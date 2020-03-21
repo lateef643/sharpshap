@@ -1,0 +1,21 @@
+.form {
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  border: 1px solid #C7C7C7;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.add-user-form {
+  label {
+
+    span {
+      font-size: 1.3rem;
+      flex: 1 0 20%;
+    }
+
+    input {
+      width: 30%;
+    }
+  }
+}

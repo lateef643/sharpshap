@@ -1,0 +1,28 @@
+.card {
+  width: 20%;
+  min-height: 20vh;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 5px 5px 6px #00000029;
+  border-radius: 1px;
+  opacity: 1;
+  margin: 3px;
+  flex-wrap: nowrap;
+  text-align: center;
+  position: relative;
+
+  &-container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__image {
+    width: 3.3rem;
+  }
+
+  &__text {
+    font-size: 1.3rem;
+    color: #707070;
+    margin-top: 15px;
+  }  
+}
