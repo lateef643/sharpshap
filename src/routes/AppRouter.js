@@ -26,7 +26,7 @@ const routes = [
     main: () => <AddUser />
   },
   {
-    path: "/add-user",
+    path: "/list-users",
     main: () => <ListUsers />
   },
   {
