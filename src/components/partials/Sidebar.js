@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import './Sidebar.scss';
 import avatar from "../../assets/images/user.svg";
 import speedometer from "../../assets/images/speedometer.svg";
@@ -17,34 +17,34 @@ const Sidebar = () => {
       <button className="sidebar__profile__edit">Edit Profile</button>
     </div>
     <div className="sidebar__links">
-      <Link to="/dashboard" activeClassName="active" className="sidebar__links__link" >
-        <img src={speedometer} className="sidebar__links__link__image" />
+      <NavLink to="/dashboard" activeClassName="active" className="sidebar__links__link" >
+        <img src={speedometer} className="sidebar__links__link__image" alt="speedometer icon" />
         <p className="sidebar__links__link__text">Dashboard</p>
-      </Link>
-      <Link to="/user-management" activeClassName="active" className="sidebar__links__link" >
-        <img src={user} className="sidebar__links__link__image" />
+      </NavLink>
+      <NavLink to="/user-management" activeClassName="active" className="sidebar__links__link" >
+        <img src={user} className="sidebar__links__link__image" alt="user icon" />
         <p className="sidebar__links__link__text">User Management</p>
         <div className="sidebar__links__link__secondary-links">
-          <Link to="/add-user" className="sidebar__links__link__secondary-links__link">
+          <NavLink to="/add-user" className="sidebar__links__link__secondary-links__link">
           <p>Add User</p>
-          </Link>
-          <Link to="/list-users" className="sidebar__links__link__secondary-links__link">
+          </NavLink>
+          <NavLink to="/list-users" className="sidebar__links__link__secondary-links__link">
             <p>List Users</p>
-          </Link>         
+          </NavLink>         
         </div>
-      </Link>
-      <Link to="/my-terminals" activeClassName="active" className="sidebar__links__link" >
-        <img src={terminal} className="sidebar__links__link__image" />
+      </NavLink>
+      <NavLink to="/my-terminals" activeClassName="active" className="sidebar__links__link">
+        <img src={terminal} className="sidebar__links__link__image" alt="terminals icon" />
         <p className="sidebar__links__link__text">My Terminals</p>
-      </Link>
-      <Link to="/transactions" activeClassName="active" className="sidebar__links__link" >
-        <img src={data} className="sidebar__links__link__image" />
+      </NavLink>
+      <NavLink to="/transactions" activeClassName="active" className="sidebar__links__link">
+        <img src={data} className="sidebar__links__link__image"  alt="data icon" />
         <p className="sidebar__links__link__text">Transactions</p>
-      </Link>  
-      <Link to="/my-wallet" activeClassName="active" className="sidebar__links__link" >
-        <img src={wallet} className="sidebar__links__link__image" />
+      </NavLink>  
+      <NavLink to="/my-wallet" activeClassName="active" className="sidebar__links__link">
+        <img src={wallet} className="sidebar__links__link__image" alt="wallet icon" />
         <p className="sidebar__links__link__text">My Wallet</p>
-      </Link>
+      </NavLink>
     </div>
   </div>
 )};

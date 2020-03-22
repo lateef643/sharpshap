@@ -1,6 +1,14 @@
 .header {
-  height: 13.5%;
-  padding: 30px;
   text-align: left;
+  background-color: #fff;
+  position: fixed;
+  z-index: 2;
+  width: calc(100vw - 16%);
+}
+
+.logo-box {
+  height: 8.2rem;
   box-shadow: 0px 3px 6px #00000029;
+  padding: 30px;
+  margin-bottom: 5px;
 }

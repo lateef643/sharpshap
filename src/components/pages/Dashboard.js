@@ -1,5 +1,5 @@
 import React from "react";
-import Card from "../partials/Card";
+import Card from "../shared/Card";
 import "./Dashboard.scss";
 import withdrawal from "../../assets/images/withdrawal.svg";
 import cabletv from "../../assets/images/cable-tv-sign-with-monitor.svg";
@@ -22,7 +22,7 @@ const Dashboard = (props) => (
       <Card text="Buy Data" image={data} />
       <Card text="Buy Insurance" image={insurance}  />
       <Card text="JAMB" image={jamb} />
-      <Card text="WAEC" image={waec} />      
+      <Card text="WAEC" image={waec} />     
     </div>
   </div>
 );

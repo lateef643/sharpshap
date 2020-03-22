@@ -5,4 +5,18 @@
   &-sidebar {
     flex: 0 0 16%;
   }
+
+  &-main {
+    flex: 1;
+
+    &-header {
+      width: 100%;
+      background-color: yellow;
+    }
+  
+    &-content {
+      position: relative;
+      top: 160px;
+    }
+  }
 }

@@ -4,15 +4,20 @@
   color: #fff;
   text-align: center;
   position: fixed;
+  top: 0;
+  left: 0;
   width: 16%;
   z-index: 1;
+  overflow: hidden;
 
   &__profile {
-    padding: 3vh 0 1.3vh 0;
-    height: calc(100vh - (14vh * 5));
+    padding-top: 3vh;
+    padding-bottom: 1vh;
+    margin-bottom: 1.3vh;
+    min-height: calc(100vh - (14vh * 5));
 
     &__img {
-      max-width: 13vh;
+      max-width: 55%;
       border-radius: 50%;
     }
 
@@ -39,7 +44,7 @@
       display: block;
       min-height: 14vh;
       color: #CBDAF6;
-      padding-top: 15px;
+      padding-top: 20px;
 
       &__image {
         height: 20px;
@@ -85,4 +90,8 @@
       background-color: rgb(32, 63, 121);
     }
   }
+}
+
+.active {
+  background-color: rgb(32, 63, 121);
 }
