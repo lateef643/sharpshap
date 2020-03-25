@@ -1,7 +1,7 @@
 import React from "react";
-import './TransactionLog.scss';
+import './ActivityLog.scss';
 
-const TransactionLog = (props) => {
+const ActivityLog = (props) => {
   const transactions = [{
     status: 'pending',
     amount: "500",
@@ -34,8 +34,8 @@ const TransactionLog = (props) => {
   }, 2, 40);
 
   return (
-    <div className="list-transactions">
-      <div className="list-transactions__heading">
+    <div className="activity-log">
+      <div className="activity-log__heading">
         <span>Status</span>
         <span>Amount</span>
         <span>Reference</span>
@@ -46,8 +46,8 @@ const TransactionLog = (props) => {
         <span>Terminal</span>
       </div>
       {transactions.map((transaction, index) => ( 
-        <div key={index} className="list-transactions__content">
-          <span className={`list-transactions__content__status list-transactions__content__status--${transaction.status}`}></span>
+        <div key={index} className="activity-log__content">
+          <span className={`activity-log__content__status activity-log__content__status--${transaction.status}`}></span>
           <span>&#8358;{transaction.amount}</span>
           <span>{transaction.reference}</span>
           <span>{transaction.type}</span>
@@ -61,4 +61,4 @@ const TransactionLog = (props) => {
   </div>
 )};
 
-export default TransactionLog;
+export default ActivityLog;

@@ -1,0 +1,54 @@
+.buy-data {
+    position: relative;
+    top: 60px;
+  
+    &__form {
+      height: 30.2rem;
+      width: 45.6rem;
+      margin: 0 auto;
+      box-shadow: 0px 3px 6px #00000029;
+      padding: 30px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+  
+      label {
+        display: flex;
+        justify-content: space-around;
+  
+        span {
+          font-size: 1.4rem;
+          flex: 0 0 25%;
+          color: #707070;
+          line-height: 24px;
+        }
+  
+        input, select {
+          flex: 0 0 50%;
+          height: 30px;
+          border: 1px solid #d6d6d6;
+          color: #707070;
+          font-family: 'Lato', sans-serif;
+          padding: 0 3px;
+        }
+      }
+  
+      button {
+        font-family: 'Lato', sans-serif;
+        width: 88%;
+        margin: 0 auto;
+        margin-top: 20px;
+        height: 35px;
+        font-size: 1.4rem;
+        outline: 0;
+        border: 1px solid #C7C7C7;
+        color: #707070;
+        box-shadow: 3px 3px 6px #00000029;
+  
+        &:active {
+          transform: translateY(3%);
+          box-shadow: 1px 1px 4px #00000029;
+        }
+      }
+    }
+  }

@@ -11,20 +11,44 @@ import airtime from "../../assets/images/smartphone-call.svg";
 import waec from "../../assets/images/WAEC_LogoPNG@2x.svg";
 import jamb from "../../assets/images/Institutions Not Showing (Blank) in CAPS Reasons and Solutions@2x.svg";
 
-const Dashboard = (props) => (
+const Dashboard = (props) => {
+  // const transactions = [];
+  // transactions.fill({
+  //   status: 'pending',
+  //   amount: "500",
+  //   reference: "428333",
+  //   type: "Airtime",
+  //   customer: "naruto@covid.com",
+  //   agent: "Saitama",
+  //   vendor: "Goku",
+  //   terminal: "jp8738",   
+  // }, 0, 5);
+  
+  return (
   <div className="dashboard">
     <div className="dashboard-container">
-      <Card text="Withdraw Money" image={withdrawal} />
-      <Card text="Transfer Funds" image={transfer} />
-      <Card text="Pay Electricity" image={power} />
-      <Card text="Buy Airtime" image={airtime} />
-      <Card text="Recharge Cable TV" image={cabletv} />
-      <Card text="Buy Data" image={data} />
-      <Card text="Buy Insurance" image={insurance}  />
-      <Card text="JAMB" image={jamb} />
-      <Card text="WAEC" image={waec} />     
+      <Card link="withdraw" text="Withdraw Money" image={withdrawal} />
+      <Card link="transfer" text="Transfer Funds" image={transfer} />
+      <Card link="pay-electricity" text="Pay Electricity" image={power} />
+      <Card link="buy-airtime" text="Buy Airtime" image={airtime} />
+      <Card link="recharge-cable" text="Recharge Cable TV" image={cabletv} />
+      <Card link="buy-data" text="Buy Data" image={data} />
+      <Card link="buy-insurance" text="Buy Insurance" image={insurance}  />
+      <Card link="jamb" text="JAMB" image={jamb} />
+      <Card link="waec" text="WAEC" image={waec} />     
     </div>
+    {/* <div>
+      <p>Last 5 transactions</p>
+      {transactions.map((transaction, index) => ( 
+        <div key={index} className="activity-log__content">
+          <span className={`dashboard__content__status dashboard__content__status--${transaction.status}`}></span>
+          <span>{transaction.type}</span>
+          <span>{transaction.amount}</span>
+        </div> 
+        )
+      )}
+    </div> */}
   </div>
-);
+)};
 
 export default Dashboard;

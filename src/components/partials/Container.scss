@@ -3,7 +3,8 @@
   min-height: 100vh;
 
   &-sidebar {
-    flex: 0 0 16%;
+    flex: 0 0 19.5rem;
+
   }
 
   &-main {
@@ -11,12 +12,11 @@
 
     &-header {
       width: 100%;
-      background-color: yellow;
     }
   
     &-content {
       position: relative;
-      top: 155px;
+      top: 15.5rem;
     }
   }
 }

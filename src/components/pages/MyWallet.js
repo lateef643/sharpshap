@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import './AddUser.scss';
+import './MyWallet.scss';
 
-const AddUser = (props) => {
+const MyWallet = (props) => {
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -52,8 +52,11 @@ const AddUser = (props) => {
   }
 
   return (
-  <div className="add-user">
-    <form className="form add-user__form" onSubmit={handleOnSubmit} >
+  <div className="my-wallet">
+    <form className="form my-wallet__form" onSubmit={handleOnSubmit} >
+      <div className="my-wallet__text-box">
+        <span>1. Details</span><span>2. Change Password</span>
+      </div>
       <label>
         <span>Firstname</span>
         <input type="text" onChange={handleFirstnameChange} />      
@@ -78,9 +81,9 @@ const AddUser = (props) => {
         <span>Confirm Password</span>
         <input type="text" onChange={handleConfirmPasswordChange} />      
       </label>   
-      <button type="submit">Submit</button>
+      <button type="submit">Save Changes</button>
     </form>    
   </div>
 )}
 
-export default AddUser;
+export default MyWallet;

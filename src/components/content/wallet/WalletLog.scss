@@ -1,4 +1,4 @@
-.list-transactions {
+.wallet-log {
     text-align: left;
     letter-spacing: 1px;
     color: #707070;
@@ -17,16 +17,9 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    // text-align: left;
-    // padding: 0 10px;
     margin-bottom: 20px;
 
-    :first-of-type {
-      flex-basis: 5%;
-      margin-right: 10px;
-    }
-
-    :not(:first-of-type) {
+    span {
       flex: 0 0 calc(100%/7);
     }
   }
@@ -39,32 +32,8 @@
     justify-content: space-between;
     align-items: center;
 
-    :first-of-type {
-      flex: 0 1 10px;
-      margin-right: 35px;
-    }
-
-    :not(:first-of-type) {
-      flex: 0 0 calc(100%/8);
-    }
-
-    &__status {
-      width: 10px;
-      height: 10px;
-      border-radius: 100%;
-      flex-basis: 5%;
-
-      &--pending {
-        background-color: #FE8B0C;
-      }
-
-      &--failed {
-        background-color: #FF0000;
-      }
-
-      &--success {
-        background-color: #3AC962;
-      }
+    span {
+      flex: 0 0 calc(100%/7);
     }
   }
 }

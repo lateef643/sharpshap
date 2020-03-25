@@ -1,13 +1,18 @@
-.add-user {
+.buy-airtime {
+  position: relative;
+  top: 6rem;
 
   &__form {
-    height: 49.2rem;
-    width: 65.2rem;
+    height: 45.8rem;
+    width: 45.2rem;
     margin: 0 auto;
     box-shadow: 0px 3px 6px #00000029;
     padding: 3rem;
+    padding-top: 2rem;
     display: flex;
+    flex-direction: column;
     justify-content: space-around;
+    align-items: center;
     flex-wrap: wrap;
 
     label {
@@ -26,9 +31,9 @@
         width: max-content;
       }
 
-      input {
-        width: 25.4rem;
-        height: 4.4rem;
+      input, select {
+        width: 29.5rem;
+        height: 4rem;
         border-radius: 5px;
         border: 1px solid #afafaf;
         color: #707070;
@@ -39,10 +44,10 @@
 
     button {
       font-family: 'Lato', sans-serif;
-      width: 50%;
+      width: 29.5rem;
       margin: 0 auto;
       margin-top: 2rem;
-      height: 3.5rem;
+      height: 4rem;
       font-size: 1.4rem;
       outline: 0;
       border: 0;

@@ -1,3 +1,105 @@
 .login {
-  color: red;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+
+  &__section--image {
+    flex: 0 0 30%;
+    background: transparent 
+      linear-gradient(180deg, #1FE294 0%, #11998E 100%) 
+      0% 0% no-repeat padding-box;
+    opacity: 1;
+
+    &__container {
+      position: relative;
+      top: 40%;
+      left: 20px;  
+      display: flex;
+      align-items: center; 
+      
+      p {
+        width: 90px;
+        height: 50px;
+        background-color: #fff;
+        font-size: 1.4rem;
+        color: #C7C7C7;
+        border-radius: 10px;
+        text-align: center;
+        vertical-align: middle;
+        padding-top: 15px;
+        padding-right: 15px;
+      }
+    }
+  }
+
+  &__section--form {
+    flex: 0 0 50%;
+    display: flex;
+    flex-direction: column;
+
+    &__container {
+      position: relative;
+      top: 18%;
+      left: 35%;
+      width: 70%;
+      height: 300px;
+      text-align: center;
+
+      .login__form {
+        margin-top: 150px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    
+        label {
+          margin-bottom: 30px;
+    
+          input {
+            height: 35px;
+            width: 370px;
+            letter-spacing: 1px;
+            font-family: 'Lato', sans-serif;
+            border: 0;
+            outline: 0;
+            border-bottom: 1px solid #d1d1d1;
+            padding: 0 10px;
+            color: #707070;
+            font-size: 1.45rem;
+          }
+
+          &::placeholder {
+            font-family: 'Lato', sans-serif;
+            font-size: 1.45rem;
+            color: #707070;
+          }
+        }
+    
+        button {
+          font-family: 'Lato', sans-serif;
+          margin-top: 30px;
+          width: 370px;
+          height: 50px;
+          color: #fff;
+          border: 0;
+          border-radius: 10px;
+          background: transparent 
+            linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
+            0% 0% no-repeat padding-box;
+          font-size: 1.45rem;
+          box-shadow: 5px 5px 8px #00000029;
+          letter-spacing: 1px;
+
+          &:focus {
+            outline: 0;
+          }
+
+          &:active {
+            outline: 0;
+            transform: translateY(2%);
+            box-shadow: 2px 2px 5px #00000029;
+          }
+        }
+      }
+    }
+  }
 }

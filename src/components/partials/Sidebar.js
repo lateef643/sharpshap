@@ -17,11 +17,11 @@ const Sidebar = () => {
       <button className="sidebar__profile__edit">Edit Profile</button>
     </div>
     <div className="sidebar__links">
-      <NavLink to="/dashboard" activeClassName="active" className="sidebar__links__link" >
+      <NavLink to="/dashboard" className="sidebar__links__link" >
         <img src={speedometer} className="sidebar__links__link__image" alt="speedometer icon" />
         <p className="sidebar__links__link__text">Dashboard</p>
       </NavLink>
-      <NavLink to="/user-management" activeClassName="active" className="sidebar__links__link" >
+      <div className="sidebar__links__link" >
         <img src={user} className="sidebar__links__link__image" alt="user icon" />
         <p className="sidebar__links__link__text">User Management</p>
         <div className="sidebar__links__link__secondary-links">
@@ -32,18 +32,37 @@ const Sidebar = () => {
             <p>List Users</p>
           </NavLink>         
         </div>
-      </NavLink>
-      <NavLink to="/my-terminals" activeClassName="active" className="sidebar__links__link">
+      </div>
+      <NavLink to="/my-terminals" className="sidebar__links__link">
         <img src={terminal} className="sidebar__links__link__image" alt="terminals icon" />
         <p className="sidebar__links__link__text">My Terminals</p>
       </NavLink>
-      <NavLink to="/transactions" activeClassName="active" className="sidebar__links__link">
+      <div className="sidebar__links__link">
         <img src={data} className="sidebar__links__link__image"  alt="data icon" />
         <p className="sidebar__links__link__text">Transactions</p>
-      </NavLink>  
-      <NavLink to="/my-wallet" activeClassName="active" className="sidebar__links__link">
+        <div className="sidebar__links__link__secondary-links">
+          <NavLink to="/new-transaction" className="sidebar__links__link__secondary-links__link">
+            <p>New Transaction</p>
+          </NavLink>
+          <NavLink to="/transactions-log" className="sidebar__links__link__secondary-links__link">
+            <p>Transactions Log</p>
+          </NavLink>
+        </div>
+      </div>  
+      <NavLink to="my-wallet" className="sidebar__links__link">
         <img src={wallet} className="sidebar__links__link__image" alt="wallet icon" />
         <p className="sidebar__links__link__text">My Wallet</p>
+        <div className="sidebar__links__link__secondary-links">
+          <NavLink to="/wallet-log" className="sidebar__links__link__secondary-links__link">
+            <p>Wallet Log</p>
+          </NavLink>
+          <NavLink to="/fund-wallet" className="sidebar__links__link__secondary-links__link">
+            <p>Fund Wallet</p>
+          </NavLink> 
+          <NavLink to="/activity-log" className="sidebar__links__link__secondary-links__link">
+            <p>Activity Log</p>
+          </NavLink>
+        </div>
       </NavLink>
     </div>
   </div>

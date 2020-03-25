@@ -1,16 +1,25 @@
 .dashboard {
   padding: 0.3rem 5rem;
   width: 100%;
-  // height: 100;
+
+  // &__content {
+  //   box-shadow: 5px 5px 5px #00000029;
+  //   height: 73px;
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   z-index: 3;
+  // }
 }
 
 .dashboard-container {
   display: flex;
   flex-flow: row wrap; 
   margin: 0 auto; 
-  justify-content: space-evenly;
+  justify-content: flex-start;
   background-color: #fff;
   position: relative;
-  top: 30px;
-  z-index: -2;
+  top: 3rem;
+  z-index: 0;
 }

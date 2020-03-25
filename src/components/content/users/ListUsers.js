@@ -9,7 +9,7 @@ const ListUsers = (props) => {
     phone: "08064829451",
     role: "Admin",
     login: "12th, March 2019",
-  }, 0, 40);
+  }, 0, 20);
 
   return (
     <div className="list-users">
@@ -28,7 +28,7 @@ const ListUsers = (props) => {
           <span>{user.phone}</span>
           <span>{user.role}</span>
           <span>{user.login}</span>
-          <span>...</span>          
+          <span>. . .</span>          
         </div> 
         )
       )}

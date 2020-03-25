@@ -1,0 +1,56 @@
+.pay-electricity {
+  padding: 0.3rem 5rem;
+  width: 100%;
+
+  // &__content {
+  //   box-shadow: 5px 5px 5px #00000029;
+  //   height: 73px;
+  //   display: flex;
+  //   flex-direction: row;
+  //   justify-content: space-between;
+  //   align-items: center;
+  //   z-index: 3;
+  // }
+}
+
+.pay-electricity-container {
+  display: flex;
+  flex-flow: row wrap; 
+  margin: 0 auto; 
+  justify-content: flex-start;
+  background-color: #fff;
+  position: relative;
+  top: 3rem;
+  z-index: 0;
+}
+
+.pay-electricity__card {
+  width: 23%;
+  min-height: 20vh;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+  box-shadow: 5px 5px 6px #00000029;
+  border-radius: 1px;
+  opacity: 1;
+  margin: 3px;
+  flex-wrap: nowrap;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  cursor: pointer;
+
+  &-container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &__image {
+    width: 10rem;
+  }
+
+  &__text {
+    font-size: 1.3rem;
+    color: #707070;
+    margin-top: 1.5rem;
+  }  
+}
