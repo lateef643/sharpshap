@@ -1,22 +1,28 @@
 .container {
   display: flex;
-  min-height: 100vh;
 
   &-sidebar {
     flex: 0 0 19.5rem;
-
   }
 
   &-main {
     flex: 1;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: stretch;
 
     &-header {
-      width: 100%;
+      // width: 100%;
+      // height: 138px;
+      flex: 0 0 138px;
     }
   
     &-content {
-      position: relative;
-      top: 15.5rem;
+      // height: 70%;
+      flex: 1;
+      background-color: #F2F4F5;
     }
   }
 }

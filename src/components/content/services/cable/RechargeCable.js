@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './RechargeCable.scss';
+import style from './RechargeCable.module.scss';
 
 const RechargeCable = (props) => {
   const cableTvProviders = [{ name: "DSTV"}, { name: 'GOTV'}, {name: "StarTimes"}, {name: "HITV"}];
@@ -33,8 +33,8 @@ const RechargeCable = (props) => {
   };
 
   return (
-  <div className="fund-wallet">
-    <form className="form recharge-cable__form" onSubmit={handleOnSubmit} >
+  <div className={style.rechargeCable}>
+    <form className={style.form} onSubmit={handleOnSubmit} >
       <label>
         <span>Provider</span>
         <select onChange={handleProviderChange}>

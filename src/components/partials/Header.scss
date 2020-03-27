@@ -2,13 +2,14 @@
   text-align: left;
   background-color: #fff;
   position: fixed;
-  z-index: 2;
-  width: calc(100vw - 16%);
+  width: calc(100vw - 19.5rem);
+  z-index: 1;
+  height: 138px;
 }
 
 .logo-box {
   height: 8.2rem;
-  box-shadow: 0px 3px 6px #00000029;
-  padding: 30px;
-  margin-bottom: 5px;
+  box-shadow: 0px 3px .6rem #00000029;
+  padding: 3rem;
+  margin-bottom: .5rem;
 }

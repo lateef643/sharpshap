@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './Terminals.scss';
 
 const ListTerminals = (props) => {
@@ -23,7 +24,12 @@ const ListTerminals = (props) => {
           <span>{index + 1}</span>
           <span>{terminal.terminalID}</span>
           <span>{terminal.date}</span>
-          <span>...</span>          
+          <span>
+            <span className="one">...</span>
+            <span className="two">
+              <Link>Transaction History</Link>
+            </span>
+          </span>          
         </div> 
         )
       )}

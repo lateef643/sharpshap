@@ -1,59 +1,46 @@
-.withdraw-funds {
-  position: relative;
-  top: 6rem;
+.upload-photo {
+    position: relative;
+    top: 6rem;
   
     &__form {
-      width: 71.2rem;
-      height: 86.3rem;
+      height: 40.8rem;
+      width: 48.2rem;
       margin: 0 auto;
       box-shadow: 0px 3px 6px #00000029;
       padding: 3rem;
-      padding-top: 2rem;
+      padding-top: 0;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: center;
       align-items: center;
       flex-wrap: wrap;
 
-      &__image {
-        padding: 0;
-
+      img {
+        width: 12rem;
       }
   
       label {
-  
-        span {
-          display: block;
-          padding: 0 1rem;
-          background-color: #fff;
-          z-index: 1;
-          font-size: 1.4rem;
-          color: #9e9d9d;
-          line-height: 2.4rem;
-          position: relative;
-          left: 3rem;
-          top: 1rem;
-          width: max-content;
-        }
-  
-        input, select {
-          width: 42.2rem;
-          height: 4.1rem;
+        input {
+          width: 18.5rem;
+          margin-top: 3.5rem;
           border-radius: 5px;
           border: 1px solid #afafaf;
           color: #707070;
           font-family: 'Lato', sans-serif;
-          padding: 0 3px;
+  
+          button {
+            background-color: green;
+          }
         }
       }
   
       button {
         font-family: 'Lato', sans-serif;
-        width: 42.2rem;
-        height: 4.1rem;
+        width: 29.5rem;
         margin: 0 auto;
-        margin-top: 2rem;
-        font-size: 1.4rem;
+        margin-top: 5rem;
+        height: 3.6rem;
+        font-size: 1.6rem;
         outline: 0;
         border: 0;
         height: 4.4rem;

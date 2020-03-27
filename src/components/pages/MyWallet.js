@@ -6,8 +6,10 @@ const MyWallet = (props) => {
   const [lastname, setLastname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
+  const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [modal, setModal] = useState(true);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -16,6 +18,15 @@ const MyWallet = (props) => {
       lastname,
       phoneNumber,
       email,
+      password,
+      confirmPassword
+    })
+  };
+
+  const handleOnPasswordChangeSubmit = (e) => {
+    e.preventDefault();
+    console.log({
+      oldPassword,
       password,
       confirmPassword
     })
@@ -41,6 +52,11 @@ const MyWallet = (props) => {
     setEmail(newEmail);
   }
 
+  const handleOldPasswordChange = (e) => {
+    const oldPassword = e.target.value;
+    setOldPassword(oldPassword);
+  }
+
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
@@ -55,7 +71,10 @@ const MyWallet = (props) => {
   <div className="my-wallet">
     <form className="form my-wallet__form" onSubmit={handleOnSubmit} >
       <div className="my-wallet__text-box">
-        <span>1. Details</span><span>2. Change Password</span>
+        <span>1. Details</span><span className="start-modal" onClick={(e) => {
+          e.preventDefault();
+          setModal(true);
+        }}>2. Change Password</span>
       </div>
       <label>
         <span>Firstname</span>
@@ -82,7 +101,28 @@ const MyWallet = (props) => {
         <input type="text" onChange={handleConfirmPasswordChange} />      
       </label>   
       <button type="submit">Save Changes</button>
-    </form>    
+    </form>
+    {modal ? <div className="my-wallet-modal">
+      <span onClick={(e) => {
+        e.preventDefault();
+        setModal(false);
+      }}>X</span>
+      <form className="form my-wallet-modal__form" onSubmit={handleOnPasswordChangeSubmit} >
+        <label>
+          <span>Old Password</span>
+          <input type="text" onChange={handleOldPasswordChange} />      
+        </label>
+        <label>
+          <span>New Password</span>
+          <input type="text" onChange={handlePasswordChange} />      
+        </label>    
+        <label>
+          <span>Confirm Password</span>
+          <input type="text" onChange={handleConfirmPasswordChange} />      
+        </label>        
+        <button type="submit">Submit</button>
+      </form> 
+    </div> : undefined}
   </div>
 )}
 

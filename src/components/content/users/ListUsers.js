@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import './ListUsers.scss';
 
 const ListUsers = (props) => {
@@ -28,7 +29,14 @@ const ListUsers = (props) => {
           <span>{user.phone}</span>
           <span>{user.role}</span>
           <span>{user.login}</span>
-          <span>. . .</span>          
+          <span>
+            <span className="one">...</span>
+            <span className="two">
+              <Link>Edit</Link>
+              <Link>Delete</Link>
+              <Link>View History</Link>
+            </span>
+          </span>          
         </div> 
         )
       )}

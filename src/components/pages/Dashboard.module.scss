@@ -1,0 +1,82 @@
+.dashboard {
+  padding-top: 2rem;
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: #707087;
+  font-size: 1.4rem;
+}
+
+.cardContainer {
+  display: flex;
+  flex-flow: row wrap; 
+  justify-content: flex-start;
+}
+
+.transactionsContainer {
+  margin-top: 10rem;
+  transition: 5s all;
+}
+
+.transactionsHeading {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  padding: 1.5rem 2rem;
+  background-color: #fff;
+
+
+  span {
+    flex: 0 1 15%;
+  }
+}
+
+.transactionsCount {
+  margin-bottom: 4rem;
+  font-size: 1.45rem;
+}
+
+.transactions {
+  box-shadow: .5rem .5rem .5rem #00000029;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 5rem;
+  padding: 1rem 2rem;
+  background-color: #fff;
+  margin-bottom: .3rem;
+
+  span {
+    flex: 0 1 15%;
+  }
+
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+
+.status {
+
+  span {
+    border-radius: 100%;
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+  }
+}
+
+.pending {
+  background-color: #FE8B0C;
+}
+
+.failed {
+  background-color: #FF0000;
+}
+
+.success {
+  background-color: #3AC962;
+}

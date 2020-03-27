@@ -11,7 +11,8 @@
     margin: 0 auto;
     position: relative;
     top: 10px;
-    overflow-x: hidden;
+    overflow: hidden;
+    background-color: #fff;
 
   &__heading {
     display: flex;

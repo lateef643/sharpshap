@@ -1,6 +1,5 @@
 .fund-wallet {
-  position: relative;
-  top: 6rem;
+  padding-top: 6rem;
 
   &__form {
     height: 45.8rem;
@@ -14,6 +13,7 @@
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
+    background-color: #fff;
 
     label {
 

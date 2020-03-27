@@ -12,7 +12,7 @@ import style from './BankForm.module.scss';
 const WithdrawForm = (props) => {
   const banks = ["Access Bank", "First Bank", "Guarantee Trust Bank", "Stanbic IBTC", 
   "Fidelity Bank", "Union Bank of Nigeria", "Zenith Bank", "United Bank of Africa"];
-  const [bank, setBank] = useState("Bank");
+  const [bank, setBank] = useState("Beneficiary Bank");
   const [errors, setErrors] = useState({
     bank: true,
     accountName: true,
@@ -60,8 +60,7 @@ const WithdrawForm = (props) => {
           const bankName = e.target.value;
 
           if (bankName.trim().length > 0) {
-            console.log('this never firs')
-            props.handleBankChange(bankName.trim());  
+            props.handleBeneficiaryBankChange(bankName.trim());  
             setErrors({...errors, bank: false});
             setBank(bankName.trim());
           };
@@ -73,23 +72,23 @@ const WithdrawForm = (props) => {
         </select>
       </label>
       <label>
-        <span>Account Number</span>
+        <span>Beneficiary Account Number</span>
         <input type="text" onChange={(e) => {
           const accountNumber = e.target.value;
 
           if (accountNumber.trim().length > 0) {
-            props.handleAccountNumberChange(accountNumber.trim());  
+            props.handleBeneficiaryAccountNumberChange(accountNumber.trim());  
             setErrors({...errors, accountNumber: false});  
           };
         }} />      
       </label>
       <label>
-        <span>Account Name</span>
+        <span>Beneficiary Account Name</span>
         <input type="text" onChange={(e) => {
           const accountName = e.target.value;
 
           if (accountName.trim().length > 0) {
-            props.handleAccountNameChange(accountName.trim());  
+            props.handleBeneficiaryAccountNameChange(accountName.trim());  
             setErrors({...errors, accountName: false});  
           };
         }} />      

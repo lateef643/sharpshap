@@ -1,5 +1,4 @@
 .sidebar {
-  height: auto;
   background-color: #2A58AE;
   color: #fff;
   text-align: center;
@@ -11,8 +10,8 @@
 
   &__profile {
     padding-top: 3vh;
-    padding-bottom: 1.5vh;
-    min-height: calc(100vh - (14vh * 5));
+    padding-bottom: 2vh;
+    min-height: calc(100vh - (9.15rem * 5));
 
     &__img {
       max-width: 50%;

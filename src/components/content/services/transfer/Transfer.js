@@ -3,29 +3,29 @@ import AmountForm from "./AmountForm";
 import BankForm from "./BankForm";
 import PaymentSummary from "../../../shared/PaymentSummary";
 import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
-import style from './Withdraw.module.scss';
+import style from './Transfer.module.scss';
 
-const Withdraw = (props) => {
+const Transfer = (props) => {
   const [page, setPage] = useState("amount");
-  const [bank, setBank] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
-  const [accountName, setAccountName] = useState("");
+  const [beneficiaryBank, setBeneficiaryBank] = useState("Beneficiary Bank");
+  const [beneficiaryAccountNumber, setBeneficiaryAccountNumber] = useState("");
+  const [beneficiaryAccountName, setBeneficiaryAccountName] = useState("");
   const [customersNumber, setCustomersNumber] = useState("");
   const [narration, setNarration] = useState("");
   const [amount, setAmount] = useState("");
   const [total, setTotal] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
 
-  const handleBankChange = (bank) => {
-    setBank(bank);
+  const handleBeneficiaryBankChange = (bank) => {
+    setBeneficiaryBank(bank);
   };
 
-  const handleAccountNumberChange = (accountNumber) => {
-    setAccountNumber(accountNumber);
+  const handleBeneficiaryAccountNumberChange = (accountNumber) => {
+    setBeneficiaryAccountNumber(accountNumber);
   };
 
-  const handleAccountNameChange = (accountName) => {
-    setAccountName(accountName);
+  const handleBeneficiaryAccountNameChange = (accountName) => {
+    setBeneficiaryAccountName(accountName);
   };
 
   const handleCustomersNumberChange = (customersNumber) => {
@@ -53,9 +53,9 @@ const Withdraw = (props) => {
 
   const handleOnSubmit = (e) => {
     console.log({
-      bank,
-      accountNumber,
-      accountName,
+      beneficiaryBank,
+      beneficiaryAccountNumber,
+      beneficiaryAccountName,
       customersNumber,
       narration,
       amount,
@@ -64,11 +64,11 @@ const Withdraw = (props) => {
   }
 
   return (
-    <div className={style.withdraw}>
+    <div className={style.Transfer}>
       {page === "bank" ? <BankForm
-          handleBankChange={handleBankChange} 
-          handleAccountNumberChange={handleAccountNumberChange}  
-          handleAccountNameChange={handleAccountNameChange}  
+          handleBeneficiaryBankChange={handleBeneficiaryBankChange} 
+          handleBeneficiaryAccountNumberChange={handleBeneficiaryAccountNumberChange}  
+          handleBeneficiaryAccountNameChange={handleBeneficiaryAccountNameChange}  
           handleCustomersNumberChange={handleCustomersNumberChange}  
           handleNarrationChange={handleNarrationChange}  
           handleAmountChange={handleAmountChange}  
@@ -90,4 +90,4 @@ const Withdraw = (props) => {
   );
 };
 
-export default Withdraw;
+export default Transfer;

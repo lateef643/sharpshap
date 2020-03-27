@@ -9,16 +9,18 @@ import ListUsers from "../components/content/users/ListUsers";
 import NewTransaction from "../components/content/transactions/NewTransaction";
 import FundWallet from "../components/content/wallet/FundWallet";
 import WalletLog from "../components/content/wallet/WalletLog";
+import Transfer from "../components/content/services/transfer/Transfer";
 import ActivityLog from "../components/content/transactions/ActivityLog";
 import Withdraw from "../components/content/services/Withdraw/Withdraw";
 import Verification from "../components/shared/Verification";
 import SuccessfulTransaction from "../components/shared/SuccessfulTransaction";
-import BuyAirtime from "../components/content/services/BuyAirtime";
-import PayElectricity from "../components/content/services/PayElectricity";
-import BuyData from "../components/content/services/BuyData";
-import RechargeCable from "../components/content/services/RechargeCable";
-import BuyInsurance from "../components/content/services/BuyInsurance";
+import BuyAirtime from "../components/content/services/airtime/BuyAirtime";
+import PayElectricity from "../components/content/services/electricity/PayElectricity";
+import BuyData from "../components/content/services/data/BuyData";
+import RechargeCable from "../components/content/services/cable/RechargeCable";
+import BuyInsurance from "../components/content/services/insurance/BuyInsurance";
 import MyWallet from "../components/pages/MyWallet";
+import EnergyVendorsList from "../components/content/services/electricity/EnergyVendorsList";
 
 const routes = [
   {
@@ -86,7 +88,7 @@ const routes = [
     path: "/buy-airtime",
     main: () => <BuyAirtime />
   },
-    {
+  {
     path: "/pay-electricity",
     main: () => <PayElectricity />
   },
@@ -101,6 +103,10 @@ const routes = [
   {
     path: "/buy-insurance",
     main: () => <BuyInsurance />
+  },
+  {
+    path: "/transfer",
+    main: () => <Transfer />
   }
 ];
 

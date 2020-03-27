@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import './BuyData.scss';
+import style from './BuyAirtime.module.scss';
 
-const BuyData = (props) => {
+const BuyAirtime = (props) => {
   const networks = [{ name: "MTN"}, { name: 'Airtel'}, {name: "Etisalat"}, {name: "Glo"}];
-  const plans = ['Ultimate Plan', 'Medium Plan', 'Big Daddy', 'Flex Plan'];
   const [network, setNetwork] = useState("");
+  const [amount, setAmount] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [dataPlan, setDataPlan] = useState("");
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
     console.log({
       network,
-      dataPlan,
+      amount,
       phoneNumber
     })
   };
@@ -22,19 +21,19 @@ const BuyData = (props) => {
     setNetwork(newNetworkName);
   };
 
+  const handleAmountChange = (e) => {
+    const newAmount = e.target.value;
+    setAmount(newAmount);
+  };
+
   const handlePhoneNumberChange = (e) => {
     const newPhoneNumber = e.target.value;
     setPhoneNumber(newPhoneNumber);
   };
 
-  const handleDataPlanChange = (e) => {
-    const newDataPlan = e.target.value;
-    setDataPlan(newDataPlan);
-  };
-
   return (
-  <div className="buy-data">
-    <form className="form buy-data__form" onSubmit={handleOnSubmit} >
+  <div className={style.buyAirtime}>
+    <form className={style.form} onSubmit={handleOnSubmit} >
       <label>
         <span>Network</span>
         <select onChange={handleNetworkChange}>
@@ -45,21 +44,16 @@ const BuyData = (props) => {
         </select>      
       </label>
       <label>
-        <span>Phone Number</span>
-        <input type="text" onChange={handlePhoneNumberChange} />      
+        <span>Amount</span>
+        <input type="text" onChange={handleAmountChange} />      
       </label>    
       <label>
-        <span>Data Plan</span>
-        <select onChange={handleDataPlanChange}>
-          <option>Select Data Plan</option>
-          {plans.map((plan, index) => {
-            return <option value={plan} key={index}>{plan}</option>
-          })}
-        </select>      
-      </label> 
+        <span>Phone Number</span>
+        <input type="text" onChange={handlePhoneNumberChange} />      
+      </label>  
       <button type="submit">Submit</button>
     </form>    
   </div>
 )}
 
-export default BuyData;
+export default BuyAirtime;
