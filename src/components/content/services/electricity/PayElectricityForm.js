@@ -38,7 +38,7 @@ const PayElectricityForm = (props) => {
   };
 
   return (
-  <div className={style.payElectricityForm}>
+  <div className={style.container}>
     <form className={style.form} onSubmit={handleOnSubmit} >
     <img src={props.vendorImage} className={style.image} alt="Vendor's logo" />
       <label>

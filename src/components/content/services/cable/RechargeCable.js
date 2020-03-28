@@ -33,7 +33,7 @@ const RechargeCable = (props) => {
   };
 
   return (
-  <div className={style.rechargeCable}>
+  <div className={style.container}>
     <form className={style.form} onSubmit={handleOnSubmit} >
       <label>
         <span>Provider</span>

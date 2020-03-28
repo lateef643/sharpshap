@@ -5,7 +5,7 @@ const InsuranceType = (props) => {
   const [type, setType] = useState("");
 
   return (
-  <div className={style.insuranceType}>
+  <div className={style.container}>
     <form className={style.form} onSubmit={(e) => {
       e.preventDefault();
       props.handleSetType(type);

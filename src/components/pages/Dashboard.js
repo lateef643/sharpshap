@@ -44,7 +44,7 @@ const Dashboard = (props) => {
   }, 2, 5);
   
   return (
-  <div className={style.dashboard}>
+  <div className={style.container}>
     <div className={style.cardContainer}>
       <Card link="withdraw" text="Withdraw Money" image={withdrawal} />
       <Card link="transfer" text="Transfer Funds" image={transfer} />

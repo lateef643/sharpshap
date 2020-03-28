@@ -16,7 +16,7 @@ const PayElectricity = (props) => {
   };
 
   return (
-  <div className={style.PayElectricity}>
+  <div className={style.container}>
      {page === "form" ? <PayElectricityForm 
       vendorImage={vendor}
     />

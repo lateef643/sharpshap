@@ -18,8 +18,7 @@ const BuyInsurance = (props) => {
   const [amount, setAmount] = useState("");
   const [total, setTotal] = useState("");
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
+  const handleOnSubmit = () => {
     console.log({
       name,
       plan,
@@ -72,7 +71,7 @@ const BuyInsurance = (props) => {
   };
 
   return (
-    <div className={style.buyInsurance}>
+    <div className={style.container}>
       { page === "upload" ? <UploadPhoto 
         handleSetFile={handleSetFile}
         handleSetPage={handleSetPage}
@@ -91,6 +90,7 @@ const BuyInsurance = (props) => {
         amount={amount}
         total={total}
         handleOnSubmit={handleOnSubmit}
+        handleSetPage={handleSetPage}
       />
       : page === "success" ? <SuccessfulTransaction />
       : <InsuranceType 

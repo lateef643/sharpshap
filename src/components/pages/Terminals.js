@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './Terminals.scss';
+import style from './Terminals.module.scss';
 
 const ListTerminals = (props) => {
   const terminals = [];
@@ -12,21 +12,21 @@ const ListTerminals = (props) => {
   }, 0, 40);
 
   return (
-    <div className="list-terminals">
-      <div className="list-terminals__heading">
+    <div className={style.container}>
+      <div className={style.heading}>
         <span>S/N</span>
         <span>Terminal ID</span>
         <span>Date</span>
         <span>Action</span>
       </div>
       {terminals.map((terminal, index) => ( 
-        <div key={index} className="list-terminals__content">
+        <div key={index} className={style.terminal}>
           <span>{index + 1}</span>
           <span>{terminal.terminalID}</span>
           <span>{terminal.date}</span>
           <span>
-            <span className="one">...</span>
-            <span className="two">
+            <span className={style.one}>...</span>
+            <span className={style.two}>
               <Link>Transaction History</Link>
             </span>
           </span>          

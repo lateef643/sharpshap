@@ -1,5 +1,5 @@
 import React from "react";
-import './WalletLog.scss';
+import style from './WalletLog.module.scss';
 
 const WalletLog = (props) => {
   const transactions = [];
@@ -15,8 +15,8 @@ const WalletLog = (props) => {
   }, 0, 20);
 
   return (
-    <div className="wallet-log">
-      <div className="wallet-log__heading">
+    <div className={style.container}>
+      <div className={style.heading}>
         <span>Previous Balance</span>
         <span>Amount</span>
         <span>Current Balance</span>
@@ -26,10 +26,10 @@ const WalletLog = (props) => {
         <span>Date Created</span>
       </div>
       {transactions.map((transaction, index) => ( 
-        <div key={index} className="wallet-log__content">
-          <span>{transaction.previousBalance}</span>
-          <span>{transaction.amount}</span>
-          <span>{transaction.currentBalance}</span>
+        <div key={index} className={style.log}>
+          <span>&#8358;{transaction.previousBalance}</span>
+          <span>&#8358;{transaction.amount}</span>
+          <span>&#8358;{transaction.currentBalance}</span>
           <span>{transaction.description}</span>
           <span>{transaction.type}</span>
           <span>{transaction.mode}</span>

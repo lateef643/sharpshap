@@ -1,0 +1,15 @@
+.container {
+  padding-top: 2rem;
+  width: 85%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: #707087;
+  font-size: 1.4rem;
+
+  > .cardContainer {
+    display: flex;
+    flex-flow: row wrap; 
+    justify-content: flex-start;
+  }
+}

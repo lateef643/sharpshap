@@ -1,8 +1,7 @@
-.successful-transaction {
-    position: relative;
-    top: 30px;
+.container {
+    padding-top: 6rem;
   
-    &-container {
+    > .sectionContainer {
       height: 42.2rem;
       width: 45.6rem;
       margin: 0 auto;

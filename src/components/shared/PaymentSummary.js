@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import './PaymentSummary.scss';
+import React from "react";
+import style from './PaymentSummary.module.scss';
 
 const PaymentSummary = (props) => (
-  <div className="payment-summary">
-    <div className="payment-summary-container" >
+  <div className={style.container}>
+    <div className={style.paymentContainer} >
       <div>
         <span>Phone Number</span>
         <span>{props.phoneNumber}</span>
@@ -17,7 +17,7 @@ const PaymentSummary = (props) => (
         <span>{props.total}</span> 
       </div> 
       <button onClick={(e) => {
-        e.preventDefault(e);
+        e.preventDefault();
         props.handleOnSubmit();
         props.handleSetPage("success");
       }}>Continue</button>       

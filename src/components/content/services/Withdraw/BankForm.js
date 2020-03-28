@@ -31,7 +31,7 @@ const WithdrawForm = (props) => {
   : bank === "Zenith Bank" ? Zenith : "";
 
   return (
-  <div className={style.bankForm}>
+  <div className={style.container}>
     <form className={style.form} onSubmit={(e) => {
       e.preventDefault();
 
@@ -60,7 +60,6 @@ const WithdrawForm = (props) => {
           const bankName = e.target.value;
 
           if (bankName.trim().length > 0) {
-            console.log('this never firs')
             props.handleBankChange(bankName.trim());  
             setErrors({...errors, bank: false});
             setBank(bankName.trim());

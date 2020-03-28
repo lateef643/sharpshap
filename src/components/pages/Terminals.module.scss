@@ -1,50 +1,45 @@
-.list-terminals {
-    text-align: left;
-    letter-spacing: 1px;
-    color: #707070;
-    opacity: 1;
-    font-size: 1.4rem;
-    padding: 0 3rem;
-    padding-top: 3rem;
-    box-shadow: 5px 5px 5px #00000029;
-    width: 95%;
-    margin: 0 auto;
-    position: relative;
-    top: 1rem;
+.container {
+  padding-top: 2rem;
+  width: 95%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: #707087;
+  font-size: 1.4rem;
+  text-align: left;
+  overflow: hidden;
 
-  &__heading {
+  > .heading {
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-    padding: 0 4rem;
+    height: 5rem;
+    padding: 1.5rem 4rem;
+    background-color: #fff;
     text-align: left;
-    margin-bottom: 2rem;
-
+    
     span {
-      flex: 0 0 20%;
-      margin: 0 3%;
-    }
-
-    :last-child {
-      text-align: center;
-    }
+      flex: 0 0 18%;
+    } 
   }
 
-  &__content {
-    box-shadow: 5px 5px 5px #00000029;
-    padding: 0 4rem;
-    height: 7.3rem;
+
+  > .terminal {
+    box-shadow: .5rem .5rem .5rem #00000029;
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
-
+    height: 5rem;
+    padding: 1rem 5rem;
+    background-color: #fff;
+    margin-bottom: .3rem;
+  
     span {
-      flex: 0 0 20%;
-      margin: 0 3%;
-    }
-
+      flex: 0 0 18%;
+    } 
+  
     span:last-child {
       display: block;
       color: blue;
@@ -54,13 +49,13 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      top: 20px;
-      height: 75px;
-
+      top: 2rem;
+      height: 7.5rem;
+  
       > .one {
-        color: green;
+        color: #2A58AD;
       }
-
+  
       > .two {
         background-color: #2A58AD;
         position: relative;
@@ -68,13 +63,13 @@
         display: flex;
         flex-direction: column;
         padding-left: 0;
-        width: 150px;
-        justify-content: space-around;
+        width: 13rem;
+        justify-content: center;
         font-weight: 100;
         visibility: hidden;
         background: #2A58AE 0% 0% no-repeat padding-box;
-        box-shadow: 0px 10px 6px #00000029;
-
+        box-shadow: 0px 1rem .6rem #00000029;
+  
         a {
           font-family: "Lato", sans-serif;
           text-decoration: none;
@@ -83,24 +78,32 @@
           color: #FFFFFF;
           display: block;
           margin-top: 2px;
-          height: 25px;
+          height: 2.5rem;
           padding-top: 5px;
           padding-left: 5px;
         }
-
+  
         a:hover {
           background-color: rgb(24, 56, 116);
         }
       }
-
+  
     }
-
+  
     span:last-child:hover {
-
+      .one {
+        z-index: -5;
+      }
+  
       .two {
         visibility: visible;
         z-index: 10;
+        transform: translateY(-100%);
       }
+    }
+  
+    &:hover {
+      transform: scale(1.02);
     }
   }
 }

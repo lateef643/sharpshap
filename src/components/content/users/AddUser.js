@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './AddUser.scss';
+import style from './AddUser.module.scss';
 
 const AddUser = (props) => {
   const [firstname, setFirstname] = useState("");
@@ -52,8 +52,8 @@ const AddUser = (props) => {
   }
 
   return (
-  <div className="add-user">
-    <form className="form add-user__form" onSubmit={handleOnSubmit} >
+  <div className={style.container}>
+    <form className={style.form} onSubmit={handleOnSubmit} >
       <label>
         <span>Firstname</span>
         <input type="text" onChange={handleFirstnameChange} />      

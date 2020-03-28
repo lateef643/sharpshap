@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './FundWallet.scss';
+import style from './FundWallet.module.scss';
 
 const FundWallet = (props) => {
   const [agentName, setAgentName] = useState("");
@@ -31,8 +31,8 @@ const FundWallet = (props) => {
   }
 
   return (
-  <div className="fund-wallet">
-    <form className="form fund-wallet__form" onSubmit={handleOnSubmit} >
+  <div className={style.container}>
+    <form className={style.form} onSubmit={handleOnSubmit} >
       <label>
         <span>Agent Name</span>
         <input type="text" onChange={handleAgentNameChange} />      

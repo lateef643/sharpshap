@@ -7,7 +7,7 @@ const AmountForm = (props) => {
     phoneNumber: true
   });
   return (
-  <div className={style.amount}>
+  <div className={style.container}>
     <form className={style.form} onSubmit={(e) => {
       e.preventDefault();
 

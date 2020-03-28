@@ -1,20 +1,20 @@
 import React, { useState } from "react";
 import user from "../../../../assets/images/user.svg";
-import './UploadPhoto.scss';
+import style from './UploadPhoto.module.scss';
 
 const UploadPhoto = (props) => {
   const [file, setFile] = useState("");
 
   return (
-  <div className="upload-photo">
-    <form className="form upload-photo__form" onSubmit={(e) => {
+  <div className={style.container}>
+    <form className={style.form} onSubmit={(e) => {
       e.preventDefault();
 
       if (file) {
         props.handleSetPage("form");
       };
     }} >
-    <img src={user} />
+    <img src={user} alt="User avatar" />
       <label>
         <input type="file" onChange={(e) => {
           const file = e.target.value;

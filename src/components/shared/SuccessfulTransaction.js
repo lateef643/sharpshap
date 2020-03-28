@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import check from "../../assets/images/check.svg";
-import './SuccessfulTransaction.scss';
+import style from './SuccessfulTransaction.module.scss';
 
 const SuccessfulTransaction = (props) => (
-  <div className="successful-transaction">
-    <div className="successful-transaction-container" >
+  <div className={style.container}>
+    <div className={style.sectionContainer} >
       <div>
         <img src={check} alt="green checkmark" />
         <p>Transaction Successful</p>

@@ -2,10 +2,10 @@
   padding-top: 6rem;
 
   > .form {
-    height: 35.8rem;
+    height: 45.8rem;
     width: 48.2rem;
     margin: 0 auto;
-    box-shadow: 0px 3px .6rem #00000029;
+    box-shadow: 0px 3px 6px #00000029;
     padding: 3rem;
     padding-top: 2rem;
     display: flex;
@@ -21,6 +21,7 @@
         display: block;
         padding: 0 1rem;
         background-color: #fff;
+        z-index: 1;
         font-size: 1.4rem;
         color: #9e9d9d;
         line-height: 2.4rem;
@@ -30,7 +31,7 @@
         width: max-content;
       }
   
-      input, select {
+      input {
         width: 29.5rem;
         height: 3.6rem;
         border-radius: 5px;
@@ -38,7 +39,6 @@
         color: #707070;
         font-family: inherit;
         padding: 0 3px;
-        font-size: 1.4rem;
       }
     }
   
@@ -54,7 +54,7 @@
       height: 4.4rem;
       border-radius: 1rem;
       color: #fff;
-      box-shadow: 3px 3px .6rem #00000029;
+      box-shadow: 3px 3px 6px #00000029;
       background: transparent 
       linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
       0% 0% no-repeat padding-box;

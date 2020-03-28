@@ -64,7 +64,7 @@ const Transfer = (props) => {
   }
 
   return (
-    <div className={style.Transfer}>
+    <div className={style.container}>
       {page === "bank" ? <BankForm
           handleBeneficiaryBankChange={handleBeneficiaryBankChange} 
           handleBeneficiaryAccountNumberChange={handleBeneficiaryAccountNumberChange}  

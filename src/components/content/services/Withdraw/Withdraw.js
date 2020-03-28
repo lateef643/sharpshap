@@ -64,7 +64,7 @@ const Withdraw = (props) => {
   }
 
   return (
-    <div className={style.withdraw}>
+    <div className={style.container}>
       {page === "bank" ? <BankForm
           handleBankChange={handleBankChange} 
           handleAccountNumberChange={handleAccountNumberChange}  

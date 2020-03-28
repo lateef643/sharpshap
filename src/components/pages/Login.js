@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./Login.scss";
+import style from "./Login.module.scss";
 import logo from "../../assets/images/cico-logo-login.svg";
 import image from "../../assets/images/login.png";
 
@@ -26,19 +26,19 @@ const Login = (props) => {
   };
   
   return (
-    <div className="login">
-      <div className="login__section--image">
-        <div className="login__section--image__container">
-          <img src={image} />
+    <div className={style.container}>
+      <div className={style.imageSection}>
+        <div className={style.imageBox}>
+          <img src={image} alt="hello illustration" />
           <p>Login</p>        
         </div>
       </div>
-      <div className="login__section--form">
-        <div className="login__section--form__container">
-          <div className="login__logo-box">
-            <img src={logo} />
+      <div className={style.formSection}>
+        <div className={style.formContainer}>
+          <div>
+            <img src={logo} alt="Cico logo" />
           </div>
-          <form className="login__form" onSubmit={handleOnSubmit}>
+          <form className={style.form} onSubmit={handleOnSubmit}>
             <label>
               <input type="text" placeholder="Phone Number" onChange={handlePhoneNumberChange} />
             </label>

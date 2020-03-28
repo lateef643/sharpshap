@@ -1,80 +1,82 @@
-.insurancePurchaseForm {
+.container {
   padding-top: 6rem;
-}
 
-.form {
-  width: 494px;
-  height: 709px;
-  margin: 0 auto;
-  box-shadow: 0px 3px 6px #00000029;
-  padding: 3rem;
-  padding-top: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  background-color: #fff;
-
-  label {
-
-    span {
-      display: block;
-      padding: 0 1rem;
-      background-color: #fff;
-      font-size: 1.4rem;
-      color: #9e9d9d;
-      line-height: 2.4rem;
-      position: relative;
-      left: 3rem;
-      top: 1rem;
-      width: max-content;
-    }
-
-    input, select {
-      width: 399px;
-      height: 51px;
-      border-radius: 5px;
-      border: 1px solid #afafaf;
-      color: #707070;
-      font-family: 'Lato', sans-serif;
-      padding: 0 3px;
-    }
-  }
-
-  div {
+  > .form {
+    width: 494px;
+    height: 709px;
+    margin: 0 auto;
+    box-shadow: 0px 3px 6px #00000029;
+    padding: 3rem;
+    padding-top: 2rem;
     display: flex;
-    justify-content: space-between;
-    width: 399px;
-
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #fff;
+  
     label {
-      select {
-        width: 150px;
-        height: 3.6rem;
+  
+      span {
+        display: block;
+        padding: 0 1rem;
+        background-color: #fff;
+        font-size: 1.4rem;
+        color: #9e9d9d;
+        line-height: 2.4rem;
+        position: relative;
+        left: 3rem;
+        top: 1rem;
+        width: max-content;
+      }
+  
+      input, select {
+        width: 39.9rem;
+        height: 5.1rem;
+        border-radius: 5px;
+        border: 1px solid #afafaf;
+        color: #707070;
+        font-family: inherit;
+        padding: 0 3px;
+        font-size: 1.4rem;
       }
     }
-  }
-
-  button {
-    font-family: 'Lato', sans-serif;
-    width: 399px;
-    height: 51px;
-    margin: 0 auto;
-    margin-top: 2rem;
-    font-size: 1.4rem;
-    outline: 0;
-    border: 0;
-    height: 4.4rem;
-    border-radius: 1rem;
-    color: #fff;
-    box-shadow: 3px 3px 6px #00000029;
-    background: transparent 
-    linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
-    0% 0% no-repeat padding-box;
-
-    &:active {
-      transform: translateY(3%);
-      box-shadow: 1px 1px 4px #00000029;
+  
+    div {
+      display: flex;
+      justify-content: space-between;
+      width: 39.9rem;
+  
+      label {
+        select {
+          width: 15rem;
+          height: 3.6rem;
+          font-size: 1.4rem;
+        }
+      }
+    }
+  
+    button {
+      font-family: 'Lato', sans-serif;
+      width: 39.9rem;
+      height: 5.1rem;
+      margin: 0 auto;
+      margin-top: 2rem;
+      font-size: 1.4rem;
+      outline: 0;
+      border: 0;
+      height: 4.4rem;
+      border-radius: 1rem;
+      color: #fff;
+      box-shadow: 3px 3px 6px #00000029;
+      background: transparent 
+      linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
+      0% 0% no-repeat padding-box;
+  
+      &:active {
+        transform: translateY(3%);
+        box-shadow: 1px 1px 4px #00000029;
+      }
     }
   }
 }

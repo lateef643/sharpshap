@@ -12,20 +12,20 @@
   text-decoration: none;
   cursor: pointer;
 
-  &-container {
+  .container {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
   }
 
-  &__image {
+  .image {
     width: 3.3rem;
   }
 
-  &__text {
+  .text {
     font-size: 1.3rem;
     color: #707070;
-    margin-top: 15px;
+    margin-top: 1.5rem;
   }  
 
   &:hover {

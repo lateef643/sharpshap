@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import './MyWallet.scss';
+import style from './MyWallet.module.scss';
 
 const MyWallet = (props) => {
   const [firstname, setFirstname] = useState("");
@@ -9,7 +9,7 @@ const MyWallet = (props) => {
   const [oldPassword, setOldPassword] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  const [modal, setModal] = useState(true);
+  const [modal, setModal] = useState(false);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
@@ -68,10 +68,10 @@ const MyWallet = (props) => {
   }
 
   return (
-  <div className="my-wallet">
-    <form className="form my-wallet__form" onSubmit={handleOnSubmit} >
-      <div className="my-wallet__text-box">
-        <span>1. Details</span><span className="start-modal" onClick={(e) => {
+  <div className={style.container}>
+    <form className={style.detailsForm} onSubmit={handleOnSubmit} >
+      <div>
+        <span>1. Details</span><span className={style.startModal} onClick={(e) => {
           e.preventDefault();
           setModal(true);
         }}>2. Change Password</span>
@@ -102,12 +102,12 @@ const MyWallet = (props) => {
       </label>   
       <button type="submit">Save Changes</button>
     </form>
-    {modal ? <div className="my-wallet-modal">
+    {modal ? <div className={style.passwordModal}>
       <span onClick={(e) => {
         e.preventDefault();
         setModal(false);
       }}>X</span>
-      <form className="form my-wallet-modal__form" onSubmit={handleOnPasswordChangeSubmit} >
+      <form className={style.passwordForm} onSubmit={handleOnPasswordChangeSubmit} >
         <label>
           <span>Old Password</span>
           <input type="text" onChange={handleOldPasswordChange} />      

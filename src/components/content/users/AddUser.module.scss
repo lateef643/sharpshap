@@ -1,7 +1,7 @@
-.add-user {
+.container {
   padding-top: 6rem;
 
-  &__form {
+  > .form {
     height: 49.2rem;
     width: 65.2rem;
     margin: 0 auto;
@@ -11,9 +11,9 @@
     justify-content: space-around;
     flex-wrap: wrap;
     background-color: #fff;
-
+  
     label {
-
+  
       span {
         display: block;
         padding: 0 1rem;
@@ -27,18 +27,18 @@
         top: 1rem;
         width: max-content;
       }
-
+  
       input {
         width: 25.4rem;
         height: 4.4rem;
         border-radius: 5px;
         border: 1px solid #afafaf;
         color: #707070;
-        font-family: 'Lato', sans-serif;
+        font-family: inherit;
         padding: 0 3px;
       }
     }
-
+  
     button {
       font-family: 'Lato', sans-serif;
       width: 50%;
@@ -55,7 +55,7 @@
       background: transparent 
       linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
       0% 0% no-repeat padding-box;
-
+  
       &:active {
         transform: translateY(3%);
         box-shadow: 1px 1px 4px #00000029;

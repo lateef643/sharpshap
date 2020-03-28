@@ -1,25 +1,34 @@
 import React from "react";
-import style from './TransactionsLog.module.scss';
+import style from './ActivityLog.module.scss';
 
-const TransactionLog = (props) => {
+const ActivityLog = (props) => {
   const transactions = [{
+    status: 'failed',
+    amount: "786,364",
+    reference: "123456",
+    type: "Transfer",
+    customer: "sanwoolu@corona.com",
+    agent: "A&B consortium",
+    vendor: "Okeson",
+    terminal: "tt8989",
+  }, {
     status: 'pending',
-    amount: "500",
-    reference: "428333",
-    type: "Airtime",
-    customer: "naruto@covid.com",
-    agent: "Saitama",
-    vendor: "Goku",
-    terminal: "jp8738",   
+    amount: "781,364",
+    reference: "123456",
+    type: "Transfer",
+    customer: "sanwoolu@corona.com",
+    agent: "A&B consortium",
+    vendor: "Okeson",
+    terminal: "tt8989",
   }, {
     status: 'failed',
-    amount: "9,000",
-    reference: "787637",
-    type: "Withdrawal",
-    customer: "slim@fatboys.co",
-    agent: "Area fada & Sons",
-    vendor: "Scatter",
-    terminal: "ht6573",
+    amount: "1,657,364",
+    reference: "123456",
+    type: "Transfer",
+    customer: "sanwoolu@corona.com",
+    agent: "A&B consortium",
+    vendor: "Okeson",
+    terminal: "tt8989",
   }];
   transactions.length = 20;
   transactions.fill({
@@ -31,7 +40,7 @@ const TransactionLog = (props) => {
     agent: "A&B consortium",
     vendor: "Okeson",
     terminal: "tt8989",
-  }, 2, 20);
+  }, 3, 40);
 
   return (
     <div className={style.container}>
@@ -41,12 +50,12 @@ const TransactionLog = (props) => {
         <span>Reference</span>
         <span>Type</span>
         <span>Customer</span>
-        <span>Agent</span>
+        <span className={style.marginLeft}>Agent</span>
         <span>Vendor</span>
         <span>Terminal</span>
       </div>
       {transactions.map((transaction, index) => ( 
-        <div key={index} className={style.log}>
+        <div key={index} className={style.card}>
           <span className={style.status}><span className={`${transaction.status === "failed" ? style.failed 
             : transaction.status === "pending" ? style.pending : style.success}`}></span></span>            
           <span>&#8358;{transaction.amount}</span>
@@ -62,4 +71,4 @@ const TransactionLog = (props) => {
   </div>
 )};
 
-export default TransactionLog;
+export default ActivityLog;

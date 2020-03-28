@@ -12,15 +12,15 @@ import jos from "../../../../assets/images/jos.png";
 const EnergyVendorsList = (props) => { 
   console.log(props) 
   return (
-  <div className={style.energyVendors}>
-    <div className={style.energyVendorsContainer}>
+  <div className={style.sectionContainer}>
+    <div className={style.cardContainer}>
       <div onClick={(e) => {
         e.preventDefault();
         console.log(props)
         props.handleSetPage('form');
         props.handleSetVendor(ikeja);
-      }} className={style.energyVendorsCardSection}>
-        <div className={style.container}>
+      }} className={style.card}>
+        <div className={style.imageBox}>
           <img src={ikeja} className={style.image} alt="card icon" />
         </div>
       </div>  
@@ -28,8 +28,8 @@ const EnergyVendorsList = (props) => {
         e.preventDefault();
         props.handleSetPage('form');
         props.handleSetVendor(ibadan);
-      }} className={style.energyVendorsCardSection}>
-        <div className={style.container}>
+      }} className={style.card}>
+        <div className={style.imageBox}>
           <img src={ibadan} className={style.image} alt="card icon" />
         </div>
       </div>  
@@ -37,8 +37,8 @@ const EnergyVendorsList = (props) => {
         e.preventDefault();
         props.handleSetPage('form');
         props.handleSetVendor(abuja);
-      }} className={style.energyVendorsCardSection}>
-        <div className={style.container}>
+      }} className={style.card}>
+        <div className={style.imageBox}>
           <img src={abuja} className={style.image} alt="card icon" />
         </div>
       </div>  
@@ -46,8 +46,8 @@ const EnergyVendorsList = (props) => {
         e.preventDefault();
         props.handleSetPage('form');
         props.handleSetVendor(enugu);
-      }} className={style.energyVendorsCardSection}>
-        <div className={style.container}>
+      }} className={style.card}>
+        <div className={style.imageBox}>
           <img src={enugu} className={style.image} alt="card icon" />
         </div>
       </div>  
@@ -55,8 +55,8 @@ const EnergyVendorsList = (props) => {
         e.preventDefault();
         props.handleSetPage('form');
         props.handleSetVendor(kaduna);
-      }} className={style.energyVendorsCardSection}>
-        <div className={style.container}>
+      }} className={style.card}>
+        <div className={style.imageBox}>
           <img src={kaduna} className={style.image} alt="card icon" />
         </div>
       </div>  
@@ -64,8 +64,8 @@ const EnergyVendorsList = (props) => {
         e.preventDefault();
         props.handleSetPage('form');
         props.handleSetVendor(kano);
-      }} className={style.energyVendorsCardSection}>
-        <div className={style.container}>
+      }} className={style.card}>
+        <div className={style.imageBox}>
           <img src={kano} className={style.image} alt="card icon" />
         </div>
       </div>  
@@ -73,8 +73,8 @@ const EnergyVendorsList = (props) => {
         e.preventDefault();
         props.handleSetPage('form');
         props.handleSetVendor(ph);
-      }} className={style.energyVendorsCardSection}>
-        <div className={style.container}>
+      }} className={style.card}>
+        <div className={style.imageBox}>
           <img src={ph} className={style.image} alt="card icon" />
         </div>
       </div>  
@@ -82,8 +82,8 @@ const EnergyVendorsList = (props) => {
         e.preventDefault();
         props.handleSetPage('form');
         props.handleSetVendor(jos);
-      }} className={style.energyVendorsCardSection}>
-        <div className={style.container}>
+      }} className={style.card}>
+        <div className={style.imageBox}>
           <img src={jos} className={style.image} alt="card icon" />
         </div>
       </div>

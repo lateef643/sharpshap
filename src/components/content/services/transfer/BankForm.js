@@ -31,7 +31,7 @@ const WithdrawForm = (props) => {
   : bank === "Zenith Bank" ? Zenith : "";
 
   return (
-  <div className={style.bankForm}>
+  <div className={style.container}>
     <form className={style.form} onSubmit={(e) => {
       e.preventDefault();
 
@@ -52,7 +52,7 @@ const WithdrawForm = (props) => {
         props.handleSetPage("summary");        
       }
     }} >
-      {bank !== "Bank" ? <img className={style.image} 
+    {bank !== "Beneficiary Bank" ? <img className={style.image} 
       src={bankImageUrl} alt={`${bank} logo`} /> : undefined}
       <label>
         <span>{bank}</span>
@@ -65,7 +65,7 @@ const WithdrawForm = (props) => {
             setBank(bankName.trim());
           };
         }}>
-          <option value="Bank">Select Bank</option>
+          <option value="Beneficiary Bank">Select Bank</option>
           {banks.map((bank, index) => {
             return <option key={index} value={bank}>{bank}</option>
           })}

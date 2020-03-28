@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "../../shared/Card";
-import "./NewTransaction.scss";
+import style from "./NewTransaction.module.scss";
 import withdrawal from "../../../assets/images/withdrawal.svg";
 import cabletv from "../../../assets/images/cable-tv-sign-with-monitor.svg";
 import power from "../../../assets/images/power.svg";
@@ -12,8 +12,8 @@ import waec from "../../../assets/images/WAEC_LogoPNG@2x.svg";
 import jamb from "../../../assets/images/Institutions Not Showing (Blank) in CAPS Reasons and Solutions@2x.svg";
 
 const NewTransactions = (props) => (
-  <div className="new-transactions">
-    <div className="new-transactions-container">
+  <div className={style.container}>
+    <div className={style.cardContainer}>
       <Card link="withdraw" text="Withdraw Money" image={withdrawal} />
       <Card link="transfer" text="Transfer Funds" image={transfer} />
       <Card link="pay-electricity" text="Pay Electricity" image={power} />

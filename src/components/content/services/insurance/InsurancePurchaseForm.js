@@ -5,14 +5,40 @@ const InsurancePurchaseForm = (props) => {
   const plans = ['Max', 'Bigi', 'Smallie', 'Family', 'Oga'];
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
   'August', 'September', 'October', 'November', 'December'];
-  const years = ['2019', '2020', '2021', '2022', '2023', '2024', '2025'];
-  const [error, setError] = useState("Please type values to begin");
+  const years = ['2020', '2021', '2022', '2023', '2024', '2025'];
+  const [errors, setErrors] = useState({
+    name: true,
+    phoneNumber: true,
+    plan: true,
+    amount: true,
+    month: true,
+    year: true
+  });
 
   return (
-  <div className={style.insurancePurchaseForm}>
+  <div className={style.container}>
     <form className={style.form} onSubmit={(e) => {
       e.preventDefault();
-      if (error.trim().length === 0) {
+
+      let hasError = true;
+
+      console.log(errors)
+
+      //Validation checks if input field is empty
+      for (let error in errors) {
+        if (errors.hasOwnProperty(error)) {
+          if (errors[error]) {
+            hasError = true;
+            break;
+          } else {
+            hasError = false;
+          };
+        }
+      }
+
+      console.log(hasError)
+
+      if (!hasError) {
         props.handleSetPage("summary");
       };
     }} >
@@ -23,10 +49,8 @@ const InsurancePurchaseForm = (props) => {
 
           if (name.trim().length > 0) {
             props.handleNameChange(name);
-            setError("");
-          } else {
-           setError("Name field empty");            
-          }
+            setErrors({...errors, name: false});
+          };
         }} />      
       </label>
       <label>
@@ -36,10 +60,8 @@ const InsurancePurchaseForm = (props) => {
 
           if (phoneNumber.trim().length > 0) {
             props.handlePhoneNumberChange(phoneNumber);
-            setError("");
-          } else {
-            setError("PhoneNumber field empty");
-          }
+            setErrors({...errors, phoneNumber: false});
+          };
         }} />      
       </label>  
       <label>
@@ -49,11 +71,10 @@ const InsurancePurchaseForm = (props) => {
 
           if (plan.trim().length > 0) {
             props.handlePlanChange(plan);
-            setError("");
-          } else {
-            setError("Plan field empty");
-          }
+            setErrors({...errors, plan: false});
+          };
         }}>
+          <option value="">Select Plan</option>
           {plans.map((plan, index) => {
             return <option value={plan} key={index}>{plan}</option>
           })}
@@ -66,10 +87,8 @@ const InsurancePurchaseForm = (props) => {
 
           if (amount.trim().length > 0) {
             props.handleAmountChange(amount);
-            setError("");
-          } else {
-            setError("Amount field empty");
-          }
+            setErrors({...errors, amount: false});
+          };
         }} />      
       </label> 
       <div>
@@ -80,11 +99,10 @@ const InsurancePurchaseForm = (props) => {
 
             if (month.trim().length > 0) {
               props.handleMonthChange(month);
-              setError("");
-            } else {
-              setError("Month field empty");
-            }
+              setErrors({...errors, month: false});
+            };
           }}>
+            <option value="">Select Month</option>
             {months.map((month, index) => {
               return <option value={month} key={index}>{month}</option>
             })}
@@ -97,11 +115,10 @@ const InsurancePurchaseForm = (props) => {
 
             if (year.trim().length > 0) {
               props.handleYearChange(year);
-              setError("");
-            } else {
-              setError("Year field empty");
-            }
+              setErrors({...errors, year: false});
+            };
           }}>
+            <option value="">Select Year</option>
             {years.map((year, index) => {
               return <option value={year} key={index}>{year}</option>
             })}

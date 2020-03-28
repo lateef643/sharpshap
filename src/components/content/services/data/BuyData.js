@@ -33,7 +33,7 @@ const BuyData = (props) => {
   };
 
   return (
-  <div className={style.buyData}>
+  <div className={style.container}>
     <form className={style.form} onSubmit={handleOnSubmit} >
       <label>
         <span>Network</span>
