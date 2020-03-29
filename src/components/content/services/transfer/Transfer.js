@@ -1,11 +1,18 @@
 import React, {useState} from "react";
+import { connect } from "react-redux";
 import AmountForm from "./AmountForm";
 import BankForm from "./BankForm";
 import PaymentSummary from "../../../shared/PaymentSummary";
 import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import style from './Transfer.module.scss';
+import { setCurrentPage } from "../../../../actions/page";
 
-const Transfer = (props) => {
+const Transfer = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Transfer Money",
+    search: false
+  });
+
   const [page, setPage] = useState("amount");
   const [beneficiaryBank, setBeneficiaryBank] = useState("Beneficiary Bank");
   const [beneficiaryAccountNumber, setBeneficiaryAccountNumber] = useState("");
@@ -90,4 +97,9 @@ const Transfer = (props) => {
   );
 };
 
-export default Transfer;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+}
+export default connect(undefined, mapDispatchToProps)(Transfer);

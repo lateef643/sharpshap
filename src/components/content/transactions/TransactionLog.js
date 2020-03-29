@@ -1,7 +1,14 @@
 import React from "react";
-import style from './TransactionsLog.module.scss';
+import { connect } from "react-redux";
+import style from './TransactionLog.module.scss';
+import { setCurrentPage } from "../../../actions/page";
 
-const TransactionLog = (props) => {
+export const TransactionLog = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Transaction Log",
+    search: true
+  });
+
   const transactions = [{
     status: 'pending',
     amount: "500",
@@ -62,4 +69,10 @@ const TransactionLog = (props) => {
   </div>
 )};
 
-export default TransactionLog;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(TransactionLog);

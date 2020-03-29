@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import style from './MyWallet.module.scss';
+import { setCurrentPage } from "../../actions/page";
 
-const MyWallet = (props) => {
+export const MyWallet = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Profile",
+    search: false
+  });
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -126,4 +133,10 @@ const MyWallet = (props) => {
   </div>
 )}
 
-export default MyWallet;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(MyWallet);

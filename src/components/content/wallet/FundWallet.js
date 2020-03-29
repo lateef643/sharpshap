@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import style from './FundWallet.module.scss';
+import { setCurrentPage } from "../../../actions/page";
 
-const FundWallet = (props) => {
+export const FundWallet = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Fund Wallet",
+    search: false
+  });
+
   const [agentName, setAgentName] = useState("");
   const [walletNumber, setWalletNumber] = useState("");
   const [amount, setAmount] = useState("");
@@ -50,4 +57,9 @@ const FundWallet = (props) => {
   </div>
 )}
 
-export default FundWallet;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+}
+export default connect(undefined, mapDispatchToProps)(FundWallet);

@@ -1,11 +1,18 @@
 import React, {useState} from "react";
+import { connect } from "react-redux";
 import AmountForm from "./AmountForm";
 import BankForm from "./BankForm";
 import PaymentSummary from "../../../shared/PaymentSummary";
 import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import style from './Withdraw.module.scss';
+import { setCurrentPage } from "../../../../actions/page";
 
-const Withdraw = (props) => {
+export const Withdraw = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Withdraw Money",
+    search: false
+  });
+
   const [page, setPage] = useState("amount");
   const [bank, setBank] = useState("");
   const [accountNumber, setAccountNumber] = useState("");
@@ -90,4 +97,9 @@ const Withdraw = (props) => {
   );
 };
 
-export default Withdraw;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+}
+export default connect(undefined, mapDispatchToProps)(Withdraw);

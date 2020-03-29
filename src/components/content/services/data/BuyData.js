@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import style from './BuyData.module.scss';
+import { setCurrentPage } from "../../../../actions/page";
 
-const BuyData = (props) => {
+const BuyData = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Buy Data",
+    search: false
+  });
+
   const networks = [{ name: "MTN"}, { name: 'Airtel'}, {name: "Etisalat"}, {name: "Glo"}];
   const plans = ['Ultimate Plan', 'Medium Plan', 'Big Daddy', 'Flex Plan'];
   const [network, setNetwork] = useState("");
@@ -62,4 +69,10 @@ const BuyData = (props) => {
   </div>
 )}
 
-export default BuyData;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(BuyData);

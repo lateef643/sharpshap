@@ -1,12 +1,19 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import style from './BuyInsurance.module.scss';
 import InsuranceType from "./InsuranceType";
 import UploadPhoto from "./UploadPhoto";
 import InsurancePurchaseForm from "./InsurancePurchaseForm";
 import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import PaymentSummary from "../../../shared/PaymentSummary";
+import { setCurrentPage } from "../../../../actions/page";
 
-const BuyInsurance = (props) => {
+export const BuyInsurance = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Buy Insurance",
+    search: false
+  });
+
   const [page, setPage] = useState("");
   const [type, setType] = useState("");
   const [name, setName] = useState("");
@@ -100,4 +107,10 @@ const BuyInsurance = (props) => {
     </div>
 )}
 
-export default BuyInsurance;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(BuyInsurance);

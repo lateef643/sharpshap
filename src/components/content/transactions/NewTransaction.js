@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import Card from "../../shared/Card";
 import style from "./NewTransaction.module.scss";
 import withdrawal from "../../../assets/images/withdrawal.svg";
@@ -10,8 +11,15 @@ import insurance from "../../../assets/images/surface1.svg";
 import airtime from "../../../assets/images/smartphone-call.svg";
 import waec from "../../../assets/images/WAEC_LogoPNG@2x.svg";
 import jamb from "../../../assets/images/Institutions Not Showing (Blank) in CAPS Reasons and Solutions@2x.svg";
+import { setCurrentPage } from "../../../actions/page";
 
-const NewTransactions = (props) => (
+export const NewTransaction = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "New Transaction",
+    search: false
+  });
+
+  return (
   <div className={style.container}>
     <div className={style.cardContainer}>
       <Card link="withdraw" text="Withdraw Money" image={withdrawal} />
@@ -25,6 +33,12 @@ const NewTransactions = (props) => (
       <Card link="waec" text="WAEC" image={waec} />     
     </div>
   </div>
-);
+)};
 
-export default NewTransactions;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(NewTransaction);

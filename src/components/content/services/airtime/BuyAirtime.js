@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import style from './BuyAirtime.module.scss';
+import { setCurrentPage } from "../../../../actions/page";
 
-const BuyAirtime = (props) => {
+export const BuyAirtime = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Buy Airtime",
+    search: false
+  });
+
   const networks = [{ name: "MTN"}, { name: 'Airtel'}, {name: "Etisalat"}, {name: "Glo"}];
   const [network, setNetwork] = useState("");
   const [amount, setAmount] = useState("");
@@ -56,4 +63,10 @@ const BuyAirtime = (props) => {
   </div>
 )}
 
-export default BuyAirtime;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(BuyAirtime);

@@ -1,8 +1,4 @@
-const pageReducer = (state = {
-  page: 'dashboard',
-  heading: 'Services',
-  input: true
-}, action) => {
+const pageReducer = (state = {}, action) => {
   switch(action.type) {
     case 'SET_CURRENT_PAGE':
       return action.payload;

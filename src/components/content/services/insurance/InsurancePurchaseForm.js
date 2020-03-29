@@ -1,7 +1,15 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import style from './InsurancePurchaseForm.module.scss';
+import { setCurrentPage } from "../../../../actions/page";
 
 const InsurancePurchaseForm = (props) => {
+  props.changeCurrentPage({
+    heading: "Buy Insurance",
+    search: false,
+    sub: "Personal Details"
+  });
+
   const plans = ['Max', 'Bigi', 'Smallie', 'Family', 'Oga'];
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July',
   'August', 'September', 'October', 'November', 'December'];
@@ -130,4 +138,10 @@ const InsurancePurchaseForm = (props) => {
   </div>
 )}
 
-export default InsurancePurchaseForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(InsurancePurchaseForm);

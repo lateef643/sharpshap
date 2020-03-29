@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { setCurrentPage } from "../../../actions/page";
 import style from './AddUser.module.scss';
 
-const AddUser = (props) => {
+export const AddUser = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: 'Add User',
+    search: false
+  });
+
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -83,4 +90,10 @@ const AddUser = (props) => {
   </div>
 )}
 
-export default AddUser;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(AddUser);

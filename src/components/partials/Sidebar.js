@@ -44,7 +44,7 @@ const Sidebar = () => {
           <NavLink to="/new-transaction" className="sidebar__links__link__secondary-links__link">
             <p>New Transaction</p>
           </NavLink>
-          <NavLink to="/transactions-log" className="sidebar__links__link__secondary-links__link">
+          <NavLink to="/transaction-log" className="sidebar__links__link__secondary-links__link">
             <p>Transactions Log</p>
           </NavLink>
         </div>

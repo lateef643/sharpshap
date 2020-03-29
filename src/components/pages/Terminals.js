@@ -1,8 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import style from './Terminals.module.scss';
+import { setCurrentPage } from "../../actions/page";
 
-const ListTerminals = (props) => {
+export const ListTerminals = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: 'My Terminals',
+    search: false
+  });
+
   const terminals = [];
   terminals.length = 40;
   terminals.fill({
@@ -24,7 +31,7 @@ const ListTerminals = (props) => {
           <span>{index + 1}</span>
           <span>{terminal.terminalID}</span>
           <span>{terminal.date}</span>
-          <span>
+          <span className={style.action}>
             <span className={style.one}>...</span>
             <span className={style.two}>
               <Link>Transaction History</Link>
@@ -36,4 +43,10 @@ const ListTerminals = (props) => {
   </div>
 )};
 
-export default ListTerminals;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(ListTerminals);

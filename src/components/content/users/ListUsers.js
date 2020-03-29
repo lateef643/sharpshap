@@ -1,8 +1,15 @@
 import React from "react";
+import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import style from './ListUsers.module.scss';
+import { setCurrentPage } from "../../../actions/page";
 
-const ListUsers = (props) => {
+export const ListUsers = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "List Users",
+    search: true
+  });
+
   const users = [];
   users.length = 20;
   users.fill({
@@ -43,4 +50,10 @@ const ListUsers = (props) => {
   </div>
 )};
 
-export default ListUsers;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(ListUsers);

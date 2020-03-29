@@ -2,7 +2,7 @@ import React from "react";
 import Login from "../components/pages/Login";
 import Dashboard from "../components/pages/Dashboard";
 import Terminals from "../components/pages/Terminals";
-import TransactionsLog from "../components/content/transactions/TransactionsLog";
+import TransactionLog from "../components/content/transactions/TransactionLog";
 import Container from "../components/partials/Container";
 import AddUser from "../components/content/users/AddUser";
 import ListUsers from "../components/content/users/ListUsers";
@@ -47,8 +47,8 @@ const routes = [
     main: () => <Terminals />
   },
   {
-    path: "/transactions-log",
-    main: () => <TransactionsLog />
+    path: "/transaction-log",
+    main: () => <TransactionLog />
   },
   {
     path: "/new-transaction",

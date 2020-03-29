@@ -1,28 +1,42 @@
 import React from "react";
+import { connect } from "react-redux";
 import style from './PaymentSummary.module.scss';
+import { setCurrentPage } from "../../actions/page";
 
-const PaymentSummary = (props) => (
-  <div className={style.container}>
-    <div className={style.paymentContainer} >
-      <div>
-        <span>Phone Number</span>
-        <span>{props.phoneNumber}</span>
-      </div>
-      <div>
-        <span>Amount</span>
-        <span>{props.amount}</span>   
-      </div>
-      <div>    
-        <span>Total</span>
-        <span>{props.total}</span> 
-      </div> 
-      <button onClick={(e) => {
-        e.preventDefault();
-        props.handleOnSubmit();
-        props.handleSetPage("success");
-      }}>Continue</button>       
-    </div>    
-  </div>
-);
+export const PaymentSummary = ({ changeCurrentPage, phoneNumber, amount, total, handleOnSubmit, handleSetPage }) => {
+  changeCurrentPage({
+    heading: "Verification",
+    search: false
+  });
 
-export default PaymentSummary;
+  return (
+    <div className={style.container}>
+      <div className={style.paymentContainer} >
+        <div>
+          <span>Phone Number</span>
+          <span>{phoneNumber}</span>
+        </div>
+        <div>
+          <span>Amount</span>
+          <span>{amount}</span>
+        </div>
+        <div>    
+          <span>Total</span>
+          <span>{total}</span> 
+        </div> 
+        <button onClick={(e) => {
+          e.preventDefault();
+          handleOnSubmit();
+          handleSetPage("success");
+        }}>Continue</button>       
+      </div>    
+    </div>
+)};
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => (dispatch(setCurrentPage(payload)))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(PaymentSummary);

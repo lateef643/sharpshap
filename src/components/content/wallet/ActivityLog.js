@@ -1,7 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import style from './ActivityLog.module.scss';
+import { setCurrentPage } from "../../../actions/page";
 
-const ActivityLog = (props) => {
+export const ActivityLog = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Activity Log",
+    search: false
+  });
+
   const transactions = [{
     status: 'failed',
     amount: "786,364",
@@ -71,4 +78,9 @@ const ActivityLog = (props) => {
   </div>
 )};
 
-export default ActivityLog;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+}
+export default connect(undefined, mapDispatchToProps)(ActivityLog);

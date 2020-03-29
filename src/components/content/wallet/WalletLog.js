@@ -1,7 +1,14 @@
 import React from "react";
+import { connect } from "react-redux";
 import style from './WalletLog.module.scss';
+import { setCurrentPage } from "../../../actions/page";
 
-const WalletLog = (props) => {
+export const WalletLog = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Wallet Log",
+    search: false
+  });
+
   const transactions = [];
   transactions.length = 20;
   transactions.fill({
@@ -40,4 +47,9 @@ const WalletLog = (props) => {
   </div>
 )};
 
-export default WalletLog;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+}
+export default connect(undefined, mapDispatchToProps)(WalletLog);

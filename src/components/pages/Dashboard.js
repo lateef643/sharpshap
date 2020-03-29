@@ -1,4 +1,5 @@
 import React from "react";
+import { connect } from "react-redux";
 import Card from "../shared/Card";
 import style from "./Dashboard.module.scss";
 import withdrawal from "../../assets/images/withdrawal.svg";
@@ -10,8 +11,14 @@ import insurance from "../../assets/images/surface1.svg";
 import airtime from "../../assets/images/smartphone-call.svg";
 import waec from "../../assets/images/WAEC_LogoPNG@2x.png";
 import jamb from "../../assets/images/Institutions Not Showing (Blank) in CAPS Reasons and Solutions@2x.png";
+import { setCurrentPage } from "../../actions/page";
 
-const Dashboard = (props) => {
+export const Dashboard = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Services",
+    search: true
+  });
+
   const transactions = [{
     status: "success",
     amount: 500,
@@ -78,4 +85,10 @@ const Dashboard = (props) => {
   </div>
 )};
 
-export default Dashboard;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(Dashboard);

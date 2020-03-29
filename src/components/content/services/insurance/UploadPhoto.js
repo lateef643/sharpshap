@@ -1,8 +1,16 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import user from "../../../../assets/images/user.svg";
 import style from './UploadPhoto.module.scss';
+import { setCurrentPage } from "../../../../actions/page";
 
-const UploadPhoto = (props) => {
+export const UploadPhoto = ({ changeCurrentPage, handleSetPage, handleSetFile}) => {
+  changeCurrentPage({
+    heading: "Buy Insurance",
+    search: false,
+    sub: "Upload Photo"
+  });
+
   const [file, setFile] = useState("");
 
   return (
@@ -11,7 +19,7 @@ const UploadPhoto = (props) => {
       e.preventDefault();
 
       if (file) {
-        props.handleSetPage("form");
+        handleSetPage("form");
       };
     }} >
     <img src={user} alt="User avatar" />
@@ -19,7 +27,7 @@ const UploadPhoto = (props) => {
         <input type="file" onChange={(e) => {
           const file = e.target.value;
           setFile(file);
-          props.handleSetFile(file);
+          handleSetFile(file);
         }}/>
       </label>       
       <button type="submit">Proceed</button>
@@ -27,4 +35,10 @@ const UploadPhoto = (props) => {
   </div>
 )}
 
-export default UploadPhoto;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(UploadPhoto);

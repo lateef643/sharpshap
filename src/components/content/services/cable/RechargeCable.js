@@ -1,7 +1,14 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
 import style from './RechargeCable.module.scss';
+import { setCurrentPage } from "../../../../actions/page";
 
-const RechargeCable = (props) => {
+export const RechargeCable = ({ changeCurrentPage }) => {
+  changeCurrentPage({
+    heading: "Recharge Cable",
+    search: false
+  });
+
   const cableTvProviders = [{ name: "DSTV"}, { name: 'GOTV'}, {name: "StarTimes"}, {name: "HITV"}];
   const packages = ['Ultimate Plan', 'Medium Plan', 'Big Daddy', 'Flex Plan'];
   const [provider, setProvider] = useState("");
@@ -62,4 +69,10 @@ const RechargeCable = (props) => {
   </div>
 )}
 
-export default RechargeCable;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+  }
+};
+
+export default connect(undefined, mapDispatchToProps)(RechargeCable);
