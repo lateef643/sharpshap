@@ -21,19 +21,19 @@ export const ListTerminals = ({ changeCurrentPage }) => {
   return (
     <div className={style.container}>
       <div className={style.heading}>
-        <span>S/N</span>
-        <span>Terminal ID</span>
-        <span>Date</span>
-        <span>Action</span>
+        <span className={style.one}>S/N</span>
+        <span className={style.two}>Terminal ID</span>
+        <span className={style.three}>Date</span>
+        <span className={style.four}>Action</span>
       </div>
       {terminals.map((terminal, index) => ( 
         <div key={index} className={style.terminal}>
-          <span>{index + 1}</span>
-          <span>{terminal.terminalID}</span>
-          <span>{terminal.date}</span>
-          <span className={style.action}>
-            <span className={style.one}>...</span>
-            <span className={style.two}>
+          <span className={style.one}>{index + 1}</span>
+          <span className={style.two}>{terminal.terminalID}</span>
+          <span className={style.three}>{terminal.date}</span>
+          <span className={style.four}>
+            <span className={style.action}>...</span>
+            <span className={style.link}>
               <Link>Transaction History</Link>
             </span>
           </span>          

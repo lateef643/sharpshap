@@ -1,6 +1,6 @@
 .container {
   padding-top: 2rem;
-  width: 109rem;
+  width: 95%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -19,9 +19,9 @@
     background-color: #fff;
     text-align: left;
     
-    span {
-      flex: 0 0 18%;
-    } 
+    // span {
+    //   flex: 0 0 18%;
+    // } 
   }
 
 
@@ -32,13 +32,13 @@
     justify-content: space-between;
     align-items: center;
     height: 5rem;
-    padding: 1rem 5rem;
+    padding: 1rem 4rem;
     background-color: #fff;
     margin-bottom: .3rem;
   
-    span {
-      flex: 0 0 18%;
-    } 
+    // span {
+    //   flex: 0 0 18%;
+    // } 
   
     span:last-child {
       display: block;
@@ -49,14 +49,13 @@
       display: flex;
       flex-direction: column;
       position: relative;
-      top: 2rem;
-      height: 7.5rem;
+      top: 1rem;
   
-      > .one {
+      > .action {
         color: #2A58AD;
       }
   
-      > .two {
+      > .link {
         background-color: #2A58AD;
         position: relative;
         display: flex;
@@ -90,11 +89,11 @@
     }
   
     span:last-child:hover {
-      .one {
+      .action {
         z-index: -5;
       }
   
-      .two {
+      .link {
         visibility: visible;
         z-index: 10;
         transform: translateY(-100%);
@@ -105,4 +104,20 @@
       transform: scale(1.02);
     }
   }
+}
+
+.one {
+  flex: 0 0 12%;
+}
+
+.two {
+  flex: 0 0 40%;
+}
+
+.three {
+  flex: 0 0 38%;
+}
+
+.four {
+  flex: 0 0 17%;
 }
