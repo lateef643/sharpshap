@@ -12,7 +12,7 @@
 
     > .imageBox {
       position: relative;
-      top: 40%;
+      top: 25rem;
       left: 20px;  
       display: flex;
       align-items: center; 
@@ -39,7 +39,7 @@
 
     > .formContainer {
       position: relative;
-      top: 18%;
+      top: 11rem;
       left: 35%;
       width: 70%;
       height: 300px;
@@ -57,7 +57,6 @@
           input {
             height: 35px;
             width: 370px;
-            letter-spacing: 1px;
             font-family: inherit;
             border: 0;
             outline: 0;

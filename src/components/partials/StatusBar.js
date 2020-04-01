@@ -2,7 +2,7 @@ import React from "react";
 import "./StatusBar.scss";
 import { connect } from "react-redux";
 
-export const StatusBar = ({ page }) => {
+export const StatusBar = ({ page, balance }) => {
   return (
   <div className="statusbar">
     <p className="statusbar__text">{page.heading}{page.sub ? <span> > {page.sub}</span> : undefined}</p>
@@ -14,7 +14,8 @@ export const StatusBar = ({ page }) => {
 
 const mapStateToProps = (state) => {
   return {
-    page: state.page
+    page: state.page,
+    // balance: state.auth.user.wallet.current_bal
   }
 }
 

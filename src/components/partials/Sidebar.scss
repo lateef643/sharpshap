@@ -56,7 +56,7 @@
         position: relative;
         left: 100%;
         bottom: 75%;
-        z-index: 3;
+        z-index: 203;
         visibility: hidden;
 
         &__link {
@@ -81,6 +81,7 @@
 
       div {
         visibility: visible;
+        z-index: 5;
       }
     }
   }

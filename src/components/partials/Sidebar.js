@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { connect } from "react-redux";
 import './Sidebar.scss';
 import avatar from "../../assets/images/user.svg";
 import speedometer from "../../assets/images/speedometer.svg";
@@ -8,12 +9,12 @@ import data from "../../assets/images/data.svg";
 import terminal from "../../assets/images/payment-terminal.svg";
 import wallet from "../../assets/images/digital-wallet.svg";
 
-const Sidebar = () => {
+export const Sidebar = ({ firstname, lastname }) => {
   return (
   <div className="sidebar">
     <div className="sidebar__profile">
       <img src={avatar} className="sidebar__profile__img" alt="user's avatar" />
-      <p className="sidebar__profile__name">Kayode Fayemi</p>
+      <p className="sidebar__profile__name">{`${firstname} ${lastname}`}</p>
       <button className="sidebar__profile__edit">Edit Profile</button>
     </div>
     <div className="sidebar__links">
@@ -68,4 +69,11 @@ const Sidebar = () => {
   </div>
 )};
 
-export default Sidebar;
+const mapStateToProps = (state) => {
+  return {
+    firstname: state.auth.user.agent.first_name,
+    lastname: state.auth.user.agent.last_name
+  }
+};
+
+export default connect(mapStateToProps)(Sidebar);

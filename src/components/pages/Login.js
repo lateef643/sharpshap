@@ -1,23 +1,31 @@
 import React, { useState } from "react";
+import { connect } from "react-redux";
+import { startLoginUser } from "../../actions/auth";
 import style from "./Login.module.scss";
 import logo from "../../assets/images/cico-logo-login.svg";
 import image from "../../assets/images/login.png";
 
-const Login = (props) => {
-  const [phoneNumber, setPhoneNumber] = useState("");
+export const Login = (props) => {
+  const [phone, setphone] = useState("");
   const [password, setPassword] = useState("");
+
+  const payload = {
+    user: {
+      phone,
+      password
+    },
+    type: "agent"
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log({
-      phoneNumber,
-      password
-    })
+
+    props.startLoginUser(payload);
   };
 
-  const handlePhoneNumberChange = (e) => {
-    const newPhoneNumber = e.target.value;
-    setPhoneNumber(newPhoneNumber);
+  const handlephoneChange = (e) => {
+    const newphone = e.target.value;
+    setphone(newphone);
   };
 
   const handlePasswordChange = (e) => {
@@ -40,7 +48,7 @@ const Login = (props) => {
           </div>
           <form className={style.form} onSubmit={handleOnSubmit}>
             <label>
-              <input type="text" placeholder="Phone Number" onChange={handlePhoneNumberChange} />
+              <input type="text" placeholder="Phone Number" onChange={handlephoneChange} />
             </label>
             <label>
               <input type="password" placeholder="Password" onChange={handlePasswordChange} />
@@ -52,4 +60,16 @@ const Login = (props) => {
     </div>
 )};
 
-export default Login;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    startLoginUser: payload => dispatch(startLoginUser(payload))
+  }
+};
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+    ownProps: ownProps
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

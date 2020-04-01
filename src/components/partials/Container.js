@@ -1,12 +1,15 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { connect } from "react-redux";
+import Login from "../pages/Login";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import './Container.scss';
 
-const AppShell = (props) => {
+export const AppShell = (props) => {
   return (
-    <Router>
+    <>
+    {!props.isAuthenticated ? <Login /> : <Router>
       <div className="container">
         <div className="container-sidebar">
           <Sidebar />
@@ -29,8 +32,15 @@ const AppShell = (props) => {
           </div>
         </div>
       </div>
-    </Router>
+    </Router> }
+    </>
   );
 }
 
-export default AppShell;
+const mapStateToProps = (state) => {
+  return {
+    isAuthenticated: state.auth.isAuthenticated
+  }
+};
+
+export default connect(mapStateToProps)(AppShell);

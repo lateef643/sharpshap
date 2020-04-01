@@ -1,16 +1,23 @@
 import React from 'react';
 import { Provider } from "react-redux";
-import configureStore from './store/configureStore';
+import createHistory from "history/createBrowserHistory";
+import configureStore from './store/redux/configureStore';
 import AppRouter from "../src/routes/AppRouter";
 import './App.scss';
 
 const store = configureStore();
 
-const App = () => {
+const history = createHistory();
+
+store.subscribe(() => {
+  store.getState();
+});
+
+export const App = () => {
   return (
     <Provider store={store}>
       <div className="app">
-        <AppRouter />
+        <AppRouter history={history} />
       </div>      
     </Provider>
   );
