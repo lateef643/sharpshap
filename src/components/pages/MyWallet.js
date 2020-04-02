@@ -1,14 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import style from './MyWallet.module.scss';
 import { setCurrentPage } from "../../actions/page";
 
 export const MyWallet = ({ changeCurrentPage }) => {
-  changeCurrentPage({
-    heading: "Profile",
-    search: false
-  });
-
   const [firstname, setFirstname] = useState("");
   const [lastname, setLastname] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -17,6 +12,13 @@ export const MyWallet = ({ changeCurrentPage }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [modal, setModal] = useState(false);
+
+  useEffect(() => {
+    changeCurrentPage({
+      heading: "Transaction Log",
+      search: true
+    });    
+  });
 
   const handleOnSubmit = (e) => {
     e.preventDefault();

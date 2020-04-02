@@ -50,7 +50,7 @@ export const Sidebar = ({ firstname, lastname }) => {
           </NavLink>
         </div>
       </div>  
-      <NavLink to="my-wallet" className="sidebar__links__link">
+      <div to="my-wallet" className="sidebar__links__link">
         <img src={wallet} className="sidebar__links__link__image" alt="wallet icon" />
         <p className="sidebar__links__link__text">My Wallet</p>
         <div className="sidebar__links__link__secondary-links">
@@ -64,7 +64,7 @@ export const Sidebar = ({ firstname, lastname }) => {
             <p>Activity Log</p>
           </NavLink>
         </div>
-      </NavLink>
+      </div>
     </div>
   </div>
 )};

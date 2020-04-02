@@ -1,55 +1,61 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import style from './WalletLog.module.scss';
 import { setCurrentPage } from "../../../actions/page";
+import { ALL_WALLET_LOGS } from "../../../store/api/constants";
 
 export const WalletLog = ({ changeCurrentPage }) => {
-  changeCurrentPage({
-    heading: "Wallet Log",
-    search: false
-  });
+  const [logs, setLogs] = useState([]);
 
-  const transactions = [];
-  transactions.length = 20;
-  transactions.fill({
-    previousBalance: 3000,
-    amount: 6500,
-    currentBalance: 9500,
-    description: "Funding by Cico Admin",
-    type: "Credit",
-    mode: "Funding by Cico Admin",
-    createdAt: "March 25, 2020"
-  }, 0, 20);
+  useEffect(() => {
+    axios.get(ALL_WALLET_LOGS)
+    .then((res) => {
+      const logs = res.data.data.data;
+      setLogs(logs);
+    })
+    .catch((err) => {
+      console.log(err);
+    })    
+  }, []);
+
+  useEffect(() => {
+    changeCurrentPage({
+      heading: "Wallet Log",
+      search: true
+    });    
+  }, [changeCurrentPage]);
 
   return (
     <div className={style.container}>
-      <div className={style.heading}>
-        <span>Previous Balance</span>
-        <span>Amount</span>
-        <span>Current Balance</span>
-        <span>Description</span>
-        <span>Type</span>
-        <span>Mode</span>
-        <span>Date Created</span>
-      </div>
-      {transactions.map((transaction, index) => ( 
-        <div key={index} className={style.log}>
-          <span>&#8358;{transaction.previousBalance}</span>
-          <span>&#8358;{transaction.amount}</span>
-          <span>&#8358;{transaction.currentBalance}</span>
-          <span>{transaction.description}</span>
-          <span>{transaction.type}</span>
-          <span>{transaction.mode}</span>
-          <span>{transaction.createdAt}</span>
+      {logs.length > 0 ? <div className={style.heading}>
+        <span className={style.itemOne}>Previous Balance</span>
+        <span className={style.itemTwo}>Amount</span>
+        <span className={style.itemThree}>Current Balance</span>
+        <span className={style.itemFour}>Description</span>
+        <span className={style.itemFive}>Type</span>
+        <span className={style.itemSix}>Mode</span>
+        <span className={style.itemSeven}>Date Created</span>
+      </div> : undefined}
+      {logs.map((log, index) => ( 
+        <div key={log.id} className={style.log}>
+          <span className={style.itemOne}>&#8358;{log.previous_bal}</span>
+          <span className={style.itemTwo}>&#8358;{log.amount}</span>
+          <span className={style.itemThree}>&#8358;{log.current_bal}</span>
+          <span className={style.itemFour}>{log.description}</span>
+          <span className={style.itemFive}>{log.type}</span>
+          <span className={style.itemSix}>{log.mode}</span>
+          <span className={style.itemSeven}>{log.created_at}</span>
         </div> 
         )
       )}
   </div>
-)};
+)}
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   return {
     changeCurrentPage: payload => dispatch(setCurrentPage(payload))
   }
-}
+};
+
 export default connect(undefined, mapDispatchToProps)(WalletLog);

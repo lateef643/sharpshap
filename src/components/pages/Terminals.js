@@ -1,36 +1,46 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import style from './Terminals.module.scss';
 import { setCurrentPage } from "../../actions/page";
+import { LIST_TERMINALS } from "../../store/api/constants";
 
 export const ListTerminals = ({ changeCurrentPage }) => {
-  changeCurrentPage({
-    heading: 'My Terminals',
-    search: false
+  const [terminals, setTerminals ] = useState([]);
+
+  useEffect(() => {
+    axios.get(LIST_TERMINALS)
+    .then(res => {
+      const terminals = res.data.data.data;
+      setTerminals(terminals);
+    })
+    .catch(err => {
+      console.log(err);
+    })    
   });
 
-  const terminals = [];
-  terminals.length = 40;
-  terminals.fill({
-    name: "John Cross",
-    terminalID: "8787-ahdjl-9836-hakd",
-    date: "12th, March 2019",
-  }, 0, 40);
+  useEffect(() => {
+    changeCurrentPage({
+      heading: 'My Terminals',
+      search: false
+    });    
+  }, [changeCurrentPage]);
 
   return (
     <div className={style.container}>
+      {terminals.length > 0 ?
       <div className={style.heading}>
         <span className={style.one}>S/N</span>
         <span className={style.two}>Terminal ID</span>
         <span className={style.three}>Date</span>
         <span className={style.four}>Action</span>
-      </div>
+      </div> : undefined}
       {terminals.map((terminal, index) => ( 
-        <div key={index} className={style.terminal}>
+        <div key={terminal.id} className={style.terminal}>
           <span className={style.one}>{index + 1}</span>
-          <span className={style.two}>{terminal.terminalID}</span>
-          <span className={style.three}>{terminal.date}</span>
+          <span className={style.two}>{terminal.terminal_id}</span>
+          <span className={style.three}>{terminal.created_at}</span>
           <span className={style.four}>
             <span className={style.action}>...</span>
             <span className={style.link}>
@@ -45,7 +55,7 @@ export const ListTerminals = ({ changeCurrentPage }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload)),
   }
 };
 

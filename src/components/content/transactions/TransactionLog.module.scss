@@ -18,9 +18,9 @@
       background-color: #fff;
       text-align: left;
     
-      span {
-        flex: 0 1 13%;
-      }
+      // span {
+      //   flex: 0 1 13%;
+      // }
     }
 
     > .log {
@@ -34,9 +34,9 @@
       background-color: #fff;
       margin-bottom: .3rem;
     
-      span {
-        flex: 0 1 13%;
-      }
+      // span {
+      //   flex: 0 1 13%;
+      // }
     
       &:hover {
         transform: scale(1.02);
@@ -45,6 +45,7 @@
   }
 
 .status {
+  flex: 0 0 5%;
 
   span {
     border-radius: 100%;
@@ -66,6 +67,38 @@
   background-color: #3AC962;
 }
 
-.marginLeft {
-  margin-left: 2rem;
+// .marginLeft {
+//   margin-left: 2rem;
+// }
+
+.itemOne {
+  flex: 0 0 5%;
+}
+
+.itemTwo {
+  flex: 0 0 7%;
+}
+
+.itemThree {
+  flex: 0 0 19%;
+}
+
+.itemFour {
+  flex: 0 0 7%;
+}
+
+.itemFive {
+  flex: 0 0 20%;
+}
+
+.itemSix {
+  flex: 0 0 15%;
+}
+
+.itemSeven {
+  flex: 0 0 8%;
+}
+
+.itemEight {
+  flex: 0 0 9%;
 }

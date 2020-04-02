@@ -90,3 +90,6 @@ export const CORAL_PAY_WEBHOOK = `${path}/transactions/coral`;
 
 //search transctions
 export const SEARCH_TRANSACTIONS = `${path}/transactions/search`;
+
+//activity
+export const ACTIVITY_LOGS = `${path}/logs`;

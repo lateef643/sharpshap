@@ -18,9 +18,9 @@
     background-color: #fff;
     text-align: left;
   
-    span {
-      flex: 0 1 13%;
-    }
+    // span {
+    //   flex: 0 1 13%;
+    // }
   }
 
   > .log {
@@ -34,12 +34,40 @@
     background-color: #fff;
     margin-bottom: .3rem;
   
-    span {
-      flex: 0 1 13%;
-    }
+    // span {
+    //   flex: 0 1 13%;
+    // }
   
     &:hover {
       transform: scale(1.02);
     }
   }
+}
+
+.itemOne {
+  flex: 0 0 12%;
+}
+
+.itemTwo {
+  flex: 0 0 12%;
+}
+
+.itemThree {
+  flex: 0 0 12%;
+}
+
+.itemFour {
+  flex: 1;
+}
+
+.itemFive {
+  flex: 0 0 12%;
+}
+
+.itemSix {
+  flex: 0 0 12%;
+}
+
+.itemSeven {
+  flex: 0 0 13%;
 }

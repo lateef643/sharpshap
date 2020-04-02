@@ -6,7 +6,8 @@ if (loginDetails) {
 } else {
   initialState = {
     isAuthenticated: false,
-    user: {}  
+    user: {},
+    wallet: {}
   }
 };
 
