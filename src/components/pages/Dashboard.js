@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
 import Card from "../shared/Card";
 import style from "./Dashboard.module.scss";
@@ -12,43 +13,28 @@ import airtime from "../../assets/images/smartphone-call.svg";
 import waec from "../../assets/images/WAEC_LogoPNG@2x.png";
 import jamb from "../../assets/images/Institutions Not Showing (Blank) in CAPS Reasons and Solutions@2x.png";
 import { setCurrentPage } from "../../actions/page";
+import { ALL_TRANSACTION_LOGS } from "../../store/api/constants";
 
 export const Dashboard = ({ changeCurrentPage }) => {
-  changeCurrentPage({
-    heading: "Services",
-    search: true
-  });
+  const [transactions, setTransactions] = useState([]);
 
-  const transactions = [{
-    status: "success",
-    amount: 500,
-    reference: "428333",
-    type: "Airtime",
-    customer: "naruto@covid.com",
-    agent: "Saitama",
-    vendor: "Goku",
-    terminal: "jp8738",   
-  }, {
-    status: "failed",
-    amount: 5600900,
-    reference: "428333",
-    type: "Transfer",
-    customer: "naruto@covid.com",
-    agent: "Saitama",
-    vendor: "Goku",
-    terminal: "jp8738"    
-  }];
-  transactions.length = 5;
-  transactions.fill({
-    status: "pending",
-    amount: 56500,
-    reference: "428333",
-    type: "Airtime",
-    customer: "naruto@covid.com",
-    agent: "Saitama",
-    vendor: "Goku",
-    terminal: "jp8738",   
-  }, 2, 5);
+  useEffect(() => {
+    axios.get(ALL_TRANSACTION_LOGS)
+    .then(res => {
+      const transactions = res.data.data.data;
+      setTransactions(transactions.splice(transactions.length - 5));
+    })
+    .catch(err => {
+      console.log(err);
+    });
+  }, []);
+
+  useEffect(() => {
+    changeCurrentPage({
+      heading: "Services",
+      search: true
+    });    
+  }, [changeCurrentPage]);
   
   return (
   <div className={style.container}>
@@ -75,7 +61,7 @@ export const Dashboard = ({ changeCurrentPage }) => {
         <div key={index} className={style.transactions}>
           <span className={style.status}><span className={`${transaction.status === "failed" ? style.failed 
             : transaction.status === "pending" ? style.pending : style.success}`}></span></span>            
-          <span>{transaction.type}</span>
+          <span>{transaction.transtype.name}</span>
           <span>&#8358;{transaction.amount.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
           <span>{transaction.terminal}</span>
         </div> 
