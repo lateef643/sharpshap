@@ -8,14 +8,20 @@ import user from "../../assets/images/user-icon.svg";
 import data from "../../assets/images/data.svg";
 import terminal from "../../assets/images/payment-terminal.svg";
 import wallet from "../../assets/images/digital-wallet.svg";
+import { startLogout } from "../../actions/auth";
 
-export const Sidebar = ({ firstname, lastname }) => {
+export const Sidebar = ({ firstname, lastname, startLogout  }) => {
+  const handleLogout = (e) => {
+    e.preventDefault();
+    startLogout();
+  };
+
   return (
   <div className="sidebar">
     <div className="sidebar__profile">
       <img src={avatar} className="sidebar__profile__img" alt="user's avatar" />
       <p className="sidebar__profile__name">{`${firstname} ${lastname}`}</p>
-      <button className="sidebar__profile__edit">Edit Profile</button>
+      <button className="sidebar__profile__edit" onClick={handleLogout}>Log out</button>
     </div>
     <div className="sidebar__links">
       <NavLink to="/dashboard" className="sidebar__links__link" >
@@ -76,4 +82,10 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(Sidebar);
+const mapDispatchToProps = dispatch => {
+  return {
+    startLogout: () => dispatch(startLogout())
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

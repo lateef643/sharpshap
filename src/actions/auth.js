@@ -2,6 +2,7 @@ import axios from 'axios';
 import { LOGIN_API } from "../store/api/constants";
 import setAuthToken from "../util/auth";
 import isEmpty from "../validation/isEmpty";
+import history from "../util/history";
 
 const loginUser = ({ user, isAuthenticated, wallet }) => {
   return {
@@ -29,7 +30,7 @@ export const startLoginUser = payload => dispatch => {
         };
 
         dispatch(loginUser(authDetails));
-        localStorage.setItem('login', JSON.stringify(authDetails));
+        localStorage.setItem('user', JSON.stringify(authDetails));
         localStorage.setItem('token', token);
         setAuthToken(token);
       };
@@ -37,4 +38,17 @@ export const startLoginUser = payload => dispatch => {
     .catch(err => {
       console.log(err);
     })
+};
+
+export const logOutUser = () => {
+  return {
+    type: "START_LOGOUT_USER"
+  }
+};
+
+export const startLogout = () => dispatch => {
+  dispatch(logOutUser());
+  localStorage.clear('user');
+  localStorage.clear('token');
+  history.push("/");
 };

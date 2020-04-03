@@ -15,6 +15,8 @@ const auth = (state = initialState, action) => {
   switch (action.type) {
     case "START_LOGIN_USER":
       return action.payload;
+    case "START_LOGOUT_USER":
+      return {};
     default:
       return state;
   }
