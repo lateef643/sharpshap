@@ -1,5 +1,6 @@
 let initialState;
-const loginDetails = JSON.parse(localStorage.getItem('login'));
+
+const loginDetails = JSON.parse(localStorage.getItem('user'));
 
 if (loginDetails) {
   initialState = loginDetails;

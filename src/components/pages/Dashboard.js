@@ -50,13 +50,14 @@ export const Dashboard = ({ changeCurrentPage }) => {
       <Card link="waec" text="WAEC" image={waec} />     
     </div>
     <div className={style.transactionsContainer}>
-      <p className={style.transactionsCount}>Last five transactions</p>
+      {transactions.length > 0 ? <p className={style.transactionsCount}>Last five transactions</p> : undefined}
+      {transactions.length > 0 ? 
       <div className={style.transactionsHeading}>
         <span>Status</span>
         <span>Transaction Type</span>
         <span>Amount(&#8358;)</span>
         <span>Terminal</span>        
-      </div>
+      </div> : undefined}
       {transactions.map((transaction, index) => ( 
         <div key={index} className={style.transactions}>
           <span className={style.status}><span className={`${transaction.status === "failed" ? style.failed 

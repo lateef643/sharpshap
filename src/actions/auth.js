@@ -40,15 +40,15 @@ export const startLoginUser = payload => dispatch => {
     })
 };
 
-export const logOutUser = () => {
+export const logoutUser = () => {
   return {
     type: "START_LOGOUT_USER"
   }
 };
 
 export const startLogout = () => dispatch => {
-  dispatch(logOutUser());
   localStorage.clear('user');
   localStorage.clear('token');
   history.push("/");
+  dispatch(logoutUser());
 };
