@@ -7,7 +7,7 @@ import AppRouter from "../src/routes/AppRouter";
 import * as serviceWorker from './serviceWorker';
 import './index.scss';
 
-const token = localStorage.getItem('token');
+const token = sessionStorage.getItem('token');
 const store = configureStore();
 
 if (token) {

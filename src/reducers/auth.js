@@ -1,6 +1,6 @@
 let initialState;
 
-const loginDetails = JSON.parse(localStorage.getItem('user'));
+const loginDetails = JSON.parse(sessionStorage.getItem('user'));
 
 if (loginDetails) {
   initialState = loginDetails;
@@ -8,7 +8,7 @@ if (loginDetails) {
   initialState = {
     isAuthenticated: false,
     user: {},
-    wallet: {}
+    walletBalance: 0
   }
 };
 

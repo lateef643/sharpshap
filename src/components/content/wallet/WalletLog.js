@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import style from './WalletLog.module.scss';
 import { setCurrentPage } from "../../../actions/page";
 import { ALL_WALLET_LOGS } from "../../../store/api/constants";
+import style from './WalletLog.module.scss';
 
 export const WalletLog = ({ changeCurrentPage }) => {
   const [logs, setLogs] = useState([]);

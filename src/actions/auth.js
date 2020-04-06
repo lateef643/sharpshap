@@ -19,19 +19,19 @@ export const startLoginUser = payload => dispatch => {
   return axios.post(LOGIN_API, payload)
     .then(res => {
       const user = res.data.data.user;
-      const wallet = res.data.data.wallet;
       const token = res.data.data.token;
+      const walletBalance = res.data.data.wallet.current_bal;
 
       if (!isEmpty(user)) {
         const authDetails = {
           isAuthenticated: true,
           user,
-          wallet
+          walletBalance
         };
 
         dispatch(loginUser(authDetails));
-        localStorage.setItem('user', JSON.stringify(authDetails));
-        localStorage.setItem('token', token);
+        sessionStorage.setItem('user', JSON.stringify(authDetails));
+        sessionStorage.setItem('token', token);
         setAuthToken(token);
       };
     })
