@@ -88,8 +88,21 @@ export const INITIATE_CASHOUT = `${path}/transactions/cashless`;
 ///coral pay webhook - POST
 export const CORAL_PAY_WEBHOOK = `${path}/transactions/coral`;
 
-//search transctions
+//search transctions - GET
 export const SEARCH_TRANSACTIONS = `${path}/transactions/search`;
 
-//activity
+//activity - GET
 export const ACTIVITY_LOGS = `${path}/logs`;
+
+/////SERVICES/////////
+//get list of telcos - GET
+export const GET_TELCOS = `${path}/airtime/telcos`;
+
+//get data plans - POST
+export const GET_DATA_PLANS = `${path}/airtime/data/plans`;
+
+//vend airtime - POST
+export const VEND_AIRTIME = `${path}/airtime`;
+
+//vend data - POST
+export const VEND_DATA = `${path}/airtime/data`;

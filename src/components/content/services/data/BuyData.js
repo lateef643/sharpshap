@@ -1,42 +1,102 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { connect } from "react-redux";
-import style from './BuyData.module.scss';
+import { GET_TELCOS, GET_DATA_PLANS } from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
+import { VEND_DATA } from "../../../../store/api/constants";
+import style from './BuyData.module.scss';
 
 const BuyData = ({ changeCurrentPage }) => {
-  changeCurrentPage({
-    heading: "Buy Data",
-    search: false
-  });
-
-  const networks = [{ name: "MTN"}, { name: 'Airtel'}, {name: "Etisalat"}, {name: "Glo"}];
-  const plans = ['Ultimate Plan', 'Medium Plan', 'Big Daddy', 'Flex Plan'];
-  const [network, setNetwork] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [telcoList, setTelcoList] = useState([]);
+  const [dataPlans, setDataPlans] = useState([]);
+  const [telco, setTelco] = useState("");
   const [dataPlan, setDataPlan] = useState("");
+  const [phone, setPhone] = useState("");
+  const [amount, setAmount] = useState("");
+
+  useEffect(() => {
+    axios.get(GET_TELCOS)
+      .then(res => {
+        const telcoList = res.data.data;
+        const dataVendors = telcoList.filter(telco => {
+          return telco.type === "Data";
+        });
+
+        setTelcoList(dataVendors);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, []);
+
+  useEffect(() => {
+    const payload = {
+      telco
+    };
+
+    axios.post(GET_DATA_PLANS, payload)
+      .then(res => {
+        const dataPlans = res.data.data;
+        setDataPlans(dataPlans);
+      })
+      .catch(err => {
+
+      })
+  }, [telco]);
+
+  useEffect(() => {
+    changeCurrentPage({
+      heading: "Buy Data",
+      search: false
+    });
+  }, [changeCurrentPage]);
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
     console.log({
-      network,
+      telco,
       dataPlan,
-      phoneNumber
-    })
+      phone
+    });
+
+    // const payload = {
+    //   telco,
+    //   dataPlan,
+    //   phone
+    // };
+    
+    // axios.post(VEND_DATA, payload)
+    // .then(res => {
+      
+    // })
+    // .catch(err => {
+
+    // })
   };
 
-  const handleNetworkChange = (e) => {
-    const newNetworkName = e.target.value;
-    setNetwork(newNetworkName);
+  const handleAmountChange = (plan) => {
+    const dataPlan = dataPlans.find(dataPlan => {
+      return dataPlan.productId === plan;
+    });
+
+    const amount = dataPlan.amount;
+    setAmount(amount);
   };
 
-  const handlePhoneNumberChange = (e) => {
-    const newPhoneNumber = e.target.value;
-    setPhoneNumber(newPhoneNumber);
+  const handleTelcoChange = (e) => {
+    const newTelcoName = e.target.value;
+    setTelco(newTelcoName);
+  };
+
+  const handlePhoneChange = (e) => {
+    const newPhone = e.target.value;
+    setPhone(newPhone);
   };
 
   const handleDataPlanChange = (e) => {
     const newDataPlan = e.target.value;
     setDataPlan(newDataPlan);
+    handleAmountChange(newDataPlan);
   };
 
   return (
@@ -44,26 +104,30 @@ const BuyData = ({ changeCurrentPage }) => {
     <form className={style.form} onSubmit={handleOnSubmit} >
       <label>
         <span>Network</span>
-        <select onChange={handleNetworkChange}>
+        <select onChange={handleTelcoChange}>
           <option>Select Network</option>
-          {networks.map((network, index) => {
-            return <option value={network.name} key={index}>{network.name}</option>
+          {telcoList.map((telco, index) => {
+            return <option value={telco.code} key={index}>{telco.name}</option>
           })}
         </select>      
       </label>
       <label>
         <span>Phone Number</span>
-        <input type="text" onChange={handlePhoneNumberChange} />      
+        <input type="text" onChange={handlePhoneChange} />      
       </label>    
       <label>
         <span>Data Plan</span>
         <select onChange={handleDataPlanChange}>
           <option>Select Data Plan</option>
-          {plans.map((plan, index) => {
-            return <option value={plan} key={index}>{plan}</option>
+          {dataPlans.map((plan, index) => {
+            return <option value={plan.productId} key={index}>{plan.databundle}</option>
           })}
         </select>      
       </label> 
+      <label>
+        <span>Amount</span>
+        <input type="text" disabled={true} value={amount} />
+      </label>
       <button type="submit">Submit</button>
     </form>    
   </div>
