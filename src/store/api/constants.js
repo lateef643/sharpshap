@@ -95,6 +95,8 @@ export const SEARCH_TRANSACTIONS = `${path}/transactions/search`;
 export const ACTIVITY_LOGS = `${path}/logs`;
 
 /////SERVICES/////////
+
+/////AIRTIME & DATA///////
 //get list of telcos - GET
 export const GET_TELCOS = `${path}/airtime/telcos`;
 
@@ -106,3 +108,29 @@ export const VEND_AIRTIME = `${path}/airtime`;
 
 //vend data - POST
 export const VEND_DATA = `${path}/airtime/data`;
+
+/////CABLE TV//////////
+//get startimes plans - POST
+export const GET_STARTIMES_PLANS = `${path}/airtime/data`;
+
+//validate startimes customer - POST
+export const VALIDATE_STARTIMES_CUSTOMER =  `${path}/cable/startimes/validate`;
+
+//vend startimes - POST
+export const VEND_STARTIMES =  `${path}/cable/startimes/vend`;
+
+//get dstv plans - POST
+export const GET_DSTV_PLANS =  `${path}/cable/multichoice/dstv`;
+
+//validate dstv & gotv customer - POST
+export const VALIDATE_MULTICHOICE_CUSTOMER = `${path}/cable/multichoice/validate`;
+
+//vend dstv - POST
+export const VEND_DSTV = `${path}/cable/multichoice/vend`;
+
+//get gotv plans - POST
+export const GET_GOTV_PLANS = `${path}/cable/multichoice/gotv`;
+
+//vend gotv - POST
+export const VEND_GOTV = `${path}/cable/multichoice/vend`;
+

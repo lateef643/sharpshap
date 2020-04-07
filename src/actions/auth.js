@@ -4,13 +4,13 @@ import setAuthToken from "../util/auth";
 import isEmpty from "../validation/isEmpty";
 import history from "../util/history";
 
-const loginUser = ({ user, isAuthenticated, wallet }) => {
+const loginUser = ({ user, isAuthenticated, walletBalance }) => {
   return {
     type: "START_LOGIN_USER",
     payload: {
       isAuthenticated,
       user,
-      wallet
+      walletBalance
     }
   }
 };
