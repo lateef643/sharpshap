@@ -18,7 +18,7 @@ import PayElectricity from "../components/content/services/electricity/PayElectr
 import BuyData from "../components/content/services/data/BuyData";
 import RechargeCable from "../components/content/services/cable/RechargeCable";
 import BuyInsurance from "../components/content/services/insurance/BuyInsurance";
-import MyWallet from "../components/pages/MyWallet";
+import Profile from "../components/content/profile/Profile";
 
 const routes = [
   {
@@ -55,8 +55,8 @@ const routes = [
     main: () => <NewTransaction />
   },
   {
-    path: "/my-wallet",
-    main: () => <MyWallet />
+    path: "/profile",
+    main: () => <Profile />
   },
   {
     path: "/fund-wallet",

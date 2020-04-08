@@ -11,6 +11,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
   const [telco, setTelco] = useState("");
   const [amount, setAmount] = useState("");
   const [phone, setPhone] = useState("");
+  const [error, setError] = useState(undefined);
 
   useEffect(() => {
     axios.get(GET_TELCOS)
@@ -36,45 +37,45 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log({
+    const payload = {
       telco,
       amount,
       phone
-    });
-
-    // const payload = {
-    //   telco,
-    //   amount,
-    //   phone
-    // };
+    };
     
-    // axios.post(VEND_AIRTIME, payload)
-    // .then(res => {
-      
-    // })
-    // .catch(err => {
-
-    // })
+    axios.post(VEND_AIRTIME, payload)
+    .then(res => {
+      console.log('this was clicked')
+      console.log(res);
+    })
+    .catch(err => {
+      const error = err.message;
+      setError(error);
+    })
   };
 
   const handleTelcoChange = (e) => {
     const newTelcoName = e.target.value;
+    setError(undefined);
     setTelco(newTelcoName);
   };
 
   const handleAmountChange = (e) => {
     const newAmount = e.target.value;
-    setAmount(newAmount);
+    setError(undefined);
+    setAmount(Number(newAmount));
   };
 
   const handlePhoneChange = (e) => {
     const newPhone = e.target.value;
+    setError(undefined);
     setPhone(newPhone);
   };
 
   return (
   <div className={style.container}>
-    <form className={style.form} onSubmit={handleOnSubmit} >
+    <form className={style.form} onSubmit={handleOnSubmit}>
+      {error ? <p className={style.error}>{error}</p> : undefined}
       <label>
         <span>Network</span>
         <select onChange={handleTelcoChange}>

@@ -10,7 +10,7 @@ import terminal from "../../assets/images/payment-terminal.svg";
 import wallet from "../../assets/images/digital-wallet.svg";
 import { startLogout } from "../../actions/auth";
 
-export const Sidebar = ({ firstname, lastname, startLogout  }) => {
+export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     startLogout();
@@ -21,6 +21,7 @@ export const Sidebar = ({ firstname, lastname, startLogout  }) => {
     <div className="sidebar__profile">
       <img src={avatar} className="sidebar__profile__img" alt="user's avatar" />
       <p className="sidebar__profile__name">{`${firstname} ${lastname}`}</p>
+      <p className="sidebar__profile__id">Agent ID: {id}</p>
       <button className="sidebar__profile__edit" onClick={handleLogout}>Log out</button>
     </div>
     <div className="sidebar__links">
@@ -78,7 +79,8 @@ export const Sidebar = ({ firstname, lastname, startLogout  }) => {
 const mapStateToProps = (state) => {
   return {
     firstname: state.auth.user.agent.first_name,
-    lastname: state.auth.user.agent.last_name
+    lastname: state.auth.user.agent.last_name,
+    id: state.auth.user.agent.id
   }
 };
 

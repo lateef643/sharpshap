@@ -8,12 +8,24 @@
   padding: 0 30px;
   background-color: #fff;
 
+  &__links {
+    flex: 1;
+    font-size: 1.4rem;
+    color: #013660;
+    opacity: 1;
+
+    > a, span {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+  }
 
   &__text {
     font-size: 1.4rem;
     color: #013660;
     opacity: 1;
-    flex: 0 0 21%;
+    flex: 0 0 20%;
   }
 }
 
@@ -29,5 +41,5 @@
   font-family: inherit;
   color: #707070;
   border-radius: 2rem;
-  flex: 1;
+  flex: 0 0 25%;
 }

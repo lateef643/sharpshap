@@ -31,6 +31,11 @@ export const UPDATE_USER = `${path}/user`;
 //update user password - PUT
 export const UPDATE_USER_PASSWORD = `${path}/users`;
 
+//////AGENT INFO///////
+
+//get agent transaction log
+export const GET_AGENT_INFO = `${path}/agents/info`;
+
 //////TERMINALS///////
 
 //list terminals - GET

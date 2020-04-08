@@ -1,10 +1,13 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
+import { createBrowserHistory } from "history";
 import Login from "../pages/Login";
 import Sidebar from "./Sidebar";
 import Header from "./Header";
 import './Container.scss';
+
+const history = createBrowserHistory();
 
 export const AppShell = (props) => {
   return (
@@ -22,6 +25,7 @@ export const AppShell = (props) => {
             <Switch>
               {props.routes.map((route, index) => (
                 <Route
+                  history={history}
                   key={index}
                   path={route.path}
                   exact={route.exact}

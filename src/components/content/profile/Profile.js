@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
-import style from './MyWallet.module.scss';
-import { setCurrentPage } from "../../actions/page";
+import { setCurrentPage } from "../../../actions/page";
+import style from './Profile.module.scss';
 
 export const MyWallet = ({ changeCurrentPage }) => {
   const [firstname, setFirstname] = useState("");
@@ -15,7 +15,7 @@ export const MyWallet = ({ changeCurrentPage }) => {
 
   useEffect(() => {
     changeCurrentPage({
-      heading: "Transaction Log",
+      heading: "Profile",
       search: true
     });    
   });

@@ -3,15 +3,19 @@ import axios from "axios";
 import { connect } from "react-redux";
 import style from './TransactionLog.module.scss';
 import { setCurrentPage } from "../../../actions/page";
-import { ALL_TRANSACTION_LOGS } from "../../../store/api/constants";
+import { GET_AGENT_INFO } from "../../../store/api/constants";
 
-export const TransactionLog = ({ changeCurrentPage }) => {
+export const TransactionLog = ({ changeCurrentPage, uuid }) => {
   const [transactions, setTransactions] = useState([]);
+  const [businessName, setBusinessName] = useState("");
 
   useEffect(() => {
-    axios.get(ALL_TRANSACTION_LOGS)
+    axios.get(`${GET_AGENT_INFO}/${uuid}`)
     .then(res => {
-      const transactions = res.data.data.data;
+      const businessName = res.data.data.agent.business_name;
+      const transactions = res.data.data.transaction;
+
+      setBusinessName(businessName);
       setTransactions(transactions);
     })
     .catch(err => {
@@ -48,7 +52,7 @@ export const TransactionLog = ({ changeCurrentPage }) => {
           <span className={style.itemThree}>{transaction.reference}</span>
           <span className={style.itemFour}>{transaction.transtype.name}</span>
           <span className={style.itemFive}>{transaction.customer_info}</span>
-          <span className={style.itemSix}>{transaction.agent.business_name}</span>
+          <span className={style.itemSix}>{businessName}</span>
           <span className={style.itemSeven}>{transaction.vendor}</span>
           <span className={style.itemEight}>{transaction.terminal_id}</span>
         </div> 
@@ -63,4 +67,10 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(undefined, mapDispatchToProps)(TransactionLog);
+const mapStateToProps = state => {
+  return {
+    uuid: state.auth.user.agent.uuid
+  }
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(TransactionLog);
