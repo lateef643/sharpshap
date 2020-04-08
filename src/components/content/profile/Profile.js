@@ -3,18 +3,21 @@ import { connect } from "react-redux";
 import { setCurrentPage } from "../../../actions/page";
 import style from './Profile.module.scss';
 
-export const MyWallet = ({ changeCurrentPage }) => {
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
+export const MyWallet = (props) => {
+  console.log(props)
+  const [firstname, setFirstname] = useState(props.firstname);
+  const [lastname, setLastname] = useState(props.lastname);
+  const [phoneNumber, setPhoneNumber] = useState(props.phone);
+  const [email, setEmail] = useState(props.email);
   const [oldPassword, setOldPassword] = useState("");
+  const [businessName, setBusinessName] = useState(props.businessName)
   const [password, setPassword] = useState("");
+  const [address, setAddress] = useState(props.address);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [modal, setModal] = useState(false);
 
   useEffect(() => {
-    changeCurrentPage({
+    props.changeCurrentPage({
       heading: "Profile",
       search: true
     });    
@@ -66,6 +69,16 @@ export const MyWallet = ({ changeCurrentPage }) => {
     setOldPassword(oldPassword);
   }
 
+  const handleAddressChange = (e) => {
+    const address = e.target.value;
+    setAddress(address);
+  }
+
+  const handleBusinessNameChange = (e) => {
+    const businessName = e.target.value;
+    setBusinessName(businessName);
+  }
+
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
@@ -87,28 +100,28 @@ export const MyWallet = ({ changeCurrentPage }) => {
       </div>
       <label>
         <span>Firstname</span>
-        <input type="text" onChange={handleFirstnameChange} />      
+        <input type="text" onChange={handleFirstnameChange} value={firstname} />      
       </label>
       <label>
         <span>Lastname</span>
-        <input type="text" onChange={handleLastnameChange} />      
+        <input type="text" onChange={handleLastnameChange} value={lastname}/>      
       </label>    
       <label>
         <span>Phone Number</span>
-        <input type="text" onChange={handlePhoneChange} />      
+        <input type="text" onChange={handlePhoneChange} value={phoneNumber} />      
       </label>    
       <label>
         <span>Email</span>
-        <input type="text" onChange={handleEmailChange} />      
-      </label>    
+        <input type="text" onChange={handleEmailChange} Value={email} />      
+      </label>  
       <label>
-        <span>Password</span>
-        <input type="text" onChange={handlePasswordChange} />      
-      </label>    
-      <label>
-        <span>Confirm Password</span>
-        <input type="text" onChange={handleConfirmPasswordChange} />      
+        <span>Business Name</span>
+        <input type="text" onChange={handleBusinessNameChange} Value={businessName} />      
       </label>   
+      <label>
+        <span>Address</span>
+        <input type="text" onChange={handleAddressChange} value={address} />      
+      </label>    
       <button type="submit">Save Changes</button>
     </form>
     {modal ? <div className={style.passwordModal}>
@@ -135,10 +148,22 @@ export const MyWallet = ({ changeCurrentPage }) => {
   </div>
 )}
 
+const mapStateToProps = state => {
+  console.log(state.auth.user)
+  return {
+    firstname: state.auth.user.agent.first_name,
+    lastname: state.auth.user.agent.last_name,
+    businessName: state.auth.user.agent.business_name,
+    email: state.auth.user.agent.email,
+    phone: state.auth.user.agent.business_phone,
+    address: state.auth.user.agent.business_address,
+  }
+}
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: payload => dispatch(setCurrentPage(payload))
   }
 };
 
-export default connect(undefined, mapDispatchToProps)(MyWallet);
+export default connect(mapStateToProps, mapDispatchToProps)(MyWallet);
