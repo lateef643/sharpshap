@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { startLoginUser } from "../../actions/auth";
 import style from "./Login.module.scss";
@@ -8,6 +8,13 @@ import image from "../../assets/images/login.png";
 export const Login = (props) => {
   const [phone, setphone] = useState("");
   const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(props.loading);
+  const [error, setError] = useState(props.message);
+
+  useEffect(() => {
+    setError(props.message);
+    setLoading(props.loading);
+  }, [props])
 
   const payload = {
     user: {
@@ -19,17 +26,26 @@ export const Login = (props) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-
+    setLoading(true);
+    props.dispatch({
+        type: "SET_LOADING",
+        payload: {
+          loading: true,
+          message: undefined       
+        }
+      })
     props.startLoginUser(payload);
   };
 
   const handlephoneChange = (e) => {
     const newphone = e.target.value;
+    setError(undefined);
     setphone(newphone);
   };
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
+    setError(undefined);
     setPassword(newPassword);
   };
   
@@ -47,13 +63,19 @@ export const Login = (props) => {
             <img src={logo} alt="Cico logo" />
           </div>
           <form className={style.form} onSubmit={handleOnSubmit}>
+            {error ? <p className={style.error}>{error}</p> : undefined}
             <label>
               <input type="text" placeholder="Phone Number" onChange={handlephoneChange} />
             </label>
             <label>
               <input type="password" placeholder="Password" onChange={handlePasswordChange} />
             </label>
-            <button>Login</button>
+              <button>{loading ?  
+                <div className={style.swing}>
+                  <div className={style.swingDot}></div>
+                  <div className={style.swingDot}></div>
+                </div> : "Login"}
+              </button>
           </form>        
         </div>
       </div>
@@ -62,13 +84,15 @@ export const Login = (props) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    startLoginUser: payload => dispatch(startLoginUser(payload))
+    startLoginUser: payload => dispatch(startLoginUser(payload)),
+    dispatch: dispatch
   }
 };
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = (state) => {
   return {
-    ownProps: ownProps
+    loading: state.error.loading,
+    message: state.error.message
   }
 }
 

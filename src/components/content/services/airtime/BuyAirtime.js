@@ -12,6 +12,8 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
   const [amount, setAmount] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(undefined);
+  const [success, setSuccess] = useState(undefined);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     axios.get(GET_TELCOS)
@@ -37,6 +39,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    setLoading(true);
     const payload = {
       telco,
       amount,
@@ -45,30 +48,40 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
     
     axios.post(VEND_AIRTIME, payload)
     .then(res => {
-      console.log('this was clicked')
-      console.log(res);
+      const success = res.data.data.statusDescription;
+      setSuccess(success);
+      setLoading(false);
+      setPhone("");
+      setTelco("");
+      setAmount("");
     })
     .catch(err => {
-      const error = err.message;
-      setError(error);
+      if (err.response) {
+        const error = err.response.data.message;
+        setLoading(false);
+        setError(error);        
+      }
     })
   };
 
   const handleTelcoChange = (e) => {
     const newTelcoName = e.target.value;
     setError(undefined);
+    setSuccess(undefined);
     setTelco(newTelcoName);
   };
 
   const handleAmountChange = (e) => {
     const newAmount = e.target.value;
     setError(undefined);
+    setSuccess(undefined);
     setAmount(Number(newAmount));
   };
 
   const handlePhoneChange = (e) => {
     const newPhone = e.target.value;
     setError(undefined);
+    setSuccess(undefined);
     setPhone(newPhone);
   };
 
@@ -76,6 +89,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
   <div className={style.container}>
     <form className={style.form} onSubmit={handleOnSubmit}>
       {error ? <p className={style.error}>{error}</p> : undefined}
+      {success ? <p className={style.success}>{success}</p> : undefined}
       <label>
         <span>Network</span>
         <select onChange={handleTelcoChange}>
@@ -93,7 +107,12 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
         <span>Phone Number</span>
         <input type="text" onChange={handlePhoneChange} />      
       </label>  
-      <button type="submit">Submit</button>
+      <button type="submit">{loading ?  
+        <div className={style.swing}>
+          <div className={style.swingDot}></div>
+          <div className={style.swingDot}></div>
+        </div> : "Submit"}
+      </button>
     </form>    
   </div>
 )}

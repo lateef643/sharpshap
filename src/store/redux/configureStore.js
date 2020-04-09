@@ -7,6 +7,7 @@ import profileReducer from "../../reducers/profile";
 import transactionReducer from "../../reducers/transaction"; 
 import terminalsReducer from "../../reducers/terminals";
 import servicesReducer from "../../reducers/services";
+import errorReducer from "../../reducers/error";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -19,7 +20,8 @@ export default () => {
       wallet: walletReducer,
       transaction: transactionReducer,
       terminals: terminalsReducer,
-      services: servicesReducer
+      services: servicesReducer,
+      error: errorReducer
     }),
     composeEnhancer(applyMiddleware(thunk))
   );

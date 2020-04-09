@@ -139,3 +139,10 @@ export const GET_GOTV_PLANS = `${path}/cable/multichoice/gotv`;
 //vend gotv - POST
 export const VEND_GOTV = `${path}/cable/multichoice/vend`;
 
+//////BANK OPERATIONS///////
+
+//get list of banks - GET
+export const GET_BANK_LIST = `${path}/bank-operations/banks`;
+
+//verify account - GET
+export const VERIFY_ACCOUNT = `${path}/bank-operations/verify-account`;

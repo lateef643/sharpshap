@@ -22,6 +22,8 @@ export const startLoginUser = payload => dispatch => {
       const token = res.data.data.token;
       const walletBalance = res.data.data.wallet.current_bal;
 
+      console.log(res.data)
+
       if (!isEmpty(user)) {
         const authDetails = {
           isAuthenticated: true,
@@ -36,7 +38,27 @@ export const startLoginUser = payload => dispatch => {
       };
     })
     .catch(err => {
-      console.log(err);
+      console.log('catch block run')
+      if (err.response && err.response.status === 401) {
+        dispatch({
+          type: "SET_LOADING",
+          payload: {
+            loading: false,
+            message: "Username or Password Incorrect"         
+          }
+        })        
+      } else {
+        console.log('else block run')
+        setTimeout(() => {
+          dispatch({
+            type: "SET_LOADING",
+            payload: {
+              loading: false,
+              message: undefined       
+            }
+          })           
+        }, 4000);
+      }
     })
 };
 
@@ -47,6 +69,14 @@ export const logoutUser = () => {
 };
 
 export const startLogout = () => dispatch => {
+  dispatch({
+    type: "SET_LOADING",
+    payload: {
+      loading: false,
+      message: undefined       
+    }
+  });
+  
   localStorage.clear('user');
   localStorage.clear('token');
   history.push("/");

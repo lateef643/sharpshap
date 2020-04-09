@@ -7,11 +7,14 @@
   left: 0;
   width: 19.5rem;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
 
   &__profile {
-    padding-top: 3vh;
-    padding-bottom: 2vh;
-    min-height: calc(100vh - (9.15rem * 5));
+    flex: 0 0 20vh;
+    padding-top: 6%;
+    padding-bottom: 8%;
 
     &__img {
       max-width: 50%;
@@ -24,13 +27,13 @@
     }
 
     &__id {
-      font-size: 1.4rem;
+      font-size: 1.2rem;
       margin: 1rem 0;
     }
 
     &__edit {
       width: 8.2rem;
-      height: 2.5rem;
+      height: 2.4rem;
       border-radius: .7rem;
       outline: 0;
       border: 1px solid #CBDAF6;
@@ -40,11 +43,12 @@
   }
 
   &__links {
+    flex: 1;
 
     &__link {
       text-decoration: none;
       display: block;
-      height: 9.15rem;
+      height: 19%;
       color: #CBDAF6;
       padding-top: 2rem;
 
@@ -65,13 +69,13 @@
         visibility: hidden;
 
         &__link {
-          height: 3rem;
+          height: 2.5rem;
           display: block;
           color: #CBDAF6;
           background-color: #2A58AE;
           text-decoration: none;
           font-size: 1.3rem;
-          padding: .8rem;
+          padding-top: .5rem;
 
           &:hover {
             visibility: visible;

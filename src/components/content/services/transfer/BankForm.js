@@ -1,4 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { GET_BANK_LIST } from "../../../../store/api/constants";
+import { VERIFY_ACCOUNT } from "../../../../store/api/constants";
 import Access from "../../../../assets/images/download (10).png";
 import UBA from "../../../../assets/images/uba_0.svg"
 import Fidelity from "../../../../assets/images/cea20b8d-new-fidelity-bank-logo.svg";
@@ -10,9 +13,10 @@ import GTBank from "../../../../assets/images/gtbank_rwanda_logo.svg";
 import style from './BankForm.module.scss';
 
 const WithdrawForm = (props) => {
-  const banks = ["Access Bank", "First Bank", "Guarantee Trust Bank", "Stanbic IBTC", 
-  "Fidelity Bank", "Union Bank of Nigeria", "Zenith Bank", "United Bank of Africa"];
+  const [banks, setBanks] = useState([]);
   const [bank, setBank] = useState("Beneficiary Bank");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [accountName, setAccountName] = useState("");
   const [errors, setErrors] = useState({
     bank: true,
     accountName: true,
@@ -22,13 +26,45 @@ const WithdrawForm = (props) => {
     narration: true
   });
 
+  useEffect(() => {
+    axios.get(GET_BANK_LIST)
+      .then(res => {
+        const banks = res.data.data;
+        setBanks(banks);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+  }, []);
+
+  useEffect(() => {
+    const payload = {
+      "account_number" : accountNumber,
+      "bank_code" : bank,
+      "amount": Number(props.amount)
+    };
+
+    if (accountNumber.length === 10) {
+      axios.post(VERIFY_ACCOUNT, payload)
+        .then(res => {
+          const accountName = res.data.data.data.account_info.accountName;
+          setAccountName(accountName);
+          setErrors({...errors, accountName: false});
+        })
+        .catch(err => {
+          console.log(err);
+        })      
+    }
+
+  }, [accountNumber]);
+
   //Dynamically render bank logo
   let bankImageUrl = "";
 
-  bankImageUrl = bank === 'Access Bank' ? Access : bank === "Guarantee Trust Bank" ?  GTBank
-  : bank === "First Bank" ? FirstBank : bank === "United Bank of Africa" ? UBA 
-  : bank === "Fidelity Bank" ? Fidelity : bank === "Union Bank of Nigeria" ? Union
-  : bank === "Zenith Bank" ? Zenith : "";
+  bankImageUrl = bank === "044" ? Access : bank === "058" ?  GTBank
+  : bank === "011" ? FirstBank : bank === "033" ? UBA 
+  : bank === "070" ? Fidelity : bank === "032" ? Union
+  : bank === "057" ? Zenith : "";
 
   return (
   <div className={style.container}>
@@ -55,7 +91,7 @@ const WithdrawForm = (props) => {
     {bank !== "Beneficiary Bank" ? <img className={style.image} 
       src={bankImageUrl} alt={`${bank} logo`} /> : undefined}
       <label>
-        <span>{bank}</span>
+        <span>Beneficiary Bank</span>
         <select onChange={(e) =>{
           const bankName = e.target.value;
 
@@ -67,7 +103,7 @@ const WithdrawForm = (props) => {
         }}>
           <option value="Beneficiary Bank">Select Bank</option>
           {banks.map((bank, index) => {
-            return <option key={index} value={bank}>{bank}</option>
+            return <option key={index} value={bank.bank_code}>{bank.bank_name}</option>
           })}
         </select>
       </label>
@@ -77,6 +113,7 @@ const WithdrawForm = (props) => {
           const accountNumber = e.target.value;
 
           if (accountNumber.trim().length > 0) {
+            setAccountNumber(accountNumber);
             props.handleBeneficiaryAccountNumberChange(accountNumber.trim());  
             setErrors({...errors, accountNumber: false});  
           };
@@ -84,14 +121,7 @@ const WithdrawForm = (props) => {
       </label>
       <label>
         <span>Beneficiary Account Name</span>
-        <input type="text" onChange={(e) => {
-          const accountName = e.target.value;
-
-          if (accountName.trim().length > 0) {
-            props.handleBeneficiaryAccountNameChange(accountName.trim());  
-            setErrors({...errors, accountName: false});  
-          };
-        }} />      
+        <input type="text" value={accountName} disabled={true} />      
       </label>      
       <label>
         <span>Amount</span>
