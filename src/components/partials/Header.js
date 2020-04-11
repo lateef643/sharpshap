@@ -12,7 +12,7 @@ const Header = (props) => (
         <img src={logo} className="header__logo" alt="Cico payments logo" />      
       </div>
       <span className="profile">
-        <img src={user} />
+        <img src={user} alt="User silhoutte"/>
         <span>
           <span className="one">Manage Profile</span>
           <span className="two">

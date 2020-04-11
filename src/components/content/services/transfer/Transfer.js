@@ -1,11 +1,13 @@
 import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
+import { axios } from "axios";
 import AmountForm from "./AmountForm";
 import BankForm from "./BankForm";
 import PaymentSummary from "../../../shared/PaymentSummary";
 import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import style from './Transfer.module.scss';
 import { setCurrentPage } from "../../../../actions/page";
+import { DISBURSE_FUNDS } from "../../../../store/api/constants";
 
 const Transfer = ({ changeCurrentPage }) => {
   const [page, setPage] = useState("amount");
@@ -61,6 +63,25 @@ const Transfer = ({ changeCurrentPage }) => {
   };
 
   const handleOnSubmit = (e) => {
+    const payload = {
+      beneficiaryBank,
+      beneficiaryAccountNumber,
+      beneficiaryAccountName,
+      customersNumber,
+      narration,
+      amount,
+      phoneNumber,
+    };
+
+    axios.post(DISBURSE_FUNDS, payload)
+      .then(res => {
+
+      })
+      .catch(err => {
+        const error = err.response.data.data.message;
+        // setError(error);
+      })
+
     console.log({
       beneficiaryBank,
       beneficiaryAccountNumber,

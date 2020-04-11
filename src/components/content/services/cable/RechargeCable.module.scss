@@ -2,21 +2,37 @@
   padding-top: 6rem;
 
   > .form {
-    height: 45.8rem;
-    width: 45.2rem;
+    height: 43.8rem;
+    width: 60.2rem;
     margin: 0 auto;
     box-shadow: 0px 3px 6px #00000029;
     padding: 3rem;
     padding-top: 2rem;
     display: flex;
-    flex-direction: column;
     justify-content: space-around;
     align-items: center;
     flex-wrap: wrap;
     background-color: #fff;
+
+    > .status {
+      font-size: 1.4rem;
+      font-weight: 400;
+      width: 29.5rem;
+      padding: .8rem 3rem;
+      text-align: center;      
+    }
+
+    > .error {
+      background-color: rgba(255, 0, 0, 0.26);
+      color: rgb(255, 255, 255);
+    }
+
+    > .success {
+      background-color: rgba(62, 196, 107, 0.603);
+      color: rgb(255, 255, 255);
+    }
   
-    label {
-  
+    label {  
       span {
         display: block;
         padding: 0 1rem;
@@ -31,7 +47,7 @@
       }
   
       input, select {
-        width: 29.5rem;
+        width: 23rem;
         height: 4rem;
         border-radius: 5px;
         border: 1px solid #afafaf;
@@ -39,11 +55,30 @@
         font-family: inherit;
         padding: 0 3px;
       }
+
+      input:disabled {
+        background-color: #fff;
+      }
+
+      .outlineGrey {
+        border: 1px solid #afafaf;
+      }
+
+      .outlineRed {
+        outline: 0;
+        border: 1px solid rgba(255, 0, 0, 0.719);
+      }
+
+      .validationErrorText {
+        font-size: 1.25rem;
+        padding: 6px 0;
+        color: rgba(255, 0, 0, 0.719);
+      }
     }
   
     button {
       font-family: 'Lato', sans-serif;
-      width: 29.5rem;
+      width: 23rem;
       margin: 0 auto;
       margin-top: 2rem;
       height: 4rem;

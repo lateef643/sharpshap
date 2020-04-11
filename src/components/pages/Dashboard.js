@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Card from "../shared/Card";
 import style from "./Dashboard.module.scss";
-import withdrawal from "../../assets/images/withdrawal.svg";
 import cabletv from "../../assets/images/cable-tv-sign-with-monitor.svg";
 import power from "../../assets/images/power.svg";
 import transfer from "../../assets/images/transfer.svg";

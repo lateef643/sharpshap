@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import Loader from "../partials/Loader";
 import { startLoginUser } from "../../actions/auth";
 import style from "./Login.module.scss";
 import logo from "../../assets/images/cico-logo-login.svg";
@@ -70,12 +71,7 @@ export const Login = (props) => {
             <label>
               <input type="password" placeholder="Password" onChange={handlePasswordChange} />
             </label>
-              <button>{loading ?  
-                <div className={style.swing}>
-                  <div className={style.swingDot}></div>
-                  <div className={style.swingDot}></div>
-                </div> : "Login"}
-              </button>
+              <button>{loading ? <Loader color="white" size="small" /> : "Login" }</button>
           </form>        
         </div>
       </div>

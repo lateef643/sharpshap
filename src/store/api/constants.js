@@ -130,14 +130,11 @@ export const GET_DSTV_PLANS =  `${path}/cable/multichoice/dstv`;
 //validate dstv & gotv customer - POST
 export const VALIDATE_MULTICHOICE_CUSTOMER = `${path}/cable/multichoice/validate`;
 
-//vend dstv - POST
-export const VEND_DSTV = `${path}/cable/multichoice/vend`;
-
 //get gotv plans - POST
 export const GET_GOTV_PLANS = `${path}/cable/multichoice/gotv`;
 
 //vend gotv - POST
-export const VEND_GOTV = `${path}/cable/multichoice/vend`;
+export const VEND_MULTICHOICE = `${path}/cable/multichoice/vend`;
 
 //////BANK OPERATIONS///////
 
@@ -146,3 +143,6 @@ export const GET_BANK_LIST = `${path}/bank-operations/banks`;
 
 //verify account - GET
 export const VERIFY_ACCOUNT = `${path}/bank-operations/verify-account`;
+
+//disburse funds -- POST
+export const DISBURSE_FUNDS = `${path}/bank-operations/disburse-funds`;

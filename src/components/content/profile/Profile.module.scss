@@ -60,6 +60,10 @@
         padding: .5rem 1rem;
         letter-spacing: .5px;
       }
+
+      input:disabled {
+        background-color: #fff;
+      }
     }
   
     button {
@@ -127,6 +131,10 @@
       box-shadow: .4rem .4rem .6rem #00000029;
   
       label {
+        .error {
+          font-size: 1.4rem;
+          color: rgba(255, 0, 0, 0.753);
+        }
   
         span {
           display: block;

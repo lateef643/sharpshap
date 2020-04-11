@@ -1,10 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
+import Loader from "../../partials/Loader";
+import { UPDATE_USER } from "../../../store/api/constants";
+import { UPDATE_USER_PASSWORD } from "../../../store/api/constants";
 import { setCurrentPage } from "../../../actions/page";
 import style from './Profile.module.scss';
 
-export const MyWallet = (props) => {
-  console.log(props)
+export const Profile = (props) => {
   const [firstname, setFirstname] = useState(props.firstname);
   const [lastname, setLastname] = useState(props.lastname);
   const [phoneNumber, setPhoneNumber] = useState(props.phone);
@@ -14,7 +17,9 @@ export const MyWallet = (props) => {
   const [password, setPassword] = useState("");
   const [address, setAddress] = useState(props.address);
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [error, setError] = useState({});
   const [modal, setModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     props.changeCurrentPage({
@@ -25,22 +30,38 @@ export const MyWallet = (props) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log({
-      firstname,
-      lastname,
-      phoneNumber,
-      email,
-      password,
-      confirmPassword
-    })
+    setLoading(true);
+
+    const payload = {
+      "user": { 
+        address
+      }
+    };
+
+    axios.post(UPDATE_USER, payload)
+      .then(res => {
+        // console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   };
 
   const handleOnPasswordChangeSubmit = (e) => {
     e.preventDefault();
-    console.log({
+    setLoading(true);
+
+    const payload = {
       oldPassword,
-      password,
-      confirmPassword
+      password
+    };
+
+    axios.post(UPDATE_USER_PASSWORD, payload)
+    .then(res => {
+      // console.log(res);
+    })
+    .catch(err => {
+      console.log(err);
     })
   };
 
@@ -86,8 +107,14 @@ export const MyWallet = (props) => {
 
   const handleConfirmPasswordChange = (e) => {
     const password2 = e.target.value;
-    setConfirmPassword(password2);
-  }
+
+    if (password2 === password) {
+      setConfirmPassword(password2);
+      setError({...error, passwordCheck: undefined});
+    } else {
+      setError({...error, passwordCheck: "Passwords do not match"});
+    }
+  };
 
   return (
   <div className={style.container}>
@@ -100,29 +127,29 @@ export const MyWallet = (props) => {
       </div>
       <label>
         <span>Firstname</span>
-        <input type="text" onChange={handleFirstnameChange} value={firstname} />      
+        <input type="text" disabled={true} onChange={handleFirstnameChange} value={firstname} />
       </label>
       <label>
         <span>Lastname</span>
-        <input type="text" onChange={handleLastnameChange} value={lastname}/>      
+        <input type="text" disabled={true} onChange={handleLastnameChange} value={lastname}/>      
       </label>    
       <label>
         <span>Phone Number</span>
-        <input type="text" onChange={handlePhoneChange} value={phoneNumber} />      
+        <input type="text" disabled={true} onChange={handlePhoneChange} value={phoneNumber} />      
       </label>    
       <label>
         <span>Email</span>
-        <input type="text" onChange={handleEmailChange} Value={email} />      
+        <input type="text" disabled={true} onChange={handleEmailChange} Value={email} />      
       </label>  
       <label>
         <span>Business Name</span>
-        <input type="text" onChange={handleBusinessNameChange} Value={businessName} />      
+        <input type="text" disabled={true} onChange={handleBusinessNameChange} Value={businessName} />      
       </label>   
       <label>
         <span>Address</span>
         <input type="text" onChange={handleAddressChange} value={address} />      
       </label>    
-      <button type="submit">Save Changes</button>
+      <button type="submit">{loading ? <Loader color="white" size="small" position="small" /> : "Submit"}</button>
     </form>
     {modal ? <div className={style.passwordModal}>
       <span onClick={(e) => {
@@ -139,6 +166,7 @@ export const MyWallet = (props) => {
           <input type="text" onChange={handlePasswordChange} />      
         </label>    
         <label>
+          {error.passwordCheck ? <p className={style.error}>{error.passwordCheck}</p> : undefined}
           <span>Confirm Password</span>
           <input type="text" onChange={handleConfirmPasswordChange} />      
         </label>        
@@ -149,7 +177,6 @@ export const MyWallet = (props) => {
 )}
 
 const mapStateToProps = state => {
-  console.log(state.auth.user)
   return {
     firstname: state.auth.user.agent.first_name,
     lastname: state.auth.user.agent.last_name,
@@ -166,4 +193,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(MyWallet);
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

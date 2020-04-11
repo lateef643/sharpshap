@@ -14,6 +14,24 @@
     align-items: center;
     flex-wrap: wrap;
     background-color: #fff;
+
+    > .status {
+      font-size: 1.4rem;
+      font-weight: 400;
+      width: 29.5rem;
+      padding: .8rem 3rem;
+      text-align: center;      
+    }
+
+    > .error {
+      background-color: rgba(255, 0, 0, 0.377);
+      color: rgb(255, 255, 255);
+    }
+
+    > .success {
+      background-color: rgba(62, 196, 107, 0.603);
+      color: rgb(255, 255, 255);
+    }
   
     label {
   
@@ -42,6 +60,21 @@
 
       input:disabled {
         background-color: #fff;
+      }
+
+      .outlineGrey {
+        border: 1px solid #afafaf;
+      }
+
+      .outlineRed {
+        outline: 0;
+        border: 1px solid rgba(255, 0, 0, 0.719);
+      }
+
+      .validationErrorText {
+        font-size: 1.25rem;
+        padding: 6px 0;
+        color: rgba(255, 0, 0, 0.719);
       }
     }
   
