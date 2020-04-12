@@ -20,6 +20,7 @@ const Transfer = ({ changeCurrentPage }) => {
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
+  const [errorText, setErrorText] = useState("");
 
   useEffect(() => {
     changeCurrentPage({
@@ -51,9 +52,16 @@ const Transfer = ({ changeCurrentPage }) => {
         setPage("success");
       })
       .catch(err => {
-        if (err.response && err.reponse.status === 403) {
-          const errorMessage = err.response.data.data.message;
-          setLoading(errorMessage);
+        console.log('1', err)
+        console.log(2, err.response)
+        console.log(3, err.response.data)
+        console.log(4, err.status)
+        console.log(7, err.response.status);
+        console.log(5, err.response.data.status)
+        console.log(6, err.response.data.data.status)
+        if (err.response && err.response.status === 403) {
+          const errorMessage = err.response.data.message;
+          setErrorText(errorMessage);
           setLoading(false);      
         } else {
           setTimeout(() => {
@@ -83,6 +91,7 @@ const Transfer = ({ changeCurrentPage }) => {
           phone={phone} 
           amount={amount} 
           total={total} 
+          errorText={errorText}
           accountNumber={beneficiaryAccountNumber}
           handleOnSubmit={handleOnSubmit} /> 
       : page === "success"? <SuccessfulTransaction /> 

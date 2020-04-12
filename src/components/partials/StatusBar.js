@@ -13,7 +13,6 @@ export const StatusBar = ({ page, walletBalance, history, uuid  }) => {
       axios.get(`${GET_AGENT_INFO}/${uuid}`)
       .then((res) => {
         const balance = res.data.data.wallet.current_bal;
-        console.log(balance)
         setBalance(balance);
       })
       .catch((err) => {

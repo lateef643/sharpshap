@@ -4,7 +4,7 @@ import Loader from "../partials/Loader";
 import style from './PaymentSummary.module.scss';
 import { setCurrentPage } from "../../actions/page";
 
-export const PaymentSummary = ({ changeCurrentPage, phone, loading, amount, accountNumber, total, handleOnSubmit, handleSetPage }) => {
+export const PaymentSummary = ({ changeCurrentPage, errorText, phone, loading, amount, accountNumber, total, handleOnSubmit, handleSetPage }) => {
   useEffect(() => {
     changeCurrentPage({
       heading: "Verification",
@@ -15,6 +15,9 @@ export const PaymentSummary = ({ changeCurrentPage, phone, loading, amount, acco
   return (
     <div className={style.container}>
       <div className={style.paymentContainer} >
+      <div>
+      {errorText ? <p className={style.error}>{errorText}</p> : undefined}
+      </div>
       <div>
           <span>Account Number:</span>
           <span>{accountNumber}</span>
