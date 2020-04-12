@@ -40,10 +40,39 @@
         width: 42.2rem;
         height: 4.1rem;
         border-radius: 5px;
-        border: 1px solid #afafaf;
         color: #707070;
+        border: 1px solid #afafaf;
         font-family: inherit;
         padding: 0 3px;
+      }
+
+      option {
+        color: #707070;
+      }
+
+      input:disabled {
+        background-color: #fff;
+      }
+
+      .transparent {
+        color: #70707069;
+      }
+
+      .opaque {
+        color: #707070;
+      }
+
+      div {
+        position: relative;
+        bottom: 20%;
+        left: 20px;
+        z-index: 5;
+      }
+
+      .validationErrorText {
+        font-size: 1.25rem;
+        padding: 6px 0;
+        color: rgba(255, 0, 0, 0.719);
       }
     }
   
@@ -68,6 +97,10 @@
         transform: translateY(3%);
         box-shadow: 1px 1px 4px #00000029;
       }
+    }
+
+    button:disabled {
+      visibility: hidden;
     }
   }
 }

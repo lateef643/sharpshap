@@ -16,7 +16,7 @@ const BuyData = ({ changeCurrentPage }) => {
     
   const [dataPlans, setDataPlans] = useState([]);
   const [telco, setTelco] = useState("");
-  const [dataPlan, setDataPlan] = useState("");
+  const [selectedDataPlanId, setSelectedDataPlanId] = useState("");
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
   const [error, setError] = useState(undefined);
@@ -64,7 +64,7 @@ const BuyData = ({ changeCurrentPage }) => {
         setSuccess(successMessage);
         setLoading(false);
         setPhone("");
-        setDataPlan("");
+        setSelectedDataPlanId("");
         setTelco("");
         setAmount("");      
       })
@@ -82,18 +82,20 @@ const BuyData = ({ changeCurrentPage }) => {
     } else {
       setTimeout(() => {
         setLoading(false);
-        setValidationError({ ...validationError, telco: !telco, phone: !phone, dataPlan: !dataPlan });
+        setValidationError({ ...validationError, telco: !telco, phone: !phone, selectedDataPlanId: !selectedDataPlanId });
       }, 2000);      
     }
   };
 
-  const handleAmountChange = (plan) => {
-    const dataPlan = dataPlans.find(dataPlan => {
-      return dataPlan.productId === plan;
+  const handleAmountChange = (planId) => {
+    const selectedDataPlan = dataPlans.find(plan => {
+      return plan.productId === planId;
     });
 
-    const amount = String(dataPlan.amount);
-    setAmount(amount);
+    if (Object.keys(selectedDataPlan).length > 0) {
+      const amount = String(selectedDataPlan.amount);
+      setAmount(amount);      
+    }
   };
 
   const handleTelcoChange = (e) => {
@@ -114,14 +116,14 @@ const BuyData = ({ changeCurrentPage }) => {
     setPhone(newPhone);
   };
 
-  const handleDataPlanChange = (e) => {
-    const newDataPlan = e.target.value;
+  const handleSelectedDataPlanIdChange = (e) => {
+    const newSelectedDataPlanId= e.target.value;
 
     setError(undefined);
     setSuccess(undefined);
-    setValidationError({ ...validationError, dataPlan: !newDataPlan  });
-    setDataPlan(newDataPlan);
-    handleAmountChange(newDataPlan);
+    setValidationError({ ...validationError, selectedDataPlanId: !newSelectedDataPlanId  });
+    setSelectedDataPlanId(newSelectedDataPlanId);
+    handleAmountChange(newSelectedDataPlanId);
   };
 
   return (
@@ -146,13 +148,13 @@ const BuyData = ({ changeCurrentPage }) => {
       </label>    
       <label>
         <span>Data Plan</span>
-        <select onChange={handleDataPlanChange} className={validationError.dataPlan ? style.outlineRed : style.outlineGrey} >
-          <option>Select Data Plan</option>
+        <select onChange={handleSelectedDataPlanIdChange} className={validationError.selectedDataPlanId ? style.outlineRed : style.outlineGrey} >
+          <option value="">Select Data Plan</option>
           {dataPlans.map((plan, index) => {
             return <option value={plan.productId} key={index}>{plan.databundle}</option>
           })}
         </select> 
-        {validationError.dataPlan ? <p className={style.validationErrorText}>Please select data plan</p> : undefined}
+        {validationError.selectedDataPlanId ? <p className={style.validationErrorText}>Please select data plan</p> : undefined}
       </label> 
       <label>
         <span>Amount</span>

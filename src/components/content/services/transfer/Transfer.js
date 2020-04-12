@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from "react";
 import { connect } from "react-redux";
-import { axios } from "axios";
-import AmountForm from "./AmountForm";
+import axios from "axios";
 import BankForm from "./BankForm";
 import PaymentSummary from "../../../shared/PaymentSummary";
 import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
@@ -11,14 +10,16 @@ import { DISBURSE_FUNDS } from "../../../../store/api/constants";
 
 const Transfer = ({ changeCurrentPage }) => {
   const [page, setPage] = useState("amount");
-  const [beneficiaryBank, setBeneficiaryBank] = useState("Beneficiary Bank");
+  const [bankCode, setBankCode] = useState("");
   const [beneficiaryAccountNumber, setBeneficiaryAccountNumber] = useState("");
   const [beneficiaryAccountName, setBeneficiaryAccountName] = useState("");
-  const [customersNumber, setCustomersNumber] = useState("");
   const [narration, setNarration] = useState("");
   const [amount, setAmount] = useState("");
   const [total, setTotal] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     changeCurrentPage({
@@ -27,96 +28,67 @@ const Transfer = ({ changeCurrentPage }) => {
     });
   }, [changeCurrentPage]);
 
-  const handleBeneficiaryBankChange = (bank) => {
-    setBeneficiaryBank(bank);
-  };
-
-  const handleBeneficiaryAccountNumberChange = (accountNumber) => {
-    setBeneficiaryAccountNumber(accountNumber);
-  };
-
-  const handleBeneficiaryAccountNameChange = (accountName) => {
-    setBeneficiaryAccountName(accountName);
-  };
-
-  const handleCustomersNumberChange = (customersNumber) => {
-    setCustomersNumber(customersNumber);
-  };
-  
-  const handleNarrationChange = (narration) => {
-    setNarration(narration);
-  };
-
-  const handleAmountChange = (amount) => {
-    const total = 89;
-
-    setAmount(`${amount}`);
-    setTotal(`${amount + total}`);
-  };
-
-  const handlePhoneNumberChange = (phoneNumber) => {
-    setPhoneNumber(phoneNumber);
-  };
-
   const handleSetPage = (page) => {
     setPage(page);
   };
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = () => {
+    setLoading(true);
+
     const payload = {
-      beneficiaryBank,
-      beneficiaryAccountNumber,
-      beneficiaryAccountName,
-      customersNumber,
-      narration,
-      amount,
-      phoneNumber,
+      "first_name" : firstName,
+      "last_name" : lastName,
+      "phone_number" : phone,
+      "account_number" : beneficiaryAccountNumber,
+      "bank_code" : bankCode,
+      "amount" : amount
     };
 
     axios.post(DISBURSE_FUNDS, payload)
       .then(res => {
-
+        console.log(res);
+        setLoading(false);
+        setPage("success");
       })
       .catch(err => {
-        const error = err.response.data.data.message;
-        // setError(error);
+        console.log(err);
+        console.log(err.response);
+        if (err.response && err.reponse.data.status === 403) {
+          setLoading(false);      
+        } else {
+          setTimeout(() => {
+            setLoading(false)
+          }, 7000);
+        }
       })
+  };
 
-    console.log({
-      beneficiaryBank,
-      beneficiaryAccountNumber,
-      beneficiaryAccountName,
-      customersNumber,
-      narration,
-      amount,
-      phoneNumber,
-    });
-  }
+  const handleContinue = ({ bankCode, accountName, accountNumber, firstName, lastName,
+    amount, phone, narration}) => {
+    setBankCode(bankCode);
+    setBeneficiaryAccountName(accountName);
+    setBeneficiaryAccountNumber(accountNumber);
+    setFirstName(firstName);
+    setLastName(lastName);    
+    setAmount(amount);
+    setPhone(phone);
+    setNarration(narration);
+    setTotal(amount);
+  };
 
   return (
     <div className={style.container}>
-      {page === "bank" ? <BankForm
-          handleBeneficiaryBankChange={handleBeneficiaryBankChange} 
-          handleBeneficiaryAccountNumberChange={handleBeneficiaryAccountNumberChange}  
-          handleBeneficiaryAccountNameChange={handleBeneficiaryAccountNameChange}  
-          handleCustomersNumberChange={handleCustomersNumberChange}  
-          handleNarrationChange={handleNarrationChange}  
-          handleAmountChange={handleAmountChange}  
-          handlePhoneNumberChange={handlePhoneNumberChange}  
-          handleSetPage={handleSetPage}
-          amount={amount} />
-      : page === "summary" ? <PaymentSummary 
-          handleSetPage={handleSetPage}
-          phoneNumber={phoneNumber} 
+      {page === "summary" ? <PaymentSummary 
+          loading={loading}
+          phone={phone} 
           amount={amount} 
           total={total} 
+          accountNumber={beneficiaryAccountNumber}
           handleOnSubmit={handleOnSubmit} /> 
       : page === "success"? <SuccessfulTransaction /> 
-      : <AmountForm 
-          handleAmountChange={handleAmountChange}
-          handlePhoneNumberChange={handlePhoneNumberChange}
-          handleSetPage={handleSetPage}
-        /> }
+      : <BankForm
+      handleSetPage={handleSetPage}
+      handleContinue={handleContinue} />}
     </div>
   );
 };

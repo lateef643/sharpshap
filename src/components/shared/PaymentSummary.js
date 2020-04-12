@@ -1,34 +1,40 @@
-import React from "react";
+import React, {useEffect} from "react";
 import { connect } from "react-redux";
+import Loader from "../partials/Loader";
 import style from './PaymentSummary.module.scss';
 import { setCurrentPage } from "../../actions/page";
 
-export const PaymentSummary = ({ changeCurrentPage, phoneNumber, amount, total, handleOnSubmit, handleSetPage }) => {
-  changeCurrentPage({
-    heading: "Verification",
-    search: false
-  });
+export const PaymentSummary = ({ changeCurrentPage, phone, loading, amount, accountNumber, total, handleOnSubmit, handleSetPage }) => {
+  useEffect(() => {
+    changeCurrentPage({
+      heading: "Verification",
+      search: false
+    });    
+  }, [changeCurrentPage])
 
   return (
     <div className={style.container}>
       <div className={style.paymentContainer} >
-        <div>
-          <span>Phone Number</span>
-          <span>{phoneNumber}</span>
+      <div>
+          <span>Account Number:</span>
+          <span>{accountNumber}</span>
         </div>
         <div>
-          <span>Amount</span>
-          <span>{amount}</span>
+          <span>Phone Number:</span>
+          <span>{phone}</span>
         </div>
-        <div>    
+        <div>
+          <span>Amount:</span>
+          <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        </div>
+        <div className={style.total}>    
           <span>Total</span>
-          <span>{total}</span> 
+          <span>&#8358;{Number(total).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span> 
         </div> 
         <button onClick={(e) => {
           e.preventDefault();
           handleOnSubmit();
-          handleSetPage("success");
-        }}>Continue</button>       
+        }}>{loading ? <Loader size="small" color="white" position="center" /> : "Continue"}</button>       
       </div>    
     </div>
 )};
