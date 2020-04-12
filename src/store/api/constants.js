@@ -145,4 +145,4 @@ export const GET_BANK_LIST = `${path}/bank-operations/banks`;
 export const VERIFY_ACCOUNT = `${path}/bank-operations/verify-account`;
 
 //disburse funds -- POST
-export const DISBURSE_FUNDS = `${path}/bank-operations/disburse-funds`;
+export const DISBURSE_FUNDS = `${path}/bank-operations/disburse-fund`;

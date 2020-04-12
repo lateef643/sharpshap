@@ -22,8 +22,6 @@ export const startLoginUser = payload => dispatch => {
       const token = res.data.data.token;
       const walletBalance = res.data.data.wallet.current_bal;
 
-      console.log(res.data)
-
       if (!isEmpty(user)) {
         const authDetails = {
           isAuthenticated: true,

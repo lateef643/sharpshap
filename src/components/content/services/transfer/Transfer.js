@@ -51,9 +51,9 @@ const Transfer = ({ changeCurrentPage }) => {
         setPage("success");
       })
       .catch(err => {
-        console.log(err);
-        console.log(err.response);
-        if (err.response && err.reponse.data.status === 403) {
+        if (err.response && err.reponse.status === 403) {
+          const errorMessage = err.response.data.data.message;
+          setLoading(errorMessage);
           setLoading(false);      
         } else {
           setTimeout(() => {
