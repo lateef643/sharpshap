@@ -1,5 +1,6 @@
 import React, {useEffect, useState } from "react";
 import axios from "axios";
+import ListLoader from "../../partials/ListLoader";
 import { connect } from "react-redux";
 import style from './TransactionLog.module.scss';
 import { setCurrentPage } from "../../../actions/page";
@@ -8,13 +9,14 @@ import { GET_AGENT_INFO } from "../../../store/api/constants";
 export const TransactionLog = ({ changeCurrentPage, uuid }) => {
   const [transactions, setTransactions] = useState([]);
   const [businessName, setBusinessName] = useState("");
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     axios.get(`${GET_AGENT_INFO}/${uuid}`)
     .then(res => {
       const businessName = res.data.data.agent.business_name;
       const transactions = res.data.data.transaction;
-
+      setLoading(false);
       setBusinessName(businessName);
       setTransactions(transactions);
     })
@@ -32,7 +34,8 @@ export const TransactionLog = ({ changeCurrentPage, uuid }) => {
 
   return (
     <div className={style.container}>
-      {transactions.length > 0 ? 
+      {loading ? <div className={style.loaderContainer}><ListLoader /></div> : undefined}
+      {!loading && transactions.length > 0 ? 
         <div className={style.heading}>
           <span className={style.itemOne}>Status</span>
           <span className={style.itemTwo}>Amount</span>
@@ -44,7 +47,7 @@ export const TransactionLog = ({ changeCurrentPage, uuid }) => {
           <span className={style.itemEight}>Terminal</span>
         </div> : undefined
       }
-      {transactions.map((transaction, index) => ( 
+      {!loading ? transactions.map((transaction, index) => ( 
         <div key={transaction.id} className={style.log}>
           <span className={style.status}><span className={`${transaction.status === "failed" ? style.failed 
             : transaction.status === "pending" ? style.pending : style.success}`}></span></span>            
@@ -57,7 +60,7 @@ export const TransactionLog = ({ changeCurrentPage, uuid }) => {
           <span className={style.itemEight}>{transaction.terminal_id}</span>
         </div> 
         )
-      )}
+      ) : undefined}
   </div>
 )};
 

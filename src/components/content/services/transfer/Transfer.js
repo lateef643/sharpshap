@@ -9,7 +9,7 @@ import { setCurrentPage } from "../../../../actions/page";
 import { DISBURSE_FUNDS } from "../../../../store/api/constants";
 
 const Transfer = ({ changeCurrentPage }) => {
-  const [page, setPage] = useState("amount");
+  const [page, setPage] = useState("");
   const [bankCode, setBankCode] = useState("");
   const [beneficiaryAccountNumber, setBeneficiaryAccountNumber] = useState("");
   const [beneficiaryAccountName, setBeneficiaryAccountName] = useState("");
@@ -21,6 +21,7 @@ const Transfer = ({ changeCurrentPage }) => {
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
+  const [successPayload, setSuccessPayload] = useState(null);
 
   useEffect(() => {
     changeCurrentPage({
@@ -47,18 +48,14 @@ const Transfer = ({ changeCurrentPage }) => {
 
     axios.post(DISBURSE_FUNDS, payload)
       .then(res => {
-        console.log(res);
+        const successPayload = res.data.data.data.provider_response;
+        const status = res.data.data.status;
+
+        setSuccessPayload({ ...successPayload, status: status });
         setLoading(false);
-        setPage("success");
+        setPage("");
       })
       .catch(err => {
-        console.log('1', err)
-        console.log(2, err.response)
-        console.log(3, err.response.data)
-        console.log(4, err.status)
-        console.log(7, err.response.status);
-        console.log(5, err.response.data.status)
-        console.log(6, err.response.data.data.status)
         if (err.response && err.response.status === 403) {
           const errorMessage = err.response.data.message;
           setErrorText(errorMessage);
@@ -66,6 +63,7 @@ const Transfer = ({ changeCurrentPage }) => {
         } else {
           setTimeout(() => {
             setLoading(false)
+            setErrorText('Transaction failed please try again later');
           }, 7000);
         }
       })
@@ -94,7 +92,9 @@ const Transfer = ({ changeCurrentPage }) => {
           errorText={errorText}
           accountNumber={beneficiaryAccountNumber}
           handleOnSubmit={handleOnSubmit} /> 
-      : page === "success"? <SuccessfulTransaction /> 
+      : page === "success"? <SuccessfulTransaction 
+          successPayload={successPayload}
+      /> 
       : <BankForm
       handleSetPage={handleSetPage}
       handleContinue={handleContinue} />}

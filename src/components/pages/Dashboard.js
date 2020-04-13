@@ -24,10 +24,10 @@ export const Dashboard = ({ changeCurrentPage }) => {
   <div className={style.container}>
     <div className={style.cardContainer}>
       <Card link="transfer" text="Transfer Funds" image={transfer} />
-      <Card link="pay-electricity" text="Pay Electricity" image={power} />
-      <Card link="buy-airtime" text="Buy Airtime" image={airtime} />
       <Card link="recharge-cable" text="Recharge Cable TV" image={cabletv} />
       <Card link="buy-data" text="Buy Data" image={data} />
+      <Card link="buy-airtime" text="Buy Airtime" image={airtime} />
+      <Card link="pay-electricity" text="Pay Electricity" image={power} />
       <Card link="buy-insurance" text="Buy Insurance" image={insurance}  />
       <Card link="jamb" text="JAMB" image={jamb} />
       <Card link="waec" text="WAEC" image={waec} />     

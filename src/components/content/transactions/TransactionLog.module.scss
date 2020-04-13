@@ -8,6 +8,13 @@
     font-size: 1.4rem;
     text-align: left;
 
+    > .loaderContainer {
+      position: absolute;
+      top: 45%;
+      left: 50%;
+      transform: translate(50%, 50%);
+    }
+
     > .heading {
       display: flex;
       flex-direction: row;

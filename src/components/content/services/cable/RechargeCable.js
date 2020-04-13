@@ -137,6 +137,7 @@ export const RechargeCable = ({ changeCurrentPage }) => {
           } else {
             setTimeout(() => {
               setLoading(false);
+              setError('Transaction failed please try again later');
             }, 7000)
           }          
         })      
@@ -190,6 +191,7 @@ export const RechargeCable = ({ changeCurrentPage }) => {
   return (
   <div className={style.container}>
     <form className={style.form} onSubmit={handleOnSubmit} >
+      {loading ? <p className={style.pending}>Please wait while we process your transaction...</p> : undefined}
       {error ? <p className={`${style.status} ${style.error}`}>{error}</p> : undefined}
       {success ? <p className={`${style.status} ${style.success}`}>{success}</p> : undefined}
       <label>

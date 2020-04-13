@@ -1,56 +1,37 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import ListLoader from "../../partials/ListLoader";
 import { connect } from "react-redux";
 import style from './ActivityLog.module.scss';
 import { setCurrentPage } from "../../../actions/page";
 
 export const ActivityLog = ({ changeCurrentPage }) => {
-  changeCurrentPage({
-    heading: "Activity Log",
-    search: false
-  });
+  const [transactions, setTransactions] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const transactions = [{
-    status: 'failed',
-    amount: "786,364",
-    reference: "123456",
-    type: "Transfer",
-    customer: "sanwoolu@corona.com",
-    agent: "A&B consortium",
-    vendor: "Okeson",
-    terminal: "tt8989",
-  }, {
-    status: 'pending',
-    amount: "781,364",
-    reference: "123456",
-    type: "Transfer",
-    customer: "sanwoolu@corona.com",
-    agent: "A&B consortium",
-    vendor: "Okeson",
-    terminal: "tt8989",
-  }, {
-    status: 'failed',
-    amount: "1,657,364",
-    reference: "123456",
-    type: "Transfer",
-    customer: "sanwoolu@corona.com",
-    agent: "A&B consortium",
-    vendor: "Okeson",
-    terminal: "tt8989",
-  }];
-  transactions.length = 20;
-  transactions.fill({
-    status: 'success',
-    amount: "657,364",
-    reference: "123456",
-    type: "Transfer",
-    customer: "sanwoolu@corona.com",
-    agent: "A&B consortium",
-    vendor: "Okeson",
-    terminal: "tt8989",
-  }, 3, 40);
+  // useEffect(() => {
+  //   axios.get()
+  //   .then((res) => {
+  //     const logs = res.data.data.data;
+  //     setLogs(logs);
+  //     setLoading(false);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })  
+  // }, [])
+
+  useEffect(() => {
+    changeCurrentPage({
+      heading: "Activity Log",
+      search: false
+    });
+  }, [changeCurrentPage]);
 
   return (
     <div className={style.container}>
+      {loading ? <div className={style.loaderContainer}><ListLoader /></div> : undefined}
+      {!loading && transactions.length > 0 ?
       <div className={style.heading}>
         <span>Status</span>
         <span>Amount</span>
@@ -60,8 +41,8 @@ export const ActivityLog = ({ changeCurrentPage }) => {
         <span className={style.marginLeft}>Agent</span>
         <span>Vendor</span>
         <span>Terminal</span>
-      </div>
-      {transactions.map((transaction, index) => ( 
+      </div> : undefined}
+      {!loading ? transactions.map((transaction, index) => ( 
         <div key={index} className={style.card}>
           <span className={style.status}><span className={`${transaction.status === "failed" ? style.failed 
             : transaction.status === "pending" ? style.pending : style.success}`}></span></span>            
@@ -74,7 +55,7 @@ export const ActivityLog = ({ changeCurrentPage }) => {
           <span>{transaction.terminal}</span>
         </div> 
         )
-      )}
+      ) : undefined}
   </div>
 )};
 

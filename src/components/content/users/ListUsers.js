@@ -1,35 +1,46 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
+import axios from "axios";
+import ListLoader from "../../partials/ListLoader";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import style from './ListUsers.module.scss';
 import { setCurrentPage } from "../../../actions/page";
 
 export const ListUsers = ({ changeCurrentPage }) => {
-  changeCurrentPage({
-    heading: "List Users",
-    search: true
-  });
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-  const users = [];
-  users.length = 20;
-  users.fill({
-    name: "John Cross",
-    phone: "08064829451",
-    role: "Admin",
-    login: "12th, March 2019",
-  }, 0, 20);
+  // useEffect(() => {
+  //   axios.get()
+  //   .then((res) => {
+  //     const logs = res.data.data.data;
+  //     setLogs(logs);
+  //     setLoading(false);
+  //   })
+  //   .catch((err) => {
+  //     console.log(err);
+  //   })  
+  // }, [])
+
+  useEffect(() => {
+    changeCurrentPage({
+      heading: "List Users",
+      search: true
+    });
+  }, [changeCurrentPage]);
 
   return (
     <div className={style.container}>
-      <div className={style.heading}>
+      {loading ? <div className={style.loaderContainer}><ListLoader /></div> : undefined}
+      {!loading && users.length > 0 ? <div className={style.heading}>
         <span>S/N</span>
         <span>Name</span>
         <span>Phone &nbsp;</span>
         <span>Role</span>
         <span>Last Login</span>
         <span>Action</span>
-      </div>
-      {users.map((user, index) => ( 
+      </div> : undefined}
+      {!loading ? users.map((user, index) => ( 
         <div key={index} className={style.content}>
           <span>{index + 1}</span>
           <span>{user.name}</span>
@@ -46,7 +57,7 @@ export const ListUsers = ({ changeCurrentPage }) => {
           </span>          
         </div> 
         )
-      )}
+      ) : undefined}
   </div>
 )};
 

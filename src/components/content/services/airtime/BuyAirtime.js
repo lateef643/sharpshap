@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import Loader from "../../../partials/Loader";
+import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_AIRTIME } from "../../../../store/api/constants";
 import style from './BuyAirtime.module.scss';
@@ -17,7 +18,8 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
   const [amount, setAmount] = useState("");
   const [phone, setPhone] = useState("");
   const [error, setError] = useState(undefined);
-  const [success, setSuccess] = useState(undefined);
+  const [success, setSuccess] = useState(false);
+  const [successPayload, setSuccessPayload] = useState(null);
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState({});
 
@@ -30,6 +32,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
+    setError(false);
 
     setLoading(true);
     
@@ -42,8 +45,10 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
     if (telco && amount && phone) {
       axios.post(VEND_AIRTIME, payload)
       .then(res => {
-        const successMessage = res.data.data.statusDescription;
-        setSuccess(successMessage);
+        const successPayload = res.data.data;
+
+        setSuccessPayload(successPayload);
+        setSuccess(true);
         setLoading(false);
         setPhone("");
         setTelco("");
@@ -57,6 +62,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
         } else {
           setTimeout(() => {
             setLoading(false);
+            setError('Transaction failed please try again later');
           }, 7000);
         }
       })
@@ -72,6 +78,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
     const newTelcoName = e.target.value;
     setError(undefined);
     setSuccess(undefined);
+    setSuccessPayload(null);
     setValidationError({ ...validationError, telco: !newTelcoName  });
     setTelco(newTelcoName);
   };
@@ -80,6 +87,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
     const newAmount = e.target.value;
     setError(undefined);
     setSuccess(undefined);
+    setSuccessPayload(null);
     setValidationError({ ...validationError, amount: !newAmount  });
     setAmount(newAmount);
   };
@@ -88,15 +96,17 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
     const newPhone = e.target.value;
     setError(undefined);
     setSuccess(undefined);
+    setSuccessPayload(null);
     setValidationError({ ...validationError, phone: !newPhone  });
     setPhone(newPhone);
   };
 
   return (
   <div className={style.container}>
+    {success ? <SuccessfulTransaction successPayload={successPayload} /> : 
     <form className={style.form} onSubmit={handleOnSubmit}>
+      {loading ? <p className={style.pending}>Please wait while we process your transaction...</p> : undefined}
       {error ? <p className={`${style.status} ${style.error}`}>{error}</p> : undefined}
-      {success ? <p className={`${style.status} ${style.success}`}>{success}</p> : undefined}
       <label>
         <span>Network</span>
         <select onChange={handleTelcoChange} className={validationError.telco ? style.outlineRed : style.outlineGrey}>
@@ -116,11 +126,11 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
         <span>Phone Number</span>
         <input type="text" onChange={handlePhoneChange} className={validationError.phone ? style.outlineRed : style.outlineGrey} />  
         {validationError.phone ? <p className={style.validationErrorText}>Please enter phone number</p> : undefined}
-      </label>  
+      </label> 
       <button type="submit">{loading ?  
         <Loader size="small" color="white" position="center" /> : "Submit"}
       </button>
-    </form>    
+    </form>}
   </div>
 )};
 

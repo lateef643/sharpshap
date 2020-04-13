@@ -1,5 +1,5 @@
 .container {
-  padding-top: 6rem;
+  padding-top: 3rem;
 
   > .form {
     height: 43.8rem;
@@ -13,6 +13,14 @@
     align-items: center;
     flex-wrap: wrap;
     background-color: #fff;
+
+    > .pending {
+      font-size: 1.4rem;
+      width: 75%;
+      margin: 0 auto;
+      color: #707070;
+      text-align: center;
+    }
 
     > .status {
       font-size: 1.4rem;

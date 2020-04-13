@@ -17,6 +17,7 @@ export const PaymentSummary = ({ changeCurrentPage, errorText, phone, loading, a
       <div className={style.paymentContainer} >
       <div>
       {errorText ? <p className={style.error}>{errorText}</p> : undefined}
+      {loading ? <p className={style.pending}>Please wait while your transaction is processing...</p> : undefined}
       </div>
       <div>
           <span>Account Number:</span>

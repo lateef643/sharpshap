@@ -9,6 +9,13 @@
   text-align: left;
   overflow: hidden;
 
+  > .loaderContainer {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(50%, 50%);
+  }
+
   > .heading {
     display: flex;
     flex-direction: row;
@@ -18,10 +25,6 @@
     padding: 1.5rem 4rem;
     background-color: #fff;
     text-align: left;
-    
-    // span {
-    //   flex: 0 0 18%;
-    // } 
   }
 
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import Loader from "../../../partials/Loader";
+import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import { GET_DATA_PLANS } from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_DATA } from "../../../../store/api/constants";
@@ -21,6 +22,7 @@ const BuyData = ({ changeCurrentPage }) => {
   const [amount, setAmount] = useState("");
   const [error, setError] = useState(undefined);
   const [success, setSuccess] = useState(undefined);
+  const [successPayload, setSuccessPayload] = useState(null);
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState({});
 
@@ -60,8 +62,10 @@ const BuyData = ({ changeCurrentPage }) => {
     if (telco && amount && phone) {
       axios.post(VEND_DATA, payload)
       .then(res => {
-        const successMessage = res.data.data.statusDescription;
-        setSuccess(successMessage);
+        const successPayload = res.data.data;
+
+        setSuccessPayload(successPayload);
+        setSuccess(true);
         setLoading(false);
         setPhone("");
         setSelectedDataPlanId("");
@@ -76,6 +80,7 @@ const BuyData = ({ changeCurrentPage }) => {
         } else {
           setTimeout(() => {
             setLoading(false);
+            setError('Transaction failed please try again later');
           }, 7000)
         }
       })      
@@ -103,6 +108,7 @@ const BuyData = ({ changeCurrentPage }) => {
 
     setError(undefined);
     setSuccess(undefined);
+    setSuccessPayload(null);
     setValidationError({ ...validationError, telco: !newTelcoName  });
     setTelco(newTelcoName);
   };
@@ -112,6 +118,7 @@ const BuyData = ({ changeCurrentPage }) => {
 
     setError(undefined);
     setSuccess(undefined);
+    setSuccessPayload(null);
     setValidationError({ ...validationError, phone: !newPhone  });
     setPhone(newPhone);
   };
@@ -121,6 +128,7 @@ const BuyData = ({ changeCurrentPage }) => {
 
     setError(undefined);
     setSuccess(undefined);
+    setSuccessPayload(null);
     setValidationError({ ...validationError, selectedDataPlanId: !newSelectedDataPlanId  });
     setSelectedDataPlanId(newSelectedDataPlanId);
     handleAmountChange(newSelectedDataPlanId);
@@ -128,7 +136,9 @@ const BuyData = ({ changeCurrentPage }) => {
 
   return (
   <div className={style.container}>
+    {success ? <SuccessfulTransaction successPayload={successPayload} /> :
     <form className={style.form} onSubmit={handleOnSubmit} >
+      {loading ? <p className={style.pending}>Please wait while we process your transaction...</p> : undefined}
       {error ? <p className={`${style.status} ${style.error}`}>{error}</p> : undefined}
       {success ? <p className={`${style.status} ${style.success}`}>{success}</p> : undefined}
       <label>
@@ -163,7 +173,7 @@ const BuyData = ({ changeCurrentPage }) => {
       <button type="submit">{loading ?  
         <Loader size="small" color="white" position="center" /> : "Submit"}
       </button>
-    </form>    
+      </form>}  
   </div>
 )}
 

@@ -5,7 +5,7 @@ import axios from "axios";
 import { GET_AGENT_INFO } from "../../store/api/constants";
 import "./StatusBar.scss";
 
-export const StatusBar = ({ page, walletBalance, history, uuid  }) => {
+export const StatusBar = ({ page, walletBalance, uuid  }) => {
   const [balance, setBalance] = useState(walletBalance);
 
   useEffect(() => {
