@@ -75,8 +75,8 @@ export const startLogout = () => dispatch => {
     }
   });
   
-  localStorage.clear('user');
-  localStorage.clear('token');
+  sessionStorage.clear('user');
+  sessionStorage.clear('token');
   history.push("/");
   dispatch(logoutUser());
 };
