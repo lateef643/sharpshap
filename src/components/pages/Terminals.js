@@ -17,12 +17,11 @@ export const ListTerminals = ({ changeCurrentPage }) => {
       const terminals = res.data.data.data;
       setLoading(false);
       setTerminals(terminals);
-      console.log(res);
     })
     .catch(err => {
       console.log(err);
     })    
-  });
+  }, []);
 
   useEffect(() => {
     changeCurrentPage({

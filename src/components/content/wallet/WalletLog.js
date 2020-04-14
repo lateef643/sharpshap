@@ -82,6 +82,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
         </div> 
         )
       ) : undefined}
+      
       {!loading ? 
         <div className={style.pagination}>
           <span onClick={() => {
