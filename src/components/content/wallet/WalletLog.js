@@ -82,7 +82,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
         </div> 
         )
       ) : undefined}
-      
+
       {!loading ? 
         <div className={style.pagination}>
           <span onClick={() => {
@@ -94,11 +94,11 @@ export const WalletLog = ({ changeCurrentPage }) => {
             }} 
           disabled={currentPage === lastPage}>Next Page</span>
          {
-          pageNumbers.map((page, index) => {
+          pageNumbers.map((page) => {
             return <span onClick={() => {
-              setCurrentPage(index++)
+              setCurrentPage(page)
             }} 
-            className={currentPage === index++ ? style.active : style.normal}>{index++}</span>
+            className={currentPage === page ? style.active : style.normal}>{page}</span>
           })
         } 
           <span onClick={() => {
