@@ -9,18 +9,42 @@ import style from './WalletLog.module.scss';
 export const WalletLog = ({ changeCurrentPage }) => {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [total, setTotal] = useState(null);
+  const [perPage, setPerPage] = useState(null);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [pageNumbers, setPageNumbers] = useState([]);
+  const [lastPage, setLastPage] = useState("");
 
   useEffect(() => {
-    axios.get(ALL_WALLET_LOGS)
+    axios.get(`${ALL_WALLET_LOGS}?page=${currentPage}`)
     .then((res) => {
       const logs = res.data.data.data;
+      const total = res.data.data.total;
+      const perPage = res.data.data.per_page;
+      const prevPage = res.data.data.prev_page_url;
+      const nextPageUrl = res.data.data.next_page_url;
+      const lastPage = res.data.data.last_page;
+      const currentPage = res.data.data.current_page;
+      let pageNumbers = [];
+
+      if (total !== null && total > 0) {
+        for (let i = 1; i <= Math.ceil(total / perPage); i++) {
+          pageNumbers.push(i);
+        };
+        setPageNumbers(pageNumbers);
+      }
+
+      setLastPage(lastPage);
+      setTotal(total);
+      setPerPage(perPage);
       setLogs(logs);
       setLoading(false);
+
     })
     .catch((err) => {
       console.log(err);
     })    
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     changeCurrentPage({
@@ -28,6 +52,10 @@ export const WalletLog = ({ changeCurrentPage }) => {
       search: true
     });    
   }, [changeCurrentPage]);
+
+  const handlePageChange = () => {
+
+  };
 
   return (
     <div className={style.container}>
@@ -54,6 +82,30 @@ export const WalletLog = ({ changeCurrentPage }) => {
         </div> 
         )
       ) : undefined}
+      {!loading ? 
+        <div className={style.pagination}>
+          <span onClick={() => {
+              setCurrentPage(1);
+            }} 
+            className={currentPage === 1 ? style.active : style.normal}>First Page</span>
+          <span onClick={() => {
+              currentPage < lastPage ? setCurrentPage(currentPage++) : setCurrentPage();
+            }} 
+          disabled={currentPage === lastPage}>Next Page</span>
+         {
+          pageNumbers.map((page, index) => {
+            return <span onClick={() => {
+              setCurrentPage(index++)
+            }} 
+            className={currentPage === index++ ? style.active : style.normal}>{index++}</span>
+          })
+        } 
+          <span onClick={() => {
+            currentPage < lastPage ? setCurrentPage(lastPage) : setCurrentPage();
+         }} 
+          className={currentPage === lastPage ? style.active : style.normal}
+          disabled={!total}>Last Page</span>
+        </div> : undefined}
   </div>
 )}
 

@@ -24,10 +24,6 @@
       padding: 1.5rem 2rem;
       background-color: #fff;
       text-align: left;
-    
-      // span {
-      //   flex: 0 1 13%;
-      // }
     }
 
     > .log {
@@ -41,13 +37,28 @@
       background-color: #fff;
       margin-bottom: .3rem;
     
-      // span {
-      //   flex: 0 1 13%;
-      // }
-    
       &:hover {
         transform: scale(1.02);
       }
+    }
+
+    > .pagination {
+      margin-top: 2.5rem;
+    }
+    .pagination span {
+      cursor: pointer;
+      color: black;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition: background-color .3s;
+      border: 1px solid #ddd;
+    }
+    
+    .pagination span.active {
+      background-color: #2A58AE;;
+      color: white;
+      border: 1px solid #2A58AE;;
     }
   }
 
@@ -73,10 +84,6 @@
 .success {
   background-color: #3AC962;
 }
-
-// .marginLeft {
-//   margin-left: 2rem;
-// }
 
 .itemOne {
   flex: 0 0 5%;
