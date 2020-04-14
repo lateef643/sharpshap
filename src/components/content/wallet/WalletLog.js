@@ -14,6 +14,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNumbers, setPageNumbers] = useState([]);
   const [lastPage, setLastPage] = useState("");
+  const firstPage = 1;
 
   useEffect(() => {
     axios.get(`${ALL_WALLET_LOGS}?page=${currentPage}`)
@@ -90,7 +91,9 @@ export const WalletLog = ({ changeCurrentPage }) => {
             }} 
             className={currentPage === 1 ? style.active : style.normal}>First Page</span>
           <span onClick={() => {
-              currentPage < lastPage ? setCurrentPage(currentPage++) : setCurrentPage();
+              if (currentPage < lastPage) {
+                setCurrentPage(currentPage + 1);
+              }
             }} 
           disabled={currentPage === lastPage}>Next Page</span>
          {
@@ -102,10 +105,17 @@ export const WalletLog = ({ changeCurrentPage }) => {
           })
         } 
           <span onClick={() => {
-            currentPage < lastPage ? setCurrentPage(lastPage) : setCurrentPage();
+            if (currentPage > firstPage) {
+              setCurrentPage(currentPage - 1);
+            }
+          }}>Prev Page</span>
+          <span onClick={() => {
+            if (currentPage < lastPage) {
+              setCurrentPage(lastPage);
+            }
          }} 
-          className={currentPage === lastPage ? style.active : style.normal}
-          disabled={!total}>Last Page</span>
+        className={currentPage === lastPage ? style.active : style.normal}
+        disabled={currentPage === lastPage}>Last Page</span>
         </div> : undefined}
   </div>
 )}
