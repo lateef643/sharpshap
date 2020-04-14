@@ -14,6 +14,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNumbers, setPageNumbers] = useState([]);
   const [lastPage, setLastPage] = useState("");
+  const [pageChangeLoading, setPageChangeLoading] = useState(false);
   const firstPage = 1;
 
   useEffect(() => {
@@ -40,6 +41,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
       setPerPage(perPage);
       setLogs(logs);
       setLoading(false);
+      setPageChangeLoading(false);
 
     })
     .catch((err) => {
@@ -60,7 +62,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
 
   return (
     <div className={style.container}>
-      {loading ? <div className={style.loaderContainer}><ListLoader /></div> : undefined}
+      {loading || pageChangeLoading ? <div className={style.loaderContainer}><ListLoader /></div> : undefined}
       {!loading && logs.length > 0 ? 
       <div className={style.heading}>
         <span className={style.itemOne}>Previous Balance</span>
@@ -71,7 +73,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
         <span className={style.itemSix}>Mode</span>
         <span className={style.itemSeven}>Date Created</span>
       </div> : undefined}
-      {!loading ? logs.map((log, index) => ( 
+      {!loading || !pageChangeLoading ? logs.map((log, index) => ( 
         <div key={log.id} className={style.log}>
           <span className={style.itemOne}>&#8358;{log.previous_bal}</span>
           <span className={style.itemTwo}>&#8358;{log.amount}</span>
@@ -87,6 +89,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
       {!loading ? 
         <div className={style.pagination}>
           <span onClick={() => {
+              setPageChangeLoading(true);
               setCurrentPage(1);
             }} 
             className={currentPage === 1 ? style.active : style.normal}>First Page</span>
@@ -99,7 +102,8 @@ export const WalletLog = ({ changeCurrentPage }) => {
          {
           pageNumbers.map((page) => {
             return <span onClick={() => {
-              setCurrentPage(page)
+              setCurrentPage(page);
+              setPageChangeLoading(true);
             }} 
             className={currentPage === page ? style.active : style.normal}>{page}</span>
           })
@@ -107,11 +111,13 @@ export const WalletLog = ({ changeCurrentPage }) => {
           <span onClick={() => {
             if (currentPage > firstPage) {
               setCurrentPage(currentPage - 1);
+              setPageChangeLoading(true);
             }
           }}>Prev Page</span>
           <span onClick={() => {
             if (currentPage < lastPage) {
               setCurrentPage(lastPage);
+              setPageChangeLoading(true);
             }
          }} 
         className={currentPage === lastPage ? style.active : style.normal}

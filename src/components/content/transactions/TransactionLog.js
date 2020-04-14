@@ -61,14 +61,6 @@ export const TransactionLog = ({ changeCurrentPage, uuid }) => {
         </div> 
         )
       ) : undefined}
-      {!loading ?  
-        <div className={style.pagination}>
-          <span>&laquo;</span>
-          <span className={style.active}>1</span>
-          <span>2</span>
-          <span>3</span>
-          <span>4</span>
-        </div> : undefined}
   </div>
 )};
 

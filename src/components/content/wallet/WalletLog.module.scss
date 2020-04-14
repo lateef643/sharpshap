@@ -9,7 +9,7 @@
   text-align: left;
 
   > .loaderContainer {
-    position: absolute;
+    position: fixed;
     top: 45%;
     left: 50%;
     transform: translate(50%, 50%);
