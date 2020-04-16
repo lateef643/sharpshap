@@ -7,9 +7,8 @@ import power from "../../assets/images/power.svg";
 import transfer from "../../assets/images/transfer.svg";
 import data from "../../assets/images/smartphone-data.svg";
 import insurance from "../../assets/images/surface1.svg";
-import airtime from "../../assets/images/smartphone-call.svg";
-import waec from "../../assets/images/WAEC_LogoPNG@2x.png";
-import jamb from "../../assets/images/Institutions Not Showing (Blank) in CAPS Reasons and Solutions@2x.png";
+import airtime from "../../assets/images//phone-svgrepo-com.svg";
+import books from "../../assets/images/books-svgrepo-com.svg";
 import { setCurrentPage } from "../../actions/page";
 
 export const Dashboard = ({ changeCurrentPage }) => {
@@ -29,8 +28,7 @@ export const Dashboard = ({ changeCurrentPage }) => {
       <Card link="buy-airtime" text="Buy Airtime" image={airtime} />
       <Card link="pay-electricity" text="Pay Electricity" image={power} />
       <Card link="buy-insurance" text="Buy Insurance" image={insurance}  />
-      <Card link="jamb" text="JAMB" image={jamb} />
-      <Card link="waec" text="WAEC" image={waec} />     
+      <Card link="education" text="Education" image={books} />
     </div>
   </div>
 )};

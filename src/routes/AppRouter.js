@@ -11,7 +11,6 @@ import FundWallet from "../components/content/wallet/FundWallet";
 import WalletLog from "../components/content/wallet/WalletLog";
 import Transfer from "../components/content/services/transfer/Transfer";
 import ActivityLog from "../components/content/wallet/ActivityLog";
-import Withdraw from "../components/content/services/Withdraw/Withdraw";
 import SuccessfulTransaction from "../components/shared/SuccessfulTransaction";
 import BuyAirtime from "../components/content/services/airtime/BuyAirtime";
 import PayElectricity from "../components/content/services/electricity/PayElectricity";
@@ -69,10 +68,6 @@ const routes = [
   {
     path: "/activity-log",
     main: () => <ActivityLog />
-  },
-  {
-    path: "/withdraw",
-    main: () => <Withdraw />
   },
   {
     path: "/success",

@@ -8,7 +8,8 @@ if (loginDetails) {
   initialState = {
     isAuthenticated: false,
     user: {},
-    walletBalance: 0
+    walletBalance: 0,
+    transactionSettings: {}
   }
 };
 

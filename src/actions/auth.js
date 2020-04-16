@@ -4,13 +4,14 @@ import setAuthToken from "../util/auth";
 import isEmpty from "../validation/isEmpty";
 import history from "../util/history";
 
-const loginUser = ({ user, isAuthenticated, walletBalance }) => {
+const loginUser = ({ user, isAuthenticated, walletBalance, transactionSettings }) => {
   return {
     type: "START_LOGIN_USER",
     payload: {
       isAuthenticated,
       user,
-      walletBalance
+      walletBalance,
+      transactionSettings
     }
   }
 };
@@ -21,12 +22,14 @@ export const startLoginUser = payload => dispatch => {
       const user = res.data.data.user;
       const token = res.data.data.token;
       const walletBalance = res.data.data.wallet.current_bal;
+      const transactionSettings = res.data.data.settings;
 
       if (!isEmpty(user)) {
         const authDetails = {
           isAuthenticated: true,
           user,
-          walletBalance
+          walletBalance,
+          transactionSettings
         };
 
         dispatch(loginUser(authDetails));
