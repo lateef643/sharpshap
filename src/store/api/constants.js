@@ -115,8 +115,8 @@ export const VEND_AIRTIME = `${path}/airtime`;
 export const VEND_DATA = `${path}/airtime/data`;
 
 /////CABLE TV//////////
-//get startimes plans - POST
-export const GET_STARTIMES_PLANS = `${path}/airtime/data`;
+//get startimes plans - GET
+export const GET_STARTIMES_PLANS = `${path}/cable/multichoice/startimes`;
 
 //validate startimes customer - POST
 export const VALIDATE_STARTIMES_CUSTOMER =  `${path}/cable/startimes/validate`;

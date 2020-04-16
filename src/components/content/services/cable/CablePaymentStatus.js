@@ -1,9 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import check from "../../../../assets/images/check.svg";
-import style from './SuccessfulTransaction.module.scss';
+import style from './CablePaymentStatus.module.scss';
 
-export const SuccessfulTransaction = ({ successPayload }) => {
+export const CablePaymentStatus = ({ successPayload }) => {
   return (
     <div className={style.container}>
       <div className={style.sectionContainer} >
@@ -58,4 +58,4 @@ export const SuccessfulTransaction = ({ successPayload }) => {
     </div>
 )};
 
-export default SuccessfulTransaction;
+export default CablePaymentStatus;

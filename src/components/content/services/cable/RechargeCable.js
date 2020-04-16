@@ -9,6 +9,7 @@ import { VALIDATE_MULTICHOICE_CUSTOMER } from "../../../../store/api/constants";
 import { VEND_STARTIMES } from "../../../../store/api/constants";
 import { VEND_MULTICHOICE } from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
+import CablePaymentStatus from "./CablePaymentStatus";
 import Loader from "../../../partials/Loader";
 import style from './RechargeCable.module.scss';
 
@@ -26,8 +27,10 @@ export const RechargeCable = ({ changeCurrentPage }) => {
   const [code, setCode] = useState("");
   const [error, setError] = useState(undefined);
   const [success, setSuccess] = useState(undefined);
+  const [successPayload, setSuccessPayload] = useState(null);
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState({});
+  const [transactionStatus, setTransactionStatus] = useState(false);
 
   useEffect(() => {
     let providerApi;
@@ -67,11 +70,13 @@ export const RechargeCable = ({ changeCurrentPage }) => {
     if (smartCardNumber.length >= 10) {
       axios.post(providerApi, payload)
         .then(res => {
-          const firstname = res.data.data.statusDescription.firstname;
-          const lastname = res.data.data.statusDescription.lastname;
+          let name;
+
+          name = provider === "startimes" ? res.data.data.customerName 
+          : `${res.data.data.statusDescription.firstname} ${res.data.data.statusDescription.lastname}`
 
           setCustomerInfo({
-            name: `${firstname} ${lastname}`,
+            name,
             status: true,
             message: ""
           });
@@ -128,6 +133,7 @@ export const RechargeCable = ({ changeCurrentPage }) => {
           setPlan("");
           setCode("");
           setValidationError({});
+          setSuccessPayload(res.data.data);
         })
         .catch(err => {
           if (err.response && err.response.status === 403) {
@@ -190,6 +196,8 @@ export const RechargeCable = ({ changeCurrentPage }) => {
 
   return (
   <div className={style.container}>
+    {transactionStatus ? 
+    <CablePaymentStatus /> :
     <form className={style.form} onSubmit={handleOnSubmit} >
       {loading ? <p className={style.pending}>Please wait while we process your transaction...</p> : undefined}
       {error ? <p className={`${style.status} ${style.error}`}>{error}</p> : undefined}
@@ -236,12 +244,12 @@ export const RechargeCable = ({ changeCurrentPage }) => {
       </label> 
       <label>
         <span>Amount</span>
-        <input type="text" disabled={true} value={amount} onChange={handlePlanAmountChange} />      
+        <input type="text" value={amount} onChange={handlePlanAmountChange} />      
       </label>  
       <button type="submit">{loading ?  
         <Loader size="small" color="white" position="center" /> : "Submit"}
       </button>
-    </form>    
+    </form>}
   </div>
 )};
 

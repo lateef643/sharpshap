@@ -1,59 +1,105 @@
-import React, { useState } from "react";
-import style from './WalletTransfer.module.scss';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import WalletTransferStatus from "./WalletTransferStatus";
+import WalletTransferSummary from "./WalletTransferSummary";
+import styles from "./WalletTransfer.module.scss";
 
-const WalletTransfer = (props) => {
-  const [errors, setErrors] = useState({
-    amount: true,
-    phoneNumber: true
+export const WalletTransfer = () => {
+  const [walletId, setWalletId] = useState("");
+  const [agentId, setAgentId] = useState("");
+  const [amount, setAmount] = useState("");
+  const [transactionStatus, setTransactionStatus] = useState("");
+  const [summaryPayload, setSummaryPayload] = useState({});
+  const [successPayload, setSuccessPayload] = useState({});
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const payload = {
+      walletId,
+      amount
+    }
+
+    axios.post('', payload)
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      })
   });
+
+  const handleOnWalletIdChange = (e) => {
+    const walletId = e.target.value;
+    setWalletId(walletId);
+  };
+
+  const handleOnAgentIdChange = (e) => {
+    const agentId = e.target.value;
+    setAgentId(agentId);
+  };
+
+  const handleOnAmountChange = (e) => {
+    const amount = e.target.value;
+    setAmount(amount);
+  };
+
+  const handleOnSubmit = () => {
+    setLoading(true);
+
+    const payload = {
+      walletId,
+      agentId,
+      amount
+    };
+
+    axios.post("", payload)
+      .then(res => {
+        console.log(res);
+        transactionStatus("");
+        setLoading(false);
+      })
+      .catch(err => {
+        console.log(err);
+        transactionStatus("");
+        setLoading(false);
+      })
+  }
+
+  const handleOnContinue = (e) => {
+    e.preventDefault();
+    setTransactionStatus("confirmation");
+  };
+
   return (
-  <div className={style.container}>
-    <form className={style.form} onSubmit={(e) => {
-      e.preventDefault();
+    <div className={styles.container}>
+      {transactionStatus === "confirmation" ? 
+      <WalletTransferSummary 
+      summary={summaryPayload}
+      handleOnSubmit={handleOnSubmit}
+      loading={loading} /> :
 
-      //Checks if input fields empty
-      let hasError = true;
+      transactionStatus === "finished" ? 
+      <WalletTransferStatus 
+        transactionStatus={transactionStatus} 
+        successPayload={successPayload} /> :
 
-      for (let error in errors) {
-        if (errors.hasOwnProperty(error)) {
-          if (errors[error]) {
-            hasError = true;
-            break;
-          } else {
-            hasError = false;
-          }
-        };
-      };
-      
-      if (!hasError) {
-        props.handleSetPage("bank");        
-      }
-    }} >
-      <label>
-        <span>Amount</span>
-        <input type="text" onChange={(e) => {
-          const amount = e.target.value;
-
-          if (amount.trim().length > 0) {
-            props.handleAmountChange(amount);  
-            setErrors({...errors, amount: false});          
-          };
-        }} />      
-      </label>
-      <label>
-        <span>Phone Number</span>
-        <input type="text" onChange={(e) => {
-          const phoneNumber = e.target.value;
-
-          if (phoneNumber.trim().length > 0) {
-            props.handlePhoneNumberChange(phoneNumber);  
-            setErrors({...errors, phoneNumber: false});          
-          };
-        }} />      
-      </label>       
-      <button type="submit">Submit</button>
-    </form>    
-  </div>
-)}
+      <form className={styles.form} onSubmit={handleOnContinue}>
+        <label>
+          <span>Wallet ID</span>
+          <input type="text" onChange={handleOnWalletIdChange} />
+        </label>
+        <label>
+          <span>Agent ID</span>
+          <input type="text" onChange={handleOnAgentIdChange} />
+        </label>
+        <label>
+          <span>Amount</span>
+          <input type="text" onChange={handleOnAmountChange} />
+        </label>
+        <button>Submit</button>
+      </form>}
+    </div>
+  )
+}
 
 export default WalletTransfer;

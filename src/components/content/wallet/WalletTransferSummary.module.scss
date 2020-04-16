@@ -1,0 +1,72 @@
+.container {
+    padding-top: 6rem;
+  
+    > .paymentContainer {
+      height: 39.2rem;
+      width: 39.6rem;
+      margin: 0 auto;
+      box-shadow: 0px 3px .6rem #00000029;
+      padding: 3rem 2rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background-color: #fff;
+  
+      div {
+        display: flex;
+        justify-content: space-between;
+
+        > .pending {
+          font-size: 1.4rem;
+          margin-bottom: 2rem;
+          font-weight: 400;
+          color: #707070; 
+          text-align: center;
+        }
+
+        span {
+          text-align: right;
+          font-size: 1.4rem;
+          flex: 0 0 65%;
+          color: #707070;
+          line-height: 2.4rem;
+        }
+  
+        span:first-child {
+          text-align: left;
+          font-size: 1.4rem;
+          flex: 0 0 35%;
+          color: #707070;
+          line-height: 2.4rem;
+        }
+      }
+
+      .total {
+        font-size: 1.75rem;
+        font-weight: bold;
+      }
+  
+      button {
+        font-family: 'Lato', sans-serif;
+        width: 25.5rem;
+        margin: 0 auto;
+        margin-top: 2rem;
+        height: 3.6rem;
+        font-size: 1.4rem;
+        outline: 0;
+        border: 0;
+        height: 4.4rem;
+        border-radius: 1rem;
+        box-shadow: 3px 3px .6rem #00000029;
+        background: transparent 
+        linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
+        0% 0% no-repeat padding-box;
+        color: #fff;
+  
+        &:active {
+          transform: translateY(3%);
+          box-shadow: 1px 1px 4px #00000029;
+        }
+      }
+    }
+  }

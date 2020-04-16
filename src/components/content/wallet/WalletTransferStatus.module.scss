@@ -1,0 +1,101 @@
+.container {
+    padding-top: 4rem;
+  
+    > .sectionContainer {
+      height: 38.2rem;
+      width: 38.6rem;
+      margin: 0 auto;
+      box-shadow: 0px 3px 6px #00000029;
+      padding-bottom: 3rem;
+      background-color: #fff;
+      color: #707070;
+      font-size: 1.45rem;
+      display: flex;
+      justify-content: space-between;
+      flex-direction: column;
+  
+      .imageContainer {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        flex: 0 0 5%;
+        margin-bottom: 10px;
+  
+        img {
+          position: relative;
+          bottom: 2rem;
+          width: 4rem;
+        }
+  
+        p {
+          font-size: 1.4rem;
+        }
+      }
+  
+      .contentContainer {
+        flex: 0 0 75%;
+        width: 90%;
+        margin: 0 auto;
+
+
+          div {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between; 
+
+          div {
+            flex: 0 0 15%;
+            height: 100%;
+            margin: 8px;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+    
+            span {
+              display: block;
+            }
+          }   
+          
+          .link {
+            flex: 0 0 10%;
+            display: flex;
+            position: relative;
+            margin-top: 20px;
+            flex-direction: row;
+            justify-content: space-between;
+            text-align: left;
+
+            div {
+              flex: 0 0 25%;
+
+              a {
+                text-decoration: none;
+                color: #707070;
+              }
+            }
+          }
+        }
+
+        .failed {
+          width: 85%;
+          line-height: 25px;
+          font-size: 1.45rem;
+          margin: 2rem auto 0 auto;
+          text-align: center;
+
+          div {
+            position: relative;
+            top: 170px;
+            right: 20px;
+
+            a {
+              text-decoration: none;
+              color: #707070;
+            }
+          }
+        }
+      }
+    }
+  }

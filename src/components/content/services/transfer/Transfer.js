@@ -9,7 +9,7 @@ import { setCurrentPage } from "../../../../actions/page";
 import { DISBURSE_FUNDS } from "../../../../store/api/constants";
 import styles from './Transfer.module.scss';
 
-const Transfer = ({ changeCurrentPage, transferSettings }) => {
+const Transfer = ({ changeCurrentPage }) => {
   const [page, setPage] = useState("");
   const [bankCode, setBankCode] = useState("");
   const [beneficiaryBankName, setBeneficiaryBankName] = useState("");
@@ -17,7 +17,7 @@ const Transfer = ({ changeCurrentPage, transferSettings }) => {
   const [beneficiaryAccountName, setBeneficiaryAccountName] = useState("");
   const [narration, setNarration] = useState("");
   const [amount, setAmount] = useState("");
-  const [transactionCost, setTransactionCost] = useState("");
+  const [transactionCost, setTransactionCost] = useState(35);
   const [total, setTotal] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
@@ -36,20 +36,7 @@ const Transfer = ({ changeCurrentPage, transferSettings }) => {
       const bankName = bank.name;
       setBeneficiaryBankName(bankName);
     }
-  }, [bankCode])
-
-  useEffect(() => {
-    const selectedSetting = transferSettings.find(setting => {
-      if (amount >= 10001) {
-        return setting.minimum === 10001;
-      } else {
-        return setting.maximum < 10001; 
-      }
-    });
-
-    setTransactionCost(selectedSetting.transaction_cost);
-    setTotal(amount + selectedSetting.transaction_cost);
-  }, [amount])
+  }, [bankCode]);
 
   useEffect(() => {
     changeCurrentPage({
@@ -113,6 +100,7 @@ const Transfer = ({ changeCurrentPage, transferSettings }) => {
     setAmount(Number(amount));
     setPhone(phone);
     setNarration(narration);
+    setTotal(amount + transactionCost);
   };
 
   return (
@@ -147,10 +135,4 @@ const mapDispatchToProps = dispatch => {
   }
 };
 
-const mapStateToProps = state => {
-  return {
-    transferSettings: state.auth.transactionSettings.transfer
-  }
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Transfer);
+export default connect(undefined, mapDispatchToProps)(Transfer);

@@ -10,8 +10,8 @@
 
     > .loaderContainer {
       position: absolute;
-      top: 45%;
-      left: 50%;
+      top: 50%;
+      left: 53.5%;
       transform: translate(50%, 50%);
     }
 
@@ -102,7 +102,7 @@
 }
 
 .itemFive {
-  flex: 0 0 25%;
+  flex: 1;
 }
 
 .itemSix {
@@ -110,5 +110,9 @@
 }
 
 .itemSeven {
-  flex: 0 0 8%;
+  flex: 0 0 12%;
+}
+
+.itemEight {
+  flex: 0 0 12.5%;
 }

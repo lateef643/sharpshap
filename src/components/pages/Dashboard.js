@@ -5,10 +5,11 @@ import style from "./Dashboard.module.scss";
 import cabletv from "../../assets/images/cable-tv-sign-with-monitor.svg";
 import power from "../../assets/images/electricity-flash-svgrepo-com.svg";
 import transfer from "../../assets/images/transfer.svg";
-import data from "../../assets/images/smartphone-internet-svgrepo-com.svg";
-import insurance from "../../assets/images/insurance-svgrepo-com.svg";
+import data from "../../assets/images/smartphone-data.svg";
+import insurance from "../../assets/images/surface1.svg";
 import airtime from "../../assets/images//phone-svgrepo-com.svg";
 import books from "../../assets/images/books-svgrepo-com.svg";
+import wallet from "../../assets/images/money-wallet-svgrepo-com.svg";
 import { setCurrentPage } from "../../actions/page";
 
 export const Dashboard = ({ changeCurrentPage }) => {
@@ -29,6 +30,7 @@ export const Dashboard = ({ changeCurrentPage }) => {
       <Card link="pay-electricity" text="Pay Electricity" image={power} />
       <Card link="buy-insurance" text="Buy Insurance" image={insurance}  />
       <Card link="education" text="Education" image={books} />
+      <Card link="wallet-transfer" text="Wallet Transfer" image={wallet} />
     </div>
   </div>
 )};

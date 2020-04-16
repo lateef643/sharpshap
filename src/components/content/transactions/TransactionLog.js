@@ -44,6 +44,7 @@ export const TransactionLog = ({ changeCurrentPage, uuid }) => {
           <span className={style.itemFive}>Customer</span>
           <span className={style.itemSix}>Agent</span>
           <span className={style.itemSeven}>Terminal</span>
+          <span className={style.itemEight}>Date Created</span>
         </div> : undefined
       }
       {!loading ? transactions.map((transaction, index) => ( 
@@ -56,6 +57,7 @@ export const TransactionLog = ({ changeCurrentPage, uuid }) => {
           <span className={style.itemFive}>{transaction.customer_info}</span>
           <span className={style.itemSix}>{businessName}</span>
           <span className={style.itemSeven}>{transaction.terminal_id}</span>
+          <span className={style.itemEight}>{transaction.created_at}</span>
         </div> 
         )
       ) : undefined}
