@@ -33,6 +33,7 @@ const BuyData = ({ changeCurrentPage }) => {
 
     axios.post(GET_DATA_PLANS, payload)
       .then(res => {
+        console.log(res);
         const dataPlans = res.data.data;
         setDataPlans(dataPlans);
       })

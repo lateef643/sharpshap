@@ -61,6 +61,9 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
         <img src={wallet} className="sidebar__links__link__image" alt="wallet icon" />
         <p className="sidebar__links__link__text">My Wallet</p>
         <div className="sidebar__links__link__secondary-links">
+          <NavLink to="/wallet-transfer" className="sidebar__links__link__secondary-links__link">
+            <p>Transfer to CiCO wallet</p>
+          </NavLink>
           <NavLink to="/wallet-log" className="sidebar__links__link__secondary-links__link">
             <p>Wallet Log</p>
           </NavLink>

@@ -18,6 +18,7 @@ import BuyData from "../components/content/services/data/BuyData";
 import RechargeCable from "../components/content/services/cable/RechargeCable";
 import BuyInsurance from "../components/content/services/insurance/BuyInsurance";
 import Profile from "../components/content/profile/Profile";
+import WalletTransfer from "../components/content/wallet/WalletTransfer";
 
 const routes = [
   {
@@ -84,6 +85,10 @@ const routes = [
   {
     path: "/buy-data",
     main: () => <BuyData />
+  },
+  {
+    path: "/wallet-transfer",
+    main: () => <WalletTransfer />
   },
   {
     path: "/recharge-cable",

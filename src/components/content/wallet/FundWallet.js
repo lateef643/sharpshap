@@ -49,7 +49,12 @@ export const FundWallet = ({ changeCurrentPage }) => {
   };
 
   const handleBankDetailsChange = (e) => {
-    const newBankDetails = JSON.parse(e.target.value);
+    let newBankDetails;
+
+    if (e.target.value !== "") {
+      newBankDetails = JSON.parse(e.target.value);
+    }
+    
     setBankDetails(newBankDetails);
   };
 

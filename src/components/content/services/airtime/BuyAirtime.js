@@ -46,6 +46,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
       axios.post(VEND_AIRTIME, payload)
       .then(res => {
         const successPayload = res.data.data;
+        console.log(res.data.data)
 
         setSuccessPayload(successPayload);
         setSuccess(true);

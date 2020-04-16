@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import style from './AmountForm.module.scss';
+import style from './WalletTransfer.module.scss';
 
-const AmountForm = (props) => {
+const WalletTransfer = (props) => {
   const [errors, setErrors] = useState({
     amount: true,
     phoneNumber: true
@@ -56,4 +56,4 @@ const AmountForm = (props) => {
   </div>
 )}
 
-export default AmountForm;
+export default WalletTransfer;
