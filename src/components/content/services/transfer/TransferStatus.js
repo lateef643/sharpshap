@@ -5,7 +5,7 @@ import check from "../../../../assets/images/check.svg";
 import cross from "../../../../assets/images/redCross.svg";
 import styles from './TransferStatus.module.scss';
 
-export const TransferStatus = ({ transactionStatus, transactionCost, amount,
+export const TransferStatus = ({ transactionStatus, total, transactionCost, amount,
 successPayload}) => { 
   return (
     <div className={styles.container}>
@@ -47,7 +47,7 @@ successPayload}) => {
               </div>
               <div>
                 <span><b>Total:</b></span>
-                <span><b>&#8358;{Number(successPayload.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b></span>  
+                <span><b>&#8358;{Number(total).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b></span>  
               </div>
               <div className={styles.link}>
                 <div><Link to="/">&larr; Home</Link></div>

@@ -51,7 +51,6 @@ const Transfer = ({ changeCurrentPage }) => {
 
   const handleOnSubmit = () => {
     setLoading(true);
-    // setErrorText("");
 
     const payload = {
       "first_name" : firstName,
@@ -59,7 +58,7 @@ const Transfer = ({ changeCurrentPage }) => {
       "phone_number" : phone,
       "account_number" : beneficiaryAccountNumber,
       "bank_code" : bankCode,
-      "amount" : amount
+      "amount" : String(amount)
     };
 
     axios.post(DISBURSE_FUNDS, payload)
@@ -75,7 +74,6 @@ const Transfer = ({ changeCurrentPage }) => {
       .catch(err => {
         if (err.response && err.response.status === 403) {
           const errorMessage = err.response.data.message;
-          // setErrorText(errorMessage);
           setLoading(false);  
           setTransactionStatus(false);
           setPage("status");
@@ -84,7 +82,6 @@ const Transfer = ({ changeCurrentPage }) => {
             setLoading(false);
             setTransactionStatus(false);
             setPage("status");
-            // setErrorText('Transaction failed please try again later');
           }, 7000);
         }
       })
@@ -120,6 +117,7 @@ const Transfer = ({ changeCurrentPage }) => {
           successPayload={successPayload}
           transactionStatus={transactionStatus}
           amount={amount}
+          total={total} 
           transactionCost={transactionCost}
       /> 
       : <BankForm
