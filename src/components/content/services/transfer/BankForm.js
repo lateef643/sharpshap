@@ -12,7 +12,6 @@ import FirstBank from "../../../../assets/images/206-2069035_firstbank-logos-fir
 import Union from "../../../../assets/images/ng-ubn-logo.svg";
 import Zenith from "../../../../assets/images/zenith-bank-logo.svg";
 import GTBank from "../../../../assets/images/gtbank_rwanda_logo.svg";
-import bankIcon from "../../../../assets/images/money-svgrepo-com (1).svg";
 import styles from './BankForm.module.scss';
 
 const WithdrawForm = (props) => {
