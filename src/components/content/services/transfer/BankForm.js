@@ -12,7 +12,8 @@ import FirstBank from "../../../../assets/images/206-2069035_firstbank-logos-fir
 import Union from "../../../../assets/images/ng-ubn-logo.svg";
 import Zenith from "../../../../assets/images/zenith-bank-logo.svg";
 import GTBank from "../../../../assets/images/gtbank_rwanda_logo.svg";
-import style from './BankForm.module.scss';
+import bankIcon from "../../../../assets/images/money-svgrepo-com (1).svg";
+import styles from './BankForm.module.scss';
 
 const WithdrawForm = (props) => {
   const banks = banksList;
@@ -66,11 +67,11 @@ const WithdrawForm = (props) => {
   bankImageUrl = bankCode === "044" ? Access : bankCode === "058" ?  GTBank
   : bankCode === "011" ? FirstBank : bankCode === "033" ? UBA 
   : bankCode === "070" ? Fidelity : bankCode === "032" ? Union
-  : bankCode === "057" ? Zenith : "";
+  : bankCode === "057" ? Zenith : Access;
 
   return (
-  <div className={style.container}>
-    <form className={style.form} onSubmit={(e) => {
+  <div className={styles.container}>
+    <form className={styles.form} onSubmit={(e) => {
       e.preventDefault();
 
       const payload = {
@@ -90,8 +91,10 @@ const WithdrawForm = (props) => {
       }
     }} >
 
-    {bankCode !== "" && bankImageUrl !== "" ? <img className={style.image} 
-      src={bankImageUrl} alt="bank logo" /> : undefined}
+    <div className={styles.imageContainer}>
+      <img className={styles.image} src={bankImageUrl} alt="bank logo" />
+    </div>
+    <div className={styles.inputContainer}>
       <label>
         <span>Beneficiary Bank</span>
         <select onChange={(e) =>{
@@ -107,7 +110,7 @@ const WithdrawForm = (props) => {
       <label>
         <span>Amount</span>
         <input type="number" onChange={(e) => {
-          const amount = e.target.value;
+          const amount = Number(e.target.value);
           setAmount(amount);
         }} />      
       </label>
@@ -124,10 +127,10 @@ const WithdrawForm = (props) => {
       </label>
       <label>
         <span>Beneficiary Account Name</span>
-        <input type="text" value={accountName} className={verificationLoading ? style.transparent : style.opaque}
+        <input type="text" value={accountName} className={verificationLoading ? styles.transparent : styles.opaque}
         disabled={true} />
         {verificationLoading ? <VerificationLoader /> : undefined}
-        {accountValidationErrorText ? <p className={style.validationErrorText}>{accountValidationErrorText}</p> : undefined}
+        {accountValidationErrorText ? <p className={styles.validationErrorText}>{accountValidationErrorText}</p> : undefined}
             
       </label>
       <label>
@@ -143,9 +146,10 @@ const WithdrawForm = (props) => {
           const narration = e.target.value;
           setNarration(narration)
         }} />      
-      </label>        
+      </label> 
+      </div>   
       <button type="submit" disabled={!inputValidation}>{loading ? <Loader size="small" color="white" /> :"Continue"}</button>
-    </form>    
+    </form> 
   </div>
 )}
 
