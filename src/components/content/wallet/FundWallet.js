@@ -6,6 +6,9 @@ import { setCurrentPage } from "../../../actions/page";
 import FundWalletStatus from "./FundWalletStatus";
 import style from './FundWallet.module.scss';
 
+const banks = [{"code":"100","id":18,"name":"Suntrust Bank"}, {"code":"044","id":1,"name":"Access Bank"},
+{"code":"070","id":6,"name":"Fidelity Bank"}];
+
 export const FundWallet = ({ changeCurrentPage }) => {
   useEffect(() => {
     changeCurrentPage({
@@ -14,7 +17,7 @@ export const FundWallet = ({ changeCurrentPage }) => {
     });
   }, [changeCurrentPage]);
 
-  const [bankDetails, setBankDetails] = useState("");
+  const [bankCode, setBankCode] = useState("");
   const [tellerNumber, setTellerNumber] = useState("");
   const [amount, setAmount] = useState("");
   const [loading, setLoading] = useState(false);
@@ -24,38 +27,30 @@ export const FundWallet = ({ changeCurrentPage }) => {
     e.preventDefault();
     setLoading(true);
     console.log({
-      bankDetails,
+      bankCode,
       tellerNumber,
       amount
     });
 
     const payload = {
-      bank: bankDetails.bank,
-      accountNumber: bankDetails.accountNumber,
-      tellerNumber,
+      bank: bankCode,
+      teller_number: tellerNumber,
       amount
     }
 
     axios.post('', payload)
       .then(res => {
-        console.log(res);
         setLoading(false);
         setRequestStatus(true);
       })
       .catch(err => {
-        console.log(err);
         setLoading(false);
       })
   };
 
-  const handleBankDetailsChange = (e) => {
-    let newBankDetails;
-
-    if (e.target.value !== "") {
-      newBankDetails = JSON.parse(e.target.value);
-    }
-    
-    setBankDetails(newBankDetails);
+  const handleBankCodeChange = (e) => {
+    let newBankCode = e.target.value;
+    setBankCode(newBankCode);
   };
 
   const handleTellerNumberChange = (e) => {
@@ -65,7 +60,7 @@ export const FundWallet = ({ changeCurrentPage }) => {
 
   const handleAmountChange = (e) => {
     const newAmount = e.target.value;
-    setAmount(newAmount);
+    setAmount(Number(newAmount));
   }
 
   return (
@@ -74,15 +69,15 @@ export const FundWallet = ({ changeCurrentPage }) => {
       <form className={style.form} onSubmit={handleOnSubmit} >
         <label>
           <span>Amount</span>
-          <input type="text" onChange={handleAmountChange} />      
+          <input type="number" onChange={handleAmountChange} />      
         </label> 
         <label>
           <span>Bank</span>
-          <select onChange={handleBankDetailsChange}>   
+          <select onChange={handleBankCodeChange}>   
             <option value="">Select Bank</option>
-            <option value={JSON.stringify({bank: "Suntrust bank", accountNumber: "0012345678" })}>Suntrust Bank  0012345678 CicoServe Payment</option>
-            <option value={JSON.stringify({bank: "Access bank", accountNumber: "0012345678" })}>Access Bank 0012345678 CicoServe Payment</option>
-            <option value={JSON.stringify({bank: "Fidelity bank", accountNumber: "0012345678" })}>Fidelity Bank 0012345678 CicoServe Payment</option>
+            {banks.map(bank => {
+              return <option value={bank.code} key={bank.code}>{bank.name}  0012345678 CicoServe Payment</option>
+            })}
           </select>
         </label>
         <label>

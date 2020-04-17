@@ -9,7 +9,7 @@ import { VALIDATE_MULTICHOICE_CUSTOMER } from "../../../../store/api/constants";
 import { VEND_STARTIMES } from "../../../../store/api/constants";
 import { VEND_MULTICHOICE } from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
-import CablePaymentStatus from "./CablePaymentStatus";
+import RechargeCableStatus from "./RechargeCableStatus";
 import Loader from "../../../partials/Loader";
 import style from './RechargeCable.module.scss';
 
@@ -197,7 +197,7 @@ export const RechargeCable = ({ changeCurrentPage }) => {
   return (
   <div className={style.container}>
     {transactionStatus ? 
-    <CablePaymentStatus /> :
+    <RechargeCableStatus /> :
     <form className={style.form} onSubmit={handleOnSubmit} >
       {loading ? <p className={style.pending}>Please wait while we process your transaction...</p> : undefined}
       {error ? <p className={`${style.status} ${style.error}`}>{error}</p> : undefined}

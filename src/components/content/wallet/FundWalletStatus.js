@@ -2,7 +2,6 @@ import React from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import check from "../../../assets/images/check.svg";
-// import cross from "../../../../assets/images/redCross.svg";
 import styles from './FundWalletStatus.module.scss';
 
 export const FundWalletStatus = ({ transactionStatus, transactionCost, amount,
@@ -12,7 +11,7 @@ successPayload}) => {
       <div className={styles.sectionContainer} >
         <div className={styles.imageContainer}>
           <img src={check} alt="checkmark" />
-          <p>Transaction Successful</p>
+          <p>Funding request successful</p>
         </div>
         <div className={styles.contentContainer}>
           <div className={styles.content}>
