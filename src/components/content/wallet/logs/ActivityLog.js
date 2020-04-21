@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from "react";
 import axios from "axios";
-import ListLoader from "../../partials/ListLoader";
+import ListLoader from "../../../partials/ListLoader";
 import { connect } from "react-redux";
 import style from './ActivityLog.module.scss';
-import { setCurrentPage } from "../../../actions/page";
+import { setCurrentPage } from "../../../../actions/page";
 
 export const ActivityLog = ({ changeCurrentPage }) => {
   const [transactions, setTransactions] = useState([]);

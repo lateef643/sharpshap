@@ -1,9 +1,9 @@
 import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import Loader from "../../../partials/Loader";
-import style from './TransferSummary.module.scss';
+import style from './FundWalletSummary.module.scss';
 
-export const TransferSummary = ({ phone, bank, accountName, loading, amount, accountNumber, total, transactionCost, handleOnSubmit, handleSetPage }) => {
+export const FundWalletSummary = ({ tellerNumber, amount, bank, accountName, accountNumber, loading, handleOnSubmit }) => {
   return (
     <div className={style.container}>
       <div className={style.paymentContainer} >
@@ -14,10 +14,6 @@ export const TransferSummary = ({ phone, bank, accountName, loading, amount, acc
           {loading ? <p className={style.pending}>Please wait while your transaction is processing...</p> : undefined}
         </div>
         <div>
-          <span>Account Name:</span>
-          <span>{accountName}</span>
-        </div>
-        <div>
           <span>Bank:</span>
           <span>{bank}</span>
         </div>
@@ -26,20 +22,16 @@ export const TransferSummary = ({ phone, bank, accountName, loading, amount, acc
           <span>{accountNumber}</span>
         </div>
         <div>
-          <span>Phone Number:</span>
-          <span>{phone}</span>
+          <span>Account Name:</span>
+          <span>{accountName}</span>
         </div>
         <div>
-          <span>Amount:</span>
-          <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
-        </div>
-        <div>
-          <span>Transaction cost:</span>
-          <span>&#8358;{Number(transactionCost).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
-        </div>
+          <span>Teller Number:</span>
+          <span>{tellerNumber}</span>
+        </div>       
         <div className={style.total}>    
-          <span>Total</span>
-          <span>&#8358;{Number(total).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span> 
+          <span>Amount:</span>
+          <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span> 
         </div> 
         <button onClick={(e) => {
           e.preventDefault();
@@ -49,4 +41,4 @@ export const TransferSummary = ({ phone, bank, accountName, loading, amount, acc
     </div>
 )};
 
-export default TransferSummary;
+export default FundWalletSummary;

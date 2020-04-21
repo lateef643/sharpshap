@@ -20,7 +20,7 @@
         justify-content: center;
         align-items: center;
         flex: 0 0 5%;
-        margin-bottom: 20px;
+        margin-bottom: 2rem;
   
         img {
           position: relative;
@@ -47,7 +47,7 @@
           div {
             flex: 0 0 15%;
             height: 100%;
-            margin: 8px;
+            margin: .8rem;
             display: flex;
             flex-direction: row;
             justify-content: space-between;
@@ -56,13 +56,17 @@
             span {
               display: block;
             }
-          }   
+          } 
+          
+          .total {
+            font-size: 1.55rem;
+          }
           
           .link {
             flex: 0 0 10%;
             display: flex;
             position: relative;
-            margin-top: 20px;
+            margin-top: 2rem;
             flex-direction: row;
             justify-content: space-between;
             text-align: left;
@@ -80,15 +84,15 @@
 
         .failed {
           width: 85%;
-          line-height: 25px;
+          line-height: 2.5rem;
           font-size: 1.45rem;
           margin: 2rem auto 0 auto;
           text-align: center;
 
           div {
             position: relative;
-            top: 170px;
-            right: 20px;
+            top: 17rem;
+            right: 2rem;
 
             a {
               text-decoration: none;

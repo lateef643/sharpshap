@@ -5,6 +5,7 @@ import Loader from "../../../partials/Loader";
 import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_AIRTIME } from "../../../../store/api/constants";
+import airtime from "../../../../assets/images/phone-svgrepo-com.svg";
 import style from './BuyAirtime.module.scss';
 
 export const BuyAirtime = ({ changeCurrentPage }) => {
@@ -106,28 +107,32 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
   <div className={style.container}>
     {success ? <SuccessfulTransaction successPayload={successPayload} /> : 
     <form className={style.form} onSubmit={handleOnSubmit}>
-      {loading ? <p className={style.pending}>Please wait while we process your transaction...</p> : undefined}
-      {error ? <p className={`${style.status} ${style.error}`}>{error}</p> : undefined}
-      <label>
-        <span>Network</span>
-        <select onChange={handleTelcoChange} className={validationError.telco ? style.outlineRed : style.outlineGrey}>
-          <option value="">Select Network</option>
-          {telcoList.map((telco, index) => {
-            return <option value={telco.code} key={index}>{telco.name}</option>
-          })}
-        </select>  
-        {validationError.telco ? <p className={style.validationErrorText}>Please select network</p> : undefined}
-      </label>
-      <label>
-        <span>Amount</span>
-        <input type="number" onChange={handleAmountChange} className={validationError.amount ? style.outlineRed : style.outlineGrey} />   
-        {validationError.amount ? <p className={style.validationErrorText}>Please enter amount</p> : undefined}
-      </label>    
-      <label>
-        <span>Phone Number</span>
-        <input type="text" onChange={handlePhoneChange} className={validationError.phone ? style.outlineRed : style.outlineGrey} />  
-        {validationError.phone ? <p className={style.validationErrorText}>Please enter phone number</p> : undefined}
-      </label> 
+      <div className={style.imageContainer}>
+        <img src={airtime} className={style.image} />
+      </div>
+      <div className={style.inputContainer}>
+        <label>
+          <span>Network</span>
+          <select onChange={handleTelcoChange} className={validationError.telco ? style.outlineRed : style.outlineGrey}>
+            <option value="">Select Network</option>
+            {telcoList.map((telco, index) => {
+              return <option value={telco.code} key={index}>{telco.name}</option>
+            })}
+          </select>  
+          {validationError.telco ? <p className={style.validationErrorText}>Please select network</p> : undefined}
+        </label>
+        <label>
+          <span>Amount</span>
+          <input type="number" onChange={handleAmountChange} className={validationError.amount ? style.outlineRed : style.outlineGrey} />   
+          {validationError.amount ? <p className={style.validationErrorText}>Please enter amount</p> : undefined}
+        </label>    
+        <label>
+          <span>Phone Number</span>
+          <input type="text" onChange={handlePhoneChange} className={validationError.phone ? style.outlineRed : style.outlineGrey} />  
+          {validationError.phone ? <p className={style.validationErrorText}>Please enter phone number</p> : undefined}
+        </label>
+      </div>
+      
       <button type="submit">{loading ?  
         <Loader size="small" color="white" position="center" /> : "Submit"}
       </button>

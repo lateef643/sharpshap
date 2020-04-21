@@ -12,10 +12,12 @@ export const PayElectricity = ({ changeCurrentPage }) => {
   });
 
   const [vendor, setVendor] = useState("");
+  const [vendorLogo, setVendorLogo] = useState("");
   const [page, setPage] = useState("");
 
-  const handleSetVendor = (vendor) => {
+  const handleSetVendor = (vendor, vendorLogo) => {
     setVendor(vendor);
+    setVendorLogo(vendorLogo);
   };
 
   const handleSetPage = (page) => {
@@ -25,7 +27,7 @@ export const PayElectricity = ({ changeCurrentPage }) => {
   return (
   <div className={style.container}>
      {page === "form" ? <PayElectricityForm 
-      vendorImage={vendor}
+      vendorImage={vendorLogo}
     />
   : <EnergyVendorsList
     handleSetVendor={handleSetVendor}

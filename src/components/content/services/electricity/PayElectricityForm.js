@@ -40,23 +40,27 @@ const PayElectricityForm = (props) => {
   return (
   <div className={style.container}>
     <form className={style.form} onSubmit={handleOnSubmit} >
-    <img src={props.vendorImage} className={style.image} alt="Vendor's logo" />
-      <label>
-        <span>Meter Number</span>
-        <input type="text" onChange={handleMeterNumberChange} />      
-      </label>
-      <label>
-        <span>Payment Plan</span>
-        <input type="text" onChange={handlePlanChange} />      
-      </label>
-      <label>
-        <span>Prepaid</span>
-        <input type="text" onChange={handlePrepaidChange} />      
-      </label>    
-      <label>
-        <span>Amount</span>
-        <input type="text" onChange={handleAmountChange} />      
-      </label>        
+      <div className={style.imageContainer}>
+        <img src={props.vendorImage} className={style.image} alt="Vendor's logo" />        
+      </div>
+      <div className={style.inputContainer}>
+        <label>
+          <span>Meter Number</span>
+          <input type="text" onChange={handleMeterNumberChange} />      
+        </label>
+        <label>
+          <span>Payment Plan</span>
+          <input type="text" onChange={handlePlanChange} />      
+        </label>
+        <label>
+          <span>Prepaid</span>
+          <input type="text" onChange={handlePrepaidChange} />      
+        </label>    
+        <label>
+          <span>Amount</span>
+          <input type="text" onChange={handleAmountChange} />      
+        </label>         
+      </div>
       <button type="submit">Submit</button>
     </form>    
   </div>

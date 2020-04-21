@@ -7,10 +7,10 @@ import Container from "../components/partials/Container";
 import AddUser from "../components/content/users/AddUser";
 import ListUsers from "../components/content/users/ListUsers";
 import NewTransaction from "../components/content/transactions/NewTransaction";
-import FundWallet from "../components/content/wallet/FundWallet";
-import WalletLog from "../components/content/wallet/WalletLog";
+import FundWallet from "../components/content/wallet/fundWallet/FundWallet";
+import WalletLog from "../components/content/wallet/logs/WalletLog";
 import Transfer from "../components/content/services/transfer/Transfer";
-import ActivityLog from "../components/content/wallet/ActivityLog";
+import ActivityLog from "../components/content/wallet/logs/ActivityLog";
 import SuccessfulTransaction from "../components/shared/SuccessfulTransaction";
 import BuyAirtime from "../components/content/services/airtime/BuyAirtime";
 import PayElectricity from "../components/content/services/electricity/PayElectricity";
@@ -18,7 +18,7 @@ import BuyData from "../components/content/services/data/BuyData";
 import RechargeCable from "../components/content/services/cable/RechargeCable";
 import BuyInsurance from "../components/content/services/insurance/BuyInsurance";
 import Profile from "../components/content/profile/Profile";
-import WalletTransfer from "../components/content/wallet/WalletTransfer";
+import WalletTransfer from "../components/content/wallet/walletTransfer/WalletTransfer";
 
 const routes = [
   {

@@ -2,14 +2,14 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import Card from "../shared/Card";
 import style from "./Dashboard.module.scss";
-import cabletv from "../../assets/images/cable-tv-sign-with-monitor.svg";
-import power from "../../assets/images/electricity-flash-svgrepo-com.svg";
+import cabletv from "../../assets/images/cabletv.svg";
+import power from "../../assets/images/electricity.svg";
 import transfer from "../../assets/images/transfer.svg";
 import data from "../../assets/images/smartphone-data.svg";
 import insurance from "../../assets/images/surface1.svg";
-import airtime from "../../assets/images//phone-svgrepo-com.svg";
-import books from "../../assets/images/books-svgrepo-com.svg";
-import wallet from "../../assets/images/money-wallet-svgrepo-com.svg";
+import airtime from "../../assets/images/phone-svgrepo-com.svg";
+import books from "../../assets/images/education.svg";
+import wallet from "../../assets/images/wallet.svg";
 import { setCurrentPage } from "../../actions/page";
 
 export const Dashboard = ({ changeCurrentPage }) => {

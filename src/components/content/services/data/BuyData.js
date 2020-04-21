@@ -6,6 +6,7 @@ import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import { GET_DATA_PLANS } from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_DATA } from "../../../../store/api/constants";
+import data from "../../../../assets/images/smartphone-data.svg";
 import style from './BuyData.module.scss';
 
 const BuyData = ({ changeCurrentPage }) => {
@@ -139,38 +140,40 @@ const BuyData = ({ changeCurrentPage }) => {
   <div className={style.container}>
     {success ? <SuccessfulTransaction successPayload={successPayload} /> :
     <form className={style.form} onSubmit={handleOnSubmit} >
-      {loading ? <p className={style.pending}>Please wait while we process your transaction...</p> : undefined}
-      {error ? <p className={`${style.status} ${style.error}`}>{error}</p> : undefined}
-      {success ? <p className={`${style.status} ${style.success}`}>{success}</p> : undefined}
-      <label>
-        <span>Network</span>
-        <select onChange={handleTelcoChange} className={validationError.telco ? style.outlineRed : style.outlineGrey} >
-          <option value="">Select Network</option>
-          {telcoList.map((telco, index) => {
-            return <option value={telco.code} key={index}>{telco.name}</option>
-          })}
-        </select>  
-        {validationError.telco ? <p className={style.validationErrorText}>Please select network</p> : undefined}
-      </label>
-      <label>
-        <span>Phone Number</span>
-        <input type="text" onChange={handlePhoneChange} className={validationError.phone ? style.outlineRed : style.outlineGrey} />   
-        {validationError.phone ? <p className={style.validationErrorText}>Please enter phone number</p> : undefined}
-      </label>    
-      <label>
-        <span>Data Plan</span>
-        <select onChange={handleSelectedDataPlanIdChange} className={validationError.selectedDataPlanId ? style.outlineRed : style.outlineGrey} >
-          <option value="">Select Data Plan</option>
-          {dataPlans.map((plan, index) => {
-            return <option value={plan.productId} key={index}>{plan.databundle}</option>
-          })}
-        </select> 
-        {validationError.selectedDataPlanId ? <p className={style.validationErrorText}>Please select data plan</p> : undefined}
-      </label> 
-      <label>
-        <span>Amount</span>
-        <input type="text" disabled={true} value={amount} />
-      </label>
+      <div className={style.imageContainer}>
+        <img src={data} className={style.image} />
+      </div>
+      <div className={style.inputContainer}>
+        <label>
+          <span>Network</span>
+          <select onChange={handleTelcoChange} className={validationError.telco ? style.outlineRed : style.outlineGrey} >
+            <option value="">Select Network</option>
+            {telcoList.map((telco, index) => {
+              return <option value={telco.code} key={index}>{telco.name}</option>
+            })}
+          </select>  
+          {validationError.telco ? <p className={style.validationErrorText}>Please select network</p> : undefined}
+        </label>
+        <label>
+          <span>Phone Number</span>
+          <input type="text" onChange={handlePhoneChange} className={validationError.phone ? style.outlineRed : style.outlineGrey} />   
+          {validationError.phone ? <p className={style.validationErrorText}>Please enter phone number</p> : undefined}
+        </label>    
+        <label>
+          <span>Data Plan</span>
+          <select onChange={handleSelectedDataPlanIdChange} className={validationError.selectedDataPlanId ? style.outlineRed : style.outlineGrey} >
+            <option value="">Select Data Plan</option>
+            {dataPlans.map((plan, index) => {
+              return <option value={plan.productId} key={index}>{plan.databundle}</option>
+            })}
+          </select> 
+          {validationError.selectedDataPlanId ? <p className={style.validationErrorText}>Please select data plan</p> : undefined}
+        </label> 
+        <label>
+          <span>Amount</span>
+          <input type="text" disabled={true} value={amount} />
+        </label>
+      </div>
       <button type="submit">{loading ?  
         <Loader size="small" color="white" position="center" /> : "Submit"}
       </button>

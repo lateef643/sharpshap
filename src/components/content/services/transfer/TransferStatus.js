@@ -6,7 +6,7 @@ import cross from "../../../../assets/images/redCross.svg";
 import styles from './TransferStatus.module.scss';
 
 export const TransferStatus = ({ transactionStatus, total, transactionCost, amount,
-successPayload}) => { 
+successData}) => { 
   return (
     <div className={styles.container}>
       <div className={styles.sectionContainer} >
@@ -19,23 +19,23 @@ successPayload}) => {
             <div>
               <div>
                 <span>Payment Reference:</span>
-                <span>{successPayload.payment_reference}</span>  
+                <span>{successData.payment_reference}</span>  
               </div>
               <div>
                 <span>Beneficiary Name:</span>
-                <span>{successPayload.beneficiary_account_name}</span>  
+                <span>{successData.beneficiary_account_name}</span>  
               </div>
               <div>
                 <span>Beneficiary Account:</span>
-                <span>{successPayload.beneficiary_account_number}</span>  
+                <span>{successData.beneficiary_account_number}</span>  
               </div>
               <div>
                 <span>Narration:</span>
-                <span>{successPayload.narration}</span>  
+                <span>{successData.narration}</span>  
               </div>
               <div>
                 <span>Date:</span>
-                <span>{successPayload.narration}</span>  
+                <span>{successData.narration}</span>  
               </div>
               <div>
                 <span>Amount:</span>
@@ -45,7 +45,7 @@ successPayload}) => {
                 <span>Convenience Fee:</span>
                 <span>&#8358;{Number(transactionCost).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>  
               </div>
-              <div>
+              <div className={styles.total}>
                 <span><b>Total:</b></span>
                 <span><b>&#8358;{Number(total).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b></span>  
               </div>

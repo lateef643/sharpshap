@@ -2,7 +2,7 @@
   padding-top: 3rem;
 
   > .form {
-    height: 45.8rem;
+    height: 44.8rem;
     width: 44.2rem;
     margin: 0 auto;
     box-shadow: 0px 3px 6px #00000029;
@@ -28,7 +28,7 @@
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
-      flex: 0 0 180px;
+      flex: 0 0 280px;
       margin: 0 auto;
 
     > label {
@@ -50,7 +50,7 @@
       }
   
       input, select {
-        width: 35.5rem;
+        width: 36.5rem;
         height: 3.7rem;
         border-radius: 5px;
         border: 1px solid #afafaf;
@@ -93,7 +93,7 @@
   
     button {
       font-family: 'Lato', sans-serif;
-      width: 35.5rem;
+      width: 36.5rem;
       margin: 0 auto;
       margin-top: 2rem;
       font-size: 1.4rem;
@@ -118,5 +118,3 @@
     }
   }
 }
-
-  

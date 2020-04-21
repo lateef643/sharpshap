@@ -16,6 +16,8 @@ if (token) {
   delete axios.defaults.headers.common['Authorization'];
 };
 
+axios.defaults.timeout = 180000;
+
 export const App = () => {
   return (
     <Provider store={store}>

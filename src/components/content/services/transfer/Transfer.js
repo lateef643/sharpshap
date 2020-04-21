@@ -10,6 +10,8 @@ import { DISBURSE_FUNDS } from "../../../../store/api/constants";
 import styles from './Transfer.module.scss';
 
 const Transfer = ({ changeCurrentPage }) => {
+  let renderedComponent;
+  const TRANSACTION_COST = 35;
   const [page, setPage] = useState("");
   const [bankCode, setBankCode] = useState("");
   const [beneficiaryBankName, setBeneficiaryBankName] = useState("");
@@ -17,14 +19,12 @@ const Transfer = ({ changeCurrentPage }) => {
   const [beneficiaryAccountName, setBeneficiaryAccountName] = useState("");
   const [narration, setNarration] = useState("");
   const [amount, setAmount] = useState("");
-  const [transactionCost, setTransactionCost] = useState(35);
   const [total, setTotal] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
   const [loading, setLoading] = useState(false);
-  const [errorText, setErrorText] = useState("");
-  const [successPayload, setSuccessPayload] = useState(null);
+  const [successData, setSuccessData] = useState(null);
   const [transactionStatus, setTransactionStatus] = useState(undefined);
 
   useEffect(() => {
@@ -45,6 +45,12 @@ const Transfer = ({ changeCurrentPage }) => {
     });
   }, [changeCurrentPage]);
 
+  const getTransactionDate = (date) => {
+    const dateString = date.toString();
+    const index = dateString.search("GMT");
+    return dateString.slice(0, 24);
+  };
+
   const handleSetPage = (page) => {
     setPage(page);
   };
@@ -63,10 +69,12 @@ const Transfer = ({ changeCurrentPage }) => {
 
     axios.post(DISBURSE_FUNDS, payload)
       .then(res => {
-        const successPayload = res.data.data.data.provider_response;
+        const successData = res.data.data.data.provider_response;
         const status = res.data.data.status;
+        const date = new Date();
+        const transactionDate = getTransactionDate(date);
 
-        setSuccessPayload({ ...successPayload, status, transactionCost, total });
+        setSuccessData({ ...successData, status, transactionCost: TRANSACTION_COST, total, date: transactionDate });
         setLoading(false);
         setTransactionStatus(true);
         setPage("status");
@@ -94,35 +102,49 @@ const Transfer = ({ changeCurrentPage }) => {
     setBeneficiaryAccountNumber(accountNumber);
     setFirstName(firstName);
     setLastName(lastName);    
-    setAmount(Number(amount));
+    setAmount(parseInt(amount));
     setPhone(phone);
     setNarration(narration);
-    setTotal(amount + transactionCost);
+    setTotal(amount + TRANSACTION_COST);
   };
+
+  switch(page) {
+    case("summary"):
+      renderedComponent = 
+      <TransferSummary 
+        loading={loading}
+        phone={phone} 
+        amount={amount} 
+        transactionCost={TRANSACTION_COST}
+        total={total} 
+        accountNumber={beneficiaryAccountNumber}
+        accountName={beneficiaryAccountName}
+        bank={beneficiaryBankName}
+        handleOnSubmit={handleOnSubmit} />;
+      break;
+
+    case("status"):
+      renderedComponent = 
+      <TransferStatus
+        successData={successData}
+        transactionStatus={transactionStatus}
+        amount={amount}
+        total={total} 
+        transactionCost={TRANSACTION_COST} />;
+      break;
+
+    default: 
+      renderedComponent = 
+      <BankForm
+        handleSetPage={handleSetPage}
+        handleContinue={handleContinue} 
+        />;
+      break;
+  }
 
   return (
     <div className={styles.container}>
-      {page === "summary" ? <TransferSummary 
-          loading={loading}
-          phone={phone} 
-          amount={amount} 
-          transactionCost={transactionCost}
-          total={total} 
-          errorText={errorText}
-          accountNumber={beneficiaryAccountNumber}
-          accountName={beneficiaryAccountName}
-          bank={beneficiaryBankName}
-          handleOnSubmit={handleOnSubmit} />
-      : page === "status"? <TransferStatus
-          successPayload={successPayload}
-          transactionStatus={transactionStatus}
-          amount={amount}
-          total={total} 
-          transactionCost={transactionCost}
-      /> 
-      : <BankForm
-      handleSetPage={handleSetPage}
-      handleContinue={handleContinue} />}
+      {renderedComponent}
     </div>
   );
 };

@@ -11,6 +11,7 @@ import { VEND_MULTICHOICE } from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
 import RechargeCableStatus from "./RechargeCableStatus";
 import Loader from "../../../partials/Loader";
+import cable from "../../../../assets/images/cabletv.svg"
 import style from './RechargeCable.module.scss';
 
 export const RechargeCable = ({ changeCurrentPage }) => {
@@ -199,53 +200,61 @@ export const RechargeCable = ({ changeCurrentPage }) => {
     {transactionStatus ? 
     <RechargeCableStatus /> :
     <form className={style.form} onSubmit={handleOnSubmit} >
+      <div className={style.imageContainer}>
+        <img className={style.image} src={cable} />
+      </div>
       {loading ? <p className={style.pending}>Please wait while we process your transaction...</p> : undefined}
-      {error ? <p className={`${style.status} ${style.error}`}>{error}</p> : undefined}
-      {success ? <p className={`${style.status} ${style.success}`}>{success}</p> : undefined}
-      <label>
-        <span>Provider</span>
-        <select onChange={handleProviderChange} className={validationError.provider ? style.outlineRed : style.outlineGrey}>
-        <option value="">Select Provider</option>
-        {cableTvProviders.map((cable, index) => {
-          return <option value={cable.name} key={index}>{cable.name}</option>
-        })}
-        </select>  
-        {validationError.provider ? <p className={style.validationErrorText}>Please select provider</p> : undefined}
-      </label>  
-      <label>
-        <span>Packages</span>
-        <select onChange={handlePlanChange} className={validationError.code ? style.outlineRed : style.outlineGrey}>
-        <option value="">Select Plan</option>
-        {plans.map((plan, index) => {
-          return <option value={JSON.stringify(plan)} key={index}>{plan.name}</option>
-        })}
-        </select>
-        {validationError.code ? <p className={style.validationErrorText}>Please select plan</p> : undefined}
-      </label>
-      <label>
-        <span>Smart Card Number</span>
-        <input type="text" onChange={handleSmartCardNumberChange} className={validationError.smartCardNumber ? style.outlineRed : style.outlineGrey}/>      
-        {validationError.smartCardNumber ? <p className={style.validationErrorText}>Please enter smart card number</p> : undefined}
-      </label>
-      <label>
-        <span>Customer Name</span>
-        <input type="text" value={customerInfo.name} disabled={true} /> 
-        {!customerInfo.status && customerInfo.message ? <p className={style.validationErrorText}>Customer validation failed</p> : undefined}
-      </label>  
-      <label>
-        <span>Plan Duration</span>
-        <select onChange={handlePlanDurationChange} className={validationError.planDuration ? style.outlineRed : style.outlineGrey}>
-        <option>Select Duration</option>
-        {plan.availablePricingOptions ? plan.availablePricingOptions.map((plan, index) => {
-          return <option value={plan.monthsPaidFor} key={index}>{plan.monthsPaidFor} months</option>
-        }) : undefined}
-        </select>  
-        {validationError.planDuration ? <p className={style.validationErrorText}>Please select plan duration</p> : undefined}
-      </label> 
-      <label>
-        <span>Amount</span>
-        <input type="text" value={amount} onChange={handlePlanAmountChange} />      
-      </label>  
+      <div className={style.inputContainer}>
+        <label>
+          <span>Provider</span>
+          <select onChange={handleProviderChange} className={validationError.provider ? style.outlineRed : style.outlineGrey}>
+          <option value="">Select Provider</option>
+          {cableTvProviders.map((cable, index) => {
+            return <option value={cable.name} key={index}>{cable.name}</option>
+          })}
+          </select>  
+          {validationError.provider ? <p className={style.validationErrorText}>Please select provider</p> : undefined}
+        </label>  
+        <label>
+          <span>Packages</span>
+          <select onChange={handlePlanChange} className={validationError.code ? style.outlineRed : style.outlineGrey}>
+          <option value="">Select Plan</option>
+          {plans.map((plan, index) => {
+            return <option value={JSON.stringify(plan)} key={index}>{plan.name}</option>
+          })}
+          </select>
+          {validationError.code ? <p className={style.validationErrorText}>Please select plan</p> : undefined}
+        </label>
+        <label>
+          <span>Smart Card Number</span>
+          <input type="text" onChange={handleSmartCardNumberChange} className={validationError.smartCardNumber ? style.outlineRed : style.outlineGrey}/>      
+          {validationError.smartCardNumber ? <p className={style.validationErrorText}>Please enter smart card number</p> : undefined}
+        </label>
+        <label>
+          <span>Customer Name</span>
+          <input type="text" value={customerInfo.name} disabled={true} /> 
+          {!customerInfo.status && customerInfo.message ? <p className={style.validationErrorText}>Customer validation failed</p> : undefined}
+        </label>  
+        <label>
+          <span>Phone Number</span>
+          <input type="text" value={customerInfo.name} disabled={true} /> 
+          {!customerInfo.status && customerInfo.message ? <p className={style.validationErrorText}>Customer validation failed</p> : undefined}
+        </label> 
+        <label>
+          <span>Plan Duration</span>
+          <select onChange={handlePlanDurationChange} className={validationError.planDuration ? style.outlineRed : style.outlineGrey}>
+          <option>Select Duration</option>
+          {plan.availablePricingOptions ? plan.availablePricingOptions.map((plan, index) => {
+            return <option value={plan.monthsPaidFor} key={index}>{plan.monthsPaidFor} months</option>
+          }) : undefined}
+          </select>  
+          {validationError.planDuration ? <p className={style.validationErrorText}>Please select plan duration</p> : undefined}
+        </label> 
+        <label>
+          <span>Amount</span>
+          <input type="text" value={amount} onChange={handlePlanAmountChange} />      
+        </label>          
+      </div>
       <button type="submit">{loading ?  
         <Loader size="small" color="white" position="center" /> : "Submit"}
       </button>

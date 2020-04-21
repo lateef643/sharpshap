@@ -79,6 +79,12 @@ export const DEBIT_AGENT_WALLET = `${path}/wallets/admin`;
 //search wallet
 export const SEARCH_WALLET = `${path}/wallets/search`;
 
+//agent wallet transfer
+export const WALLET_TRANSFER = `${path}/wallets/transfer`;
+
+//agent fund wallet request
+export const FUND_WALLET_REQUEST = `${path}/fund-requests`;
+
 /////TRANSACTIONS/////
 
 //get agent transaction history - GET
