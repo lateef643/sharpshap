@@ -73,6 +73,7 @@ export const FundWallet = ({ changeCurrentPage }) => {
         setAccountName={setAccountName}
         setAccountNumber={setAccountNumber}
         setBank={setBank}
+        bank={bank}
       />
       break;
     case "summary":

@@ -3,7 +3,7 @@ import Loader from "../../../partials/Loader";
 import wallet from "../../../../assets/images/wallet.svg";
 import styles from './FundWalletRequestForm.module.scss';
 
-export const FundWalletRequestForm = ({handleAmountChange, setComponentToRender, setAccountName, setBank, setAccountNumber, tellerNumber, amount, setBankCode, handleTellerNumberChange, bankCode, loading}) => {
+export const FundWalletRequestForm = ({handleAmountChange, bank, setComponentToRender, setAccountName, setBank, setAccountNumber, tellerNumber, amount, setBankCode, handleTellerNumberChange, bankCode, loading}) => {
   const banks = [{"code":"100","id":18,"name":"Suntrust Bank","account": "0012345678"}, {"code":"044","id":1,"name":"Access Bank","account": "0012345678"},
   {"code":"070","id":6,"name":"Fidelity Bank","account": "0012345678"}];
 
@@ -24,8 +24,7 @@ export const FundWalletRequestForm = ({handleAmountChange, setComponentToRender,
           <label>
             <span>Bank</span>
             <select>
-              <option>{bankCode === "044" ? "Access Bank" : bankCode === "100" ? "Suntrust Bank" : bankCode === "70" 
-              ? "Fidelity Bank" : "" }</option>
+              <option>{bank}</option>
             </select>
             <div>
               {banks.map(bank => {
