@@ -20,7 +20,7 @@
         justify-content: center;
         align-items: center;
         flex: 0 0 5%;
-        margin-bottom: 2rem;
+        margin-bottom: 1.5rem;
   
         img {
           position: relative;
@@ -45,7 +45,7 @@
             justify-content: space-between; 
 
           div {
-            flex: 0 0 15%;
+            flex: 0 0 10%;
             height: 100%;
             margin: .8rem;
             display: flex;
@@ -60,16 +60,21 @@
           
           .total {
             font-size: 1.55rem;
+            padding: 8px 0;
+            border: 1px solid #7070709f;
+            border-left: 0;
+            border-right: 0;
           }
           
           .link {
-            flex: 0 0 10%;
+            flex: 0 0 15%;
             display: flex;
             position: relative;
-            margin-top: 2rem;
+            bottom: 1rem;
             flex-direction: row;
             justify-content: space-between;
             text-align: left;
+            padding: 0;
 
             div {
               flex: 0 0 25%;

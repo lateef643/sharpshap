@@ -22,6 +22,10 @@ successData}) => {
                 <span>{successData.payment_reference}</span>  
               </div>
               <div>
+                <span>Beneficiary Bank:</span>
+                <span>{successData.bank}</span>  
+              </div>
+              <div>
                 <span>Beneficiary Name:</span>
                 <span>{successData.beneficiary_account_name}</span>  
               </div>
@@ -30,12 +34,8 @@ successData}) => {
                 <span>{successData.beneficiary_account_number}</span>  
               </div>
               <div>
-                <span>Narration:</span>
-                <span>{successData.narration}</span>  
-              </div>
-              <div>
                 <span>Date:</span>
-                <span>{successData.narration}</span>  
+                <span>{successData.date}</span>  
               </div>
               <div>
                 <span>Amount:</span>

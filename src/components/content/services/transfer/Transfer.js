@@ -74,7 +74,7 @@ const Transfer = ({ changeCurrentPage }) => {
         const date = new Date();
         const transactionDate = getTransactionDate(date);
 
-        setSuccessData({ ...successData, status, transactionCost: TRANSACTION_COST, total, date: transactionDate });
+        setSuccessData({ ...successData, status, transactionCost: TRANSACTION_COST, total, date: transactionDate, bank: beneficiaryBankName });
         setLoading(false);
         setTransactionStatus(true);
         setPage("status");
