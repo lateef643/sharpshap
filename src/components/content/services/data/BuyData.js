@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+import BuyDataForm from "./BuyDataForm";
+import BuyDataSummary from "./BuyDataSummary";
+import BuyDataStatus from "./BuyDataStatus";
 import Loader from "../../../partials/Loader";
-import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
 import { GET_DATA_PLANS } from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_DATA } from "../../../../store/api/constants";
@@ -10,38 +12,20 @@ import data from "../../../../assets/images/smartphone-data.svg";
 import style from './BuyData.module.scss';
 
 const BuyData = ({ changeCurrentPage }) => {
-  const telcoList = 
-    [{code: "D01D", id: 5, name: "Airtel", type: "Data"},
-    {code: "D02D", id: 6, name: "9 Mobile", type: "Data"},
-    {code: "D03D", id: 7, name: "Globacom", type: "Data"},
-    {code: "D04D", id: 8, name: "MTN", type: "Data"}];
-    
+  let renderedComponent;
+  const [componentToRender, setComponentToRender] = useState("form");
   const [dataPlans, setDataPlans] = useState([]);
   const [telco, setTelco] = useState("");
+  const [telcoName, setTelcoName] = useState("");
+  const [selectedDataPlanName, setSelectedDataPlanName] = useState("");
+  const [selectedDataPlanValidity, setSelectedDataPlanValidity] = useState("");
   const [selectedDataPlanId, setSelectedDataPlanId] = useState("");
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
-  const [error, setError] = useState(undefined);
-  const [success, setSuccess] = useState(undefined);
-  const [successPayload, setSuccessPayload] = useState(null);
+  const [transactionStatus, setTransactionStatus] = useState(false);
+  const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState({});
-
-  useEffect(() => {
-    const payload = {
-      telco
-    };
-
-    axios.post(GET_DATA_PLANS, payload)
-      .then(res => {
-        console.log(res);
-        const dataPlans = res.data.data;
-        setDataPlans(dataPlans);
-      })
-      .catch(err => {
-        console.log(err.response);
-      })
-  }, [telco]);
 
   useEffect(() => {
     changeCurrentPage({
@@ -50,9 +34,7 @@ const BuyData = ({ changeCurrentPage }) => {
     });
   }, [changeCurrentPage]);
 
-  const handleOnSubmit = (e) => {
-    e.preventDefault();
-
+  const handleOnSubmit = () => {
     setLoading(true);
 
     const payload = {
@@ -64,33 +46,24 @@ const BuyData = ({ changeCurrentPage }) => {
     if (telco && amount && phone) {
       axios.post(VEND_DATA, payload)
       .then(res => {
-        const successPayload = res.data.data;
-
-        setSuccessPayload(successPayload);
-        setSuccess(true);
-        setLoading(false);
-        setPhone("");
-        setSelectedDataPlanId("");
-        setTelco("");
-        setAmount("");      
+        const successData = res.data.data;
+        setTransactionStatus(true);
+        setSuccessData(successData);
+        setComponentToRender("status");    
       })
       .catch(err => {
         if (err.response && err.response.status === 403) {
-          const errorMessage = err.response.data.message;
-          setError(errorMessage);
+          setTransactionStatus(false);
           setLoading(false);
+          setComponentToRender("status");    
         } else {
           setTimeout(() => {
             setLoading(false);
-            setError('Transaction failed please try again later');
+            setTransactionStatus(false);
+            setComponentToRender("status");    
           }, 7000)
         }
       })      
-    } else {
-      setTimeout(() => {
-        setLoading(false);
-        setValidationError({ ...validationError, telco: !telco, phone: !phone, selectedDataPlanId: !selectedDataPlanId });
-      }, 2000);      
     }
   };
 
@@ -106,78 +79,80 @@ const BuyData = ({ changeCurrentPage }) => {
   };
 
   const handleTelcoChange = (e) => {
-    const newTelcoName = e.target.value;
+    const telco = JSON.parse(e.target.value);
 
-    setError(undefined);
-    setSuccess(undefined);
-    setSuccessPayload(null);
-    setValidationError({ ...validationError, telco: !newTelcoName  });
-    setTelco(newTelcoName);
+    if (typeof telco !== "string") {
+      const newTelcoName = telco.name;
+      const newTelcoCode = telco.code;
+
+      setValidationError({ ...validationError, telco: !newTelcoName  });
+      setTelco(newTelcoCode);
+      setTelcoName(newTelcoName);
+    }
   };
 
   const handlePhoneChange = (e) => {
     const newPhone = e.target.value;
 
-    setError(undefined);
-    setSuccess(undefined);
-    setSuccessPayload(null);
     setValidationError({ ...validationError, phone: !newPhone  });
     setPhone(newPhone);
   };
 
   const handleSelectedDataPlanIdChange = (e) => {
-    const newSelectedDataPlanId= e.target.value;
+    const plan = JSON.parse(e.target.value);
 
-    setError(undefined);
-    setSuccess(undefined);
-    setSuccessPayload(null);
-    setValidationError({ ...validationError, selectedDataPlanId: !newSelectedDataPlanId  });
-    setSelectedDataPlanId(newSelectedDataPlanId);
-    handleAmountChange(newSelectedDataPlanId);
+    if (typeof plan !== "string") {
+      const newSelectedDataPlanId = plan.productId;
+
+      setValidationError({ ...validationError, selectedDataPlanId: !newSelectedDataPlanId  });
+      setSelectedDataPlanId(newSelectedDataPlanId);
+      setSelectedDataPlanValidity(plan.validity);
+      setSelectedDataPlanName(plan.databundle);
+      handleAmountChange(newSelectedDataPlanId);      
+    }
   };
+
+  switch(componentToRender) {
+    case "form":
+      renderedComponent = <BuyDataForm 
+        handleTelcoChange={handleTelcoChange}
+        handlePhoneChange={handlePhoneChange}
+        handleSelectedDataPlanIdChange={handleSelectedDataPlanIdChange}
+        validationError={validationError}
+        setValidationError={setValidationError}
+        setComponentToRender={setComponentToRender}
+        dataPlans={dataPlans}
+        setDataPlans={setDataPlans}
+        amount={amount}
+        phone={phone}
+        selectedDataPlanId={selectedDataPlanId}
+        telco={telco}
+      />;
+      break;
+    case "summary":
+      renderedComponent = <BuyDataSummary 
+        telcoName={telcoName}
+        amount={amount}
+        phone={phone}
+        selectedDataPlanName={selectedDataPlanName}
+        selectedDataPlanValidity={selectedDataPlanValidity}
+        handleOnSubmit={handleOnSubmit}
+        loading={loading}
+      />;
+      break;
+    case "status":
+      renderedComponent = <BuyDataStatus 
+        successData={successData}
+        transactionStatus={transactionStatus}
+      />;
+      break;
+    default:
+      renderedComponent = null;
+  }
 
   return (
   <div className={style.container}>
-    {success ? <SuccessfulTransaction successPayload={successPayload} /> :
-    <form className={style.form} onSubmit={handleOnSubmit} >
-      <div className={style.imageContainer}>
-        <img src={data} className={style.image} />
-      </div>
-      <div className={style.inputContainer}>
-        <label>
-          <span>Network</span>
-          <select onChange={handleTelcoChange} className={validationError.telco ? style.outlineRed : style.outlineGrey} >
-            <option value="">Select Network</option>
-            {telcoList.map((telco, index) => {
-              return <option value={telco.code} key={index}>{telco.name}</option>
-            })}
-          </select>  
-          {validationError.telco ? <p className={style.validationErrorText}>Please select network</p> : undefined}
-        </label>
-        <label>
-          <span>Phone Number</span>
-          <input type="text" onChange={handlePhoneChange} className={validationError.phone ? style.outlineRed : style.outlineGrey} />   
-          {validationError.phone ? <p className={style.validationErrorText}>Please enter phone number</p> : undefined}
-        </label>    
-        <label>
-          <span>Data Plan</span>
-          <select onChange={handleSelectedDataPlanIdChange} className={validationError.selectedDataPlanId ? style.outlineRed : style.outlineGrey} >
-            <option value="">Select Data Plan</option>
-            {dataPlans.map((plan, index) => {
-              return <option value={plan.productId} key={index}>{plan.databundle}</option>
-            })}
-          </select> 
-          {validationError.selectedDataPlanId ? <p className={style.validationErrorText}>Please select data plan</p> : undefined}
-        </label> 
-        <label>
-          <span>Amount</span>
-          <input type="text" disabled={true} value={amount} />
-        </label>
-      </div>
-      <button type="submit">{loading ?  
-        <Loader size="small" color="white" position="center" /> : "Submit"}
-      </button>
-      </form>}  
+    {renderedComponent} 
   </div>
 )}
 

@@ -1,61 +1,54 @@
 import React from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import check from "../../../../assets/images/check.svg";
-import style from './SuccessfulTransaction.module.scss';
+import cross from "../../../../assets/images/redCross.svg";
+import styles from './BuyDataStatus.module.scss';
 
-export const SuccessfulTransaction = ({ successPayload }) => {
+export const BuyDataStatus = ({ successData, transactionStatus }) => {
+  const { amount, tranxReference, tranxDate, recipient, network} = successData;
   return (
-    <div className={style.container}>
-      <div className={style.sectionContainer} >
-        <div className={style.imageContainer}>
-          <img src={check} alt="green checkmark" />
-          <p>Transaction Successful</p>
+    <div className={styles.container}>
+      <div className={styles.sectionContainer} >
+        <div className={styles.imageContainer}>
+          <img src={transactionStatus ? check : cross} alt="transaction status icon" />
+          <p>{transactionStatus ? "Transaction Successful" : "Transaction Failed"}</p>
         </div>
-
-        <div className={style.contentContainer}>
-          {successPayload.status ? <div>
-            <span>Status:</span>
-            <span>{successPayload.status}</span>   
-          </div> : undefined}
-          {successPayload.statusDescription ? <div>
-            <span>Status:</span>
-            <span>{successPayload.statusDescription}</span>   
-          </div> : undefined}
-          {successPayload.referenceCode ? <div>
-            <span>Reference Code:</span>
-            <span>{successPayload.referenceCode}</span>   
-          </div> : undefined}
-          {successPayload.payment_reference ? <div>
-            <span>Reference Code:</span>
-            <span>{successPayload.payment_reference}</span>   
-          </div> : undefined}
-          {successPayload.amount ? <div>
-            <span>Amount:</span>
-            <span><b>&#8358;{Number(successPayload.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b></span>   
-          </div>  : undefined} 
-          {successPayload.recipient ? <div>
-            <span>Recipient:</span>
-            <span>{successPayload.recipient}</span>   
-          </div> : undefined}
-          {successPayload.network ? <div>
-            <span>Network:</span>
-            <span>{successPayload.network}</span>   
-          </div> : undefined}
-          {successPayload.beneficiary_account_name ? <div>
-            <span>Account Name:</span>
-            <span>{successPayload.beneficiary_account_name}</span>   
-          </div> : undefined}
-          {successPayload.beneficiary_account_number ? <div>
-            <span>Account Number:</span>
-            <span>{successPayload.beneficiary_account_number}</span>   
-          </div> : undefined}
-          {successPayload.date ? <div>
-            <span>Date:</span>
-            <span>{successPayload.date}</span>   
-          </div> : undefined}
+        <div className={styles.contentContainer}>
+          {transactionStatus ?
+          <div>
+            <div>
+              <span>Transaction Reference:</span>
+              <span>{tranxReference}</span>   
+            </div>
+            <div>
+              <span>Network:</span>
+              <span>{network}</span>   
+            </div>
+            <div>
+              <span>Recipient:</span>
+              <span>{recipient}</span>   
+            </div>
+            <div>
+              <span>Date:</span>
+              <span>{tranxDate}</span>   
+            </div>
+            <div>
+              <span>Amount:</span>
+              <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+            </div>
+            <div className={styles.link}>
+              <div><Link to="/">&larr; Home</Link></div>
+            </div>
+          </div> :
+          <div className={styles.failed}>
+            <p>We were unable to process your transaction, 
+              please try again later!</p>  
+            <div><Link to="/">&larr; Home</Link></div>
+          </div> }
         </div>
       </div>    
     </div>
 )};
 
-export default SuccessfulTransaction;
+export default BuyDataStatus;
