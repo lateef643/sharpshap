@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GET_DATA_PLANS } from "../../../../store/api/constants";
 import VerificationLoader from "../../../partials/VerificationLoader";
-import data from "../../../../assets/images/smartphone-data.svg"
+import data from "../../../../assets/images/smartphone.svg"
 import styles from "./BuyDataForm.module.scss";
 
 export const BuyDataForm = (props) => {

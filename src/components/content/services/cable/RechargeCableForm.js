@@ -6,7 +6,7 @@ import { GET_GOTV_PLANS } from "../../../../store/api/constants";
 import { VALIDATE_STARTIMES_CUSTOMER } from "../../../../store/api/constants";
 import { VALIDATE_MULTICHOICE_CUSTOMER } from "../../../../store/api/constants";
 import VerificationLoader from "../../../partials/VerificationLoader";
-import cable from "../../../../assets/images/cabletv.svg"
+import cable from "../../../../assets/images/television.svg"
 import styles from "./RechargeCableForm.module.scss";
 
 export const RechargeCableForm = (props) => {
