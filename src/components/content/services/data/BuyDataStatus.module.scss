@@ -2,7 +2,7 @@
   padding-top: 4rem;
 
   > .sectionContainer {
-    height: 30.2rem;
+    height: 31.2rem;
     width: 35.6rem;
     margin: 0 auto;
     box-shadow: 0px 3px 6px #00000029;
@@ -67,22 +67,33 @@
         }
         
         .link {
+          margin-top: 2rem;
           flex: 0 0 15%;
           display: flex;
-          position: relative;
-          bottom: 1rem;
           flex-direction: row;
           justify-content: space-between;
-          text-align: left;
           padding: 0;
 
-          div {
-            flex: 0 0 25%;
+          a {
+            flex: 0 0 45%;
+            display: inline-block;
+            height: 3.1rem;
+            background-color: yellow;
+            border-radius: 5px;
+            font-size: 1.35rem;
+            text-align: center;
+            line-height: 2.8rem;
+            text-decoration: none;
+            color: #fff;
+            cursor: pointer;
+          }
 
-            a {
-              text-decoration: none;
-              color: #707070;
-            }
+          .linkHome {
+            background-color: #2A58AE;
+          }
+
+          .linkServiceHome {
+            background-color: #00B378;
           }
         }
       }

@@ -1,47 +1,29 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { WALLET_TRANSFER } from "../../../../store/api/constants";
+import WalletTransferForm from "./WalletTransferForm";
 import WalletTransferStatus from "./WalletTransferStatus";
 import WalletTransferSummary from "./WalletTransferSummary";
-import wallet from "../../../../assets/images/wallet-svgrepo-com.svg";
 import styles from "./WalletTransfer.module.scss";
 
 export const WalletTransfer = () => {
-  const TRANSACTION_COST = 0;
+  const TRANSACTION_COST = 35;
+  let renderedComponent;
+  const [componentToRender, setComponentToRender] = useState("form");
   const [agentName, setAgentName] = useState("");
   const [agentId, setAgentId] = useState("");
   const [amount, setAmount] = useState("");
   const [total, setTotal] = useState(null);
   const [page, setPage] = useState("");
   const [transactionStatus, setTransactionStatus] = useState("");
-  const [summaryData, setSummaryData] = useState({});
-  const [successPayload, setSuccessPayload] = useState({});
+  const [successData, setSuccessData] = useState({});
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    setSummaryData({
-      agentId,
-      amount,
-      agentName,
-      TRANSACTION_COST,
-      total
-    })
-  }, [agentId, amount, agentName, total]);
-
-  // useEffect(() => {
-  //   const payload = {
-  //     agentId,
-  //     amount
-  //   };
-
-  //   axios.post('', payload)
-  //     .then(res => {
-  //       console.log(res);
-  //     })
-  //     .catch(err => {
-  //       console.log(err);
-  //     })
-  // });
+  const getTransactionDate = (date) => {
+    const dateString = date.toString();
+    const index = dateString.search("GMT");
+    return dateString.slice(0, 24);
+  };
 
   const handleOnAgentIdChange = (e) => {
     const agentId = e.target.value;
@@ -60,65 +42,67 @@ export const WalletTransfer = () => {
   const handleOnSubmit = () => {
     setLoading(true);
 
-    const payload = {
+    const Data = {
       agent_id: agentId,
-      amount: total
+      amount: amount
     };
 
-    axios.post(WALLET_TRANSFER, payload)
+    axios.post(WALLET_TRANSFER, Data)
       .then(res => {
-        console.log(res)
         const successData = res.data.data;
-        setSuccessPayload(successData);
-        transactionStatus(true);
+        const date = new Date();
+        const transactionDate = getTransactionDate(date);
+       
+        setSuccessData({...successData, date: transactionDate });
+        setTransactionStatus(true);
         setLoading(false); 
-        setPage("finished");     
+        setComponentToRender("status");     
       })
       .catch(err => {
+        console.log(err);
         setTransactionStatus(false);
         setLoading(false);
-        setPage("finished");
+        setComponentToRender("status");
       })
   };
 
-  const handleOnContinue = (e) => {
-    e.preventDefault();
-    setPage("confirmation");
+  switch(componentToRender) {
+    case "form":
+      renderedComponent = <WalletTransferForm 
+        handleOnAgentIdChange={handleOnAgentIdChange}
+        handleOnAmountChange={handleOnAmountChange}
+        agentId={agentId}
+        agentName={agentName}
+        amount={amount}
+        setComponentToRender={setComponentToRender}
+      />;
+      break;
+    case "summary":
+      renderedComponent = <WalletTransferSummary
+        agentId={agentId}
+        agentName={agentName}
+        amount={amount}
+        transactionCost={TRANSACTION_COST} 
+        total={total}
+        handleOnSubmit={handleOnSubmit}
+        loading={loading} 
+      />;
+      break;
+    case "status":
+      renderedComponent = <WalletTransferStatus        
+        transactionStatus={transactionStatus} 
+        successData={successData} 
+        setComponentToRender={setComponentToRender}
+      />;
+        break;
+    default:
+      renderedComponent = null; 
+      break;
   };
 
   return (
     <div className={styles.container}>
-      {page === "confirmation" ? 
-      <WalletTransferSummary 
-      summaryData={summaryData}
-      handleOnSubmit={handleOnSubmit}
-      loading={loading} /> :
-
-      page === "finished" ? 
-      <WalletTransferStatus 
-        transactionStatus={transactionStatus} 
-        successPayload={successPayload} /> :
-
-      <form className={styles.form} onSubmit={handleOnContinue}>
-        <div className={styles.imageContainer}>
-          <img src={wallet} className={styles.image} />
-        </div>
-        <div className={styles.inputContainer}>
-          <label>
-            <span>Agent ID</span>
-            <input type="text" value={agentId} onChange={handleOnAgentIdChange} />
-          </label>
-          <label>
-            <span>Agent Name</span>
-            <input type="text" value={agentName} disabled={true} />
-          </label>
-          <label>
-            <span>Amount</span>
-            <input type="text" value={amount} onChange={handleOnAmountChange} />
-          </label>
-        </div>
-        <button>Submit</button>
-      </form>}
+      {renderedComponent}
     </div>
   )
 }

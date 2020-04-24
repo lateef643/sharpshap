@@ -117,6 +117,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
       renderedComponent = <BuyAirtimeStatus 
         transactionStatus={transactionStatus}
         successData={successData}
+        setComponentToRender={setComponentToRender}
       />;
       break;
     default:

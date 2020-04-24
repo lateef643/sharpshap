@@ -9,7 +9,7 @@
       padding-bottom: 3rem;
       background-color: #fff;
       color: #707070;
-      font-size: 1.45rem;
+      font-size: 1.4rem;
       display: flex;
       justify-content: space-between;
       flex-direction: column;
@@ -59,21 +59,33 @@
           }   
           
           .link {
-            flex: 0 0 10%;
+            margin-top: 2rem;
+            flex: 0 0 15%;
             display: flex;
-            position: relative;
-            margin-top: 20px;
             flex-direction: row;
             justify-content: space-between;
-            text-align: left;
-
-            div {
-              flex: 0 0 25%;
-
-              a {
-                text-decoration: none;
-                color: #707070;
-              }
+            padding: 0;
+  
+            a {
+              flex: 0 0 45%;
+              display: inline-block;
+              height: 3.1rem;
+              background-color: yellow;
+              border-radius: 5px;
+              font-size: 1.35rem;
+              text-align: center;
+              line-height: 2.8rem;
+              text-decoration: none;
+              color: #fff;
+              cursor: pointer;
+            }
+  
+            .linkHome {
+              background-color: #2A58AE;
+            }
+  
+            .linkServiceHome {
+              background-color: #00B378;
             }
           }
         }

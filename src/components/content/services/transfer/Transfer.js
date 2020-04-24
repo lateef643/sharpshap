@@ -12,17 +12,19 @@ import styles from './Transfer.module.scss';
 const Transfer = ({ changeCurrentPage }) => {
   let renderedComponent;
   const TRANSACTION_COST = 35;
-  const [page, setPage] = useState("");
+  const [componentToRender, setComponentToRender] = useState("form");
   const [bankCode, setBankCode] = useState("");
-  const [beneficiaryBankName, setBeneficiaryBankName] = useState("");
-  const [beneficiaryAccountNumber, setBeneficiaryAccountNumber] = useState("");
-  const [beneficiaryAccountName, setBeneficiaryAccountName] = useState("");
+  const [bankName, setBankName] = useState("");
+  const [accountNumber, setAccountNumber] = useState("");
+  const [accountName, setAccountName] = useState("");
   const [narration, setNarration] = useState("");
   const [amount, setAmount] = useState("");
   const [total, setTotal] = useState("");
   const [firstName, setFirstName] = useState("");
+  const [accountValidationErrorText, setAccountValidationErrorText] = useState("");
   const [lastName, setLastName] = useState("");
   const [phone, setPhone] = useState("");
+  const [verificationLoading, setVerificationLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState(null);
   const [transactionStatus, setTransactionStatus] = useState(undefined);
@@ -34,7 +36,7 @@ const Transfer = ({ changeCurrentPage }) => {
       });
 
       const bankName = bank.name;
-      setBeneficiaryBankName(bankName);
+      setBankName(bankName);
     }
   }, [bankCode]);
 
@@ -51,10 +53,6 @@ const Transfer = ({ changeCurrentPage }) => {
     return dateString.slice(0, 24);
   };
 
-  const handleSetPage = (page) => {
-    setPage(page);
-  };
-
   const handleOnSubmit = () => {
     setLoading(true);
 
@@ -62,7 +60,7 @@ const Transfer = ({ changeCurrentPage }) => {
       "first_name" : firstName,
       "last_name" : lastName,
       "phone_number" : phone,
-      "account_number" : beneficiaryAccountNumber,
+      "account_number" : accountNumber,
       "bank_code" : bankCode,
       "amount" : String(amount)
     };
@@ -74,71 +72,105 @@ const Transfer = ({ changeCurrentPage }) => {
         const date = new Date();
         const transactionDate = getTransactionDate(date);
 
-        setSuccessData({ ...successData, status, transactionCost: TRANSACTION_COST, total, date: transactionDate, bank: beneficiaryBankName });
+        setSuccessData({ ...successData, status, transactionCost: TRANSACTION_COST, total, date: transactionDate, bank: bankName });
         setLoading(false);
         setTransactionStatus(true);
-        setPage("status");
+        setComponentToRender("status");
       })
       .catch(err => {
         if (err.response && err.response.status === 403) {
-          const errorMessage = err.response.data.message;
           setLoading(false);  
           setTransactionStatus(false);
-          setPage("status");
+          setComponentToRender("status");
         } else {
           setTimeout(() => {
             setLoading(false);
             setTransactionStatus(false);
-            setPage("status");
+            setComponentToRender("status");
           }, 7000);
         }
       })
   };
 
-  const handleContinue = ({ bankCode, accountName, accountNumber, firstName, lastName,
-    amount, phone, narration}) => {
+  const handleBankCodeChange = (e) => {
+    const bankCode = e.target.value;
     setBankCode(bankCode);
-    setBeneficiaryAccountName(accountName);
-    setBeneficiaryAccountNumber(accountNumber);
-    setFirstName(firstName);
-    setLastName(lastName);    
-    setAmount(parseInt(amount));
-    setPhone(phone);
-    setNarration(narration);
+  }
+    
+  const handleAmountChange = (e) => {
+    const amount = Number(e.target.value);
+    setAmount(amount);
     setTotal(amount + TRANSACTION_COST);
   };
 
-  switch(page) {
+  const handleAccountNumberChange = (e) => {
+    const accountNumber = e.target.value;
+    setAccountNumber(accountNumber);
+
+    if (accountNumber.length >= 10) {
+      setVerificationLoading(true);
+    }
+  };
+
+  const handlePhoneChange = (e) => {
+    const phone = e.target.value;
+    setPhone(phone);
+  };
+
+  const handleNarrationChange = (e) => {
+    const narration = e.target.value;
+    setNarration(narration)
+  };
+
+  switch(componentToRender) {
+    case ("form"):
+      renderedComponent = <BankForm
+        handleBankCodeChange={handleBankCodeChange}
+        handleAmountChange={handleAmountChange}
+        handleAccountNumberChange={handleAccountNumberChange}
+        handlePhoneChange={handlePhoneChange}
+        handleNarrationChange={handleNarrationChange}
+        bankCode={bankCode}
+        accountNumber={accountNumber}
+        accountName={accountName}
+        setAccountName={setAccountName}
+        setFirstName={setFirstName}
+        setLastName={setLastName}
+        amount={amount}
+        phone={phone}
+        narration={narration}
+        accountValidationErrorText={accountValidationErrorText}
+        setAccountValidationErrorText={setAccountValidationErrorText}
+        verificationLoading={verificationLoading}
+        setVerificationLoading={setVerificationLoading}
+        setComponentToRender={setComponentToRender}
+      />;
+      break;
     case("summary"):
-      renderedComponent = 
-      <TransferSummary 
+      renderedComponent = <TransferSummary 
         loading={loading}
         phone={phone} 
         amount={amount} 
         transactionCost={TRANSACTION_COST}
         total={total} 
-        accountNumber={beneficiaryAccountNumber}
-        accountName={beneficiaryAccountName}
-        bank={beneficiaryBankName}
-        handleOnSubmit={handleOnSubmit} />;
+        accountNumber={accountNumber}
+        accountName={accountName}
+        bank={bankName}
+        handleOnSubmit={handleOnSubmit} 
+      />;
       break;
-
     case("status"):
-      renderedComponent = 
-      <TransferStatus
+      renderedComponent = <TransferStatus
         successData={successData}
         transactionStatus={transactionStatus}
         amount={amount}
         total={total} 
-        transactionCost={TRANSACTION_COST} />;
+        transactionCost={TRANSACTION_COST} 
+        setComponentToRender={setComponentToRender}
+      />;
       break;
-
     default: 
-      renderedComponent = 
-      <BankForm
-        handleSetPage={handleSetPage}
-        handleContinue={handleContinue} 
-        />;
+      renderedComponent = null;
       break;
   }
 

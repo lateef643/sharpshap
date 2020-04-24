@@ -144,6 +144,7 @@ const BuyData = ({ changeCurrentPage }) => {
       renderedComponent = <BuyDataStatus 
         successData={successData}
         transactionStatus={transactionStatus}
+        setComponentToRender={setComponentToRender}
       />;
       break;
     default:

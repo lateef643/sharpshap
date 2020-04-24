@@ -1,11 +1,10 @@
 import React from "react";
-import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import check from "../../../../assets/images/check.svg";
 import cross from "../../../../assets/images/redCross.svg";
 import styles from './WalletTransferStatus.module.scss';
 
-export const WalletTransferStatus = ({ successPayload, transactionStatus }) => { 
+export const WalletTransferStatus = ({ successData, transactionStatus, setComponentToRender }) => { 
   return (
     <div className={styles.container}>
       <div className={styles.sectionContainer} >
@@ -17,23 +16,28 @@ export const WalletTransferStatus = ({ successPayload, transactionStatus }) => {
           {transactionStatus ? 
             <div>
               <div>
-                <span>Agent ID:</span>
-                <span>{successPayload.agentId}</span>
+                <span>Reference:</span>
+                <span>{successData.reference}</span>
               </div>
               <div>
-                <span>Wallet ID:</span>
-                <span>{successPayload.wallet_id}</span>
+                <span>Recipient:</span>
+                <span>{successData.customer_info}</span>
               </div>
               <div>
-                <span>Current Balance:</span>
-                <span>&#8358;{Number(successPayload.current_bal).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>  
+                <span>Transaction:</span>
+                <span>{successData.mode}</span>
               </div>
               <div>
                 <span>Date:</span>
-                <span>{successPayload.created_at}</span>
+                <span>{successData.date}</span>
+              </div>
+              <div>
+                <span><b>Amount:</b></span>
+                <span><b>&#8358;{Number(successData.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b></span>  
               </div>
               <div className={styles.link}>
-                <div><Link to="/">&larr; Home</Link></div>
+                <Link to="/" className={styles.linkHome}>Home</Link>
+                <a onClick={() => setComponentToRender("form")} className={styles.linkServiceHome}>New Payment</a>
               </div>
             </div>  
           : <div className={styles.failed}>

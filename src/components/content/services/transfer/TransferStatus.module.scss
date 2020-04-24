@@ -1,8 +1,15 @@
 .container {
     padding-top: 4rem;
-  
-    > .sectionContainer {
-      height: 39.2rem;
+
+    .sectionContainerSmall {
+      position: relative;
+      top: 4rem;
+      height: 30rem;
+      width: 35rem;
+    }
+
+    > div {
+      height: 42.2rem;
       width: 43.6rem;
       margin: 0 auto;
       box-shadow: 0px 3px 6px #00000029;
@@ -67,28 +74,39 @@
           }
           
           .link {
+            margin-top: 2rem;
             flex: 0 0 15%;
             display: flex;
-            position: relative;
-            bottom: 1rem;
             flex-direction: row;
             justify-content: space-between;
-            text-align: left;
             padding: 0;
-
-            div {
-              flex: 0 0 25%;
-
-              a {
-                text-decoration: none;
-                color: #707070;
-              }
+  
+            a {
+              flex: 0 0 45%;
+              display: inline-block;
+              height: 3.1rem;
+              background-color: yellow;
+              border-radius: 5px;
+              font-size: 1.35rem;
+              text-align: center;
+              line-height: 2.8rem;
+              text-decoration: none;
+              color: #fff;
+              cursor: pointer;
+            }
+  
+            .linkHome {
+              background-color: #2A58AE;
+            }
+  
+            .linkServiceHome {
+              background-color: #00B378;
             }
           }
         }
 
         .failed {
-          width: 85%;
+          width: 95%;
           line-height: 2.5rem;
           font-size: 1.45rem;
           margin: 2rem auto 0 auto;
@@ -96,8 +114,8 @@
 
           div {
             position: relative;
-            top: 17rem;
-            right: 2rem;
+            top: 11rem;
+            right: 1rem;
 
             a {
               text-decoration: none;

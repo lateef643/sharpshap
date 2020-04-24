@@ -21,14 +21,18 @@ export const RechargeCable = ({ changeCurrentPage }) => {
   const [plan, setPlan] = useState({});
   const [code, setCode] = useState("");
   const [phone, setPhone] = useState("");
-  const [error, setError] = useState(undefined);
-  const [success, setSuccess] = useState(undefined);
-  const [successPayload, setSuccessPayload] = useState(null);
+  const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [customerValidationLoading, setCustomerValidationLoading] = useState(false);
   const [validationError, setValidationError] = useState({});
   const [transactionStatus, setTransactionStatus] = useState(false);
   const [getPlansLoading, setGetPlansLoading] = useState(false);
+
+  const getTransactionDate = (date) => {
+    const dateString = date.toString();
+    const index = dateString.search("GMT");
+    return dateString.slice(0, 24);
+  };
 
   useEffect(() => {
     changeCurrentPage({
@@ -58,29 +62,19 @@ export const RechargeCable = ({ changeCurrentPage }) => {
     };
         axios.post(providerApi, payload)
         .then(res => {
-          const successMessage = res.data.data.statusDescription.message;
-          setSuccess(successMessage);
+          const successData = res.data.data;
+          const date = new Date();
+          const transactionDate = getTransactionDate(date);
+
           setLoading(false);
-          setProvider("");
-          setSmartCardNumber("");
-          setPlanDuration("");
-          setAmount("");  
-          setPlan("");
-          setCode("");
-          setValidationError({});
-          setSuccessPayload(res.data.data);
+          setSuccessData({ ...successData, date: transactionDate });
+          setTransactionStatus(true);
+          setComponentToRender("status");
         })
         .catch(err => {
-          if (err.response && err.response.status === 403) {
-            const errorMessage = err.response.data.message;
-            setError(errorMessage);
-            setLoading(false);
-          } else {
-            setTimeout(() => {
-              setLoading(false);
-              setError('Transaction failed please try again later');
-            }, 7000)
-          }          
+          setLoading(false);
+          setTransactionStatus(false);
+          setComponentToRender("status");
         })   
   };
 
@@ -182,7 +176,14 @@ export const RechargeCable = ({ changeCurrentPage }) => {
       />;
       break;
     case ("status"):
-      renderedComponent = <RechargeCableStatus />;
+      renderedComponent = <RechargeCableStatus 
+        provider={provider}
+        plan={plan.name}
+        smartCardNumber={smartCardNumber}
+        successData={successData}
+        transactionStatus={transactionStatus}
+        setComponentToRender={setComponentToRender}
+      />;
       break;
     default:
       renderedComponent = null;

@@ -5,8 +5,7 @@ import check from "../../../../assets/images/check.svg";
 import cross from "../../../../assets/images/redCross.svg";
 import styles from './BuyDataStatus.module.scss';
 
-export const BuyDataStatus = ({ successData, transactionStatus }) => {
-  const { amount, tranxReference, tranxDate, recipient, network} = successData;
+export const BuyDataStatus = ({ successData, transactionStatus, setComponentToRender }) => {
   return (
     <div className={styles.container}>
       <div className={styles.sectionContainer} >
@@ -19,26 +18,27 @@ export const BuyDataStatus = ({ successData, transactionStatus }) => {
           <div>
             <div>
               <span>Transaction Reference:</span>
-              <span>{tranxReference}</span>   
+              <span>{successData.tranxReference}</span>   
             </div>
             <div>
               <span>Network:</span>
-              <span>{network}</span>   
+              <span>{successData.network}</span>   
             </div>
             <div>
               <span>Recipient:</span>
-              <span>{recipient}</span>   
+              <span>{successData.recipient}</span>   
             </div>
             <div>
               <span>Date:</span>
-              <span>{tranxDate}</span>   
+              <span>{successData.tranxDate}</span>   
             </div>
             <div>
               <span>Amount:</span>
-              <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+              <span>&#8358;{Number(successData.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
             </div>
             <div className={styles.link}>
-              <div><Link to="/">&larr; Home</Link></div>
+              <Link to="/" className={styles.linkHome}>Home</Link>
+              <a onClick={() => setComponentToRender("form")} className={styles.linkServiceHome}>New Payment</a>
             </div>
           </div> :
           <div className={styles.failed}>

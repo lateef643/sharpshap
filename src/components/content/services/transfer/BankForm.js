@@ -17,18 +17,12 @@ import keystone from "../../../../assets/images/keystone.svg";
 import fcmb from "../../../../assets/images/fcmb.svg";
 import styles from './BankForm.module.scss';
 
-const WithdrawForm = (props) => {
+const BankForm = (props) => {
   const banks = banksList;
-  const [bankCode, setBankCode] = useState("");
-  const [accountNumber, setAccountNumber] = useState("");
-  const [accountName, setAccountName] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [amount, setAmount] = useState("");
-  const [phone, setPhone] = useState("");
-  const [narration, setNarration] = useState("");
-  const [accountValidationErrorText, setAccountValidationErrorText] = useState("");
-  const [verificationLoading, setVerificationLoading] = useState(false);
+  const {bankCode, handleBankCodeChange, handleAmountChange, handleAccountNumberChange, 
+    handlePhoneChange, handleNarrationChange, accountNumber, accountName, setAccountName, setFirstName, 
+    setLastName, amount, phone, narration, accountValidationErrorText, setComponentToRender, setAccountValidationErrorText, 
+    verificationLoading, setVerificationLoading} = props;
 
   const inputValidation = bankCode && accountNumber && accountName && amount && phone && narration;
 
@@ -79,20 +73,8 @@ const WithdrawForm = (props) => {
     <form className={styles.form} onSubmit={(e) => {
       e.preventDefault();
 
-      const formData = {
-        bankCode,
-        accountName,
-        accountNumber,
-        firstName,
-        lastName,
-        amount,
-        phone,
-        narration
-      };
-
       if (inputValidation) {
-        props.handleContinue(formData);
-        props.handleSetPage("summary");      
+        setComponentToRender("summary");      
       }
     }} >
 
@@ -102,10 +84,7 @@ const WithdrawForm = (props) => {
     <div className={styles.inputContainer}>
       <label>
         <span>Beneficiary Bank</span>
-        <select onChange={(e) =>{
-          const bankName = e.target.value;
-          setBankCode(bankName);
-        }}>
+        <select onChange={handleBankCodeChange}>
           <option value="Beneficiary Bank">Select Bank</option>
           {banks.map((bank, index) => {
             return <option key={`${index}-${bank.code}`} value={bank.code}>{bank.name}</option>
@@ -114,21 +93,11 @@ const WithdrawForm = (props) => {
       </label>
       <label>
         <span>Amount</span>
-        <input type="number" onChange={(e) => {
-          const amount = Number(e.target.value);
-          setAmount(amount);
-        }} />      
+        <input type="number" value={amount} onChange={handleAmountChange} />      
       </label>
       <label>
         <span>Beneficiary Account Number</span>
-        <input type="text" onChange={(e) => {
-          const accountNumber = e.target.value;
-          setAccountNumber(accountNumber);
-
-          if (accountNumber.length >= 10) {
-            setVerificationLoading(true);
-          }
-        }} />      
+        <input type="text" value={accountNumber} onChange={handleAccountNumberChange} />      
       </label>
       <label>
         <span>Beneficiary Account Name</span>
@@ -139,17 +108,11 @@ const WithdrawForm = (props) => {
       </label>
       <label>
         <span>Customer's Number</span>
-        <input type="text" onChange={(e) => {
-          const phone = e.target.value;
-          setPhone(phone)
-        }} />      
+        <input type="text" value={phone} onChange={handlePhoneChange} />      
       </label>    
       <label>
         <span>Narration</span>
-        <input type="text" onChange={(e) => {
-          const narration = e.target.value;
-          setNarration(narration)
-        }} />      
+        <input type="text" value={narration} onChange={handleNarrationChange} />      
       </label> 
       </div>   
       <button type="submit" disabled={!inputValidation}>Continue</button>
@@ -157,4 +120,4 @@ const WithdrawForm = (props) => {
   </div>
 )}
 
-export default WithdrawForm;
+export default BankForm;

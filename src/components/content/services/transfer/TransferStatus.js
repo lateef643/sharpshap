@@ -5,11 +5,10 @@ import check from "../../../../assets/images/check.svg";
 import cross from "../../../../assets/images/redCross.svg";
 import styles from './TransferStatus.module.scss';
 
-export const TransferStatus = ({ transactionStatus, total, transactionCost, amount,
-successData}) => { 
+export const TransferStatus = ({ successData, transactionStatus, setComponentToRender, amount, total, transactionCost }) => { 
   return (
     <div className={styles.container}>
-      <div className={styles.sectionContainer} >
+      <div className={transactionStatus ? styles.sectionContainer : styles.sectionContainerSmall} >
         <div className={styles.imageContainer}>
           <img src={transactionStatus ? check : cross} alt="checkmark" />
           {transactionStatus ? <p>Transaction Successful</p> : <p>Transaction Failed</p>}
@@ -50,7 +49,8 @@ successData}) => {
                 <span><b>&#8358;{Number(total).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</b></span>  
               </div>
               <div className={styles.link}>
-                <div><Link to="/">&larr; Home</Link></div>
+                <Link to="/" className={styles.linkHome}>Home</Link>
+                <a onClick={() => setComponentToRender("form")} className={styles.linkServiceHome}>New Payment</a>
               </div>
             </div>  
           : <div className={styles.failed}>
