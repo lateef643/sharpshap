@@ -1,6 +1,7 @@
 import React from "react";
 import Login from "../components/pages/Login";
 import Dashboard from "../components/pages/Dashboard";
+import Contact from "../components/pages/Contact";
 import Terminals from "../components/pages/Terminals";
 import TransactionLog from "../components/content/transactions/TransactionLog";
 import Container from "../components/partials/Container";
@@ -33,6 +34,10 @@ const routes = [
   {
     path: "/dashboard",
     main: () => <Dashboard />
+  },
+  {
+    path: "/contact-us",
+    main: () => <Contact />
   },
   {
     path: "/add-user",

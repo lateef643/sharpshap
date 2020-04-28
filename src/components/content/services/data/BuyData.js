@@ -127,6 +127,7 @@ const BuyData = ({ changeCurrentPage }) => {
         phone={phone}
         selectedDataPlanId={selectedDataPlanId}
         telco={telco}
+        telcoName={telcoName}
       />;
       break;
     case "summary":

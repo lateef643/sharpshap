@@ -1,5 +1,8 @@
 import React, { useEffect, useState } from "react";
-import telephone from "../../../../assets/images/telephone.svg";
+import mtn from "../../../../assets/images/MTN Logo.svg";
+import _9mobile from "../../../../assets/images/9mobile.svg";
+import airtel from "../../../../assets/images/Airtel.svg";
+import glo from "../../../../assets/images/glo.svg";
 import styles from "./BuyAirtimeForm.module.scss";
 
 export const BuyAirtimeForm = (props) => {
@@ -9,9 +12,16 @@ export const BuyAirtimeForm = (props) => {
     {code: "A03E", id: 3, name: "Globacom", type: "Airtime"},
     {code: "A04E", id: 4, name: "MTN", type: "Airtime"}];
   const { setComponentToRender, handleTelcoChange, handlePhoneChange, handleAmountChange, 
-    amount, phone, telco, validationError, setValidationError } = props;
+    amount, phone, telco, validationError, setValidationError, telcoName } = props;
 
-  return (
+      //Dynamically render telco logo
+      let telcoImageUrl = "";
+
+      telcoImageUrl = telcoName === "MTN" ? mtn
+      : telcoName === "9 Mobile" ?  _9mobile : telcoName === "Globacom" ? glo
+      : telcoName === "Airtel" ? airtel: mtn;
+  
+    return (
     <form className={styles.form} onSubmit={(e) => {
       e.preventDefault();
 
@@ -24,7 +34,7 @@ export const BuyAirtimeForm = (props) => {
       }
     }}>
       <div className={styles.imageContainer}>
-        <img src={telephone} className={styles.image} />
+        <img src={telcoImageUrl} className={styles.image} />
       </div>
       <div className={styles.inputContainer}>
         <label>

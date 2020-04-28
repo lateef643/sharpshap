@@ -6,7 +6,9 @@ import { GET_GOTV_PLANS } from "../../../../store/api/constants";
 import { VALIDATE_STARTIMES_CUSTOMER } from "../../../../store/api/constants";
 import { VALIDATE_MULTICHOICE_CUSTOMER } from "../../../../store/api/constants";
 import VerificationLoader from "../../../partials/VerificationLoader";
-import cable from "../../../../assets/images/television.svg"
+import dstv from "../../../../assets/images/dstv.jpg";
+import startimes from "../../../../assets/images/startimes.png";
+import gotv from "../../../../assets/images/GOtv_Logo.png";
 import styles from "./RechargeCableForm.module.scss";
 
 export const RechargeCableForm = (props) => {
@@ -76,6 +78,13 @@ export const RechargeCableForm = (props) => {
     }
   }, [provider, smartCardNumber]);
 
+    //Dynamically render bank logo
+    let providerImageUrl = "";
+
+    providerImageUrl = provider === "gotv" ? gotv
+    : provider === "dstv" ?  dstv : provider === "startimes" ? startimes
+    : dstv;
+
   return (
     <form className={styles.form} onSubmit={(e) => {
       e.preventDefault();
@@ -90,7 +99,7 @@ export const RechargeCableForm = (props) => {
       }
     }} >
       <div className={styles.imageContainer}>
-        <img className={styles.image} src={cable} />
+        <img className={styles.image} src={providerImageUrl} />
       </div>
       <div className={styles.inputContainer}>
         <label>

@@ -2,6 +2,10 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GET_DATA_PLANS } from "../../../../store/api/constants";
 import VerificationLoader from "../../../partials/VerificationLoader";
+import mtn from "../../../../assets/images/MTN Logo.svg";
+import _9mobile from "../../../../assets/images/9mobile.svg";
+import airtel from "../../../../assets/images/Airtel.svg";
+import glo from "../../../../assets/images/glo.svg";
 import data from "../../../../assets/images/smartphone.svg"
 import styles from "./BuyDataForm.module.scss";
 
@@ -12,7 +16,7 @@ export const BuyDataForm = (props) => {
     {code: "D03D", id: 7, name: "Globacom", type: "Data"},
     {code: "D04D", id: 8, name: "MTN", type: "Data"}];
   const {handleTelcoChange, handlePhoneChange, handleSelectedDataPlanIdChange,
-  setDataPlans, amount, phone, setValidationError, validationError, selectedDataPlanId, setComponentToRender, telco, dataPlans } = props;
+  setDataPlans, amount, phone, telcoName, setValidationError, validationError, selectedDataPlanId, setComponentToRender, telco, dataPlans } = props;
 
   useEffect(() => {
     const payload = {
@@ -29,6 +33,13 @@ export const BuyDataForm = (props) => {
       })
   }, [telco]);
 
+    //Dynamically render telco logo
+    let telcoImageUrl = "";
+
+    telcoImageUrl = telcoName === "MTN" ? mtn
+    : telcoName === "9 Mobile" ?  _9mobile : telcoName === "Globacom" ? glo
+    : telcoName === "Airtel" ? airtel: mtn;
+
   return (
     <form className={styles.form} onSubmit={(e) => {
       e.preventDefault();
@@ -42,7 +53,7 @@ export const BuyDataForm = (props) => {
       }
     }} >
       <div className={styles.imageContainer}>
-        <img src={data} className={styles.image} />
+        <img src={telcoImageUrl} className={styles.image} />
       </div>
       <div className={styles.inputContainer}>
         <label>

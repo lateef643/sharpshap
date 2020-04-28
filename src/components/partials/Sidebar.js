@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import './Sidebar.scss';
 import avatar from "../../assets/images/user.svg";
-import speedometer from "../../assets/images/speedometer.svg";
-import user from "../../assets/images/user-icon.svg";
-import data from "../../assets/images/data.svg";
+import dashboard from "../../assets/images/dashboard.svg";
+import phone from "../../assets/images/phone.svg";
+import user from "../../assets/images/user-2.svg";
+import business from "../../assets/images/business.svg";
 import terminal from "../../assets/images/payment-terminal.svg";
-import wallet from "../../assets/images/digital-wallet.svg";
+import wallet from "../../assets/images/wallet-outlined.svg";
 import { startLogout } from "../../actions/auth";
 
 export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
@@ -26,7 +27,7 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
     </div>
     <div className="sidebar__links">
       <NavLink to="/dashboard" className="sidebar__links__link" >
-        <img src={speedometer} className="sidebar__links__link__image" alt="speedometer icon" />
+        <img src={dashboard} className="sidebar__links__link__image" alt="speedometer icon" />
         <p className="sidebar__links__link__text">Dashboard</p>
       </NavLink>
       <div className="sidebar__links__link" >
@@ -46,7 +47,7 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
         <p className="sidebar__links__link__text">My Terminals</p>
       </NavLink>
       <div className="sidebar__links__link">
-        <img src={data} className="sidebar__links__link__image"  alt="data icon" />
+        <img src={business} className="sidebar__links__link__image"  alt="data icon" />
         <p className="sidebar__links__link__text">Transactions</p>
         <div className="sidebar__links__link__secondary-links">
           <NavLink to="/new-transaction" className="sidebar__links__link__secondary-links__link">
@@ -72,6 +73,10 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
           </NavLink>
         </div>
       </div>
+      <NavLink to="/contact-us" className="sidebar__links__link" >
+        <img src={phone} className="sidebar__links__link__image" alt="speedometer icon" />
+        <p className="sidebar__links__link__text">Contact Us</p>
+      </NavLink>
     </div>
   </div>
 )};

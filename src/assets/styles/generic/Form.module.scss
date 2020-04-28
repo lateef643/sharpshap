@@ -1,8 +1,8 @@
-.container {
-  padding-top: 3rem;
+@import "../config/mixins";
+@import "../config/breakpoints";
 
-  > .form {
-    height: 52.8rem;
+.form {
+    height: 70.8rem;
     width: 47.2rem;
     margin: 0 auto;
     box-shadow: 0px 3px 6px #00000029;
@@ -12,15 +12,35 @@
     display: flex;
     flex-direction: column;
 
+    @include respond(phone-large) {
+      padding: 1rem;
+      height: 48.2rem;
+      width: 95%;
+      margin: 0 auto;
+      height: max-content;
+    }
+
     .imageContainer {
       flex: 0 0 55px;
       padding: 5px 0;
       text-align: center;
+      background-color: red;
+
+      @include respond(phone-large) {
+        flex: 0 0 40px;
+        padding: 2px 0;
+        display: none;
+      }
 
       .image {
         padding: 0;
         width: 90px;
         height: 40px;
+
+        @include respond(phone-large) {
+          height: 3rem;
+          width: 60px;
+        }
       }
     }
 
@@ -28,12 +48,21 @@
       display: flex;
       flex-direction: column;
       flex-wrap: wrap;
-      flex: 0 0 250px;
+      flex: 0 0 500px;
       margin: 0 auto;
+
+      @include respond(phone-large) {
+        flex: 0 0 400px;
+      }
 
     > label {
       flex: 0 0 8.6rem;
       margin: 2px 0;
+
+      @include respond(phone-large) {
+        flex: 0 0 4.6rem;
+        margin: 2px 0;       
+      }
   
       span {
         display: block;
@@ -49,20 +78,35 @@
       }
   
       input, select {
+        border: 0;
         width: 39.5rem;
         height: 3.7rem;
         border-radius: 5px;
-        border: 1px solid #afafaf;
+        background-color: #fff;
         color: #707070;
         font-family: inherit;
         padding: 0 6px;
+
+        @include respond(phone-large) {
+          width: 26rem;
+          height: 2.8rem;
+        }
+      }
+
+      .outlineGrey {
+        border: 1px solid #afafaf;
+      }
+
+      .outlineRed {
+        border: 1px solid rgba(255, 0, 0, 0.719);
       }
 
       option {
         color: #707070;
       }
 
-      input:disabled {
+      input:disabled,
+      select:disabled {
         background-color: #fff;
       }
 
@@ -85,9 +129,13 @@
         font-size: 1.25rem;
         padding-top: 4px;
         color: rgba(255, 0, 0, 0.719);
+        
+        @include respond(phone-large) {
+          display: none;
+        }
       }
     }
-    }
+  }
   
   
     button {
@@ -105,6 +153,11 @@
       background: transparent 
       linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
       0% 0% no-repeat padding-box;
+
+      @include respond(phone-large) {
+        width: 26rem;
+        height: 3.3rem;
+      }
   
       &:active {
         transform: translateY(3%);
@@ -116,4 +169,5 @@
       visibility: hidden;
     }
   }
-}
+
+  

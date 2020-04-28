@@ -12,12 +12,12 @@
   height: 100vh;
 
   &__profile {
-    flex: 0 0 20vh;
+    flex: 0 0 18vh;
     padding-top: 6%;
     padding-bottom: 8%;
 
     &__img {
-      max-width: 46.5%;
+      max-width: 43.5%;
       border-radius: 50%;
     }
 
@@ -48,12 +48,13 @@
     &__link {
       text-decoration: none;
       display: block;
-      height: 19%;
+      height: 14.2%;
       color: #CBDAF6;
       padding-top: 2rem;
 
       &__image {
         height: 2rem;
+        color: white;
       }
       
       &__text {

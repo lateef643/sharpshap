@@ -102,6 +102,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
         amount={amount}
         phone={phone}
         telco={telco}
+        telcoName={telcoName}
       />;
       break;
     case "summary":

@@ -9,8 +9,8 @@ import style from './WalletLog.module.scss';
 export const WalletLog = ({ changeCurrentPage }) => {
   const [logs, setLogs] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [total, setTotal] = useState(null);
-  const [perPage, setPerPage] = useState(null);
+  // const [total, setTotal] = useState(null);
+  // const [perPage, setPerPage] = useState(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNumbers, setPageNumbers] = useState([]);
   const [lastPage, setLastPage] = useState("");
@@ -23,10 +23,10 @@ export const WalletLog = ({ changeCurrentPage }) => {
       const logs = res.data.data.data;
       const total = res.data.data.total;
       const perPage = res.data.data.per_page;
-      const prevPage = res.data.data.prev_page_url;
-      const nextPageUrl = res.data.data.next_page_url;
+      // const prevPage = res.data.data.prev_page_url;
+      // const nextPageUrl = res.data.data.next_page_url;
       const lastPage = res.data.data.last_page;
-      const currentPage = res.data.data.current_page;
+      // const currentPage = res.data.data.current_page;
       let pageNumbers = [];
 
       if (total !== null && total > 0) {
@@ -37,8 +37,8 @@ export const WalletLog = ({ changeCurrentPage }) => {
       }
 
       setLastPage(lastPage);
-      setTotal(total);
-      setPerPage(perPage);
+      // setTotal(total);
+      // setPerPage(perPage);
       setLogs(logs);
       setLoading(false);
       setPageChangeLoading(false);
@@ -74,7 +74,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
         <span className={style.itemSeven}>Date Created</span>
       </div> : undefined}
       {!loading || !pageChangeLoading ? logs.map((log, index) => ( 
-        <div key={log.id} className={style.log}>
+        <div key={`${log.id}--${index}`} className={style.log}>
           <span className={style.itemOne}>&#8358;{log.previous_bal}</span>
           <span className={style.itemTwo}>&#8358;{log.amount}</span>
           <span className={style.itemThree}>&#8358;{log.current_bal}</span>
@@ -100,8 +100,8 @@ export const WalletLog = ({ changeCurrentPage }) => {
             }} 
           disabled={currentPage === lastPage}>Next Page</span>
          {
-          pageNumbers.map((page) => {
-            return <span onClick={() => {
+          pageNumbers.map((page, index) => {
+            return <span key={`${index}--key`}onClick={() => {
               setCurrentPage(page);
               setPageChangeLoading(true);
             }} 

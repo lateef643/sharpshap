@@ -60,10 +60,8 @@ export const Login = (props) => {
       </div>
       <div className={style.formSection}>
         <div className={style.formContainer}>
-          <div>
-            <img src={logo} alt="Cico logo" />
-          </div>
           <form className={style.form} onSubmit={handleOnSubmit}>
+            <img className={style.logo} src={logo} alt="Cico logo" />
             {error ? <p className={style.error}>{error}</p> : undefined}
             <label>
               <input type="text" placeholder="Phone Number" onChange={handlephoneChange} />
