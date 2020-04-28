@@ -63,7 +63,7 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
       </div>  
       <div className="sidebar__links__link" >
         <img src={user} className="sidebar__links__link__image" alt="user icon" />
-        <p className="sidebar__links__link__text">Manage User</p>
+        <p className="sidebar__links__link__text">Manage Users</p>
         <div className="sidebar__links__link__secondary-links">
           <NavLink to="/add-user" className="sidebar__links__link__secondary-links__link">
           <p>Add User</p>
