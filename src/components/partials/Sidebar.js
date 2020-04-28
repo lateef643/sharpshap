@@ -30,16 +30,19 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
         <img src={dashboard} className="sidebar__links__link__image" alt="speedometer icon" />
         <p className="sidebar__links__link__text">Dashboard</p>
       </NavLink>
-      <div className="sidebar__links__link" >
-        <img src={user} className="sidebar__links__link__image" alt="user icon" />
-        <p className="sidebar__links__link__text">User Management</p>
+      <div to="my-wallet" className="sidebar__links__link">
+        <img src={wallet} className="sidebar__links__link__image" alt="wallet icon" />
+        <p className="sidebar__links__link__text">My Wallet</p>
         <div className="sidebar__links__link__secondary-links">
-          <NavLink to="/add-user" className="sidebar__links__link__secondary-links__link">
-          <p>Add User</p>
+          <NavLink to="/wallet-log" className="sidebar__links__link__secondary-links__link">
+            <p>Wallet Log</p>
           </NavLink>
-          <NavLink to="/list-users" className="sidebar__links__link__secondary-links__link">
-            <p>List Users</p>
-          </NavLink>         
+          <NavLink to="/fund-wallet" className="sidebar__links__link__secondary-links__link">
+            <p>Fund Wallet</p>
+          </NavLink> 
+          <NavLink to="/activity-log" className="sidebar__links__link__secondary-links__link">
+            <p>Activity Log</p>
+          </NavLink>
         </div>
       </div>
       <NavLink to="/my-terminals" className="sidebar__links__link">
@@ -58,19 +61,16 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
           </NavLink>
         </div>
       </div>  
-      <div to="my-wallet" className="sidebar__links__link">
-        <img src={wallet} className="sidebar__links__link__image" alt="wallet icon" />
-        <p className="sidebar__links__link__text">My Wallet</p>
+      <div className="sidebar__links__link" >
+        <img src={user} className="sidebar__links__link__image" alt="user icon" />
+        <p className="sidebar__links__link__text">Manage User</p>
         <div className="sidebar__links__link__secondary-links">
-          <NavLink to="/wallet-log" className="sidebar__links__link__secondary-links__link">
-            <p>Wallet Log</p>
+          <NavLink to="/add-user" className="sidebar__links__link__secondary-links__link">
+          <p>Add User</p>
           </NavLink>
-          <NavLink to="/fund-wallet" className="sidebar__links__link__secondary-links__link">
-            <p>Fund Wallet</p>
-          </NavLink> 
-          <NavLink to="/activity-log" className="sidebar__links__link__secondary-links__link">
-            <p>Activity Log</p>
-          </NavLink>
+          <NavLink to="/list-users" className="sidebar__links__link__secondary-links__link">
+            <p>List Users</p>
+          </NavLink>         
         </div>
       </div>
       <NavLink to="/contact-us" className="sidebar__links__link" >

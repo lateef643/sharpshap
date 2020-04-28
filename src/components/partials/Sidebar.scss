@@ -51,6 +51,7 @@
       height: 14.2%;
       color: #CBDAF6;
       padding-top: 2rem;
+      transition: .2s all;
 
       &__image {
         height: 2rem;
@@ -65,7 +66,7 @@
       &__secondary-links {
         position: relative;
         left: 100%;
-        bottom: 75%;
+        bottom: 100%;
         z-index: 203;
         visibility: hidden;
 
@@ -77,6 +78,7 @@
           text-decoration: none;
           font-size: 1.3rem;
           padding-top: .5rem;
+          transition: .1s all;
 
           &:hover {
             visibility: visible;
