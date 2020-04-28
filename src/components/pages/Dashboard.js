@@ -4,12 +4,12 @@ import Card from "../shared/Card";
 import style from "./Dashboard.module.scss";
 import cabletv from "../../assets/images/cabletv.svg";
 import power from "../../assets/images/electricity.svg";
-import transfer from "../../assets/images/transfer.svg";
-import data from "../../assets/images/smartphone-data.svg";
-import insurance from "../../assets/images/surface1.svg";
+import transfer from "../../assets/images/transfer-outlined.svg";
+import data from "../../assets/images/internet-phone.svg";
+import insurance from "../../assets/images/insurance-outlined.svg";
 import airtime from "../../assets/images/phone-svgrepo-com.svg";
-import books from "../../assets/images/education.svg";
-import wallet from "../../assets/images/wallet.svg";
+import books from "../../assets/images/books-outline.svg";
+import wallet from "../../assets/images/wallet-outline.svg";
 import { setCurrentPage } from "../../actions/page";
 
 export const Dashboard = ({ changeCurrentPage }) => {
