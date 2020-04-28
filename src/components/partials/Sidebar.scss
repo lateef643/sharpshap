@@ -5,14 +5,14 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 19.5rem;
+  width: 16.5rem;
   z-index: 1;
   display: flex;
   flex-direction: column;
   height: 100vh;
 
   &__profile {
-    flex: 0 0 18vh;
+    flex: 0 0 19vh;
     padding-top: 6%;
     padding-bottom: 8%;
 
@@ -48,7 +48,7 @@
     &__link {
       text-decoration: none;
       display: block;
-      height: 14.2%;
+      height: 14.71%;
       color: #CBDAF6;
       padding-top: 2rem;
       transition: .2s all;
