@@ -1,38 +1,29 @@
 import React, {useState, useEffect} from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { GET_AGENT_INFO } from "../../store/api/constants";
 import cico from "../../assets/images/cico-logo-login.svg";
 import styles from './TransactionDetails.module.scss';
 import { setCurrentPage } from "../../actions/page";
 
-export const TransactionDetails = ({ uuid, changeCurrentPage, match}) => {
+export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
   const [transaction, setTransaction] = useState({});
   const [transtype, setTranstype] = useState({});
 
   useEffect(() => {
-    axios.get(`${GET_AGENT_INFO}/${uuid}`)
-    .then(res => {
-      const transactions = res.data.data.transaction;
-
-      const transaction = transactions.find(transaction => {
-        return transaction.reference === match.params.id;
-      });
-
-      setTransaction(transaction);
-      setTranstype(transaction.transtype);
-    })
-    .catch(err => {
-      console.log(err);
+    const transactions = JSON.parse(sessionStorage.getItem('transactions'));
+    const transactionItem = transactions.find(transaction => {
+      return transaction.reference === match.params.id;
     });
-  }, []);
+  
+    setTransaction(transactionItem);
+    setTranstype(transactionItem.transtype);
+  }, [])
 
   useEffect(() => {
     changeCurrentPage({
       heading: "Transaction Details",
       search: false
-    });    
+    });
   });
 
   return (
@@ -90,7 +81,7 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match}) => {
 
 const mapStateToProps = (state) => {
   return {
-    uuid: state.auth.user.agent.uuid
+    uuid: state.auth.user.agent.uuid,
   }
 };
 

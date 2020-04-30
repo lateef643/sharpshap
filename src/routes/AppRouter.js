@@ -78,7 +78,6 @@ const routes = [
   },
   {
     path: "/transaction-details/:id",
-    exact: true,
     main: (props) => <route><TransactionDetails {...props} /></route>
   },
   {

@@ -86,43 +86,34 @@
 }
 
 .itemOne {
-  flex: 0 0 4%;
+  flex: 0 0 5%;
 }
 
 .itemTwo {
-  flex: 0 0 8%;
+  flex: 0 0 7%;
 }
 
 .itemThree {
-  flex: 0 0 8%;
-}
-
-.itemFour {
-  flex: 0 0 8%;
-
-}
-
-.itemFive {
-  flex: 0 0 19%;
-}
-
-.itemSix {
-  flex: 0 0 7%;
-}
-
-.itemSeven {
   flex: 0 0 20%;
 }
 
-.itemEight {
-  flex: 0 0 13%;
-}
-
-.itemNine {
+.itemFour {
   flex: 0 0 7%;
-
-  a {
-    text-decoration: none;
-    color: #551A8B;
-  }
 }
+
+.itemFive {
+  flex: 0 0 21%;
+}
+
+.itemSix {
+  flex: 0 0 15%;
+}
+
+.itemSeven {
+  flex: 0 0 12.5%;
+}
+
+.itemEight {
+  flex: 0 0 8%;
+}
+
