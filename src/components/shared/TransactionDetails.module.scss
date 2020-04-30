@@ -1,11 +1,14 @@
 @import "../../assets/styles/generic/status.scss";
 
 .section {
-  margin-top: 3rem;
-  padding: 2rem;
+  margin-top: 2rem;
+  padding: 2rem 0;
+  width: 50rem;
+  height: 48rem;
 
   @media print {
     position: absolute;  
+    left: 16%;
   }
 
   .imageContainer {
@@ -16,6 +19,10 @@
       position: initial;
     }
   }
+}
+
+.customerInfo {
+  flex: 0 0 55%;
 }
 
 // @page { size: auto;  margin: 0mm; }

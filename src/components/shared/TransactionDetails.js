@@ -58,7 +58,7 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match}) => {
             </div>
             <div>
               <span>Customer:</span>
-              <span>{transaction.customer_info}</span>  
+              <span className={styles.customerInfo}>{transaction.customer_info}</span>  
             </div>
             <div>
               <span>Date:</span>
