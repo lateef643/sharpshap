@@ -63,7 +63,7 @@
   }
 
 .status {
-  flex: 0 0 5%;
+  flex: 0 0 4%;
 
   span {
     border-radius: 100%;
@@ -86,33 +86,43 @@
 }
 
 .itemOne {
-  flex: 0 0 5%;
+  flex: 0 0 4%;
 }
 
 .itemTwo {
-  flex: 0 0 7%;
+  flex: 0 0 8%;
 }
 
 .itemThree {
-  flex: 0 0 19%;
+  flex: 0 0 8%;
 }
 
 .itemFour {
-  flex: 0 0 7%;
+  flex: 0 0 8%;
+
 }
 
 .itemFive {
-  flex: 1;
+  flex: 0 0 19%;
 }
 
 .itemSix {
-  flex: 0 0 15%;
+  flex: 0 0 7%;
 }
 
 .itemSeven {
-  flex: 0 0 12%;
+  flex: 0 0 20%;
 }
 
 .itemEight {
-  flex: 0 0 12.5%;
+  flex: 0 0 13%;
+}
+
+.itemNine {
+  flex: 0 0 7%;
+
+  a {
+    text-decoration: none;
+    color: #551A8B;
+  }
 }

@@ -5,6 +5,10 @@
   width: calc(100vw - 16.5rem);
   z-index: 1;
   height: 138px;
+
+  @media print {
+    display: none;
+  }
 }
 
 .header-container {

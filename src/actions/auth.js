@@ -39,7 +39,6 @@ export const startLoginUser = payload => dispatch => {
       };
     })
     .catch(err => {
-      console.log('catch block run')
       if (err.response && err.response.status === 401) {
         dispatch({
           type: "SET_LOADING",
@@ -49,7 +48,6 @@ export const startLoginUser = payload => dispatch => {
           }
         })        
       } else {
-        console.log('else block run')
         setTimeout(() => {
           dispatch({
             type: "SET_LOADING",

@@ -24,7 +24,6 @@
       flex: 0 0 55px;
       padding: 5px 0;
       text-align: center;
-      background-color: red;
 
       @include respond(phone-large) {
         flex: 0 0 40px;
@@ -44,20 +43,20 @@
       }
     }
 
-    .inputContainer {
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      flex: 0 0 500px;
-      margin: 0 auto;
+    // .inputContainer {
+    //   display: flex;
+    //   flex-direction: column;
+    //   flex-wrap: wrap;
+    //   flex: 0 0 500px;
+    //   margin: 0 auto;
 
-      @include respond(phone-large) {
-        flex: 0 0 400px;
-      }
+    //   @include respond(phone-large) {
+    //     flex: 0 0 400px;
+    //   }
 
-    > label {
+     label {
       flex: 0 0 8.6rem;
-      margin: 2px 0;
+      margin: 2px auto;
 
       @include respond(phone-large) {
         flex: 0 0 4.6rem;
@@ -86,6 +85,7 @@
         color: #707070;
         font-family: inherit;
         padding: 0 6px;
+        margin: 0 auto;
 
         @include respond(phone-large) {
           width: 26rem;
@@ -134,7 +134,7 @@
           display: none;
         }
       }
-    }
+    // }
   }
   
   

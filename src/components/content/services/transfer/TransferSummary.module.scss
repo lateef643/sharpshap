@@ -1,86 +1,88 @@
-.container {
-    padding-top: 6rem;
-  
-    > .paymentContainer {
-      height: 39.2rem;
-      width: 41.6rem;
-      margin: 0 auto;
-      box-shadow: 0px 3px .6rem #00000029;
-      padding: 2rem 2rem;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background-color: #fff;
-      color: #707070;
+@import "../../../../assets/styles/generic/summary.scss";
 
-      .heading {
-        margin-bottom: 2rem;
-
-        > .headingText {
-          text-align: center;
-          margin: 0 auto;
-          font-size: 1.6rem;
-        }
-      }
+// .container {
+//     padding-top: 6rem;
   
-      div {
-        display: flex;
-        justify-content: space-between;
+//     > .paymentContainer {
+//       height: 39.2rem;
+//       width: 41.6rem;
+//       margin: 0 auto;
+//       box-shadow: 0px 3px .6rem #00000029;
+//       padding: 2rem 2rem;
+//       display: flex;
+//       flex-direction: column;
+//       justify-content: space-between;
+//       background-color: #fff;
+//       color: #707070;
 
-        > .pending {
-          font-size: 1.4rem;
-          margin-bottom: 2rem;
-          font-weight: 400;
-          color: #707070; 
-          text-align: center;
-        }
+//       .heading {
+//         margin-bottom: 2rem;
 
-        span {
-          text-align: right;
-          font-size: 1.4rem;
-          flex: 0 0 65%;
-          color: #707070;
-          line-height: 2.4rem;
-        }
+//         > .headingText {
+//           text-align: center;
+//           margin: 0 auto;
+//           font-size: 1.6rem;
+//         }
+//       }
   
-        span:first-child {
-          text-align: left;
-          font-size: 1.4rem;
-          flex: 0 0 35%;
-          color: #707070;
-          line-height: 2.4rem;
-        }
-      }
+//       div {
+//         display: flex;
+//         justify-content: space-between;
 
-      .total {
-        font-size: 1.75rem;
-        font-weight: bold;
-        padding: 5px 0;
-        border: 1px solid #7070709f;
-        border-left: 0;
-        border-right: 0;
-      }
+//         > .pending {
+//           font-size: 1.4rem;
+//           margin-bottom: 2rem;
+//           font-weight: 400;
+//           color: #707070; 
+//           text-align: center;
+//         }
+
+//         span {
+//           text-align: right;
+//           font-size: 1.4rem;
+//           flex: 0 0 65%;
+//           color: #707070;
+//           line-height: 2.4rem;
+//         }
   
-      button {
-        font-family: 'Lato', sans-serif;
-        width: 100%;
-        margin: 0 auto;
-        margin-top: 2rem;
-        height: 3.6rem;
-        font-size: 1.4rem;
-        outline: 0;
-        border: 0;
-        border-radius: 1rem;
-        box-shadow: 3px 3px .6rem #00000029;
-        background: transparent 
-        linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
-        0% 0% no-repeat padding-box;
-        color: #fff;
+//         span:first-child {
+//           text-align: left;
+//           font-size: 1.4rem;
+//           flex: 0 0 35%;
+//           color: #707070;
+//           line-height: 2.4rem;
+//         }
+//       }
+
+//       .total {
+//         font-size: 1.75rem;
+//         font-weight: bold;
+//         padding: 5px 0;
+//         border: 1px solid #7070709f;
+//         border-left: 0;
+//         border-right: 0;
+//       }
   
-        &:active {
-          transform: translateY(3%);
-          box-shadow: 1px 1px 4px #00000029;
-        }
-      }
-    }
-  }
+//       button {
+//         font-family: 'Lato', sans-serif;
+//         width: 100%;
+//         margin: 0 auto;
+//         margin-top: 2rem;
+//         height: 3.6rem;
+//         font-size: 1.4rem;
+//         outline: 0;
+//         border: 0;
+//         border-radius: 1rem;
+//         box-shadow: 3px 3px .6rem #00000029;
+//         background: transparent 
+//         linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
+//         0% 0% no-repeat padding-box;
+//         color: #fff;
+  
+//         &:active {
+//           transform: translateY(3%);
+//           box-shadow: 1px 1px 4px #00000029;
+//         }
+//       }
+//     }
+//   }

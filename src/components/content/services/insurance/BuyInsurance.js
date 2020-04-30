@@ -4,8 +4,8 @@ import style from './BuyInsurance.module.scss';
 import InsuranceType from "./InsuranceType";
 import UploadPhoto from "./UploadPhoto";
 import InsurancePurchaseForm from "./InsurancePurchaseForm";
-import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
-import PaymentSummary from "../../../shared/PaymentSummary";
+// import SuccessfulTransaction from "../../../shared/SuccessfulTransaction";
+// import PaymentSummary from "../../../shared/PaymentSummary";
 import { setCurrentPage } from "../../../../actions/page";
 
 export const BuyInsurance = ({ changeCurrentPage }) => {
@@ -92,14 +92,14 @@ export const BuyInsurance = ({ changeCurrentPage }) => {
         handlePlanChange={handlePlanChange}
         handleSetPage={handleSetPage}
       />
-      : page === "summary" ? <PaymentSummary 
-        phoneNumber={phoneNumber}
-        amount={amount}
-        total={total}
-        handleOnSubmit={handleOnSubmit}
-        handleSetPage={handleSetPage}
-      />
-      : page === "success" ? <SuccessfulTransaction />
+      // : page === "summary" ? <PaymentSummary 
+      //   phoneNumber={phoneNumber}
+      //   amount={amount}
+      //   total={total}
+      //   handleOnSubmit={handleOnSubmit}
+      //   handleSetPage={handleSetPage}
+      // />
+      // : page === "success" ? <SuccessfulTransaction />
       : <InsuranceType 
         handleSetType={handleSetType}
         handleSetPage={handleSetPage}

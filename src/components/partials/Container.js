@@ -9,7 +9,7 @@ import './Container.scss';
 
 const history = createBrowserHistory();
 
-export const AppShell = (props) => {
+export const Container = (props) => {
   return (
     <>
     {!props.isAuthenticated ? <Login /> : <Router>
@@ -23,15 +23,15 @@ export const AppShell = (props) => {
           </div>
           <div className="container-main-content">
             <Switch>
-              {props.routes.map((route, index) => (
-                <Route
+              {props.routes.map((route, index) => {
+                return <Route
                   history={history}
                   key={index}
                   path={route.path}
                   exact={route.exact}
-                  children={<route.main />}
+                  render={({ match }) => <route.main match={match} {...props} />}
                 />
-              ))}
+              })}
             </Switch>            
           </div>
         </div>
@@ -47,4 +47,4 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(AppShell);
+export default connect(mapStateToProps)(Container);

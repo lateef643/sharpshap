@@ -11,6 +11,7 @@ import style from './RechargeCable.module.scss';
 
 export const RechargeCable = ({ changeCurrentPage }) => {
   let renderedComponent;
+  const TRANSACTION_COST = 0;
   const [componentToRender, setComponentToRender] = useState("form");
   const [plans, setPlans] = useState([]);
   const [provider, setProvider] = useState("");
@@ -164,13 +165,11 @@ export const RechargeCable = ({ changeCurrentPage }) => {
     case ("summary"):
       renderedComponent = <RechargeCableSummary 
         smartCardNumber={smartCardNumber}
-        provider={provider}
         amount={amount}
         plan={plan.name}
         provider={provider}
         planDuration={planDuration}
         customerName={customerName}
-        phone={phone}
         loading={loading}
         handleOnSubmit={handleOnSubmit}
       />;
@@ -183,6 +182,7 @@ export const RechargeCable = ({ changeCurrentPage }) => {
         successData={successData}
         transactionStatus={transactionStatus}
         setComponentToRender={setComponentToRender}
+        transactionCost={TRANSACTION_COST}
       />;
       break;
     default:

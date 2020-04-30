@@ -16,38 +16,36 @@ export const FundWalletRequestForm = ({handleAmountChange, bank, setComponentToR
         <div className={styles.imageContainer}>
           <img src={wallet} className={styles.image} />
         </div>
-        <div className={styles.inputContainer}>
-          <label>
-            <span>Amount</span>
-            <input type="number" onChange={handleAmountChange} />      
-          </label> 
-          <label>
-            <span>Bank</span>
-            <select>
-              <option>{bank}</option>
-            </select>
-            <div>
-              {banks.map(bank => {
-                return <p onClick={() => {
-                  setBankCode(bank.code);
-                  setAccountName("CICOSERVE PAYMENTS");
-                  setAccountNumber(bank.account);
-                  setBank(bank.name);
-                }}><span className={styles.spanOne}>{bank.name}</span><span className={styles.spanTwo}>{bank.account}</span><span className={styles.spanThree}>CicoServe Payment</span></p>
-              })}
-            </div>
-            {/* <select onChange={handleBankCodeChange}>   
-              <option value="">Select Bank</option>
-              {banks.map(bank => {
-                return <option value={bank.code} key={bank.code}>{bank.name}  0012345678 CicoServe Payment</option>
-              })}
-            </select> */}
-          </label>
-          <label>
-            <span>Teller Number</span>
-            <input type="text" onChange={handleTellerNumberChange} />
-          </label>              
-        </div>
+        <label>
+          <span>Amount</span>
+          <input type="number" onChange={handleAmountChange} className={styles.outlineGrey} />      
+        </label> 
+        <label>
+          <span>Bank</span>
+          <select className={styles.outlineGrey}>
+            <option>{bank}</option>
+          </select>
+          <div>
+            {banks.map(bank => {
+              return <p onClick={() => {
+                setBankCode(bank.code);
+                setAccountName("CICOSERVE PAYMENTS");
+                setAccountNumber(bank.account);
+                setBank(bank.name);
+              }}><span className={styles.spanOne}>{bank.name}</span><span className={styles.spanTwo}>{bank.account}</span><span className={styles.spanThree}>CicoServe Payment</span></p>
+            })}
+          </div>
+          {/* <select onChange={handleBankCodeChange}>   
+            <option value="">Select Bank</option>
+            {banks.map(bank => {
+              return <option value={bank.code} key={bank.code}>{bank.name}  0012345678 CicoServe Payment</option>
+            })}
+          </select> */}
+        </label>
+        <label>
+          <span>Teller Number</span>
+          <input type="text" onChange={handleTellerNumberChange} className={styles.outlineGrey} />
+        </label>              
         <button type="submit">{loading ? <Loader size="small" color="white" position="center" /> : "Submit" }</button>
     </form>
   )

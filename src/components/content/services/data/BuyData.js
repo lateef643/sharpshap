@@ -4,15 +4,13 @@ import { connect } from "react-redux";
 import BuyDataForm from "./BuyDataForm";
 import BuyDataSummary from "./BuyDataSummary";
 import BuyDataStatus from "./BuyDataStatus";
-import Loader from "../../../partials/Loader";
-import { GET_DATA_PLANS } from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_DATA } from "../../../../store/api/constants";
-import data from "../../../../assets/images/smartphone-data.svg";
 import style from './BuyData.module.scss';
 
 const BuyData = ({ changeCurrentPage }) => {
   let renderedComponent;
+  const TRANSACTION_COST = 0;
   const [componentToRender, setComponentToRender] = useState("form");
   const [dataPlans, setDataPlans] = useState([]);
   const [telco, setTelco] = useState("");
@@ -22,7 +20,7 @@ const BuyData = ({ changeCurrentPage }) => {
   const [selectedDataPlanId, setSelectedDataPlanId] = useState("");
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
-  const [transactionStatus, setTransactionStatus] = useState(false);
+  const [transactionStatus, setTransactionStatus] = useState(undefined);
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState({});
@@ -146,6 +144,7 @@ const BuyData = ({ changeCurrentPage }) => {
         successData={successData}
         transactionStatus={transactionStatus}
         setComponentToRender={setComponentToRender}
+        transactionCost={TRANSACTION_COST}
       />;
       break;
     default:

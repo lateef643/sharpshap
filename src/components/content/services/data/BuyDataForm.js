@@ -55,37 +55,35 @@ export const BuyDataForm = (props) => {
       <div className={styles.imageContainer}>
         <img src={telcoImageUrl} className={styles.image} />
       </div>
-      <div className={styles.inputContainer}>
-        <label>
-          <span>Network</span>
-          <select onChange={handleTelcoChange} className={validationError.telco ? styles.outlineRed : styles.outlineGrey} >
-            <option value="">Select Network</option>
-            {telcoList.map((telco, index) => {
-              return <option value={JSON.stringify(telco)} key={index}>{telco.name}</option>
-            })}
-          </select>  
-          {validationError.telco ? <p className={styles.validationErrorText}>Please select network</p> : undefined}
-        </label>
-        <label>
-          <span>Phone Number</span>
-          <input type="text" onChange={handlePhoneChange} className={validationError.phone ? styles.outlineRed : styles.outlineGrey} />   
-          {validationError.phone ? <p className={styles.validationErrorText}>Please enter phone number</p> : undefined}
-        </label>    
-        <label>
-          <span>Data Plan</span>
-          <select onChange={handleSelectedDataPlanIdChange} className={validationError.selectedDataPlanId ? styles.outlineRed : styles.outlineGrey} >
-            <option value="">Select Data Plan</option>
-            {dataPlans.map((plan, index) => {
-              return <option value={JSON.stringify(plan)} key={index}>{plan.databundle}</option>
-            })}
-          </select> 
-          {validationError.selectedDataPlanId ? <p className={styles.validationErrorText}>Please select data plan</p> : undefined}
-        </label> 
-        <label>
-          <span>Amount</span>
-          <input type="text" disabled={true} value={amount} />
-        </label>
-      </div>
+      <label>
+        <span>Network</span>
+        <select onChange={handleTelcoChange} className={validationError.telco ? styles.outlineRed : styles.outlineGrey} >
+          <option value="">Select Network</option>
+          {telcoList.map((telco, index) => {
+            return <option value={JSON.stringify(telco)} key={index}>{telco.name}</option>
+          })}
+        </select>  
+        {validationError.telco ? <p className={styles.validationErrorText}>Please select network</p> : undefined}
+      </label>
+      <label>
+        <span>Phone Number</span>
+        <input type="text" onChange={handlePhoneChange} className={validationError.phone ? styles.outlineRed : styles.outlineGrey} />   
+        {validationError.phone ? <p className={styles.validationErrorText}>Please enter phone number</p> : undefined}
+      </label>    
+      <label>
+        <span>Data Plan</span>
+        <select onChange={handleSelectedDataPlanIdChange} className={validationError.selectedDataPlanId ? styles.outlineRed : styles.outlineGrey} >
+          <option value="">Select Data Plan</option>
+          {dataPlans.map((plan, index) => {
+            return <option value={JSON.stringify(plan)} key={index}>{plan.databundle}</option>
+          })}
+        </select> 
+        {validationError.selectedDataPlanId ? <p className={styles.validationErrorText}>Please select data plan</p> : undefined}
+      </label> 
+      <label>
+        <span>Amount</span>
+        <input type="text" disabled={true} value={amount} className={styles.outlineGrey} />
+      </label>
       <button type="submit">Continue</button>
     </form>
   )

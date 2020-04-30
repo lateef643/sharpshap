@@ -11,6 +11,10 @@
   flex-direction: column;
   height: 100vh;
 
+  @media print {
+    display: none;
+  }
+
   &__profile {
     flex: 0 0 19vh;
     padding-top: 6%;

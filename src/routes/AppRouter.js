@@ -12,7 +12,7 @@ import FundWallet from "../components/content/wallet/fundWallet/FundWallet";
 import WalletLog from "../components/content/wallet/logs/WalletLog";
 import Transfer from "../components/content/services/transfer/Transfer";
 import ActivityLog from "../components/content/wallet/logs/ActivityLog";
-import SuccessfulTransaction from "../components/shared/SuccessfulTransaction";
+import TransactionDetails from "../components/shared/TransactionDetails";
 import BuyAirtime from "../components/content/services/airtime/BuyAirtime";
 import PayElectricity from "../components/content/services/electricity/PayElectricity";
 import BuyData from "../components/content/services/data/BuyData";
@@ -20,6 +20,7 @@ import RechargeCable from "../components/content/services/cable/RechargeCable";
 import BuyInsurance from "../components/content/services/insurance/BuyInsurance";
 import Profile from "../components/content/profile/Profile";
 import WalletTransfer from "../components/content/wallet/walletTransfer/WalletTransfer";
+import { route } from "react-router-dom";
 
 const routes = [
   {
@@ -76,8 +77,9 @@ const routes = [
     main: () => <ActivityLog />
   },
   {
-    path: "/success",
-    main: () => <SuccessfulTransaction />
+    path: "/transaction-details/:id",
+    exact: true,
+    main: (props) => <route><TransactionDetails {...props} /></route>
   },
   {
     path: "/buy-airtime",

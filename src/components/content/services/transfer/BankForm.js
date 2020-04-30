@@ -15,6 +15,9 @@ import uba from "../../../../assets/images/uba.svg";
 import heritage from "../../../../assets/images/heritage.svg";
 import keystone from "../../../../assets/images/keystone.svg";
 import fcmb from "../../../../assets/images/fcmb.svg";
+import sterling from "../../../../assets/images/Sterling Bank Plc Logo.svg";
+import suntrust from "../../../../assets/images/suntrust.svg";
+import firstbank from "../../../../assets/images/First Bank Nigeria Logo.svg";
 import styles from './BankForm.module.scss';
 
 const BankForm = (props) => {
@@ -66,7 +69,9 @@ const BankForm = (props) => {
   : bankCode === "057" ? zenith : bankCode === "214" ? fcmb 
   : bankCode === "035" ? wema : bankCode === "030" ? heritage
   : bankCode === "068" ? scbank : bankCode === "050" ? ecobank
-  : bankCode === "082" ? keystone : access;
+  : bankCode === "232" ? sterling : bankCode === "082" ? keystone 
+  : bankCode === "011" ? firstbank 
+  : bankCode === "100" ? suntrust : access;
 
   return (
   <div className={styles.container}>
@@ -77,14 +82,12 @@ const BankForm = (props) => {
         setComponentToRender("summary");      
       }
     }} >
-
-    <div className={styles.imageContainer}>
-      <img className={styles.image} src={bankImageUrl} alt="bank logo" />
-    </div>
-    <div className={styles.inputContainer}>
+      <div className={styles.imageContainer}>
+        <img className={styles.image} src={bankImageUrl} alt="bank logo" />
+      </div>
       <label>
         <span>Beneficiary Bank</span>
-        <select onChange={handleBankCodeChange}>
+        <select onChange={handleBankCodeChange} className={styles.outlineGrey}>
           <option value="Beneficiary Bank">Select Bank</option>
           {banks.map((bank, index) => {
             return <option key={`${index}-${bank.code}`} value={bank.code}>{bank.name}</option>
@@ -93,28 +96,27 @@ const BankForm = (props) => {
       </label>
       <label>
         <span>Amount</span>
-        <input type="number" value={amount} onChange={handleAmountChange} />      
+        <input type="number" value={amount} onChange={handleAmountChange}  className={styles.outlineGrey} />      
       </label>
       <label>
         <span>Beneficiary Account Number</span>
-        <input type="text" value={accountNumber} onChange={handleAccountNumberChange} />      
+        <input type="text" value={accountNumber} onChange={handleAccountNumberChange}  className={styles.outlineGrey} />      
       </label>
       <label>
         <span>Beneficiary Account Name</span>
         <input type="text" value={accountName} className={verificationLoading ? styles.transparent : styles.opaque}
-        disabled={true} />
+        disabled={true}  className={styles.outlineGrey} />
         {verificationLoading ? <VerificationLoader /> : undefined}
         {accountValidationErrorText ? <p className={styles.validationErrorText}>{accountValidationErrorText}</p> : undefined}
       </label>
       <label>
         <span>Customer's Number</span>
-        <input type="text" value={phone} onChange={handlePhoneChange} />      
+        <input type="text" value={phone} onChange={handlePhoneChange}  className={styles.outlineGrey} />      
       </label>    
       <label>
         <span>Narration</span>
-        <input type="text" value={narration} onChange={handleNarrationChange} />      
+        <input type="text" value={narration} onChange={handleNarrationChange}  className={styles.outlineGrey} />      
       </label> 
-      </div>   
       <button type="submit" disabled={!inputValidation}>Continue</button>
     </form> 
   </div>

@@ -1,3 +1,6 @@
+//Not importing generic form style
+//Displaying div with spans on select dropdown hover instead of options
+
 .form {
   height: 44.8rem;
   width: 44.2rem;
@@ -10,28 +13,20 @@
   flex-direction: column;
 
   .imageContainer {
-    flex: 0 0 55px;
+    flex: 0 0 5.5rem;
     padding: 5px 0;
     text-align: center;
 
     .image {
       padding: 0;
-      width: 90px;
-      height: 40px;
+      width: 9rem;
+      height: 4rem;
     }
   }
 
-  .inputContainer {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    flex: 0 0 280px;
-    margin: 0 auto;
-
   > label {
       flex: 0 0 8.6rem;
-      margin: 2px 0;
-      // background-color: yellow;
+      margin: 2px auto;
   
       span {
         display: block;
@@ -88,7 +83,7 @@
           display: flex;
           justify-content: space-between;
           text-align: left;
-          padding-left: 10px;
+          padding-left: 1rem;
 
 
           > span {
@@ -125,7 +120,6 @@
         color: rgba(255, 0, 0, 0.719);
       }
     }
-  }
 
   button {
     font-family: 'Lato', sans-serif;

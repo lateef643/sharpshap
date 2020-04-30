@@ -14,14 +14,12 @@ export const WalletTransfer = () => {
   const [agentId, setAgentId] = useState("");
   const [amount, setAmount] = useState("");
   const [total, setTotal] = useState(null);
-  const [page, setPage] = useState("");
   const [transactionStatus, setTransactionStatus] = useState("");
   const [successData, setSuccessData] = useState({});
   const [loading, setLoading] = useState(false);
 
   const getTransactionDate = (date) => {
     const dateString = date.toString();
-    const index = dateString.search("GMT");
     return dateString.slice(0, 24);
   };
 
@@ -93,6 +91,9 @@ export const WalletTransfer = () => {
         transactionStatus={transactionStatus} 
         successData={successData} 
         setComponentToRender={setComponentToRender}
+        transactionCost={TRANSACTION_COST}
+        total={total}
+        agentId={agentId}
       />;
         break;
     default:

@@ -1,0 +1,21 @@
+@import "../../assets/styles/generic/status.scss";
+
+.section {
+  margin-top: 3rem;
+  padding: 2rem;
+
+  @media print {
+    position: absolute;  
+  }
+
+  .imageContainer {
+
+    .headingImage {
+      width: 90px;
+      margin-bottom: 1rem;
+      position: initial;
+    }
+  }
+}
+
+// @page { size: auto;  margin: 0mm; }

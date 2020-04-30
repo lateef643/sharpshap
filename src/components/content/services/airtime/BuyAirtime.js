@@ -4,13 +4,13 @@ import { connect } from "react-redux";
 import BuyAirtimeForm from "./BuyAirtimeForm";
 import BuyAirtimeSummary from "./BuyAirtimeSummary";
 import BuyAirtimeStatus from "./BuyAirtimeStatus";
-import Loader from "../../../partials/Loader";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_AIRTIME } from "../../../../store/api/constants";
 import style from './BuyAirtime.module.scss';
 
 export const BuyAirtime = ({ changeCurrentPage }) => {
   let renderedComponent;
+  const TRANSACTION_COST = 0;
   const [componentToRender, setComponentToRender] = useState("form");
   const [telco, setTelco] = useState("");
   const [telcoName, setTelcoName] = useState("");
@@ -19,7 +19,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState({});
-  const [transactionStatus, setTransactionStatus] = useState(false);
+  const [transactionStatus, setTransactionStatus] = useState(undefined);
 
   useEffect(() => {
     changeCurrentPage({
@@ -48,7 +48,6 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
       })
       .catch(err => {
         if (err.response && err.response.status === 403) {
-          const errorMessage = err.response.data.message;
           setTransactionStatus(false);
           setLoading(false);
           setComponentToRender("status");
@@ -112,6 +111,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
         telcoName={telcoName}
         handleOnSubmit={handleOnSubmit}
         loading={loading}
+        transactionCost={TRANSACTION_COST}
       />;
       break;
     case "status":
@@ -119,6 +119,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
         transactionStatus={transactionStatus}
         successData={successData}
         setComponentToRender={setComponentToRender}
+        transactionCost={TRANSACTION_COST}
       />;
       break;
     default:
