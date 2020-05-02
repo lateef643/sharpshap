@@ -1,3 +1,6 @@
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/breakpoints";
+
 .statusbar {
   height: 5.1rem;
   box-shadow: 0px 3px 6px #00000029;
@@ -8,11 +11,19 @@
   padding: 0 30px;
   background-color: #fff;
 
+  @include respond(phone-large) {
+    padding: 0 1.3rem;
+  }
+
   &__links {
     flex: 1;
     font-size: 1.4rem;
     color: #013660;
     opacity: 1;
+
+    @include respond(phone-large) {
+      display: none;
+    }
 
     > a, span {
       text-decoration: none;
@@ -26,6 +37,21 @@
     color: #013660;
     opacity: 1;
     flex: 0 0 20%;
+
+    @include respond(phone-large) {
+      flex: 0 0 50%;
+    }
+
+    @include respond-custom(330px) {
+      flex: 0 0 55%;
+    }
+
+    &__transaction-balance {
+
+      @include respond(phone-large) {
+        display: none;
+      }
+    }
   }
 }
 
@@ -42,4 +68,11 @@
   color: #707070;
   border-radius: 2rem;
   flex: 0 0 25%;
+
+  @include respond(phone-large) {
+    flex: 0 0 30%;
+    width: 12rem;
+    height: 2.3rem;
+    order: 1;
+  }
 }

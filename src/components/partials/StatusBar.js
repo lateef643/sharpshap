@@ -29,8 +29,8 @@ export const StatusBar = ({ page, walletBalance, uuid  }) => {
         {page.sub ? <span>&nbsp;/ {page.sub}</span>: undefined}
       </p>
       <input className="search" type="text" placeholder="Search" style={{visibility: page.search ? 'visible' : 'hidden'}}/>
-      <p className="statusbar__text">Wallet Balance: &#8358;{balance.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>
-      <p className="statusbar__text">Transaction Value: &#8358;0.00</p>
+      <p className="statusbar__text">Wallet Balance: &nbsp;&#8358;{balance.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>
+      <p className="statusbar__text statusbar__text__transaction-balance">Transaction Value: &#8358;0.00</p>
     </div>
 )};
 

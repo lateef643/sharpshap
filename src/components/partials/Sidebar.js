@@ -1,7 +1,6 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
-import './Sidebar.scss';
 import avatar from "../../assets/images/user.svg";
 import dashboard from "../../assets/images/dashboard.svg";
 import phone from "../../assets/images/phone.svg";
@@ -10,6 +9,7 @@ import business from "../../assets/images/business.svg";
 import terminal from "../../assets/images/payment-terminal.svg";
 import wallet from "../../assets/images/wallet-outlined.svg";
 import { startLogout } from "../../actions/auth";
+import styles from './Sidebar.module.scss';
 
 export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
   const handleLogout = (e) => {
@@ -18,67 +18,77 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
   };
 
   return (
-  <div className="sidebar">
-    <div className="sidebar__profile">
-      <img src={avatar} className="sidebar__profile__img" alt="user's avatar" />
-      <p className="sidebar__profile__name">{`${firstname} ${lastname}`}</p>
-      <p className="sidebar__profile__id">Wallet ID: {id}</p>
-      <button className="sidebar__profile__edit" onClick={handleLogout}>Log out</button>
-    </div>
-    <div className="sidebar__links">
-      <NavLink to="/dashboard" className="sidebar__links__link" >
-        <img src={dashboard} className="sidebar__links__link__image" alt="speedometer icon" />
-        <p className="sidebar__links__link__text">Dashboard</p>
-      </NavLink>
-      <div to="my-wallet" className="sidebar__links__link">
-        <img src={wallet} className="sidebar__links__link__image" alt="wallet icon" />
-        <p className="sidebar__links__link__text">My Wallet</p>
-        <div className="sidebar__links__link__secondary-links">
-          <NavLink to="/wallet-log" className="sidebar__links__link__secondary-links__link">
-            <p>Wallet Log</p>
+    <nav className={styles.navigation}>
+      <input
+        type="checkbox"
+        className={styles.toggleCheckbox}
+        id="navi-toggle"
+      />
+      <label htmlFor="navi-toggle" className={styles.toggleButton}>
+        <span className={styles.hamburgerItem}></span>
+      </label>
+      <div className={styles.sidebar}>
+        <div className={styles.profile}>
+          <img src={avatar} className={styles.profileImage} alt="user's avatar" />
+          <p className={styles.profileName}>{`${firstname} ${lastname}`}</p>
+          <p className={styles.profileId}>Wallet ID: {id}</p>
+          <button className={styles.logout} onClick={handleLogout}>Log out</button>
+        </div>
+        <div className={styles.links}>
+          <NavLink to="/dashboard" className={styles.linkItem} >
+            <img src={dashboard} className={styles.linkItemImage} alt="speedometer icon" />
+            <p className={styles.linkItemText}>Dashboard</p>
           </NavLink>
-          <NavLink to="/fund-wallet" className="sidebar__links__link__secondary-links__link">
-            <p>Fund Wallet</p>
-          </NavLink> 
-          <NavLink to="/activity-log" className="sidebar__links__link__secondary-links__link">
-            <p>Activity Log</p>
+          <div to="my-wallet" className={styles.linkItem}>
+            <img src={wallet} className={styles.linkItemImage} alt="wallet icon" />
+            <p className={styles.linkItemText}>My Wallet</p>
+            <div className={styles.linkSecondary}>
+              <NavLink to="/wallet-log" className={styles.linkSecondaryItem}>
+                <p>Wallet Log</p>
+              </NavLink>
+              <NavLink to="/fund-wallet" className={styles.linkSecondaryItem}>
+                <p>Fund Wallet</p>
+              </NavLink> 
+              <NavLink to="/activity-log" className={styles.linkSecondaryItem}>
+                <p>Activity Log</p>
+              </NavLink>
+            </div>
+          </div>
+          <NavLink to="/my-terminals" className={styles.linkItem}>
+            <img src={terminal} className={styles.linkItemImage} alt="terminals icon" />
+            <p className={styles.linkItemText}>My Terminals</p>
+          </NavLink>
+          <div className={styles.linkItem}>
+            <img src={business} className={styles.linkItemImage}  alt="data icon" />
+            <p className={styles.linkItemText}>Transactions</p>
+            <div className={styles.linkSecondary}>
+              <NavLink to="/new-transaction" className={styles.linkSecondaryItem}>
+                <p>New Transaction</p>
+              </NavLink>
+              <NavLink to="/transaction-log" className={styles.linkSecondaryItem}>
+                <p>Transactions Log</p>
+              </NavLink>
+            </div>
+          </div>  
+          <div className={styles.linkItem} >
+            <img src={user} className={styles.linkItemImage} alt="user icon" />
+            <p className={styles.linkItemText}>Manage Users</p>
+            <div className={styles.linkSecondary}>
+              <NavLink to="/add-user" className={styles.linkSecondaryItem}>
+                <p>Add User</p>
+              </NavLink>
+              <NavLink to="/list-users" className={styles.linkSecondaryItem}>
+                <p>List Users</p>
+              </NavLink>         
+            </div>
+          </div>
+          <NavLink to="/contact-us" className={styles.linkItem} >
+            <img src={phone} className={styles.linkItemImage} alt="speedometer icon" />
+            <p className={styles.linkItemText}>Contact Us</p>
           </NavLink>
         </div>
-      </div>
-      <NavLink to="/my-terminals" className="sidebar__links__link">
-        <img src={terminal} className="sidebar__links__link__image" alt="terminals icon" />
-        <p className="sidebar__links__link__text">My Terminals</p>
-      </NavLink>
-      <div className="sidebar__links__link">
-        <img src={business} className="sidebar__links__link__image"  alt="data icon" />
-        <p className="sidebar__links__link__text">Transactions</p>
-        <div className="sidebar__links__link__secondary-links">
-          <NavLink to="/new-transaction" className="sidebar__links__link__secondary-links__link">
-            <p>New Transaction</p>
-          </NavLink>
-          <NavLink to="/transaction-log" className="sidebar__links__link__secondary-links__link">
-            <p>Transactions Log</p>
-          </NavLink>
-        </div>
-      </div>  
-      <div className="sidebar__links__link" >
-        <img src={user} className="sidebar__links__link__image" alt="user icon" />
-        <p className="sidebar__links__link__text">Manage Users</p>
-        <div className="sidebar__links__link__secondary-links">
-          <NavLink to="/add-user" className="sidebar__links__link__secondary-links__link">
-          <p>Add User</p>
-          </NavLink>
-          <NavLink to="/list-users" className="sidebar__links__link__secondary-links__link">
-            <p>List Users</p>
-          </NavLink>         
-        </div>
-      </div>
-      <NavLink to="/contact-us" className="sidebar__links__link" >
-        <img src={phone} className="sidebar__links__link__image" alt="speedometer icon" />
-        <p className="sidebar__links__link__text">Contact Us</p>
-      </NavLink>
-    </div>
-  </div>
+      </div>    
+    </nav>
 )};
 
 const mapStateToProps = (state) => {

@@ -1,0 +1,168 @@
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/breakpoints";
+
+.navigation {
+
+  .toggleCheckbox {
+    display: none;
+  }
+
+  .toggleCheckbox:checked ~ .sidebar {
+    transform: translateX(0%);
+  }
+
+  .toggleButton {
+    background-color: red;
+    height: 6rem;
+    width: 5rem;
+    z-index: 2000;
+    position: fixed;
+    top: 1rem;
+    background-color: transparent;
+    display: none;
+
+    @include respond(phone-large) {
+      display: initial;
+    }
+  }
+
+  @media print {
+    display: none;
+  }
+
+  .sidebar {
+    background-color: #2A58AE;
+    color: #fff;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 16.5rem;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100vh;
+    transition: .8s all;
+
+
+    @include respond(phone-large) {
+      width: 15.5rem;
+      transform: translateX(-100%);
+    }
+  
+    .profile {
+      flex: 0 0 23vh;
+      padding-top: 1.5vh;
+
+      .profileImage {
+        max-width: 43.5%;
+        border-radius: 50%;
+
+        @include respond-custom(350px) {
+          max-width: 40%;
+        }
+      }
+  
+      .profileName {
+        font-size: 1.4rem;
+        margin: .5vh 0;
+
+        @include respond-custom(350px) {
+          font-size: 1.3rem;
+        }
+      }
+  
+      .profileId {
+        font-size: 1.4rem;
+        margin: 1.3vh 0;
+
+        @include respond-custom(350px) {
+          font-size: 1.3rem;
+        }
+      }
+  
+      .logout {
+        width: 8.2rem;
+        height: 2.4rem;
+        border-radius: .7rem;
+        outline: 0;
+        border: 1px solid #CBDAF6;
+        background: #FFFFFF1A 0% 0% no-repeat padding-box;
+        color: #CBDAF6;
+      }
+    }
+  
+    .links {
+      flex: 0 0 75vh;
+  
+      .linkItem {
+        text-decoration: none;
+        display: block;
+        height: calc(75vh/6);
+        color: #CBDAF6;
+        padding-top: 2rem;
+        transition: .2s all;
+
+        @include respond-custom(350px) {
+          padding-top: 1.5rem;
+        }
+
+        .linkItemImage {
+          height: 2rem;
+          color: white;
+
+          @include respond-custom(320px) {
+            height: 1.5rem;
+          }
+        }
+        
+        .linkItemText {
+          font-size: 1.3rem;
+          margin-top: .5rem;
+
+          @include respond-custom(320px) {
+            height: 1.2rem;
+            margin-top: .3rem;
+
+            // background-color:red;
+          }
+        }
+  
+        .linkSecondary {
+          position: relative;
+          left: 100%;
+          bottom: 100%;
+          z-index: 203;
+          visibility: hidden;
+  
+          .linkSecondaryItem {
+            height: 2.5rem;
+            display: block;
+            color: #CBDAF6;
+            background-color: #2A58AE;
+            text-decoration: none;
+            font-size: 1.3rem;
+            padding-top: .5rem;
+            transition: .1s all;
+  
+            &:hover {
+              visibility: visible;
+              background-color: rgb(32, 63, 121);
+            }
+          }
+        }
+  
+      &:hover {
+        visibility: visible;
+        background-color: rgb(32, 63, 121);
+  
+          div {
+            visibility: visible;
+            z-index: 5;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,3 +1,6 @@
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/breakpoints";
+
 .card {
   width: 23%;
   min-height: 20vh;
@@ -13,20 +16,55 @@
   cursor: pointer;
   transition: .5s all;
 
+  @include respond(phone-large) {
+    width: 28%;
+    min-height: 12vh;
+    border-radius: 10px;
+    margin: 8px 8px;
+    box-shadow: 2px 2px 4px #00000029;
+  }
+
+  @include respond-custom(340px) {
+    width: 27%;
+  }
+
   .container {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+
+    @include respond(phone-large) {
+      padding: 10px;
+    }
   }
 
   .image {
     width: 3.3rem;
+
+    @include respond(phone-large) {
+      width: 2.5rem;
+    }
+
+    @include respond-custom(330px) {
+      width: 1.5rem;
+    }
   }
 
   .text {
     font-size: 1.3rem;
     color: #707070;
     margin-top: 1.5rem;
+
+    @include respond(phone-large) {
+      line-break: strict;
+      font-size: 1.23rem;
+      margin-top: .5rem;
+      line-height: 15px;
+    }
+
+    @include respond-custom(330px) {
+      font-size: 1.2rem;
+    }
   }  
 
   &:hover {

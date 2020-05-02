@@ -1,3 +1,6 @@
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/breakpoints";
+
 .header {
   text-align: left;
   background-color: #fff;
@@ -5,6 +8,10 @@
   width: calc(100vw - 16.5rem);
   z-index: 1;
   height: 138px;
+
+  @include respond(phone-large) {
+    width: 100vw;
+  }
 
   @media print {
     display: none;
@@ -19,6 +26,13 @@
   margin-bottom: .5rem;
   height: 8.2rem;
   align-items: center;
+}
+
+.logo-box {
+
+  @include respond(phone-large) {
+    margin-left: 5rem;
+  }
 }
 
 .profile {
@@ -41,6 +55,10 @@
     position: relative;
     top: 1.5rem;
     height: 7.5rem;
+
+    @include respond(phone-large) {
+      display: none;
+    }
 
     > .one {
       color: #013660;

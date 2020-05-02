@@ -1,8 +1,16 @@
+@import "../../assets//styles/config/mixins";
+@import "../../assets//styles/config/breakpoints";
+
 .container {
   display: flex;
 
   &-sidebar {
     flex: 0 0 16.5rem;
+
+    @include respond(phone-large) {
+      position: fixed;
+      z-index: 23;
+    }
   }
 
   &-main {
