@@ -3,7 +3,7 @@ import axios from "axios";
 import ListLoader from "../../../partials/ListLoader";
 import { connect } from "react-redux";
 import { setCurrentPage } from "../../../../actions/page";
-import { ALL_WALLET_LOGS } from "../../../../store/api/constants";
+import { GET_AGENT_WALLET_HISTORY } from "../../../../store/api/constants";
 import style from './WalletLog.module.scss';
 
 export const WalletLog = ({ changeCurrentPage }) => {
@@ -18,7 +18,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
   const firstPage = 1;
 
   useEffect(() => {
-    axios.get(`${ALL_WALLET_LOGS}?page=${currentPage}`)
+    axios.get(`${GET_AGENT_WALLET_HISTORY}?page=${currentPage}`)
     .then((res) => {
       console.log(res)
       const logs = res.data.data.data;
@@ -56,10 +56,6 @@ export const WalletLog = ({ changeCurrentPage }) => {
       search: true
     });    
   }, [changeCurrentPage]);
-
-  const handlePageChange = () => {
-
-  };
 
   return (
     <div className={style.container}>

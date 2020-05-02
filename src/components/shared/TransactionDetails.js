@@ -9,6 +9,8 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
   const [transaction, setTransaction] = useState({});
   const [transtype, setTranstype] = useState({});
 
+  console.log(transaction)
+
   useEffect(() => {
     const transactions = JSON.parse(sessionStorage.getItem('transactions'));
     const transactionItem = transactions.find(transaction => {

@@ -46,7 +46,7 @@
     }
 
     @include respond-custom(330px) {
-      width: 1.5rem;
+      width: 2rem;
     }
   }
 
@@ -63,7 +63,7 @@
     }
 
     @include respond-custom(330px) {
-      font-size: 1.2rem;
+      font-size: 1.15rem;
     }
   }  
 

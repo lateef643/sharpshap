@@ -57,40 +57,40 @@
   }
   
   .pagination span.active {
-    background-color: #2A58AE;;
+    background-color: #2A58AE;
     color: white;
-    border: 1px solid #2A58AE;;
+    border: 1px solid #2A58AE;
   }
 
   .pagination span:disabled {
-    background-color: #2A58AE;;
+    background-color: #2A58AE;
     color: white;
-    border: 1px solid #2A58AE;;
+    border: 1px solid #2A58AE;
   }
 }
 
 .itemOne {
-  flex: 0 0 12%;
+  flex: 0 0 10%;
 }
 
 .itemTwo {
-  flex: 0 0 12%;
+  flex: 0 0 10%;
 }
 
 .itemThree {
-  flex: 0 0 12%;
+  flex: 0 0 10%;
 }
 
 .itemFour {
-  flex: 1;
+  flex: 0 0 27%;
 }
 
 .itemFive {
-  flex: 0 0 12%;
+  flex: 0 0 9%;
 }
 
 .itemSix {
-  flex: 0 0 12%;
+  flex: 0 0 11%;
 }
 
 .itemSeven {

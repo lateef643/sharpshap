@@ -9,7 +9,7 @@
     text-align: left;
 
     > .loaderContainer {
-      position: absolute;
+      position: fixed;
       top: 50%;
       left: 53.5%;
       transform: translate(50%, 50%);
@@ -56,6 +56,12 @@
     }
     
     .pagination span.active {
+      background-color: #2A58AE;;
+      color: white;
+      border: 1px solid #2A58AE;;
+    }
+
+    .pagination span:disabled {
       background-color: #2A58AE;;
       color: white;
       border: 1px solid #2A58AE;;

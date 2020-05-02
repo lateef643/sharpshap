@@ -65,7 +65,7 @@ export const SEARCH_TERMINALS = `${path}/terminals/search`;
 /////WALLETS//////
 
 //get wallet history - GET
-export const WALLET_HISTORY = `${path}/wallets/admin`;
+export const GET_AGENT_WALLET_HISTORY = `${path}/agents/wallets`;
 
 //get wallet logs - GET
 export const ALL_WALLET_LOGS = `${path}/wallets/all`;
@@ -89,9 +89,6 @@ export const FUND_WALLET_REQUEST = `${path}/fund-requests`;
 
 //get agent transaction history - GET
 export const AGENT_TRANSACTION_HISTORY = `${path}/transactions`;
-
-//get transaction logs - GET
-export const ALL_TRANSACTION_LOGS = `${path}/transactions/all`;
 
 //post initiate cashout - POST
 export const INITIATE_CASHOUT = `${path}/transactions/cashless`;
