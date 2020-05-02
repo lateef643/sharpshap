@@ -5,10 +5,10 @@ if (
   window.location.href.indexOf("dev") >= 0
 ) {
   //development server
-  path = "http://api.cico.ng/api";  
+  path = "https://api.cico.ng/api";  
 } else {
   //production server
-  path = "http://api.cico.ng/api";  
+  path = "https://api.cico.ng/api";  
 }
 
 //////AUTH///////
