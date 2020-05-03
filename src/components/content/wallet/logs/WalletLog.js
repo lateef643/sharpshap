@@ -96,7 +96,8 @@ export const WalletLog = ({ changeCurrentPage }) => {
               }
             }} 
           disabled={currentPage === lastPage}>Next Page</span>
-         {
+          <span className={style.active} disabled>{currentPage}</span>
+         {/* {
           pageNumbers.map((page, index) => {
             return <span key={`${index}--key`}onClick={() => {
               setCurrentPage(page);
@@ -104,7 +105,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
             }} 
             className={currentPage === page ? style.active : style.normal}>{page}</span>
           })
-        } 
+        }  */}
           <span onClick={() => {
             if (currentPage > firstPage) {
               setCurrentPage(currentPage - 1);
