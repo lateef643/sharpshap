@@ -19,82 +19,58 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
   const [lastPage, setLastPage] = useState("");
   const [pageChangeLoading, setPageChangeLoading] = useState(false);
   const [date, setDate] = useState(new Date());
-  const [filter, setFilter] = useState("");
+  const [from, setFrom] = useState(null);
+  const [to, setTo] = useState(null);
+  const [transactionTypeFilter, setTransactionTypeFilter] = useState("");
   const firstPage = 1;
 
   useEffect(() => {
-    if (typeof filter === "number") {
-      const payload = {
-        "transaction_type_id": 2
-      }
-
-      console.log('this is called')
-      console.log(filter)
-      axios.get('https://api.cico.ng/api/transactions/filter', payload)
-      .then(res => {
-        const transactions = res.data.data.data;
-        const total = res.data.data.total;
-        const perPage = res.data.data.per_page;
-        const lastPage = res.data.data.last_page;
-        let pageNumbers = [];
-        console.log("filtered", res.data.data)
-        console.log(res)
-  
-        if (total !== null && total > 0) {
-          for (let i = 1; i <= Math.ceil(total / perPage); i++) {
-            pageNumbers.push(i);
-          };
-          setPageNumbers(pageNumbers);
-        }
-        // const businessName = res.data.data.agent.business_name;
-        // const transactions = res.data.data.transaction;
-        // const walletInfo = res.data.data.wallet;
-        // setWalletInfo(walletInfo);
-        setLoading(false);
-        setLastPage(lastPage)
-        // setBusinessName(businessName);
-        setTransactions(transactions);
-        setPageChangeLoading(false);
-      })
-      .catch(err => {
-        console.log(err);
-        if (err.response) {
-          console.log(err.response.data)
-        }
-      });
-    }
-  }, [filter]);
+    const now = new Date();
+    const nowString = now.toString();
+  }, [])
 
   useEffect(() => {
-    axios.get(`${AGENT_TRANSACTION_HISTORY}?page=${currentPage}`)
+    setPageChangeLoading(true);
+
+    const params = {};
+
+    if (transactionTypeFilter) params.type = transactionTypeFilter;
+    if (from) params.from = from;
+    if (to) params.to = to;
+    if (currentPage) params.page = currentPage;
+
+    axios.get(`${AGENT_TRANSACTION_HISTORY}`, {
+      params
+    })
     .then(res => {
       const transactions = res.data.data.data;
       const total = res.data.data.total;
       const perPage = res.data.data.per_page;
       const lastPage = res.data.data.last_page;
       let pageNumbers = [];
-      console.log(res.data.data)
 
       if (total !== null && total > 0) {
         for (let i = 1; i <= Math.ceil(total / perPage); i++) {
           pageNumbers.push(i);
         };
         setPageNumbers(pageNumbers);
+        setLoading(false);
+        setLastPage(lastPage)
+        // setBusinessName(businessName);
+        setTransactions(transactions);
+        setPageChangeLoading(false);
+        
       }
       // const businessName = res.data.data.agent.business_name;
       // const transactions = res.data.data.transaction;
       // const walletInfo = res.data.data.wallet;
       // setWalletInfo(walletInfo);
-      setLoading(false);
-      setLastPage(lastPage)
-      // setBusinessName(businessName);
-      setTransactions(transactions);
-      setPageChangeLoading(false);
+
     })
     .catch(err => {
-      console.log(err);
+      console.log(err)
     });
-  }, [currentPage]);
+  }, [transactionTypeFilter, currentPage, date]);
 
   useEffect(() => {
     setTransactionsLog(transactions);
@@ -109,10 +85,33 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
 
 
   const handleFilterChange = (e) => {
-    console.log('this bitch is running')
-    const filter = parseInt(e.target.value);
-    setFilter(filter);
-  }
+    const value = e.target.value;
+    let filter;
+
+    if (value) {
+      filter = parseInt(e.target.value);
+    }
+
+    setTransactionTypeFilter(filter);
+  };
+
+  const setDateFiltes= (date) => {
+    let from = date[0];
+    let to = date[1];;
+
+    const fromMonth = from.getMonth();
+    const toMonth = to.getMonth();
+    const fromDate = from.getDate();
+    const toDate = to.getDate();
+    const fromYear = from.getFullYear();
+    const toYear = to.getFullYear();
+
+    const formattedFrom = `${fromYear}-${fromMonth + 1}-${fromDate}`;
+    const formattedTo = `${toYear}-${toMonth + 1}-${toDate}`;
+
+    setFrom(formattedFrom);
+    setTo(formattedTo);
+  };
 
   return (
     <div className={styles.container}>
@@ -122,8 +121,8 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
           <div className={styles.dateFilter}>
             <DateRangePicker
               onChange={date => {
-                console.log(date);
                 setDate(date);
+                setDateFiltes(date);
               }}
               value={date}
             />
@@ -131,10 +130,16 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
         </div>
         <div>
           <select onChange={handleFilterChange}>
-            <option value="">Filter by transaction type</option>
+            <option value="">Filter by Transaction Type</option>
             <option value="">All transactions</option>
-            <option value="2">Transfer</option>
-            <option value="3">Airtime</option>
+            <option value="1">Energy</option>
+            <option value="2">Cashout</option>
+            <option value="3">Deposit</option>
+            <option value="4">Airtime</option>
+            <option value="5">DSTV</option>
+            <option value="6">GOTV</option>
+            <option value="7">Transfer</option>
+            <option value="8">Data</option>
           </select>          
         </div>
       </div> :
@@ -168,7 +173,7 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
         </div> 
         )
       ) : undefined}
-      {!loading ? 
+      {!loading && transactions.length ? 
         <div className={styles.pagination}>
           <span onClick={() => {
               setPageChangeLoading(true);

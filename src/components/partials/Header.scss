@@ -7,11 +7,11 @@
   position: fixed;
   width: calc(100vw - 16.5rem);
   z-index: 1;
-  height: 138px;
+  height: 13.8rem;
 
   @include respond(phone-large) {
     width: 100vw;
-    height: 90px;
+    height: 9rem;
   }
 
   @media print {
@@ -24,7 +24,7 @@
   justify-content: space-between;
   box-shadow: 0px 3px .6rem #00000029;
   padding: 0 3rem;
-  margin-bottom: .5rem;
+  margin-bottom: .2rem;
   height: 8.2rem;
   align-items: center;
 
