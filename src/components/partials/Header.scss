@@ -11,6 +11,7 @@
 
   @include respond(phone-large) {
     width: 100vw;
+    height: 90px;
   }
 
   @media print {
@@ -26,12 +27,16 @@
   margin-bottom: .5rem;
   height: 8.2rem;
   align-items: center;
+
+  @include respond(phone-large) {
+    height: 5rem;
+  }
 }
 
 .logo-box {
 
   @include respond(phone-large) {
-    margin-left: 5rem;
+    margin-left: 3rem;
   }
 }
 

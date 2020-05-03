@@ -11,18 +11,68 @@
     transform: translateX(0%);
   }
 
+  .toggleCheckbox:checked + .toggleButton .hamburgerItem {
+    background-color: transparent;
+  }
+
+  .toggleCheckbox:checked + .toggleButton .hamburgerItem::before {
+    top: 0;
+    transform: rotate(135deg);
+  }
+
+  .toggleCheckbox:checked + .toggleButton .hamburgerItem::after {
+    top: 0;
+    transform: rotate(-135deg);
+  }
+
   .toggleButton {
-    background-color: red;
     height: 6rem;
-    width: 5rem;
+    width: 4rem;
     z-index: 2000;
     position: fixed;
-    top: 1rem;
+    top: 1.2rem;
+    left: 1rem;
     background-color: transparent;
+    // text-align: center;
     display: none;
+    cursor: pointer;
+    // background-color: red;
 
     @include respond(phone-large) {
       display: initial;
+    }
+
+    .hamburgerItem {
+      position: relative;
+      margin-top: 3rem;
+      transition: all .2s;
+      
+      &,
+      &::before,
+      &::after {
+        width: 3rem;
+        height: 1px;
+        background-color: blue;
+        display: inline-block;
+        transition: all .7s;
+      }
+
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        // transition: all 5s;
+
+
+      }
+
+      &::before {
+        top: -.9rem;
+      }
+
+      &::after {
+        top: .9rem;
+      }
     }
   }
 
@@ -43,10 +93,12 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
-    transition: .8s all;
+    transition: .5s all;
 
 
     @include respond(phone-large) {
+      height: calc(100vh - 50px);
+      top: 50px;
       width: 15.5rem;
       transform: translateX(-100%);
     }
@@ -104,8 +156,9 @@
         padding-top: 2rem;
         transition: .2s all;
 
-        @include respond-custom(350px) {
-          padding-top: 1.5rem;
+        @include respond-custom(400px) {
+          height: calc(65vh/6);
+          padding-top: 1rem;
         }
 
         .linkItemImage {

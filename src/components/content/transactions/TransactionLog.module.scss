@@ -8,6 +8,43 @@
     font-size: 1.4rem;
     text-align: left;
 
+    > .filters {
+      background-color: #fff;
+      padding: 3rem 0;
+      padding-bottom: 5rem;
+      height: 7rem;
+      text-align: center;
+      // box-shadow: .2rem .2rem .3rem #00000029;
+      // margin-bottom: 1px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      .dateFilterContainer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .dateFilter {
+          display: flex;
+          flex-direction: column;
+        }
+      }
+
+      select {
+        margin-left: 3rem;
+        border: 0;
+        height: 5rem;
+        width: 25rem;
+        box-shadow: 0 .2rem .3rem #00000029;
+        color: #707087;
+        font-size: inherit;
+        font-family: inherit;
+        padding: 0 .5rem;
+        border-radius: 10px;
+      }
+    }
+
     > .loaderContainer {
       position: fixed;
       top: 50%;
@@ -32,10 +69,10 @@
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      height: 5rem;
-      padding: 1rem 2rem;
+      height: 6rem;
+      padding: 2rem 2rem;
       background-color: #fff;
-      margin-bottom: .3rem;
+      margin-bottom: .2rem;
     
       &:hover {
         transform: scale(1.02);
@@ -43,11 +80,16 @@
     }
 
     > .pagination {
+      margin: 0 auto;
       margin-top: 2.5rem;
+      background-color: #fff;
+      border-radius: 10px;
     }
+
     .pagination span {
       cursor: pointer;
-      color: black;
+      margin-bottom: 1rem;
+      color: #707087;
       float: left;
       padding: 8px 16px;
       text-decoration: none;

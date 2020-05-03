@@ -23,6 +23,10 @@
 
     &-header {
       flex: 0 0 13.8rem;
+
+      @include respond(phone-large) {
+        flex: 0 0 90px;
+      }
     }
   
     &-content {

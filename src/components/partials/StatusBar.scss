@@ -13,6 +13,7 @@
 
   @include respond(phone-large) {
     padding: 0 1.3rem;
+    height: 3rem;
   }
 
   &__links {
