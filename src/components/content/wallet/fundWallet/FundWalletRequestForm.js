@@ -4,7 +4,7 @@ import wallet from "../../../../assets/images/wallet.svg";
 import styles from './FundWalletRequestForm.module.scss';
 
 export const FundWalletRequestForm = ({handleAmountChange, bank, setComponentToRender, setAccountName, setBank, setAccountNumber, tellerNumber, amount, setBankCode, handleTellerNumberChange, bankCode, loading}) => {
-  const banks = [{"code":"100","id":18,"name":"Suntrust Bank","account": "0012345678"}, {"code":"044","id":1,"name":"Access Bank","account": "0012345678"},
+  const banks = [{"code":"100","id":18,"name":"Suntrust Bank","account": "0001192798"}, {"code":"044","id":1,"name":"Access Bank","account": "0012345678"},
   {"code":"070","id":6,"name":"Fidelity Bank","account": "0012345678"}];
 
   return (
