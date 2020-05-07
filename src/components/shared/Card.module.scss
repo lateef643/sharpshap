@@ -2,10 +2,10 @@
 @import "../../assets/styles/config/breakpoints";
 
 .card {
-  width: 23%;
-  min-height: 20vh;
+  width: 43%;
+  min-height: 17vh;
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 5px 5px 6px #00000029;
+  box-shadow: 3px 2px 4px #00000029;
   border-radius: 1px;
   opacity: 1;
   margin: 5px;
@@ -13,6 +13,7 @@
   text-align: center;
   position: relative;
   text-decoration: none;
+  border-radius: 10px;
   cursor: pointer;
   transition: .5s all;
 

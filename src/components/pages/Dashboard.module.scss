@@ -2,22 +2,51 @@
 @import "../../assets/styles/config/breakpoints";
 
 .container {
-  padding-top: 3rem;
-  width: 85%;
+  padding-top: 2rem;
+  width: 90%;
   margin: 0 auto;
   display: flex;
-  flex-direction: column;
   color: #707087;
   font-size: 1.4rem;
   overflow: hidden;
+  justify-content: space-between;
 
   @include respond(phone-large) {
     width: 90%;
   }
 
   > .cardContainer {
+    flex: 0 0 30%;
     display: flex;
     flex-flow: row wrap; 
     justify-content: flex-start;
+  }
+
+  > .chartContainer {
+    flex: 1;
+    background-color: #fff;
+    padding: 2rem;
+    padding-bottom: 1rem;
+    border-radius: 10px;
+
+    .sortBy {
+      float: right;
+      width: 10rem;
+      height: 3rem;
+      border: 0;
+      font-size: 1.4rem;
+      font-family: inherit;
+      box-shadow: 3px 2px 4px #00000029;
+      border-radius: 10px;
+      margin-right: 3rem;
+      margin-bottom: 2rem;
+      padding: 5px;
+    }
+
+    .chart {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
   }
 }
