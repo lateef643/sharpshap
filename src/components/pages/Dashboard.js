@@ -77,6 +77,7 @@ export const Dashboard = ({ changeCurrentPage }) => {
 
     window.onload = function() {
       var ctx = document.getElementById('canvas').getContext('2d');
+      if (window.myBar) window.myBar.destroy();
       window.myBar = new Chart(ctx, {
         type: 'bar',
         data: barChartData,
@@ -137,6 +138,15 @@ export const Dashboard = ({ changeCurrentPage }) => {
 
   const handleTransactionVolumeDateToDisplayChange = (e) => {
     const value = e.target.value;
+
+    if (value === 'month') {
+      setTransactionVolumeDataDaily([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]);
+    };
+
+    if (value === 'day') {
+      setTransactionVolumeDataMonthly([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,]);
+    };
+
     setTransactionVolumeDateToDisplay(value);
   };
   
