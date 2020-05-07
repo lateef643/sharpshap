@@ -8,6 +8,7 @@
     "@testing-library/user-event": "^7.1.2",
     "@wojtekmaj/react-daterange-picker": "^3.0.0",
     "axios": "^0.19.2",
+    "chart.js": "^2.9.3",
     "history": "^4.10.1",
     "node-sass": "^4.13.1",
     "react": "^16.13.0",

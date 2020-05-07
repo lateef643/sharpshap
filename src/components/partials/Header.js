@@ -5,13 +5,20 @@ import logo from "../../assets/images/cico-logo.svg";
 import notification from "../../assets/images/notification-svgrepo-com (1).svg";
 import chat from "../../assets/images/chat-svgrepo-com (1).svg";
 import user from "../../assets/images/user.svg";
+import { connect } from "react-redux";
 import styles from "./Header.module.scss";
 
-const Header = (props) => {
+const Header = ({ currentPage }) => {
   const notifications = [{
-    title: "Please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly."
+    title: "Dear Agent, please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly."
   }];
   const [toggleNotifications, setToggleNotifications] = useState(true);
+
+  useEffect(() => {
+    if (currentPage.heading !== "Dashboard" && currentPage.heading !== undefined) {
+      setToggleNotifications(false);
+    }
+  }, [currentPage]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -22,8 +29,6 @@ const Header = (props) => {
   const handleToggleNotifications = () => {
     setToggleNotifications(!toggleNotifications)
   };
-
-  console.log(toggleNotifications)
   
   return (
     <div className={styles.header}>
@@ -37,6 +42,7 @@ const Header = (props) => {
             <span className={styles.active}>1</span>
             {toggleNotifications ? 
             <div className={styles.notificationPanel}>
+              <p className={styles.heading}>Notifications</p>
               {notifications.map((notification, index) => {
               return <div>
                 <img src={chat} alt="chat icon" />
@@ -62,4 +68,8 @@ const Header = (props) => {
     </div>
 )};
 
-export default Header;
+const mapStateToProps = state => ({
+  currentPage: state.page
+});
+
+export default connect(mapStateToProps)(Header);

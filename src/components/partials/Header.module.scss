@@ -7,7 +7,7 @@
   position: fixed;
   width: calc(100vw - 16.5rem);
   z-index: 1;
-  height: 13.8rem;
+  height: 11rem;
 
   @include respond(phone-large) {
     width: 100vw;
@@ -24,7 +24,7 @@
     box-shadow: 0px 3px .6rem #00000029;
     padding: 0 3rem;
     margin-bottom: .2rem;
-    height: 8.2rem;
+    height: 7rem;
     align-items: center;
   
     @include respond(phone-large) {
@@ -67,12 +67,11 @@
         text-align: center;
         color: #fff;
         font-size: 8px;
-        padding-top: 1px;
       }
 
       .notificationPanel {
         position: absolute;
-        top: 140px;
+        top: 120px;
         width: 100vh;
         right: 10px;
         background-color: #fff;
@@ -80,6 +79,14 @@
         padding: 2rem 2.2rem;
         height: min-content;
         box-shadow: 0px 3px .6rem #00000029;
+        border-radius: 10px;
+
+        .heading {
+          font-size: 1.65rem;
+          color: #707070;
+          font-weight: bold;
+          margin-bottom: 2rem;
+        }
 
         div {
           display: flex;
@@ -90,11 +97,10 @@
           img {
             flex: 0 0 2rem;
             margin-top: 5px;
-            // width: 2rem;
           }
 
           p {
-            flex: 0 0 87%;
+            flex: 0 0 89%;
             font-size: 1.4rem;
             display: inline-block;
             color: #707070;

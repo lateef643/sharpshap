@@ -22,7 +22,7 @@
     align-items: stretch;
 
     &-header {
-      flex: 0 0 13.8rem;
+      flex: 0 0 11rem;
 
       @include respond(phone-large) {
         flex: 0 0 9rem;

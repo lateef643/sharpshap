@@ -6,7 +6,7 @@ import dashboard from "../../assets/images/dashboard.svg";
 import phone from "../../assets/images/phone.svg";
 import user from "../../assets/images/user-2.svg";
 import business from "../../assets/images/business.svg";
-import terminal from "../../assets/images/payment-terminal.svg";
+// import terminal from "../../assets/images/payment-terminal.svg";
 import wallet from "../../assets/images/wallet-outlined.svg";
 import { startLogout } from "../../actions/auth";
 import styles from './Sidebar.module.scss';
@@ -54,10 +54,10 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
               </NavLink>
             </div>
           </div>
-          <NavLink to="/my-terminals" className={styles.linkItem}>
+          {/* <NavLink to="/my-terminals" className={styles.linkItem}>
             <img src={terminal} className={styles.linkItemImage} alt="terminals icon" />
             <p className={styles.linkItemText}>My Terminals</p>
-          </NavLink>
+          </NavLink> */}
           <div className={styles.linkItem}>
             <img src={business} className={styles.linkItemImage}  alt="data icon" />
             <p className={styles.linkItemText}>Transactions</p>
