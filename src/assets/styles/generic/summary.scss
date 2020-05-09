@@ -1,3 +1,6 @@
+@import "../config/breakpoints";
+@import "../config/mixins";
+
 .paymentContainer {
   height: 39.2rem;
   width: 41.6rem;
@@ -9,6 +12,10 @@
   justify-content: space-between;
   background-color: #fff;
   color: #707070;
+
+  @include respond(phone-large) {
+    width: 95%;
+  }
 
   .heading {
     margin-bottom: 2rem;

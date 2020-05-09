@@ -20,6 +20,8 @@ export const Profile = (props) => {
   const [error, setError] = useState({});
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [passwordLoading, setPasswordLoading] = useState(false);
+  const [status, setStatus] = useState("");
 
   useEffect(() => {
     props.changeCurrentPage({
@@ -49,19 +51,21 @@ export const Profile = (props) => {
 
   const handleOnPasswordChangeSubmit = (e) => {
     e.preventDefault();
-    setLoading(true);
+    setPasswordLoading(true);
 
     const payload = {
-      oldPassword,
-      password
+      "new_password" : password,
+      "confirm_password" : password
     };
 
-    axios.post(UPDATE_USER_PASSWORD, payload)
+    axios.patch(UPDATE_USER_PASSWORD, payload)
     .then(res => {
-      // console.log(res);
+      setStatus("Password change successful");
+      setPasswordLoading(false);
     })
     .catch(err => {
-      console.log(err);
+      setStatus("An error occured");
+      setPasswordLoading(false);
     })
   };
 
@@ -88,6 +92,7 @@ export const Profile = (props) => {
   const handleOldPasswordChange = (e) => {
     const oldPassword = e.target.value;
     setOldPassword(oldPassword);
+    setStatus("");
   }
 
   const handleAddressChange = (e) => {
@@ -103,10 +108,12 @@ export const Profile = (props) => {
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
+    setStatus("");
   }
 
   const handleConfirmPasswordChange = (e) => {
     const password2 = e.target.value;
+    setStatus("");
 
     if (password2 === password) {
       setConfirmPassword(password2);
@@ -157,6 +164,7 @@ export const Profile = (props) => {
         setModal(false);
       }}>X</span>
       <form className={style.passwordForm} onSubmit={handleOnPasswordChangeSubmit} >
+        <p className={style.status}>{status ? status : undefined}</p>
         <label>
           <span>Old Password</span>
           <input type="text" onChange={handleOldPasswordChange} />      
@@ -170,7 +178,7 @@ export const Profile = (props) => {
           <span>Confirm Password</span>
           <input type="text" onChange={handleConfirmPasswordChange} />      
         </label>        
-        <button type="submit">Submit</button>
+        <button type="submit">{passwordLoading ? <Loader color="white" size="small" position="center" /> : "Submit"}</button>
       </form> 
     </div> : undefined}
   </div>

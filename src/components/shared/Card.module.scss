@@ -75,6 +75,13 @@
   height: 21vh;
   width: 21%;
   margin-right: 1.5rem;
+
+  @include respond(phone-large) {
+    height: 15vh;
+    width: 23%;
+    margin: 0;
+    margin-right: 5px;
+  }
 } 
 
 .small {
