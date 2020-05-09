@@ -14,12 +14,14 @@ import { setCurrentPage } from "../../actions/page";
 export const Dashboard = ({ changeCurrentPage }) => {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']; 
   const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+  const dayShort = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
+  const monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
   const [transactionVolumeDataToDisplay, setTransactionVolumeDateToDisplay] = useState('month');
   const [transactionVolumeData, setTransactionVolumeData] = useState(null);
   const [transactionVolumeDataMonthly, setTransactionVolumeDataMonthly] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const [transactionVolumeDataDaily, setTransactionVolumeDataDaily] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
   const barChartData = {
-    labels: transactionVolumeDataToDisplay === 'month' ? months : days,
+    labels: transactionVolumeDataToDisplay === 'month' ? monthShort : dayShort,
     datasets: [{
       backgroundColor: '#2A58AE',
       data: transactionVolumeDataToDisplay === 'month' ? transactionVolumeDataMonthly : transactionVolumeDataDaily,

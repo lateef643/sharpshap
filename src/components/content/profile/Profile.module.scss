@@ -129,6 +129,12 @@
       flex-wrap: wrap;
       background-color: #fff;
       box-shadow: .4rem .4rem .6rem #00000029;
+
+      .status {
+        font-size: 1.4rem;
+        color: #707070;
+        margin-bottom: 3rem;
+      }
   
       label {
         .error {
