@@ -4,14 +4,10 @@ import axios from "axios";
 import { AGENT_DASHBOARD_DATA } from "../../store/api/constants";
 import Card from "../shared/Card";
 import styles from "./Dashboard.module.scss";
-import cabletv from "../../assets/images/cabletv.svg";
-import power from "../../assets/images/electricity.svg";
+import bills from "../../assets/images/bills.svg";
 import transfer from "../../assets/images/transfer-outlined.svg";
-import data from "../../assets/images/internet-phone.svg";
-import insurance from "../../assets/images/insurance-outlined.svg";
-import airtime from "../../assets/images/phone-svgrepo-com.svg";
-import books from "../../assets/images/books-outline.svg";
-import wallet from "../../assets/images/wallet-outline.svg";
+import sim from "../../assets/images/sim.svg";
+import football from "../../assets/images/football.svg";
 import Chart from "chart.js";
 import { setCurrentPage } from "../../actions/page";
 
@@ -145,14 +141,10 @@ export const Dashboard = ({ changeCurrentPage }) => {
   return (
   <div className={styles.container}>
     <div className={styles.cardContainer}>
-      <Card link="transfer" text="Transfer Funds" image={transfer} />
-      <Card link="recharge-cable" text="Recharge Cable" image={cabletv} />
-      <Card link="buy-data" text="Buy Data" image={data} />
-      <Card link="buy-airtime" text="Buy Airtime" image={airtime} />
-      <Card link="pay-electricity" text="Pay Electricity" image={power} />
-      <Card link="buy-insurance" text="Buy Insurance" image={insurance}  />
-      <Card link="education" text="Education" image={books} />
-      <Card link="wallet-transfer" text="Wallet Transfer" image={wallet} />
+      <Card link="transfer" text="Transfer Funds" size="small" image={transfer} />
+      <Card link="bill-payment" text="Bill Payment" size="small" image={bills} />
+      <Card link="airtime-data" text="Airtime & Data" size="small" image={sim} />
+      <Card link="betting" text="Betting" size="small" image={football} />
     </div>
     <div className={styles.chartContainer}>
       <select className={styles.sortBy} onChange={handleTransactionVolumeDateToDisplayChange}>

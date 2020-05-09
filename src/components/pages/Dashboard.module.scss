@@ -12,7 +12,8 @@
   justify-content: space-between;
 
   @include respond(phone-large) {
-    width: 90%;
+    width: 95%;
+    flex-direction: column;
   }
 
   > .cardContainer {
@@ -20,6 +21,12 @@
     display: flex;
     flex-flow: row wrap; 
     justify-content: flex-start;
+    height: max-content;
+
+    @include respond(phone-large) {
+      margin-bottom: 3rem;
+      justify-content: space-between;
+    }
   }
 
   > .chartContainer {
@@ -28,6 +35,11 @@
     padding: 2rem;
     padding-bottom: 1rem;
     border-radius: 10px;
+
+    @include respond(phone-large) {
+      padding: .5rem;
+      padding-top: 1rem;
+    }
 
     .sortBy {
       float: right;
@@ -41,6 +53,12 @@
       margin-right: 3rem;
       margin-bottom: 2rem;
       padding: 5px;
+
+      @include respond(phone-large) {
+        height: 3rem;
+        width: 8rem;
+        font-size: 1.2rem;
+      }
     }
 
     .chart {
