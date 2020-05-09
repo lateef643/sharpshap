@@ -13,7 +13,7 @@ const Header = ({ currentPage }) => {
     title: "Dear Agent, please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly."
   }];
   const [toggleNotifications, setToggleNotifications] = useState(true);
-
+  const [toggleProfile, setToggleProfile] = useState(false);
   useEffect(() => {
     if (currentPage.heading !== "Dashboard" && currentPage.heading !== undefined) {
       setToggleNotifications(false);
@@ -52,14 +52,14 @@ const Header = ({ currentPage }) => {
             </div> : undefined}
           </span>
           <span className={styles.profile}>
-            <img src={user} alt="User silhoutte"/>
-            <span>
-              <span className={styles.one}>Manage Profile</span>
-              <span className={styles.two}>
-                <Link to="/profile">Edit Profile</Link>
-                <Link to="/profile">Change Password</Link>
-              </span>
-            </span>  
+            <img src={user} onClick={() => {
+              setToggleProfile(!toggleProfile)
+            }} alt="User silhoutte"/>
+            {toggleProfile ? 
+            <span className={styles.submenu}>
+              <Link to="/profile">Edit Profile</Link>
+              <Link to="/profile">Change Password</Link>
+            </span> : undefined}
           </span>        
         </div>
 

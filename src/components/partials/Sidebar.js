@@ -75,14 +75,17 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
           </div>  
           <div className={styles.linkItem} >
             <img src={user} className={styles.linkItemImage} alt="user icon" />
-            <p className={styles.linkItemText}>Manage Users</p>
+            <p className={styles.linkItemText}>Profile</p>
             <div className={styles.linkSecondary}>
               <NavLink to="/add-user" className={styles.linkSecondaryItem}>
                 <p>Add User</p>
               </NavLink>
               <NavLink to="/list-users" className={styles.linkSecondaryItem}>
                 <p>List Users</p>
-              </NavLink>         
+              </NavLink> 
+              <NavLink to="/profile" className={styles.linkSecondaryItem}>
+                <p>Change Password</p>
+              </NavLink>        
             </div>
           </div>
           <NavLink to="/contact-us" className={styles.linkItem} >
