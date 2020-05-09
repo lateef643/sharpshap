@@ -20,6 +20,9 @@ import RechargeCable from "../components/content/services/cable/RechargeCable";
 import BuyInsurance from "../components/content/services/insurance/BuyInsurance";
 import Profile from "../components/content/profile/Profile";
 import WalletTransfer from "../components/content/wallet/walletTransfer/WalletTransfer";
+import BillPayment from "../components/pages/BillPayment";
+import AirtimeData from "../components/pages/AirtimeData";
+import Betting from "../components/pages/Betting";
 import { route } from "react-router-dom";
 
 const routes = [
@@ -107,6 +110,18 @@ const routes = [
   {
     path: "/transfer",
     main: () => <Transfer />
+  },
+  {
+    path: "/bill-payment",
+    main: () => <BillPayment />
+  },
+  {
+    path: "/airtime-data",
+    main: () => <AirtimeData />
+  },
+  {
+    path: "/betting",
+    main: () => <Betting />
   }
 ];
 
