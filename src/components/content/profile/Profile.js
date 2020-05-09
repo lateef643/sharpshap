@@ -21,7 +21,6 @@ export const Profile = (props) => {
   const [modal, setModal] = useState(false);
   const [loading, setLoading] = useState(false);
   const [passwordLoading, setPasswordLoading] = useState(false);
-  const [status, setStatus] = useState("");
 
   useEffect(() => {
     props.changeCurrentPage({
@@ -55,16 +54,15 @@ export const Profile = (props) => {
 
     const payload = {
       "new_password" : password,
-      "confirm_password" : password
+      "confirm_password" : confirmPassword
     };
 
-    axios.patch(UPDATE_USER_PASSWORD, payload)
+    axios.put(UPDATE_USER_PASSWORD, payload)
     .then(res => {
-      setStatus("Password change successful");
       setPasswordLoading(false);
+      setModal(false);
     })
     .catch(err => {
-      setStatus("An error occured");
       setPasswordLoading(false);
     })
   };
@@ -92,7 +90,6 @@ export const Profile = (props) => {
   const handleOldPasswordChange = (e) => {
     const oldPassword = e.target.value;
     setOldPassword(oldPassword);
-    setStatus("");
   }
 
   const handleAddressChange = (e) => {
@@ -108,12 +105,10 @@ export const Profile = (props) => {
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
-    setStatus("");
   }
 
   const handleConfirmPasswordChange = (e) => {
     const password2 = e.target.value;
-    setStatus("");
 
     if (password2 === password) {
       setConfirmPassword(password2);
@@ -125,58 +120,59 @@ export const Profile = (props) => {
 
   return (
   <div className={style.container}>
-    <form className={style.detailsForm} onSubmit={handleOnSubmit} >
-      <div>
-        <span>1. Details</span><span className={style.startModal} onClick={(e) => {
+    <form className={style.form} onSubmit={handleOnSubmit} >
+      <div className={style.optionsContainer}>
+        <span className={style.detailsText}>1. Details</span>
+        <span className={style.startModal} onClick={(e) => {
           e.preventDefault();
           setModal(true);
         }}>2. Change Password</span>
       </div>
       <label>
         <span>Firstname</span>
-        <input type="text" disabled={true} onChange={handleFirstnameChange} value={firstname} />
+        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleFirstnameChange} value={firstname} />
       </label>
       <label>
         <span>Lastname</span>
-        <input type="text" disabled={true} onChange={handleLastnameChange} value={lastname}/>      
+        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleLastnameChange} value={lastname}/>      
       </label>    
       <label>
         <span>Phone Number</span>
-        <input type="text" disabled={true} onChange={handlePhoneChange} value={phoneNumber} />      
+        <input type="text" disabled={true} className={style.outlineGrey} onChange={handlePhoneChange} value={phoneNumber} />      
       </label>    
       <label>
         <span>Email</span>
-        <input type="text" disabled={true} onChange={handleEmailChange} Value={email} />      
+        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleEmailChange} Value={email} />      
       </label>  
       <label>
         <span>Business Name</span>
-        <input type="text" disabled={true} onChange={handleBusinessNameChange} Value={businessName} />      
+        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleBusinessNameChange} Value={businessName} />      
       </label>   
       <label>
         <span>Address</span>
-        <input type="text" onChange={handleAddressChange} value={address} />      
+        <input type="text" className={style.outlineGrey} onChange={handleAddressChange} value={address} />      
       </label>    
       <button type="submit">{loading ? <Loader color="white" size="small" position="small" /> : "Submit"}</button>
     </form>
     {modal ? <div className={style.passwordModal}>
       <span onClick={(e) => {
         e.preventDefault();
+        setError({...error, passwordCheck: undefined});
         setModal(false);
       }}>X</span>
-      <form className={style.passwordForm} onSubmit={handleOnPasswordChangeSubmit} >
-        <p className={style.status}>{status ? status : undefined}</p>
+      <form className={style.form} onSubmit={handleOnPasswordChangeSubmit} >
         <label>
           <span>Old Password</span>
-          <input type="text" onChange={handleOldPasswordChange} />      
+          <input type="password" className={style.outlineGrey} onChange={handleOldPasswordChange} />      
         </label>
         <label>
           <span>New Password</span>
-          <input type="text" onChange={handlePasswordChange} />      
+          <input type="password" className={style.outlineGrey} onChange={handlePasswordChange} />      
         </label>    
         <label>
           {error.passwordCheck ? <p className={style.error}>{error.passwordCheck}</p> : undefined}
           <span>Confirm Password</span>
-          <input type="text" onChange={handleConfirmPasswordChange} />      
+          <input type="password" className={style.outlineGrey} onChange={handleConfirmPasswordChange} />      
         </label>        
         <button type="submit">{passwordLoading ? <Loader color="white" size="small" position="center" /> : "Submit"}</button>
       </form> 
