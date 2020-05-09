@@ -1,3 +1,6 @@
+@import "../config/breakpoints";
+@import "../config/mixins";
+
 .section {
   height: 45.2rem;
   width: 43.6rem;
@@ -10,6 +13,10 @@
   display: flex;
   justify-content: space-between;
   flex-direction: column;
+
+  @include respond(phone-large) {
+    width: 95%;
+  }
 
   .imageContainer {
     display: flex;
@@ -99,7 +106,6 @@
           flex: 0 0 45%;
           display: inline-block;
           height: 3.1rem;
-          background-color: yellow;
           border-radius: 5px;
           font-size: 1.35rem;
           text-align: center;
