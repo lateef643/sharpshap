@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 import { connect } from "react-redux";
 import avatar from "../../assets/images/user.svg";
 import dashboard from "../../assets/images/dashboard.svg";
-import phone from "../../assets/images/phone.svg";
+import phone from "../../assets/images/phone-contact.svg";
 import user from "../../assets/images/user-2.svg";
 import business from "../../assets/images/business.svg";
 // import terminal from "../../assets/images/payment-terminal.svg";
@@ -43,6 +43,9 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
             <img src={wallet} className={styles.linkItemImage} alt="wallet icon" />
             <p className={styles.linkItemText}>My Wallet</p>
             <div className={styles.linkSecondary}>
+              <NavLink to="/wallet-transfer" className={styles.linkSecondaryItem}>
+                <p>Wallet Transfer</p>
+              </NavLink>
               <NavLink to="/wallet-log" className={styles.linkSecondaryItem}>
                 <p>Wallet Log</p>
               </NavLink>

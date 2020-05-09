@@ -1,0 +1,13 @@
+.container {
+  padding-top: 3rem;
+  width: 80%;
+  margin: 0 auto;
+
+  > .cardContainer {
+    flex: 0 0 30%;
+    display: flex;
+    flex-flow: row wrap; 
+    justify-content: flex-start;
+    height: max-content;
+  }
+}

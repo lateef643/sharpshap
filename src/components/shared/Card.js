@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import style from './Card.module.scss';
+import styles from './Card.module.scss';
 
 const Card = (props) => (
-  <Link to={`/${props.link}`} className={style.card}>
-    <div className={style.container}>
-      <img src={props.image} className={style.image} alt="card icon" />
-      <p className={style.text}>{props.text}</p>      
+  <Link to={`/${props.link}`} className={`${styles.card} ${styles[props.size]}`}>
+    <div className={styles.container}>
+      <img src={props.image} className={styles.image} alt="card icon" />
+      <p className={styles.text}>{props.text}</p>      
     </div>
   </Link>
 );
