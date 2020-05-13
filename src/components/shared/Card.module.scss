@@ -73,8 +73,7 @@
 
 .large {
   height: 21vh;
-  width: 21%;
-  margin-right: 1.5rem;
+  width: 19%;
 
   @include respond(phone-large) {
     height: 15vh;

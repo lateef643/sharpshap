@@ -76,6 +76,12 @@
         left: 3rem;
         top: 1rem;
         width: max-content;
+
+        @include respond(phone-large) {
+          font-size: 1.3rem;
+          top: .5rem;
+          padding: 0 .5rem;
+        }
       }
   
       input, select {
@@ -91,7 +97,7 @@
 
         @include respond(phone-large) {
           width: 26rem;
-          height: 2.8rem;
+          height: 3.3rem;
         }
       }
 
@@ -122,7 +128,7 @@
 
       div {
         position: relative;
-        bottom: 20%;
+        bottom: 75%;
         left: 20px;
         z-index: 5;
       }
