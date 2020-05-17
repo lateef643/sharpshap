@@ -1,64 +1,114 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import PropTypes from "prop-types";
+
+import validateFormData from "../../../../validation/validateFormData";
 import mtn from "../../../../assets/images/MTN Logo.svg";
 import _9mobile from "../../../../assets/images/9mobile.svg";
 import airtel from "../../../../assets/images/Airtel.svg";
 import glo from "../../../../assets/images/glo.svg";
+
 import styles from "./BuyAirtimeForm.module.scss";
 
 export const BuyAirtimeForm = (props) => {
-  const telcoList = 
-    [{code: "A01E", id: 1, name: "Airtel", type: "Airtime"},
-    {code: "A02E", id: 2, name: "9 Mobile", type: "Airtime"},
-    {code: "A03E", id: 3, name: "Globacom", type: "Airtime"},
-    {code: "A04E", id: 4, name: "MTN", type: "Airtime"}];
-  const { setComponentToRender, handleTelcoChange, handlePhoneChange, handleAmountChange, 
-    amount, phone, telco, validationError, setValidationError, telcoName } = props;
+  const { networkList, AirtimePurchaseFormState: state, dispatch, setComponentToRender } = props;
+  const [validationErrors, setValidationErrors] = useState({});
 
-      //Dynamically render telco logo
-      let telcoImageUrl = "";
+  //Dynamically render network logo
+  let telcoImageUrl;
 
-      telcoImageUrl = telcoName === "MTN" ? mtn
-      : telcoName === "9 Mobile" ?  _9mobile : telcoName === "Globacom" ? glo
-      : telcoName === "Airtel" ? airtel: mtn;
+  switch (state.network) {
+    case "A04E":
+      telcoImageUrl = mtn;
+      break;
+    case "A02E":
+      telcoImageUrl = _9mobile;
+      break;
+    case "A03E":
+      telcoImageUrl = glo;
+      break;
+    case "A01E":
+      telcoImageUrl = airtel;
+      break;
+    default:
+      telcoImageUrl = mtn;
+      break;
+  }
+
+  const handleOnContinue = (e) => {
+    e.preventDefault();
+
+    const keys = Object.keys(state);
+    const errors = validateFormData(state, keys);
+
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) return 
+    
+    setComponentToRender("summary");
+  }
+
+  const handleSetFormState = ({ target }) => {
+    setValidationErrors({ ...validationErrors, [target.name]: false });
+    dispatch({
+      type: "UPDATE_FORM_STATE",
+      payload: { [target.name]: target.value }
+    });
+  }
   
-    return (
-    <form className={styles.form} onSubmit={(e) => {
-      e.preventDefault();
-
-      if (amount && phone && telco) {
-        setComponentToRender("summary");
-      } else {
-        setTimeout(() => {
-          setValidationError({ ...validationError, telco: !telco, phone: !phone, amount: !amount });
-        }, 2000);        
-      }
-    }}>
+  return (
+    <form className={styles.form} 
+      onSubmit={(e) => handleOnContinue(e)} 
+      autoComplete="off"
+    >
       <div className={styles.imageContainer}>
         <img src={telcoImageUrl} className={styles.image} />
       </div>
       <label>
         <span>Network</span>
-        <select onChange={handleTelcoChange} className={validationError.telco ? styles.outlineRed : styles.outlineGrey}>
+        <select 
+          name="network"
+          value={state.network}
+          onChange={(e) => handleSetFormState(e)} 
+          className={validationErrors.network ? styles.outlineRed : styles.outlineGrey}>
           <option value="">Select Network</option>
-          {telcoList.map((telco, index) => {
-            return <option value={JSON.stringify(telco)} key={index}>{telco.name}</option>
+          {networkList.map((telco, index) => {
+            return <option value={telco.code} key={index}>{telco.name}</option>
           })}
         </select>  
-        {validationError.telco ? <p className={styles.validationErrorText}>Please select network</p> : undefined}
+        {validationErrors.network ? <p className={styles.validationErrorText}>Please select network</p> : undefined}
       </label>
       <label>
         <span>Amount</span>
-        <input type="number" value={amount} onChange={handleAmountChange} className={validationError.amount ? styles.outlineRed : styles.outlineGrey} />   
-        {validationError.amount ? <p className={styles.validationErrorText}>Please enter amount</p> : undefined}
+        <input 
+          type="text"
+          name="amount"
+          value={state.amount} 
+          onChange={(e) => handleSetFormState(e)} 
+          className={validationErrors.amount ? styles.outlineRed : styles.outlineGrey} 
+        />   
+        {validationErrors.amount ? <p className={styles.validationErrorText}>Please enter amount</p> : undefined}
       </label>    
       <label>
         <span>Phone Number</span>
-        <input type="text" value={phone} onChange={handlePhoneChange} className={validationError.phone ? styles.outlineRed : styles.outlineGrey} />  
-        {validationError.phone ? <p className={styles.validationErrorText}>Please enter phone number</p> : undefined}
+        <input 
+          type="text"
+          name="phone"
+          value={state.phone} 
+          onChange={(e) => handleSetFormState(e)} 
+          className={validationErrors.phone ? styles.outlineRed : styles.outlineGrey} 
+        />  
+        {validationErrors.phone ? <p className={styles.validationErrorText}>Please enter valid phone number</p> : undefined}
       </label>
       <button type="submit">Continue</button>
     </form>
   )
-};
+}
+
+BuyAirtimeForm.propTypes = {
+  networkList: PropTypes.array.isRequired,
+  AirtimePurchaseFormState: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
+  setComponentToRender: PropTypes.func.isRequired,
+}
 
 export default BuyAirtimeForm;

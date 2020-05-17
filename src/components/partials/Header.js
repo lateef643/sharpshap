@@ -4,14 +4,15 @@ import StatusBar from "../partials/StatusBar";
 import logo from "../../assets/images/cico-logo.svg";
 import notification from "../../assets/images/notification-svgrepo-com (1).svg";
 import chat from "../../assets/images/chat-svgrepo-com (1).svg";
+import caution from "../../assets/images/warning-svgrepo-com.svg";
 import user from "../../assets/images/user.svg";
 import { connect } from "react-redux";
 import styles from "./Header.module.scss";
 
-const Header = ({ currentPage }) => {
-  const notifications = [{
+const Header = ({ currentPage, isDefaultPassword }) => {
+  const [notifications, setNotifications] = useState([{
     title: "Dear Agent, please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly."
-  }];
+  }]);
   const [toggleNotifications, setToggleNotifications] = useState(true);
   const [toggleProfile, setToggleProfile] = useState(false);
   useEffect(() => {
@@ -19,6 +20,14 @@ const Header = ({ currentPage }) => {
       setToggleNotifications(false);
     }
   }, [currentPage]);
+
+  useEffect(() => {
+    if (isDefaultPassword === 0) {
+      setNotifications([...notifications, {
+        title: "Dear Agent, please create a secure password to proceed."
+      }])
+    }
+  }, [])
 
   useEffect(() => {
     setTimeout(() => {
@@ -39,16 +48,18 @@ const Header = ({ currentPage }) => {
         <div className={styles.actions}>
           <span className={styles.notification} onClick={handleToggleNotifications}>
             <img src={notification} alt="notification bell" />
-            <span className={styles.active}>1</span>
+            <span className={styles.active}>{notifications.length}</span>
             {toggleNotifications ? 
             <div className={styles.notificationPanel}>
               <p className={styles.heading}>Notifications</p>
-              {notifications.map((notification, index) => {
-              return <div>
+              <div>
                 <img src={chat} alt="chat icon" />
-                <p key={index}>{notification.title}</p>
+                <p>{notifications[0].title}</p>
               </div>
-              })}
+              {notifications[1] ? <div>
+                <img src={caution} alt="caution icon" />
+                <p>{notifications[1].title}</p>
+              </div> : undefined}
             </div> : undefined}
           </span>
           <span className={styles.profile}>
@@ -69,7 +80,8 @@ const Header = ({ currentPage }) => {
 )};
 
 const mapStateToProps = state => ({
-  currentPage: state.page
+  currentPage: state.page,
+  isDefaultPassword: state.auth.user.is_default
 });
 
 export default connect(mapStateToProps)(Header);

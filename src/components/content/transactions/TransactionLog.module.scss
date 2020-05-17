@@ -1,3 +1,6 @@
+@import "../../../assets/styles/config/breakpoints";
+@import "../../../assets/styles/config/mixins";
+
 .container {
     padding-top: 2rem;
     width: 98%;
@@ -8,6 +11,16 @@
     font-size: 1.4rem;
     text-align: left;
 
+    @include respond(phone-large) {
+      width: 96%;
+      padding-top: 1rem;
+    }
+
+    @include respond-custom(330px) {
+      width: 99%;
+      font-size: 1.3rem;
+    }
+
     > .filters {
       background-color: #fff;
       padding: 1rem 0;
@@ -15,16 +28,38 @@
       height: 7rem;
       text-align: center;
 
-      div {
+      @include respond(phone-large) {
+        height: max-content;
+        padding-bottom: 1.5rem;
+        margin-bottom: 3px;
+      }
+
+    .filtersContainer {
       display: flex;
       flex-direction: row;
       justify-content: space-evenly;
       align-items: center;
 
+      @include respond(phone-large) {
+        flex-direction: column;
+      }
+
+      .export {
+
+        @include respond(phone-large) {
+          display: none;
+        }
+      }
+
       .dateFilterContainer {
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        @include respond(phone-large) {
+          width: 20rem;
+          display: none;
+        }
 
         .dateFilter {
           display: flex;
@@ -42,15 +77,24 @@
         font-family: inherit;
         padding: 0 .5rem;
         border-radius: 10px;
+
+        @include respond(phone-large) {
+          width: 20rem;
+        }
       }
     }
-    }
+  }
 
     > .loaderContainer {
       position: fixed;
       top: 50%;
       left: 53.5%;
       transform: translate(50%, 50%);
+
+      @include respond(phone-large) {
+        left: 35%;
+        top: 40%;
+      }
     }
 
     > .heading {
@@ -63,13 +107,53 @@
       padding-left: 2rem;
       background-color: #fff;
       text-align: left;
+
+      @include respond(phone-large) {
+        display: none;
+      }
+
+      .status {
+        flex: 0 0 3%;
+      }
+
+      .date {
+        flex: 0 0 12.5%;
+      }
+
+      .amount {
+        flex: 0 0 7.5%;
+      }
+
+      .type {
+        flex: 0 0 6%;
+      }
+
+      .prev {
+        flex: 0 0 7.5%;
+      }
+      
+      .current {
+        flex: 0 0 7.5%;
+      }
+
+      .ref {
+        flex: 0 0 18%;
+      }
+
+      .customer {
+        flex: 0 0 21%;
+      }
+      
+      .details {
+        flex: 0 0 8%;
+      }
     }
 
     > .log {
       box-shadow: .5rem .5rem .5rem #00000029;
       display: flex;
       flex-direction: row;
-      justify-content: space-between;
+      // justify-content: space-between;
       align-items: center;
       height: 6rem;
       padding: 2rem .5rem;
@@ -79,100 +163,195 @@
     
       &:hover {
         transform: scale(1.02);
+
+        @include respond(phone-large) {
+          transform: scale(1);
+        }
+      }
+
+      @include respond(phone-large) {
+        height: max-content;
+        display: initial;
+        padding: 0;
+        box-shadow: .2rem .2rem .3rem #00000029;
+        background-color: transparent;
+      }
+
+      .logItem {
+        @include respond(phone-large) {
+          height: 3.5rem;
+          margin-bottom: 3px;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 0 1rem;
+          background-color: #fff;
+
+          a {
+            text-decoration: none;
+            color: #800080;
+          }
+        }
+
+      > .headingMobile {
+          display: none;
+
+          @include respond(phone-large) {
+            display: initial;
+            flex: 0 0 35%;
+          }
+        }
+      }
+
+      .status {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+
+        > .statusColor {
+          flex: 0 0 3%;
+
+          span {
+            border-radius: 100%;
+            width: 1rem;
+            height: 1rem;
+            display: inline-block;
+          }
+
+          .pending {
+            background-color: #FE8B0C;
+          }
+          
+          .failed {
+            background-color: #FF0000;
+          }
+          
+          .success {
+            background-color: #3AC962;
+          }
+        }
+
+        > .statusDate {
+          flex: 0 0 12.5%;
+
+          @include respond(phone-large) {
+            flex: 0 0 45%;
+          }
+        }
+        
+        > .statusAmount {
+          flex: 0 0 7.5%;
+
+        @include respond(phone-large) {
+            flex: 0 0 22%;
+          }         
+        }
+
+        > .statusType {
+          flex: 0 0 6%;
+
+          @include respond(phone-large) {
+            flex: 0 0 18%;
+          }
+        }
+        
+        > .statusRef {
+          flex: 0 0 18%;
+          word-break: break-all;
+
+          @include respond(phone-large) {
+            display: none;
+          }         
+        }
+        
+        > .statusCurrent {
+          flex: 0 0 7.5%;
+
+          @include respond(phone-large) {
+            display: none;
+          }         
+        }
+
+        > .statusPrev {
+          flex: 0 0 7.5%;
+
+          @include respond(phone-large) {
+            display: none;
+          }         
+        }
+
+        > .statusCustomer {
+          flex: 0 0 21%;
+
+          @include respond(phone-large) {
+            display: none;
+          }         
+        }
+
+        > .statusAccordionToggle {
+          display: none;
+
+          @include respond(phone-large) {
+            display: initial;
+            cursor: pointer;
+          }          
+        }
+
+        > a {
+          flex: 0 0 8%;
+          text-decoration: none;
+          color: #800080;
+
+          @include respond(phone-large) {
+            display: none;
+          }
+        }
       }
     }
 
     > .pagination {
       margin: 2rem auto;
-      background-color: #fff;
-      // position: absolute;
-      // bottom: 1rem;
-      // left: 40%;
-      // transform: translateX(-50%, 50%);
-    }
 
-    .pagination span {
-      cursor: pointer;
-      margin-bottom: 1rem;
-      color: #707087;
-      float: left;
-      padding: 8px 16px;
-      text-decoration: none;
-      transition: background-color .3s;
-      border: 1px solid #ddd;
-    }
-    
-    .pagination span.active {
-      background-color: #2A58AE;;
-      color: white;
-      border: 1px solid #2A58AE;;
-    }
+      @include respond(phone-large) {
+        margin-top: .5rem;
+        width: 100%;
+      }
 
-    .pagination span:disabled {
-      background-color: #2A58AE;;
-      color: white;
-      border: 1px solid #2A58AE;;
-    }
-  }
-
-.status {
-  flex: 0 0 3%;
-
-  span {
-    border-radius: 100%;
-    width: 1rem;
-    height: 1rem;
-    display: inline-block;
-  }
-}
-
-.pending {
-  background-color: #FE8B0C;
-}
-
-.failed {
-  background-color: #FF0000;
-}
-
-.success {
-  background-color: #3AC962;
-}
-
-.date {
-  flex: 0 0 12.5%;
-}
-
-.prev {
-  flex: 0 0 7.5%;
-}
-
-.current {
-  flex: 0 0 7.5%;
-}
-
-.amount {
-  flex: 0 0 7.5%;
-}
-
-.ref {
-  flex: 0 0 18%;
-  word-break: break-all;
-}
-
-.type {
-  flex: 0 0 6%;
-}
-
-.customer {
-  flex: 0 0 21%;
-}
-
-.details {
-  flex: 0 0 8%;
+      span {
+        cursor: pointer;
+        margin-bottom: 1rem;
+        color: #707087;
+        float: left;
+        padding: 8px 16px;
+        text-decoration: none;
+        transition: background-color .3s;
+        border: 1px solid #ddd;
+        text-align: center;
+        background-color: #fff;
   
-  a {
-    text-decoration: none;
-    color: #800080;
+        @include respond(phone-large) {
+          width: 22.75%;
+          padding: 8px 5px;
+        }
+
+      &.active {
+        background-color: #2A58AE;;
+        color: white;
+        border: 1px solid #2A58AE;;
+      }
+  
+      &:disabled {
+        background-color: #2A58AE;;
+        color: white;
+        border: 1px solid #2A58AE;;
+      }
+    }
+      
+    > .currentPage {
+      width: 9%;
+    }
   }
 }
 

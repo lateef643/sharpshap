@@ -4,6 +4,8 @@ import ListLoader from "../../partials/ListLoader";
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+
+import formatToCurrency from "../../../util/formatToCurrency";
 import ExportToExcel from "../../shared/ExportToExcel";
 import styles from './TransactionLog.module.scss';
 import { setCurrentPage } from "../../../actions/page";
@@ -23,6 +25,7 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
   const [from, setFrom] = useState(null);
   const [to, setTo] = useState(null);
   const [transactionTypeFilter, setTransactionTypeFilter] = useState("");
+  const [accordionToggle, setAccordionToggle] = useState(false);
   const firstPage = 1;
 
   useEffect(() => {
@@ -44,7 +47,6 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
       const res = await axios.get(`${AGENT_TRANSACTION_HISTORY}`, { params });
 
       const transactions = res.data.data.data;
-      console.log(transactions)
       const total = res.data.data.total;
       const perPage = res.data.data.per_page;
       const lastPage = res.data.data.last_page;
@@ -64,6 +66,7 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
     })();
   }, [transactionTypeFilter, currentPage, date]);
 
+  //dispatching to redux state because we need transactions log to get transactionDetails
   useEffect(() => {
     setTransactionsLog(transactions);
   });
@@ -115,8 +118,10 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
     <div className={styles.container}>
     {!loading && transactions.length > 0 ?
       <div className={styles.filters}>
-        <div>
-          <ExportToExcel dataset={transactions} labels={labels} filename="Transactions Log" />
+        <div className={styles.filtersContainer}>
+          <div className={styles.export}>
+            <ExportToExcel dataset={transactions} labels={labels} filename="Transactions Log" />
+          </div>
           <div className={styles.dateFilterContainer}>
             <div className={styles.dateFilter}>
               <DateRangePicker
@@ -150,32 +155,73 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
         <div className={styles.heading}>
           <span className={styles.status}>Status</span>
           <span className={styles.date}>Date Created</span>
+          <span className={styles.amount}>Amount</span>
+          <span className={styles.type}>Type</span>
           <span className={styles.prev}>Prev Balance</span>
           <span className={styles.current}>Current Balance</span>
-          <span className={styles.amount}>Amount</span>
           <span className={styles.customer}>Customer</span>
           <span className={styles.ref}>Reference</span>
-          <span className={styles.type}>Type</span>
           {/* <span className={styles.itemSix}>Agent</span> */}
           <span className={styles.details}>Details</span>
         </div> : undefined
       }
       {!loading || !pageChangeLoading ? transactions.map((transaction, index) => ( 
         <div key={transaction.id} className={styles.log}>
-          <span className={styles.status}><span className={`${transaction.status === "failed" ? styles.failed 
-            : transaction.status === "pending" ? styles.pending : styles.success}`}></span></span> 
-          <span className={styles.date}>{transaction.created_at}</span> 
-          <span className={styles.prev}>{transaction.wallet_history.previous_bal}</span>
-          <span className={styles.current}>{transaction.wallet_history.current_bal}</span>          
-          <span className={styles.amount}>&#8358;{transaction.amount}</span>
-          <span className={styles.customer}>{transaction.customer_info}</span>
-          <span className={styles.ref}>{transaction.reference}</span>
-          <span className={styles.type}>{transaction.transtype.name}</span>
-          {/* <span className={styles.itemSix}>{transaction.agent.business_name}</span> */}
-          <span className={styles.details}>
+          <div className={`${styles.logItem} ${styles.status}`}>
+            {/* <span className={`${styles.headingMobile} ${styles.statusHeadingMobile}`}>Status:</span> */}
+            <span className={styles.statusColor}>
+              <span className={`${transaction.status === "failed" ? styles.failed 
+            : transaction.status === "pending" ? styles.pending : styles.success}`}></span>
+            </span>
+            <span className={styles.statusDate}>{transaction.created_at}</span>
+            <span className={styles.statusAmount}>&#8358;{formatToCurrency(transaction.amount)}</span>
+            <span className={styles.statusType}>{transaction.transtype.name}</span>
+            <span className={styles.statusPrev}>&#8358;{formatToCurrency(transaction.wallet_history.previous_bal)}</span>
+            <span className={styles.statusCurrent}>&#8358;{formatToCurrency(transaction.wallet_history.current_bal)}</span>
+            <span className={styles.statusCustomer}>{transaction.customer_info}</span>
+            <span className={styles.statusRef}>{transaction.reference}</span>
             <Link to={`/transaction-details/${transaction.reference}`}>View Details</Link>
-          </span>
-        </div> 
+            <span className={styles.statusAccordionToggle} onClick={(e) => {
+              setAccordionToggle(accordionToggle === index + 1 ? false : index + 1);
+            }}>{accordionToggle === index + 1 ? <span>x</span> : <span>&#11206;</span>}</span>
+          </div> 
+          {accordionToggle === index + 1 ? 
+          <>
+          <div className={`${styles.logItem} ${styles.date}`}>
+            <span className={`${styles.headingMobile} ${styles.dateHeadingMobile}`}>Date:</span> 
+            <span>{transaction.created_at}</span>
+          </div>
+          <div className={`${styles.logItem} ${styles.prev}`}>
+            <span className={`${styles.headingMobile} ${styles.prevHeadingMobile}`}>Previous Balance:</span> 
+            <span className={styles.prevContent}>{transaction.wallet_history.previous_bal}</span>
+          </div>
+          <div className={`${styles.logItem} ${styles.current}`}>
+            <span className={`${styles.headingMobile} ${styles.currentHeadingMobile}`}>Current Balance:</span> 
+            <span className={styles.currentContent}>{transaction.wallet_history.current_bal}</span>
+          </div>          
+          <div className={`${styles.logItem} ${styles.amount}`}>
+            <span className={`${styles.headingMobile} ${styles.amountHeadingMobile}`}>Amount:</span> 
+            <span className={styles.amountContent}>&#8358;{transaction.amount}</span>
+          </div>
+          <div className={`${styles.logItem} ${styles.customer}`}>
+            <span className={`${styles.headingMobile} ${styles.customerHeadingMobile}`}>Customer:</span> 
+            <span className={styles.customerContent}>{transaction.customer_info}</span>
+          </div>
+          <div className={`${styles.logItem} ${styles.ref}`}>
+            <span className={`${styles.headingMobile} ${styles.refHeadingMobile}`}>Ref:</span> 
+            <span className={styles.dateContent}>{transaction.reference}</span>
+          </div>
+          <div className={`${styles.logItem} ${styles.type}`}>
+            <span className={`${styles.headingMobile} ${styles.typeHeadingMobile}`}>Type:</span> 
+            <span className={styles.typeContent}>{transaction.transtype.name}</span>
+          </div>
+          {/* <span className={styles.itemSix}>{transaction.agent.business_name}</span> */}
+          <div className={`${styles.logItem} ${styles.details}`}>
+            <span className={`${styles.headingMobile} ${styles.detailsHeadingMobile}`}>Details:</span> 
+            <Link to={`/transaction-details/${transaction.reference}`}>View Details</Link>
+          </div>
+          </> : undefined }
+        </div>
         )
       ) : undefined}
       {!loading && transactions.length ? 
@@ -191,7 +237,7 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
               }
             }} 
           disabled={currentPage === lastPage}>Next Page</span>
-          <span className={styles.active} disabled>{currentPage}</span>
+          <span className={`${styles.currentPage} ${styles.active}`} disabled>{currentPage}</span>
          {/* {
           pageNumbers.map((page, index) => {
             if (page === 1) {

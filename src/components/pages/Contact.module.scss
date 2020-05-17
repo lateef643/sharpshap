@@ -1,3 +1,6 @@
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/mixins";
+
 .container {
     padding-top: 5rem;
   
@@ -14,6 +17,11 @@
       padding-bottom: 3rem;
       justify-content: space-between;
       flex-direction: column;
+
+      @include respond(phone-large) {
+        width: 95%;
+        padding: 0 1rem;
+      }
 
       .heading {
         padding: 2rem;
