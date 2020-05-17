@@ -5,6 +5,7 @@ import BankForm from "./BankForm";
 import banksList from "../../../../store/localData/listOfBanks";
 import TransferSummary from "./TransferSummary";
 import TransferStatus from "./TransferStatus";
+import FailedTransaction from "../../../shared/FailedTransaction";
 import { setCurrentPage } from "../../../../actions/page";
 import { DISBURSE_FUNDS } from "../../../../store/api/constants";
 import styles from './Transfer.module.scss';
@@ -27,7 +28,6 @@ const Transfer = ({ changeCurrentPage }) => {
   const [verificationLoading, setVerificationLoading] = useState(false);
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState(null);
-  const [transactionStatus, setTransactionStatus] = useState(undefined);
 
   useEffect(() => {
     if (bankCode) {
@@ -74,19 +74,16 @@ const Transfer = ({ changeCurrentPage }) => {
 
         setSuccessData({ ...successData, status, transactionCost: TRANSACTION_COST, total, date: transactionDate, bank: bankName });
         setLoading(false);
-        setTransactionStatus(true);
-        setComponentToRender("status");
+        setComponentToRender("success");
       })
       .catch(err => {
         if (err.response && err.response.status === 403) {
           setLoading(false);  
-          setTransactionStatus(false);
-          setComponentToRender("status");
+          setComponentToRender("failed");
         } else {
           setTimeout(() => {
             setLoading(false);
-            setTransactionStatus(false);
-            setComponentToRender("status");
+            setComponentToRender("failed");
           }, 7000);
         }
       })
@@ -123,7 +120,7 @@ const Transfer = ({ changeCurrentPage }) => {
   };
 
   switch(componentToRender) {
-    case ("form"):
+    case "form":
       renderedComponent = <BankForm
         handleBankCodeChange={handleBankCodeChange}
         handleAmountChange={handleAmountChange}
@@ -146,7 +143,7 @@ const Transfer = ({ changeCurrentPage }) => {
         setComponentToRender={setComponentToRender}
       />;
       break;
-    case("summary"):
+    case "summary":
       renderedComponent = <TransferSummary 
         loading={loading}
         phone={phone} 
@@ -159,15 +156,17 @@ const Transfer = ({ changeCurrentPage }) => {
         handleOnSubmit={handleOnSubmit} 
       />;
       break;
-    case("status"):
+    case "success":
       renderedComponent = <TransferStatus
         successData={successData}
-        transactionStatus={transactionStatus}
         amount={amount}
         total={total} 
         transactionCost={TRANSACTION_COST} 
         setComponentToRender={setComponentToRender}
       />;
+      break;
+    case "failed":
+      renderedComponent = <FailedTransaction />;
       break;
     default: 
       renderedComponent = null;

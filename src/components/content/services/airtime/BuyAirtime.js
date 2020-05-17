@@ -1,34 +1,50 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+
+import { setCurrentPage } from "../../../../actions/page";
+import { VEND_AIRTIME } from "../../../../store/api/constants";
+import AirtimePurchaseReducer, { initialState } from "./airtime-reducer";
 import BuyAirtimeForm from "./BuyAirtimeForm";
 import BuyAirtimeSummary from "./BuyAirtimeSummary";
 import BuyAirtimeStatus from "./BuyAirtimeStatus";
-import { setCurrentPage } from "../../../../actions/page";
-import { VEND_AIRTIME } from "../../../../store/api/constants";
-import style from './BuyAirtime.module.scss';
+import FailedTransaction from "../../../shared/FailedTransaction";
+
+import styles from './BuyAirtime.module.scss';
 
 export const BuyAirtime = ({ changeCurrentPage }) => {
   let renderedComponent;
   const TRANSACTION_COST = 0;
   const [componentToRender, setComponentToRender] = useState("form");
-  const [telco, setTelco] = useState("");
-  const [telcoName, setTelcoName] = useState("");
-  const [amount, setAmount] = useState("");
-  const [phone, setPhone] = useState("");
+  const [AirtimePurchaseFormState, dispatch] = useReducer(AirtimePurchaseReducer, initialState);
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [validationError, setValidationError] = useState({});
-  const [transactionStatus, setTransactionStatus] = useState(undefined);
+  const networkList = 
+    [{code: "A01E", id: 1, name: "Airtel", type: "Airtime"},
+    {code: "A02E", id: 2, name: "9 Mobile", type: "Airtime"},
+    {code: "A03E", id: 3, name: "Globacom", type: "Airtime"},
+    {code: "A04E", id: 4, name: "MTN", type: "Airtime"}];
+  const [selectedNetworkName, setSelectedNetworkName] = useState("");
 
   useEffect(() => {
     changeCurrentPage({
       heading: "Buy Airtime",
       search: false
     });
-  }, [changeCurrentPage]);
+  }, []);
+
+  useEffect(() => {
+    if (AirtimePurchaseFormState.network) {
+      const selectedNetwork = networkList.find(telco => {
+        return telco.code === AirtimePurchaseFormState.network;
+      });
+
+      setSelectedNetworkName(selectedNetwork.name);
+    }
+  }, [AirtimePurchaseFormState.network]);
 
   const handleOnSubmit = () => {
+    const { network: telco, amount, phone } = AirtimePurchaseFormState;
     setLoading(true);
     
     const payload = {
@@ -42,85 +58,51 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
       .then(res => {
         const successData = res.data.data;
         setLoading(false);
-        setTransactionStatus(true);
         setSuccessData(successData);
-        setComponentToRender("status");
+        setComponentToRender("success");
       })
       .catch(err => {
         if (err.response && err.response.status === 403) {
-          setTransactionStatus(false);
           setLoading(false);
-          setComponentToRender("status");
+          setComponentToRender("failed");
         } else {
           setTimeout(() => {
-            setTransactionStatus(false);
             setLoading(false);
-            setComponentToRender("status");
+            setComponentToRender("failed");
           }, 7000);
         }
       })
     }
   };
 
-  const handleTelcoChange = (e) => {
-    const telco = JSON.parse(e.target.value);
-
-    if (typeof telco !== "string" ) {
-      const telcoCode = telco.code;
-      const telcoName = telco.name;
-
-      setValidationError({ ...validationError, telco: !telcoCode  });
-      setTelco(telcoCode);  
-      setTelcoName(telcoName);
-    } else {
-      setTelco(telco);
-    }
-  };
-
-  const handleAmountChange = (e) => {
-    const newAmount = e.target.value;
-    setValidationError({ ...validationError, amount: !newAmount  });
-    setAmount(newAmount);
-  };
-
-  const handlePhoneChange = (e) => {
-    const newPhone = e.target.value;
-    setValidationError({ ...validationError, phone: !newPhone  });
-    setPhone(newPhone);
-  };
-
   switch(componentToRender) {
     case "form":
-      renderedComponent = <BuyAirtimeForm 
-        handleTelcoChange={handleTelcoChange}
-        handleAmountChange={handleAmountChange}
-        handlePhoneChange={handlePhoneChange}
-        validationError={validationError}
-        setValidationError={setValidationError}
+      renderedComponent = 
+      <BuyAirtimeForm 
+        networkList={networkList}
+        AirtimePurchaseFormState={AirtimePurchaseFormState}
+        dispatch={dispatch}
         setComponentToRender={setComponentToRender}
-        amount={amount}
-        phone={phone}
-        telco={telco}
-        telcoName={telcoName}
       />;
       break;
     case "summary":
-      renderedComponent = <BuyAirtimeSummary 
-        amount={amount}
-        phone={phone}
-        telcoName={telcoName}
+      renderedComponent = 
+      <BuyAirtimeSummary 
+        AirtimePurchaseFormState={AirtimePurchaseFormState}
+        selectedNetworkName={selectedNetworkName}
         handleOnSubmit={handleOnSubmit}
         loading={loading}
         transactionCost={TRANSACTION_COST}
       />;
       break;
-    case "status":
+    case "success":
       renderedComponent = <BuyAirtimeStatus 
-        transactionStatus={transactionStatus}
         successData={successData}
         setComponentToRender={setComponentToRender}
-        transactionCost={TRANSACTION_COST}
       />;
+      break;
+    case "failed":
+      renderedComponent = <FailedTransaction />;
       break;
     default:
       renderedComponent = null;
@@ -128,7 +110,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
   }
 
   return (
-  <div className={style.container}>
+  <div className={styles.container}>
     {renderedComponent}
   </div>
 )};

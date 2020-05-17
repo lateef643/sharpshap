@@ -37,6 +37,8 @@ const BankForm = (props) => {
     };
 
     if (accountNumber.length >= 10) {
+      setAccountValidationErrorText("");
+
       axios.post(VERIFY_ACCOUNT, payload)
         .then(res => {
           const accountName = res.data.data.data.account_info.accountName;
@@ -74,7 +76,6 @@ const BankForm = (props) => {
   : bankCode === "100" ? suntrust : access;
 
   return (
-  <div className={styles.container}>
     <form className={styles.form} onSubmit={(e) => {
       e.preventDefault();
 
@@ -119,7 +120,6 @@ const BankForm = (props) => {
       </label> 
       <button type="submit" disabled={!inputValidation}>Continue</button>
     </form> 
-  </div>
 )}
 
 export default BankForm;

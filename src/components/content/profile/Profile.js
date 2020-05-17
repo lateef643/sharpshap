@@ -142,7 +142,7 @@ export const Profile = (props) => {
       </label>    
       <label>
         <span>Email</span>
-        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleEmailChange} Value={email} />      
+        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleEmailChange} value={email} />      
       </label>  
       <label>
         <span>Business Name</span>

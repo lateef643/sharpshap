@@ -1,10 +1,13 @@
-import React, {useEffect} from "react";
-import { connect } from "react-redux";
+import React from "react";
+import PropTypes from "prop-types";
+
+import formatToCurrency from "../../../../util/formatToCurrency";
 import Loader from "../../../partials/Loader";
+
 import style from './RechargeCableSummary.module.scss';
 
 export const RechargeCableSummary = (props) => {
-  const { smartCardNumber, amount, plan, provider, planDuration, customerName, loading, handleOnSubmit} = props;
+  const { RechargeCableFormState: state, loading, handleOnSubmit, transactionCost } = props;
 
   return (
     <div className={style.paymentContainer} >
@@ -16,35 +19,35 @@ export const RechargeCableSummary = (props) => {
       </div>
       <div>
         <span>Service:</span>
-        <span>{provider}</span>
+        <span>{state.provider}</span>
       </div>
       <div>
         <span>Plan:</span>
-        <span>{plan}</span>
+        <span>{state.selectedPlanName}</span>
       </div>
       <div>
         <span>Account Name:</span>
-        <span>{customerName}</span>
+        <span>{state.customerName}</span>
       </div>
       <div>
         <span>Smart card:</span>
-        <span>{smartCardNumber}</span>
+        <span>{state.smartCardNumber}</span>
       </div> 
       <div>
         <span>Plan Duration:</span>
-        <span>{planDuration} {planDuration === "1" ? "month" : "months"}</span>
+        <span>{state.selectedPlanDuration} {state.selectedPlanDuration === "1" ? "month" : "months"}</span>
       </div>
       <div>
         <span>Amount:</span>
-        <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        <span>&#8358;{formatToCurrency(state.amount)}</span>
       </div> 
       <div>
         <span>Transaction cost:</span>
-        <span>&#8358;{Number(0).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        <span>&#8358;{formatToCurrency(transactionCost)}</span>
       </div>     
       <div className={style.total}>    
         <span>Total:</span>
-        <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span> 
+        <span>&#8358;{formatToCurrency(state.amount)}</span> 
       </div> 
       <button onClick={(e) => {
         e.preventDefault();
@@ -52,5 +55,12 @@ export const RechargeCableSummary = (props) => {
       }}>{loading ? <Loader size="small" color="white" position="center" /> : "Continue"}</button>       
     </div>    
 )};
+
+RechargeCableSummary.propTypes = {
+  RechargeCableFormState: PropTypes.object,
+  loading: PropTypes.bool,
+  handleOnSubmit: PropTypes.func,
+  transactionCost: PropTypes.number
+}
 
 export default RechargeCableSummary;
