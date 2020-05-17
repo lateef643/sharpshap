@@ -103,10 +103,20 @@
 
       .outlineGrey {
         border: 1px solid #afafaf;
+
+        &:focus {
+          border: 0;
+          outline: 1px solid rgba(11, 74, 182, 0.774);
+        }
       }
 
       .outlineRed {
         border: 1px solid rgba(255, 0, 0, 0.719);
+
+        &:focus {
+          border: 0;
+          outline: 1px solid #2A58AE;
+        }
       }
 
       option {

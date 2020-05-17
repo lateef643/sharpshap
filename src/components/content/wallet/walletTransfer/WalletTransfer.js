@@ -4,6 +4,7 @@ import { WALLET_TRANSFER } from "../../../../store/api/constants";
 import WalletTransferForm from "./WalletTransferForm";
 import WalletTransferStatus from "./WalletTransferStatus";
 import WalletTransferSummary from "./WalletTransferSummary";
+import FailedTransaction from "../../../shared/FailedTransaction";
 import styles from "./WalletTransfer.module.scss";
 
 export const WalletTransfer = () => {
@@ -14,7 +15,6 @@ export const WalletTransfer = () => {
   const [agentId, setAgentId] = useState("");
   const [amount, setAmount] = useState("");
   const [total, setTotal] = useState(null);
-  const [transactionStatus, setTransactionStatus] = useState("");
   const [successData, setSuccessData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -52,15 +52,13 @@ export const WalletTransfer = () => {
         const transactionDate = getTransactionDate(date);
        
         setSuccessData({...successData, date: transactionDate });
-        setTransactionStatus(true);
         setLoading(false); 
-        setComponentToRender("status");     
+        setComponentToRender("success");     
       })
       .catch(err => {
         console.log(err);
-        setTransactionStatus(false);
         setLoading(false);
-        setComponentToRender("status");
+        setComponentToRender("failed");
       })
   };
 
@@ -86,16 +84,18 @@ export const WalletTransfer = () => {
         loading={loading} 
       />;
       break;
-    case "status":
+    case "success":
       renderedComponent = <WalletTransferStatus        
-        transactionStatus={transactionStatus} 
         successData={successData} 
         setComponentToRender={setComponentToRender}
         transactionCost={TRANSACTION_COST}
         total={total}
         agentId={agentId}
       />;
-        break;
+      break;
+    case "failed":
+      renderedComponent = <FailedTransaction />;
+      break;
     default:
       renderedComponent = null; 
       break;

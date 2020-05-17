@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import BuyDataForm from "./BuyDataForm";
 import BuyDataSummary from "./BuyDataSummary";
 import BuyDataStatus from "./BuyDataStatus";
+import FailedTransaction from "../../../shared/FailedTransaction";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_DATA } from "../../../../store/api/constants";
 import style from './BuyData.module.scss';
@@ -20,7 +21,6 @@ const BuyData = ({ changeCurrentPage }) => {
   const [selectedDataPlanId, setSelectedDataPlanId] = useState("");
   const [phone, setPhone] = useState("");
   const [amount, setAmount] = useState("");
-  const [transactionStatus, setTransactionStatus] = useState(undefined);
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [validationError, setValidationError] = useState({});
@@ -45,19 +45,16 @@ const BuyData = ({ changeCurrentPage }) => {
       axios.post(VEND_DATA, payload)
       .then(res => {
         const successData = res.data.data;
-        setTransactionStatus(true);
         setSuccessData(successData);
         setComponentToRender("status");    
       })
       .catch(err => {
         if (err.response && err.response.status === 403) {
-          setTransactionStatus(false);
           setLoading(false);
           setComponentToRender("status");    
         } else {
           setTimeout(() => {
             setLoading(false);
-            setTransactionStatus(false);
             setComponentToRender("status");    
           }, 7000)
         }
@@ -139,13 +136,15 @@ const BuyData = ({ changeCurrentPage }) => {
         loading={loading}
       />;
       break;
-    case "status":
+    case "success":
       renderedComponent = <BuyDataStatus 
         successData={successData}
-        transactionStatus={transactionStatus}
         setComponentToRender={setComponentToRender}
         transactionCost={TRANSACTION_COST}
       />;
+      break;
+    case "failed":
+      renderedComponent = <FailedTransaction />;
       break;
     default:
       renderedComponent = null;

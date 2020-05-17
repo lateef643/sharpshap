@@ -1,10 +1,16 @@
 @import "../../assets/styles/generic/status.scss";
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/mixins";
 
 .section {
   margin-top: 2rem;
   padding: 2rem 0;
   width: 50rem;
   height: 48rem;
+
+  @include respond(phone-large) {
+    width: 95%;
+  }
 
   @media print {
     position: absolute;  

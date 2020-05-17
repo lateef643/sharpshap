@@ -1,13 +1,13 @@
 .flow {
-    width: calc(25px * 1.3);
+    width: calc(20px * 1.3);
     height: calc(20px * 1.3);
     display: flex;
     justify-content: space-between;
   }
   
   .flowDot {
-    width: 27%;
-    height: 25%;
+    width: 20%;
+    height: 20%;
     background-color: rgb(119, 114, 115);
     border-radius: 50%;
     animation: sk-flow 1.4s cubic-bezier(0.455, 0.03, 0.515, 0.955) 0s infinite both;

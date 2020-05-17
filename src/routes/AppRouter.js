@@ -14,7 +14,7 @@ import Transfer from "../components/content/services/transfer/Transfer";
 import ActivityLog from "../components/content/wallet/logs/ActivityLog";
 import TransactionDetails from "../components/shared/TransactionDetails";
 import BuyAirtime from "../components/content/services/airtime/BuyAirtime";
-import PayElectricity from "../components/content/services/electricity/PayElectricity";
+import ElectricityPayment from "../components/content/services/electricity/ElectricityPayment";
 import BuyData from "../components/content/services/data/BuyData";
 import RechargeCable from "../components/content/services/cable/RechargeCable";
 import BuyInsurance from "../components/content/services/insurance/BuyInsurance";
@@ -89,7 +89,7 @@ const routes = [
   },
   {
     path: "/pay-electricity",
-    main: () => <PayElectricity />
+    main: () => <ElectricityPayment />
   },
   {
     path: "/buy-data",

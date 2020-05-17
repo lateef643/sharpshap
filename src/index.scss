@@ -1,4 +1,5 @@
 @import-normalize;
+@import "./assets/styles/config/variables";
 
 * {
   box-sizing: border-box;
@@ -21,4 +22,14 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+::-moz-selection { 
+  background: $cico-blue;
+  color: #fff;
+}
+
+::selection { 
+  background: $cico-blue;
+  color: #fff;
 }

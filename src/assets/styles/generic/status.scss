@@ -43,113 +43,82 @@
     width: 90%;
     margin: 0 auto;
     margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
 
-    .successContent {
+    .transactionDetails {
+      flex: 1;
       display: flex;
       flex-direction: column;
-      justify-content: space-between; 
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-top: 1px solid #7070706c;
 
-      .transactionDetails {
-        flex: 1;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 1rem 0;
-        border-top: 1px solid #7070706c;
-
-        div {
-          flex: 0 0 10%;
-          margin: .8rem;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          text-align: left;
-  
-          span {
-            display: block;
-          }
-        } 
-      }
-
-      .transactionAmount {
-        flex: 0 0 35%;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        padding: 1rem 0;
-        border-top: 1px solid #7070706c;
-
-        div {
-          flex: 0 0 20%;
-          margin: .8rem;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          text-align: left;
-  
-          span {
-            display: block;
-          }
-        } 
-
-      }
-      
-      .link {
-        margin-top: 2rem;
-        flex: 0 0 15%;
+      div {
+        flex: 0 0 10%;
+        margin: .8rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-        padding: 0;
+        text-align: left;
 
-        a, div {
-          flex: 0 0 45%;
-          display: inline-block;
-          height: 3.1rem;
-          border-radius: 5px;
-          font-size: 1.35rem;
-          text-align: center;
-          line-height: 2.8rem;
-          text-decoration: none;
-          color: #fff;
-          cursor: pointer;
+        span {
+          display: block;
         }
-
-        .linkHome {
-          background-color: #2A58AE;
-        }
-
-        .linkServiceHome {
-          background-color: #00B378;
-        }
-      }
+      } 
     }
 
-    .failedContent {
-      width: 95%;
-      line-height: 2.5rem;
-      font-size: 1.45rem;
-      margin: 2rem auto 0 auto;
-      text-align: center;
+    .transactionAmount {
+      flex: 0 0 35%;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 1rem 0;
+      border-top: 1px solid #7070706c;
 
       div {
-        position: relative;
-        top: 11rem;
-        right: 1rem;
+        flex: 0 0 20%;
+        margin: .8rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
 
-        a {
-          text-decoration: none;
-          color: #707070;
+        span {
+          display: block;
         }
+      } 
+    }
+    
+    .link {
+      margin-top: 2rem;
+      flex: 0 0 15%;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      padding: 0;
+
+      a, div {
+        flex: 0 0 45%;
+        display: inline-block;
+        height: 3.1rem;
+        border-radius: 5px;
+        font-size: 1.35rem;
+        text-align: center;
+        line-height: 2.8rem;
+        text-decoration: none;
+        color: #fff;
+        cursor: pointer;
+      }
+
+      .linkHome {
+        background-color: #2A58AE;
+      }
+
+      .linkServiceHome {
+        background-color: #00B378;
       }
     }
   }
-}
-
-//Alternate section container for failed transactions
-.sectionFailed {
-  position: relative;
-  top: 4rem;
-  height: 30rem;
-  width: 35rem;
 }

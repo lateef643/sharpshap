@@ -152,3 +152,11 @@ export const VERIFY_ACCOUNT = `${path}/bank-operations/verify-account`;
 
 //disburse funds -- POST
 export const DISBURSE_FUNDS = `${path}/bank-operations/disburse-fund`;
+
+///////ENERGY//////////////////
+
+//get energy vendors - GET
+export const GET_ENERGY_VENDORS = `${path}/energy/discos`;
+
+//validate meter number - POST
+export const VALIDATE_METER_NUMBER = `${path}/energy`;

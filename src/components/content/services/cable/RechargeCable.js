@@ -1,33 +1,33 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useReducer } from "react";
+import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
-import RechargeCableForm from "./RechargeCableForm";
+
+import RechargeCableReducer, { initialFormState } from "./cable-reducer";
+import { setCurrentPage } from "../../../../actions/page";
 import { VEND_STARTIMES } from "../../../../store/api/constants";
 import { VEND_MULTICHOICE } from "../../../../store/api/constants";
-import { setCurrentPage } from "../../../../actions/page";
+import RechargeCableForm from "./RechargeCableForm";
 import RechargeCableStatus from "./RechargeCableStatus";
 import RechargeCableSummary from "./RechargeCableSummary";
-import style from './RechargeCable.module.scss';
+import FailedTransaction from "../../../shared/FailedTransaction";
+
+import styles from './RechargeCable.module.scss';
 
 export const RechargeCable = ({ changeCurrentPage }) => {
-  let renderedComponent;
   const TRANSACTION_COST = 0;
+  let renderedComponent;
   const [componentToRender, setComponentToRender] = useState("form");
-  const [plans, setPlans] = useState([]);
-  const [provider, setProvider] = useState("");
-  const [smartCardNumber, setSmartCardNumber] = useState("");
-  const [customerName, setCustomerName] = useState("");
-  const [planDuration, setPlanDuration] = useState("");
-  const [amount, setAmount] = useState("");
-  const [plan, setPlan] = useState({});
-  const [code, setCode] = useState("");
-  const [phone, setPhone] = useState("");
+  const [RechargeCableFormState, dispatch] = useReducer(RechargeCableReducer, initialFormState);
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [customerValidationLoading, setCustomerValidationLoading] = useState(false);
-  const [validationError, setValidationError] = useState({});
-  const [transactionStatus, setTransactionStatus] = useState(false);
-  const [getPlansLoading, setGetPlansLoading] = useState(false);
+
+  useEffect(() => {
+    changeCurrentPage({
+      heading: "Recharge Cable",
+      search: false
+    });
+  }, []);
 
   const getTransactionDate = (date) => {
     const dateString = date.toString();
@@ -35,17 +35,11 @@ export const RechargeCable = ({ changeCurrentPage }) => {
     return dateString.slice(0, 24);
   };
 
-  useEffect(() => {
-    changeCurrentPage({
-      heading: "Recharge Cable",
-      search: false
-    });
-  }, [changeCurrentPage]);
-
   const handleOnSubmit = () => {
     setLoading(true);
 
     let providerApi;
+    const { provider, smartCardNumber, amount, selectedPlanCode, selectedplanDuration } = RechargeCableFormState;
 
     if (provider === "dstv" || provider === "gotv") {
       providerApi = VEND_MULTICHOICE;
@@ -57,148 +51,71 @@ export const RechargeCable = ({ changeCurrentPage }) => {
       smartcard: smartCardNumber,
       amount,
       customer_name: "MOBILE",
-      product_code: code,
-      period: planDuration,
+      product_code: selectedPlanCode,
+      period: selectedplanDuration,
       service: provider      
     };
-        axios.post(providerApi, payload)
-        .then(res => {
-          const successData = res.data.data;
-          const date = new Date();
-          const transactionDate = getTransactionDate(date);
 
-          setLoading(false);
-          setSuccessData({ ...successData, date: transactionDate });
-          setTransactionStatus(true);
-          setComponentToRender("status");
-        })
-        .catch(err => {
-          setLoading(false);
-          setTransactionStatus(false);
-          setComponentToRender("status");
-        })   
-  };
-
-  const handleProviderChange = (e) => {
-    const newProviderCode = e.target.value;
-    validationError.provider = !newProviderCode;
-    setProvider(newProviderCode);
-    
-  };
-
-  const handleSmartCardNumberChange = (e) => {
-    const newSmartCardNumber = e.target.value;
-    validationError.smartCardNumber = !newSmartCardNumber;
-    setSmartCardNumber(newSmartCardNumber);
-  };
-
-  const handlePlanChange = (e) => {
-    const newPlan = JSON.parse(e.target.value);
-    validationError.code = !newPlan.code;
-    setPlan(newPlan);
-    setCode(newPlan.code);
-  };
-
-  const handlePhoneChange = (e) => {
-    const newPhone = e.target.value;
-    validationError.phone = !newPhone;
-    setPhone(newPhone);
-  };
-
-  const handlePlanDurationChange = (e) => {
-    const newDuration = e.target.value;
-    validationError.planDuration = !newDuration
-    setPlanDuration(newDuration);
-    handlePlanAmountChange(newDuration);
-  };
-
-  const handlePlanAmountChange = (data) => {
-    let selectedPlan;
-    let amount;
-
-    if (typeof data == "string") {
-      if (plan.availablePricingOptions) {
-        selectedPlan = plan.availablePricingOptions.find(plan => {
-          return plan.monthsPaidFor == data;
-        });
+    (async function vendCable() {
+      try {
+        const res = await axios.post(providerApi, payload);
+        const successData = res.data.data;
+        const date = new Date();
+        const transactionDate = getTransactionDate(date);
+  
+        setLoading(false);
+        setSuccessData({ ...successData, date: transactionDate });
+        setComponentToRender("success");
+      } catch(e) {
+        setLoading(false);
+        setComponentToRender("failed");   
       }
-
-      amount = selectedPlan ? selectedPlan.price : "";
-    } else {
-      amount = data.target.value;
-    }
-
-    setValidationError({ ...validationError, amount: !amount });
-    setAmount(amount);
+    })(); 
   };
 
   switch(componentToRender) {
-    case ("form"):
-      renderedComponent = <RechargeCableForm 
-        handleProviderChange={handleProviderChange}
-        handleSmartCardNumberChange={handleSmartCardNumberChange}
-        handlePlanChange={handlePlanChange}
-        handlePlanDurationChange={handlePlanDurationChange}
-        handlePlanAmountChange={handlePlanAmountChange}
-        handlePhoneChange={handlePhoneChange}
-        setCustomerValidationLoading={setCustomerValidationLoading}
-        customerValidationLoading={customerValidationLoading}
-        setGetPlansLoading={setGetPlansLoading}
-        getPlansLoading={getPlansLoading}
-        validationError={validationError}
-        setCustomerName={setCustomerName}
-        setValidationError={setValidationError}
+    case "form":
+      renderedComponent = <RechargeCableForm
+        RechargeCableFormState={RechargeCableFormState}
+        dispatch={dispatch}
         setComponentToRender={setComponentToRender}
-        setPlans={setPlans}
-        plans={plans}
-        setCode={setCode}
-        smartCardNumber={smartCardNumber}
-        amount={amount}
-        plan={plan}
-        provider={provider}
-        planDuration={planDuration}
-        customerName={customerName}
-        code={code}
-        phone={phone}
       />;
       break;
-    case ("summary"):
+    case "summary":
       renderedComponent = <RechargeCableSummary 
-        smartCardNumber={smartCardNumber}
-        amount={amount}
-        plan={plan.name}
-        provider={provider}
-        planDuration={planDuration}
-        customerName={customerName}
+        RechargeCableFormState={RechargeCableFormState}
         loading={loading}
         handleOnSubmit={handleOnSubmit}
-      />;
-      break;
-    case ("status"):
-      renderedComponent = <RechargeCableStatus 
-        provider={provider}
-        plan={plan.name}
-        smartCardNumber={smartCardNumber}
-        successData={successData}
-        transactionStatus={transactionStatus}
-        setComponentToRender={setComponentToRender}
         transactionCost={TRANSACTION_COST}
       />;
       break;
+    case "success":
+      renderedComponent = <RechargeCableStatus 
+        successData={successData}
+        setComponentToRender={setComponentToRender}
+        transactionCost={TRANSACTION_COST}
+      />;
+    case "failed":
+      renderedComponent = <FailedTransaction />;
+      break;
     default:
       renderedComponent = null;
-    };
+    }
 
   return (
-  <div className={style.container}>
+  <div className={styles.container}>
     {renderedComponent}
   </div>
-)};
+)}
 
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: payload => dispatch(setCurrentPage(payload))
   }
-};
+}
+
+RechargeCable.propTypes = {
+  changeCurrentPage: PropTypes.func.isRequired
+}
 
 export default connect(undefined, mapDispatchToProps)(RechargeCable);

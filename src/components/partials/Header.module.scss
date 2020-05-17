@@ -127,6 +127,7 @@
             display: inline-block;
             color: #707070;
             line-height: 2.3rem;
+            margin-bottom: 1rem;
             
             @include respond(phone-large) {
               flex: 0 0 85%;
