@@ -90,6 +90,11 @@
       top: 50%;
       left: 53.5%;
       transform: translate(50%, 50%);
+
+      @include respond(phone-large) {
+        left: 35%;
+        top: 40%;
+      }
     }
 
     > .heading {
