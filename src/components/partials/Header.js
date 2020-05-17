@@ -48,7 +48,7 @@ const Header = ({ currentPage, isDefaultPassword }) => {
         <div className={styles.actions}>
           <span className={styles.notification} onClick={handleToggleNotifications}>
             <img src={notification} alt="notification bell" />
-            <span className={styles.active}>1</span>
+            <span className={styles.active}>{notifications.length}</span>
             {toggleNotifications ? 
             <div className={styles.notificationPanel}>
               <p className={styles.heading}>Notifications</p>
