@@ -22,7 +22,7 @@ const Header = ({ currentPage, isDefaultPassword }) => {
   }, [currentPage]);
 
   useEffect(() => {
-    if (isDefaultPassword === 0) {
+    if (isDefaultPassword === 1) {
       setNotifications([...notifications, {
         title: "Dear Agent, please create a secure password to proceed."
       }])
