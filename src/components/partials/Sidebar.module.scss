@@ -1,7 +1,18 @@
 @import "../../assets/styles/config/mixins";
 @import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/variables";
 
 .navigation {
+  flex: 0 0 #{$sidebar-width};
+
+  @media print {
+    display: none;
+  } 
+
+  @include respond(phone-large) {
+    position: fixed;
+    z-index: 23;
+  }
 
   .toggleCheckbox {
     display: none;
@@ -154,6 +165,7 @@
         display: block;
         height: calc(70vh/5);
         color: #CBDAF6;
+        cursor: pointer;
         padding-top: 2rem;
         transition: .2s all;
 

@@ -1,6 +1,7 @@
 import React, {useEffect} from "react";
 import Loader from "../../../partials/Loader";
 import style from './TransferSummary.module.scss';
+import formatToCurrency from "../../../../util/formatToCurrency";
 
 export const TransferSummary = ({ phone, bank, accountName, loading, amount, accountNumber, total, transactionCost, handleOnSubmit, handleSetPage }) => {
   return (
@@ -29,15 +30,15 @@ export const TransferSummary = ({ phone, bank, accountName, loading, amount, acc
       </div>
       <div>
         <span>Amount:</span>
-        <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        <span>{formatToCurrency(amount)}</span>
       </div>
       <div>
         <span>Transaction cost:</span>
-        <span>&#8358;{Number(transactionCost).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        <span>{formatToCurrency(transactionCost)}</span>
       </div>
       <div className={style.total}>    
         <span>Total</span>
-        <span>&#8358;{Number(total).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span> 
+        <span>{formatToCurrency(total)}</span> 
       </div> 
       <button onClick={(e) => {
         e.preventDefault();

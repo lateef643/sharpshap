@@ -158,5 +158,8 @@ export const DISBURSE_FUNDS = `${path}/bank-operations/disburse-fund`;
 //get energy vendors - GET
 export const GET_ENERGY_VENDORS = `${path}/energy/discos`;
 
-//validate meter number - POST
+//validate meter number - PUT
 export const VALIDATE_METER_NUMBER = `${path}/energy`;
+
+//vend energy - POST
+export const VEND_ENERGY = `${path}/energy`;

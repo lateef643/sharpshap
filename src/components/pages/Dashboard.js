@@ -28,6 +28,10 @@ export const Dashboard = ({ changeCurrentPage }) => {
       maxBarThickness: 28,
     }]
   };
+  // const [deviceHeight, setDeviceHeight] = useState(window.innerHeight);
+  // const [deviceWidth, setDeviceWidth] = useState(window.innerWidth);
+
+  const deviceWidth = window.innerWidth;
 
   const getTransactionVolumeDataDaily = () => {
     if (transactionVolumeData !== null && transactionVolumeData.weekly.data.length > 0) {
@@ -88,26 +92,47 @@ export const Dashboard = ({ changeCurrentPage }) => {
             }
           },
           scales: {
-              xAxes: [{
-                  gridLines: {
-                      color: "rgba(0, 0, 0, 0)",
-                  },
-                  ticks: {
-                    fontSize: 13
+            xAxes: [{
+                gridLines: {
+                    color: "rgba(0, 0, 0, 0)",
+                },
+                ticks: {
+                  fontSize: deviceWidth > 600 ? 13 : 12,
+                }
+            }],
+            yAxes: [{
+              gridLines: {
+                  color: "rgba(0, 0, 0, 0)",
+              } ,
+              ticks: {
+                fontSize: deviceWidth > 600 ? 13.5 : 12,
+                fontFamily: 'sans-serif',
+                callback: function(label, index, labels) {
+                  let prefix;
+                  let suffix;
+
+                  if (label > 999999999) {
+                    suffix = "B";
+                    prefix = label/1000000000;
+                  } else if (label > 999999) {
+                    suffix = "M";
+                    prefix = label/1000000;
+                  } else if (label > 999) {
+                    suffix = "K";
+                    prefix = label/1000;
+                  } else {
+                    suffix = "";
+                    prefix = label;
                   }
-              }],
-              yAxes: [{
-                  gridLines: {
-                      color: "rgba(0, 0, 0, 0)",
-                  } ,
-                  ticks: {
-                    fontSize: 13.5,
-                    fontFamily: 'sans-serif',
-                    callback: function(label, index, labels) {
-                        return `₦${label.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}`;
-                    }
-                }  
-              }]
+
+                  if (deviceWidth < 600) {
+                    return `₦${prefix + suffix}`;
+                  } else {
+                    return `₦${label.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}`;
+                  }
+                }
+              }  
+            }]
           },
           responsive: true,
           legend: {
@@ -153,7 +178,10 @@ export const Dashboard = ({ changeCurrentPage }) => {
         <option value="month">Monthly</option>
         <option value="day">Daily</option>
       </select>
-      <canvas id="canvas" className={styles.canvas} width="200" height="120" ></canvas>
+      <canvas 
+        id="canvas" 
+        className={styles.canvas} 
+          width="200" height={deviceWidth > 600 ?  "120" : "150"} ></canvas>
     </div>
   </div>
 )};

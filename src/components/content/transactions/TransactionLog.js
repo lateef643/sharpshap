@@ -174,16 +174,16 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
             : transaction.status === "pending" ? styles.pending : styles.success}`}></span>
             </span>
             <span className={styles.statusDate}>{transaction.created_at}</span>
-            <span className={styles.statusAmount}>&#8358;{formatToCurrency(transaction.amount)}</span>
+            <span className={styles.statusAmount}>{formatToCurrency(transaction.amount)}</span>
             <span className={styles.statusType}>{transaction.transtype.name}</span>
-            <span className={styles.statusPrev}>&#8358;{formatToCurrency(transaction.wallet_history.previous_bal)}</span>
-            <span className={styles.statusCurrent}>&#8358;{formatToCurrency(transaction.wallet_history.current_bal)}</span>
+            <span className={styles.statusPrev}>{formatToCurrency(transaction.wallet_history.previous_bal)}</span>
+            <span className={styles.statusCurrent}>{formatToCurrency(transaction.wallet_history.current_bal)}</span>
             <span className={styles.statusCustomer}>{transaction.customer_info}</span>
             <span className={styles.statusRef}>{transaction.reference}</span>
             <Link to={`/transaction-details/${transaction.reference}`}>View Details</Link>
             <span className={styles.statusAccordionToggle} onClick={(e) => {
               setAccordionToggle(accordionToggle === index + 1 ? false : index + 1);
-            }}>{accordionToggle === index + 1 ? <span>x</span> : <span>&#11206;</span>}</span>
+            }}>{accordionToggle === index + 1 ? <span>-</span> : <span>+</span>}</span>
           </div> 
           {accordionToggle === index + 1 ? 
           <>
@@ -201,7 +201,7 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
           </div>          
           <div className={`${styles.logItem} ${styles.amount}`}>
             <span className={`${styles.headingMobile} ${styles.amountHeadingMobile}`}>Amount:</span> 
-            <span className={styles.amountContent}>&#8358;{transaction.amount}</span>
+            <span className={styles.amountContent}>{formatToCurrency(transaction.amount)}</span>
           </div>
           <div className={`${styles.logItem} ${styles.customer}`}>
             <span className={`${styles.headingMobile} ${styles.customerHeadingMobile}`}>Customer:</span> 

@@ -107,7 +107,7 @@ const BankForm = (props) => {
         <span>Beneficiary Account Name</span>
         <input type="text" value={accountName} className={verificationLoading ? styles.transparent : styles.opaque}
         disabled={true}  className={styles.outlineGrey} />
-        {verificationLoading ? <VerificationLoader /> : undefined}
+        {verificationLoading ? <div className={styles.loader}><VerificationLoader /></div> : undefined}
         {accountValidationErrorText ? <p className={styles.validationErrorText}>{accountValidationErrorText}</p> : undefined}
       </label>
       <label>

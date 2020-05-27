@@ -3,7 +3,7 @@
 
 .card {
   background: #FFFFFF 0% 0% no-repeat padding-box;
-  box-shadow: 3px 2px 4px #00000029;
+  box-shadow: 0 2px 4px #00000029;
   border-radius: 1px;
   opacity: 1;
   margin: 5px;
@@ -17,10 +17,8 @@
 
   @include respond(phone-large) {
     width: 28%;
-    min-height: 12vh;
-    border-radius: 10px;
-    margin: 8px 8px;
-    box-shadow: 2px 2px 4px #00000029;
+    border-radius: 15px;
+    margin: 8px;
   }
 
   @include respond-custom(340px) {
@@ -34,6 +32,7 @@
 
     @include respond(phone-large) {
       padding: 10px;
+      // background-color:red;
     }
   }
 
@@ -51,18 +50,19 @@
 
   .text {
     font-size: 1.3rem;
+    margin-top: .3rem;
     color: #707070;
-    margin-top: 1.1rem;
 
     @include respond(phone-large) {
       line-break: strict;
       font-size: 1.23rem;
-      margin-top: .5rem;
+      // margin-top: .5rem;
       line-height: 15px;
     }
 
     @include respond-custom(330px) {
       font-size: 1.15rem;
+      line-height: 14px;
     }
   }  
 
@@ -89,7 +89,11 @@
 
   @include respond(phone-large) {
     width: 23%;
-    height: 15vh;
+    height: 9rem;
     margin: 0;
+  }
+
+  @include respond-custom(330px) {
+    height: 7.5rem;
   }
 }

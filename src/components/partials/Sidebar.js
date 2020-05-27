@@ -35,7 +35,7 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
           <button className={styles.logout} onClick={handleLogout}>Log out</button>
         </div>
         <div className={styles.links}>
-          <NavLink to="/dashboard" className={styles.linkItem} >
+          <NavLink to="/" className={styles.linkItem} >
             <img src={dashboard} className={styles.linkItemImage} alt="speedometer icon" />
             <p className={styles.linkItemText}>Dashboard</p>
           </NavLink>

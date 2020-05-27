@@ -2,6 +2,7 @@ import React, {useEffect} from "react";
 import { connect } from "react-redux";
 import Loader from "../../../partials/Loader";
 import style from './BuyDataSummary.module.scss';
+import formatToCurrency from "../../../../util/formatToCurrency";
 
 export const BuyDataSummary = (props) => {
   const { telcoName, amount, phone, loading, handleOnSubmit, selectedDataPlanName, selectedDataPlanValidity } = props;
@@ -32,15 +33,15 @@ export const BuyDataSummary = (props) => {
       </div>
       <div>
         <span>Amount:</span>
-        <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        <span>{formatToCurrency(amount)}</span>
       </div> 
       <div>
         <span>Transaction cost:</span>
-        <span>&#8358;{Number(0).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        <span>{formatToCurrency(0)}</span>
       </div>     
       <div className={style.total}>    
         <span>Total:</span>
-        <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span> 
+        <span>{formatToCurrency(amount)}</span> 
       </div> 
       <button onClick={(e) => {
         e.preventDefault();

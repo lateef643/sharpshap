@@ -39,15 +39,15 @@ export const RechargeCableSummary = (props) => {
       </div>
       <div>
         <span>Amount:</span>
-        <span>&#8358;{formatToCurrency(state.amount)}</span>
+        <span>{formatToCurrency(state.amount)}</span>
       </div> 
       <div>
         <span>Transaction cost:</span>
-        <span>&#8358;{formatToCurrency(transactionCost)}</span>
+        <span>{formatToCurrency(transactionCost)}</span>
       </div>     
       <div className={style.total}>    
         <span>Total:</span>
-        <span>&#8358;{formatToCurrency(state.amount)}</span> 
+        <span>{formatToCurrency(state.amount)}</span> 
       </div> 
       <button onClick={(e) => {
         e.preventDefault();

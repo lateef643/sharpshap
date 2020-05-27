@@ -53,11 +53,13 @@
       margin-right: 3rem;
       margin-bottom: 2rem;
       padding: 5px;
+      background-color: #fff;
 
       @include respond(phone-large) {
         height: 3rem;
         width: 8rem;
         font-size: 1.2rem;
+        box-shadow: 0 1px 2px #00000029;
       }
     }
 
@@ -67,4 +69,8 @@
       -ms-user-select: none;
     }
   }
+}
+
+#canvas {
+  height: 500px;
 }
