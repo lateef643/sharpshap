@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import StatusBar from "../partials/StatusBar";
-import NotificationsPanel from "../partials/NotificationsPanel";
+// import NotificationsPanel from "../partials/NotificationsPanel";
 import logo from "../../assets/images/cico-logo.svg";
 import notification from "../../assets/images/notification-svgrepo-com (1).svg";
 import chat from "../../assets/images/chat-svgrepo-com (1).svg";
