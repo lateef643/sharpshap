@@ -1,3 +1,782 @@
-const banksList = [{"code":"044","id":1,"name":"Access Bank"},{"code":"023","id":2,"name":"Citibank"},{"code":"063","id":3,"name":"Diamond Bank"},{"code":" ","id":4,"name":"Dynamic Standard Bank"},{"code":"050","id":5,"name":"Ecobank Nigeria"},{"code":"070","id":6,"name":"Fidelity Bank Nigeria"},{"code":"011","id":7,"name":"First Bank of Nigeria"},{"code":"214","id":8,"name":"First City Monument Bank"},{"code":"058","id":9,"name":"Guaranty Trust Bank"},{"code":"030","id":10,"name":"Heritage Bank Plc"},{"code":"301","id":11,"name":"Jaiz Bank"},{"code":"082","id":12,"name":"Keystone Bank Limited"},{"code":"101","id":13,"name":"Providus Bank Plc"},{"code":"076","id":14,"name":"Polaris Bank"},{"code":"221","id":15,"name":"Stanbic IBTC Bank Nigeria Limited"},{"code":"068","id":16,"name":"Standard Chartered Bank"},{"code":"232","id":17,"name":"Sterling Bank"},{"code":"100","id":18,"name":"Suntrust Bank Nigeria Limited"},{"code":"032","id":19,"name":"Union Bank of Nigeria"},{"code":"033","id":20,"name":"United Bank for Africa"},{"code":"215","id":21,"name":"Unity Bank Plc"},{"code":"035","id":22,"name":"Wema Bank"},{"code":"057","id":23,"name":"Zenith Bank"},{"code":"","id":345,"name":"AACB Microfinance Bank Limited"},{"code":"","id":346,"name":"AB Microfinance Bank Limited"},{"code":"","id":347,"name":"Abatete Microfinance Bank Limited"},{"code":"","id":348,"name":"ABC Microfinance Bank Limited"},{"code":"","id":349,"name":"Abia State University Microfinance Bank Limited"},{"code":"","id":350,"name":"Abigi Microfinance Bank Limited"},{"code":"","id":351,"name":"Abokie Microfinance Bank Limited"},{"code":"","id":352,"name":"Abucoop Microfinance Bank Limited"},{"code":"","id":353,"name":"Accion Microfinance Bank Limited"},{"code":"","id":354,"name":"ACE Microfinance Bank Limited"},{"code":"","id":355,"name":"Acheajebwa Microfinance Bank Limited"},{"code":"","id":356,"name":"Achina Microfinance Bank Limited"},{"code":"","id":357,"name":"Active Point Microfinance Bank Limited"},{"code":"","id":358,"name":"Acuity Microfinance Bank Limited"},{"code":"","id":359,"name":"Adaigbo Microfinance Bank Limited"},{"code":"","id":360,"name":"Adazi- Nnukwu Microfinance Bank Limited"},{"code":"","id":361,"name":"Adazi-Enu Microfinance Bank Limited"},{"code":"","id":362,"name":"Addossar Microfinance Bank Limited"},{"code":"","id":363,"name":"Adkolm-Emerald Microfinance Bank LImited"},{"code":"","id":364,"name":"Advance Microfinance Bank Limited"},{"code":"","id":365,"name":"Afemai Microfinance Bank Limited"},{"code":"","id":366,"name":"Afotamodi-Ogunola Microfinance Bank Limited"},{"code":"","id":367,"name":"Mainstreet Microfinance Bank Limited"},{"code":"","id":368,"name":"Agbarho Microfinance Bank Limited"},{"code":"","id":369,"name":"Agbowu Microfinance Bank Limited"},{"code":"","id":370,"name":"Agosasa Microfinance Bank Limited"},{"code":"","id":371,"name":"Aguda Titun Microfinance Bank Limited"},{"code":"","id":372,"name":"Aguleri Microfinance Bank Limited"},{"code":"","id":373,"name":"Ahetou Microfinance Bank Limited"},{"code":"","id":374,"name":"Ahmadu Bello University Microfinance Bank Limited"},{"code":"","id":375,"name":"Aiyepe Microfinance Bank Limited"},{"code":"","id":376,"name":"Aja-Yejebwo Microfinance Bank Limited"},{"code":"","id":377,"name":"Ajeko Microfinance Bank Limited"},{"code":"","id":378,"name":"Ajewole Microfinance Bank Limited"},{"code":"","id":379,"name":"Ajiya Microfinance Bank Limited"},{"code":"","id":380,"name":"Ajose Microfinance Bank Limited"},{"code":"","id":381,"name":"Ajuta Microfinance Bank Limited"},{"code":"","id":382,"name":"Akalabo Microfinance Bank Limited"},{"code":"","id":383,"name":"AKCOFED Microfinance Bank Limited"},{"code":"","id":384,"name":"Akokwa Microfinance Bank Limited"},{"code":"","id":385,"name":"Akpo Microfinance Bank Limited"},{"code":"","id":386,"name":"Aku Diewa Microfinance Bank Limited"},{"code":"","id":387,"name":"Akwengwu Microfinance Bank Limited"},{"code":"","id":388,"name":"Alache Microfinance Bank Limited"},{"code":"","id":389,"name":"Al-Barakah Microfinance Bank Limited"},{"code":"","id":390,"name":"Alekun Microfinance Bank Limited"},{"code":"","id":391,"name":"Aliero Microfinance Bank Limited"},{"code":"","id":392,"name":"Alkaleri Microfinance Bank Limited"},{"code":"","id":393,"name":"All Seasons Microfinance Bank Limited"},{"code":"","id":394,"name":"All Workers Microfinance Bank Limited"},{"code":"","id":395,"name":"Aloaye Microfinance Bank Limited"},{"code":"","id":396,"name":"Alor Microfinance Bank Limited"},{"code":"","id":397,"name":"Altitude Microfinance Bank Limited"},{"code":"","id":398,"name":"Alvana Microfinance Bank Limited"},{"code":"","id":399,"name":"Amaifeke Microfinance Bank Limited"},{"code":"","id":400,"name":"Amazu Microfinance Bank Limited"},{"code":"","id":401,"name":"Amba Microfinance Bank Limited"},{"code":"","id":402,"name":"Amegy Microfinance Bank Limited"},{"code":"","id":403,"name":"AMJU-Unique Microfinance Bank Limited"},{"code":"","id":404,"name":"Amoye Microfinance Bank Limited"},{"code":"","id":405,"name":"Amram Microfinance Bank Limited"},{"code":"","id":406,"name":"Amucha Microfinance Bank Limited"},{"code":"","id":407,"name":"Amuro Microfinance Bank Limited"},{"code":"","id":408,"name":"Anchorage Microfinance Bank Limited"},{"code":"","id":409,"name":"Aniocha Microfinance Bank Limited"},{"code":"","id":410,"name":"Annointed Microfinance Bank Limited"},{"code":"","id":411,"name":"Anya Microfinance Bank Limited"},{"code":"","id":412,"name":"Aogo Microfinance Bank Limited"},{"code":"","id":413,"name":"Apa Microfinance Bank Limited"},{"code":"","id":414,"name":"Apeks Microfinance Bank LImited"},{"code":"","id":415,"name":"Apex Trust Microfinance Bank Limited"},{"code":"","id":416,"name":"Apple Microfinance Bank Limited"},{"code":"","id":417,"name":"Aramoko Microfinance Bank Limited"},{"code":"","id":418,"name":"Arochukwu Microfinance Bank Limited"},{"code":"","id":419,"name":"Arondizuogu Microfinance Bank Limited"},{"code":"","id":420,"name":"Asha Microfinance Bank Limited"},{"code":"","id":421,"name":"Aspire Microfinance Bank LImited"},{"code":"","id":422,"name":"Asset Matrix Microfinance Bank Limited"},{"code":"","id":423,"name":"Assets Microfinance Bank Limited"},{"code":"","id":424,"name":"Associated Investment Trust Microfinance Bank Limi"},{"code":"","id":425,"name":"Astra Polaris Microfinance Bank Limited"},{"code":"","id":426,"name":"Atlas Microfinance Bank Limited"},{"code":"","id":427,"name":"Atyap Microfinance Bank Limited"},{"code":"","id":428,"name":"Auchi Microfinance Bank Limited"},{"code":"","id":429,"name":"Avunegbe Microfinance Bank Limited"},{"code":"","id":430,"name":"Avyi Microfinance Bank Limited"},{"code":"","id":431,"name":"Awe Microfinance Bank Limited"},{"code":"","id":432,"name":"Awgbu Microfinance Bank Limited"},{"code":"","id":433,"name":"Awka Microfinance Bank Limited"},{"code":"","id":434,"name":"Awka-Etiti Microfinance Bank Limited"},{"code":"","id":435,"name":"Awkuzu Microfinance Bank Limited"},{"code":"","id":436,"name":"Ayete Microfinance Bank Limited"},{"code":"","id":437,"name":"AZSA Microfinance Bank Limited"},{"code":"","id":438,"name":"Babba Microfinance Bank Limited"},{"code":"","id":439,"name":"Babura Microfinance Bank Limited"},{"code":"","id":440,"name":"Bakassi Microfinance Bank Limited"},{"code":"","id":441,"name":"Balera Microfinance Bank Limited"},{"code":"","id":442,"name":"Balogun Ajikobi Microfinance Bank Limited"},{"code":"","id":443,"name":"Balogun Fulani Microfinance Bank Limited"},{"code":"","id":444,"name":"Balogun Gambari Microfinance Bank Limited"},{"code":"","id":445,"name":"Bam Microfinance Bank Limited"},{"code":"","id":446,"name":"Bama Microfinance Bank Limited"},{"code":"","id":447,"name":"Bancorp Microfinance Bank Limited"},{"code":"","id":448,"name":"Barnawa Microfinance Bank Limited"},{"code":"","id":449,"name":"Bauchi Investment Corporation MFB Limited"},{"code":"","id":450,"name":"Bawyi Microfinance Bank Limited"},{"code":"","id":451,"name":"Bayajidda Microfinance Bank Limited"},{"code":"","id":452,"name":"Bayetin MFB Microfinance Bank Limited"},{"code":"","id":453,"name":"Bayetin Microfinance Bank Limited"},{"code":"","id":454,"name":"Bejin-Doko Microfinance Bank Limited"},{"code":"","id":455,"name":"Berachah Microfinance Bank Limited"},{"code":"","id":456,"name":"Best Star Microfinance Bank Limited"},{"code":"","id":457,"name":"Bestway Microfinance Bank Limited"},{"code":"","id":458,"name":"Bethel Microfinance Bank Limited"},{"code":"","id":459,"name":"Bethseda Microfinance Bank Limited"},{"code":"","id":460,"name":"BFL Microfinance Bank Limited"},{"code":"","id":461,"name":"Bigthana Microfinance Bank Limited"},{"code":"","id":462,"name":"Birni Microfinance Bank Limited"},{"code":"","id":463,"name":"BishopGate Microfinance Bank Limited"},{"code":"","id":464,"name":"Biyama Microfinance Bank Limited"},{"code":"","id":465,"name":"Biztrust Microfinance Bank LImited"},{"code":"","id":466,"name":"Blue Intercontinental Microfinance Bank Limited"},{"code":"","id":467,"name":"Blue Ridge Microfinance Bank Limited"},{"code":"","id":468,"name":"Bmazazhin Microfinance Bank Limited"},{"code":"","id":469,"name":"BOI Microfinance Bank Limited"},{"code":"","id":470,"name":"Boji Boji Microfinance Bank Limited"},{"code":"","id":471,"name":"Boluwaduro Microfinance Bank Limited"},{"code":"","id":472,"name":"Bonded Microfinance Bank Limited"},{"code":"","id":473,"name":"Bonghe Microfinance Bank Limited"},{"code":"","id":474,"name":"Borgu Microfinance Bank Limited"},{"code":"","id":475,"name":"Borstal Microfinance Bank Limited"},{"code":"","id":476,"name":"Bosak Microfinance Bank Limited"},{"code":"","id":477,"name":"Bowen Microfinance Bank Limited"},{"code":"","id":478,"name":"Bowman Microfinance Bank Limited"},{"code":"","id":479,"name":"Brass Microfinance Bank Limited"},{"code":"","id":480,"name":"Briyth Covenant Microfinance Bank Limited"},{"code":"","id":481,"name":"Broadview Microfinance Bank Limited"},{"code":"","id":482,"name":"Brooks Microfinance Bank Limited"},{"code":"","id":483,"name":"Bungudu Microfinance Bank Limited"},{"code":"","id":484,"name":"Bunkasa Microfinance Bank Limited"},{"code":"","id":485,"name":"Business Support Microfinance Bank Limited"},{"code":"","id":486,"name":"Busu Microfinance Bank Limited"},{"code":"","id":487,"name":"CAFON Microfinance Bank Limited"},{"code":"","id":488,"name":"Calabar Microfinance Bank Limited"},{"code":"","id":489,"name":"Calm Microfinance Bank Limited"},{"code":"","id":490,"name":"Capstone Microfinance Bank Limited"},{"code":"","id":491,"name":"Cardinal Rock Microfinance Bank Limited"},{"code":"","id":492,"name":"Caretaker Microfinance Bank Limited"},{"code":"","id":493,"name":"Cash Cow Microfinance Bank Limited"},{"code":"","id":494,"name":"Castle Microfinance Bank Limited"},{"code":"","id":495,"name":"Catland Microfinance Bank Limited"},{"code":"","id":496,"name":"Cedar Microfinance Bank Limited"},{"code":"","id":497,"name":"Chanelle Microfinance Bank Limited"},{"code":"","id":498,"name":"Chartwell Microfinance Bank Limited"},{"code":"","id":499,"name":"Chelsea Microfinance Bank Limited"},{"code":"","id":500,"name":"Chevron Employee Co-operative MFB"},{"code":"","id":501,"name":"Chibueze Microfinance Bank Limited"},{"code":"","id":502,"name":"Chidera Microfinance Bank Limited"},{"code":"","id":503,"name":"Chigbe-Yaji Microfinance Bank Limited"},{"code":"","id":504,"name":"Chikum Microfinance Bank Limited"},{"code":"","id":505,"name":"Chimham Microfinance Bank Limited"},{"code":"","id":506,"name":"Chrisore Microfinance Bank Limited"},{"code":"","id":507,"name":"Chukwunenye Microfinance Bank Limited"},{"code":"","id":508,"name":"CIT Microfinance Bank Limited"},{"code":"","id":509,"name":"Citadel Microfinance Bank Limited"},{"code":"","id":510,"name":"City Mission Methodist Microfinance Bank Limited"},{"code":"","id":511,"name":"Civic Microfinance Bank Limited"},{"code":"","id":512,"name":"Coalcamp Microfinance Bank Limited"},{"code":"","id":513,"name":"Coastline Microfinance Bank Limited"},{"code":"","id":514,"name":"Coconut Avenue Microfinance Bank Limited"},{"code":"","id":515,"name":"Combined Benefits Microfinance Bank Limited"},{"code":"","id":516,"name":"Compass Microfinance Bank Limited"},{"code":"","id":517,"name":"Complete Trust Microfinance Bank Limited"},{"code":"","id":518,"name":"Confidence Microfinance Bank Limited"},{"code":"","id":519,"name":"Confluence Microfinance Bank Limited"},{"code":"","id":520,"name":"Conpro Microfinance Bank Limited"},{"code":"","id":521,"name":"Consumer Microfinance Bank Limited"},{"code":"","id":522,"name":"Coral Microfinance Bank Limited"},{"code":"","id":523,"name":"Corestep Microfinance Bank Limited"},{"code":"","id":524,"name":"Cosmopolitan Microfinance Bank Ltd"},{"code":"","id":525,"name":"Covenant University Microfinance Bank Limited"},{"code":"","id":526,"name":"Cowries Microfinance Bank Limited"},{"code":"","id":527,"name":"Credit Express Microfinance Bank Limited"},{"code":"","id":528,"name":"Credit Plus Microfinance Bank Limited"},{"code":"","id":529,"name":"CreditLink Microfinance Bank Limited"},{"code":"","id":530,"name":"Creekline Microfinance Bank Limited"},{"code":"","id":531,"name":"Crest Microfinance Bank Limited"},{"code":"","id":532,"name":"Crowned Eagle Microfinance Bank Limited"},{"code":"","id":533,"name":"CRUTECH  Microfinance Bank Limited"},{"code":"","id":534,"name":"Crystabel Microfinance Bank Limited"},{"code":"","id":535,"name":"CSD Microfinance Bank Limited"},{"code":"","id":536,"name":"Dadin Kowa Microfinance Bank Limited"},{"code":"","id":537,"name":"Daffo Mangai Microfinance Bank Limited"},{"code":"","id":538,"name":"Dambatta Microfinance Bank Limited"},{"code":"","id":539,"name":"Danels Global Microfinance Bank Limited"},{"code":"","id":540,"name":"Dangizhi Microfinance Bank Limited"},{"code":"","id":541,"name":"Darazo Microfinance Bank Limited"},{"code":"","id":542,"name":"DCFA-Universal Microfinance Bank Limited"},{"code":"","id":543,"name":"Decency Microfinance Bank Limited"},{"code":"","id":544,"name":"DEC-Enugu Microfinance Bank Limited"},{"code":"","id":545,"name":"Desmonarchy Microfinance Bank Limited"},{"code":"","id":546,"name":"Destiny Microfinance Bank Limited"},{"code":"","id":547,"name":"Diobu Microfinance Bank Limited"},{"code":"","id":548,"name":"Dolphin Microfinance Bank Limited"},{"code":"","id":549,"name":"Dominion Microfinance Bank Limited"},{"code":"","id":550,"name":"Dutse Microfinance Bank Limited"},{"code":"","id":551,"name":"Eagle Flight Microfinance Bank Limited"},{"code":"","id":552,"name":"East Gate Microfinance Bank Limited"},{"code":"","id":553,"name":"Eastman Microfinance Bank Limited"},{"code":"","id":554,"name":"e-Barclays Microfinance Bank Limited"},{"code":"","id":555,"name":"Ebedi Microfinance Bank Limited"},{"code":"","id":556,"name":"Ebonyi State University Microfinance Bank Limited"},{"code":"","id":557,"name":"Ebu Microfinance Bank Limited"},{"code":"","id":558,"name":"Echo Microfinance Bank Limited"},{"code":"","id":559,"name":"Edo Microfinance Bank Limited"},{"code":"","id":560,"name":"Eduek Microfinance Bank Limited"},{"code":"","id":561,"name":"Edumana Microfinance Bank Limited"},{"code":"","id":562,"name":"Egbe Microfinance Bank Limited"},{"code":"","id":563,"name":"Ehor Microfinance Bank Limited"},{"code":"","id":564,"name":"Ejiamatu Microfinance Bank Ltd"},{"code":"","id":565,"name":"Ekimogun Microfinance Bank Limited"},{"code":"","id":566,"name":"Ekondo Microfinance Bank Limited"},{"code":"","id":567,"name":"Ekuombe Microfinance Bank Limited"},{"code":"","id":568,"name":"Ekwulobia Microfinance Bank Limited"},{"code":"","id":569,"name":"Elim Microfinance Bank Limited"},{"code":"","id":570,"name":"Endwell Microfinance Bank Limited"},{"code":"","id":571,"name":"Enterprise Microfinance Bank Limited"},{"code":"","id":572,"name":"Enugu-Ukwu Microfinance Bank Limited"},{"code":"","id":573,"name":"Equator Microfinance Bank Limited"},{"code":"","id":574,"name":"Equinox Microfinance Bank Limited"},{"code":"","id":575,"name":"Ere City Microfinance Bank Limited"},{"code":"","id":576,"name":"Eruwon Microfinance Bank Limited"},{"code":"","id":577,"name":"Esan Microfinance Bank Limited"},{"code":"","id":578,"name":"Eso-E Microfinance Bank Limited"},{"code":"","id":579,"name":"Estate Microfinance Bank Limited"},{"code":"","id":580,"name":"Ethics Microfinance Bank Limited"},{"code":"","id":581,"name":"Everest Microfinance Bank Limited"},{"code":"","id":582,"name":"EWT Microfinance Bank Limited"},{"code":"","id":583,"name":"Excel Microfinance Bank Limited"},{"code":"","id":584,"name":"Excellent Microfinance Bank Limited"},{"code":"","id":585,"name":"Ezebo Microfinance Bank Limited"},{"code":"","id":586,"name":"Fadan Chawai Microfinance Bank Limited"},{"code":"","id":587,"name":"Fahimta Microfinance Bank Limited"},{"code":"","id":588,"name":"Faith Microfinance Bank Limited"},{"code":"","id":589,"name":"Fame Microfinance Bank Limited"},{"code":"","id":590,"name":"FBN Microfinance Bank Limited"},{"code":"","id":591,"name":"FCE Obudu Microfinance Bank Limited"},{"code":"","id":592,"name":"FEDETH Co-op Microfinance Bank Limited"},{"code":"","id":593,"name":"FEDPOLY Microfinance Bank Limited"},{"code":"","id":594,"name":"Fidfund Microfinance Bank Limited"},{"code":"","id":595,"name":"FIMS Microfinance Bank Limited"},{"code":"","id":596,"name":"Finatrust Microfinance Bank Limited"},{"code":"","id":597,"name":"Finex Microfinance Bank Limited"},{"code":"","id":598,"name":"First Ideal Microfinance Bank Limited"},{"code":"","id":599,"name":"First Index Microfinance Bank Limited"},{"code":"","id":600,"name":"First Lowland Microfinance Bank Limited"},{"code":"","id":601,"name":"First Mutual Microfinance Bank Limited"},{"code":"","id":602,"name":"First Option Microfinance Bank Limited"},{"code":"","id":603,"name":"First Royal Microfinance Bank Limited"},{"code":"","id":604,"name":"Fiyinfolu Microfinance Bank Limited"},{"code":"","id":605,"name":"Flourish Microfinance Bank LImited"},{"code":"","id":606,"name":"Foresight Microfinance Bank Limited"},{"code":"","id":607,"name":"Fortis Microfinance Bank Limited"},{"code":"","id":608,"name":"Forward Microfinance Bank Limited"},{"code":"","id":609,"name":"Freedom (Lagos) Microfinance Bank Limited"},{"code":"","id":610,"name":"Frontline Microfinance Bank Limited"},{"code":"","id":611,"name":"Fufore Microfinance Bank Limited"},{"code":"","id":612,"name":"FUT Minna Microfinance Bank Limited"},{"code":"","id":613,"name":"FUTO Microfinance Bank Limited"},{"code":"","id":614,"name":"Future Growth Microfinance Bank Limited"},{"code":"","id":615,"name":"Gaa Akanbi Microfinance Bank Limited"},{"code":"","id":616,"name":"Gains Microfinance Bank Limited"},{"code":"","id":617,"name":"Gamawa Microfinance Bank Limited"},{"code":"","id":618,"name":"Gapbridge Microfinance Bank Limited"},{"code":"","id":619,"name":"Garden City Microfinance Bank Limited"},{"code":"","id":620,"name":"Garewa Microfinance Bank Limited"},{"code":"","id":621,"name":"Garki Microfinance Bank Limited"},{"code":"","id":622,"name":"Garu Microfinance bank Limited"},{"code":"","id":623,"name":"Gashua Microfinance Bank Limited"},{"code":"","id":624,"name":"Gbede Microfinance Bank Limited"},{"code":"","id":625,"name":"Gboko Microfinance Bank Limited"},{"code":"","id":626,"name":"Gidauniya Alheri MFB Limited"},{"code":"","id":627,"name":"Gideon Trust Microfinance Bank Limited"},{"code":"","id":628,"name":"Girei Microfinance Bank Limited"},{"code":"","id":629,"name":"Giwa Microfinance Bank Limited"},{"code":"","id":630,"name":"Global Initiative Microfinance Bank Limited"},{"code":"","id":631,"name":"Global Trust Microfinance Bank Limited"},{"code":"","id":632,"name":"Glory Microfinance Bank Limited"},{"code":"","id":633,"name":"Gobarau Microfinance Bank Limited"},{"code":"","id":634,"name":"Gold Microfinance Bank Limited"},{"code":"","id":635,"name":"Golden Choice Microfinance Bank Limited"},{"code":"","id":636,"name":"Golden Funds Microfinance Bank Limited"},{"code":"","id":637,"name":"Goldman Microfinance Bank Limited"},{"code":"","id":638,"name":"Gombe Microfinance Bank Limited"},{"code":"","id":639,"name":"Good Neighbors Microfinance Bank Limited"},{"code":"","id":640,"name":"Grand Fortress Microfinance Bank Limited"},{"code":"","id":641,"name":"Grants Microfinance Bank Limited"},{"code":"","id":642,"name":"Grassroot Microfinance Bank Limited"},{"code":"","id":643,"name":"Green Acres Microfinance Bank Limited"},{"code":"","id":644,"name":"Green-Bank Microfinance Bank Limited"},{"code":"","id":645,"name":"Greenfield Lagos Microfinance Bank Limited"},{"code":"","id":646,"name":"Greenland Microfinance Bank Limited"},{"code":"","id":647,"name":"GTI Microfinance Bank Limited"},{"code":"","id":648,"name":"Guddiri Microfinance Bank Limited"},{"code":"","id":649,"name":"Gudusisa Microfinance Bank Limited"},{"code":"","id":650,"name":"Gufax Microfinance Bank Limited"},{"code":"","id":651,"name":"Gulfare Microfinance Bank Limited"},{"code":"","id":652,"name":"Gwadabawa Microfinance bank Limited"},{"code":"","id":653,"name":"Gwong Microfinance Bank Limited"},{"code":"","id":654,"name":"Hillspring Microfinance Bank Limited"},{"code":"","id":655,"name":"Hallowed Microfinance Bank Limited"},{"code":"","id":656,"name":"Halmond Microfinance Bank Limited"},{"code":"","id":657,"name":"Hamda Microfinance Bank Limited"},{"code":"","id":658,"name":"Hamdala Microfinance Bank Limited"},{"code":"","id":659,"name":"Happy Note Microfinance Bank Limited"},{"code":"","id":660,"name":"Harvest Microfinance Bank Limited"},{"code":"","id":661,"name":"Hasal Microfinance Bank Limited"},{"code":"","id":662,"name":"Headstone Microfinance Bank Limited"},{"code":"","id":663,"name":"Hedgeworth Microfinance Bank Limited"},{"code":"","id":664,"name":"Heritage Microfinance Bank Limited"},{"code":"","id":665,"name":"High Street Microfinance Bank Limited"}]
-
-export default banksList;
+export default [
+  {
+    "code": "000014",
+    "name": "Access Bank"
+  },
+  {
+    "code": "000009",
+    "name": "Citi Bank"
+  },
+  {
+    "code": "000005",
+    "name": "Access Bank (Diamond)"
+  },
+  {
+    "code": "000010",
+    "name": "Ecobank"
+  },
+  {
+    "code": "000007",
+    "name": "Fidelity Bank"
+  },
+  {
+    "code": "000016",
+    "name": "First Bank"
+  },
+  {
+    "code": "000003",
+    "name": "FCMB"
+  },
+  {
+    "code": "000013",
+    "name": "GTBank"
+  },
+  {
+    "code": "000020",
+    "name": "Heritage"
+  },
+  {
+    "code": "000006",
+    "name": "JAIZ Bank"
+  },
+  {
+    "code": "000002",
+    "name": "Keystone Bank"
+  },
+  {
+    "code": "000023",
+    "name": "Providus Bank"
+  },
+  {
+    "code": "000008",
+    "name": "Polaris Bank"
+  },
+  {
+    "code": "000012",
+    "name": "StanbicIBTC Bank"
+  },
+  {
+    "code": "000021",
+    "name": "StandardChartered"
+  },
+  {
+    "code": "000001",
+    "name": "Sterling Bank"
+  },
+  {
+    "code": "000022",
+    "name": "Suntrust Bank"
+  },
+  {
+    "code": "000004",
+    "name": "UBA"
+  },
+  {
+    "code": "000018",
+    "name": "Union Bank"
+  },
+  {
+    "code": "000011",
+    "name": "Unity Bank"
+  },
+  {
+    "code": "000017",
+    "name": "Wema Bank"
+  },
+  {
+    "code": "000015",
+    "name": "Zenith Bank"
+  },
+  {
+      "code": 110005,
+      "name": "3line Card management Limited"
+  },
+  {
+      "code": "090270",
+      "name": "AB Microfinance bank"
+  },
+  {
+      "code": "070010",
+      "name": "ABBEY MORTGAGE BANK"
+  },
+  {
+      "code": "090260",
+      "name": "Above Only Microfinance bank"
+  },
+  {
+      "code": "090197",
+      "name": "ABU Microfinance bank"
+  },
+  {
+      "code": 100013,
+      "name": "AccessMobile"
+  },
+  {
+      "code": "090134",
+      "name": "ACCION MFB"
+  },
+  {
+      "code": "090160",
+      "name": "Addosser MFBB"
+  },
+  {
+      "code": "090268",
+      "name": "Adeyemi College Staff Microfinance bank"
+  },
+  {
+      "code": 100028,
+      "name": "AG MORTGAGE BANK PLC"
+  },
+  {
+      "code": "090133",
+      "name": "AL-BARKAH MFB"
+  },
+  {
+      "code": "090259",
+      "name": "Alekun Microfinance bank"
+  },
+  {
+      "code": "090277",
+      "name": "Alhayat MFB"
+  },
+  {
+      "code": "090131",
+      "name": "ALLWORKERS MFB"
+  },
+  {
+      "code": "090169",
+      "name": "Alphakapital MFB"
+  },
+  {
+      "code": "090180",
+      "name": "Amju MFB"
+  },
+  {
+      "code": "090116",
+      "name": "AMML MFB"
+  },
+  {
+      "code": "090143",
+      "name": "APEKS Microfinance Bank"
+  },
+  {
+      "code": "090282",
+      "name": "Arise MFB"
+  },
+  {
+      "code": "090001",
+      "name": "ASOSavings"
+  },
+  {
+      "code": "090172",
+      "name": "Astrapolis MFB"
+  },
+  {
+      "code": "090264",
+      "name": "Auchi Microfinance bank"
+  },
+  {
+      "code": "090188",
+      "name": "Baines Credit MFB"
+  },
+  {
+      "code": "090127",
+      "name": "BC Kash MFB"
+  },
+  {
+      "code": "090117",
+      "name": "Boctrust Microfinance Bank"
+  },
+  {
+      "code": "090176",
+      "name": "Bosak MFB"
+  },
+  {
+      "code": "090148",
+      "name": "Bowen MFB"
+  },
+  {
+      "code": "070015",
+      "name": "Brent Mortgage Bank"
+  },
+  {
+      "code": 100005,
+      "name": "Cellulant"
+  },
+  {
+      "code": "090154",
+      "name": "CEMCS MFB"
+  },
+  {
+      "code": "090141",
+      "name": "Chikum Microfinance Bank"
+  },
+  {
+      "code": "090144",
+      "name": "CIT Microfinance Bank"
+  },
+  {
+      "code": "090130",
+      "name": "CONSUMER  MFB"
+  },
+  {
+      "code": 100032,
+      "name": "Contec Global"
+  },
+  {
+      "code": "060001",
+      "name": "Coronation"
+  },
+  {
+      "code": "070006",
+      "name": "Covenant MFB"
+  },
+  {
+      "code": "090159",
+      "name": "Credit Afrique MFB"
+  },
+  {
+      "code": "090167",
+      "name": "Daylight Microfinance Bank"
+  },
+  {
+      "code": "090156",
+      "name": "e-BARCs MFB"
+  },
+  {
+      "code": 100021,
+      "name": "Eartholeum"
+  },
+  {
+      "code": 100008,
+      "name": "Ecobank Xpress Account"
+  },
+  {
+      "code": "090097",
+      "name": "Ekondo MFB"
+  },
+  {
+      "code": "090273",
+      "name": "Emeralds MFB"
+  },
+  {
+      "code": "090114",
+      "name": "EmpireTrust Microfinance bank"
+  },
+  {
+      "code": "000019",
+      "name": "Enterprise Bank"
+  },
+  {
+      "code": "090189",
+      "name": "Esan MFB"
+  },
+  {
+      "code": "090166",
+      "name": "Eso-E Microfinance Bank"
+  },
+  {
+      "code": 100006,
+      "name": "eTranzact"
+  },
+  {
+      "code": "090179",
+      "name": "FAST MFB"
+  },
+  {
+      "code": "090107",
+      "name": "FBN Morgages Limited"
+  },
+  {
+      "code": 100014,
+      "name": "FBNMobile"
+  },
+  {
+      "code": "060002",
+      "name": "FBNQuest MERCHANT BANK"
+  },
+  {
+      "code": 100031,
+      "name": "FCMB Easy Account"
+  },
+  {
+      "code": 100001,
+      "name": "FET"
+  },
+  {
+      "code": "090153",
+      "name": "FFS Microfinance Bank"
+  },
+  {
+      "code": 100019,
+      "name": "Fidelity Mobile"
+  },
+  {
+      "code": "090126",
+      "name": "FidFund MFB"
+  },
+  {
+      "code": "090111",
+      "name": "FinaTrust Microfinance Bank"
+  },
+  {
+      "code": "090281",
+      "name": "Finex MFB"
+  },
+  {
+      "code": 110004,
+      "name": "First Apple Limited"
+  },
+  {
+      "code": "070014",
+      "name": "First Generation Mortgage Bank"
+  },
+  {
+      "code": "090163",
+      "name": "First Multiple MFB"
+  },
+  {
+      "code": "090164",
+      "name": "First Royal Microfinance Bank"
+  },
+  {
+      "code": 110002,
+      "name": "Flutterwave Technology solutions Limited"
+  },
+  {
+      "code": "070002",
+      "name": "Fortis Microfinance Bank"
+  },
+  {
+      "code": 100016,
+      "name": "FortisMobile"
+  },
+  {
+      "code": 400001,
+      "name": "FSDH"
+  },
+  {
+      "code": "090145",
+      "name": "Full range MFB"
+  },
+  {
+      "code": "090158",
+      "name": "FUTO MFB"
+  },
+  {
+      "code": "090168",
+      "name": "Gashua Microfinance Bank"
+  },
+  {
+      "code": "070009",
+      "name": "GATEWAY MORTGAGE BANK"
+  },
+  {
+      "code": "090278",
+      "name": "Glory MFB "
+  },
+  {
+      "code": 100022,
+      "name": "GoMoney"
+  },
+  {
+      "code": "090122",
+      "name": "GOWANS MFB"
+  },
+  {
+      "code": "090178",
+      "name": "GreenBank MFB"
+  },
+  {
+      "code": "090269",
+      "name": "Greenville Microfinance bank"
+  },
+  {
+      "code": "090195",
+      "name": "Grooming Microfinance bank"
+  },
+  {
+      "code": 100009,
+      "name": "GTMobile"
+  },
+  {
+      "code": "090147",
+      "name": "Hackman Microfinance Bank"
+  },
+  {
+      "code": "070017",
+      "name": "Haggai Mortgage Bank"
+  },
+  {
+      "code": "090121",
+      "name": "HASAL MFB"
+  },
+  {
+      "code": 100017,
+      "name": "Hedonmark"
+  },
+  {
+      "code": "090175",
+      "name": "HighStreet MFB"
+  },
+  {
+      "code": "090118",
+      "name": "IBILE Microfinance Bank"
+  },
+  {
+      "code": "090279",
+      "name": "Ikire MFB"
+  },
+  {
+      "code": "090258",
+      "name": "Imo Microfinance bank"
+  },
+  {
+      "code": 100024,
+      "name": "Imperial Homes Mortgage Bank"
+  },
+  {
+      "code": "090157",
+      "name": "Infinity MFB"
+  },
+  {
+      "code": "070016",
+      "name": "Infinity trust  Mortgage Bank"
+  },
+  {
+      "code": 100029,
+      "name": "Innovectives Kesh"
+  },
+  {
+      "code": 100027,
+      "name": "Intellifin"
+  },
+  {
+      "code": 110003,
+      "name": "Interswitch Limited"
+  },
+  {
+      "code": "090149",
+      "name": "IRL Microfinance Bank"
+  },
+  {
+      "code": "090211",
+      "name": "Itex Integrated Services Limited"
+  },
+  {
+      "code": "090003",
+      "name": "JubileeLife"
+  },
+  {
+      "code": "090191",
+      "name": "KCMB MFB"
+  },
+  {
+      "code": 100015,
+      "name": "Kegow"
+  },
+  {
+      "code": "090267",
+      "name": "Kuda Microfinance Bank"
+  },
+  {
+      "code": "090155",
+      "name": "La Fayette Microfinance Bank"
+  },
+  {
+      "code": "090177",
+      "name": "Lapo MFB"
+  },
+  {
+      "code": "090271",
+      "name": "Lavender Microfinance bank"
+  },
+  {
+      "code": "070012",
+      "name": "LBIC Mortgage Bank"
+  },
+  {
+      "code": "090265",
+      "name": "Lovonus Microfinance bank"
+  },
+  {
+      "code": "090171",
+      "name": "Mainstreet MFB"
+  },
+  {
+      "code": "090174",
+      "name": "Malachy MFB"
+  },
+  {
+      "code": "090280",
+      "name": "Megapraise Microfinance Bank"
+  },
+  {
+      "code": "090275",
+      "name": "Meridian MFB"
+  },
+  {
+      "code": "090136",
+      "name": "Microcred Microfinance Bank"
+  },
+  {
+      "code": 100011,
+      "name": "Mkudi"
+  },
+  {
+      "code": 100020,
+      "name": "MoneyBox"
+  },
+  {
+      "code": "090129",
+      "name": "MONEYTRUST MFB"
+  },
+  {
+      "code": "090190",
+      "name": "Mutual Benefits MFB"
+  },
+  {
+      "code": "090151",
+      "name": "Mutual Trust Microfinance Bank"
+  },
+  {
+      "code": "090152",
+      "name": "Nargata MFB"
+  },
+  {
+      "code": "090263",
+      "name": "Navy Microfinance bank"
+  },
+  {
+      "code": "090128",
+      "name": "Ndiorah MFB"
+  },
+  {
+      "code": "090108",
+      "name": "New Prudential Bank"
+  },
+  {
+      "code": "090205",
+      "name": "Newdawn Microfinance bank"
+  },
+  {
+      "code": "090194",
+      "name": "NIRSAL National microfinance bank"
+  },
+  {
+      "code": "060003",
+      "name": "NOVA MB"
+  },
+  {
+      "code": "070001",
+      "name": "NPF MicroFinance Bank"
+  },
+  {
+      "code": "090119",
+      "name": "OHAFIA MFB"
+  },
+  {
+      "code": "090161",
+      "name": "Okpoga MFB"
+  },
+  {
+      "code": "090272",
+      "name": "Olabisi Onabanjo university Microfinance bank"
+  },
+  {
+      "code": "070007",
+      "name": "Omoluabi Mortgage Bank Plc"
+  },
+  {
+      "code": 100026,
+      "name": "ONE FINANCE"
+  },
+  {
+      "code": 100002,
+      "name": "Paga"
+  },
+  {
+      "code": "070008",
+      "name": "PAGE FINANCIALS"
+  },
+  {
+      "code": 100003,
+      "name": "Parkway-ReadyCash"
+  },
+  {
+      "code": "090004",
+      "name": "Parralex"
+  },
+  {
+      "code": 110001,
+      "name": "PayAttitude Online"
+  },
+  {
+      "code": 100004,
+      "name": "Paycom"
+  },
+  {
+      "code": 110006,
+      "name": "Paystack Payments Limited"
+  },
+  {
+      "code": "090137",
+      "name": "Pecan Trust Microfinance Bank"
+  },
+  {
+      "code": "090196",
+      "name": "Pennywise Microfinance bank"
+  },
+  {
+      "code": "090135",
+      "name": "Personal Trust Microfinance Bank"
+  },
+  {
+      "code": "090165",
+      "name": "Petra Microfinance Bank"
+  },
+  {
+      "code": "070013",
+      "name": "PLATINUM MORTGAGE BANK"
+  },
+  {
+      "code": "090274",
+      "name": "Prestige Microfinance bank"
+  },
+  {
+      "code": "090261",
+      "name": "QuickFund Microfinance bank"
+  },
+  {
+      "code": "090170",
+      "name": "Rahama MFB"
+  },
+  {
+      "code": "000024",
+      "name": "Rand Merchant Bank"
+  },
+  {
+      "code": "070011",
+      "name": "Refuge Mortgage Bank"
+  },
+  {
+      "code": "090125",
+      "name": "REGENT MFB"
+  },
+  {
+      "code": "090173",
+      "name": "Reliance MFB"
+  },
+  {
+      "code": "090198",
+      "name": "Renmoney microfinance bank"
+  },
+  {
+      "code": "090132",
+      "name": "RICHWAY MFB"
+  },
+  {
+      "code": "090138",
+      "name": "Royal Exchange Microfinance Bank"
+  },
+  {
+      "code": "090006",
+      "name": "SafeTrust"
+  },
+  {
+      "code": "090140",
+      "name": "Sagamu Microfinance Bank"
+  },
+  {
+      "code": "090112",
+      "name": "Seed Capital Microfinance Bank"
+  },
+  {
+      "code": "090325",
+      "name": "Sparkle"
+  },
+  {
+      "code": 100007,
+      "name": "Stanbic IBTC @ease Wallet"
+  },
+  {
+      "code": "090162",
+      "name": "Stanford MFB"
+  },
+  {
+      "code": "090262",
+      "name": "Stellas Microfinance bank"
+  },
+  {
+      "code": 100023,
+      "name": "TagPay"
+  },
+  {
+      "code": "000026",
+      "name": "Taj Bank"
+  },
+  {
+      "code": "090115",
+      "name": "TCF"
+  },
+  {
+      "code": 100010,
+      "name": "TeasyMobile"
+  },
+  {
+      "code": "090146",
+      "name": "Trident Microfinance Bank"
+  },
+  {
+      "code": "090005",
+      "name": "Trustbond"
+  },
+  {
+      "code": "090266",
+      "name": "Uniben Microfinance bank"
+  },
+  {
+      "code": "090193",
+      "name": "Unical MFB"
+  },
+  {
+      "code": "090123",
+      "name": "Verite Microfinance Bank"
+  },
+  {
+      "code": 999999,
+      "name": "VFD MICROFINANCE BANK"
+  },
+  {
+      "code": "090150",
+      "name": "Virtue MFB"
+  },
+  {
+      "code": "090139",
+      "name": "Visa Microfinance Bank"
+  },
+  {
+      "code": 100012,
+      "name": "VTNetworks"
+  },
+  {
+      "code": "090120",
+      "name": "WETLAND MFB"
+  },
+  {
+      "code": "090124",
+      "name": "XSLNCE Microfinance Bank"
+  },
+  {
+      "code": "090142",
+      "name": "Yes MFB"
+  },
+  {
+      "code": 100018,
+      "name": "ZenithMobile"
+  },
+  {
+      "code": 100025,
+      "name": "Zinternet - KongaPay"
+  }
+]

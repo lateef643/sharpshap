@@ -4,10 +4,10 @@ import PropTypes from "prop-types";
 import formatToCurrency from "../../../../util/formatToCurrency";
 import Loader from "../../../partials/Loader";
 
-import style from './RechargeCableSummary.module.scss';
+import style from './FundsTransferSummary.module.scss';
 
-export const RechargeCableSummary = (props) => {
-  const { RechargeCableFormState: state, loading, handleOnSubmit, transactionCost } = props;
+export const FundsTransferSummary = (props) => {
+  const { FundsTransferFormState: state, loading, handleOnSubmit, transactionCost } = props;
 
   return (
     <div className={style.paymentContainer} >
@@ -18,25 +18,21 @@ export const RechargeCableSummary = (props) => {
         {loading ? <p className={style.pending}>Please wait while your transaction is processing...</p> : undefined}
       </div>
       <div>
-        <span>Service:</span>
-        <span>{state.provider}</span>
-      </div>
-      <div>
-        <span>Plan:</span>
-        <span>{state.selectedPlanName}</span>
-      </div>
-      <div>
         <span>Account Name:</span>
-        <span>{state.customerName}</span>
+        <span>{state.accountName}</span>
       </div>
       <div>
-        <span>Smart card:</span>
-        <span>{state.smartCardNumber}</span>
+        <span>Bank:</span>
+        <span>{state.beneficiaryBankName}</span>
+      </div>
+      <div>
+        <span>Account Number:</span>
+        <span>{state.accountNumber}</span>
+      </div>
+      <div>
+        <span>Phone Number:</span>
+        <span>{state.phone}</span>
       </div> 
-      <div>
-        <span>Plan Duration:</span>
-        <span>{state.selectedPlanDuration} {state.selectedPlanDuration === "1" ? "month" : "months"}</span>
-      </div>
       <div>
         <span>Amount:</span>
         <span>{formatToCurrency(state.amount)}</span>
@@ -47,7 +43,7 @@ export const RechargeCableSummary = (props) => {
       </div>     
       <div className={style.total}>    
         <span>Total:</span>
-        <span>{formatToCurrency(state.amount)}</span> 
+        <span>{formatToCurrency(state.total)}</span> 
       </div> 
       <button onClick={(e) => {
         e.preventDefault();
@@ -56,11 +52,11 @@ export const RechargeCableSummary = (props) => {
     </div>    
 )};
 
-RechargeCableSummary.propTypes = {
-  RechargeCableFormState: PropTypes.object,
+FundsTransferSummary.propTypes = {
+  FundsTransferFormState: PropTypes.object,
   loading: PropTypes.bool,
   handleOnSubmit: PropTypes.func,
   transactionCost: PropTypes.number
 }
 
-export default RechargeCableSummary;
+export default FundsTransferSummary;

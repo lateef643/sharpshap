@@ -1,6 +1,6 @@
  
 import React from "react";
-import cross from "../../assets/images/cross.svg";
+import cross from "../../assets/images/fail.svg";
 import { Link } from "react-router-dom";
 import styles from "./FailedTransaction.module.scss";
 

@@ -1,0 +1,40 @@
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/variables";
+
+.main {
+  flex: 1;
+  min-height: 100vh;
+  position: relative;
+
+  .header {
+    height: $header-height;
+    width: calc(100vw - #{$sidebar-width});
+    position: fixed;
+    top: 0;
+    text-align: left;
+    background-color: $header-background-color;
+    z-index: 1;
+
+    @media print {
+      display: none;
+    }
+  
+    @include respond(phone-large) {
+      width: 100vw;
+      height: $header-height-smaller-devices;
+    }
+  }
+
+  .content {
+    flex: 1;
+    min-height: calc(100vh - #{$header-height});
+    background-color: $content-background-color;
+    position: relative;
+    top: $header-height;
+
+    @include respond(phone-large) {
+      top: 9rem;
+    }
+  }
+}

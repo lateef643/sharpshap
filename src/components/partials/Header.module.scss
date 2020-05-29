@@ -1,190 +1,175 @@
 @import "../../assets/styles/config/mixins";
 @import "../../assets/styles/config/breakpoints";
 
-.header {
-  text-align: left;
-  background-color: #fff;
-  position: fixed;
-  width: calc(100vw - 16.5rem);
-  z-index: 1;
-  height: 11rem;
+.container {
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0px 2px .3rem #00000029;
+  padding: 0 3rem;
+  margin-bottom: .2rem;
+  // height: 6rem;
+  height: 7rem;
+  align-items: center;
 
   @include respond(phone-large) {
-    width: 100vw;
-    height: 9rem;
+    height: 5rem;
   }
 
-  @media print {
-    display: none;
-  }
+  .logoBox {
 
-  .headerContainer {
-    display: flex;
-    justify-content: space-between;
-    box-shadow: 0px 3px .6rem #00000029;
-    padding: 0 3rem;
-    margin-bottom: .2rem;
-    height: 7rem;
-    align-items: center;
-  
     @include respond(phone-large) {
-      height: 5rem;
+      margin-left: 3rem;
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: row;
+    flex: 0 0 10rem;
+    justify-content: space-around;
+    align-items: center;
+    margin-right: 1rem;
+
+    @include respond(phone-large) {
+      flex: 0 0 5rem;
+      margin-right: 0;
+      justify-content: space-between;
+    }
+  }
+  
+  .notification {
+    width: 4rem;
+    display: relative;
+    cursor: pointer;
+  
+    img {
+      width: 2rem;
     }
 
-    .logoBox {
+    .active {
+      border-radius: 100%;
+      width: 1rem;
+      height: 1rem;
+      display: inline-block;
+      background-color: red;
+      position: relative;
+      bottom: 1.4rem;
+      right: .8rem;
+      text-align: center;
+      color: #fff;
+      font-size: 8px;
+      padding-top: 1px;
+    }
+
+    .notificationPanel {
+      position: absolute;
+      top: 120px;
+      right: 10px;
+      background-color: #fff;
+      width: 40rem;
+      padding: 2rem 2.2rem;
+      height: min-content;
+      box-shadow: 0px 3px .6rem #00000029;
+      border-radius: 10px;
+      opacity: 1;
+      z-index: 10;
 
       @include respond(phone-large) {
-        margin-left: 3rem;
-      }
-    }
-
-    .actions {
-      display: flex;
-      flex-direction: row;
-      flex: 0 0 10rem;
-      justify-content: space-around;
-      align-items: center;
-      margin-right: 1rem;
-
-      @include respond(phone-large) {
-        flex: 0 0 5rem;
-        margin-right: 0;
-        justify-content: space-between;
-      }
-    }
-    
-    .notification {
-      width: 4rem;
-      display: relative;
-      cursor: pointer;
-    
-      img {
-        width: 2rem;
+        width: 85%;
+        top: 95px;
+        margin: 0 auto;
+        padding: 1rem;
       }
 
-      .active {
-        border-radius: 100%;
-        width: 1rem;
-        height: 1rem;
-        display: inline-block;
-        background-color: red;
-        position: relative;
-        bottom: 1.4rem;
-        right: .8rem;
-        text-align: center;
-        color: #fff;
-        font-size: 8px;
-        padding-top: 1px;
-      }
-
-      .notificationPanel {
-        position: absolute;
-        top: 120px;
-        right: 10px;
-        background-color: #fff;
-        width: 40rem;
-        padding: 2rem 2.2rem;
-        height: min-content;
-        box-shadow: 0px 3px .6rem #00000029;
-        border-radius: 10px;
-
+      .heading {
+        font-size: 1.65rem;
+        color: #707070;
+        font-weight: bold;
+        margin-bottom: 2rem;
+        
         @include respond(phone-large) {
-          width: 85%;
-          top: 95px;
-          margin: 0 auto;
-          padding: 1rem;
+          font-size: 1.5rem;
+          margin-bottom: 1rem;
+        }
+      }
+
+      div {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        img {
+          flex: 0 0 2rem;
+          margin-top: 5px;
+
+          @include respond(phone-large) {
+            flex: 0 0 1.5rem;
+          }
         }
 
-        .heading {
-          font-size: 1.65rem;
+        p {
+          flex: 0 0 89%;
+          font-size: 1.4rem;
+          display: inline-block;
           color: #707070;
-          font-weight: bold;
-          margin-bottom: 2rem;
+          line-height: 2.3rem;
+          margin-bottom: 1rem;
           
           @include respond(phone-large) {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
+            flex: 0 0 85%;
+            font-size: 1.2rem;
+            line-height: 2rem;
           }
         }
 
-        div {
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          align-items: flex-start;
-
-          img {
-            flex: 0 0 2rem;
-            margin-top: 5px;
-
-            @include respond(phone-large) {
-              flex: 0 0 1.5rem;
-            }
-          }
-
-          p {
-            flex: 0 0 89%;
-            font-size: 1.4rem;
-            display: inline-block;
-            color: #707070;
-            line-height: 2.3rem;
-            margin-bottom: 1rem;
-            
-            @include respond(phone-large) {
-              flex: 0 0 85%;
-              font-size: 1.2rem;
-              line-height: 2rem;
-            }
-          }
-
-        }
-      
       }
+    
     }
-    
-    .profile {
-      display: flex;
-      flex-direction: row;
-      justify-content: center;
-    
-      img {
-        width: 2rem;
-        position: relative;
-        bottom: 1px;
-        cursor: pointer;
-      }
-    
-        .submenu {
-          position: absolute;
-          top: 5rem;
-          right: 1rem;
-          display: flex;
-          flex-direction: column;
-          padding-left: 0;
-          width: 13rem;
-          justify-content: center;
-          font-weight: 100;
-          background-color: #fff;
-          color: #2A58AD;
-          box-shadow: 0px 1rem .6rem #00000029;
-    
-          a {
-            font-family: "Lato", sans-serif;
-            text-decoration: none;
-            font-size: 1.3rem;
-            color: #013660;
-            display: block;
-            margin-top: 2px;
-            height: 2.5rem;
-            padding-top: 5px;
-            padding-left: 5px;
-            font-weight: normal;
-          }
-    
-          a:hover {
-            color: #ffffff;
-            background: #2A58AE 0% 0% no-repeat padding-box;
-          }
+  }
+  
+  .profile {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+  
+    img {
+      width: 2rem;
+      position: relative;
+      bottom: 1px;
+      cursor: pointer;
+    }
+  
+      .submenu {
+        position: absolute;
+        top: 5rem;
+        right: 1rem;
+        display: flex;
+        flex-direction: column;
+        padding-left: 0;
+        width: 13rem;
+        justify-content: center;
+        font-weight: 100;
+        background-color: #fff;
+        color: #2A58AE;
+        box-shadow: 0px 1rem .6rem #00000029;
+  
+        a {
+          font-family: "Lato", sans-serif;
+          text-decoration: none;
+          font-size: 1.3rem;
+          color: #013660;
+          display: block;
+          margin-top: 2px;
+          height: 2.5rem;
+          padding-top: 5px;
+          padding-left: 5px;
+          font-weight: normal;
+        }
+  
+        a:hover {
+          color: #ffffff;
+          background: #2A58AE 0% 0% no-repeat padding-box;
         }
       }
     }

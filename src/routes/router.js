@@ -1,16 +1,16 @@
 import React from "react";
+
 import Login from "../components/pages/Login";
 import Dashboard from "../components/pages/Dashboard";
 import Contact from "../components/pages/Contact";
 import Terminals from "../components/pages/Terminals";
 import TransactionLog from "../components/content/transactions/TransactionLog";
-import Container from "../components/partials/Container";
 import AddUser from "../components/content/users/AddUser";
 import ListUsers from "../components/content/users/ListUsers";
 import NewTransaction from "../components/content/transactions/NewTransaction";
 import FundWallet from "../components/content/wallet/fundWallet/FundWallet";
 import WalletLog from "../components/content/wallet/logs/WalletLog";
-import Transfer from "../components/content/services/transfer/Transfer";
+import FundsTransfer from "../components/content/services/transfer/FundsTransfer";
 import ActivityLog from "../components/content/wallet/logs/ActivityLog";
 import TransactionDetails from "../components/shared/TransactionDetails";
 import BuyAirtime from "../components/content/services/airtime/BuyAirtime";
@@ -22,8 +22,7 @@ import Profile from "../components/content/profile/Profile";
 import WalletTransfer from "../components/content/wallet/walletTransfer/WalletTransfer";
 import BillPayment from "../components/pages/BillPayment";
 import AirtimeData from "../components/pages/AirtimeData";
-import Betting from "../components/pages/Betting";
-import { route } from "react-router-dom";
+import Betting from "../components/content/services/betting/Betting";
 
 const routes = [
   {
@@ -34,10 +33,6 @@ const routes = [
   {
     path: "/login",
     main: () => <Login />
-  },
-  {
-    path: "/dashboard",
-    main: () => <Dashboard />
   },
   {
     path: "/contact-us",
@@ -79,9 +74,10 @@ const routes = [
     path: "/activity-log",
     main: () => <ActivityLog />
   },
+  //passing props to transaction details because we need match to extract id
   {
     path: "/transaction-details/:id",
-    main: (props) => <route><TransactionDetails {...props} /></route>
+    main: (props) => <TransactionDetails {...props} />
   },
   {
     path: "/buy-airtime",
@@ -109,7 +105,7 @@ const routes = [
   },
   {
     path: "/transfer",
-    main: () => <Transfer />
+    main: () => <FundsTransfer />
   },
   {
     path: "/bill-payment",
@@ -125,8 +121,4 @@ const routes = [
   }
 ];
 
-const AppRouter = () => (
-  <Container routes={routes} />
-);
-
-export default AppRouter;
+export default routes;

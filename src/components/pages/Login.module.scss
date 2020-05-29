@@ -1,6 +1,18 @@
 @import "../../assets/styles/config/mixins";
 @import "../../assets/styles/config/breakpoints";
 
+@keyframes slidedown {
+  0% {
+    transform: translateY(-3rem);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -45,6 +57,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
+    position: relative;
 
     > .formContainer {
       width: 55%;
@@ -60,6 +73,7 @@
       }
 
       @include respond(phone-large) {
+        margin-top: 29vh;
         width: 100%;
       }
 
@@ -75,26 +89,42 @@
 
         .logo {
           margin-bottom: 15vh;
+
+          @include respond(phone-large) {
+            margin-bottom: 10vh;
+          }
         }
 
         .error {
-          position: fixed;
-          bottom: 57%;
+          position: absolute;
+          top: 5rem;
           color: red;
           font-size: 1.4rem;
           padding: 1rem 2rem;
-          width: 37rem;
+          width: 29rem;
           margin: 0 auto 2rem auto;
           background-color: rgba(255, 0, 0, 0.185);
+          animation: slidedown .5s;
+          border-radius: 5px;
+
+          display: flex;
+          align-items: center;
+
+          img {
+            width: 2.5rem;
+            margin-right: 1.5rem;
+          }
 
           @include respond(tab) {
-            position: relative;
+            height: 3.5rem;
+            top: 1rem;
           }
         }
       
         label {
           margin-bottom: 3rem;
           width: 70%;
+          position: relative;
 
           @include respond(phone-large) {
             width: 85%;
@@ -121,6 +151,21 @@
               margin-top: 4vh;
             }
           }
+
+          span {
+            position: absolute;
+            right: 1rem;
+            top: 1rem;
+            height: 2rem;
+
+            img {
+              width: 2rem;
+            }
+
+            @include respond(phone-large) {
+              top: 51%;
+            }
+          }
       
           &::placeholder {
             font-family: inherit;
@@ -136,7 +181,7 @@
           height: 5rem;
           color: #fff;
           border: 0;
-          border-radius: 1rem;
+          border-radius: .5rem;
           background: transparent 
             linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
             0% 0% no-repeat padding-box;

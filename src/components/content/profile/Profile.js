@@ -5,7 +5,8 @@ import Loader from "../../partials/Loader";
 import { UPDATE_USER } from "../../../store/api/constants";
 import { UPDATE_USER_PASSWORD } from "../../../store/api/constants";
 import { setCurrentPage } from "../../../actions/page";
-import style from './Profile.module.scss';
+import styles from './Profile.module.scss';
+import { startLogout } from "../../../actions/auth";
 
 export const Profile = (props) => {
   const [firstname, setFirstname] = useState(props.firstname);
@@ -61,6 +62,7 @@ export const Profile = (props) => {
     .then(res => {
       setPasswordLoading(false);
       setModal(false);
+      props.startLogout();
     })
     .catch(err => {
       setPasswordLoading(false);
@@ -119,60 +121,60 @@ export const Profile = (props) => {
   };
 
   return (
-  <div className={style.container}>
-    <form className={style.form} onSubmit={handleOnSubmit} >
-      <div className={style.optionsContainer}>
-        <span className={style.detailsText}>1. Details</span>
-        <span className={style.startModal} onClick={(e) => {
+  <div className={styles.container}>
+    <form className={styles.form} onSubmit={handleOnSubmit} >
+      <div className={styles.optionsContainer}>
+        <span className={styles.detailsText}>1. Details</span>
+        <span className={styles.startModal} onClick={(e) => {
           e.preventDefault();
           setModal(true);
         }}>2. Change Password</span>
       </div>
       <label>
         <span>Firstname</span>
-        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleFirstnameChange} value={firstname} />
+        <input type="text" disabled={true} className={styles.outlineGrey} onChange={handleFirstnameChange} value={firstname} />
       </label>
       <label>
         <span>Lastname</span>
-        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleLastnameChange} value={lastname}/>      
+        <input type="text" disabled={true} className={styles.outlineGrey} onChange={handleLastnameChange} value={lastname}/>      
       </label>    
       <label>
         <span>Phone Number</span>
-        <input type="text" disabled={true} className={style.outlineGrey} onChange={handlePhoneChange} value={phoneNumber} />      
+        <input type="text" disabled={true} className={styles.outlineGrey} onChange={handlePhoneChange} value={phoneNumber} />      
       </label>    
       <label>
         <span>Email</span>
-        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleEmailChange} value={email} />      
+        <input type="text" disabled={true} className={styles.outlineGrey} onChange={handleEmailChange} value={email} />      
       </label>  
       <label>
         <span>Business Name</span>
-        <input type="text" disabled={true} className={style.outlineGrey} onChange={handleBusinessNameChange} Value={businessName} />      
+        <input type="text" disabled={true} className={styles.outlineGrey} onChange={handleBusinessNameChange} Value={businessName} />      
       </label>   
       <label>
         <span>Address</span>
-        <input type="text" className={style.outlineGrey} onChange={handleAddressChange} value={address} />      
+        <input type="text" className={styles.outlineGrey} onChange={handleAddressChange} value={address} />      
       </label>    
       <button type="submit">{loading ? <Loader color="white" size="small" position="small" /> : "Submit"}</button>
     </form>
-    {modal ? <div className={style.passwordModal}>
+    {modal ? <div className={styles.passwordModal}>
       <span onClick={(e) => {
         e.preventDefault();
         setError({...error, passwordCheck: undefined});
         setModal(false);
       }}>X</span>
-      <form className={style.form} onSubmit={handleOnPasswordChangeSubmit} >
+      <form className={styles.form} onSubmit={handleOnPasswordChangeSubmit} >
         <label>
           <span>Old Password</span>
-          <input type="password" className={style.outlineGrey} onChange={handleOldPasswordChange} />      
+          <input type="password" className={styles.outlineGrey} onChange={handleOldPasswordChange} />      
         </label>
         <label>
           <span>New Password</span>
-          <input type="password" className={style.outlineGrey} onChange={handlePasswordChange} />      
+          <input type="password" className={styles.outlineGrey} onChange={handlePasswordChange} />      
         </label>    
         <label>
-          {error.passwordCheck ? <p className={style.error}>{error.passwordCheck}</p> : undefined}
+          {error.passwordCheck ? <p className={styles.error}>{error.passwordCheck}</p> : undefined}
           <span>Confirm Password</span>
-          <input type="password" className={style.outlineGrey} onChange={handleConfirmPasswordChange} />      
+          <input type="password" className={styles.outlineGrey} onChange={handleConfirmPasswordChange} />      
         </label>        
         <button type="submit">{passwordLoading ? <Loader color="white" size="small" position="center" /> : "Submit"}</button>
       </form> 
@@ -189,11 +191,12 @@ const mapStateToProps = state => {
     phone: state.auth.user.agent.business_phone,
     address: state.auth.user.agent.business_address,
   }
-}
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
+    changeCurrentPage: payload => dispatch(setCurrentPage(payload)),
+    startLogout: () => dispatch(startLogout())
   }
 };
 

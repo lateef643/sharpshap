@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 
+import VerificationLoader from "../../../partials/VerificationLoader";
+
 import { GET_ENERGY_VENDORS } from "../../../../store/api/constants";
 import { VALIDATE_METER_NUMBER } from "../../../../store/api/constants";
 import validateFormData from "../../../../validation/validateFormData";
@@ -19,6 +21,7 @@ const ElectricityPaymentForm = (props) => {
   const [energyVendors, setEnergyVendors] = useState([]);
   const [accountName, setAccountName] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     (async function fetchVendorsList() {
@@ -30,6 +33,7 @@ const ElectricityPaymentForm = (props) => {
   }, []);
 
   useEffect(() => {
+
     const { meterNo, disco, paymentPlan } = state;
     const req = {
       "meter_number": meterNo,
@@ -37,40 +41,59 @@ const ElectricityPaymentForm = (props) => {
       "type": paymentPlan
     };
 
-    (async function validateMeterNumber() {
-      try {
-        const res = await axios.put(VALIDATE_METER_NUMBER, req);
+    if (!isNaN(parseInt(meterNo)) && meterNo.length > 10) {
+      setLoading(true);
 
-        // setAccountName(accountName);
-      } catch(e) {
-        // setValidationErrors({...validationErrors, accountName: "Account validation failed please try again"});
-      }
-    })();
+      dispatch({
+        type: "UPDATE_FORM_STATE",
+        payload: { accountName: "" }
+      });
+
+      setValidationErrors({...validationErrors, accountName: ""});
+
+      (async function validateMeterNumber() {
+        try {
+          const res = await axios.put(VALIDATE_METER_NUMBER, req);
+
+          const customerName = res.data.data.name;
+          setLoading(false);
+
+          dispatch({
+            type: "UPDATE_FORM_STATE",
+            payload: { accountName: customerName }
+          });
+
+        } catch(e) {
+          setValidationErrors({...validationErrors, accountName: "Account validation failed please try again"});
+          setLoading(false);
+        }
+      })(); 
+    }
   }, [state.meterNo]);
 
   //Change form image url on disco change
   let imageUrl;
 
   switch(state.disco) {
-    case "IKEJA":
+    case "IKEDC":
       imageUrl = ikedc;
       break;
-    case "EKO":
+    case "EKEDC":
       imageUrl = ikedc;
       break;
-    case "PH":
+    case "PHEDC":
       imageUrl = phedc;
       break;
-    case "KANO":
+    case "KEDC":
       imageUrl = kaedc;
       break;
-    case "KADUNA":
+    case "KAEDC":
       imageUrl = kedc;
       break;
-    case "IBADAN":
+    case "IBEDC":
       imageUrl = ibedc;
       break;
-    case "ABUJA":
+    case "AEDC":
       imageUrl = aedc;
       break;
     default:
@@ -84,7 +107,6 @@ const ElectricityPaymentForm = (props) => {
     const errors = validateFormData(state, properties);
 
     setValidationErrors({ ...validationErrors, ...errors});
-    console.log(errors);
 
     if (Object.keys(errors).length > 0) return
 
@@ -93,6 +115,7 @@ const ElectricityPaymentForm = (props) => {
 
   const handleStateChange = ({ target }) => {
     setValidationErrors({ ...validationErrors, [target.name]: false });
+
     dispatch({
       type: "UPDATE_FORM_STATE",
       payload: { [target.name]: target.value },
@@ -122,7 +145,7 @@ const ElectricityPaymentForm = (props) => {
             {energyVendors.map((vendor, index) => {
               return <option 
                 key={`${index}-${vendor.name}`} 
-                value={vendor.buypower_code}>{vendor.name}</option>
+                value={vendor.name}>{vendor.name}</option>
             })}
           </select>
           {validationErrors.disco ? <p className={styles.validationErrorText}>Please select disco</p> : undefined}
@@ -160,8 +183,9 @@ const ElectricityPaymentForm = (props) => {
             name="accountName"
             value={state.accountName}
             className={styles.outlineGrey}
-            onChange={(e) => handleStateChange(e)}
+            disabled
           />  
+          {loading ? <div className={styles.loader}><VerificationLoader /></div> : undefined}
           {validationErrors.accountName ? <p className={styles.validationErrorText}>{validationErrors.accountName}</p> : undefined}
         </label> 
         <label>

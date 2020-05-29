@@ -1,57 +1,67 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+import formatToCurrency from "../../../../util/formatToCurrency";
 import check from "../../../../assets/images/check.svg";
+import logo from "../../../../assets/images/cico-logo.svg";
+
 import styles from './ElectricityPaymentCompleted.module.scss';
 
-export const ElectricityPaymentCompleted = ({ formState, setComponentToRender }) => { 
-  const { disco, meterNo, accountName, paymentPlan, amount, phoneNo} = formState;
+export const ElectricityPaymentCompleted = ({ successData }) => { 
+  const { name, account, token, receipt_no, txndate, amountPaid, units} = successData;
   
   return (
     <div className={styles.section}>
       <div className={styles.imageContainer}>
         <img className={styles.headingImage} src={check} alt="checkmark" />
+        <img className={styles.headingImagePrint} src={logo} alt="cico logo for print" />
         <p className={styles.headingText}>Transaction Successful</p>
       </div>
       <div className={styles.contentContainer}>
         <div className={styles.transactionDetails}>
           <div>
-            <span>Disco:</span>
-            <span>{disco}</span>  
+            <span>Name:</span>
+            <span>{name}</span>  
           </div>
           <div>
-            <span>Meter No:</span>
-            <span>{meterNo}</span>  
+            <span>Account No:</span>
+            <span>{account}</span>
           </div>
           <div>
-            <span>Account Name</span>
-            <span>{accountName}</span>  
+            <span>Units</span>
+            <span>{units || "POSTPAID"}</span>  
           </div>
           <div>
-            <span>Plan:</span>
-            <span>{paymentPlan}</span>  
+            <span>Token</span>
+            <span>{token || "POSTPAID"}</span>  
           </div>
           <div>
-            <span>Amount:</span>
-            <span>{amount}</span>  
+            <span>Receipt No:</span>
+            <span>{receipt_no}</span>  
+          </div>
+          <div>
+            <span>Date:</span>
+            <span>{txndate}</span>  
           </div>
         </div>
         <div className={styles.transactionAmount}>
           <div>
             <span>Amount:</span>
-            <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>  
+            <span>{formatToCurrency(amountPaid)}</span>  
           </div>
           <div>
             <span>Convenience Fee:</span>
-            <span>&#8358;{Number(0).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>  
+            <span>{formatToCurrency(0)}</span>  
           </div>
           <div className={styles.total}>
             <span>Total:</span>
-            <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>  
+            <span>{formatToCurrency(amountPaid)}</span>  
           </div>
         </div>
           <div className={styles.link}>
             <Link to="/" className={styles.linkHome}>Home</Link>
-            <a onClick={() => setComponentToRender("form")} className={styles.linkServiceHome}>New Payment</a>
+            <a onClick={() => window.print()} className={styles.linkServiceHome}>Print</a>
+            {/* <a onClick={() => setComponentToRender("form")} className={styles.linkServiceHome}>New Payment</a> */}
           </div>
         </div>
       </div>

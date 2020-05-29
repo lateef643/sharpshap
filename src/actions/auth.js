@@ -1,6 +1,7 @@
 import axios from 'axios';
+
 import { LOGIN_API } from "../store/api/constants";
-import setAuthToken from "../util/auth";
+import setAuthToken from "../util/setAuthToken";
 import isEmpty from "../validation/isEmpty";
 import history from "../util/history";
 
