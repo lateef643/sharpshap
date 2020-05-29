@@ -53,7 +53,7 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
         const date = new Date();
         const transactionDate = getTransactionDate(date);
 
-        setSuccessData({ ...FundsTransferFormState, reference, status, transactionCost: TRANSACTION_COST, date: transactionDate });
+        setSuccessData({ reference, status, transactionCost: TRANSACTION_COST, date: transactionDate });
         setLoading(false);
         setComponentToRender("completed");
       } catch(err) {
@@ -94,7 +94,9 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
       <FundsTransferCompleted 
         successData={successData}
         setComponentToRender={setComponentToRender}
+        FundsTransferFormState={FundsTransferFormState}
       />;
+      break;
     case "failed":
       renderedComponent = <FailedTransaction />;
       break;
