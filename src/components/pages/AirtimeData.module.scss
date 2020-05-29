@@ -15,7 +15,16 @@
     flex: 0 0 30%;
     display: flex;
     flex-flow: row wrap; 
-    justify-content: flex-start;
     height: max-content;
+    justify-content: start;
+
+    @include respond(phone-large) {
+      justify-content: space-between;
+      width: 55%;
+    }
+
+    @include respond-custom(330px) {
+      width: 50%;
+    }
   }
 }

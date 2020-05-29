@@ -1,6 +1,8 @@
 import React, {useEffect} from "react";
-import { connect } from "react-redux";
+
+import formatToCurrency from "../../../../util/formatToCurrency";
 import Loader from "../../../partials/Loader";
+
 import style from './WalletTransferSummary.module.scss';
 
 export const WalletTransferSummary = ({ agentId, agentName, amount, transactionCost, total, loading, handleOnSubmit }) => {
@@ -22,15 +24,15 @@ export const WalletTransferSummary = ({ agentId, agentName, amount, transactionC
       </div>
       <div>
         <span>Amount:</span>
-        <span>&#8358;{Number(amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        <span>{formatToCurrency(amount)}</span>
       </div>
       <div>
         <span>Transaction Cost:</span>
-        <span>&#8358;{Number(transactionCost).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>
+        <span>{formatToCurrency(transactionCost)}</span>
       </div>        
       <div className={style.total}>    
         <span>Total:</span>
-        <span>&#8358;{Number(total).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span> 
+        <span>{formatToCurrency(total)}</span> 
       </div> 
       <button onClick={(e) => {
         e.preventDefault();

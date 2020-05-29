@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { GET_DATA_PLANS } from "../../../../store/api/constants";
-import VerificationLoader from "../../../partials/VerificationLoader";
 import mtn from "../../../../assets/images/MTN Logo.svg";
 import _9mobile from "../../../../assets/images/9mobile.svg";
 import airtel from "../../../../assets/images/Airtel.svg";

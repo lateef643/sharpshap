@@ -1,9 +1,10 @@
 @import "../../assets/styles/config/mixins";
 @import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/variables";
 
 .statusbar {
-  height: 4rem;
-  box-shadow: 0px 3px 6px #00000029;
+  height: $status-bar-height;
+  box-shadow: 0px 2px 3px #00000029;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -13,11 +14,11 @@
 
   @include respond(phone-large) {
     padding: 0 1.3rem;
-    height: 4rem;
+    height: $status-bar-height-smaller-devices;
   }
 
   &__links {
-    flex: 1;
+    flex: 0 0 25%;
     font-size: 1.4rem;
     color: #013660;
     opacity: 1;
@@ -41,10 +42,13 @@
 
     @include respond(phone-large) {
       flex: 0 0 50%;
+      font-size: 1.35rem;
     }
 
     @include respond-custom(330px) {
       flex: 0 0 55%;
+      font-size: 1.25rem;
+      text-align: center;
     }
 
     &__transaction-balance {
@@ -57,23 +61,43 @@
 }
 
 .search {
-  height: 3rem;
-  width: 22rem;
-  background: #FCFBFB 0% 0% no-repeat padding-box;
-  border-radius: 5px;
-  opacity: 1;
-  border: 0;
-  outline: 0;
-  padding: 0 .7rem;
-  font-family: inherit;
-  color: #707070;
-  border-radius: 2rem;
-  flex: 0 0 25%;
+  flex: 0 0 20%;
+  height: 2.3rem;
+  position: relative;
 
-  @include respond(phone-large) {
-    flex: 0 0 30%;
-    width: 12rem;
+  .searchInput {
     height: 2.3rem;
-    order: 1;
+    width: 100%;
+    background: #FCFBFB 0% 0% no-repeat padding-box;
+    border-radius: 2px;
+    opacity: 1;
+    border: 0;
+    outline: 0;
+    padding: 0 1rem;
+    padding-right: 3rem;
+    font-family: inherit;
+    color: #707070;
+    border-radius: 10px;
+    flex: 0 0 25%;
+  
+    @include respond(phone-large) {
+      flex: 0 0 30%;
+      width: 12rem;
+      height: 2.3rem;
+      order: 1;
+      padding-right: 2rem;
+    }
+  }
+
+  img {
+    position: absolute;
+    right: 1.3rem;
+    top: .6rem;
+    width: 1.2rem;
+
+    @include respond(phone-large) {
+      right: .7rem;
+    }
   }
 }
+

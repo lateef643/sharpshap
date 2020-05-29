@@ -1,7 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
+
+import formatToCurrency from "../../../../util/formatToCurrency";
 import check from "../../../../assets/images/check.svg";
-import cross from "../../../../assets/images/redCross.svg";
+
 import styles from './WalletTransferStatus.module.scss';
 
 export const WalletTransferStatus = (props) => { 
@@ -38,15 +40,15 @@ export const WalletTransferStatus = (props) => {
       <div className={styles.transactionAmount}>
         <div>
           <span>Amount:</span>
-          <span>&#8358;{Number(successData.amount).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>  
+          <span>{formatToCurrency(successData.amount)}</span>  
         </div>
         <div>
           <span>Convenience Fee:</span>
-          <span>&#8358;{Number(transactionCost).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>  
+          <span>{formatToCurrency(transactionCost)}</span>  
         </div>
         <div>
           <span>Total:</span>
-          <span>&#8358;{Number(total).toFixed(2).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</span>  
+          <span>{formatToCurrency(total)}</span>  
         </div>
       </div>
       <div className={styles.link}>

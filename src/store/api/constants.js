@@ -145,18 +145,21 @@ export const VEND_MULTICHOICE = `${path}/cable/multichoice/vend`;
 //////BANK OPERATIONS///////
 
 //get list of banks - GET
-export const GET_BANK_LIST = `${path}/bank-operations/banks`;
+export const GET_BANK_LIST = `${path}/banks/lists`;
 
 //verify account - GET
-export const VERIFY_ACCOUNT = `${path}/bank-operations/verify-account`;
+export const VERIFY_ACCOUNT = `${path}/recipient/verify`;
 
 //disburse funds -- POST
-export const DISBURSE_FUNDS = `${path}/bank-operations/disburse-fund`;
+export const DISBURSE_FUNDS = `${path}/funds/transfer`;
 
 ///////ENERGY//////////////////
 
 //get energy vendors - GET
 export const GET_ENERGY_VENDORS = `${path}/energy/discos`;
 
-//validate meter number - POST
+//validate meter number - PUT
 export const VALIDATE_METER_NUMBER = `${path}/energy`;
+
+//vend energy - POST
+export const VEND_ENERGY = `${path}/energy`;

@@ -1,21 +1,24 @@
 import React, { useState, useEffect, useReducer } from "react";
 import { connect } from "react-redux";
+import axios from "axios";
 
+import { VEND_ENERGY } from "../../../../store/api/constants";
+import { setCurrentPage } from "../../../../actions/page";
 import ElectricityPaymentForm from "./ElectricityPaymentForm";
 import ElectricityPaymentSummary from "./ElectricityPaymentSummary";
 import ElectricityPaymentCompleted from "./ElectricityPaymentCompleted";
 import FailedTransaction from "../../../shared/FailedTransaction";
 import ElecticityPaymentReducer, { initialFormState } from "./payment-reducer";
-import { setCurrentPage } from "../../../../actions/page";
 
 import style from './ElectricityPayment.module.scss';
 
 export const ElectricityPayment = ({ changeCurrentPage }) => {
   const TRANSACTION_COST = 0;
   let renderedComponent;
-  const [componentToRender, setComponentToRender] = useState('form');
+  const [componentToRender, setComponentToRender] = useState("form");
   const [ElectricityPaymentFormState, dispatch] = useReducer(ElecticityPaymentReducer, initialFormState);
   const [loading, setLoading] = useState(false);
+  const [successData, setSuccessData] = useState(null);
 
   useEffect(() => {
     changeCurrentPage({
@@ -24,10 +27,29 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
     });
   }, []);
 
-  const handleOnSubmit = (e) => {
+  const handleOnSubmit = () => {
+    const { meterNo, disco, paymentPlan, amount, phone } = ElectricityPaymentFormState;
     setLoading(true);
-    e.preventDefault();
-    console.log(ElectricityPaymentFormState);
+
+    const req = {
+      "meter_number": meterNo,
+      "disco": disco,
+      "type": paymentPlan,
+      "amount": parseInt(amount),
+      "phone": phone
+    };
+
+    (async function vendEnergy() {
+      try {
+        const res = await axios.post(VEND_ENERGY, req);
+        setLoading(false); 
+        setSuccessData(res.data.data);   
+        setComponentToRender("success");    
+      } catch(e) {
+        setLoading(false);
+        setComponentToRender("failed");
+      }
+    })();
   };
 
   switch(componentToRender) {
@@ -50,7 +72,9 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
         break;
     case "success":
       renderedComponent = 
-        <ElectricityPaymentCompleted />
+        <ElectricityPaymentCompleted 
+          successData={successData}
+        />
         break;
     case "failed":
       renderedComponent = 

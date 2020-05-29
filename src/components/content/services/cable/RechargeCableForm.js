@@ -210,7 +210,7 @@ export const RechargeCableForm = (props) => {
             key={`${index}--${plan.name}`}>{plan.name}</option>
         })}
         </select>
-        {fetchPlansLoading ? <VerificationLoader /> : undefined}
+        {fetchPlansLoading ? <div className={styles.loader}><VerificationLoader /></div> : undefined}
         {validationErrors.plan ? <p className={styles.validationErrorText}>Please select plan</p> : undefined}
       </label>
       <label>
@@ -233,7 +233,8 @@ export const RechargeCableForm = (props) => {
           disabled={true} 
           className={styles.outlineGrey} 
           /> 
-        {customerValidationLoading ? <VerificationLoader /> : undefined}
+        {customerValidationLoading ? 
+        <div className={styles.loader}><VerificationLoader /></div> : undefined}
         {validationErrors.customerName ? <p className={styles.validationErrorText}>Customer validation failed</p> : undefined}
       </label>  
       <label>

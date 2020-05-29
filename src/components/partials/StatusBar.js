@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { Link, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
+import formatToCurrency from "../../util/formatToCurrency";
 import axios from "axios";
 import { GET_AGENT_INFO } from "../../store/api/constants";
+import search from "../../assets/images/search-svgrepo-com.svg";
 import "./StatusBar.scss";
 
 export const StatusBar = ({ page, walletBalance, uuid  }) => {
@@ -28,8 +30,11 @@ export const StatusBar = ({ page, walletBalance, uuid  }) => {
         {page.heading ? <span>&nbsp;/ {page.heading}</span> : undefined}
         {page.sub ? <span>&nbsp;/ {page.sub}</span>: undefined}
       </p>
-      <input className="search" type="text" placeholder="Search" style={{visibility: page.search ? 'visible' : 'hidden'}}/>
-      <p className="statusbar__text">Wallet Balance: &nbsp;&#8358;{balance.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}</p>
+      <span className="search"style={{visibility: page.search ? 'visible' : 'hidden'}}>
+        <input className="searchInput" type="text" placeholder="Search" />
+        <img src={search} />
+      </span>
+      <p className="statusbar__text">Wallet Balance: {formatToCurrency(balance)}</p>
       <p className="statusbar__text statusbar__text__transaction-balance">Transaction Value: &#8358;0.00</p>
     </div>
 )};

@@ -8,7 +8,7 @@ import style from './ElectricityPaymentSummary.module.scss';
 
 export const ElectricityPaymentSummary = (props) => {
   const { ElectricityPaymentFormState:state, handleOnSubmit, loading, transactionCost } = props;
-  const { disco, meterNo, accountName, paymentPlan, amount, phoneNo} = state;
+  const { disco, meterNo, accountName, paymentPlan, amount, phone} = state;
   
   return (
     <div className={style.paymentContainer} >
@@ -36,19 +36,19 @@ export const ElectricityPaymentSummary = (props) => {
       </div>
       <div>
         <span>Phone No:</span>
-        <span>{phoneNo}</span>
+        <span>{phone}</span>
       </div>
       <div>
         <span>Amount:</span>
-        <span>&#8358;{formatToCurrency(amount)}</span>
+        <span>{formatToCurrency(amount)}</span>
       </div>
       <div>
         <span>Transaction cost:</span>
-        <span>&#8358;{formatToCurrency(transactionCost)}</span>
+        <span>{formatToCurrency(transactionCost)}</span>
       </div>
       <div className={style.total}>    
         <span>Total</span>
-        <span>&#8358;{formatToCurrency(amount)}</span> 
+        <span>{formatToCurrency(amount)}</span> 
       </div> 
       <button onClick={(e) => {
         e.preventDefault();

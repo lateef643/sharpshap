@@ -17,6 +17,10 @@
     width: 95%;
   }
 
+  @include respond-custom(330px) {
+    font-size: 1.3rem;
+  }
+
   .heading {
     margin-bottom: 2rem;
 
@@ -24,6 +28,10 @@
       text-align: center;
       margin: 0 auto;
       font-size: 1.6rem;
+
+      @include respond-custom(330px) {
+        font-size: 1.5rem;
+      }
     }
   }
 
@@ -45,6 +53,10 @@
       flex: 0 0 65%;
       color: #707070;
       line-height: 2.4rem;
+
+      @include respond-custom(330px) {
+        font-size: 1.3rem;
+      }
     }
 
     span:first-child {
@@ -53,6 +65,11 @@
       flex: 0 0 35%;
       color: #707070;
       line-height: 2.4rem;
+
+      @include respond-custom(330px) {
+        font-size: 1.3rem;
+        flex: 0 0 38%;
+      }
     }
   }
 
@@ -63,6 +80,10 @@
     border: 1px solid #7070709f;
     border-left: 0;
     border-right: 0;
+
+    @include respond-custom(330px) {
+      font-size: 1.3rem;
+    }
   }
 
   button {

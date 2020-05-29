@@ -1,16 +1,22 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+
 import Loader from "../partials/Loader";
 import { startLoginUser } from "../../actions/auth";
-import style from "./Login.module.scss";
 import logo from "../../assets/images/cico-logo-login.svg";
+import eye from "../../assets/images/eye-svgrepo-com.svg";
+import blind from "../../assets/images/blind-symbol-of-an-opened-eye-with-a-slash-svgrepo-com.svg";
+import caution from "../../assets/images/warning-svgrepo-com.svg";
 import image from "../../assets/images/login.png";
+
+import styles from "./Login.module.scss";
 
 export const Login = (props) => {
   const [phone, setphone] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(props.loading);
   const [error, setError] = useState(props.message);
+  const [toggleReveal, setToggleReveal] = useState(false);
 
   useEffect(() => {
     setError(props.message);
@@ -51,23 +57,26 @@ export const Login = (props) => {
   };
   
   return (
-    <div className={style.container}>
-      <div className={style.imageSection}>
-        <div className={style.imageBox}>
+    <div className={styles.container}>
+      <div className={styles.imageSection}>
+        <div className={styles.imageBox}>
           <img src={image} alt="hello illustration" />
           <p>Login</p>        
         </div>
       </div>
-      <div className={style.formSection}>
-        <div className={style.formContainer}>
-          <form className={style.form} onSubmit={handleOnSubmit}>
-            <img className={style.logo} src={logo} alt="Cico logo" />
-            {error ? <p className={style.error}>{error}</p> : undefined}
+      <div className={styles.formSection}>
+        <div className={styles.formContainer}>
+          <form className={styles.form} onSubmit={handleOnSubmit}>
+            <img className={styles.logo} src={logo} alt="Cico logo" />
+            {error ? <p className={styles.error}><img src={caution} /><span>{error}</span></p> : undefined}
             <label>
               <input type="text" placeholder="Phone Number" onChange={handlephoneChange} />
             </label>
             <label>
-              <input type="password" placeholder="Password" onChange={handlePasswordChange} />
+              <input type={!toggleReveal ? "password" : "text"} placeholder="Password" onChange={handlePasswordChange} />
+              <span onClick={() => {
+                setToggleReveal(!toggleReveal)
+              }}><img src={!toggleReveal ? eye : blind} /></span>
             </label>
               <button>{loading ? <Loader color="white" size="small" /> : "Login" }</button>
           </form>        
