@@ -7,8 +7,9 @@ import check from "../../../../assets/images/check.svg";
 import styles from './FundsTransferCompleted.module.scss';
 
 export const FundsTransferCompleted = (props) => {
-  const { successData, setComponentToRender } = props;
-  const { date, transactionCost, reference, beneficiaryBankName, amount, accountNumber, accountName, total } = successData;
+  const { successData, setComponentToRender, FundsTransferFormState } = props;
+  const { beneficiaryBankName, amount, accountNumber, accountName, total } = FundsTransferFormState;
+  const { date, transactionCost, status, reference } = successData;
 
   return (
     <div className={styles.section} >
@@ -33,6 +34,10 @@ export const FundsTransferCompleted = (props) => {
         <div>
           <span>Beneficiary Account:</span>
           <span>{accountNumber}</span>  
+        </div>
+        <div>
+          <span>Status:</span>
+          <span>{status}</span>  
         </div>
         <div>
           <span>Date:</span>
