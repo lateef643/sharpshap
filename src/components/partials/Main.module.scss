@@ -32,5 +32,9 @@
     background-color: $content-background-color;
     position: relative;
     top: $header-height;
+
+    @include respond(phone-large) {
+      top: 9rem;
+    }
   }
 }

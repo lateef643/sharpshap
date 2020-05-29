@@ -1,9 +1,14 @@
-import React, {useEffect} from "react";
-import Loader from "../../../partials/Loader";
-import style from './TransferSummary.module.scss';
-import formatToCurrency from "../../../../util/formatToCurrency";
+import React from "react";
+import PropTypes from "prop-types";
 
-export const TransferSummary = ({ phone, bank, accountName, loading, amount, accountNumber, total, transactionCost, handleOnSubmit, handleSetPage }) => {
+import formatToCurrency from "../../../../util/formatToCurrency";
+import Loader from "../../../partials/Loader";
+
+import style from './FundsTransferSummary.module.scss';
+
+export const FundsTransferSummary = (props) => {
+  const { FundsTransferFormState: state, loading, handleOnSubmit, transactionCost } = props;
+
   return (
     <div className={style.paymentContainer} >
       <div className={style.heading}>
@@ -14,37 +19,44 @@ export const TransferSummary = ({ phone, bank, accountName, loading, amount, acc
       </div>
       <div>
         <span>Account Name:</span>
-        <span>{accountName}</span>
+        <span>{state.accountName}</span>
       </div>
       <div>
         <span>Bank:</span>
-        <span>{bank}</span>
+        <span>{state.beneficiaryBankName}</span>
       </div>
       <div>
         <span>Account Number:</span>
-        <span>{accountNumber}</span>
+        <span>{state.accountNumber}</span>
       </div>
       <div>
         <span>Phone Number:</span>
-        <span>{phone}</span>
-      </div>
+        <span>{state.phone}</span>
+      </div> 
       <div>
         <span>Amount:</span>
-        <span>{formatToCurrency(amount)}</span>
-      </div>
+        <span>{formatToCurrency(state.amount)}</span>
+      </div> 
       <div>
         <span>Transaction cost:</span>
         <span>{formatToCurrency(transactionCost)}</span>
-      </div>
+      </div>     
       <div className={style.total}>    
-        <span>Total</span>
-        <span>{formatToCurrency(total)}</span> 
+        <span>Total:</span>
+        <span>{formatToCurrency(state.total)}</span> 
       </div> 
       <button onClick={(e) => {
         e.preventDefault();
         handleOnSubmit();
       }}>{loading ? <Loader size="small" color="white" position="center" /> : "Continue"}</button>       
-    </div>
+    </div>    
 )};
 
-export default TransferSummary;
+FundsTransferSummary.propTypes = {
+  FundsTransferFormState: PropTypes.object,
+  loading: PropTypes.bool,
+  handleOnSubmit: PropTypes.func,
+  transactionCost: PropTypes.number
+}
+
+export default FundsTransferSummary;

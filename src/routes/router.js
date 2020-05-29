@@ -10,7 +10,7 @@ import ListUsers from "../components/content/users/ListUsers";
 import NewTransaction from "../components/content/transactions/NewTransaction";
 import FundWallet from "../components/content/wallet/fundWallet/FundWallet";
 import WalletLog from "../components/content/wallet/logs/WalletLog";
-import Transfer from "../components/content/services/transfer/Transfer";
+import FundsTransfer from "../components/content/services/transfer/FundsTransfer";
 import ActivityLog from "../components/content/wallet/logs/ActivityLog";
 import TransactionDetails from "../components/shared/TransactionDetails";
 import BuyAirtime from "../components/content/services/airtime/BuyAirtime";
@@ -105,7 +105,7 @@ const routes = [
   },
   {
     path: "/transfer",
-    main: () => <Transfer />
+    main: () => <FundsTransfer />
   },
   {
     path: "/bill-payment",

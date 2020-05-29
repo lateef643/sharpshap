@@ -72,8 +72,12 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
                 <p>Transactions Log</p>
               </NavLink>
             </div>
-          </div>  
-          <div className={styles.linkItem} >
+          </div> 
+          <NavLink to="/profile" className={styles.linkItem} >
+            <img src={user} className={styles.linkItemImage} alt="user icon" />
+            <p className={styles.linkItemText}>Profile</p>
+          </NavLink> 
+          {/* <div className={styles.linkItem} >
             <img src={user} className={styles.linkItemImage} alt="user icon" />
             <p className={styles.linkItemText}>Profile</p>
             <div className={styles.linkSecondary}>
@@ -87,7 +91,7 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
                 <p>Change Password</p>
               </NavLink>        
             </div>
-          </div>
+          </div> */}
           <NavLink to="/contact-us" className={styles.linkItem} >
             <img src={phone} className={styles.linkItemImage} alt="speedometer icon" />
             <p className={styles.linkItemText}>Contact Us</p>

@@ -174,11 +174,16 @@
           padding-top: 1rem;
         }
 
+        @include respond-custom(330px) {
+          height: calc(62vh/5);
+          padding-top: 1.8rem;
+        }
+
         .linkItemImage {
           height: 2rem;
           color: white;
 
-          @include respond-custom(320px) {
+          @include respond-custom(330px) {
             height: 1.5rem;
           }
         }
@@ -187,7 +192,7 @@
           font-size: 1.3rem;
           margin-top: .5rem;
 
-          @include respond-custom(320px) {
+          @include respond-custom(330px) {
             height: 1.2rem;
             margin-top: .3rem;
 
@@ -212,6 +217,10 @@
 
           @include respond-custom(360px) {
             bottom: 70%;
+          }
+
+          @include respond-custom(330px) {
+            bottom: 98%;
           }
 
           .linkSecondaryItem {

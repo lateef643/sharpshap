@@ -142,7 +142,7 @@ export const Dashboard = ({ changeCurrentPage }) => {
             display: true,
             position: 'bottom',
             text: 'Transaction Volume',
-            fontSize: 16,
+            fontSize: deviceWidth > 600 ? 16 : 14,
             fontFamily: "'Lato', sans-serif"
           }
         }
@@ -181,7 +181,7 @@ export const Dashboard = ({ changeCurrentPage }) => {
       <canvas 
         id="canvas" 
         className={styles.canvas} 
-          width="200" height={deviceWidth > 600 ?  "120" : "150"} ></canvas>
+          width="200" height={deviceWidth > 600 ?  "120" : "180"} ></canvas>
     </div>
   </div>
 )};
