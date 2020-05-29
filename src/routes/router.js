@@ -22,7 +22,7 @@ import Profile from "../components/content/profile/Profile";
 import WalletTransfer from "../components/content/wallet/walletTransfer/WalletTransfer";
 import BillPayment from "../components/pages/BillPayment";
 import AirtimeData from "../components/pages/AirtimeData";
-import Betting from "../components/content/services/betting/Betting";
+// import Betting from "../components/content/services/betting/Betting";
 
 const routes = [
   {
@@ -115,10 +115,10 @@ const routes = [
     path: "/airtime-data",
     main: () => <AirtimeData />
   },
-  {
-    path: "/betting",
-    main: () => <Betting />
-  }
+  // {
+  //   path: "/betting",
+  //   main: () => <Betting />
+  // }
 ];
 
 export default routes;
