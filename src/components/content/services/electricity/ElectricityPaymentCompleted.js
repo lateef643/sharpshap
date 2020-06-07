@@ -7,8 +7,9 @@ import logo from "../../../../assets/images/cico-logo.svg";
 
 import styles from './ElectricityPaymentCompleted.module.scss';
 
-export const ElectricityPaymentCompleted = ({ successData }) => { 
-  const { name, account, token, receipt_no, txndate, amountPaid, units} = successData;
+export const ElectricityPaymentCompleted = ({ successData, ElectricityPaymentFormState }) => { 
+  const { payer, unit_value, unit, token, transactionID, date, amount} = successData;
+  const { account } = ElectricityPaymentFormState;
   
   return (
     <div className={styles.section}>
@@ -21,7 +22,7 @@ export const ElectricityPaymentCompleted = ({ successData }) => {
         <div className={styles.transactionDetails}>
           <div>
             <span>Name:</span>
-            <span>{name}</span>  
+            <span>{payer.trim()}</span>  
           </div>
           <div>
             <span>Account No:</span>
@@ -29,25 +30,25 @@ export const ElectricityPaymentCompleted = ({ successData }) => {
           </div>
           <div>
             <span>Units</span>
-            <span>{units || "POSTPAID"}</span>  
+            <span>{unit_value + unit || "NIL"}</span>  
           </div>
           <div>
             <span>Token</span>
-            <span>{token || "POSTPAID"}</span>  
+            <span>{token || "NIL"}</span>  
           </div>
           <div>
-            <span>Receipt No:</span>
-            <span>{receipt_no}</span>  
+            <span>Transaction ID:</span>
+            <span>{transactionID}</span>  
           </div>
           <div>
             <span>Date:</span>
-            <span>{txndate}</span>  
+            <span>{date}</span>  
           </div>
         </div>
         <div className={styles.transactionAmount}>
           <div>
             <span>Amount:</span>
-            <span>{formatToCurrency(amountPaid)}</span>  
+            <span>{formatToCurrency(amount)}</span>  
           </div>
           <div>
             <span>Convenience Fee:</span>
@@ -55,7 +56,7 @@ export const ElectricityPaymentCompleted = ({ successData }) => {
           </div>
           <div className={styles.total}>
             <span>Total:</span>
-            <span>{formatToCurrency(amountPaid)}</span>  
+            <span>{formatToCurrency(amount)}</span>  
           </div>
         </div>
           <div className={styles.link}>

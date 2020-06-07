@@ -39,6 +39,7 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
       "phone": phone
     };
 
+
     (async function vendEnergy() {
       try {
         const res = await axios.post(VEND_ENERGY, req);
@@ -74,6 +75,7 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
       renderedComponent = 
         <ElectricityPaymentCompleted 
           successData={successData}
+          ElectricityPaymentFormState={ElectricityPaymentFormState}
         />
         break;
     case "failed":
