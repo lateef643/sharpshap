@@ -40,13 +40,9 @@ export const Profile = (props) => {
       }
     };
 
-    axios.post(UPDATE_USER, payload)
-      .then(res => {
-        // console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-      })
+    // axios.post(UPDATE_USER, payload)
+    //   .then()
+    //   .catch()
   };
 
   const handleOnPasswordChangeSubmit = (e) => {
