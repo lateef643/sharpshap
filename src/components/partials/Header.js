@@ -13,7 +13,7 @@ import styles from "./Header.module.scss";
 
 const Header = ({ currentPage, isDefaultPassword }) => {
   const [notifications, setNotifications] = useState([{
-    title: "Great news dear Agent! You can now make electricity payments with CICO! From your home page click on BILL PAYMENT, next click PAY ELECTRICITY to use this exciting new feature."
+    title: "Great news! Dear Agent, you can now make electricity payments with CICO! From your home page click on BILL PAYMENT, next click PAY ELECTRICITY to use this exciting new feature."
   },{
     title: "Dear Agent, please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly."
   }]);
