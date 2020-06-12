@@ -8,10 +8,13 @@ import chat from "../../assets/images/chat-svgrepo-com (1).svg";
 import caution from "../../assets/images/warning-svgrepo-com.svg";
 import user from "../../assets/images/user.svg";
 import { connect } from "react-redux";
+import megaphone from "../../assets/images/announcement-svgrepo-com.svg";
 import styles from "./Header.module.scss";
 
 const Header = ({ currentPage, isDefaultPassword }) => {
   const [notifications, setNotifications] = useState([{
+    title: "Great news! Dear Agent, you can now make electricity payments with CICO! From your home page click on BILL PAYMENT, next click PAY ELECTRICITY to use this exciting new feature."
+  },{
     title: "Dear Agent, please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly."
   }]);
   const [toggleNotifications, setToggleNotifications] = useState(true);
@@ -33,7 +36,7 @@ const Header = ({ currentPage, isDefaultPassword }) => {
   useEffect(() => {
     setTimeout(() => {
       setToggleNotifications(false);
-    }, 10000);
+    }, 30000);
   }, [])
 
   const handleToggleNotifications = () => {
@@ -54,10 +57,14 @@ const Header = ({ currentPage, isDefaultPassword }) => {
             <div className={styles.notificationPanel}>
               <p className={styles.heading}>Notifications</p>
               <div>
-                <img src={chat} alt="chat icon" />
+                <img src={megaphone} alt="announcement icon" />
                 <p>{notifications[0].title}</p>
               </div>
-              {notifications[1] ? <div>
+              <div>
+                <img src={chat} alt="chat icon" />
+                <p>{notifications[1].title}</p>
+              </div>
+              {notifications[2] ? <div>
                 <img src={caution} alt="caution icon" />
                 <p>{notifications[1].title}</p>
               </div> : undefined}

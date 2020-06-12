@@ -17,7 +17,7 @@ export const Contact = () => {
         <div className={styles.content}>
           <div className={styles.section}>
             <img src={phone} />
-            <p>+2348036213394</p>
+            <p>+2349080070040</p>
           </div>
           <div className={styles.section}>
             <img src={email} />
@@ -25,7 +25,7 @@ export const Contact = () => {
           </div>
           <div className={styles.section}>
             <img src={whatsapp} />
-            <p>+2348036213394</p>
+            <p>+2349080070040</p>
           </div>
           <div className={styles.section}>
             <img src={address} />
