@@ -8,6 +8,7 @@ import bills from "../../assets/images/bills.svg";
 import transfer from "../../assets/images/transfer-outlined.svg";
 import sim from "../../assets/images/sim.svg";
 import football from "../../assets/images/football.svg";
+import cashcall2 from "../../assets/images/cashcall2.svg";
 import Chart from "chart.js";
 import { setCurrentPage } from "../../actions/page";
 
@@ -172,6 +173,7 @@ export const Dashboard = ({ changeCurrentPage }) => {
       <Card link="bill-payment" text="Bill Payment" size="small" image={bills} />
       <Card link="airtime-data" text="Airtime & Data" size="small" image={sim} />
       <Card link="betting" text="Betting" size="small" image={football} />
+      <Card link="cash-call" text="Cash Call" size="small" image={cashcall2} />
     </div>
     <div className={styles.chartContainer}>
       <select className={styles.sortBy} onChange={handleTransactionVolumeDateToDisplayChange}>
