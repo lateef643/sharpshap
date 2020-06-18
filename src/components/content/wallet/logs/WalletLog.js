@@ -20,7 +20,6 @@ export const WalletLog = ({ changeCurrentPage }) => {
   useEffect(() => {
     axios.get(`${GET_AGENT_WALLET_HISTORY}?page=${currentPage}`)
     .then((res) => {
-      console.log(res)
       const logs = res.data.data.data;
       const total = res.data.data.total;
       const perPage = res.data.data.per_page;

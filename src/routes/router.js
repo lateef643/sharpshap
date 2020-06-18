@@ -23,6 +23,7 @@ import WalletTransfer from "../components/content/wallet/walletTransfer/WalletTr
 import BillPayment from "../components/pages/BillPayment";
 import AirtimeData from "../components/pages/AirtimeData";
 // import Betting from "../components/content/services/betting/Betting";
+import CashCall from "../components/content/services/cashcall/CashCall";
 
 const routes = [
   {
@@ -119,6 +120,10 @@ const routes = [
   //   path: "/betting",
   //   main: () => <Betting />
   // }
+  {
+    path: "/cash-call",
+    main: () => <CashCall />
+  }
 ];
 
 export default routes;
