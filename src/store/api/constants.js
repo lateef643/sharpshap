@@ -163,3 +163,12 @@ export const VALIDATE_METER_NUMBER = `${path}/energy`;
 
 //vend energy - POST
 export const VEND_ENERGY = `${path}/energy`;
+
+//cash call
+export const CASHCALL_REQUEST_CASH = `${path}/cashcall/request`;
+
+//Get cashcall list
+export const GET_CASHCALL_LIST = `${path}/cashcall`;
+
+//Accept cash
+export const CASHCALL_ACCEPT_CASH = `${path}/cashcall/accept`;
