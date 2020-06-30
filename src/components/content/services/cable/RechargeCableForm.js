@@ -16,11 +16,21 @@ import gotv from "../../../../assets/images/GOtv_Logo.png";
 import styles from "./RechargeCableForm.module.scss";
 
 export const RechargeCableForm = (props) => {
-  const { RechargeCableFormState: state, dispatch, setComponentToRender } = props;
-  const [customerValidationLoading, setCustomerValidationLoading] = useState(false);
+  const {
+    RechargeCableFormState: state,
+    dispatch,
+    setComponentToRender,
+  } = props;
+  const [customerValidationLoading, setCustomerValidationLoading] = useState(
+    false
+  );
   const [fetchPlansLoading, setFetchPlansLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
-  const cableTvProviders = [{ name: "dstv" }, { name: 'gotv' }, {name: "startimes" }];
+  const cableTvProviders = [
+    { name: "dstv" },
+    { name: "gotv" },
+    { name: "startimes" },
+  ];
   const [plans, setPlans] = useState([]);
   const [selectedPlan, setselectedPlan] = useState({});
 
@@ -32,7 +42,7 @@ export const RechargeCableForm = (props) => {
     if (provider) {
       setFetchPlansLoading(true);
 
-      switch(provider) {
+      switch (provider) {
         case "dstv":
           providerApi = GET_DSTV_PLANS;
           break;
@@ -49,10 +59,10 @@ export const RechargeCableForm = (props) => {
       (async function fetchPlans() {
         try {
           const res = await axios.get(providerApi);
-          const plans = res.data.data;   
+          const plans = res.data.data;
           setPlans(plans);
-          setFetchPlansLoading(false);       
-        } catch(e) {
+          setFetchPlansLoading(false);
+        } catch (e) {
           setFetchPlansLoading(false);
         }
       })();
@@ -62,7 +72,7 @@ export const RechargeCableForm = (props) => {
   //sets selected plan name based on plans dropdown value
   useEffect(() => {
     if (state.selectedPlanCode) {
-      const selectedPlan = plans.find(plan => {
+      const selectedPlan = plans.find((plan) => {
         return plan.code === state.selectedPlanCode;
       });
 
@@ -71,10 +81,9 @@ export const RechargeCableForm = (props) => {
       setselectedPlan(selectedPlan);
       dispatch({
         type: "UPDATE_FORM_STATE",
-        payload: { selectedPlanName }
-      })
+        payload: { selectedPlanName },
+      });
     }
-
   }, [state.selectedPlanCode]);
 
   useEffect(() => {
@@ -92,7 +101,7 @@ export const RechargeCableForm = (props) => {
 
       const payload = {
         smartcard: smartCardNumber,
-        service: provider
+        service: provider,
       };
 
       (async function validateAndSetCustomerName() {
@@ -101,18 +110,23 @@ export const RechargeCableForm = (props) => {
 
           let name;
 
-          name = provider === "startimes" ? res.data.data.customerName 
-            : `${res.data.data.statusDescription.firstname} ${res.data.data.statusDescription.lastname}`
+          name =
+            provider === "startimes"
+              ? res.data.data.customerName
+              : `${res.data.data.statusDescription.firstname} ${res.data.data.statusDescription.lastname}`;
 
-            setValidationErrors({ ...validationErrors, customerName: !name });
-            dispatch({
-              type: "UPDATE_FORM_STATE",
-              payload: { customerName: name }
-            });
-            setCustomerValidationLoading(false);          
-        } catch(e) {
-          setValidationErrors({ ...validationErrors, customerName: !validationErrors.customerName });
-          setCustomerValidationLoading(false);          
+          setValidationErrors({ ...validationErrors, customerName: !name });
+          dispatch({
+            type: "UPDATE_FORM_STATE",
+            payload: { customerName: name },
+          });
+          setCustomerValidationLoading(false);
+        } catch (e) {
+          setValidationErrors({
+            ...validationErrors,
+            customerName: !validationErrors.customerName,
+          });
+          setCustomerValidationLoading(false);
         }
       })();
     }
@@ -124,26 +138,28 @@ export const RechargeCableForm = (props) => {
     let amount;
 
     if (selectedPlan.availablePricingOptions) {
-      selectedPlanPricingOption = selectedPlan.availablePricingOptions.find(plan => {
-        return plan.monthsPaidFor == selectedPlanDuration;
-      });
+      selectedPlanPricingOption = selectedPlan.availablePricingOptions.find(
+        (plan) => {
+          return plan.monthsPaidFor === selectedPlanDuration;
+        }
+      );
     }
 
     amount = selectedPlanPricingOption ? selectedPlanPricingOption.price : "";
 
     dispatch({
       type: "UPDATE_FORM_STATE",
-      payload: { amount }
-    })
+      payload: { amount },
+    });
   }, [state.selectedPlanDuration]);
 
   const handleFormStateChange = ({ target }) => {
     setValidationErrors({ ...validationErrors, [target.name]: false });
     dispatch({
       type: "UPDATE_FORM_STATE",
-      payload: { [target.name]: target.value }
-    })
-  }
+      payload: { [target.name]: target.value },
+    });
+  };
 
   const handleOnContinue = (e) => {
     e.preventDefault();
@@ -156,15 +172,15 @@ export const RechargeCableForm = (props) => {
     //restricting customer name error to failed validation
     delete errors.customerName;
 
-    if (Object.keys(errors).length > 0) return 
-    
+    if (Object.keys(errors).length > 0) return;
+
     setComponentToRender("summary");
-  }
+  };
 
   //Dynamically render bank logo
   let providerImageUrl = "";
 
-  switch(state.provider) {
+  switch (state.provider) {
     case "gotv":
       providerImageUrl = gotv;
       break;
@@ -176,115 +192,178 @@ export const RechargeCableForm = (props) => {
   }
 
   return (
-    <form className={styles.form} autoComplete="off" onSubmit={handleOnContinue} >
+    <form
+      className={styles.form}
+      autoComplete="off"
+      onSubmit={handleOnContinue}
+    >
       <div className={styles.imageContainer}>
-        <img className={styles.image} src={providerImageUrl} />
+        <img
+          className={styles.image}
+          src={providerImageUrl}
+          alt="cable provider icon"
+        />
       </div>
       <label>
         <span>Provider</span>
-        <select 
+        <select
           name="provider"
-          onChange={handleFormStateChange} 
-          className={validationErrors.provider ? styles.outlineRed : styles.outlineGrey}>
-        <option value="">Select Provider</option>
-        {cableTvProviders.map((cable, index) => {
-          return <option 
-            value={cable.name} 
-            key={`${index}--${cable.name}`}>
-              {cable.name}
-            </option>
-        })}
-        </select>  
-        {validationErrors.provider ? <p className={styles.validationErrorText}>Please select provider</p> : undefined}
-      </label>  
+          onChange={handleFormStateChange}
+          className={
+            validationErrors.provider ? styles.outlineRed : styles.outlineGrey
+          }
+        >
+          <option value="">Select Provider</option>
+          {cableTvProviders.map((cable, index) => {
+            return (
+              <option value={cable.name} key={`${index}--${cable.name}`}>
+                {cable.name}
+              </option>
+            );
+          })}
+        </select>
+        {validationErrors.provider ? (
+          <p className={styles.validationErrorText}>Please select provider</p>
+        ) : undefined}
+      </label>
       <label>
         <span>Packages</span>
-        <select 
+        <select
           name="selectedPlanCode"
-          onChange={handleFormStateChange} 
-          className={validationErrors.plan ? styles.outlineRed : styles.outlineGrey}>
-        <option value="">Select Plan</option>
-        {plans.map((plan, index) => {
-          return <option 
-            value={plan.code} 
-            key={`${index}--${plan.name}`}>{plan.name}</option>
-        })}
+          onChange={handleFormStateChange}
+          className={
+            validationErrors.plan ? styles.outlineRed : styles.outlineGrey
+          }
+        >
+          <option value="">Select Plan</option>
+          {plans.map((plan, index) => {
+            return (
+              <option value={plan.code} key={`${index}--${plan.name}`}>
+                {plan.name}
+              </option>
+            );
+          })}
         </select>
-        {fetchPlansLoading ? <div className={styles.loader}><VerificationLoader /></div> : undefined}
-        {validationErrors.plan ? <p className={styles.validationErrorText}>Please select plan</p> : undefined}
+        {fetchPlansLoading ? (
+          <div className={styles.loader}>
+            <VerificationLoader />
+          </div>
+        ) : undefined}
+        {validationErrors.plan ? (
+          <p className={styles.validationErrorText}>Please select plan</p>
+        ) : undefined}
       </label>
       <label>
         <span>Smart Card Number</span>
-        <input 
+        <input
           name="smartCardNumber"
           value={state.smartCardNumber}
-          type="text" 
-          onChange={handleFormStateChange} 
-          className={validationErrors.smartCardNumber ? styles.outlineRed : styles.outlineGrey}
-        />      
-        {validationErrors.smartCardNumber ? <p className={styles.validationErrorText}>Please enter smart card number</p> : undefined}
+          type="text"
+          onChange={handleFormStateChange}
+          className={
+            validationErrors.smartCardNumber
+              ? styles.outlineRed
+              : styles.outlineGrey
+          }
+        />
+        {validationErrors.smartCardNumber ? (
+          <p className={styles.validationErrorText}>
+            Please enter smart card number
+          </p>
+        ) : undefined}
       </label>
       <label>
         <span>Customer Name</span>
-        <input 
+        <input
           name="customerName"
-          type="text" 
-          value={state.customerName} 
-          disabled={true} 
-          className={styles.outlineGrey} 
-          /> 
-        {customerValidationLoading ? 
-        <div className={styles.loader}><VerificationLoader /></div> : undefined}
-        {validationErrors.customerName ? <p className={styles.validationErrorText}>Customer validation failed</p> : undefined}
-      </label>  
+          type="text"
+          value={state.customerName}
+          disabled={true}
+          className={styles.outlineGrey}
+        />
+        {customerValidationLoading ? (
+          <div className={styles.loader}>
+            <VerificationLoader />
+          </div>
+        ) : undefined}
+        {validationErrors.customerName ? (
+          <p className={styles.validationErrorText}>
+            Customer validation failed
+          </p>
+        ) : undefined}
+      </label>
       <label>
         <span>Phone Number</span>
-        <input 
+        <input
           name="phone"
-          type="text" 
-          value={state.phone} 
-          onChange={handleFormStateChange} 
-          className={validationErrors.phone ? styles.outlineRed : styles.outlineGrey} 
-        /> 
-        {validationErrors.phone ? <p className={styles.validationErrorText}>Please enter phone number</p> : undefined}
-      </label> 
+          type="text"
+          value={state.phone}
+          onChange={handleFormStateChange}
+          className={
+            validationErrors.phone ? styles.outlineRed : styles.outlineGrey
+          }
+        />
+        {validationErrors.phone ? (
+          <p className={styles.validationErrorText}>
+            Please enter phone number
+          </p>
+        ) : undefined}
+      </label>
       <label>
         <span>Plan Duration</span>
         <select
-          name="selectedPlanDuration" 
-          onChange={handleFormStateChange} 
-          className={validationErrors.planDuration ? styles.outlineRed : styles.outlineGrey}
+          name="selectedPlanDuration"
+          onChange={handleFormStateChange}
+          className={
+            validationErrors.planDuration
+              ? styles.outlineRed
+              : styles.outlineGrey
+          }
         >
-        <option value="">Select Duration</option>
-        {selectedPlan.availablePricingOptions ? selectedPlan.availablePricingOptions.map((plan, index) => {
-          return <option 
-            value={plan.monthsPaidFor} 
-            key={`${index}--${plan.name}`}>{plan.monthsPaidFor} months
-            </option>
-        }) : undefined}
-        </select>  
-        {validationErrors.planDuration ? <p className={styles.validationErrorText}>Please select plan duration</p> : undefined}
-      </label> 
+          <option value="">Select Duration</option>
+          {selectedPlan.availablePricingOptions
+            ? selectedPlan.availablePricingOptions.map((plan, index) => {
+                return (
+                  <option
+                    value={plan.monthsPaidFor}
+                    key={`${index}--${plan.name}`}
+                  >
+                    {plan.monthsPaidFor} months
+                  </option>
+                );
+              })
+            : undefined}
+        </select>
+        {validationErrors.planDuration ? (
+          <p className={styles.validationErrorText}>
+            Please select plan duration
+          </p>
+        ) : undefined}
+      </label>
       <label>
         <span>Amount</span>
-        <input 
+        <input
           name="amount"
-          type="text" 
-          value={state.amount} 
-          onChange={handleFormStateChange} 
-          className={validationErrors.amount ? styles.outlineRed : styles.outlineGrey} 
+          type="text"
+          value={state.amount}
+          onChange={handleFormStateChange}
+          className={
+            validationErrors.amount ? styles.outlineRed : styles.outlineGrey
+          }
         />
-        {validationErrors.amount ? <p className={styles.validationErrorText}>Please enter amount</p> : undefined}
-      </label>          
+        {validationErrors.amount ? (
+          <p className={styles.validationErrorText}>Please enter amount</p>
+        ) : undefined}
+      </label>
       <button type="submit">Submit</button>
     </form>
-  )
+  );
 };
 
 RechargeCableForm.propTypes = {
   RechargeCableFormState: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
-  setComponentToRender: PropTypes.func.isRequired
-}
+  setComponentToRender: PropTypes.func.isRequired,
+};
 
 export default RechargeCableForm;

@@ -10,92 +10,99 @@ import ElectricityPaymentCompleted from "./ElectricityPaymentCompleted";
 import FailedTransaction from "../../../shared/FailedTransaction";
 import ElecticityPaymentReducer, { initialFormState } from "./payment-reducer";
 
-import style from './ElectricityPayment.module.scss';
+import style from "./ElectricityPayment.module.scss";
 
 export const ElectricityPayment = ({ changeCurrentPage }) => {
   const TRANSACTION_COST = 0;
   let renderedComponent;
   const [componentToRender, setComponentToRender] = useState("form");
-  const [ElectricityPaymentFormState, dispatch] = useReducer(ElecticityPaymentReducer, initialFormState);
+  const [ElectricityPaymentFormState, dispatch] = useReducer(
+    ElecticityPaymentReducer,
+    initialFormState
+  );
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState(null);
 
   useEffect(() => {
     changeCurrentPage({
       heading: "Pay Electricity Bill",
-      search: false
+      search: false,
     });
   }, []);
 
   const handleOnSubmit = () => {
-    const { meterNo, disco, paymentPlan, amount, phone } = ElectricityPaymentFormState;
+    const {
+      meterNo,
+      disco,
+      paymentPlan,
+      amount,
+      phone,
+    } = ElectricityPaymentFormState;
     setLoading(true);
 
     const req = {
-      "meter_number": meterNo,
-      "disco": disco,
-      "type": paymentPlan,
-      "amount": parseInt(amount),
-      "phone": phone
+      meter_number: meterNo,
+      disco: disco,
+      type: paymentPlan,
+      amount: parseInt(amount),
+      phone: phone,
     };
-
 
     (async function vendEnergy() {
       try {
         const res = await axios.post(VEND_ENERGY, req);
-        setLoading(false); 
-        setSuccessData(res.data.data);   
-        setComponentToRender("success");    
-      } catch(e) {
+        setLoading(false);
+        setSuccessData(res.data.data);
+        setComponentToRender("success");
+      } catch (e) {
         setLoading(false);
         setComponentToRender("failed");
       }
     })();
   };
 
-  switch(componentToRender) {
-    case 'form':
-      renderedComponent = 
-        <ElectricityPaymentForm 
+  switch (componentToRender) {
+    case "form":
+      renderedComponent = (
+        <ElectricityPaymentForm
           setComponentToRender={setComponentToRender}
           dispatch={dispatch}
           ElectricityPaymentFormState={ElectricityPaymentFormState}
         />
-        break;
+      );
+      break;
     case "summary":
-      renderedComponent = 
-        <ElectricityPaymentSummary 
+      renderedComponent = (
+        <ElectricityPaymentSummary
           ElectricityPaymentFormState={ElectricityPaymentFormState}
           handleOnSubmit={handleOnSubmit}
           loading={loading}
           transactionCost={TRANSACTION_COST}
         />
-        break;
+      );
+      break;
     case "success":
-      renderedComponent = 
-        <ElectricityPaymentCompleted 
+      renderedComponent = (
+        <ElectricityPaymentCompleted
           successData={successData}
           ElectricityPaymentFormState={ElectricityPaymentFormState}
         />
-        break;
+      );
+      break;
     case "failed":
-      renderedComponent = 
-        <FailedTransaction />
-        break;
+      renderedComponent = <FailedTransaction />;
+      break;
     default:
       renderedComponent = null;
   }
 
-  return (
-  <div className={style.container}>
-    {renderedComponent}
-  </div>
-)}
+  return <div className={style.container}>{renderedComponent}</div>;
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
-  }
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+  };
 };
 
 export default connect(undefined, mapDispatchToProps)(ElectricityPayment);

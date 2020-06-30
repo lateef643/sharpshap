@@ -11,30 +11,32 @@ export const Contact = () => {
       <div className={styles.sectionContainer}>
         <div className={styles.heading}>
           <h3>Get in touch</h3>
-          <p>Want to get in touch? We'd love to hear from you. 
-            Here's how you can reach us...</p>
+          <p>
+            Want to get in touch? We'd love to hear from you. Here's how you can
+            reach us...
+          </p>
         </div>
         <div className={styles.content}>
           <div className={styles.section}>
-            <img src={phone} />
+            <img src={phone} alt="phone icon" />
             <p>+2349080070040</p>
           </div>
           <div className={styles.section}>
-            <img src={email} />
+            <img src={email} alt="email icon" />
             <p>hello@cico.ng</p>
           </div>
           <div className={styles.section}>
-            <img src={whatsapp} />
+            <img src={whatsapp} alt="whatsapp icon" />
             <p>+2349080070040</p>
           </div>
           <div className={styles.section}>
-            <img src={address} />
+            <img src={address} alt="address icon" />
             <p>41/42 Industrial Estate, Sabo, Yaba, Lagos.</p>
           </div>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default Contact;

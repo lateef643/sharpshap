@@ -13,21 +13,63 @@ import Chart from "chart.js";
 import { setCurrentPage } from "../../actions/page";
 
 export const Dashboard = ({ changeCurrentPage }) => {
-  const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday']; 
-  const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-  const dayShort = ['Mon', 'Tues', 'Wed', 'Thurs', 'Fri', 'Sat', 'Sun'];
-  const monthShort = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-  const [transactionVolumeDataToDisplay, setTransactionVolumeDateToDisplay] = useState('month');
+  const days = [
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+    "Sunday",
+  ];
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const dayShort = ["Mon", "Tues", "Wed", "Thurs", "Fri", "Sat", "Sun"];
+  const monthShort = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sep",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  const [
+    transactionVolumeDataToDisplay,
+    setTransactionVolumeDateToDisplay,
+  ] = useState("month");
   const [transactionVolumeData, setTransactionVolumeData] = useState(null);
-  const [transactionVolumeDataMonthly, setTransactionVolumeDataMonthly] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
-  const [transactionVolumeDataDaily, setTransactionVolumeDataDaily] = useState([0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]);
+  const transactionVolumeDataMonthly = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  const transactionVolumeDataDaily = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const barChartData = {
-    labels: transactionVolumeDataToDisplay === 'month' ? monthShort : dayShort,
-    datasets: [{
-      backgroundColor: '#2A58AE',
-      data: transactionVolumeDataToDisplay === 'month' ? transactionVolumeDataMonthly : transactionVolumeDataDaily,
-      maxBarThickness: 28,
-    }]
+    labels: transactionVolumeDataToDisplay === "month" ? monthShort : dayShort,
+    datasets: [
+      {
+        backgroundColor: "#2A58AE",
+        data:
+          transactionVolumeDataToDisplay === "month"
+            ? transactionVolumeDataMonthly
+            : transactionVolumeDataDaily,
+        maxBarThickness: 28,
+      },
+    ],
   };
   // const [deviceHeight, setDeviceHeight] = useState(window.innerHeight);
   // const [deviceWidth, setDeviceWidth] = useState(window.innerWidth);
@@ -35,30 +77,36 @@ export const Dashboard = ({ changeCurrentPage }) => {
   const deviceWidth = window.innerWidth;
 
   const getTransactionVolumeDataDaily = () => {
-    if (transactionVolumeData !== null && transactionVolumeData.weekly.data.length > 0) {
+    if (
+      transactionVolumeData !== null &&
+      transactionVolumeData.weekly.data.length > 0
+    ) {
       const dailyTransactionVolumeInfo = transactionVolumeData.weekly.data;
 
-      days.forEach((day, index)=> {
-          dailyTransactionVolumeInfo.forEach(dayInfo => {
-            if (day === dayInfo.day) {
-              transactionVolumeDataDaily[index] = dayInfo.volume;
-            }
-          })
-        })      
+      days.forEach((day, index) => {
+        dailyTransactionVolumeInfo.forEach((dayInfo) => {
+          if (day === dayInfo.day) {
+            transactionVolumeDataDaily[index] = dayInfo.volume;
+          }
+        });
+      });
     }
   };
 
   const getTransactionVolumeDataMonthly = () => {
-    if (transactionVolumeData !== null && transactionVolumeData.monthly.data.length > 0) {
+    if (
+      transactionVolumeData !== null &&
+      transactionVolumeData.monthly.data.length > 0
+    ) {
       const monthlyTransactionVolumeInfo = transactionVolumeData.monthly.data;
 
-      months.forEach((month, index)=> {
-          monthlyTransactionVolumeInfo.forEach(monthInfo => {
-            if (month === monthInfo.month) {
-              transactionVolumeDataMonthly[index] = monthInfo.volume;
-            }
-          })
-        })      
+      months.forEach((month, index) => {
+        monthlyTransactionVolumeInfo.forEach((monthInfo) => {
+          if (month === monthInfo.month) {
+            transactionVolumeDataMonthly[index] = monthInfo.volume;
+          }
+        });
+      });
     }
   };
 
@@ -78,86 +126,94 @@ export const Dashboard = ({ changeCurrentPage }) => {
   useEffect(() => {
     Chart.defaults.global.defaultFontFamily = "Lato";
 
-    window.onload = function() {
-      var ctx = document.getElementById('canvas').getContext('2d');
+    window.onload = function () {
+      var ctx = document.getElementById("canvas").getContext("2d");
       if (window.myBar) window.myBar.destroy();
       window.myBar = new Chart(ctx, {
-        type: 'bar',
+        type: "bar",
         data: barChartData,
         options: {
           tooltips: {
             callbacks: {
-              label: function(tooltipItem, data) {
-                  return `₦${tooltipItem.yLabel.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}`;
-              }
-            }
+              label: function (tooltipItem, data) {
+                return `₦${tooltipItem.yLabel
+                  .toString()
+                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`;
+              },
+            },
           },
           scales: {
-            xAxes: [{
+            xAxes: [
+              {
                 gridLines: {
-                    color: "rgba(0, 0, 0, 0)",
+                  color: "rgba(0, 0, 0, 0)",
                 },
                 ticks: {
                   fontSize: deviceWidth > 600 ? 13 : 12,
-                }
-            }],
-            yAxes: [{
-              gridLines: {
+                },
+              },
+            ],
+            yAxes: [
+              {
+                gridLines: {
                   color: "rgba(0, 0, 0, 0)",
-              } ,
-              ticks: {
-                fontSize: deviceWidth > 600 ? 13.5 : 12,
-                fontFamily: 'sans-serif',
-                callback: function(label, index, labels) {
-                  let prefix;
-                  let suffix;
+                },
+                ticks: {
+                  fontSize: deviceWidth > 600 ? 13.5 : 12,
+                  fontFamily: "sans-serif",
+                  callback: function (label, index, labels) {
+                    let prefix;
+                    let suffix;
 
-                  if (label > 999999999) {
-                    suffix = "B";
-                    prefix = label/1000000000;
-                  } else if (label > 999999) {
-                    suffix = "M";
-                    prefix = label/1000000;
-                  } else if (label > 999) {
-                    suffix = "K";
-                    prefix = label/1000;
-                  } else {
-                    suffix = "";
-                    prefix = label;
-                  }
+                    if (label > 999999999) {
+                      suffix = "B";
+                      prefix = label / 1000000000;
+                    } else if (label > 999999) {
+                      suffix = "M";
+                      prefix = label / 1000000;
+                    } else if (label > 999) {
+                      suffix = "K";
+                      prefix = label / 1000;
+                    } else {
+                      suffix = "";
+                      prefix = label;
+                    }
 
-                  if (deviceWidth < 600) {
-                    return `₦${prefix + suffix}`;
-                  } else {
-                    return `₦${label.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')}`;
-                  }
-                }
-              }  
-            }]
+                    if (deviceWidth < 600) {
+                      return `₦${prefix + suffix}`;
+                    } else {
+                      return `₦${label
+                        .toString()
+                        .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}`;
+                    }
+                  },
+                },
+              },
+            ],
           },
           responsive: true,
           legend: {
-            display: false
+            display: false,
           },
           title: {
             display: true,
-            position: 'bottom',
-            text: 'Transaction Volume',
+            position: "bottom",
+            text: "Transaction Volume",
             fontSize: deviceWidth > 600 ? 16 : 14,
-            fontFamily: "'Lato', sans-serif"
-          }
-        }
+            fontFamily: "'Lato', sans-serif",
+          },
+        },
       });
     };
 
     window.onload();
-  })
+  });
 
   useEffect(() => {
     changeCurrentPage({
       heading: "Dashboard",
-      search: true
-    });    
+      search: true,
+    });
   }, [changeCurrentPage]);
 
   const handleTransactionVolumeDateToDisplayChange = (e) => {
@@ -165,33 +221,59 @@ export const Dashboard = ({ changeCurrentPage }) => {
 
     setTransactionVolumeDateToDisplay(value);
   };
-  
+
   return (
-  <div className={styles.container}>
-    <div className={styles.cardContainer}>
-      <Card link="transfer" text="Transfer Funds" size="small" image={transfer} />
-      <Card link="bill-payment" text="Bill Payment" size="small" image={bills} />
-      <Card link="airtime-data" text="Airtime & Data" size="small" image={sim} />
-      <Card link="betting" text="Betting" size="small" image={football} />
-      <Card link="cash-call" text="Cash Call" size="small" image={cashcall2} />
+    <div className={styles.container}>
+      <div className={styles.cardContainer}>
+        <Card
+          link="transfer"
+          text="Transfer Funds"
+          size="small"
+          image={transfer}
+        />
+        <Card
+          link="bill-payment"
+          text="Bill Payment"
+          size="small"
+          image={bills}
+        />
+        <Card
+          link="airtime-data"
+          text="Airtime & Data"
+          size="small"
+          image={sim}
+        />
+        <Card link="betting" text="Betting" size="small" image={football} />
+        <Card
+          link="cash-call"
+          text="Cash Call"
+          size="small"
+          image={cashcall2}
+        />
+      </div>
+      <div className={styles.chartContainer}>
+        <select
+          className={styles.sortBy}
+          onChange={handleTransactionVolumeDateToDisplayChange}
+        >
+          <option value="month">Monthly</option>
+          <option value="day">Daily</option>
+        </select>
+        <canvas
+          id="canvas"
+          className={styles.canvas}
+          width="200"
+          height={deviceWidth > 600 ? "120" : "180"}
+        ></canvas>
+      </div>
     </div>
-    <div className={styles.chartContainer}>
-      <select className={styles.sortBy} onChange={handleTransactionVolumeDateToDisplayChange}>
-        <option value="month">Monthly</option>
-        <option value="day">Daily</option>
-      </select>
-      <canvas 
-        id="canvas" 
-        className={styles.canvas} 
-          width="200" height={deviceWidth > 600 ?  "120" : "180"} ></canvas>
-    </div>
-  </div>
-)};
+  );
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
-  }
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+  };
 };
 
 export default connect(undefined, mapDispatchToProps)(Dashboard);

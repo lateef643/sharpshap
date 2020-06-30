@@ -1,6 +1,10 @@
 @import "../config/breakpoints";
 @import "../config/mixins";
 
+//real favicon generator
+//whydidyouupdate
+//create pwa
+
 .section {
   height: max-content;
   width: 43.6rem;
@@ -61,7 +65,7 @@
     margin-top: 1rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
 
     .transactionDetails {
       flex: 1;
@@ -73,7 +77,7 @@
 
       div {
         flex: 0 0 10%;
-        margin: .8rem;
+        margin: 0.8rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -82,7 +86,7 @@
         span {
           display: block;
         }
-      } 
+      }
     }
 
     .transactionAmount {
@@ -95,7 +99,7 @@
 
       div {
         flex: 0 0 20%;
-        margin: .8rem;
+        margin: 0.8rem;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
@@ -104,9 +108,9 @@
         span {
           display: block;
         }
-      } 
+      }
     }
-    
+
     .link {
       margin-top: 2rem;
       flex: 0 0 15%;
@@ -115,10 +119,13 @@
       justify-content: space-between;
       padding: 0;
 
-      a, div {
+      a,
+      div,
+      button {
         flex: 0 0 45%;
         display: inline-block;
         height: 3.1rem;
+        border: 0;
         border-radius: 5px;
         font-size: 1.35rem;
         text-align: center;
@@ -129,11 +136,11 @@
       }
 
       .linkHome {
-        background-color: #2A58AE;
+        background-color: #2a58ae;
       }
 
       .linkServiceHome {
-        background-color: #00B378;
+        background-color: #00b378;
       }
     }
   }

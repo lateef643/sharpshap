@@ -9,9 +9,9 @@ import business from "../../assets/images/business.svg";
 // import terminal from "../../assets/images/payment-terminal.svg";
 import wallet from "../../assets/images/wallet-outlined.svg";
 import { startLogout } from "../../actions/auth";
-import styles from './Sidebar.module.scss';
+import styles from "./Sidebar.module.scss";
 
-export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
+export const Sidebar = ({ firstname, lastname, id, startLogout }) => {
   const handleLogout = (e) => {
     e.preventDefault();
     startLogout();
@@ -29,21 +29,38 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
       </label>
       <div className={styles.sidebar}>
         <div className={styles.profile}>
-          <img src={avatar} className={styles.profileImage} alt="user's avatar" />
+          <img
+            src={avatar}
+            className={styles.profileImage}
+            alt="user's avatar"
+          />
           <p className={styles.profileName}>{`${firstname} ${lastname}`}</p>
           <p className={styles.profileId}>Wallet ID: {id}</p>
-          <button className={styles.logout} onClick={handleLogout}>Log out</button>
+          <button className={styles.logout} onClick={handleLogout}>
+            Log out
+          </button>
         </div>
         <div className={styles.links}>
-          <NavLink to="/" className={styles.linkItem} >
-            <img src={dashboard} className={styles.linkItemImage} alt="speedometer icon" />
+          <NavLink to="/" className={styles.linkItem}>
+            <img
+              src={dashboard}
+              className={styles.linkItemImage}
+              alt="speedometer icon"
+            />
             <p className={styles.linkItemText}>Dashboard</p>
           </NavLink>
           <div to="my-wallet" className={styles.linkItem}>
-            <img src={wallet} className={styles.linkItemImage} alt="wallet icon" />
+            <img
+              src={wallet}
+              className={styles.linkItemImage}
+              alt="wallet icon"
+            />
             <p className={styles.linkItemText}>My Wallet</p>
             <div className={styles.linkSecondary}>
-              <NavLink to="/wallet-transfer" className={styles.linkSecondaryItem}>
+              <NavLink
+                to="/wallet-transfer"
+                className={styles.linkSecondaryItem}
+              >
                 <p>Wallet Transfer</p>
               </NavLink>
               <NavLink to="/wallet-log" className={styles.linkSecondaryItem}>
@@ -51,7 +68,7 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
               </NavLink>
               <NavLink to="/fund-wallet" className={styles.linkSecondaryItem}>
                 <p>Fund Wallet</p>
-              </NavLink> 
+              </NavLink>
               <NavLink to="/activity-log" className={styles.linkSecondaryItem}>
                 <p>Activity Log</p>
               </NavLink>
@@ -62,21 +79,37 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
             <p className={styles.linkItemText}>My Terminals</p>
           </NavLink> */}
           <div className={styles.linkItem}>
-            <img src={business} className={styles.linkItemImage}  alt="data icon" />
+            <img
+              src={business}
+              className={styles.linkItemImage}
+              alt="data icon"
+            />
             <p className={styles.linkItemText}>Transactions</p>
             <div className={styles.linkSecondary}>
-              <NavLink to="/new-transaction" className={styles.linkSecondaryItem}>
+              <NavLink
+                to="/new-transaction"
+                className={styles.linkSecondaryItem}
+              >
                 <p>New Transaction</p>
               </NavLink>
-              <NavLink to="/transaction-log" className={styles.linkSecondaryItem}>
+              <NavLink
+                to="/transaction-log"
+                className={styles.linkSecondaryItem}
+              >
                 <p>Transactions Log</p>
               </NavLink>
+              <NavLink
+                to="/cash-call-list"
+                className={styles.linkSecondaryItem}
+              >
+                <p>Cashcalls log</p>
+              </NavLink>
             </div>
-          </div> 
-          <NavLink to="/profile" className={styles.linkItem} >
+          </div>
+          <NavLink to="/profile" className={styles.linkItem}>
             <img src={user} className={styles.linkItemImage} alt="user icon" />
             <p className={styles.linkItemText}>Profile</p>
-          </NavLink> 
+          </NavLink>
           {/* <div className={styles.linkItem} >
             <img src={user} className={styles.linkItemImage} alt="user icon" />
             <p className={styles.linkItemText}>Profile</p>
@@ -92,27 +125,32 @@ export const Sidebar = ({ firstname, lastname, id, startLogout  }) => {
               </NavLink>        
             </div>
           </div> */}
-          <NavLink to="/contact-us" className={styles.linkItem} >
-            <img src={phone} className={styles.linkItemImage} alt="speedometer icon" />
+          <NavLink to="/contact-us" className={styles.linkItem}>
+            <img
+              src={phone}
+              className={styles.linkItemImage}
+              alt="speedometer icon"
+            />
             <p className={styles.linkItemText}>Contact Us</p>
           </NavLink>
         </div>
-      </div>    
+      </div>
     </nav>
-)};
+  );
+};
 
 const mapStateToProps = (state) => {
   return {
     firstname: state.auth.user.agent.first_name,
     lastname: state.auth.user.agent.last_name,
-    id: state.auth.user.agent.wallet_no
-  }
+    id: state.auth.user.agent.wallet_no,
+  };
 };
 
-const mapDispatchToProps = dispatch => {
+const mapDispatchToProps = (dispatch) => {
   return {
-    startLogout: () => dispatch(startLogout())
-  }
+    startLogout: () => dispatch(startLogout()),
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sidebar);

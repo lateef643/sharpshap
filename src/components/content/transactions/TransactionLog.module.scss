@@ -2,37 +2,37 @@
 @import "../../../assets/styles/config/mixins";
 
 .container {
-    padding-top: 2rem;
-    width: 98%;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    color: #707087;
-    font-size: 1.4rem;
-    text-align: left;
+  padding-top: 2rem;
+  width: 98%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: #707087;
+  font-size: 1.4rem;
+  text-align: left;
+
+  @include respond(phone-large) {
+    width: 96%;
+    padding-top: 1rem;
+  }
+
+  @include respond-custom(330px) {
+    width: 99%;
+    font-size: 1.3rem;
+  }
+
+  > .filters {
+    background-color: #fff;
+    padding: 1rem 0;
+    padding-bottom: 7rem;
+    height: 7rem;
+    text-align: center;
 
     @include respond(phone-large) {
-      width: 96%;
-      padding-top: 1rem;
+      height: max-content;
+      padding-bottom: 1.5rem;
+      margin-bottom: 3px;
     }
-
-    @include respond-custom(330px) {
-      width: 99%;
-      font-size: 1.3rem;
-    }
-
-    > .filters {
-      background-color: #fff;
-      padding: 1rem 0;
-      padding-bottom: 7rem;
-      height: 7rem;
-      text-align: center;
-
-      @include respond(phone-large) {
-        height: max-content;
-        padding-bottom: 1.5rem;
-        margin-bottom: 3px;
-      }
 
     .filtersContainer {
       display: flex;
@@ -45,7 +45,6 @@
       }
 
       .export {
-
         @include respond(phone-large) {
           display: none;
         }
@@ -71,11 +70,11 @@
         border: 0;
         height: 3.5rem;
         width: 25rem;
-        box-shadow: 0 .2rem .3rem #00000029;
+        box-shadow: 0 0.2rem 0.3rem #00000029;
         color: #707087;
         font-size: inherit;
         font-family: inherit;
-        padding: 0 .5rem;
+        padding: 0 0.5rem;
         border-radius: 10px;
         background-color: #fff;
 
@@ -87,278 +86,277 @@
     }
   }
 
-    > .loaderContainer {
-      position: fixed;
-      top: 50%;
-      left: 53.5%;
-      transform: translate(50%, 50%);
+  > .loaderContainer {
+    position: fixed;
+    top: 50%;
+    left: 53.5%;
+    transform: translate(50%, 50%);
+
+    @include respond(phone-large) {
+      left: 35%;
+      top: 40%;
+    }
+  }
+
+  > .heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    padding: 1.5rem 0.5rem;
+    padding-left: 2rem;
+    background-color: #fff;
+    text-align: left;
+
+    @include respond(phone-large) {
+      display: none;
+    }
+
+    .status {
+      flex: 0 0 3%;
+    }
+
+    .date {
+      flex: 0 0 12.5%;
+    }
+
+    .amount {
+      flex: 0 0 7.5%;
+    }
+
+    .type {
+      flex: 0 0 6%;
+    }
+
+    .prev {
+      flex: 0 0 7.5%;
+    }
+
+    .current {
+      flex: 0 0 7.5%;
+    }
+
+    .ref {
+      flex: 0 0 18%;
+    }
+
+    .customer {
+      flex: 0 0 21%;
+    }
+
+    .details {
+      flex: 0 0 8%;
+    }
+  }
+
+  > .log {
+    box-shadow: 0.5rem 0.5rem 0.5rem #00000029;
+    display: flex;
+    flex-direction: row;
+    // justify-content: space-between;
+    align-items: center;
+    height: 6rem;
+    padding: 2rem 0.5rem;
+    padding-left: 2rem;
+    background-color: #fff;
+    margin-bottom: 0.2rem;
+
+    &:hover {
+      transform: scale(1.02);
 
       @include respond(phone-large) {
-        left: 35%;
-        top: 40%;
+        transform: scale(1);
       }
     }
 
-    > .heading {
+    @include respond(phone-large) {
+      height: max-content;
+      display: initial;
+      padding: 0;
+      box-shadow: 0.2rem 0.2rem 0.3rem #00000029;
+      background-color: transparent;
+    }
+
+    .logItem {
+      @include respond(phone-large) {
+        height: 3.5rem;
+        margin-bottom: 3px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 1rem;
+        background-color: #fff;
+
+        a {
+          text-decoration: none;
+          color: #800080;
+        }
+      }
+
+      > .headingMobile {
+        display: none;
+
+        @include respond(phone-large) {
+          display: initial;
+          flex: 0 0 35%;
+        }
+      }
+    }
+
+    .status {
+      flex: 1;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
       align-items: center;
-      height: 5rem;
-      padding: 1.5rem .5rem;
-      padding-left: 2rem;
-      background-color: #fff;
-      text-align: left;
 
-      @include respond(phone-large) {
-        display: none;
-      }
-
-      .status {
+      > .statusColor {
         flex: 0 0 3%;
+
+        span {
+          border-radius: 100%;
+          width: 1rem;
+          height: 1rem;
+          display: inline-block;
+        }
+
+        .pending {
+          background-color: #fe8b0c;
+        }
+
+        .failed {
+          background-color: #ff0000;
+        }
+
+        .success {
+          background-color: #3ac962;
+        }
       }
 
-      .date {
+      > .statusDate {
         flex: 0 0 12.5%;
+
+        @include respond(phone-large) {
+          flex: 0 0 45%;
+        }
       }
 
-      .amount {
+      > .statusAmount {
         flex: 0 0 7.5%;
+
+        @include respond(phone-large) {
+          flex: 0 0 22%;
+        }
       }
 
-      .type {
+      > .statusType {
         flex: 0 0 6%;
-      }
-
-      .prev {
-        flex: 0 0 7.5%;
-      }
-      
-      .current {
-        flex: 0 0 7.5%;
-      }
-
-      .ref {
-        flex: 0 0 18%;
-      }
-
-      .customer {
-        flex: 0 0 21%;
-      }
-      
-      .details {
-        flex: 0 0 8%;
-      }
-    }
-
-    > .log {
-      box-shadow: .5rem .5rem .5rem #00000029;
-      display: flex;
-      flex-direction: row;
-      // justify-content: space-between;
-      align-items: center;
-      height: 6rem;
-      padding: 2rem .5rem;
-      padding-left: 2rem;
-      background-color: #fff;
-      margin-bottom: .2rem;
-    
-      &:hover {
-        transform: scale(1.02);
 
         @include respond(phone-large) {
-          transform: scale(1);
-        }
-      }
-
-      @include respond(phone-large) {
-        height: max-content;
-        display: initial;
-        padding: 0;
-        box-shadow: .2rem .2rem .3rem #00000029;
-        background-color: transparent;
-      }
-
-      .logItem {
-        @include respond(phone-large) {
-          height: 3.5rem;
-          margin-bottom: 3px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding: 0 1rem;
-          background-color: #fff;
-
-          a {
-            text-decoration: none;
-            color: #800080;
-          }
-        }
-
-      > .headingMobile {
-          display: none;
-
-          @include respond(phone-large) {
-            display: initial;
-            flex: 0 0 35%;
-          }
-        }
-      }
-
-      .status {
-        flex: 1;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-
-        > .statusColor {
-          flex: 0 0 3%;
-
-          span {
-            border-radius: 100%;
-            width: 1rem;
-            height: 1rem;
-            display: inline-block;
-          }
-
-          .pending {
-            background-color: #FE8B0C;
-          }
-          
-          .failed {
-            background-color: #FF0000;
-          }
-          
-          .success {
-            background-color: #3AC962;
-          }
-        }
-
-        > .statusDate {
-          flex: 0 0 12.5%;
-
-          @include respond(phone-large) {
-            flex: 0 0 45%;
-          }
-        }
-        
-        > .statusAmount {
-          flex: 0 0 7.5%;
-
-        @include respond(phone-large) {
-            flex: 0 0 22%;
-          }         
-        }
-
-        > .statusType {
-          flex: 0 0 6%;
-
-          @include respond(phone-large) {
-            flex: 0 0 18%;
-          }
-        }
-        
-        > .statusRef {
           flex: 0 0 18%;
-          word-break: break-all;
-
-          @include respond(phone-large) {
-            display: none;
-          }         
         }
-        
-        > .statusCurrent {
-          flex: 0 0 7.5%;
+      }
 
-          @include respond(phone-large) {
-            display: none;
-          }         
-        }
+      > .statusRef {
+        flex: 0 0 18%;
+        word-break: break-all;
 
-        > .statusPrev {
-          flex: 0 0 7.5%;
-
-          @include respond(phone-large) {
-            display: none;
-          }         
-        }
-
-        > .statusCustomer {
-          flex: 0 0 21%;
-
-          @include respond(phone-large) {
-            display: none;
-          }         
-        }
-
-        > .statusAccordionToggle {
+        @include respond(phone-large) {
           display: none;
+        }
+      }
 
-         > span {
-            font: 1.9rem;
-            font-weight: bold;
-          }
+      > .statusCurrent {
+        flex: 0 0 7.5%;
 
-          @include respond(phone-large) {
-            display: initial;
-            cursor: pointer;
-          }          
+        @include respond(phone-large) {
+          display: none;
+        }
+      }
+
+      > .statusPrev {
+        flex: 0 0 7.5%;
+
+        @include respond(phone-large) {
+          display: none;
+        }
+      }
+
+      > .statusCustomer {
+        flex: 0 0 21%;
+
+        @include respond(phone-large) {
+          display: none;
+        }
+      }
+
+      > .statusAccordionToggle {
+        display: none;
+
+        > span {
+          font: 1.9rem;
+          font-weight: bold;
         }
 
-        > a {
-          flex: 0 0 8%;
-          text-decoration: none;
-          color: #800080;
+        @include respond(phone-large) {
+          display: initial;
+          cursor: pointer;
+        }
+      }
 
-          @include respond(phone-large) {
-            display: none;
-          }
+      > a {
+        flex: 0 0 8%;
+        text-decoration: none;
+        color: #800080;
+
+        @include respond(phone-large) {
+          display: none;
         }
       }
     }
+  }
 
-    > .pagination {
-      margin: 2rem auto;
+  > .pagination {
+    margin: 2rem auto;
+
+    @include respond(phone-large) {
+      margin-top: 0.5rem;
+      width: 100%;
+    }
+
+    span {
+      cursor: pointer;
+      margin-bottom: 1rem;
+      color: #707087;
+      float: left;
+      padding: 8px 16px;
+      text-decoration: none;
+      transition: background-color 0.3s;
+      border: 1px solid #ddd;
+      text-align: center;
+      background-color: #fff;
 
       @include respond(phone-large) {
-        margin-top: .5rem;
-        width: 100%;
+        width: 22.75%;
+        padding: 8px 5px;
       }
-
-      span {
-        cursor: pointer;
-        margin-bottom: 1rem;
-        color: #707087;
-        float: left;
-        padding: 8px 16px;
-        text-decoration: none;
-        transition: background-color .3s;
-        border: 1px solid #ddd;
-        text-align: center;
-        background-color: #fff;
-  
-        @include respond(phone-large) {
-          width: 22.75%;
-          padding: 8px 5px;
-        }
 
       &.active {
-        background-color: #2A58AE;;
+        background-color: #2a58ae;
         color: white;
-        border: 1px solid #2A58AE;;
+        border: 1px solid #2a58ae;
       }
-  
+
       &:disabled {
-        background-color: #2A58AE;;
+        background-color: #2a58ae;
         color: white;
-        border: 1px solid #2A58AE;;
+        border: 1px solid #2a58ae;
       }
     }
-      
+
     > .currentPage {
       width: 9%;
     }
   }
 }
-

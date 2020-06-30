@@ -24,97 +24,100 @@ import BillPayment from "../components/pages/BillPayment";
 import AirtimeData from "../components/pages/AirtimeData";
 // import Betting from "../components/content/services/betting/Betting";
 import CashCall from "../components/content/services/cashcall/CashCall";
+import CashCallPage from "../components/pages/CashCall";
+import CashCallList from "../components/content/services/cashcall/CashCallList";
+import CashCallSuccess from "../components/content/services/cashcall/CashCallSuccess";
 
 const routes = [
   {
     path: "/",
     exact: true,
-    main: () => <Dashboard />
+    main: () => <Dashboard />,
   },
   {
     path: "/login",
-    main: () => <Login />
+    main: () => <Login />,
   },
   {
     path: "/contact-us",
-    main: () => <Contact />
+    main: () => <Contact />,
   },
   {
     path: "/add-user",
-    main: () => <AddUser />
+    main: () => <AddUser />,
   },
   {
     path: "/list-users",
-    main: () => <ListUsers />
+    main: () => <ListUsers />,
   },
   {
     path: "/my-terminals",
-    main: () => <Terminals />
+    main: () => <Terminals />,
   },
   {
     path: "/transaction-log",
-    main: () => <TransactionLog />
+    main: () => <TransactionLog />,
   },
   {
     path: "/new-transaction",
-    main: () => <NewTransaction />
+    main: () => <NewTransaction />,
   },
   {
     path: "/profile",
-    main: () => <Profile />
+    main: () => <Profile />,
   },
   {
     path: "/fund-wallet",
-    main: () => <FundWallet />
+    main: () => <FundWallet />,
   },
   {
     path: "/wallet-log",
-    main: () => <WalletLog />
+    main: () => <WalletLog />,
   },
   {
     path: "/activity-log",
-    main: () => <ActivityLog />
+    main: () => <ActivityLog />,
   },
   //passing props to transaction details because we need match to extract id
   {
     path: "/transaction-details/:id",
-    main: (props) => <TransactionDetails {...props} />
+    main: (props) => <TransactionDetails {...props} />,
   },
   {
     path: "/buy-airtime",
-    main: () => <BuyAirtime />
+    main: () => <BuyAirtime />,
   },
   {
     path: "/pay-electricity",
-    main: () => <ElectricityPayment />
+    main: () => <ElectricityPayment />,
   },
   {
     path: "/buy-data",
-    main: () => <BuyData />
+    main: () => <BuyData />,
   },
   {
     path: "/wallet-transfer",
-    main: () => <WalletTransfer />
+    main: () => <WalletTransfer />,
   },
   {
     path: "/recharge-cable",
-    main: () => <RechargeCable />
+    main: () => <RechargeCable />,
   },
   {
     path: "/buy-insurance",
-    main: () => <BuyInsurance />
+    main: () => <BuyInsurance />,
   },
   {
     path: "/transfer",
-    main: () => <FundsTransfer />
+    main: () => <FundsTransfer />,
   },
   {
     path: "/bill-payment",
-    main: () => <BillPayment />
+    main: () => <BillPayment />,
   },
   {
     path: "/airtime-data",
-    main: () => <AirtimeData />
+    main: () => <AirtimeData />,
   },
   // {
   //   path: "/betting",
@@ -122,8 +125,21 @@ const routes = [
   // }
   {
     path: "/cash-call",
-    main: () => <CashCall />
-  }
+    exact: true,
+    main: () => <CashCallPage />,
+  },
+  {
+    path: "/cash-call/:id",
+    main: (props) => <CashCall {...props} />,
+  },
+  {
+    path: "/cash-call-list",
+    main: (props) => <CashCallList type="list" {...props} />,
+  },
+  {
+    path: "/cash-call-completed",
+    main: (props) => <CashCallSuccess {...props} />,
+  },
 ];
 
 export default routes;

@@ -1,6 +1,6 @@
 .container {
   padding-top: 2rem;
-  width: 97%;
+  width: 93%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -10,8 +10,8 @@
 
   > .loaderContainer {
     position: fixed;
-    top: 50%;
-    left: 53.5%;
+    top: 48%;
+    left: 53.8%;
     transform: translate(50%, 50%);
   }
 
@@ -28,7 +28,7 @@
   }
 
   > .log {
-    box-shadow: .2rem .2rem .3rem #00000029;
+    box-shadow: 0.2rem 0.2rem 0.3rem #00000029;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -36,8 +36,8 @@
     height: 5rem;
     padding: 1rem 2rem;
     background-color: #fff;
-    margin-bottom: .3rem;
-  
+    margin-bottom: 0.3rem;
+
     &:hover {
       transform: scale(1.02);
     }
@@ -54,59 +54,69 @@
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-    transition: background-color .3s;
+    transition: background-color 0.3s;
     border: 1px solid #ddd;
   }
-  
+
   .pagination span.active {
-    background-color: #2A58AE;
+    background-color: #2a58ae;
     color: white;
-    border: 1px solid #2A58AE;
+    border: 1px solid #2a58ae;
   }
 
   .pagination span:disabled {
-    background-color: #2A58AE;
+    background-color: #2a58ae;
     color: white;
-    border: 1px solid #2A58AE;
+    border: 1px solid #2a58ae;
   }
 }
 
 .itemOne {
-  flex: 0 0 10%;
+  flex: 0 0 5%;
 }
 
 .itemTwo {
-  flex: 0 0 10%;
+  flex: 0 0 15%;
 }
 
 .itemThree {
-  flex: 0 0 20%;
+  flex: 0 0 10%;
 }
 
 .itemFour {
-  flex: 0 0 27%;
+  flex: 0 0 12%;
 }
 
 .itemFive {
-  flex: 0 0 19%;
+  flex: 0 0 15%;
 }
 
 .itemSix {
-  flex: 0 0 11%;
-}
-
-.acceptButton {
-  border: 0;
-  height: 3rem;
-  background-color:#2A58AE;
-  border-radius: 5px;
-  color: #eee;
-}
-
-.acceptDisabled {
-  background-color: rgb(199, 199, 199);
+  flex: 0 0 10%;
 }
 
 .itemSeven {
-  flex: 0 0 13%;
+  flex: 0 0 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  height: 3rem;
+  border-radius: 5px;
+  border: 0;
+  width: 10rem;
+  background-color: #2a58ae;
+  color: #eee;
+  padding: 0.5rem;
+}
+
+.cancelButton {
+  background-color: #ff4242;
+}
+
+.buttonDisabled {
+  background-color: rgb(199, 199, 199);
 }

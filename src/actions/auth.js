@@ -1,84 +1,92 @@
-import axios from 'axios';
+import axios from "axios";
 
 import { LOGIN_API } from "../store/api/constants";
 import setAuthToken from "../util/setAuthToken";
 import isEmpty from "../validation/isEmpty";
 import history from "../util/history";
 
-const loginUser = ({ user, isAuthenticated, walletBalance, transactionSettings }) => {
+const loginUser = ({
+  user,
+  isAuthenticated,
+  walletBalance,
+  transactionSettings,
+}) => {
   return {
     type: "START_LOGIN_USER",
     payload: {
       isAuthenticated,
       user,
       walletBalance,
-      transactionSettings
-    }
-  }
+      transactionSettings,
+    },
+  };
 };
 
-export const startLoginUser = payload => dispatch => { 
-  return axios.post(LOGIN_API, payload)
-    .then(res => {
+export const startLoginUser = (payload) => (dispatch) => {
+  return axios
+    .post(LOGIN_API, payload)
+    .then((res) => {
       const user = res.data.data.user;
       const token = res.data.data.token;
       const walletBalance = res.data.data.wallet.current_bal;
       const transactionSettings = res.data.data.settings;
+      // const { agent, phone, is_default } = user;
+      // const { first_name, last_name, user_id, date_of_birth, email, business_name, business_address, business_phone} = agent;
 
       if (!isEmpty(user)) {
         const authDetails = {
           isAuthenticated: true,
           user,
           walletBalance,
-          transactionSettings
+          transactionSettings,
         };
 
         dispatch(loginUser(authDetails));
-        sessionStorage.setItem('user', JSON.stringify(authDetails));
-        sessionStorage.setItem('token', token);
+        sessionStorage.setItem("user", JSON.stringify(authDetails));
+        sessionStorage.setItem("token", token);
         setAuthToken(token);
-      };
+      }
     })
-    .catch(err => {
+    .catch((err) => {
       if (err.response && err.response.status === 401) {
         dispatch({
           type: "SET_LOADING",
           payload: {
             loading: false,
-            message: "Username or Password Incorrect"         
-          }
-        })        
+            message: "Username or Password Incorrect",
+          },
+        });
       } else {
         setTimeout(() => {
           dispatch({
             type: "SET_LOADING",
             payload: {
               loading: false,
-              message: undefined       
-            }
-          })           
+              message: undefined,
+            },
+          });
         }, 4000);
       }
-    })
+    });
 };
 
 export const logoutUser = () => {
   return {
-    type: "START_LOGOUT_USER"
-  }
+    type: "START_LOGOUT_USER",
+  };
 };
 
-export const startLogout = () => dispatch => {
+export const startLogout = () => (dispatch) => {
   dispatch({
     type: "SET_LOADING",
     payload: {
       loading: false,
-      message: undefined       
-    }
+      message: undefined,
+    },
   });
-  
-  sessionStorage.clear('user');
-  sessionStorage.clear('token');
+
+  sessionStorage.clear("user");
+  sessionStorage.clear("token");
   history.push("/");
   dispatch(logoutUser());
 };

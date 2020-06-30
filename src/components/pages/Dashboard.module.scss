@@ -19,7 +19,7 @@
   > .cardContainer {
     flex: 0 0 30%;
     display: flex;
-    flex-flow: row wrap; 
+    flex-flow: row wrap;
     justify-content: flex-start;
     height: max-content;
 
@@ -37,7 +37,7 @@
     border-radius: 10px;
 
     @include respond(phone-large) {
-      padding: .2rem;
+      padding: 0.2rem;
       padding-top: 1rem;
     }
 

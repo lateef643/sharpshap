@@ -19,7 +19,7 @@
     @media print {
       display: none;
     }
-  
+
     @include respond(phone-large) {
       width: 100vw;
       height: $header-height-smaller-devices;

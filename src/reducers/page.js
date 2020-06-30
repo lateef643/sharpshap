@@ -1,8 +1,8 @@
 const pageReducer = (state = {}, action) => {
-  switch(action.type) {
-    case 'SET_CURRENT_PAGE':
+  switch (action.type) {
+    case "SET_CURRENT_PAGE":
       return action.payload;
-    default: 
+    default:
       return state;
   }
 };

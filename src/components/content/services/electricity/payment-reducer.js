@@ -4,13 +4,13 @@ export const initialFormState = {
   accountName: "",
   paymentPlan: "",
   amount: "",
-  phone: ""
+  phone: "",
 };
 
 const ElecticityPaymentReducer = (formState, { type, payload }) => {
-  switch(type) {
+  switch (type) {
     case "UPDATE_FORM_STATE":
-      return {...formState, ...payload}
+      return { ...formState, ...payload };
     default:
       return formState;
   }

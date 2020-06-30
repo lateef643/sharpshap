@@ -4,8 +4,8 @@ import { connect } from "react-redux";
 import Loader from "../partials/Loader";
 import { startLoginUser } from "../../actions/auth";
 import logo from "../../assets/images/cico-logo-login.svg";
-import eye from "../../assets/images/eye-svgrepo-com.svg";
-import blind from "../../assets/images/blind-symbol-of-an-opened-eye-with-a-slash-svgrepo-com.svg";
+import eyeOpen from "../../assets/images/eyeOpen.svg";
+import eyeClosed from "../../assets/images/eyeClosed.svg";
 import caution from "../../assets/images/warning-svgrepo-com.svg";
 import image from "../../assets/images/login.png";
 
@@ -18,29 +18,34 @@ export const Login = (props) => {
   const [error, setError] = useState(props.message);
   const [toggleReveal, setToggleReveal] = useState(false);
 
+  //Accessing the login error message from the server
   useEffect(() => {
     setError(props.message);
     setLoading(props.loading);
-  }, [props])
+  }, [props]);
 
   const payload = {
     user: {
       phone,
-      password
+      password,
     },
-    type: "agent"
+    type: "agent",
   };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
     setLoading(true);
+
+    //Dispatching loading state to the error reducer to indicate loading
+    //Auth action in actions folder dispatches loading: false and server
+    //error message if error
     props.dispatch({
-        type: "SET_LOADING",
-        payload: {
-          loading: true,
-          message: undefined       
-        }
-      })
+      type: "SET_LOADING",
+      payload: {
+        loading: true,
+        message: undefined,
+      },
+    });
     props.startLoginUser(payload);
   };
 
@@ -55,48 +60,72 @@ export const Login = (props) => {
     setError(undefined);
     setPassword(newPassword);
   };
-  
+
   return (
     <div className={styles.container}>
       <div className={styles.imageSection}>
         <div className={styles.imageBox}>
           <img src={image} alt="hello illustration" />
-          <p>Login</p>        
+          <p>Login</p>
         </div>
       </div>
       <div className={styles.formSection}>
         <div className={styles.formContainer}>
           <form className={styles.form} onSubmit={handleOnSubmit}>
             <img className={styles.logo} src={logo} alt="Cico logo" />
-            {error ? <p className={styles.error}><img src={caution} /><span>{error}</span></p> : undefined}
-            <label>
-              <input type="text" placeholder="Phone Number" onChange={handlephoneChange} />
-            </label>
-            <label>
-              <input type={!toggleReveal ? "password" : "text"} placeholder="Password" onChange={handlePasswordChange} />
-              <span onClick={() => {
-                setToggleReveal(!toggleReveal)
-              }}><img src={!toggleReveal ? eye : blind} /></span>
-            </label>
-              <button>{loading ? <Loader color="white" size="small" /> : "Login" }</button>
-          </form>        
+            {error ? (
+              <p className={styles.error}>
+                <img src={caution} alt="caution icon" />
+                <span>{error}</span>
+              </p>
+            ) : undefined}
+            <div className={styles.inputField}>
+              <label htmlFor="phone"></label>
+              <input
+                name="phone"
+                type="text"
+                placeholder="Phone Number"
+                onChange={handlephoneChange}
+              />
+            </div>
+            <div className={styles.inputField}>
+              <label htmlFor="password"></label>
+              <input
+                name="password"
+                type={!toggleReveal ? "password" : "text"}
+                placeholder="Password"
+                onChange={handlePasswordChange}
+              />
+              <span
+                onClick={() => {
+                  setToggleReveal(!toggleReveal);
+                }}
+              >
+                <img src={!toggleReveal ? eyeOpen : eyeClosed} alt="eye icon" />
+              </span>
+            </div>
+            <button>
+              {loading ? <Loader color="white" size="small" /> : "Login"}
+            </button>
+          </form>
         </div>
       </div>
     </div>
-)};
+  );
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    startLoginUser: payload => dispatch(startLoginUser(payload)),
-    dispatch: dispatch
-  }
+    startLoginUser: (payload) => dispatch(startLoginUser(payload)),
+    dispatch: dispatch,
+  };
 };
 
 const mapStateToProps = (state) => {
   return {
     loading: state.error.loading,
-    message: state.error.message
-  }
-}
+    message: state.error.message,
+  };
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login);

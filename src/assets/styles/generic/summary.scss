@@ -5,7 +5,7 @@
   height: 39.2rem;
   width: 41.6rem;
   margin: 0 auto;
-  box-shadow: 0px 3px .6rem #00000029;
+  box-shadow: 0px 3px 0.6rem #00000029;
   padding: 2rem 2rem;
   display: flex;
   flex-direction: column;
@@ -43,7 +43,7 @@
       font-size: 1.4rem;
       margin-bottom: 2rem;
       font-weight: 400;
-      color: #707070; 
+      color: #707070;
       text-align: center;
     }
 
@@ -87,7 +87,7 @@
   }
 
   button {
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     width: 100%;
     margin: 0 auto;
     margin-top: 2rem;
@@ -96,10 +96,9 @@
     outline: 0;
     border: 0;
     border-radius: 1rem;
-    box-shadow: 3px 3px .6rem #00000029;
-    background: transparent 
-    linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
-    0% 0% no-repeat padding-box;
+    box-shadow: 3px 3px 0.6rem #00000029;
+    background: transparent linear-gradient(90deg, #11998e 0%, #38ef7d 100%) 0%
+      0% no-repeat padding-box;
     color: #fff;
 
     &:active {

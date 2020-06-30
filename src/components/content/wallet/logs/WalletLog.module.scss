@@ -27,7 +27,7 @@
   }
 
   > .log {
-    box-shadow: .5rem .5rem .5rem #00000029;
+    box-shadow: 0.5rem 0.5rem 0.5rem #00000029;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -35,8 +35,8 @@
     height: 5rem;
     padding: 1rem 2rem;
     background-color: #fff;
-    margin-bottom: .3rem;
-  
+    margin-bottom: 0.3rem;
+
     &:hover {
       transform: scale(1.02);
     }
@@ -53,20 +53,20 @@
     float: left;
     padding: 8px 16px;
     text-decoration: none;
-    transition: background-color .3s;
+    transition: background-color 0.3s;
     border: 1px solid #ddd;
   }
-  
+
   .pagination span.active {
-    background-color: #2A58AE;
+    background-color: #2a58ae;
     color: white;
-    border: 1px solid #2A58AE;
+    border: 1px solid #2a58ae;
   }
 
   .pagination span:disabled {
-    background-color: #2A58AE;
+    background-color: #2a58ae;
     color: white;
-    border: 1px solid #2A58AE;
+    border: 1px solid #2a58ae;
   }
 }
 

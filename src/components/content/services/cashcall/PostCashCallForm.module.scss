@@ -10,6 +10,11 @@
   box-shadow: 0px 3px 6px #00000029;
   text-align: center;
 
+  p {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
   img {
     width: 3rem;
     margin-bottom: 1rem;
@@ -24,11 +29,11 @@
 
     label {
       position: relative;
-      top: .7rem;
+      top: 0.7rem;
       left: 1.2rem;
       background-color: #fff;
       width: max-content;
-      padding: 0 .5rem;
+      padding: 0 0.5rem;
       font-size: 1.4rem;
     }
 
@@ -45,7 +50,7 @@
   }
 
   button {
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     width: 100%;
     margin: 0 auto;
     margin-top: 1rem;
@@ -53,11 +58,10 @@
     outline: 0;
     border: 0;
     height: 3.8rem;
-    border-radius: .5rem;
+    border-radius: 0.5rem;
     color: #fff;
     box-shadow: 3px 3px 6px #00000029;
-    background: transparent 
-    linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
-    0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(90deg, #11998e 0%, #38ef7d 100%) 0%
+      0% no-repeat padding-box;
   }
 }

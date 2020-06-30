@@ -14,10 +14,14 @@ import kaedc from "../../../../assets/images/Kano.png";
 import ibedc from "../../../../assets/images/ibedc.png";
 import phedc from "../../../../assets/images/Ph.png";
 
-import styles from './ElectricityPaymentForm.module.scss';
+import styles from "./ElectricityPaymentForm.module.scss";
 
 const ElectricityPaymentForm = (props) => {
-  const { ElectricityPaymentFormState:state, dispatch, setComponentToRender } = props;
+  const {
+    ElectricityPaymentFormState: state,
+    dispatch,
+    setComponentToRender,
+  } = props;
   const [energyVendors, setEnergyVendors] = useState([]);
   const [accountName, setAccountName] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
@@ -33,12 +37,11 @@ const ElectricityPaymentForm = (props) => {
   }, []);
 
   useEffect(() => {
-
     const { meterNo, disco, paymentPlan } = state;
     const req = {
-      "meter_number": meterNo,
-      "disco": disco,
-      "type": paymentPlan
+      meter_number: meterNo,
+      disco: disco,
+      type: paymentPlan,
     };
 
     if (!isNaN(parseInt(meterNo)) && meterNo.length > 10) {
@@ -46,10 +49,10 @@ const ElectricityPaymentForm = (props) => {
 
       dispatch({
         type: "UPDATE_FORM_STATE",
-        payload: { accountName: "" }
+        payload: { accountName: "" },
       });
 
-      setValidationErrors({...validationErrors, accountName: ""});
+      setValidationErrors({ ...validationErrors, accountName: "" });
 
       (async function validateMeterNumber() {
         try {
@@ -60,21 +63,23 @@ const ElectricityPaymentForm = (props) => {
 
           dispatch({
             type: "UPDATE_FORM_STATE",
-            payload: { accountName: customerName }
+            payload: { accountName: customerName },
           });
-
-        } catch(e) {
-          setValidationErrors({...validationErrors, accountName: "Account validation failed please try again"});
+        } catch (e) {
+          setValidationErrors({
+            ...validationErrors,
+            accountName: "Account validation failed please try again",
+          });
           setLoading(false);
         }
-      })(); 
+      })();
     }
   }, [state.meterNo]);
 
   //Change form image url on disco change
   let imageUrl;
 
-  switch(state.disco) {
+  switch (state.disco) {
     case "IKEDC":
       imageUrl = ikedc;
       break;
@@ -106,9 +111,9 @@ const ElectricityPaymentForm = (props) => {
     const properties = Object.keys(state);
     const errors = validateFormData(state, properties);
 
-    setValidationErrors({ ...validationErrors, ...errors});
+    setValidationErrors({ ...validationErrors, ...errors });
 
-    if (Object.keys(errors).length > 0) return
+    if (Object.keys(errors).length > 0) return;
 
     setComponentToRender("summary");
   };
@@ -124,96 +129,139 @@ const ElectricityPaymentForm = (props) => {
 
   return (
     <div className={styles.container}>
-      <form className={styles.form} onSubmit={(e) => handleOnContinue(e)} autoComplete="off" >
+      <form
+        className={styles.form}
+        onSubmit={(e) => handleOnContinue(e)}
+        autoComplete="off"
+      >
         <div className={styles.imageContainer}>
-          <img 
-            src={imageUrl} 
-            className={styles.image} 
-            alt="Electricity Vendor's logo" 
-          />        
+          <img
+            src={imageUrl}
+            className={styles.image}
+            alt="Electricity Vendor's logo"
+          />
         </div>
         <label>
           <span>Disco</span>
-          <select 
-            type="text" 
+          <select
+            type="text"
             name="disco"
             value={state.disco}
-            className={validationErrors.disco ? styles.outlineRed : styles.outlineGrey}
+            className={
+              validationErrors.disco ? styles.outlineRed : styles.outlineGrey
+            }
             onChange={(e) => handleStateChange(e)}
           >
             <option value="">Select Disco</option>
             {energyVendors.map((vendor, index) => {
-              return <option 
-                key={`${index}-${vendor.name}`} 
-                value={vendor.name}>{vendor.name}</option>
+              return (
+                <option key={`${index}-${vendor.name}`} value={vendor.name}>
+                  {vendor.name}
+                </option>
+              );
             })}
           </select>
-          {validationErrors.disco ? <p className={styles.validationErrorText}>Please select disco</p> : undefined}
+          {validationErrors.disco ? (
+            <p className={styles.validationErrorText}>Please select disco</p>
+          ) : undefined}
         </label>
         <label>
           <span>Plan</span>
-          <select 
-            type="text" 
+          <select
+            type="text"
             name="paymentPlan"
             value={state.paymentPlan}
-            className={validationErrors.paymentPlan ? styles.outlineRed : styles.outlineGrey}
+            className={
+              validationErrors.paymentPlan
+                ? styles.outlineRed
+                : styles.outlineGrey
+            }
             onChange={(e) => handleStateChange(e)}
           >
             <option value="">Select plan</option>
             <option value="PREPAID">PREPAID</option>
             <option value="POSTPAID">POSTPAID</option>
           </select>
-          {validationErrors.paymentPlan ? <p className={styles.validationErrorText}>Please select payment plan</p> : undefined}
-        </label>   
+          {validationErrors.paymentPlan ? (
+            <p className={styles.validationErrorText}>
+              Please select payment plan
+            </p>
+          ) : undefined}
+        </label>
         <label>
           <span>Meter Number</span>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="meterNo"
             value={state.meterNo}
-            className={validationErrors.meterNo ? styles.outlineRed : styles.outlineGrey}
+            className={
+              validationErrors.meterNo ? styles.outlineRed : styles.outlineGrey
+            }
             onChange={(e) => handleStateChange(e)}
           />
-          {validationErrors.meterNo ? <p className={styles.validationErrorText}>Please enter meter number</p> : undefined}
+          {validationErrors.meterNo ? (
+            <p className={styles.validationErrorText}>
+              Please enter meter number
+            </p>
+          ) : undefined}
         </label>
         <label>
           <span>Account Name</span>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="accountName"
             value={state.accountName}
             className={styles.outlineGrey}
             disabled
-          />  
-          {loading ? <div className={styles.loader}><VerificationLoader /></div> : undefined}
-          {validationErrors.accountName ? <p className={styles.validationErrorText}>{validationErrors.accountName}</p> : undefined}
-        </label> 
+          />
+          {loading ? (
+            <div className={styles.loader}>
+              <VerificationLoader />
+            </div>
+          ) : undefined}
+          {validationErrors.accountName ? (
+            <p className={styles.validationErrorText}>
+              {validationErrors.accountName}
+            </p>
+          ) : undefined}
+        </label>
         <label>
           <span>Amount</span>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="amount"
             value={state.amount}
-            className={validationErrors.amount ? styles.outlineRed : styles.outlineGrey}
+            className={
+              validationErrors.amount ? styles.outlineRed : styles.outlineGrey
+            }
             onChange={(e) => handleStateChange(e)}
-          />  
-          {validationErrors.amount ? <p className={styles.validationErrorText}>Please enter amount</p> : undefined}
-        </label>   
+          />
+          {validationErrors.amount ? (
+            <p className={styles.validationErrorText}>Please enter amount</p>
+          ) : undefined}
+        </label>
         <label>
           <span>Phone</span>
-          <input 
-            type="text" 
+          <input
+            type="text"
             name="phone"
             value={state.phone}
-            className={validationErrors.phone ? styles.outlineRed : styles.outlineGrey}
+            className={
+              validationErrors.phone ? styles.outlineRed : styles.outlineGrey
+            }
             onChange={(e) => handleStateChange(e)}
-          />  
-          {validationErrors.phone ? <p className={styles.validationErrorText}>Please enter valid phone number</p> : undefined}
-        </label>       
+          />
+          {validationErrors.phone ? (
+            <p className={styles.validationErrorText}>
+              Please enter valid phone number
+            </p>
+          ) : undefined}
+        </label>
         <button type="submit">Continue</button>
-      </form>    
+      </form>
     </div>
-)};
+  );
+};
 
 ElectricityPaymentForm.propTypes = {
   ElectricityPaymentFormState: PropTypes.object.isRequired,

@@ -5,10 +5,10 @@ if (
   window.location.href.indexOf("dev") >= 0
 ) {
   //development server
-  path = "https://api.cico.ng/api";  
+  path = "https://api.cico.ng/api";
 } else {
   //production server
-  path = "https://api.cico.ng/api";  
+  path = "https://api.cico.ng/api";
 }
 
 //////AUTH///////
@@ -125,13 +125,13 @@ export const VEND_DATA = `${path}/airtime/data`;
 export const GET_STARTIMES_PLANS = `${path}/cable/multichoice/startimes`;
 
 //validate startimes customer - POST
-export const VALIDATE_STARTIMES_CUSTOMER =  `${path}/cable/startimes/validate`;
+export const VALIDATE_STARTIMES_CUSTOMER = `${path}/cable/startimes/validate`;
 
 //vend startimes - POST
-export const VEND_STARTIMES =  `${path}/cable/startimes/vend`;
+export const VEND_STARTIMES = `${path}/cable/startimes/vend`;
 
 //get dstv plans - POST
-export const GET_DSTV_PLANS =  `${path}/cable/multichoice/dstv`;
+export const GET_DSTV_PLANS = `${path}/cable/multichoice/dstv`;
 
 //validate dstv & gotv customer - POST
 export const VALIDATE_MULTICHOICE_CUSTOMER = `${path}/cable/multichoice/validate`;
@@ -164,11 +164,22 @@ export const VALIDATE_METER_NUMBER = `${path}/energy`;
 //vend energy - POST
 export const VEND_ENERGY = `${path}/energy`;
 
-//cash call
-export const CASHCALL_REQUEST_CASH = `${path}/cashcall/request`;
+//////////CASHCALL///////////
+
+//Initiate cashcall
+export const INITIATE_LIQUID_CASHCALL = `${path}/cashcall/initiate`;
+
+//Post opportunity
+export const POST_OPPORTUNITY = `${path}/cashcall/request`;
 
 //Get cashcall list
 export const GET_CASHCALL_LIST = `${path}/cashcall`;
 
+//cash call
+export const INITIATE_PHYSICAL_CASHCALL = `${path}/cashcall/match`;
+
 //Accept cash
-export const CASHCALL_ACCEPT_CASH = `${path}/cashcall/accept`;
+export const ACCEPT_OPPORTUNITY = `${path}/cashcall/accept`;
+
+//Release funds
+export const RELEASE_FUNDS = `${path}/cashcall/release-funds`;
