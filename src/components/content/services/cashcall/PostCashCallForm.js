@@ -13,6 +13,7 @@ export const PostCashCallForm = ({
   cancelCashcall,
   releaseFunds,
   cashCallCompleteStatus,
+  error,
 }) => {
   const handleProceed = (e) => {
     e.preventDefault();
@@ -82,6 +83,7 @@ export const PostCashCallForm = ({
             onChange={handleUpdateState}
           />
         </div>
+        <p className={styles.errorText}>{error}</p>
         <button type="submit">
           {verificationLoading ? "Please wait" : "Complete"}
         </button>

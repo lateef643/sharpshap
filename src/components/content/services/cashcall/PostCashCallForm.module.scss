@@ -21,7 +21,7 @@
   }
 
   div {
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -49,11 +49,17 @@
     }
   }
 
+  .errorText {
+    color: #ff0000;
+    text-align: left;
+    height: 1rem;
+  }
+
   button {
     font-family: "Lato", sans-serif;
     width: 100%;
     margin: 0 auto;
-    margin-top: 1rem;
+    margin-top: 0.5rem;
     font-size: 1.4rem;
     outline: 0;
     border: 0;
