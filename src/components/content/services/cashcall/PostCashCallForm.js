@@ -10,6 +10,9 @@ export const PostCashCallForm = ({
   cashCallState,
   cashCallType,
   handleOpportunity,
+  cancelCashcall,
+  releaseFunds,
+  cashCallCompleteStatus,
 }) => {
   const handleProceed = (e) => {
     e.preventDefault();
@@ -19,8 +22,16 @@ export const PostCashCallForm = ({
         ? cashCallState.post.token
         : cashCallState.accept.token;
 
-    if (token) {
+    if (
+      (cashCallType === "1" || cashCallType === "2") &&
+      cashCallCompleteStatus === null &&
+      token
+    ) {
       handleOpportunity();
+    } else if (cashCallCompleteStatus === "release") {
+      releaseFunds();
+    } else if (cashCallCompleteStatus === "cancel") {
+      cancelCashcall();
     }
   };
 
@@ -33,6 +44,16 @@ export const PostCashCallForm = ({
     } else if (cashCallType === "2") {
       dispatch({
         type: "UPDATE_ACCEPT_CASHCALL_STATE",
+        payload: { [target.name]: target.value },
+      });
+    } else if (cashCallCompleteStatus === "release") {
+      dispatch({
+        type: "UPDATE_RELEASE_FUNDS_STATE",
+        payload: { [target.name]: target.value },
+      });
+    } else if (cashCallCompleteStatus === "cancel") {
+      dispatch({
+        type: "UPDATE_CANCEL_CASHCALL_STATE",
         payload: { [target.name]: target.value },
       });
     }
@@ -49,7 +70,13 @@ export const PostCashCallForm = ({
             value={
               cashCallType === "1"
                 ? cashCallState.post.token
-                : cashCallState.accept.token
+                : cashCallType === "2"
+                ? cashCallState.accept.token
+                : cashCallCompleteStatus === "release"
+                ? cashCallState.release.token
+                : cashCallCompleteStatus === "cancel"
+                ? cashCallState.cancel.token
+                : undefined
             }
             type="text"
             onChange={handleUpdateState}

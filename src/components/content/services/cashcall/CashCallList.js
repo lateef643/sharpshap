@@ -2,13 +2,18 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
 import ListLoader from "../../../partials/ListLoader";
-import { RELEASE_FUNDS } from "../../../../store/api/constants";
 import { GET_CASHCALL_LIST } from "../../../../store/api/constants";
 import formatToCurrency from "../../../../util/formatToCurrency";
 
 import styles from "./CashCallList.module.scss";
 
-export const CashCallList = ({ history, selectOpportunity }) => {
+export const CashCallList = ({
+  cashCallType,
+  dispatch,
+  setStatus,
+  selectOpportunity,
+  setCashCallCompleteStatus,
+}) => {
   const [cashCallList, setCashCallList] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -21,11 +26,10 @@ export const CashCallList = ({ history, selectOpportunity }) => {
         let cashCallList;
 
         //Rendering list from two paths
-        //i. From the accept opportunity route - selectOpportunity is passed down as props so not undefined
-        //11. From sidebar here select opportunity is not passed down hence undefined
-        cashCallList = !selectOpportunity
-          ? res.data.data.personal
-          : res.data.data.liquid;
+        //i. From the accept opportunity route - cashcalltype is 2, this displays a list of all cashcalls
+        //11. From sidebar here cashcalltype is 3, this displays a list of personal cashcalls
+        cashCallList =
+          cashCallType === "3" ? res.data.data.personal : res.data.data.liquid;
 
         if (!isCancelled && cashCallList.length !== 0) {
           setLoading(false);
@@ -60,20 +64,23 @@ export const CashCallList = ({ history, selectOpportunity }) => {
   };
 
   const handleReleaseFunds = (reference) => {
-    (async function releaseFunds() {
-      const req = {
-        token: "",
-        reference,
-      };
+    dispatch({
+      type: "UPDATE_RELEASE_FUNDS_STATE",
+      payload: { reference },
+    });
 
-      try {
-        await Axios.post(RELEASE_FUNDS, req);
+    setCashCallCompleteStatus("release");
+    setStatus("verification");
+  };
 
-        history.push("/cashcall-completed");
-      } catch (e) {
-        // console.log(e.response);
-      }
-    })();
+  const handleCancelCashcall = (reference) => {
+    dispatch({
+      type: "UPDATE_CANCEL_CASHCALL_STATE",
+      payload: { reference },
+    });
+
+    setCashCallCompleteStatus("cancel");
+    setStatus("verification");
   };
 
   return (
@@ -106,7 +113,7 @@ export const CashCallList = ({ history, selectOpportunity }) => {
                 {formatToCurrency(cashcall.admin_fee)}
               </span>
               <span className={styles.itemFour}>
-                {cashcall.type && "Cashcall"}
+                {cashcall.type || "Cashcall"}
               </span>
               <span className={styles.itemFive}>{cashcall.created_at}</span>
               <span className={styles.itemSix}>{cashcall.status}</span>
@@ -118,12 +125,13 @@ export const CashCallList = ({ history, selectOpportunity }) => {
                   <>
                     <button
                       className={`${styles.button} ${styles.cancelButton}`}
+                      onClick={() => handleCancelCashcall(cashcall.uuid)}
                     >
                       Cancel
                     </button>
                     <button
                       className={`${styles.button} ${styles.releaseFunds}`}
-                      onClick={() => handleReleaseFunds(cashcall.reference)}
+                      onClick={() => handleReleaseFunds(cashcall.uuid)}
                     >
                       Release funds
                     </button>

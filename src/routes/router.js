@@ -25,8 +25,6 @@ import AirtimeData from "../components/pages/AirtimeData";
 // import Betting from "../components/content/services/betting/Betting";
 import CashCall from "../components/content/services/cashcall/CashCall";
 import CashCallPage from "../components/pages/CashCall";
-import CashCallList from "../components/content/services/cashcall/CashCallList";
-import CashCallSuccess from "../components/content/services/cashcall/CashCallSuccess";
 
 const routes = [
   {
@@ -131,14 +129,6 @@ const routes = [
   {
     path: "/cash-call/:id",
     main: (props) => <CashCall {...props} />,
-  },
-  {
-    path: "/cash-call-list",
-    main: (props) => <CashCallList type="list" {...props} />,
-  },
-  {
-    path: "/cash-call-completed",
-    main: (props) => <CashCallSuccess {...props} />,
   },
 ];
 

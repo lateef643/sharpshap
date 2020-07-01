@@ -183,3 +183,6 @@ export const ACCEPT_OPPORTUNITY = `${path}/cashcall/accept`;
 
 //Release funds
 export const RELEASE_FUNDS = `${path}/cashcall/release-funds`;
+
+//Cancel cashcall
+export const CANCEL_CASHCALL = `${path}/cashcall/cancel-funds`;
