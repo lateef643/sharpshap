@@ -2,7 +2,7 @@
 @import "../../assets/styles/config/breakpoints";
 
 .card {
-  background: #FFFFFF 0% 0% no-repeat padding-box;
+  background: #ffffff 0% 0% no-repeat padding-box;
   box-shadow: 0 2px 4px #00000029;
   border-radius: 1px;
   opacity: 1;
@@ -13,7 +13,7 @@
   text-decoration: none;
   border-radius: 10px;
   cursor: pointer;
-  transition: .5s all;
+  transition: 0.5s all;
 
   @include respond(phone-large) {
     width: 28%;
@@ -50,7 +50,7 @@
 
   .text {
     font-size: 1.3rem;
-    margin-top: .3rem;
+    margin-top: 0.8rem;
     color: #707070;
 
     @include respond(phone-large) {
@@ -58,13 +58,14 @@
       font-size: 1.23rem;
       // margin-top: .5rem;
       line-height: 15px;
+      margin-top: 0.1rem;
     }
 
     @include respond-custom(330px) {
       font-size: 1.15rem;
       line-height: 14px;
     }
-  }  
+  }
 
   &:hover {
     transform: translateY(-5%);
@@ -88,7 +89,7 @@
     margin: 0;
     // margin-right: 5px;
   }
-} 
+}
 
 .small {
   height: 17vh;
@@ -98,6 +99,7 @@
     width: 23%;
     height: 9rem;
     margin: 0;
+    margin-bottom: 0.5rem;
   }
 
   @include respond-custom(330px) {

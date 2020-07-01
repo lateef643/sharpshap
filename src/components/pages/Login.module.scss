@@ -18,32 +18,31 @@
   flex-direction: row;
   height: 100vh;
   font-size: 1.45rem;
-  font-family: 'Lato', sans-serif;
+  font-family: "Lato", sans-serif;
 
   > .imageSection {
     flex: 0 0 30%;
-    background: transparent 
-      linear-gradient(180deg, #1FE294 0%, #11998E 100%) 
-      0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(180deg, #1fe294 0%, #11998e 100%) 0%
+      0% no-repeat padding-box;
     opacity: 1;
 
     @include respond-custom(58em) {
-      display: none;      
+      display: none;
     }
 
     > .imageBox {
       position: relative;
       top: 25rem;
-      left: 2rem;  
+      left: 2rem;
       display: flex;
-      align-items: center; 
-      
+      align-items: center;
+
       p {
         width: 9rem;
         height: 5rem;
         background-color: #fff;
         font-size: 1.4rem;
-        color: #C7C7C7;
+        color: #c7c7c7;
         border-radius: 1rem;
         text-align: center;
         vertical-align: middle;
@@ -104,7 +103,7 @@
           width: 29rem;
           margin: 0 auto 2rem auto;
           background-color: rgba(255, 0, 0, 0.185);
-          animation: slidedown .5s;
+          animation: slidedown 0.5s;
           border-radius: 5px;
 
           display: flex;
@@ -120,8 +119,8 @@
             top: 1rem;
           }
         }
-      
-        label {
+
+        .inputField {
           margin-bottom: 3rem;
           width: 70%;
           position: relative;
@@ -129,7 +128,7 @@
           @include respond(phone-large) {
             width: 85%;
           }
-      
+
           input {
             height: 3.5rem;
             width: 100%;
@@ -141,7 +140,7 @@
             padding: 0 15px;
             color: #707070;
             font-size: 1.4rem;
-            letter-spacing: .3px;
+            letter-spacing: 0.3px;
 
             @include respond(tab) {
               margin-top: 5vh;
@@ -166,25 +165,25 @@
               top: 51%;
             }
           }
-      
+
           &::placeholder {
             font-family: inherit;
             font-size: 1.4rem;
             color: #707070;
           }
         }
-      
+
         button {
-          font-family: 'Lato', sans-serif;
+          font-family: "Lato", sans-serif;
           margin-top: 3rem;
           width: 70%;
           height: 5rem;
           color: #fff;
           border: 0;
-          border-radius: .5rem;
-          background: transparent 
-            linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
-            0% 0% no-repeat padding-box;
+          border-radius: 0.5rem;
+          background: transparent
+            linear-gradient(90deg, #11998e 0%, #38ef7d 100%) 0% 0% no-repeat
+            padding-box;
           font-size: 1.45rem;
           box-shadow: 5px 5px 8px #00000029;
           letter-spacing: 1px;
@@ -210,11 +209,11 @@
           div {
             margin: 0 auto;
           }
-      
+
           &:focus {
             outline: 0;
           }
-      
+
           &:active {
             outline: 0;
             transform: translateY(2%);

@@ -1,18 +1,22 @@
-import React, {useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import ListLoader from "../../partials/ListLoader";
-import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 
 import formatToCurrency from "../../../util/formatToCurrency";
 import ExportToExcel from "../../shared/ExportToExcel";
-import styles from './TransactionLog.module.scss';
+import styles from "./TransactionLog.module.scss";
 import { setCurrentPage } from "../../../actions/page";
 import { setTransactionLog } from "../../../actions/transaction";
 import { AGENT_TRANSACTION_HISTORY } from "../../../store/api/constants";
 
-export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) => {
+export const TransactionLog = ({
+  changeCurrentPage,
+  setTransactionsLog,
+  uuid,
+}) => {
   const [transactions, setTransactions] = useState([]);
   const [walletInfo, setWalletInfo] = useState(null);
   const [businessName, setBusinessName] = useState("");
@@ -31,7 +35,7 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
   useEffect(() => {
     const now = new Date();
     const nowString = now.toString();
-  }, [])
+  }, []);
 
   useEffect(() => {
     setPageChangeLoading(true);
@@ -43,7 +47,7 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
     if (to) params.to = to;
     if (currentPage) params.page = currentPage;
 
-    (async function getTransactionsLog () {
+    (async function getTransactionsLog() {
       const res = await axios.get(`${AGENT_TRANSACTION_HISTORY}`, { params });
 
       const transactions = res.data.data.data;
@@ -55,10 +59,10 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
       if (total !== null && total > 0) {
         for (let i = 1; i <= Math.ceil(total / perPage); i++) {
           pageNumbers.push(i);
-        };
+        }
         setPageNumbers(pageNumbers);
         setLoading(false);
-        setLastPage(lastPage)
+        setLastPage(lastPage);
         // setBusinessName(businessName);
         setTransactions(transactions);
         setPageChangeLoading(false);
@@ -74,10 +78,9 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
   useEffect(() => {
     changeCurrentPage({
       heading: "Transaction Log",
-      search: true
-    });    
+      search: true,
+    });
   }, [changeCurrentPage]);
-
 
   const handleFilterChange = (e) => {
     const value = e.target.value;
@@ -90,9 +93,9 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
     setTransactionTypeFilter(filter);
   };
 
-  const setDateFiltes= (date) => {
+  const setDateFiltes = (date) => {
     let from = date[0];
-    let to = date[1];;
+    let to = date[1];
 
     const fromMonth = from.getMonth();
     const toMonth = to.getMonth();
@@ -108,50 +111,66 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
     setTo(formattedTo);
   };
 
-  const labels = [{ name: "Date created", value: "date" }, { name: "Status", value: "status" }, 
-  { name: "Previous Balance", value: "previous balance" },
-  { name: "Current Balance", value: "current balance" }, { name: "Amount", value: "amount" }, 
-  { name: "Customer", value: "customer" },
-  { name: "Reference", value: "reference" }, { name: "Type", value: "type" }];
+  const labels = [
+    { name: "Date created", value: "date" },
+    { name: "Status", value: "status" },
+    { name: "Previous Balance", value: "previous balance" },
+    { name: "Current Balance", value: "current balance" },
+    { name: "Amount", value: "amount" },
+    { name: "Customer", value: "customer" },
+    { name: "Reference", value: "reference" },
+    { name: "Type", value: "type" },
+  ];
 
   return (
     <div className={styles.container}>
-    {!loading && transactions.length > 0 ?
-      <div className={styles.filters}>
-        <div className={styles.filtersContainer}>
-          <div className={styles.export}>
-            <ExportToExcel dataset={transactions} labels={labels} filename="Transactions Log" />
-          </div>
-          <div className={styles.dateFilterContainer}>
-            <div className={styles.dateFilter}>
-              <DateRangePicker
-                onChange={date => {
-                  setDate(date);
-                  setDateFiltes(date);
-                }}
-                value={date}
+      {!loading && transactions.length > 0 ? (
+        <div className={styles.filters}>
+          <div className={styles.filtersContainer}>
+            <div className={styles.export}>
+              <ExportToExcel
+                dataset={transactions}
+                labels={labels}
+                filename="Transactions Log"
               />
             </div>
-          </div>
-          <div>
-            <select className={styles.filterDropDown} onChange={handleFilterChange}>
-              <option value="">Filter by Transaction Type</option>
-              <option value="">All transactions</option>
-              <option value="1">Energy</option>
-              <option value="2">Cashout</option>
-              <option value="3">Deposit</option>
-              <option value="4">Airtime</option>
-              <option value="5">DSTV</option>
-              <option value="6">GOTV</option>
-              <option value="7">Transfer</option>
-              <option value="8">Data</option>
-            </select>          
+            <div className={styles.dateFilterContainer}>
+              <div className={styles.dateFilter}>
+                <DateRangePicker
+                  onChange={(date) => {
+                    setDate(date);
+                    setDateFiltes(date);
+                  }}
+                  value={date}
+                />
+              </div>
+            </div>
+            <div>
+              <select
+                className={styles.filterDropDown}
+                onChange={handleFilterChange}
+              >
+                <option value="">Filter by Transaction Type</option>
+                <option value="">All transactions</option>
+                <option value="1">Energy</option>
+                <option value="2">Cashout</option>
+                <option value="3">Deposit</option>
+                <option value="4">Airtime</option>
+                <option value="5">DSTV</option>
+                <option value="6">GOTV</option>
+                <option value="7">Transfer</option>
+                <option value="8">Data</option>
+              </select>
+            </div>
           </div>
         </div>
-      </div> :
-      undefined}
-      {loading || pageChangeLoading ? <div className={styles.loaderContainer}><ListLoader /></div> : undefined}
-      {!loading && transactions.length > 0 ? 
+      ) : undefined}
+      {loading || pageChangeLoading ? (
+        <div className={styles.loaderContainer}>
+          <ListLoader />
+        </div>
+      ) : undefined}
+      {!loading && transactions.length > 0 ? (
         <div className={styles.heading}>
           <span className={styles.status}>Status</span>
           <span className={styles.date}>Date Created</span>
@@ -163,82 +182,174 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
           <span className={styles.ref}>Reference</span>
           {/* <span className={styles.itemSix}>Agent</span> */}
           <span className={styles.details}>Details</span>
-        </div> : undefined
-      }
-      {!loading || !pageChangeLoading ? transactions.map((transaction, index) => ( 
-        <div key={transaction.id} className={styles.log}>
-          <div className={`${styles.logItem} ${styles.status}`}>
-            {/* <span className={`${styles.headingMobile} ${styles.statusHeadingMobile}`}>Status:</span> */}
-            <span className={styles.statusColor}>
-              <span className={`${transaction.status === "failed" ? styles.failed 
-            : transaction.status === "pending" ? styles.pending : styles.success}`}></span>
-            </span>
-            <span className={styles.statusDate}>{transaction.created_at}</span>
-            <span className={styles.statusAmount}>{formatToCurrency(transaction.amount)}</span>
-            <span className={styles.statusType}>{transaction.transtype.name}</span>
-            <span className={styles.statusPrev}>{formatToCurrency(transaction.wallet_history.previous_bal)}</span>
-            <span className={styles.statusCurrent}>{formatToCurrency(transaction.wallet_history.current_bal)}</span>
-            <span className={styles.statusCustomer}>{transaction.customer_info}</span>
-            <span className={styles.statusRef}>{transaction.reference}</span>
-            <Link to={`/transaction-details/${transaction.reference}`}>View Details</Link>
-            <span className={styles.statusAccordionToggle} onClick={(e) => {
-              setAccordionToggle(accordionToggle === index + 1 ? false : index + 1);
-            }}>{accordionToggle === index + 1 ? <span>-</span> : <span>+</span>}</span>
-          </div> 
-          {accordionToggle === index + 1 ? 
-          <>
-          <div className={`${styles.logItem} ${styles.date}`}>
-            <span className={`${styles.headingMobile} ${styles.dateHeadingMobile}`}>Date:</span> 
-            <span>{transaction.created_at}</span>
-          </div>
-          <div className={`${styles.logItem} ${styles.prev}`}>
-            <span className={`${styles.headingMobile} ${styles.prevHeadingMobile}`}>Previous Balance:</span> 
-            <span className={styles.prevContent}>{transaction.wallet_history.previous_bal}</span>
-          </div>
-          <div className={`${styles.logItem} ${styles.current}`}>
-            <span className={`${styles.headingMobile} ${styles.currentHeadingMobile}`}>Current Balance:</span> 
-            <span className={styles.currentContent}>{transaction.wallet_history.current_bal}</span>
-          </div>          
-          <div className={`${styles.logItem} ${styles.amount}`}>
-            <span className={`${styles.headingMobile} ${styles.amountHeadingMobile}`}>Amount:</span> 
-            <span className={styles.amountContent}>{formatToCurrency(transaction.amount)}</span>
-          </div>
-          <div className={`${styles.logItem} ${styles.customer}`}>
-            <span className={`${styles.headingMobile} ${styles.customerHeadingMobile}`}>Customer:</span> 
-            <span className={styles.customerContent}>{transaction.customer_info}</span>
-          </div>
-          <div className={`${styles.logItem} ${styles.ref}`}>
-            <span className={`${styles.headingMobile} ${styles.refHeadingMobile}`}>Ref:</span> 
-            <span className={styles.dateContent}>{transaction.reference}</span>
-          </div>
-          <div className={`${styles.logItem} ${styles.type}`}>
-            <span className={`${styles.headingMobile} ${styles.typeHeadingMobile}`}>Type:</span> 
-            <span className={styles.typeContent}>{transaction.transtype.name}</span>
-          </div>
-          {/* <span className={styles.itemSix}>{transaction.agent.business_name}</span> */}
-          <div className={`${styles.logItem} ${styles.details}`}>
-            <span className={`${styles.headingMobile} ${styles.detailsHeadingMobile}`}>Details:</span> 
-            <Link to={`/transaction-details/${transaction.reference}`}>View Details</Link>
-          </div>
-          </> : undefined }
         </div>
-        )
       ) : undefined}
-      {!loading && transactions.length ? 
+      {!loading || !pageChangeLoading
+        ? transactions.map((transaction, index) => (
+            <div key={transaction.id} className={styles.log}>
+              <div className={`${styles.logItem} ${styles.status}`}>
+                {/* <span className={`${styles.headingMobile} ${styles.statusHeadingMobile}`}>Status:</span> */}
+                <span className={styles.statusColor}>
+                  <span
+                    className={`${
+                      transaction.status === "failed"
+                        ? styles.failed
+                        : transaction.status === "pending"
+                        ? styles.pending
+                        : styles.success
+                    }`}
+                  ></span>
+                </span>
+                <span className={styles.statusDate}>
+                  {transaction.created_at}
+                </span>
+                <span className={styles.statusAmount}>
+                  {formatToCurrency(transaction.amount)}
+                </span>
+                <span className={styles.statusType}>
+                  {transaction.transtype.name}
+                </span>
+                <span className={styles.statusPrev}>
+                  {formatToCurrency(transaction.wallet_history.previous_bal)}
+                </span>
+                <span className={styles.statusCurrent}>
+                  {formatToCurrency(transaction.wallet_history.current_bal)}
+                </span>
+                <span className={styles.statusCustomer}>
+                  {transaction.customer_info}
+                </span>
+                <span className={styles.statusRef}>
+                  {transaction.reference}
+                </span>
+                <Link to={`/transaction-details/${transaction.reference}`}>
+                  View Details
+                </Link>
+                <span
+                  className={styles.statusAccordionToggle}
+                  onClick={(e) => {
+                    setAccordionToggle(
+                      accordionToggle === index + 1 ? false : index + 1
+                    );
+                  }}
+                >
+                  {accordionToggle === index + 1 ? (
+                    <span>-</span>
+                  ) : (
+                    <span>+</span>
+                  )}
+                </span>
+              </div>
+              {accordionToggle === index + 1 ? (
+                <>
+                  <div className={`${styles.logItem} ${styles.date}`}>
+                    <span
+                      className={`${styles.headingMobile} ${styles.dateHeadingMobile}`}
+                    >
+                      Date:
+                    </span>
+                    <span>{transaction.created_at}</span>
+                  </div>
+                  <div className={`${styles.logItem} ${styles.prev}`}>
+                    <span
+                      className={`${styles.headingMobile} ${styles.prevHeadingMobile}`}
+                    >
+                      Previous Balance:
+                    </span>
+                    <span className={styles.prevContent}>
+                      {transaction.wallet_history.previous_bal}
+                    </span>
+                  </div>
+                  <div className={`${styles.logItem} ${styles.current}`}>
+                    <span
+                      className={`${styles.headingMobile} ${styles.currentHeadingMobile}`}
+                    >
+                      Current Balance:
+                    </span>
+                    <span className={styles.currentContent}>
+                      {transaction.wallet_history.current_bal}
+                    </span>
+                  </div>
+                  <div className={`${styles.logItem} ${styles.amount}`}>
+                    <span
+                      className={`${styles.headingMobile} ${styles.amountHeadingMobile}`}
+                    >
+                      Amount:
+                    </span>
+                    <span className={styles.amountContent}>
+                      {formatToCurrency(transaction.amount)}
+                    </span>
+                  </div>
+                  <div className={`${styles.logItem} ${styles.customer}`}>
+                    <span
+                      className={`${styles.headingMobile} ${styles.customerHeadingMobile}`}
+                    >
+                      Customer:
+                    </span>
+                    <span className={styles.customerContent}>
+                      {transaction.customer_info}
+                    </span>
+                  </div>
+                  <div className={`${styles.logItem} ${styles.ref}`}>
+                    <span
+                      className={`${styles.headingMobile} ${styles.refHeadingMobile}`}
+                    >
+                      Ref:
+                    </span>
+                    <span className={styles.dateContent}>
+                      {transaction.reference}
+                    </span>
+                  </div>
+                  <div className={`${styles.logItem} ${styles.type}`}>
+                    <span
+                      className={`${styles.headingMobile} ${styles.typeHeadingMobile}`}
+                    >
+                      Type:
+                    </span>
+                    <span className={styles.typeContent}>
+                      {transaction.transtype.name}
+                    </span>
+                  </div>
+                  {/* <span className={styles.itemSix}>{transaction.agent.business_name}</span> */}
+                  <div className={`${styles.logItem} ${styles.details}`}>
+                    <span
+                      className={`${styles.headingMobile} ${styles.detailsHeadingMobile}`}
+                    >
+                      Details:
+                    </span>
+                    <Link to={`/transaction-details/${transaction.reference}`}>
+                      View Details
+                    </Link>
+                  </div>
+                </>
+              ) : undefined}
+            </div>
+          ))
+        : undefined}
+      {!loading && transactions.length ? (
         <div className={styles.pagination}>
-          <span onClick={() => {
+          <span
+            onClick={() => {
               setPageChangeLoading(true);
               setCurrentPage(1);
-            }} 
-            className={currentPage === 1 ? styles.active : styles.normal}>First Page</span>
-          <span onClick={() => {
+            }}
+            className={currentPage === 1 ? styles.active : styles.normal}
+          >
+            First Page
+          </span>
+          <span
+            onClick={() => {
               if (currentPage < lastPage) {
                 setCurrentPage(currentPage + 1);
               }
-            }} 
-          disabled={currentPage === lastPage}>Next Page</span>
-          <span className={`${styles.currentPage} ${styles.active}`} disabled>{currentPage}</span>
-         {/* {
+            }}
+            disabled={currentPage === lastPage}
+          >
+            Next Page
+          </span>
+          <span className={`${styles.currentPage} ${styles.active}`} disabled>
+            {currentPage}
+          </span>
+          {/* {
           pageNumbers.map((page, index) => {
             if (page === 1) {
               return <span key={`${index}--key`}onClick={() => {
@@ -249,35 +360,45 @@ export const TransactionLog = ({ changeCurrentPage, setTransactionsLog, uuid }) 
             }
           })
         }  */}
-          <span onClick={() => {
-            if (currentPage > firstPage) {
-              setCurrentPage(currentPage - 1);
-              setPageChangeLoading(true);
-            }
-          }}>Prev Page</span>
-          <span onClick={() => {
-            if (currentPage < lastPage) {
-              setCurrentPage(lastPage);
-              setPageChangeLoading(true);
-            }
-         }} 
-        className={currentPage === lastPage ? styles.active : styles.normal}
-        disabled={currentPage === lastPage}>Last Page</span>
-        </div> : undefined}
-  </div>
-)};
+          <span
+            onClick={() => {
+              if (currentPage > firstPage) {
+                setCurrentPage(currentPage - 1);
+                setPageChangeLoading(true);
+              }
+            }}
+          >
+            Prev Page
+          </span>
+          <span
+            onClick={() => {
+              if (currentPage < lastPage) {
+                setCurrentPage(lastPage);
+                setPageChangeLoading(true);
+              }
+            }}
+            className={currentPage === lastPage ? styles.active : styles.normal}
+            disabled={currentPage === lastPage}
+          >
+            Last Page
+          </span>
+        </div>
+      ) : undefined}
+    </div>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload)),
-    setTransactionsLog: payload => dispatch(setTransactionLog(payload))
-  }
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+    setTransactionsLog: (payload) => dispatch(setTransactionLog(payload)),
+  };
 };
 
-const mapStateToProps = state => {
+const mapStateToProps = (state) => {
   return {
-    uuid: state.auth.user.agent.uuid
-  }
+    uuid: state.auth.user.agent.uuid,
+  };
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionLog);

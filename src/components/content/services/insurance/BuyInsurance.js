@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import style from './BuyInsurance.module.scss';
+import style from "./BuyInsurance.module.scss";
 import InsuranceType from "./InsuranceType";
 import UploadPhoto from "./UploadPhoto";
 import InsurancePurchaseForm from "./InsurancePurchaseForm";
@@ -11,7 +11,7 @@ import { setCurrentPage } from "../../../../actions/page";
 export const BuyInsurance = ({ changeCurrentPage }) => {
   changeCurrentPage({
     heading: "Buy Insurance",
-    search: false
+    search: false,
   });
 
   const [page, setPage] = useState("");
@@ -34,8 +34,8 @@ export const BuyInsurance = ({ changeCurrentPage }) => {
       type,
       file,
       month,
-      year
-    })
+      year,
+    });
   };
 
   const handleSetFile = (file) => {
@@ -79,38 +79,43 @@ export const BuyInsurance = ({ changeCurrentPage }) => {
 
   return (
     <div className={style.container}>
-      { page === "upload" ? <UploadPhoto 
-        handleSetFile={handleSetFile}
-        handleSetPage={handleSetPage}
-      /> 
-      : page === "form" ? <InsurancePurchaseForm 
-        handleAmountChange={handleAmountChange}
-        handleMonthChange={handleMonthChange}
-        handleYearChange={handleYearChange}
-        handleNameChange={handleNameChange}
-        handlePhoneNumberChange={handlePhoneNumberChange}
-        handlePlanChange={handlePlanChange}
-        handleSetPage={handleSetPage}
-      />
-      // : page === "summary" ? <PaymentSummary 
-      //   phoneNumber={phoneNumber}
-      //   amount={amount}
-      //   total={total}
-      //   handleOnSubmit={handleOnSubmit}
-      //   handleSetPage={handleSetPage}
-      // />
-      // : page === "success" ? <SuccessfulTransaction />
-      : <InsuranceType 
-        handleSetType={handleSetType}
-        handleSetPage={handleSetPage}
-      /> }   
+      {page === "upload" ? (
+        <UploadPhoto
+          handleSetFile={handleSetFile}
+          handleSetPage={handleSetPage}
+        />
+      ) : page === "form" ? (
+        <InsurancePurchaseForm
+          handleAmountChange={handleAmountChange}
+          handleMonthChange={handleMonthChange}
+          handleYearChange={handleYearChange}
+          handleNameChange={handleNameChange}
+          handlePhoneNumberChange={handlePhoneNumberChange}
+          handlePlanChange={handlePlanChange}
+          handleSetPage={handleSetPage}
+        />
+      ) : (
+        // : page === "summary" ? <PaymentSummary
+        //   phoneNumber={phoneNumber}
+        //   amount={amount}
+        //   total={total}
+        //   handleOnSubmit={handleOnSubmit}
+        //   handleSetPage={handleSetPage}
+        // />
+        // : page === "success" ? <SuccessfulTransaction />
+        <InsuranceType
+          handleSetType={handleSetType}
+          handleSetPage={handleSetPage}
+        />
+      )}
     </div>
-)}
+  );
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
-  }
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+  };
 };
 
 export default connect(undefined, mapDispatchToProps)(BuyInsurance);

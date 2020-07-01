@@ -25,104 +25,104 @@
   }
 
   > label {
-      flex: 0 0 8.6rem;
-      margin: 2px auto;
-  
-      span {
-        display: block;
-        padding: 0 1rem;
-        background-color: #fff;
-        font-size: 1.35rem;
-        color: #9e9d9d;
-        line-height: 2.4rem;
-        position: relative;
-        left: 3rem;
-        top: 1rem;
-        width: max-content;
-      }
-  
-      input, select {
-        width: 36.5rem;
-        height: 3.7rem;
-        border-radius: 5px;
-        border: 1px solid #afafaf;
-        color: #707070;
-        font-family: inherit;
-        padding: 0 6px;
-      }
+    flex: 0 0 8.6rem;
+    margin: 2px auto;
 
-      select:hover ~ div {
-        visibility: visible;
-      }
+    span {
+      display: block;
+      padding: 0 1rem;
+      background-color: #fff;
+      font-size: 1.35rem;
+      color: #9e9d9d;
+      line-height: 2.4rem;
+      position: relative;
+      left: 3rem;
+      top: 1rem;
+      width: max-content;
+    }
 
-      option {
-        color: #707070;
-      }
+    input,
+    select {
+      width: 36.5rem;
+      height: 3.7rem;
+      border-radius: 5px;
+      border: 1px solid #afafaf;
+      color: #707070;
+      font-family: inherit;
+      padding: 0 6px;
+    }
 
-      input:disabled {
-        background-color: #fff;
-      }
+    select:hover ~ div {
+      visibility: visible;
+    }
 
-      .transparent {
-        color: #70707069;
-      }
+    option {
+      color: #707070;
+    }
 
-      .opaque {
-        color: #707070;
-      }
+    input:disabled {
+      background-color: #fff;
+    }
 
-      div {
-        width: 36.5rem;
-        box-shadow: 0px 3px 6px #00000029;
-        visibility: hidden;
-        z-index: 34;
-        position: fixed;
-        background-color: #fff;
+    .transparent {
+      color: #70707069;
+    }
 
-        p {
-          display: flex;
-          justify-content: space-between;
-          text-align: left;
-          padding-left: 1rem;
+    .opaque {
+      color: #707070;
+    }
 
+    div {
+      width: 36.5rem;
+      box-shadow: 0px 3px 6px #00000029;
+      visibility: hidden;
+      z-index: 34;
+      position: fixed;
+      background-color: #fff;
 
-          > span {
-            display: inline-block;
-            padding: .5rem;
-            flex: 0 0 30%;
-            line-height: 2.4rem;
-            position: initial;
-          }
+      p {
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+        padding-left: 1rem;
 
-          .spanTwo {
-            flex: 0 0 25%;
-          }
-
-          .spanThree {
-            flex: 0 0 40%;
-          }
+        > span {
+          display: inline-block;
+          padding: 0.5rem;
+          flex: 0 0 30%;
+          line-height: 2.4rem;
+          position: initial;
         }
 
-        p:hover {
-          transform: scale(1.02);
+        .spanTwo {
+          flex: 0 0 25%;
         }
-        
-        p:nth-of-type(2) {
-          border: 1px solid #70707049;
-          border-left: 0;
-          border-right: 0;
+
+        .spanThree {
+          flex: 0 0 40%;
         }
       }
 
-      .validationErrorText {
-        font-size: 1.25rem;
-        padding-top: 4px;
-        color: rgba(255, 0, 0, 0.719);
+      p:hover {
+        transform: scale(1.02);
+      }
+
+      p:nth-of-type(2) {
+        border: 1px solid #70707049;
+        border-left: 0;
+        border-right: 0;
       }
     }
 
+    .validationErrorText {
+      font-size: 1.25rem;
+      padding-top: 4px;
+      color: rgba(255, 0, 0, 0.719);
+    }
+  }
+
   button {
-    font-family: 'Lato', sans-serif;
+    font-family: "Lato", sans-serif;
     width: 36.5rem;
     margin: 0 auto;
     margin-top: 2rem;
@@ -133,9 +133,8 @@
     border-radius: 1rem;
     color: #fff;
     box-shadow: 3px 3px 6px #00000029;
-    background: transparent 
-    linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
-    0% 0% no-repeat padding-box;
+    background: transparent linear-gradient(90deg, #11998e 0%, #38ef7d 100%) 0%
+      0% no-repeat padding-box;
 
     &:active {
       transform: translateY(3%);

@@ -12,85 +12,107 @@ import megaphone from "../../assets/images/announcement-svgrepo-com.svg";
 import styles from "./Header.module.scss";
 
 const Header = ({ currentPage, isDefaultPassword }) => {
-  const [notifications, setNotifications] = useState([{
-    title: "Great news! Dear Agent, you can now make electricity payments with CICO! From your home page click on BILL PAYMENT, next click PAY ELECTRICITY to use this exciting new feature."
-  },{
-    title: "Dear Agent, please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly."
-  }]);
+  const [notifications, setNotifications] = useState([
+    {
+      title:
+        "Great news! Dear Agent, you can now make electricity payments with CICO! From your home page click on BILL PAYMENT, next click PAY ELECTRICITY to use this exciting new feature.",
+    },
+    {
+      title:
+        "Dear Agent, please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly.",
+    },
+  ]);
   const [toggleNotifications, setToggleNotifications] = useState(true);
   const [toggleProfile, setToggleProfile] = useState(false);
   useEffect(() => {
-    if (currentPage.heading !== "Dashboard" && currentPage.heading !== undefined) {
+    if (
+      currentPage.heading !== "Dashboard" &&
+      currentPage.heading !== undefined
+    ) {
       setToggleNotifications(false);
     }
   }, [currentPage]);
 
   useEffect(() => {
     if (isDefaultPassword === 1) {
-      setNotifications([...notifications, {
-        title: "Dear Agent, please create a secure password to proceed."
-      }])
+      setNotifications([
+        ...notifications,
+        {
+          title: "Dear Agent, please create a secure password to proceed.",
+        },
+      ]);
     }
-  }, [])
+  }, []);
 
   useEffect(() => {
     setTimeout(() => {
       setToggleNotifications(false);
     }, 30000);
-  }, [])
+  }, []);
 
   const handleToggleNotifications = () => {
-    setToggleNotifications(!toggleNotifications)
+    setToggleNotifications(!toggleNotifications);
   };
-  
+
   return (
     <>
       <div className={styles.container}>
         <div className={styles.logoBox}>
-          <img src={logo} className={styles.logo} alt="Cico payments logo" />      
+          <img src={logo} className={styles.logo} alt="Cico payments logo" />
         </div>
         <div className={styles.actions}>
-          <span className={styles.notification} onClick={handleToggleNotifications}>
+          <span
+            className={styles.notification}
+            onClick={handleToggleNotifications}
+          >
             <img src={notification} alt="notification bell" />
             <span className={styles.active}>{notifications.length}</span>
-            {toggleNotifications ? 
-            <div className={styles.notificationPanel}>
-              <p className={styles.heading}>Notifications</p>
-              <div>
-                <img src={megaphone} alt="announcement icon" />
-                <p>{notifications[0].title}</p>
+            {toggleNotifications ? (
+              <div className={styles.notificationPanel}>
+                <p className={styles.heading}>Notifications</p>
+                <div>
+                  <img src={megaphone} alt="announcement icon" />
+                  <p>{notifications[0].title}</p>
+                </div>
+                <div>
+                  <img src={chat} alt="chat icon" />
+                  <p>{notifications[1].title}</p>
+                </div>
+                {notifications[2] ? (
+                  <div>
+                    <img src={caution} alt="caution icon" />
+                    <p>{notifications[1].title}</p>
+                  </div>
+                ) : undefined}
               </div>
-              <div>
-                <img src={chat} alt="chat icon" />
-                <p>{notifications[1].title}</p>
-              </div>
-              {notifications[2] ? <div>
-                <img src={caution} alt="caution icon" />
-                <p>{notifications[1].title}</p>
-              </div> : undefined}
-            </div> : undefined}
+            ) : undefined}
           </span>
           <span className={styles.profile}>
-            <img src={user} onClick={() => {
-              setToggleProfile(!toggleProfile)
-            }} alt="User silhoutte"/>
-            {toggleProfile ? 
-            <span className={styles.submenu}>
-              <Link to="/profile">Edit Profile</Link>
-              <Link to="/profile">Change Password</Link>
-            </span> : undefined}
-          </span>        
+            <img
+              src={user}
+              onClick={() => {
+                setToggleProfile(!toggleProfile);
+              }}
+              alt="User silhoutte"
+            />
+            {toggleProfile ? (
+              <span className={styles.submenu}>
+                <Link to="/profile">Edit Profile</Link>
+                <Link to="/profile">Change Password</Link>
+              </span>
+            ) : undefined}
+          </span>
         </div>
-
       </div>
       <StatusBar />
       {/* <NotificationsPanel /> */}
     </>
-)};
+  );
+};
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   currentPage: state.page,
-  isDefaultPassword: state.auth.user.is_default
+  isDefaultPassword: state.auth.user.is_default,
 });
 
 export default connect(mapStateToProps)(Header);

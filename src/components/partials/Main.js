@@ -29,15 +29,16 @@ export const Main = (props) => {
                 component={route.main}
                 isDefaultPassword={props.isDefaultPassword}
               />
-          )})}
-        </Switch>         
+            );
+          })}
+        </Switch>
       </section>
-    </main>    
-  )
-}
+    </main>
+  );
+};
 
-const mapStateToProps = state => ({
-  isDefaultPassword: state.auth.user.is_default
+const mapStateToProps = (state) => ({
+  isDefaultPassword: state.auth.user.is_default,
 });
 
 export default connect(mapStateToProps)(Main);

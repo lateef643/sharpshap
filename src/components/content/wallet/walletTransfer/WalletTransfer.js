@@ -42,70 +42,73 @@ export const WalletTransfer = () => {
 
     const Data = {
       agent_id: agentId,
-      amount: amount
+      amount: amount,
     };
 
-    axios.post(WALLET_TRANSFER, Data)
-      .then(res => {
+    axios
+      .post(WALLET_TRANSFER, Data)
+      .then((res) => {
         const successData = res.data.data;
         const date = new Date();
         const transactionDate = getTransactionDate(date);
-       
-        setSuccessData({...successData, date: transactionDate });
-        setLoading(false); 
-        setComponentToRender("success");     
+
+        setSuccessData({ ...successData, date: transactionDate });
+        setLoading(false);
+        setComponentToRender("success");
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         setLoading(false);
         setComponentToRender("failed");
-      })
+      });
   };
 
-  switch(componentToRender) {
+  switch (componentToRender) {
     case "form":
-      renderedComponent = <WalletTransferForm 
-        handleOnAgentIdChange={handleOnAgentIdChange}
-        handleOnAmountChange={handleOnAmountChange}
-        agentId={agentId}
-        agentName={agentName}
-        amount={amount}
-        setComponentToRender={setComponentToRender}
-      />;
+      renderedComponent = (
+        <WalletTransferForm
+          handleOnAgentIdChange={handleOnAgentIdChange}
+          handleOnAmountChange={handleOnAmountChange}
+          agentId={agentId}
+          agentName={agentName}
+          amount={amount}
+          setComponentToRender={setComponentToRender}
+        />
+      );
       break;
     case "summary":
-      renderedComponent = <WalletTransferSummary
-        agentId={agentId}
-        agentName={agentName}
-        amount={amount}
-        transactionCost={TRANSACTION_COST} 
-        total={total}
-        handleOnSubmit={handleOnSubmit}
-        loading={loading} 
-      />;
+      renderedComponent = (
+        <WalletTransferSummary
+          agentId={agentId}
+          agentName={agentName}
+          amount={amount}
+          transactionCost={TRANSACTION_COST}
+          total={total}
+          handleOnSubmit={handleOnSubmit}
+          loading={loading}
+        />
+      );
       break;
     case "success":
-      renderedComponent = <WalletTransferStatus        
-        successData={successData} 
-        setComponentToRender={setComponentToRender}
-        transactionCost={TRANSACTION_COST}
-        total={total}
-        agentId={agentId}
-      />;
+      renderedComponent = (
+        <WalletTransferStatus
+          successData={successData}
+          setComponentToRender={setComponentToRender}
+          transactionCost={TRANSACTION_COST}
+          total={total}
+          agentId={agentId}
+        />
+      );
       break;
     case "failed":
       renderedComponent = <FailedTransaction />;
       break;
     default:
-      renderedComponent = null; 
+      renderedComponent = null;
       break;
-  };
+  }
 
-  return (
-    <div className={styles.container}>
-      {renderedComponent}
-    </div>
-  )
-}
+  return <div className={styles.container}>{renderedComponent}</div>;
+};
 
 export default WalletTransfer;

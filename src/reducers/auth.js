@@ -1,6 +1,6 @@
 let initialState;
 
-const loginDetails = JSON.parse(sessionStorage.getItem('user'));
+const loginDetails = JSON.parse(sessionStorage.getItem("user"));
 
 if (loginDetails) {
   initialState = loginDetails;
@@ -9,9 +9,9 @@ if (loginDetails) {
     isAuthenticated: false,
     user: {},
     walletBalance: 0,
-    transactionSettings: {}
-  }
-};
+    transactionSettings: {},
+  };
+}
 
 const auth = (state = initialState, action) => {
   switch (action.type) {

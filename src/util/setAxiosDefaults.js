@@ -5,4 +5,3 @@ const setAxiosDefaults = () => {
 };
 
 export default setAxiosDefaults;
-

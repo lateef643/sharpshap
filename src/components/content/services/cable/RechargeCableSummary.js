@@ -4,18 +4,27 @@ import PropTypes from "prop-types";
 import formatToCurrency from "../../../../util/formatToCurrency";
 import Loader from "../../../partials/Loader";
 
-import style from './RechargeCableSummary.module.scss';
+import style from "./RechargeCableSummary.module.scss";
 
 export const RechargeCableSummary = (props) => {
-  const { RechargeCableFormState: state, loading, handleOnSubmit, transactionCost } = props;
+  const {
+    RechargeCableFormState: state,
+    loading,
+    handleOnSubmit,
+    transactionCost,
+  } = props;
 
   return (
-    <div className={style.paymentContainer} >
+    <div className={style.paymentContainer}>
       <div className={style.heading}>
         <h2 className={style.headingText}>Transaction Summary</h2>
       </div>
       <div>
-        {loading ? <p className={style.pending}>Please wait while your transaction is processing...</p> : undefined}
+        {loading ? (
+          <p className={style.pending}>
+            Please wait while your transaction is processing...
+          </p>
+        ) : undefined}
       </div>
       <div>
         <span>Service:</span>
@@ -32,35 +41,47 @@ export const RechargeCableSummary = (props) => {
       <div>
         <span>Smart card:</span>
         <span>{state.smartCardNumber}</span>
-      </div> 
+      </div>
       <div>
         <span>Plan Duration:</span>
-        <span>{state.selectedPlanDuration} {state.selectedPlanDuration === "1" ? "month" : "months"}</span>
+        <span>
+          {state.selectedPlanDuration}{" "}
+          {state.selectedPlanDuration === "1" ? "month" : "months"}
+        </span>
       </div>
       <div>
         <span>Amount:</span>
         <span>{formatToCurrency(state.amount)}</span>
-      </div> 
+      </div>
       <div>
         <span>Transaction cost:</span>
         <span>{formatToCurrency(transactionCost)}</span>
-      </div>     
-      <div className={style.total}>    
+      </div>
+      <div className={style.total}>
         <span>Total:</span>
-        <span>{formatToCurrency(state.amount)}</span> 
-      </div> 
-      <button onClick={(e) => {
-        e.preventDefault();
-        handleOnSubmit();
-      }}>{loading ? <Loader size="small" color="white" position="center" /> : "Continue"}</button>       
-    </div>    
-)};
+        <span>{formatToCurrency(state.amount)}</span>
+      </div>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          handleOnSubmit();
+        }}
+      >
+        {loading ? (
+          <Loader size="small" color="white" position="center" />
+        ) : (
+          "Continue"
+        )}
+      </button>
+    </div>
+  );
+};
 
 RechargeCableSummary.propTypes = {
   RechargeCableFormState: PropTypes.object,
   loading: PropTypes.bool,
   handleOnSubmit: PropTypes.func,
-  transactionCost: PropTypes.number
-}
+  transactionCost: PropTypes.number,
+};
 
 export default RechargeCableSummary;

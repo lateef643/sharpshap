@@ -7,7 +7,7 @@ import BuyDataStatus from "./BuyDataStatus";
 import FailedTransaction from "../../../shared/FailedTransaction";
 import { setCurrentPage } from "../../../../actions/page";
 import { VEND_DATA } from "../../../../store/api/constants";
-import style from './BuyData.module.scss';
+import style from "./BuyData.module.scss";
 
 const BuyData = ({ changeCurrentPage }) => {
   let renderedComponent;
@@ -28,7 +28,7 @@ const BuyData = ({ changeCurrentPage }) => {
   useEffect(() => {
     changeCurrentPage({
       heading: "Buy Data",
-      search: false
+      search: false,
     });
   }, [changeCurrentPage]);
 
@@ -38,38 +38,39 @@ const BuyData = ({ changeCurrentPage }) => {
     const payload = {
       telco,
       amount,
-      phone
+      phone,
     };
 
     if (telco && amount && phone) {
-      axios.post(VEND_DATA, payload)
-      .then(res => {
-        const successData = res.data.data;
-        setSuccessData(successData);
-        setComponentToRender("status");    
-      })
-      .catch(err => {
-        if (err.response && err.response.status === 403) {
-          setLoading(false);
-          setComponentToRender("status");    
-        } else {
-          setTimeout(() => {
+      axios
+        .post(VEND_DATA, payload)
+        .then((res) => {
+          const successData = res.data.data;
+          setSuccessData(successData);
+          setComponentToRender("status");
+        })
+        .catch((err) => {
+          if (err.response && err.response.status === 403) {
             setLoading(false);
-            setComponentToRender("status");    
-          }, 7000)
-        }
-      })      
+            setComponentToRender("status");
+          } else {
+            setTimeout(() => {
+              setLoading(false);
+              setComponentToRender("status");
+            }, 7000);
+          }
+        });
     }
   };
 
   const handleAmountChange = (planId) => {
-    const selectedDataPlan = dataPlans.find(plan => {
+    const selectedDataPlan = dataPlans.find((plan) => {
       return plan.productId === planId;
     });
 
     if (Object.keys(selectedDataPlan).length > 0) {
       const amount = String(selectedDataPlan.amount);
-      setAmount(amount);      
+      setAmount(amount);
     }
   };
 
@@ -80,7 +81,7 @@ const BuyData = ({ changeCurrentPage }) => {
       const newTelcoName = telco.name;
       const newTelcoCode = telco.code;
 
-      setValidationError({ ...validationError, telco: !newTelcoName  });
+      setValidationError({ ...validationError, telco: !newTelcoName });
       setTelco(newTelcoCode);
       setTelcoName(newTelcoName);
     }
@@ -89,7 +90,7 @@ const BuyData = ({ changeCurrentPage }) => {
   const handlePhoneChange = (e) => {
     const newPhone = e.target.value;
 
-    setValidationError({ ...validationError, phone: !newPhone  });
+    setValidationError({ ...validationError, phone: !newPhone });
     setPhone(newPhone);
   };
 
@@ -99,49 +100,58 @@ const BuyData = ({ changeCurrentPage }) => {
     if (typeof plan !== "string") {
       const newSelectedDataPlanId = plan.productId;
 
-      setValidationError({ ...validationError, selectedDataPlanId: !newSelectedDataPlanId  });
+      setValidationError({
+        ...validationError,
+        selectedDataPlanId: !newSelectedDataPlanId,
+      });
       setSelectedDataPlanId(newSelectedDataPlanId);
       setSelectedDataPlanValidity(plan.validity);
       setSelectedDataPlanName(plan.databundle);
-      handleAmountChange(newSelectedDataPlanId);      
+      handleAmountChange(newSelectedDataPlanId);
     }
   };
 
-  switch(componentToRender) {
+  switch (componentToRender) {
     case "form":
-      renderedComponent = <BuyDataForm 
-        handleTelcoChange={handleTelcoChange}
-        handlePhoneChange={handlePhoneChange}
-        handleSelectedDataPlanIdChange={handleSelectedDataPlanIdChange}
-        validationError={validationError}
-        setValidationError={setValidationError}
-        setComponentToRender={setComponentToRender}
-        dataPlans={dataPlans}
-        setDataPlans={setDataPlans}
-        amount={amount}
-        phone={phone}
-        selectedDataPlanId={selectedDataPlanId}
-        telco={telco}
-        telcoName={telcoName}
-      />;
+      renderedComponent = (
+        <BuyDataForm
+          handleTelcoChange={handleTelcoChange}
+          handlePhoneChange={handlePhoneChange}
+          handleSelectedDataPlanIdChange={handleSelectedDataPlanIdChange}
+          validationError={validationError}
+          setValidationError={setValidationError}
+          setComponentToRender={setComponentToRender}
+          dataPlans={dataPlans}
+          setDataPlans={setDataPlans}
+          amount={amount}
+          phone={phone}
+          selectedDataPlanId={selectedDataPlanId}
+          telco={telco}
+          telcoName={telcoName}
+        />
+      );
       break;
     case "summary":
-      renderedComponent = <BuyDataSummary 
-        telcoName={telcoName}
-        amount={amount}
-        phone={phone}
-        selectedDataPlanName={selectedDataPlanName}
-        selectedDataPlanValidity={selectedDataPlanValidity}
-        handleOnSubmit={handleOnSubmit}
-        loading={loading}
-      />;
+      renderedComponent = (
+        <BuyDataSummary
+          telcoName={telcoName}
+          amount={amount}
+          phone={phone}
+          selectedDataPlanName={selectedDataPlanName}
+          selectedDataPlanValidity={selectedDataPlanValidity}
+          handleOnSubmit={handleOnSubmit}
+          loading={loading}
+        />
+      );
       break;
     case "success":
-      renderedComponent = <BuyDataStatus 
-        successData={successData}
-        setComponentToRender={setComponentToRender}
-        transactionCost={TRANSACTION_COST}
-      />;
+      renderedComponent = (
+        <BuyDataStatus
+          successData={successData}
+          setComponentToRender={setComponentToRender}
+          transactionCost={TRANSACTION_COST}
+        />
+      );
       break;
     case "failed":
       renderedComponent = <FailedTransaction />;
@@ -150,16 +160,13 @@ const BuyData = ({ changeCurrentPage }) => {
       renderedComponent = null;
   }
 
-  return (
-  <div className={style.container}>
-    {renderedComponent} 
-  </div>
-)}
+  return <div className={style.container}>{renderedComponent}</div>;
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
-  }
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+  };
 };
 
 export default connect(undefined, mapDispatchToProps)(BuyData);

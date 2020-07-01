@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
 import { setCurrentPage } from "../../../actions/page";
-import style from './AddUser.module.scss';
+import style from "./AddUser.module.scss";
 
 export const AddUser = ({ changeCurrentPage }) => {
   changeCurrentPage({
-    heading: 'Add User',
-    search: false
+    heading: "Add User",
+    search: false,
   });
 
   const [firstname, setFirstname] = useState("");
@@ -24,8 +24,8 @@ export const AddUser = ({ changeCurrentPage }) => {
       phoneNumber,
       email,
       password,
-      confirmPassword
-    })
+      confirmPassword,
+    });
   };
 
   const handleFirstnameChange = (e) => {
@@ -36,64 +36,65 @@ export const AddUser = ({ changeCurrentPage }) => {
   const handleLastnameChange = (e) => {
     const newLastname = e.target.value;
     setLastname(newLastname);
-  }
+  };
 
   const handlePhoneChange = (e) => {
     const newPhoneNumber = e.target.value;
     setPhoneNumber(newPhoneNumber);
-  }
+  };
 
   const handleEmailChange = (e) => {
     const newEmail = e.target.value;
     setEmail(newEmail);
-  }
+  };
 
   const handlePasswordChange = (e) => {
     const newPassword = e.target.value;
     setPassword(newPassword);
-  }
+  };
 
   const handleConfirmPasswordChange = (e) => {
     const password2 = e.target.value;
     setConfirmPassword(password2);
-  }
+  };
 
   return (
-  <div className={style.container}>
-    <form className={style.form} onSubmit={handleOnSubmit} >
-      <label>
-        <span>Firstname</span>
-        <input type="text" onChange={handleFirstnameChange} />      
-      </label>
-      <label>
-        <span>Lastname</span>
-        <input type="text" onChange={handleLastnameChange} />      
-      </label>    
-      <label>
-        <span>Phone Number</span>
-        <input type="text" onChange={handlePhoneChange} />      
-      </label>    
-      <label>
-        <span>Email</span>
-        <input type="text" onChange={handleEmailChange} />      
-      </label>    
-      <label>
-        <span>Password</span>
-        <input type="text" onChange={handlePasswordChange} />      
-      </label>    
-      <label>
-        <span>Confirm Password</span>
-        <input type="text" onChange={handleConfirmPasswordChange} />      
-      </label>   
-      <button type="submit">Submit</button>
-    </form>    
-  </div>
-)}
+    <div className={style.container}>
+      <form className={style.form} onSubmit={handleOnSubmit}>
+        <label>
+          <span>Firstname</span>
+          <input type="text" onChange={handleFirstnameChange} />
+        </label>
+        <label>
+          <span>Lastname</span>
+          <input type="text" onChange={handleLastnameChange} />
+        </label>
+        <label>
+          <span>Phone Number</span>
+          <input type="text" onChange={handlePhoneChange} />
+        </label>
+        <label>
+          <span>Email</span>
+          <input type="text" onChange={handleEmailChange} />
+        </label>
+        <label>
+          <span>Password</span>
+          <input type="text" onChange={handlePasswordChange} />
+        </label>
+        <label>
+          <span>Confirm Password</span>
+          <input type="text" onChange={handleConfirmPasswordChange} />
+        </label>
+        <button type="submit">Submit</button>
+      </form>
+    </div>
+  );
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
-  }
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+  };
 };
 
 export default connect(undefined, mapDispatchToProps)(AddUser);

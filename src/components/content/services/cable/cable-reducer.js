@@ -5,16 +5,16 @@ export const initialFormState = {
   customerName: "",
   phone: "",
   selectedPlanDuration: "",
-  selectedPlanCode: ""
-}
+  selectedPlanCode: "",
+};
 
 const RechargeCableReducer = (state, { type, payload }) => {
-  switch(type) {
+  switch (type) {
     case "UPDATE_FORM_STATE":
-      return { ...state, ...payload }
+      return { ...state, ...payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default RechargeCableReducer;

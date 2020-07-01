@@ -3,156 +3,284 @@ import PropTypes from "prop-types";
 import Axios from "axios";
 import { connect } from "react-redux";
 
-import { CASHCALL_REQUEST_CASH } from "../../../../store/api/constants";
-import { CASHCALL_ACCEPT_CASH } from "../../../../store/api/constants";
+import {
+  RELEASE_FUNDS,
+  ACCEPT_OPPORTUNITY,
+  INITIATE_PHYSICAL_CASHCALL,
+  INITIATE_LIQUID_CASHCALL,
+  CANCEL_CASHCALL,
+  POST_OPPORTUNITY,
+} from "../../../../store/api/constants";
 import { setCurrentPage } from "../../../../actions/page";
 import CashCallRequestForm from "./CashCallRequestForm";
 import CashCallList from "./CashCallList";
-import CashCallVerification from "./CashCallVerification";
-import CashCallCompleted from "./CashCallCompleted";
+import PostCashCallForm from "./PostCashCallForm";
 import cashCallReducer, { initialState } from "./cashcall-reducer";
+import CashCallSuccess from "./CashCallSuccess";
 
 import styles from "./CashCall.module.scss";
 
-export const CashCall = ({ changeCurrentPage }) => {
+export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
+  const cashCallType = match.params.id;
   const [cashCallState, dispatch] = useReducer(cashCallReducer, initialState);
-  const [status, setStatus] = useState("form");
+  const [status, setStatus] = useState(cashCallType === "1" ? "form" : "list");
   const [loading, setLoading] = useState(false);
   const [verificationLoading, setVerificationLoading] = useState(false);
-  const [acceptCashLoading, setAcceptCashLoading] = useState(false);
+  const [cashCallCompleteStatus, setCashCallCompleteStatus] = useState(null);
 
   useEffect(() => {
     changeCurrentPage({
-      heading: "Cash Call",
-      search: false
+      heading: "Cash Call ",
+      search: false,
     });
   }, []);
 
   useEffect(() => {
-    if (!isNaN(parseInt(cashCallState.amount))) {
-      const transactionCost = 0.1 * cashCallState.amount;
-      const total = +cashCallState.amount + transactionCost;
+    dispatch({
+      type: "UPDATE_POST_CASHCALL_STATE",
+      payload: { phone: agentPhoneNumber },
+    });
+
+    dispatch({
+      type: "UPDATE_ACCEPT_CASHCALL_STATE",
+      payload: { phone: agentPhoneNumber },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (!isNaN(parseInt(cashCallState.post.amount))) {
+      const transactionCost = 0.1 * cashCallState.post.amount;
+      const total = +cashCallState.post.amount + transactionCost;
 
       dispatch({
-        type: "UPDATE_REQUEST_STATE",
-        payload: { total }
-      })      
+        type: "UPDATE_POST_CASHCALL_STATE",
+        payload: { adminFee: transactionCost },
+      });
+
+      dispatch({
+        type: "UPDATE_POST_CASHCALL_STATE",
+        payload: { total },
+      });
     } else {
       const total = 0;
-      
+
       dispatch({
-        type: "UPDATE_REQUEST_STATE",
-        payload: { total }
-      })
+        type: "UPDATE_POST_CASHCALL_STATE",
+        payload: { total },
+      });
     }
-  }, [cashCallState.amount]);
+  }, [cashCallState.post.amount]);
 
-  const requestCash = () => {
-    setLoading(true)
-    const {amount, phone } = cashCallState;
+  const initiateLiquidCashCall = () => {
+    setLoading(true);
 
-    (async function() {
+    (async function initiateCashcall() {
+      const { amount, phone } = cashCallState.post;
+
       const req = {
-        amount: amount,
+        amount,
         phone,
-        location: 2
-      }
+        type: "liquid",
+      };
+
       try {
-        const res = await Axios.post(CASHCALL_REQUEST_CASH, req)
+        const res = await Axios.post(INITIATE_LIQUID_CASHCALL, req);
         const reference = res.data.data.uuid;
-        const date = res.data.data.created_at;
 
-        dispatch({
-          type: "UPDATE_REQUEST_STATE",
-          payload: { reference  }
-        })
-
-        dispatch({
-          type: "UPDATE_REQUEST_STATE",
-          payload: { date }
-        })
         setLoading(false);
-        setStatus("list");          
-      } catch(e) {
+        dispatch({
+          type: "UPDATE_POST_CASHCALL_STATE",
+          payload: { reference },
+        });
+        setStatus("verification");
+      } catch (e) {
         setLoading(false);
       }
     })();
-  }
+  };
 
-  const acceptCash = () => {
-    setAcceptCashLoading(true);
-    const { reference } = cashCallState;
+  const postOpportunity = () => {
+    setVerificationLoading(true);
 
-    (async function() {
+    (async function initiateCashcall() {
+      const { reference, token } = cashCallState.post;
+
       const req = {
-        reference
-      }
+        reference,
+        token,
+      };
 
       try {
-        const res = await Axios.post(CASHCALL_ACCEPT_CASH, req)
-        setAcceptCashLoading(false);
-        setStatus("verification");
-      } catch(e) {
-        setAcceptCashLoading(false);
-        setStatus("verification");
-      }
-    })();
-  }
-
-  const verifyCashCall = () => {
-    verificationLoading(true);
-    const { token } = cashCallState;
-
-    (async function() {
-      const req = {
-        token
-      }
-      try {
-        const res = await Axios.post(CASHCALL_ACCEPT_CASH, req)
+        await Axios.post(POST_OPPORTUNITY, req);
         setVerificationLoading(false);
         setStatus("completed");
-      } catch(e) {
+      } catch (e) {
         setVerificationLoading(false);
       }
-    })();    
-  }
+    })();
+  };
+
+  const selectOpportunity = (cashcall) => {
+    dispatch({
+      type: "UPDATE_ACCEPT_CASHCALL_STATE",
+      payload: cashcall,
+    });
+
+    setStatus("form");
+  };
+
+  const initiatePhysicalCashCall = () => {
+    (async function initiateCashcall() {
+      const { amount, phone } = cashCallState.accept;
+
+      const req = {
+        amount,
+        phone,
+        type: "physical",
+      };
+
+      try {
+        await Axios.post(INITIATE_PHYSICAL_CASHCALL, req);
+        setStatus("verification");
+      } catch (e) {
+        setStatus("list");
+      }
+    })();
+  };
+
+  const acceptOpportunity = () => {
+    setVerificationLoading(true);
+
+    (async function initiateCashcall() {
+      const { reference, token } = cashCallState.accept;
+
+      const req = {
+        reference,
+        token,
+      };
+
+      try {
+        await Axios.post(ACCEPT_OPPORTUNITY, req);
+        setVerificationLoading(false);
+        setStatus("completed");
+      } catch (e) {
+        setVerificationLoading(false);
+      }
+    })();
+  };
+
+  const handleOnRequestFormSubmit = () => {
+    if (cashCallType === "1") {
+      initiateLiquidCashCall();
+    } else if (cashCallType === "2") {
+      initiatePhysicalCashCall();
+    }
+  };
+
+  const handleOpportunity = () => {
+    if (cashCallType === "1") {
+      postOpportunity();
+    } else if (cashCallType === "2") {
+      acceptOpportunity();
+    }
+  };
+
+  const releaseFunds = (reference) => {
+    setVerificationLoading(true);
+
+    (async function releaseFunds() {
+      const { token, reference } = cashCallState.release;
+
+      const req = {
+        token,
+        reference,
+      };
+
+      try {
+        await Axios.post(RELEASE_FUNDS, req);
+        setVerificationLoading(false);
+        setStatus("completed");
+      } catch (e) {
+        setVerificationLoading(false);
+        // console.log(e.response);
+      }
+    })();
+  };
+
+  const cancelCashcall = () => {
+    (async function releaseFunds() {
+      const { token, reference } = cashCallState.cancel;
+
+      const req = {
+        token,
+        reference,
+      };
+
+      try {
+        await Axios.post(CANCEL_CASHCALL, req);
+        setVerificationLoading(false);
+        setStatus("completed");
+      } catch (e) {
+        setVerificationLoading(false);
+        // console.log(e.response);
+      }
+    })();
+  };
 
   return (
     <div className={styles.container}>
       {
         {
-          form: <CashCallRequestForm 
-            cashCallState={cashCallState}
-            requestCash={requestCash}
-            loading={loading}
-            dispatch={dispatch}
-          />,
-          list: <CashCallList
-            acceptCash={acceptCash}
-            acceptCashLoading={acceptCashLoading}
-          />,
-          verification: <CashCallVerification 
-            cashCallState={cashCallState}
-            verifyCashCall={verifyCashCall}
-            verificationLoading={verificationLoading}
-            dispatch={dispatch}
-          />,
-          completed: <CashCallCompleted 
-            cashCallState={cashCallState}
-          />
+          form: (
+            <CashCallRequestForm
+              cashCallState={cashCallState}
+              loading={loading}
+              dispatch={dispatch}
+              cashCallType={cashCallType}
+              handleOnRequestFormSubmit={handleOnRequestFormSubmit}
+            />
+          ),
+          list: (
+            <CashCallList
+              dispatch={dispatch}
+              selectOpportunity={selectOpportunity}
+              cashCallType={cashCallType}
+              setStatus={setStatus}
+              setCashCallCompleteStatus={setCashCallCompleteStatus}
+            />
+          ),
+          completed: <CashCallSuccess cashCallType={cashCallType} />,
+          verification: (
+            <PostCashCallForm
+              dispatch={dispatch}
+              verificationLoading={verificationLoading}
+              cashCallState={cashCallState}
+              cashCallType={cashCallType}
+              handleOpportunity={handleOpportunity}
+              cancelCashcall={cancelCashcall}
+              releaseFunds={releaseFunds}
+              cashCallCompleteStatus={cashCallCompleteStatus}
+            />
+          ),
         }[status]
       }
     </div>
-  )
-}
+  );
+};
+
+const mapStateToProps = (state) => {
+  return {
+    agentPhoneNumber: state.auth.user.phone,
+  };
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
-  }
-}
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+  };
+};
 
 CashCall.propTypes = {
-  changeCurrentPage: PropTypes.func.isRequired
-}
-export default connect(undefined, mapDispatchToProps)(CashCall);
+  changeCurrentPage: PropTypes.func.isRequired,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(CashCall);

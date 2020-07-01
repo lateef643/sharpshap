@@ -25,14 +25,14 @@
     padding: 1.5rem 2rem;
     background-color: #fff;
     text-align: left;
-    
+
     span {
       flex: 0 0 18%;
-    } 
+    }
   }
 
   > .content {
-    box-shadow: .5rem .5rem .5rem #00000029;
+    box-shadow: 0.5rem 0.5rem 0.5rem #00000029;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -40,12 +40,12 @@
     height: 5rem;
     padding: 1rem 2rem;
     background-color: #fff;
-    margin-bottom: .3rem;
-  
+    margin-bottom: 0.3rem;
+
     span {
       flex: 0 0 18%;
-    } 
-  
+    }
+
     span:last-child {
       display: block;
       color: blue;
@@ -57,13 +57,13 @@
       position: relative;
       top: 2rem;
       height: 7.5rem;
-  
+
       > .one {
-        color: #2A58AD;
+        color: #2a58ad;
       }
-  
+
       > .two {
-        background-color: #2A58AD;
+        background-color: #2a58ad;
         position: relative;
         right: 30%;
         display: flex;
@@ -73,41 +73,40 @@
         justify-content: center;
         font-weight: 100;
         visibility: hidden;
-        background: #2A58AE 0% 0% no-repeat padding-box;
-        box-shadow: 0px 1rem .6rem #00000029;
-  
+        background: #2a58ae 0% 0% no-repeat padding-box;
+        box-shadow: 0px 1rem 0.6rem #00000029;
+
         a {
           font-family: "Lato", sans-serif;
           text-decoration: none;
           font-weight: 300;
           font-size: 1.3rem;
-          color: #FFFFFF;
+          color: #ffffff;
           display: block;
           margin-top: 2px;
           height: 2.5rem;
           padding-top: 5px;
           padding-left: 5px;
         }
-  
+
         a:hover {
           background-color: rgb(24, 56, 116);
         }
       }
-  
     }
-  
+
     span:last-child:hover {
       .one {
         z-index: -5;
       }
-  
+
       .two {
         visibility: visible;
         z-index: 10;
         transform: translateY(-100%);
       }
     }
-  
+
     &:hover {
       transform: scale(1.02);
     }

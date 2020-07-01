@@ -1,11 +1,11 @@
 export const initialState = {
   network: "",
   amount: "",
-  phone: ""
+  phone: "",
 };
 
 const AirtimePurchaseReducer = (state, { type, payload }) => {
-  switch(type) {
+  switch (type) {
     case "UPDATE_FORM_STATE":
       return { ...state, ...payload };
     default:

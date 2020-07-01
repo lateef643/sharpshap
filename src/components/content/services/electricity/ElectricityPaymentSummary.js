@@ -1,22 +1,31 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import formatToCurrency from "../../../../util/formatToCurrency";
 import Loader from "../../../partials/Loader";
 
-import style from './ElectricityPaymentSummary.module.scss';
+import style from "./ElectricityPaymentSummary.module.scss";
 
 export const ElectricityPaymentSummary = (props) => {
-  const { ElectricityPaymentFormState:state, handleOnSubmit, loading, transactionCost } = props;
-  const { disco, meterNo, accountName, paymentPlan, amount, phone} = state;
-  
+  const {
+    ElectricityPaymentFormState: state,
+    handleOnSubmit,
+    loading,
+    transactionCost,
+  } = props;
+  const { disco, meterNo, accountName, paymentPlan, amount, phone } = state;
+
   return (
-    <div className={style.paymentContainer} >
+    <div className={style.paymentContainer}>
       <div className={style.heading}>
         <h2 className={style.headingText}>Transaction Summary</h2>
       </div>
       <div>
-        {loading ? <p className={style.pending}>Please wait while your transaction is processing...</p> : undefined}
+        {loading ? (
+          <p className={style.pending}>
+            Please wait while your transaction is processing...
+          </p>
+        ) : undefined}
       </div>
       <div>
         <span>Disco:</span>
@@ -46,22 +55,31 @@ export const ElectricityPaymentSummary = (props) => {
         <span>Transaction cost:</span>
         <span>{formatToCurrency(transactionCost)}</span>
       </div>
-      <div className={style.total}>    
+      <div className={style.total}>
         <span>Total</span>
-        <span>{formatToCurrency(amount)}</span> 
-      </div> 
-      <button onClick={(e) => {
-        e.preventDefault();
-        handleOnSubmit();
-      }}>{loading ? <Loader size="small" color="white" position="center" /> : "Continue"}</button>       
+        <span>{formatToCurrency(amount)}</span>
+      </div>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          handleOnSubmit();
+        }}
+      >
+        {loading ? (
+          <Loader size="small" color="white" position="center" />
+        ) : (
+          "Continue"
+        )}
+      </button>
     </div>
-)};
+  );
+};
 
 ElectricityPaymentSummary.propTypes = {
   ElectricityPaymentFormState: PropTypes.object.isRequired,
   handleOnSubmit: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  transactionCost: PropTypes.number.isRequired
-}
+  transactionCost: PropTypes.number.isRequired,
+};
 
 export default ElectricityPaymentSummary;
