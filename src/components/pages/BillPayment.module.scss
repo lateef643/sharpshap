@@ -2,24 +2,24 @@
 @import "../../assets/styles/config/mixins";
 
 .container {
-    padding-top: 3rem;
-    width: 80%;
-    margin: 0 auto;
+  padding-top: 3rem;
+  width: 80%;
+  margin: 0 auto;
+
+  @include respond(phone-large) {
+    width: 95%;
+    padding-top: 2rem;
+  }
+
+  > .cardContainer {
+    flex: 0 0 30%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    height: max-content;
 
     @include respond(phone-large) {
-      width: 95%;
-      padding-top: 2rem;
-    }
-  
-    > .cardContainer {
-      flex: 0 0 30%;
-      display: flex;
-      flex-flow: row wrap; 
-      justify-content: flex-start;
-      height: max-content;
-
-      @include respond(phone-large) {
-        justify-content: space-between;
-      }
+      justify-content: space-between;
     }
   }
+}

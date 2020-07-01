@@ -7,7 +7,7 @@
 
   @media print {
     display: none;
-  } 
+  }
 
   @include respond(phone-large) {
     position: fixed;
@@ -41,7 +41,7 @@
     width: 4rem;
     z-index: 2000;
     position: fixed;
-    top: .5rem;
+    top: 0.5rem;
     left: 1rem;
     background-color: transparent;
     // text-align: center;
@@ -56,14 +56,14 @@
     .hamburgerItem {
       position: relative;
       margin-top: 2rem;
-      transition: all .2s;
-      
+      transition: all 0.2s;
+
       &,
       &::before,
       &::after {
         width: 3rem;
         height: 2px;
-        background-color: #0747A6;
+        background-color: #0747a6;
         display: inline-block;
         // transition: all .7s;
       }
@@ -72,17 +72,15 @@
       &::after {
         content: "";
         position: absolute;
-        transition: all .3s;
-
-
+        transition: all 0.3s;
       }
 
       &::before {
-        top: -.9rem;
+        top: -0.9rem;
       }
 
       &::after {
-        top: .9rem;
+        top: 0.9rem;
       }
     }
   }
@@ -92,7 +90,7 @@
   }
 
   .sidebar {
-    background-color: #2A58AE;
+    background-color: #2a58ae;
     color: #fff;
     text-align: center;
     position: fixed;
@@ -104,8 +102,7 @@
     flex-direction: column;
     justify-content: space-between;
     height: 100vh;
-    transition: .5s all;
-
+    transition: 0.5s all;
 
     @include respond(phone-large) {
       height: calc(100vh - 5rem);
@@ -113,7 +110,7 @@
       width: 15.5rem;
       transform: translateX(-100%);
     }
-  
+
     .profile {
       flex: 0 0 28vh;
       padding-top: 3vh;
@@ -127,16 +124,16 @@
           max-width: 40%;
         }
       }
-  
+
       .profileName {
         font-size: 1.4rem;
-        margin: .8vh 0;
+        margin: 0.8vh 0;
 
         @include respond-custom(350px) {
           font-size: 1.3rem;
         }
       }
-  
+
       .profileId {
         font-size: 1.4rem;
         margin: 1.5vh 0;
@@ -145,37 +142,37 @@
           font-size: 1.3rem;
         }
       }
-  
+
       .logout {
         width: 8.2rem;
         height: 2.4rem;
-        border-radius: .7rem;
+        border-radius: 0.7rem;
         outline: 0;
-        border: 1px solid #CBDAF6;
-        background: #FFFFFF1A 0% 0% no-repeat padding-box;
-        color: #CBDAF6;
+        border: 1px solid #cbdaf6;
+        background: #ffffff1a 0% 0% no-repeat padding-box;
+        color: #cbdaf6;
       }
     }
-  
+
     .links {
       flex: 0 0 70vh;
-  
+
       .linkItem {
         text-decoration: none;
         display: block;
-        height: calc(70vh/5);
-        color: #CBDAF6;
+        height: calc(70vh / 5);
+        color: #cbdaf6;
         cursor: pointer;
         padding-top: 2rem;
-        transition: .2s all;
+        transition: 0.2s all;
 
         @include respond(phone-large) {
-          height: calc(65vh/5);
+          height: calc(65vh / 5);
           padding-top: 1rem;
         }
 
         @include respond-custom(330px) {
-          height: calc(62vh/5);
+          height: calc(62vh / 5);
           padding-top: 1.8rem;
         }
 
@@ -187,19 +184,19 @@
             height: 1.5rem;
           }
         }
-        
+
         .linkItemText {
           font-size: 1.3rem;
-          margin-top: .5rem;
+          margin-top: 0.5rem;
 
           @include respond-custom(330px) {
             height: 1.2rem;
-            margin-top: .3rem;
+            margin-top: 0.3rem;
 
             // background-color:red;
           }
         }
-  
+
         .linkSecondary {
           position: relative;
           left: 100%;
@@ -226,24 +223,24 @@
           .linkSecondaryItem {
             height: 2.5rem;
             display: block;
-            color: #CBDAF6;
-            background-color: #2A58AE;
+            color: #cbdaf6;
+            background-color: #2a58ae;
             text-decoration: none;
             font-size: 1.3rem;
-            padding-top: .5rem;
-            transition: .1s all;
-  
+            padding-top: 0.5rem;
+            transition: 0.1s all;
+
             &:hover {
               visibility: visible;
               background-color: rgb(32, 63, 121);
             }
           }
         }
-  
-      &:hover {
-        visibility: visible;
-        background-color: rgb(32, 63, 121);
-  
+
+        &:hover {
+          visibility: visible;
+          background-color: rgb(32, 63, 121);
+
           div {
             visibility: visible;
             z-index: 5;

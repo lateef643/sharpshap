@@ -9,7 +9,7 @@ const ExcelColumn = ReactExport.ExcelFile.ExcelColumn;
 const Download = (props) => {
   const { filename, dataset, labels } = props;
 
-  const transactionDataForExcel = dataset.map(data => {
+  const transactionDataForExcel = dataset.map((data) => {
     return {
       status: data.status,
       date: data.created_at,
@@ -18,19 +18,21 @@ const Download = (props) => {
       amount: data.amount,
       customer: data.customer_info,
       reference: data.reference,
-      type: data.transtype.name
-    }
-  })
+      type: data.transtype.name,
+    };
+  });
 
   return (
-  <ExcelFile element={<button className={styles.button}>Export to Excel</button>}>
-    <ExcelSheet data={transactionDataForExcel} name={filename}>
-      {labels.map((label, index) => {
-        return <ExcelColumn label={label.name} value={label.value} />
-      })}
-    </ExcelSheet>
-  </ExcelFile>
-  )
+    <ExcelFile
+      element={<button className={styles.button}>Export to Excel</button>}
+    >
+      <ExcelSheet data={transactionDataForExcel} name={filename}>
+        {labels.map((label, index) => {
+          return <ExcelColumn label={label.name} value={label.value} />;
+        })}
+      </ExcelSheet>
+    </ExcelFile>
+  );
 };
 
 export default Download;

@@ -1,19 +1,31 @@
-import React, {useEffect} from "react";
-import { connect } from "react-redux";
+import React from "react";
+// import { connect } from "react-redux";
 import Loader from "../../../partials/Loader";
-import style from './BuyDataSummary.module.scss';
+import style from "./BuyDataSummary.module.scss";
 import formatToCurrency from "../../../../util/formatToCurrency";
 
 export const BuyDataSummary = (props) => {
-  const { telcoName, amount, phone, loading, handleOnSubmit, selectedDataPlanName, selectedDataPlanValidity } = props;
+  const {
+    telcoName,
+    amount,
+    phone,
+    loading,
+    handleOnSubmit,
+    selectedDataPlanName,
+    selectedDataPlanValidity,
+  } = props;
 
   return (
-    <div className={style.paymentContainer} >
+    <div className={style.paymentContainer}>
       <div className={style.heading}>
         <h2 className={style.headingText}>Transaction Summary</h2>
       </div>
       <div>
-        {loading ? <p className={style.pending}>Please wait while your transaction is processing...</p> : undefined}
+        {loading ? (
+          <p className={style.pending}>
+            Please wait while your transaction is processing...
+          </p>
+        ) : undefined}
       </div>
       <div>
         <span>Phone Number:</span>
@@ -34,20 +46,29 @@ export const BuyDataSummary = (props) => {
       <div>
         <span>Amount:</span>
         <span>{formatToCurrency(amount)}</span>
-      </div> 
+      </div>
       <div>
         <span>Transaction cost:</span>
         <span>{formatToCurrency(0)}</span>
-      </div>     
-      <div className={style.total}>    
+      </div>
+      <div className={style.total}>
         <span>Total:</span>
-        <span>{formatToCurrency(amount)}</span> 
-      </div> 
-      <button onClick={(e) => {
-        e.preventDefault();
-        handleOnSubmit();
-      }}>{loading ? <Loader size="small" color="white" position="center" /> : "Continue"}</button>       
-    </div>    
-)};
+        <span>{formatToCurrency(amount)}</span>
+      </div>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          handleOnSubmit();
+        }}
+      >
+        {loading ? (
+          <Loader size="small" color="white" position="center" />
+        ) : (
+          "Continue"
+        )}
+      </button>
+    </div>
+  );
+};
 
 export default BuyDataSummary;

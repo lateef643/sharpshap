@@ -2,188 +2,104 @@
 @import "../config/breakpoints";
 
 .form {
-    height: max-content;
-    width: 44.2rem;
+  height: max-content;
+  width: 44.2rem;
+  margin: 0 auto;
+  box-shadow: 0px 3px 6px #00000029;
+  padding: 3rem;
+  padding-top: 2rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+
+  @include respond(phone-large) {
+    padding: 1rem;
+    padding-bottom: 3rem;
     margin: 0 auto;
-    box-shadow: 0px 3px 6px #00000029;
-    padding: 3rem;
-    padding-top: 2rem;
-    background-color: #fff;
-    display: flex;
-    flex-direction: column;
+    margin-bottom: 1rem;
+    height: 48.2rem;
+    width: 95%;
+    height: max-content;
+  }
+
+  .imageContainer {
+    flex: 0 0 55px;
+    padding: 5px 0;
+    text-align: center;
 
     @include respond(phone-large) {
-      padding: 1rem;
-      padding-bottom: 3rem;
-      margin: 0 auto;
-      margin-bottom: 1rem;
-      height: 48.2rem;
-      width: 95%;
-      height: max-content;
+      flex: 0 0 40px;
+      padding: 2px 0;
+      // display: none;
     }
 
-    .imageContainer {
-      flex: 0 0 55px;
-      padding: 5px 0;
-      text-align: center;
+    .image {
+      padding: 0;
+      width: 90px;
+      height: 40px;
 
       @include respond(phone-large) {
-        flex: 0 0 40px;
-        padding: 2px 0;
-        // display: none;
-      }
-
-      .image {
-        padding: 0;
-        width: 90px;
-        height: 40px;
-
-        @include respond(phone-large) {
-          height: 3rem;
-          width: 60px;
-        }
+        height: 3rem;
+        width: 60px;
       }
     }
-
-    // .inputContainer {
-    //   display: flex;
-    //   flex-direction: column;
-    //   flex-wrap: wrap;
-    //   flex: 0 0 500px;
-    //   margin: 0 auto;
-
-    //   @include respond(phone-large) {
-    //     flex: 0 0 400px;
-    //   }
-
-     label {
-      flex: 0 0 8rem;
-      margin: 2px auto;
-      position: relative;
-
-      @include respond(phone-large) {
-        flex: 0 0 7rem;
-        margin: 2px auto;       
-      }
-
-      @include respond-custom(330px) {
-        margin: 2px auto;       
-      }
-  
-      span {
-        display: block;
-        padding: 0 .4rem;
-        background-color: #fff;
-        font-size: 1.35rem;
-        color: #9e9d9d;
-        line-height: 2.4rem;
-        position: relative;
-        left: 1.5rem;
-        top: 1rem;
-        width: max-content;
-
-        @include respond(phone-large) {
-          font-size: 1.3rem;
-          top: .5rem;
-          padding: 0 .5rem;
-        }
-      }
-  
-      input, select {
-        border: 0;
-        width: 37.9rem;
-        height: 3.9rem;
-        border-radius: 5px;
-        background-color: #fff;
-        color: #707070;
-        font-family: inherit;
-        padding: 0 6px;
-        margin: 0 auto;
-
-        @include respond(phone-large) {
-          width: 30rem;
-          height: 3.6rem;
-        }
-
-        @include respond-custom(330px) {
-          width: 26rem;
-        }
-      }
-
-      .outlineGrey {
-        border: 1px solid #afafaf;
-
-        // &:focus {
-        //   border: 0;
-        //   outline: 1px solid rgba(11, 74, 182, 0.774);
-        // }
-      }
-
-      .outlineRed {
-        border: 2px solid rgba(224, 52, 52, 0.555);
-
-        // &:focus {
-        //   border: 0;
-        //   outline: 1px solid #2A58AE;
-        // }
-      }
-
-      option {
-        color: #707070;
-      }
-
-      input:disabled,
-      select:disabled {
-        background-color: #fff;
-      }
-
-      .transparent {
-        color: #70707069;
-      }
-
-      .opaque {
-        color: #707070;
-      }
-
-      .loader {
-        position: absolute;
-        top: 50%;
-        left: 1.5rem;
-        z-index: 5;
-
-        @include respond(phone) {
-          top: 54%;
-        }
-      }
-
-      .validationErrorText {
-        font-size: 1.25rem;
-        padding-top: 4px;
-        color: rgba(255, 0, 0, 0.719);
-        
-        @include respond(phone-large) {
-          display: none;
-        }
-      }
-    // }
   }
-  
-  
-    button {
-      font-family: 'Lato', sans-serif;
-      width: 37.9rem;
-      margin: 0 auto;
-      margin-top: 2rem;
-      font-size: 1.4rem;
-      outline: 0;
+
+  // .inputContainer {
+  //   display: flex;
+  //   flex-direction: column;
+  //   flex-wrap: wrap;
+  //   flex: 0 0 500px;
+  //   margin: 0 auto;
+
+  //   @include respond(phone-large) {
+  //     flex: 0 0 400px;
+  //   }
+
+  label {
+    flex: 0 0 8rem;
+    margin: 2px auto;
+    position: relative;
+
+    @include respond(phone-large) {
+      flex: 0 0 7rem;
+      margin: 2px auto;
+    }
+
+    @include respond-custom(330px) {
+      margin: 2px auto;
+    }
+
+    span {
+      display: block;
+      padding: 0 0.4rem;
+      background-color: #fff;
+      font-size: 1.35rem;
+      color: #9e9d9d;
+      line-height: 2.4rem;
+      position: relative;
+      left: 1.5rem;
+      top: 1rem;
+      width: max-content;
+
+      @include respond(phone-large) {
+        font-size: 1.3rem;
+        top: 0.5rem;
+        padding: 0 0.5rem;
+      }
+    }
+
+    input,
+    select {
       border: 0;
-      height: 4rem;
-      border-radius: 1rem;
-      color: #fff;
-      box-shadow: 3px 3px 6px #00000029;
-      background: transparent 
-      linear-gradient(90deg, #11998E 0%, #38EF7D 100%) 
-      0% 0% no-repeat padding-box;
+      width: 37.9rem;
+      height: 3.9rem;
+      border-radius: 5px;
+      background-color: #fff;
+      color: #707070;
+      font-family: inherit;
+      padding: 0 6px;
+      margin: 0 auto;
 
       @include respond(phone-large) {
         width: 30rem;
@@ -193,16 +109,97 @@
       @include respond-custom(330px) {
         width: 26rem;
       }
-  
-      &:active {
-        transform: translateY(3%);
-        box-shadow: 1px 1px 4px #00000029;
+    }
+
+    .outlineGrey {
+      border: 1px solid #afafaf;
+
+      // &:focus {
+      //   border: 0;
+      //   outline: 1px solid rgba(11, 74, 182, 0.774);
+      // }
+    }
+
+    .outlineRed {
+      border: 2px solid rgba(224, 52, 52, 0.555);
+
+      // &:focus {
+      //   border: 0;
+      //   outline: 1px solid #2A58AE;
+      // }
+    }
+
+    option {
+      color: #707070;
+    }
+
+    input:disabled,
+    select:disabled {
+      background-color: #fff;
+    }
+
+    .transparent {
+      color: #70707069;
+    }
+
+    .opaque {
+      color: #707070;
+    }
+
+    .loader {
+      position: absolute;
+      top: 50%;
+      left: 1.5rem;
+      z-index: 5;
+
+      @include respond(phone) {
+        top: 54%;
       }
     }
 
-    button:disabled {
-      visibility: hidden;
+    .validationErrorText {
+      font-size: 1.25rem;
+      padding-top: 4px;
+      color: rgba(255, 0, 0, 0.719);
+
+      @include respond(phone-large) {
+        display: none;
+      }
+    }
+    // }
+  }
+
+  button {
+    font-family: "Lato", sans-serif;
+    width: 37.9rem;
+    margin: 0 auto;
+    margin-top: 2rem;
+    font-size: 1.4rem;
+    outline: 0;
+    border: 0;
+    height: 4rem;
+    border-radius: 1rem;
+    color: #fff;
+    box-shadow: 3px 3px 6px #00000029;
+    background: transparent linear-gradient(90deg, #11998e 0%, #38ef7d 100%) 0%
+      0% no-repeat padding-box;
+
+    @include respond(phone-large) {
+      width: 30rem;
+      height: 3.6rem;
+    }
+
+    @include respond-custom(330px) {
+      width: 26rem;
+    }
+
+    &:active {
+      transform: translateY(3%);
+      box-shadow: 1px 1px 4px #00000029;
     }
   }
 
-  
+  button:disabled {
+    visibility: hidden;
+  }
+}

@@ -7,6 +7,6 @@ export const VerificationLoader = () => (
     <div className={style.flowDot}></div>
     <div className={style.flowDot}></div>
   </div>
-)
+);
 
 export default VerificationLoader;

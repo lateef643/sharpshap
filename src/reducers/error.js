@@ -1,13 +1,13 @@
 const initialState = {
   loading: false,
-  message: ""
+  message: "",
 };
 
 const errorReducer = (state = initialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case "SET_LOADING":
       return action.payload;
-    default: 
+    default:
       return state;
   }
 };

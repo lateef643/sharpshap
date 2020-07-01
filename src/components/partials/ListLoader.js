@@ -16,8 +16,8 @@ const ListLoader = () => {
       <div className={style.circleFadeDot}></div>
       <div className={style.circleFadeDot}></div>
       <div className={style.circleFadeDot}></div>
-  </div>
-  )
+    </div>
+  );
 };
 
 export default ListLoader;

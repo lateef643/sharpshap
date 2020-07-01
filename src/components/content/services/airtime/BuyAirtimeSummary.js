@@ -1,14 +1,19 @@
-import React, {useEffect} from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import formatToCurrency from "../../../../util/formatToCurrency";
 import Loader from "../../../partials/Loader";
 
-import style from './BuyAirtimeSummary.module.scss';
+import style from "./BuyAirtimeSummary.module.scss";
 
 export const BuyAirtimeSummary = (props) => {
-  const { AirtimePurchaseFormState, selectedNetworkName: network, loading, handleOnSubmit,
-    transactionCost } = props;
+  const {
+    AirtimePurchaseFormState,
+    selectedNetworkName: network,
+    loading,
+    handleOnSubmit,
+    transactionCost,
+  } = props;
   const { phone, amount } = AirtimePurchaseFormState;
 
   return (
@@ -17,7 +22,11 @@ export const BuyAirtimeSummary = (props) => {
         <h2 className={style.headingText}>Transaction Summary</h2>
       </div>
       <div>
-        {loading ? <p className={style.pending}>Please wait while your transaction is processing...</p> : undefined}
+        {loading ? (
+          <p className={style.pending}>
+            Please wait while your transaction is processing...
+          </p>
+        ) : undefined}
       </div>
       <div>
         <span>Phone Number:</span>
@@ -34,28 +43,37 @@ export const BuyAirtimeSummary = (props) => {
       <div>
         <span>Amount:</span>
         <span>{formatToCurrency(amount)}</span>
-      </div> 
+      </div>
       <div>
         <span>Transaction cost:</span>
         <span>{formatToCurrency(transactionCost)}</span>
-      </div>     
-      <div className={style.total}>    
+      </div>
+      <div className={style.total}>
         <span>Total:</span>
-        <span>{formatToCurrency(amount)}</span> 
-      </div> 
-      <button onClick={(e) => {
-        e.preventDefault();
-        handleOnSubmit();
-      }}>{loading ? <Loader size="small" color="white" position="center" /> : "Continue"}</button>       
-    </div>    
-)};
+        <span>{formatToCurrency(amount)}</span>
+      </div>
+      <button
+        onClick={(e) => {
+          e.preventDefault();
+          handleOnSubmit();
+        }}
+      >
+        {loading ? (
+          <Loader size="small" color="white" position="center" />
+        ) : (
+          "Continue"
+        )}
+      </button>
+    </div>
+  );
+};
 
 BuyAirtimeSummary.propTypes = {
   AirtimePurchaseFormState: PropTypes.object.isRequired,
   selectedNetworkName: PropTypes.string.isRequired,
   handleOnSubmit: PropTypes.func.isRequired,
   loading: PropTypes.bool.isRequired,
-  transactionCost: PropTypes.number.isRequired
-}
+  transactionCost: PropTypes.number.isRequired,
+};
 
 export default BuyAirtimeSummary;

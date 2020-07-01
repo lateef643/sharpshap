@@ -12,26 +12,29 @@ import RechargeCableStatus from "./RechargeCableStatus";
 import RechargeCableSummary from "./RechargeCableSummary";
 import FailedTransaction from "../../../shared/FailedTransaction";
 
-import styles from './RechargeCable.module.scss';
+import styles from "./RechargeCable.module.scss";
 
 export const RechargeCable = ({ changeCurrentPage }) => {
   const TRANSACTION_COST = 0;
   let renderedComponent;
   const [componentToRender, setComponentToRender] = useState("form");
-  const [RechargeCableFormState, dispatch] = useReducer(RechargeCableReducer, initialFormState);
+  const [RechargeCableFormState, dispatch] = useReducer(
+    RechargeCableReducer,
+    initialFormState
+  );
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     changeCurrentPage({
       heading: "Recharge Cable",
-      search: false
+      search: false,
     });
   }, []);
 
   const getTransactionDate = (date) => {
     const dateString = date.toString();
-    const index = dateString.search("GMT");
+    // const index = dateString.search("GMT");
     return dateString.slice(0, 24);
   };
 
@@ -39,21 +42,27 @@ export const RechargeCable = ({ changeCurrentPage }) => {
     setLoading(true);
 
     let providerApi;
-    const { provider, smartCardNumber, amount, selectedPlanCode, selectedplanDuration } = RechargeCableFormState;
+    const {
+      provider,
+      smartCardNumber,
+      amount,
+      selectedPlanCode,
+      selectedplanDuration,
+    } = RechargeCableFormState;
 
     if (provider === "dstv" || provider === "gotv") {
       providerApi = VEND_MULTICHOICE;
     } else if (provider === "startimes") {
       providerApi = VEND_STARTIMES;
     }
-    
+
     const payload = {
       smartcard: smartCardNumber,
       amount,
       customer_name: "MOBILE",
       product_code: selectedPlanCode,
       period: selectedplanDuration,
-      service: provider      
+      service: provider,
     };
 
     (async function vendCable() {
@@ -62,60 +71,64 @@ export const RechargeCable = ({ changeCurrentPage }) => {
         const successData = res.data.data;
         const date = new Date();
         const transactionDate = getTransactionDate(date);
-  
+
         setLoading(false);
         setSuccessData({ ...successData, date: transactionDate });
         setComponentToRender("success");
-      } catch(e) {
+      } catch (e) {
         setLoading(false);
-        setComponentToRender("failed");   
+        setComponentToRender("failed");
       }
-    })(); 
+    })();
   };
 
-  switch(componentToRender) {
+  switch (componentToRender) {
     case "form":
-      renderedComponent = <RechargeCableForm
-        RechargeCableFormState={RechargeCableFormState}
-        dispatch={dispatch}
-        setComponentToRender={setComponentToRender}
-      />;
+      renderedComponent = (
+        <RechargeCableForm
+          RechargeCableFormState={RechargeCableFormState}
+          dispatch={dispatch}
+          setComponentToRender={setComponentToRender}
+        />
+      );
       break;
     case "summary":
-      renderedComponent = <RechargeCableSummary 
-        RechargeCableFormState={RechargeCableFormState}
-        loading={loading}
-        handleOnSubmit={handleOnSubmit}
-        transactionCost={TRANSACTION_COST}
-      />;
+      renderedComponent = (
+        <RechargeCableSummary
+          RechargeCableFormState={RechargeCableFormState}
+          loading={loading}
+          handleOnSubmit={handleOnSubmit}
+          transactionCost={TRANSACTION_COST}
+        />
+      );
       break;
     case "success":
-      renderedComponent = <RechargeCableStatus 
-        successData={successData}
-        setComponentToRender={setComponentToRender}
-        transactionCost={TRANSACTION_COST}
-      />;
+      renderedComponent = (
+        <RechargeCableStatus
+          successData={successData}
+          setComponentToRender={setComponentToRender}
+          transactionCost={TRANSACTION_COST}
+        />
+      );
+      break;
     case "failed":
       renderedComponent = <FailedTransaction />;
       break;
     default:
       renderedComponent = null;
-    }
+  }
 
-  return (
-  <div className={styles.container}>
-    {renderedComponent}
-  </div>
-)}
+  return <div className={styles.container}>{renderedComponent}</div>;
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
-  }
-}
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+  };
+};
 
 RechargeCable.propTypes = {
-  changeCurrentPage: PropTypes.func.isRequired
-}
+  changeCurrentPage: PropTypes.func.isRequired,
+};
 
 export default connect(undefined, mapDispatchToProps)(RechargeCable);

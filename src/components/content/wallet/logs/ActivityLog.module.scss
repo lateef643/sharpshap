@@ -24,14 +24,14 @@
     padding: 1.5rem 2rem;
     background-color: #fff;
     text-align: left;
-  
+
     span {
       flex: 1 0 11%;
     }
   }
 
   > .card {
-    box-shadow: .5rem .5rem .5rem #00000029;
+    box-shadow: 0.5rem 0.5rem 0.5rem #00000029;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -39,12 +39,12 @@
     height: 5rem;
     padding: 1rem 2rem;
     background-color: #fff;
-    margin-bottom: .3rem;
+    margin-bottom: 0.3rem;
 
     span {
       flex: 0 1 13%;
     }
-  
+
     &:hover {
       transform: scale(1.02);
     }
@@ -52,7 +52,6 @@
 }
 
 .status {
-
   span {
     border-radius: 100%;
     width: 1rem;
@@ -62,15 +61,15 @@
 }
 
 .pending {
-  background-color: #FE8B0C;
+  background-color: #fe8b0c;
 }
 
 .failed {
-  background-color: #FF0000;
+  background-color: #ff0000;
 }
 
 .success {
-  background-color: #3AC962;
+  background-color: #3ac962;
 }
 
 .marginLeft {
