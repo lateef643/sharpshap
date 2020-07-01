@@ -27,6 +27,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
   const [loading, setLoading] = useState(false);
   const [verificationLoading, setVerificationLoading] = useState(false);
   const [cashCallCompleteStatus, setCashCallCompleteStatus] = useState(null);
+  const [error, setError] = useState("");
 
   useEffect(() => {
     changeCurrentPage({
@@ -111,11 +112,15 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       };
 
       try {
-        await Axios.post(POST_OPPORTUNITY, req);
-        setVerificationLoading(false);
-        setStatus("completed");
+        const res = await Axios.post(POST_OPPORTUNITY, req);
+
+        if (res) {
+          setVerificationLoading(false);
+          setStatus("completed");
+        }
       } catch (e) {
         setVerificationLoading(false);
+        setError(e.response.message);
       }
     })();
   };
@@ -140,8 +145,8 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       };
 
       try {
-        await Axios.post(INITIATE_PHYSICAL_CASHCALL, req);
-        setStatus("verification");
+        const res = await Axios.post(INITIATE_PHYSICAL_CASHCALL, req);
+        if (res) setStatus("verification");
       } catch (e) {
         setStatus("list");
       }
@@ -160,11 +165,15 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       };
 
       try {
-        await Axios.post(ACCEPT_OPPORTUNITY, req);
-        setVerificationLoading(false);
-        setStatus("completed");
+        const res = await Axios.post(ACCEPT_OPPORTUNITY, req);
+
+        if (res) {
+          setVerificationLoading(false);
+          setStatus("completed");
+        }
       } catch (e) {
         setVerificationLoading(false);
+        setError(e.response.message);
       }
     })();
   };
@@ -197,9 +206,12 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       };
 
       try {
-        await Axios.post(RELEASE_FUNDS, req);
-        setVerificationLoading(false);
-        setStatus("completed");
+        const res = await Axios.post(RELEASE_FUNDS, req);
+
+        if (res) {
+          setVerificationLoading(false);
+          setStatus("completed");
+        }
       } catch (e) {
         setVerificationLoading(false);
         // console.log(e.response);
@@ -217,9 +229,12 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       };
 
       try {
-        await Axios.post(CANCEL_CASHCALL, req);
-        setVerificationLoading(false);
-        setStatus("completed");
+        const res = await Axios.post(CANCEL_CASHCALL, req);
+
+        if (res) {
+          setVerificationLoading(false);
+          setStatus("completed");
+        }
       } catch (e) {
         setVerificationLoading(false);
         // console.log(e.response);
@@ -260,6 +275,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
               cancelCashcall={cancelCashcall}
               releaseFunds={releaseFunds}
               cashCallCompleteStatus={cashCallCompleteStatus}
+              error={error}
             />
           ),
         }[status]
