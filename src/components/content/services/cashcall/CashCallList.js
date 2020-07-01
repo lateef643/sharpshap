@@ -34,6 +34,8 @@ export const CashCallList = ({
         if (!isCancelled && cashCallList.length !== 0) {
           setLoading(false);
           setCashCallList(cashCallList);
+        } else if (!isCancelled && cashCallList.length === 0) {
+          setLoading(false);
         }
       } catch (e) {
         if (!isCancelled) {
@@ -88,6 +90,11 @@ export const CashCallList = ({
       {loading && (
         <div className={styles.loaderContainer}>
           <ListLoader />
+        </div>
+      )}
+      {!loading && cashCallList.length === 0 && (
+        <div className={styles.noCashcalls}>
+          No cashcalls available at the moment, please try again later.
         </div>
       )}
       {!loading && cashCallList.length > 0 && (
