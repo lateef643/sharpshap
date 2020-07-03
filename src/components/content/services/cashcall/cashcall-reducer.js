@@ -31,9 +31,9 @@ const cashCallReducer = (state, { type, payload }) => {
     case "UPDATE_ACCEPT_CASHCALL_STATE":
       return { ...state, accept: { ...state.accept, ...payload } };
     case "UPDATE_CANCEL_CASHCALL_STATE":
-      return { ...state, accept: { ...state.accept, ...payload } };
+      return { ...state, cancel: { ...state.cancel, ...payload } };
     case "UPDATE_RELEASE_FUNDS_STATE":
-      return { ...state, accept: { ...state.accept, ...payload } };
+      return { ...state, release: { ...state.release, ...payload } };
     default:
       return state;
   }
