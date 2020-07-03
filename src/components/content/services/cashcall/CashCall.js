@@ -28,12 +28,24 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
   const [verificationLoading, setVerificationLoading] = useState(false);
   const [cashCallCompleteStatus, setCashCallCompleteStatus] = useState(null);
   const [error, setError] = useState("");
+  const [agentLocation, setAgentLocation] = useState(null);
 
   useEffect(() => {
     changeCurrentPage({
       heading: "Cash Call ",
       search: false,
     });
+  }, []);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setAgentLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    }
   }, []);
 
   useEffect(() => {
@@ -109,6 +121,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       const req = {
         reference,
         token,
+        agentLocation,
       };
 
       try {
@@ -162,6 +175,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       const req = {
         reference,
         token,
+        agentLocation,
       };
 
       try {
