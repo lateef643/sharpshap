@@ -126,7 +126,7 @@ export const CashCallList = ({
               <span className={styles.itemSix}>{cashcall.status}</span>
               {/* Rendering three button types depending on transaction status */}
               <div className={styles.itemSeven}>
-                {cashcall.type === "liquid" && cashcall.matched !== 0 ? (
+                {cashcall.type === "physical" ? (
                   <>
                     <button
                       className={`${styles.button} ${styles.cancelButton}`}
@@ -141,7 +141,9 @@ export const CashCallList = ({
                       Release funds
                     </button>
                   </>
-                ) : cashcall.type === "liquid" && cashcall.matched === 0 ? (
+                ) : cashCallType === "2" &&
+                  cashcall.type === "liquid" &&
+                  cashcall.matched === 0 ? (
                   <button
                     onClick={() => handleSelectOpportunity(cashcall)}
                     className={`${styles.button}`}
@@ -153,7 +155,11 @@ export const CashCallList = ({
                     disabled
                     className={`${styles.button} ${styles.buttonDisabled}`}
                   >
-                    Unavailable
+                    {cashCallType === "2" && cashcall.type !== "liquid"
+                      ? "Unavailable"
+                      : cashCallType === "3"
+                      ? "Self"
+                      : "Matched"}
                   </button>
                 )}
               </div>
