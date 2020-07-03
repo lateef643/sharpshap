@@ -109,7 +109,6 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
         });
         setStatus("verification");
       } catch (e) {
-        console.log(e.response);
         setLoading(false);
       }
     })();
