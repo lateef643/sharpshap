@@ -94,6 +94,8 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
         amount,
         phone,
         type: "liquid",
+        latitude: agentLocation.latitude,
+        longitude: agentLocation.longitude,
       };
 
       try {
@@ -121,7 +123,6 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       const req = {
         reference,
         token,
-        agentLocation,
       };
 
       try {
@@ -155,6 +156,8 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
         amount,
         phone,
         type: "physical",
+        latitude: agentLocation.latitude,
+        longitude: agentLocation.longitude,
       };
 
       try {
@@ -175,7 +178,6 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       const req = {
         reference,
         token,
-        agentLocation,
       };
 
       try {
