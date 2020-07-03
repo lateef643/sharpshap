@@ -6,6 +6,7 @@ import { GET_CASHCALL_LIST } from "../../../../store/api/constants";
 import formatToCurrency from "../../../../util/formatToCurrency";
 
 import styles from "./CashCallList.module.scss";
+import CashCallSuccess from "./CashCallSuccess";
 
 export const CashCallList = ({
   cashCallType,
@@ -126,7 +127,8 @@ export const CashCallList = ({
               <span className={styles.itemSix}>{cashcall.status}</span>
               {/* Rendering three button types depending on transaction status */}
               <div className={styles.itemSeven}>
-                {cashcall.type === "physical" ? (
+                {cashcall.type === "physical" &&
+                cashcall.status !== "accepted" ? (
                   <>
                     <button
                       className={`${styles.button} ${styles.cancelButton}`}
@@ -157,8 +159,10 @@ export const CashCallList = ({
                   >
                     {cashCallType === "2" && cashcall.type !== "liquid"
                       ? "Unavailable"
-                      : cashCallType === "3"
+                      : cashCallType === "3" && cashcall.status !== "accepted"
                       ? "Self"
+                      : cashcall.status === "accepted"
+                      ? "Completed"
                       : "Matched"}
                   </button>
                 )}

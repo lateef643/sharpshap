@@ -269,6 +269,8 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
         reference,
       };
 
+      console.log(req);
+
       try {
         const res = await Axios.post(CANCEL_CASHCALL, req);
 
