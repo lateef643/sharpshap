@@ -61,28 +61,52 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
   }, []);
 
   useEffect(() => {
-    if (!isNaN(parseInt(cashCallState.post.amount))) {
-      const transactionCost = 0.1 * cashCallState.post.amount;
-      const total = +cashCallState.post.amount + transactionCost;
+    if (cashCallType === "1") {
+      if (!isNaN(parseInt(cashCallState.post.amount))) {
+        const transactionCost = 0.1 * cashCallState.post.amount;
+        const total = +cashCallState.post.amount + transactionCost;
 
-      dispatch({
-        type: "UPDATE_POST_CASHCALL_STATE",
-        payload: { adminFee: transactionCost },
-      });
+        dispatch({
+          type: "UPDATE_POST_CASHCALL_STATE",
+          payload: { adminFee: transactionCost },
+        });
 
-      dispatch({
-        type: "UPDATE_POST_CASHCALL_STATE",
-        payload: { total },
-      });
-    } else {
-      const total = 0;
+        dispatch({
+          type: "UPDATE_POST_CASHCALL_STATE",
+          payload: { total },
+        });
+      } else {
+        const total = 0;
 
-      dispatch({
-        type: "UPDATE_POST_CASHCALL_STATE",
-        payload: { total },
-      });
+        dispatch({
+          type: "UPDATE_POST_CASHCALL_STATE",
+          payload: { total },
+        });
+      }
+    } else if (cashCallType === "2") {
+      if (!isNaN(parseInt(cashCallState.accept.amount))) {
+        const transactionCost = 0.1 * cashCallState.accept.amount;
+        const total = +cashCallState.accept.amount + transactionCost;
+
+        dispatch({
+          type: "UPDATE_ACCEPT_CASHCALL_STATE",
+          payload: { adminFee: transactionCost },
+        });
+
+        dispatch({
+          type: "UPDATE_ACCEPT_CASHCALL_STATE",
+          payload: { total },
+        });
+      } else {
+        const total = 0;
+
+        dispatch({
+          type: "UPDATE_ACCEPT_CASHCALL_STATE",
+          payload: { total },
+        });
+      }
     }
-  }, [cashCallState.post.amount]);
+  }, [cashCallState.post.amount, cashCallState.accept.amount]);
 
   const initiateLiquidCashCall = () => {
     setLoading(true);
@@ -150,7 +174,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
 
   const initiatePhysicalCashCall = () => {
     (async function initiateCashcall() {
-      const { amount, phone } = cashCallState.accept;
+      const { amount, phone, reference } = cashCallState.accept;
 
       const req = {
         amount,
@@ -158,6 +182,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
         type: "physical",
         latitude: agentLocation.latitude,
         longitude: agentLocation.longitude,
+        reference,
       };
 
       try {
