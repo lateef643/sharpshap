@@ -98,9 +98,6 @@ export const Sidebar = ({ firstname, lastname, id, startLogout }) => {
               >
                 <p>Transactions Log</p>
               </NavLink>
-              <NavLink to="/cash-call/3" className={styles.linkSecondaryItem}>
-                <p>Cashcalls log</p>
-              </NavLink>
             </div>
           </div>
           <NavLink to="/profile" className={styles.linkItem}>
