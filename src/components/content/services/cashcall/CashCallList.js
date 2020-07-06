@@ -9,7 +9,6 @@ import {
 import formatToCurrency from "../../../../util/formatToCurrency";
 
 import styles from "./CashCallList.module.scss";
-import CashCallSuccess from "./CashCallSuccess";
 
 export const CashCallList = ({
   cashCallType,
@@ -17,21 +16,10 @@ export const CashCallList = ({
   setStatus,
   selectOpportunity,
   setCashCallCompleteStatus,
+  agentLocation,
 }) => {
   const [cashCallList, setCashCallList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [agentLocation, setAgentLocation] = useState(null);
-
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setAgentLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      });
-    }
-  }, []);
 
   useEffect(() => {
     let isCancelled = false;
@@ -42,20 +30,12 @@ export const CashCallList = ({
       api = cashCallType === "3" ? GET_CASHCALL_LIST : OPPORTUNITIES_LIST;
 
       try {
-        let res;
-
-        if (cashCallType === "3") {
-          res = await Axios.get(api);
-        }
-
-        if (cashCallType === "2") {
-          res = await Axios.get(api, {
-            headers: {
-              lat: agentLocation.latitude,
-              lng: agentLocation.longitude,
-            },
-          });
-        }
+        let res = await Axios.get(api, {
+          headers: {
+            lat: agentLocation.latitude,
+            lng: agentLocation.longitude,
+          },
+        });
 
         let cashCallList;
 
@@ -79,7 +59,7 @@ export const CashCallList = ({
     return () => {
       isCancelled = true;
     };
-  }, [agentLocation]);
+  });
 
   const handleSelectOpportunity = (cashcall) => {
     const { uuid, amount } = cashcall;
