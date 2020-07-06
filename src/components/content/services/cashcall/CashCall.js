@@ -300,6 +300,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
               cashCallType={cashCallType}
               setStatus={setStatus}
               setCashCallCompleteStatus={setCashCallCompleteStatus}
+              agentLocation={agentLocation}
             />
           ),
           completed: <CashCallSuccess cashCallType={cashCallType} />,
