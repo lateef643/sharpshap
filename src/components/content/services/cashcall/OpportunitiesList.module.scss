@@ -1,0 +1,124 @@
+.container {
+  padding-top: 2rem;
+  width: 93%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: #707087;
+  font-size: 1.4rem;
+  text-align: left;
+
+  > .loaderContainer {
+    position: fixed;
+    top: 48%;
+    left: 53.8%;
+    transform: translate(50%, 50%);
+  }
+
+  > .heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    padding: 1.5rem 2rem;
+    background-color: #fff;
+    text-align: left;
+    margin-bottom: 3px;
+  }
+
+  > .log {
+    box-shadow: 0.2rem 0.2rem 0.3rem #00000029;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    margin-bottom: 0.3rem;
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+
+  > .pagination {
+    margin: 2rem auto;
+    background-color: #fff;
+  }
+
+  .pagination span {
+    cursor: pointer;
+    color: #707070;
+    float: left;
+    padding: 8px 16px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+    border: 1px solid #ddd;
+  }
+
+  .pagination span.active {
+    background-color: #2a58ae;
+    color: white;
+    border: 1px solid #2a58ae;
+  }
+
+  .pagination span:disabled {
+    background-color: #2a58ae;
+    color: white;
+    border: 1px solid #2a58ae;
+  }
+}
+
+.itemOne {
+  flex: 0 0 5%;
+}
+
+.itemTwo {
+  flex: 0 0 15%;
+}
+
+.itemThree {
+  flex: 0 0 10%;
+}
+
+.itemFour {
+  flex: 0 0 12%;
+  text-transform: capitalize;
+}
+
+.itemFive {
+  flex: 0 0 15%;
+}
+
+.itemSix {
+  flex: 0 0 10%;
+  text-transform: capitalize;
+}
+
+.itemSeven {
+  flex: 0 0 20%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  height: 3rem;
+  border-radius: 5px;
+  border: 0;
+  width: 10rem;
+  background-color: #2a58ae;
+  color: #eee;
+  padding: 0.5rem;
+}
+
+.cancelButton {
+  background-color: #ff4242;
+}
+
+.buttonDisabled {
+  background-color: rgb(199, 199, 199);
+}

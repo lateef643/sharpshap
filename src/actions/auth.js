@@ -30,8 +30,6 @@ export const startLoginUser = (payload) => (dispatch) => {
       const token = res.data.data.token;
       const walletBalance = res.data.data.wallet.current_bal;
       const transactionSettings = res.data.data.settings;
-      // const { agent, phone, is_default } = user;
-      // const { first_name, last_name, user_id, date_of_birth, email, business_name, business_address, business_phone} = agent;
 
       if (!isEmpty(user)) {
         const authDetails = {
