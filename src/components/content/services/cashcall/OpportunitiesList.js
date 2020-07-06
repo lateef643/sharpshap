@@ -2,10 +2,7 @@ import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
 import ListLoader from "../../../partials/ListLoader";
-import {
-  GET_CASHCALL_LIST,
-  OPPORTUNITIES_LIST,
-} from "../../../../store/api/constants";
+import { GET_CASHCALL_LIST } from "../../../../store/api/constants";
 import formatToCurrency from "../../../../util/formatToCurrency";
 
 import styles from "./CashCallList.module.scss";
@@ -20,49 +17,20 @@ export const CashCallList = ({
 }) => {
   const [cashCallList, setCashCallList] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [agentLocation, setAgentLocation] = useState(null);
-
-  useEffect(() => {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.getCurrentPosition(function (position) {
-        setAgentLocation({
-          latitude: position.coords.latitude,
-          longitude: position.coords.longitude,
-        });
-      });
-    }
-  }, []);
 
   useEffect(() => {
     let isCancelled = false;
 
     (async function getCashcallList() {
-      let api;
-
-      api = cashCallType === "3" ? GET_CASHCALL_LIST : OPPORTUNITIES_LIST;
-
       try {
-        let res;
-
-        if (cashCallType === "3") {
-          res = await Axios.get(api);
-        }
-
-        if (cashCallType === "2") {
-          res = await Axios.get(api, {
-            headers: {
-              lat: agentLocation.latitude,
-              lng: agentLocation.longitude,
-            },
-          });
-        }
-
+        const res = await Axios.get(GET_CASHCALL_LIST);
         let cashCallList;
 
         //Rendering list from two paths
         //i. From the accept opportunity route - cashcalltype is 2, this displays a list of all cashcalls
         //11. From sidebar here cashcalltype is 3, this displays a list of personal cashcalls
-        cashCallList = cashCallType === "3" ? res.data.data : res.data.data;
+        cashCallList =
+          cashCallType === "3" ? res.data.data.personal : res.data.data.liquid;
 
         if (!isCancelled && cashCallList.length !== 0) {
           setLoading(false);
@@ -79,7 +47,7 @@ export const CashCallList = ({
     return () => {
       isCancelled = true;
     };
-  }, [agentLocation]);
+  }, []);
 
   const handleSelectOpportunity = (cashcall) => {
     const { uuid, amount } = cashcall;

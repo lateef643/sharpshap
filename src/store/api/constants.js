@@ -176,7 +176,7 @@ export const POST_OPPORTUNITY = `${path}/cashcall/request`;
 export const GET_CASHCALL_LIST = `${path}/cashcall`;
 
 //cash call
-export const INITIATE_PHYSICAL_CASHCALL = `${path}/cashcall/match`;
+export const INITIATE_PHYSICAL_CASHCALL = `${path}/cashcall/initiate-accept`;
 
 //Accept cash
 export const ACCEPT_OPPORTUNITY = `${path}/cashcall/accept`;
@@ -186,3 +186,6 @@ export const RELEASE_FUNDS = `${path}/cashcall/release-funds`;
 
 //Cancel cashcall
 export const CANCEL_CASHCALL = `${path}/cashcall/cancel-funds`;
+
+//List opportunities
+export const OPPORTUNITIES_LIST = `${path}/cashcall/opportunities`;

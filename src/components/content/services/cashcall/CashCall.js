@@ -112,14 +112,13 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
     setLoading(true);
 
     (async function initiateCashcall() {
-      const { amount, phone } = cashCallState.post;
+      const { amount } = cashCallState.post;
 
       const req = {
         amount,
-        phone,
         type: "liquid",
-        latitude: agentLocation.latitude,
-        longitude: agentLocation.longitude,
+        lat: `${agentLocation.latitude}`,
+        lng: `${agentLocation.longitude}`,
       };
 
       try {
@@ -180,8 +179,6 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
         amount,
         phone,
         type: "physical",
-        latitude: agentLocation.latitude,
-        longitude: agentLocation.longitude,
         reference,
       };
 
@@ -268,8 +265,6 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
         token,
         reference,
       };
-
-      console.log(req);
 
       try {
         const res = await Axios.post(CANCEL_CASHCALL, req);
