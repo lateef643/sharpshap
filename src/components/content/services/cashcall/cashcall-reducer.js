@@ -1,7 +1,6 @@
 export const initialState = {
   post: {
     amount: "",
-    phone: "",
     adminFee: "",
     total: "",
     token: "",

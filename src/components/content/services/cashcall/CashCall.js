@@ -21,9 +21,11 @@ import CashCallSuccess from "./CashCallSuccess";
 import styles from "./CashCall.module.scss";
 
 export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
-  const cashCallType = match.params.id;
+  const cashCallType = match.params.type;
   const [cashCallState, dispatch] = useReducer(cashCallReducer, initialState);
-  const [status, setStatus] = useState(cashCallType === "1" ? "form" : "list");
+  const [status, setStatus] = useState(
+    cashCallType === "post" ? "form" : "list"
+  );
   const [loading, setLoading] = useState(false);
   const [verificationLoading, setVerificationLoading] = useState(false);
   const [cashCallCompleteStatus, setCashCallCompleteStatus] = useState(null);
@@ -32,10 +34,10 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
 
   useEffect(() => {
     changeCurrentPage({
-      heading: "Cash Call ",
+      heading: "Cash Call",
       search: false,
     });
-  }, []);
+  }, [changeCurrentPage]);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -49,19 +51,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
   }, []);
 
   useEffect(() => {
-    dispatch({
-      type: "UPDATE_POST_CASHCALL_STATE",
-      payload: { phone: agentPhoneNumber },
-    });
-
-    dispatch({
-      type: "UPDATE_ACCEPT_CASHCALL_STATE",
-      payload: { phone: agentPhoneNumber },
-    });
-  }, []);
-
-  useEffect(() => {
-    if (cashCallType === "1") {
+    if (cashCallType === "post") {
       if (!isNaN(parseInt(cashCallState.post.amount))) {
         const transactionCost = 0.1 * cashCallState.post.amount;
         const total = +cashCallState.post.amount + transactionCost;
@@ -83,7 +73,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
           payload: { total },
         });
       }
-    } else if (cashCallType === "2") {
+    } else if (cashCallType === "accept") {
       if (!isNaN(parseInt(cashCallState.accept.amount))) {
         const transactionCost = 0.1 * cashCallState.accept.amount;
         const total = +cashCallState.accept.amount + transactionCost;
@@ -217,17 +207,17 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
   };
 
   const handleOnRequestFormSubmit = () => {
-    if (cashCallType === "1") {
+    if (cashCallType === "post") {
       initiateLiquidCashCall();
-    } else if (cashCallType === "2") {
+    } else if (cashCallType === "accept") {
       initiatePhysicalCashCall();
     }
   };
 
   const handleOpportunity = () => {
-    if (cashCallType === "1") {
+    if (cashCallType === "post") {
       postOpportunity();
-    } else if (cashCallType === "2") {
+    } else if (cashCallType === "accept") {
       acceptOpportunity();
     }
   };

@@ -22,18 +22,16 @@ export const CashCallList = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    let isCancelled = false;
-
     (async function getCashcallList() {
       let api;
 
-      api = cashCallType === "3" ? GET_CASHCALL_LIST : OPPORTUNITIES_LIST;
+      api = cashCallType === "view" ? GET_CASHCALL_LIST : OPPORTUNITIES_LIST;
 
       try {
         let res = await Axios.get(api, {
           headers: {
-            lat: agentLocation.latitude,
-            lng: agentLocation.longitude,
+            lat: `${agentLocation.latitude}`,
+            lng: `${agentLocation.longitude}`,
           },
         });
 
@@ -42,24 +40,16 @@ export const CashCallList = ({
         //Rendering list from two paths
         //i. From the accept opportunity route - cashcalltype is 2, this displays a list of all cashcalls
         //11. From sidebar here cashcalltype is 3, this displays a list of personal cashcalls
-        cashCallList = cashCallType === "3" ? res.data.data : res.data.data;
 
-        if (!isCancelled && cashCallList.length !== 0) {
-          setLoading(false);
-          setCashCallList(cashCallList);
-        } else if (!isCancelled && cashCallList.length === 0) {
-          setLoading(false);
-        }
+        cashCallList = res.data.data;
+
+        setCashCallList(cashCallList);
+        setLoading(false);
       } catch (e) {
-        if (!isCancelled) {
-          setLoading(true);
-        }
+        setLoading(false);
       }
     })();
-    return () => {
-      isCancelled = true;
-    };
-  });
+  }, [agentLocation]);
 
   const handleSelectOpportunity = (cashcall) => {
     const { uuid, amount } = cashcall;

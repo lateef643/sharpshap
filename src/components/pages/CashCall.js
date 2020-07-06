@@ -17,19 +17,19 @@ export const AirtimeData = ({ changeCurrentPage }) => {
     <div className={styles.container}>
       <div className={styles.cardContainer}>
         <Card
-          link="cash-call/1"
+          link="cash-call/post"
           text="Post cashcall"
           size="large"
           image={cashcall}
         />
         <Card
-          link="cash-call/2"
+          link="cash-call/accept"
           text="Accept cashcall"
           size="large"
           image={cashcall}
         />
         <Card
-          link="cash-call/3"
+          link="cash-call/view"
           text="View cashcalls"
           size="large"
           image={cashcall}

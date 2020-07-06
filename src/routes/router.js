@@ -127,7 +127,7 @@ const routes = [
     main: () => <CashCallPage />,
   },
   {
-    path: "/cash-call/:id",
+    path: "/cash-call/:type",
     main: (props) => <CashCall {...props} />,
   },
 ];
