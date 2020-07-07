@@ -22,16 +22,18 @@ export const CashCallList = ({
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    let isCancelled = false;
+
     (async function getCashcallList() {
       let api;
 
-      api = cashCallType === "view" ? GET_CASHCALL_LIST : OPPORTUNITIES_LIST;
+      api = cashCallType === "3" ? GET_CASHCALL_LIST : OPPORTUNITIES_LIST;
 
       try {
         let res = await Axios.get(api, {
           headers: {
-            lat: `${agentLocation.latitude}`,
-            lng: `${agentLocation.longitude}`,
+            lat: agentLocation.latitude,
+            lng: agentLocation.longitude,
           },
         });
 
@@ -40,15 +42,23 @@ export const CashCallList = ({
         //Rendering list from two paths
         //i. From the accept opportunity route - cashcalltype is 2, this displays a list of all cashcalls
         //11. From sidebar here cashcalltype is 3, this displays a list of personal cashcalls
+        cashCallList = cashCallType === "3" ? res.data.data : res.data.data;
 
-        cashCallList = res.data.data;
-
-        setCashCallList(cashCallList);
-        setLoading(false);
+        if (!isCancelled && cashCallList.length !== 0) {
+          setLoading(false);
+          setCashCallList(cashCallList);
+        } else if (!isCancelled && cashCallList.length === 0) {
+          setLoading(false);
+        }
       } catch (e) {
-        setLoading(false);
+        if (!isCancelled) {
+          setLoading(true);
+        }
       }
     })();
+    return () => {
+      isCancelled = true;
+    };
   }, [agentLocation]);
 
   const handleSelectOpportunity = (cashcall) => {
@@ -130,7 +140,7 @@ export const CashCallList = ({
               {/* Rendering three button types depending on transaction status */}
               <div className={styles.itemSeven}>
                 {cashcall.type === "physical" &&
-                cashcall.status !== "accepted" ? (
+                cashcall.status !== "completed" ? (
                   <>
                     <button
                       className={`${styles.button} ${styles.cancelButton}`}
@@ -145,7 +155,7 @@ export const CashCallList = ({
                       Release funds
                     </button>
                   </>
-                ) : cashCallType === "accept" &&
+                ) : cashCallType === "2" &&
                   cashcall.type === "liquid" &&
                   cashcall.matched === 0 ? (
                   <button
@@ -159,12 +169,11 @@ export const CashCallList = ({
                     disabled
                     className={`${styles.button} ${styles.buttonDisabled}`}
                   >
-                    {cashCallType === "accept" && cashcall.type !== "liquid"
+                    {cashCallType === "2" && cashcall.type !== "liquid"
                       ? "Unavailable"
-                      : cashCallType === "view" &&
-                        cashcall.status !== "accepted"
+                      : cashCallType === "3" && cashcall.status !== "completed"
                       ? "Self"
-                      : cashcall.status === "accepted"
+                      : cashcall.status === "completed"
                       ? "Completed"
                       : "Matched"}
                   </button>

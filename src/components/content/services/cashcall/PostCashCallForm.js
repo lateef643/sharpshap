@@ -15,18 +15,16 @@ export const PostCashCallForm = ({
   cashCallCompleteStatus,
   error,
 }) => {
-  console.log(cashCallType, "a la carte");
-  console.log("ladida");
   const handleProceed = (e) => {
     e.preventDefault();
 
     const token =
-      cashCallType === "post"
+      cashCallType === "1"
         ? cashCallState.post.token
         : cashCallState.accept.token;
 
     if (
-      (cashCallType === "post" || cashCallType === "accept") &&
+      (cashCallType === "1" || cashCallType === "2") &&
       cashCallCompleteStatus === null &&
       token
     ) {
@@ -39,12 +37,12 @@ export const PostCashCallForm = ({
   };
 
   const handleUpdateState = ({ target }) => {
-    if (cashCallType === "post") {
+    if (cashCallType === "1") {
       dispatch({
         type: "UPDATE_POST_CASHCALL_STATE",
         payload: { [target.name]: target.value },
       });
-    } else if (cashCallType === "accept") {
+    } else if (cashCallType === "2") {
       dispatch({
         type: "UPDATE_ACCEPT_CASHCALL_STATE",
         payload: { [target.name]: target.value },
@@ -71,9 +69,9 @@ export const PostCashCallForm = ({
           <input
             name="token"
             value={
-              cashCallType === "post"
+              cashCallType === "1"
                 ? cashCallState.post.token
-                : cashCallType === "accept"
+                : cashCallType === "2"
                 ? cashCallState.accept.token
                 : cashCallCompleteStatus === "release"
                 ? cashCallState.release.token

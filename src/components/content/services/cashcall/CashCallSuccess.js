@@ -10,9 +10,9 @@ export const CashCallSuccess = ({ cashCallType, cashCallCompleteStatus }) => {
       <img src={check} alt="check icon" />
       <h3>Success!</h3>
       <p>
-        {cashCallType === "post"
+        {cashCallType === "1"
           ? "We will notify you immediately we match you to an agent."
-          : cashCallType === "accept"
+          : cashCallType === "2"
           ? "You have successfully accepted an opportunity, please check cashcall list to conclude transaction."
           : cashCallCompleteStatus === "cancel"
           ? "Cashcall cancelled"

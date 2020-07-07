@@ -20,12 +20,10 @@ import CashCallSuccess from "./CashCallSuccess";
 
 import styles from "./CashCall.module.scss";
 
-export const CashCall = ({ changeCurrentPage, match }) => {
-  const cashCallType = match.params.type;
+export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
+  const cashCallType = match.params.id;
   const [cashCallState, dispatch] = useReducer(cashCallReducer, initialState);
-  const [status, setStatus] = useState(
-    cashCallType === "post" ? "form" : "list"
-  );
+  const [status, setStatus] = useState(cashCallType === "1" ? "form" : "list");
   const [loading, setLoading] = useState(false);
   const [verificationLoading, setVerificationLoading] = useState(false);
   const [cashCallCompleteStatus, setCashCallCompleteStatus] = useState(null);
@@ -34,7 +32,7 @@ export const CashCall = ({ changeCurrentPage, match }) => {
 
   useEffect(() => {
     changeCurrentPage({
-      heading: "Cash Call",
+      heading: "Cash Call ",
       search: false,
     });
   }, []);
@@ -51,7 +49,19 @@ export const CashCall = ({ changeCurrentPage, match }) => {
   }, []);
 
   useEffect(() => {
-    if (cashCallType === "post") {
+    dispatch({
+      type: "UPDATE_POST_CASHCALL_STATE",
+      payload: { phone: agentPhoneNumber },
+    });
+
+    dispatch({
+      type: "UPDATE_ACCEPT_CASHCALL_STATE",
+      payload: { phone: agentPhoneNumber },
+    });
+  }, []);
+
+  useEffect(() => {
+    if (cashCallType === "1") {
       if (!isNaN(parseInt(cashCallState.post.amount))) {
         const transactionCost = 0.1 * cashCallState.post.amount;
         const total = +cashCallState.post.amount + transactionCost;
@@ -73,7 +83,7 @@ export const CashCall = ({ changeCurrentPage, match }) => {
           payload: { total },
         });
       }
-    } else if (cashCallType === "accept") {
+    } else if (cashCallType === "2") {
       if (!isNaN(parseInt(cashCallState.accept.amount))) {
         const transactionCost = 0.1 * cashCallState.accept.amount;
         const total = +cashCallState.accept.amount + transactionCost;
@@ -105,7 +115,7 @@ export const CashCall = ({ changeCurrentPage, match }) => {
       const { amount } = cashCallState.post;
 
       const req = {
-        amount,
+        amount: `${amount}`,
         type: "liquid",
         lat: `${agentLocation.latitude}`,
         lng: `${agentLocation.longitude}`,
@@ -163,11 +173,12 @@ export const CashCall = ({ changeCurrentPage, match }) => {
 
   const initiatePhysicalCashCall = () => {
     (async function initiateCashcall() {
-      const { amount, phone, reference } = cashCallState.accept;
+      const { amount, reference } = cashCallState.accept;
 
       const req = {
-        amount,
-        phone,
+        amount: `${amount}`,
+        lat: `${agentLocation.latitude}`,
+        lng: `${agentLocation.longitude}`,
         type: "physical",
         reference,
       };
@@ -189,7 +200,7 @@ export const CashCall = ({ changeCurrentPage, match }) => {
 
       const req = {
         reference,
-        token,
+        token: `${token}`,
       };
 
       try {
@@ -207,17 +218,17 @@ export const CashCall = ({ changeCurrentPage, match }) => {
   };
 
   const handleOnRequestFormSubmit = () => {
-    if (cashCallType === "post") {
+    if (cashCallType === "1") {
       initiateLiquidCashCall();
-    } else if (cashCallType === "accept") {
+    } else if (cashCallType === "2") {
       initiatePhysicalCashCall();
     }
   };
 
   const handleOpportunity = () => {
-    if (cashCallType === "post") {
+    if (cashCallType === "1") {
       postOpportunity();
-    } else if (cashCallType === "accept") {
+    } else if (cashCallType === "2") {
       acceptOpportunity();
     }
   };
@@ -318,6 +329,12 @@ export const CashCall = ({ changeCurrentPage, match }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  return {
+    agentPhoneNumber: state.auth.user.phone,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
@@ -327,4 +344,4 @@ const mapDispatchToProps = (dispatch) => {
 CashCall.propTypes = {
   changeCurrentPage: PropTypes.func.isRequired,
 };
-export default connect(undefined, mapDispatchToProps)(CashCall);
+export default connect(mapStateToProps, mapDispatchToProps)(CashCall);
