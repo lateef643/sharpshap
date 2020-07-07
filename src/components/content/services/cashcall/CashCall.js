@@ -20,7 +20,7 @@ import CashCallSuccess from "./CashCallSuccess";
 
 import styles from "./CashCall.module.scss";
 
-export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
+export const CashCall = ({ changeCurrentPage, match }) => {
   const cashCallType = match.params.type;
   const [cashCallState, dispatch] = useReducer(cashCallReducer, initialState);
   const [status, setStatus] = useState(
@@ -37,7 +37,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       heading: "Cash Call",
       search: false,
     });
-  }, [changeCurrentPage]);
+  }, []);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -293,7 +293,12 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
               agentLocation={agentLocation}
             />
           ),
-          completed: <CashCallSuccess cashCallType={cashCallType} />,
+          completed: (
+            <CashCallSuccess
+              cashCallType={cashCallType}
+              cashCallCompleteStatus={cashCallCompleteStatus}
+            />
+          ),
           verification: (
             <PostCashCallForm
               dispatch={dispatch}
@@ -313,12 +318,6 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    agentPhoneNumber: state.auth.user.phone,
-  };
-};
-
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
@@ -328,4 +327,4 @@ const mapDispatchToProps = (dispatch) => {
 CashCall.propTypes = {
   changeCurrentPage: PropTypes.func.isRequired,
 };
-export default connect(mapStateToProps, mapDispatchToProps)(CashCall);
+export default connect(undefined, mapDispatchToProps)(CashCall);

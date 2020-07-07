@@ -145,7 +145,7 @@ export const CashCallList = ({
                       Release funds
                     </button>
                   </>
-                ) : cashCallType === "2" &&
+                ) : cashCallType === "accept" &&
                   cashcall.type === "liquid" &&
                   cashcall.matched === 0 ? (
                   <button
@@ -159,9 +159,10 @@ export const CashCallList = ({
                     disabled
                     className={`${styles.button} ${styles.buttonDisabled}`}
                   >
-                    {cashCallType === "2" && cashcall.type !== "liquid"
+                    {cashCallType === "accept" && cashcall.type !== "liquid"
                       ? "Unavailable"
-                      : cashCallType === "3" && cashcall.status !== "accepted"
+                      : cashCallType === "view" &&
+                        cashcall.status !== "accepted"
                       ? "Self"
                       : cashcall.status === "accepted"
                       ? "Completed"
