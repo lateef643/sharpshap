@@ -4,7 +4,7 @@ import check from "../../../../assets/images/check.svg";
 
 import styles from "./CashCallSucess.module.scss";
 
-export const CashCallSuccess = ({ cashCallType }) => {
+export const CashCallSuccess = ({ cashCallType, cashCallCompleteStatus }) => {
   return (
     <div className={styles.container}>
       <img src={check} alt="check icon" />
@@ -14,6 +14,8 @@ export const CashCallSuccess = ({ cashCallType }) => {
           ? "We will notify you immediately we match you to an agent."
           : cashCallType === "2"
           ? "You have successfully accepted an opportunity, please check cashcall list to conclude transaction."
+          : cashCallCompleteStatus === "cancel"
+          ? "Cashcall cancelled"
           : "Cashcall completed successfully"}
       </p>
     </div>
