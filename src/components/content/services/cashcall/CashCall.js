@@ -115,7 +115,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
       const { amount } = cashCallState.post;
 
       const req = {
-        amount,
+        amount: `${amount}`,
         type: "liquid",
         lat: `${agentLocation.latitude}`,
         lng: `${agentLocation.longitude}`,
@@ -173,11 +173,12 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
 
   const initiatePhysicalCashCall = () => {
     (async function initiateCashcall() {
-      const { amount, phone, reference } = cashCallState.accept;
+      const { amount, reference } = cashCallState.accept;
 
       const req = {
-        amount,
-        phone,
+        amount: `${amount}`,
+        lat: `${agentLocation.latitude}`,
+        lng: `${agentLocation.longitude}`,
         type: "physical",
         reference,
       };
@@ -199,7 +200,7 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
 
       const req = {
         reference,
-        token,
+        token: `${token}`,
       };
 
       try {
@@ -303,7 +304,12 @@ export const CashCall = ({ changeCurrentPage, match, agentPhoneNumber }) => {
               agentLocation={agentLocation}
             />
           ),
-          completed: <CashCallSuccess cashCallType={cashCallType} />,
+          completed: (
+            <CashCallSuccess
+              cashCallType={cashCallType}
+              cashCallCompleteStatus={cashCallCompleteStatus}
+            />
+          ),
           verification: (
             <PostCashCallForm
               dispatch={dispatch}

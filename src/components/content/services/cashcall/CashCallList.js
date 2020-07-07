@@ -59,7 +59,7 @@ export const CashCallList = ({
     return () => {
       isCancelled = true;
     };
-  });
+  }, [agentLocation]);
 
   const handleSelectOpportunity = (cashcall) => {
     const { uuid, amount } = cashcall;
@@ -140,7 +140,7 @@ export const CashCallList = ({
               {/* Rendering three button types depending on transaction status */}
               <div className={styles.itemSeven}>
                 {cashcall.type === "physical" &&
-                cashcall.status !== "accepted" ? (
+                cashcall.status !== "completed" ? (
                   <>
                     <button
                       className={`${styles.button} ${styles.cancelButton}`}
@@ -171,9 +171,9 @@ export const CashCallList = ({
                   >
                     {cashCallType === "2" && cashcall.type !== "liquid"
                       ? "Unavailable"
-                      : cashCallType === "3" && cashcall.status !== "accepted"
+                      : cashCallType === "3" && cashcall.status !== "completed"
                       ? "Self"
-                      : cashcall.status === "accepted"
+                      : cashcall.status === "completed"
                       ? "Completed"
                       : "Matched"}
                   </button>
