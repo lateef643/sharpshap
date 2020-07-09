@@ -18,8 +18,6 @@ export const TransactionLog = ({
   uuid,
 }) => {
   const [transactions, setTransactions] = useState([]);
-  const [walletInfo, setWalletInfo] = useState(null);
-  const [businessName, setBusinessName] = useState("");
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [pageNumbers, setPageNumbers] = useState([]);
