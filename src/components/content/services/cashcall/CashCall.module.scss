@@ -1,5 +1,23 @@
+@keyframes slidein {
+  0% {
+    transform: translateY(-10%);
+    opacity: 0;
+  }
+
+  80% {
+    transform: translateY(-5%);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
 .container {
   padding-top: 3rem;
   font-size: 1.4rem;
   color: #707070;
+  // overflow: hidden;
+  animation: slidein 0.5s;
 }
