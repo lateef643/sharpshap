@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import Loader from "../partials/Loader";
 import { startLoginUser } from "../../actions/auth";
@@ -79,7 +80,7 @@ export const Login = (props) => {
                 <span>{error}</span>
               </p>
             ) : undefined}
-            <div className={styles.inputField}>
+            <div className={styles.formGroup}>
               <label htmlFor="phone"></label>
               <input
                 name="phone"
@@ -88,7 +89,7 @@ export const Login = (props) => {
                 onChange={handlephoneChange}
               />
             </div>
-            <div className={styles.inputField}>
+            <div className={styles.formGroup}>
               <label htmlFor="password"></label>
               <input
                 name="password"
@@ -103,6 +104,13 @@ export const Login = (props) => {
               >
                 <img src={!toggleReveal ? eyeOpen : eyeClosed} alt="eye icon" />
               </span>
+            </div>
+            <div className={styles.formGroup}>
+              <p>
+                <Link to="/forgot-password" className={styles.forgotPassword}>
+                  Forgot password?
+                </Link>
+              </p>
             </div>
             <button>
               {loading ? <Loader color="white" size="small" /> : "Login"}

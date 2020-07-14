@@ -19,6 +19,7 @@
   height: 100vh;
   font-size: 1.45rem;
   font-family: "Lato", sans-serif;
+  background-color: #fff;
 
   > .imageSection {
     flex: 0 0 30%;
@@ -120,7 +121,7 @@
           }
         }
 
-        .inputField {
+        .formGroup {
           margin-bottom: 3rem;
           width: 70%;
           position: relative;
@@ -171,11 +172,26 @@
             font-size: 1.4rem;
             color: #707070;
           }
+
+          p {
+            width: 100%;
+            text-align: right;
+
+            a {
+              color: #0e54aa;
+            }
+          }
+        }
+
+        .forgotPassword {
+          text-decoration: none;
+          font-size: 1.4rem;
+          color: rgb(10, 30, 119);
         }
 
         button {
           font-family: "Lato", sans-serif;
-          margin-top: 3rem;
+          // margin-top: 3rem;
           width: 70%;
           height: 5rem;
           color: #fff;
@@ -189,17 +205,17 @@
           letter-spacing: 1px;
 
           @include respond(tab) {
-            margin-top: 5vh;
+            // margin-top: 5vh;
           }
 
           @include respond(phone-large) {
-            margin-top: 2rem;
+            // margin-top: 2rem;
             width: 70%;
           }
 
           @include respond(phone-medium) {
             height: 4.7rem;
-            margin-top: 4vh;
+            // margin-top: 4vh;
           }
 
           @include respond(phone-small) {

@@ -17,14 +17,17 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
   const TRANSACTION_COST = 35;
   let renderedComponent;
   const [componentToRender, setComponentToRender] = useState("form");
-  const [FundsTransferFormState, dispatch] = useReducer(FundsTransferReducer, initialFormState);
+  const [FundsTransferFormState, dispatch] = useReducer(
+    FundsTransferReducer,
+    initialFormState
+  );
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     changeCurrentPage({
       heading: "Funds Transfer",
-      search: false
+      search: false,
     });
   }, []);
 
@@ -36,16 +39,22 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
 
   const handleOnSubmit = () => {
     setLoading(true);
-    
-    const { accountNumber, beneficiaryBankCode, amount } = FundsTransferFormState;
+
+    const {
+      accountNumber,
+      beneficiaryBankCode,
+      amount,
+      phone,
+    } = FundsTransferFormState;
 
     const req = {
-      "account_number" : accountNumber,
-      "bank" : beneficiaryBankCode,
-      "amount" : amount,
+      account_number: accountNumber,
+      bank: beneficiaryBankCode,
+      amount: amount,
+      phone: phone,
     };
 
-    (async function disburseFunds () {
+    (async function disburseFunds() {
       try {
         const res = await axios.post(DISBURSE_FUNDS, req);
         const reference = res.data.data.Data.TxnId;
@@ -53,71 +62,76 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
         const date = new Date();
         const transactionDate = getTransactionDate(date);
 
-        setSuccessData({ reference, status, transactionCost: TRANSACTION_COST, date: transactionDate });
+        setSuccessData({
+          reference,
+          status,
+          transactionCost: TRANSACTION_COST,
+          date: transactionDate,
+        });
         setLoading(false);
         setComponentToRender("completed");
-      } catch(err) {
+      } catch (err) {
         if (err.response && err.response.status === 403) {
-          setLoading(false);  
+          setLoading(false);
           setComponentToRender("failed");
         } else {
           setTimeout(() => {
             setLoading(false);
             setComponentToRender("failed");
           }, 7000);
-        }        
+        }
       }
     })();
   };
 
-  switch(componentToRender) {
+  switch (componentToRender) {
     case "form":
-      renderedComponent = 
-      <FundsTransferForm
-        FundsTransferFormState={FundsTransferFormState}
-        dispatch={dispatch}
-        setComponentToRender={setComponentToRender}
-        transactionCost={TRANSACTION_COST}
-      />;
+      renderedComponent = (
+        <FundsTransferForm
+          FundsTransferFormState={FundsTransferFormState}
+          dispatch={dispatch}
+          setComponentToRender={setComponentToRender}
+          transactionCost={TRANSACTION_COST}
+        />
+      );
       break;
     case "summary":
-      renderedComponent = 
-      <FundsTransferSummary
-        FundsTransferFormState={FundsTransferFormState}
-        loading={loading}
-        handleOnSubmit={handleOnSubmit}
-        transactionCost={TRANSACTION_COST}
-      />;
+      renderedComponent = (
+        <FundsTransferSummary
+          FundsTransferFormState={FundsTransferFormState}
+          loading={loading}
+          handleOnSubmit={handleOnSubmit}
+          transactionCost={TRANSACTION_COST}
+        />
+      );
       break;
     case "completed":
-      renderedComponent = 
-      <FundsTransferCompleted 
-        successData={successData}
-        setComponentToRender={setComponentToRender}
-        FundsTransferFormState={FundsTransferFormState}
-      />;
+      renderedComponent = (
+        <FundsTransferCompleted
+          successData={successData}
+          setComponentToRender={setComponentToRender}
+          FundsTransferFormState={FundsTransferFormState}
+        />
+      );
       break;
     case "failed":
       renderedComponent = <FailedTransaction />;
       break;
     default:
       renderedComponent = null;
-    }
+  }
 
-  return (
-  <div className={styles.container}>
-    {renderedComponent}
-  </div>
-)}
+  return <div className={styles.container}>{renderedComponent}</div>;
+};
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    changeCurrentPage: payload => dispatch(setCurrentPage(payload))
-  }
-}
+    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+  };
+};
 
 FundsTransfer.propTypes = {
-  changeCurrentPage: PropTypes.func.isRequired
-}
+  changeCurrentPage: PropTypes.func.isRequired,
+};
 
 export default connect(undefined, mapDispatchToProps)(FundsTransfer);
