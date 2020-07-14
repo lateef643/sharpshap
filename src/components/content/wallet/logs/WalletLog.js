@@ -160,9 +160,11 @@ export const WalletLog = ({ changeCurrentPage }) => {
                   : `${style.itemOne}`
               }
             >
-              <span className={style.mobileListItemHeading}>
-                Previous Balance:
-              </span>
+              {deviceWidth <= 600 && (
+                <span className={style.mobileListItemHeading}>
+                  Previous Balance:
+                </span>
+              )}
               <span>{formatToCurrency(log.previous_bal)}</span>
             </span>
             <span
@@ -175,7 +177,9 @@ export const WalletLog = ({ changeCurrentPage }) => {
                   : `${style.itemTwo}`
               }
             >
-              <span className={style.mobileListItemHeading}>Amount:</span>
+              {deviceWidth <= 600 && (
+                <span className={style.mobileListItemHeading}>Amount:</span>
+              )}
               <span>{formatToCurrency(log.amount)}</span>
             </span>
             <span
@@ -188,9 +192,11 @@ export const WalletLog = ({ changeCurrentPage }) => {
                   : `${style.itemThree}`
               }
             >
-              <span className={style.mobileListItemHeading}>
-                Current balance:
-              </span>
+              {deviceWidth <= 600 && (
+                <span className={style.mobileListItemHeading}>
+                  Current balance:
+                </span>
+              )}
               <span>{formatToCurrency(log.current_bal)}</span>
             </span>
             <span
@@ -203,7 +209,11 @@ export const WalletLog = ({ changeCurrentPage }) => {
                   : `${style.itemFour}`
               }
             >
-              <span className={style.mobileListItemHeading}>Description:</span>
+              {deviceWidth <= 600 && (
+                <span className={style.mobileListItemHeading}>
+                  Description:
+                </span>
+              )}
               <span>{log.description || "Nil"}</span>
             </span>
             <span
@@ -216,7 +226,9 @@ export const WalletLog = ({ changeCurrentPage }) => {
                   : `${style.itemFive}`
               }
             >
-              <span className={style.mobileListItemHeading}>Type:</span>
+              {deviceWidth <= 600 && (
+                <span className={style.mobileListItemHeading}>Type:</span>
+              )}
               <span>{log.type}</span>
             </span>
             <span
@@ -229,12 +241,16 @@ export const WalletLog = ({ changeCurrentPage }) => {
                   : `${style.itemSix}`
               }
             >
-              <span className={style.mobileListItemHeading}>Mode:</span>
+              {deviceWidth <= 600 && (
+                <span className={style.mobileListItemHeading}>Mode:</span>
+              )}
               <span>{log.mode}</span>
             </span>
             <span
               className={
-                deviceWidth < 600 && accordionToggle && activeListItem === index
+                deviceWidth <= 600 &&
+                accordionToggle &&
+                activeListItem === index
                   ? `${style.mobileListItem}`
                   : deviceWidth < 600 &&
                     (!accordionToggle || activeListItem !== index)
@@ -242,7 +258,9 @@ export const WalletLog = ({ changeCurrentPage }) => {
                   : `${style.itemSeven}`
               }
             >
-              <span className={style.mobileListItemHeading}>Date:</span>
+              {deviceWidth <= 600 && (
+                <span className={style.mobileListItemHeading}>Date:</span>
+              )}
               <span>{log.created_at}</span>
             </span>
           </div>
