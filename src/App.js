@@ -1,10 +1,11 @@
 import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { createBrowserHistory } from "history";
 
 import routes from "./routes/router";
 import Login from "./components/pages/Login";
+import ForgotPassword from "./components/pages/ForgotPassword";
 import Sidebar from "./components/partials/Sidebar";
 import Main from "./components/partials/Main";
 
@@ -16,7 +17,12 @@ export const App = ({ isAuthenticated }) => {
   return (
     <>
       {!isAuthenticated ? (
-        <Login />
+        <Router>
+          <Switch>
+            <Route path="/" component={Login} exact />
+            <Route path="/forgot-password" component={ForgotPassword} />
+          </Switch>
+        </Router>
       ) : (
         <Router>
           <div className="app">
