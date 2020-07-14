@@ -31,6 +31,12 @@ export const UPDATE_USER = `${path}/user`;
 //update user password - PUT
 export const UPDATE_USER_PASSWORD = `${path}/users`;
 
+//forgot password - PATCH
+export const FORGOT_PASSWORD = `${path}/user/password`;
+
+//update user password - PATCH
+export const RESET_PASSWORD = `${path}/user/token`;
+
 ///////AGENT DASHBOARD DATA/////////
 export const AGENT_DASHBOARD_DATA = `${path}/agent/dashboard`;
 
