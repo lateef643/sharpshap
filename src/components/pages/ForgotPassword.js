@@ -140,7 +140,7 @@ export const ForgotPassword = ({ history }) => {
             </label>
             <input
               name="new"
-              type="text"
+              type="password"
               value={password}
               onChange={handleInputChange}
               placeholder="New password"
@@ -155,7 +155,7 @@ export const ForgotPassword = ({ history }) => {
             </label>
             <input
               name="confirm"
-              type="text"
+              type="password"
               value={confirmPassword}
               onChange={handleInputChange}
               placeholder="Confirm password"

@@ -133,15 +133,37 @@ export const CashCallList = ({
                 {formatToCurrency(cashcall.admin_fee)}
               </span>
               <span className={styles.itemFour}>
-                {cashcall.type || "Cashcall"}
+                {cashCallType === "3" && cashcall.type === "physical"
+                  ? "Accepted"
+                  : cashCallType === "3" && cashcall.type === "liquid"
+                  ? "Posted"
+                  : cashcall.type}
               </span>
               <span className={styles.itemFive}>{cashcall.created_at}</span>
-              <span className={styles.itemSix}>{cashcall.status}</span>
+              <span
+                className={
+                  cashCallType === "3" && cashcall.status === "completed"
+                    ? `${styles.itemSix} ${styles.completed}`
+                    : cashCallType === "3" && cashcall.status === "pending"
+                    ? `${styles.itemSix} ${styles.progress}`
+                    : cashCallType === "2"
+                    ? `${styles.itemSix}`
+                    : `${styles.itemSix} ${styles.cancelled}`
+                }
+              >
+                {cashCallType === "3" && cashcall.status === "completed"
+                  ? "Completed"
+                  : cashCallType === "3" && cashcall.status === "pending"
+                  ? "In progress"
+                  : cashCallType === "2"
+                  ? cashcall.status
+                  : "Cancelled"}
+              </span>
               {/* Rendering three button types depending on transaction status */}
               <div className={styles.itemSeven}>
                 {cashCallType === "3" &&
                 cashcall.type === "physical" &&
-                cashcall.matched !== 1 ? (
+                cashcall.status === "pending" ? (
                   <>
                     <button
                       className={`${styles.button} ${styles.cancelButton}`}
@@ -164,20 +186,20 @@ export const CashCallList = ({
                     I want
                   </button>
                 ) : (
-                  <button
-                    disabled
-                    className={`${styles.button} ${styles.buttonDisabled}`}
-                  >
-                    {cashCallType === "3" &&
-                    cashcall.matched === 0 &&
-                    cashcall.type === "physical"
-                      ? "Cancelled"
-                      : cashCallType === "3" && cashcall.status !== "completed"
-                      ? "Self"
-                      : cashcall.status === "completed"
-                      ? "Completed"
-                      : "Matched"}
-                  </button>
+                  <>
+                    <button
+                      className={`${styles.button} ${styles.buttonDisabled}`}
+                      onClick={() => handleCancelCashcall(cashcall.uuid)}
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      className={`${styles.button} ${styles.buttonDisabled}`}
+                      onClick={() => handleReleaseFunds(cashcall.uuid)}
+                    >
+                      Release funds
+                    </button>
+                  </>
                 )}
               </div>
             </div>
