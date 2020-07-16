@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { setCurrentPage } from "../../actions/page";
 import Card from "../shared/Card";
-import cashcall from "../../assets/images/cashcall2.svg";
-import styles from "./AirtimeData.module.scss";
+import postcash from "../../assets/images/postcash.png";
+import viewcash from "../../assets/images/viewcash.png";
+import acceptcash from "../../assets/images/acceptcash.png";
+import styles from "./CashCall.module.scss";
 
-export const AirtimeData = ({ changeCurrentPage }) => {
+export const CashCall = ({ changeCurrentPage }) => {
   useEffect(() => {
     changeCurrentPage({
       heading: "Cash-call",
@@ -15,24 +17,25 @@ export const AirtimeData = ({ changeCurrentPage }) => {
 
   return (
     <div className={styles.container}>
+      <h2 className={styles.cashcallHeader}>What will you like to do?</h2>
       <div className={styles.cardContainer}>
         <Card
           link="cash-call/1"
-          text="Post cashcall"
+          text="Post cash"
           size="large"
-          image={cashcall}
+          image={postcash}
         />
         <Card
           link="cash-call/2"
-          text="Accept cashcall"
+          text="Accept Cash call"
           size="large"
-          image={cashcall}
+          image={acceptcash}
         />
         <Card
           link="cash-call/3"
-          text="View cashcalls"
+          text="My Transactions"
           size="large"
-          image={cashcall}
+          image={viewcash}
         />
       </div>
     </div>
@@ -45,4 +48,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(AirtimeData);
+export default connect(undefined, mapDispatchToProps)(CashCall);

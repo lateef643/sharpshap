@@ -28,7 +28,9 @@ const Download = (props) => {
     >
       <ExcelSheet data={transactionDataForExcel} name={filename}>
         {labels.map((label, index) => {
-          return <ExcelColumn label={label.name} value={label.value} />;
+          return (
+            <ExcelColumn key={index} label={label.name} value={label.value} />
+          );
         })}
       </ExcelSheet>
     </ExcelFile>

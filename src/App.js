@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
 import { createBrowserHistory } from "history";
@@ -14,12 +14,28 @@ import "./App.scss";
 export const App = ({ isAuthenticated }) => {
   const history = createBrowserHistory();
 
+  useEffect(() => {
+    let isCancelled = false;
+
+    if (!isCancelled) {
+      (function requestNotification() {
+        if (Notification.permission !== "denied") {
+          Notification.requestPermission();
+        }
+      })();
+    }
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
+
   return (
     <>
       {!isAuthenticated ? (
         <Router>
           <Switch>
-            <Route path="/" component={Login} exact />
+            <Route path="/" children={() => <Login />} exact />
             <Route path="/forgot-password" component={ForgotPassword} />
           </Switch>
         </Router>

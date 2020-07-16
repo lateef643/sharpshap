@@ -1,6 +1,6 @@
 import React from "react";
 
-import Login from "../components/pages/Login";
+// import Login from "../components/pages/Login";
 import Dashboard from "../components/pages/Dashboard";
 import Contact from "../components/pages/Contact";
 import Terminals from "../components/pages/Terminals";
@@ -32,10 +32,10 @@ const routes = [
     exact: true,
     main: () => <Dashboard />,
   },
-  {
-    path: "/login",
-    main: () => <Login />,
-  },
+  // {
+  //   path: "/login",
+  //   main: () => <Login />,
+  // },
   {
     path: "/contact-us",
     main: () => <Contact />,
