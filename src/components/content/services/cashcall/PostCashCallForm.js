@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 // import formatToCurrency from "../../../../util/formatToCurrency";
 
@@ -13,8 +13,9 @@ export const PostCashCallForm = ({
   cancelCashcall,
   releaseFunds,
   cashCallCompleteStatus,
-  error,
 }) => {
+  const [error, setError] = useState(false);
+
   const handleProceed = (e) => {
     e.preventDefault();
 
@@ -33,26 +34,32 @@ export const PostCashCallForm = ({
       releaseFunds();
     } else if (cashCallCompleteStatus === "cancel") {
       cancelCashcall();
+    } else if (!token) {
+      setError(true);
     }
   };
 
   const handleUpdateState = ({ target }) => {
     if (cashCallType === "1") {
+      setError(false);
       dispatch({
         type: "UPDATE_POST_CASHCALL_STATE",
         payload: { [target.name]: target.value },
       });
     } else if (cashCallType === "2") {
+      setError(false);
       dispatch({
         type: "UPDATE_ACCEPT_CASHCALL_STATE",
         payload: { [target.name]: target.value },
       });
     } else if (cashCallCompleteStatus === "release") {
+      setError(false);
       dispatch({
         type: "UPDATE_RELEASE_FUNDS_STATE",
         payload: { [target.name]: target.value },
       });
     } else if (cashCallCompleteStatus === "cancel") {
+      setError(false);
       dispatch({
         type: "UPDATE_CANCEL_CASHCALL_STATE",
         payload: { [target.name]: target.value },
@@ -63,7 +70,6 @@ export const PostCashCallForm = ({
   return (
     <div>
       <form onSubmit={handleProceed} className={styles.form} autoComplete="off">
-        <p>Please enter Code to debit your wallet</p>
         <div>
           <label>Verification Code</label>
           <input
@@ -83,9 +89,11 @@ export const PostCashCallForm = ({
             onChange={handleUpdateState}
           />
         </div>
-        <p className={styles.errorText}>{error}</p>
+        {error ? (
+          <p className={styles.errorText}>Please enter token</p>
+        ) : undefined}
         <button type="submit">
-          {verificationLoading ? "Please wait" : "Complete"}
+          {verificationLoading ? "Please wait..." : "Complete"}
         </button>
       </form>
     </div>

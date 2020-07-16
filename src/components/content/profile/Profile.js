@@ -179,7 +179,7 @@ export const Profile = (props) => {
             disabled={true}
             className={styles.outlineGrey}
             onChange={handleBusinessNameChange}
-            Value={businessName}
+            value={businessName}
           />
         </label>
         <label>

@@ -1,6 +1,6 @@
 import React from "react";
 
-import cashcall from "../../../../assets/images/cashcall2.svg";
+import postcash from "../../../../assets/images/postcash.png";
 
 import styles from "./CashCallRequestForm.module.scss";
 
@@ -59,7 +59,7 @@ export const CashCallRequestForm = ({
         className={styles.form}
         autoComplete="off"
       >
-        <img src={cashcall} alt="cash request icon" />
+        <img src={postcash} alt="cash request icon" />
         <div>
           <label>Amount</label>
           <input
@@ -74,7 +74,7 @@ export const CashCallRequestForm = ({
           />
         </div>
         <div>
-          <label>Cash Type</label>
+          <label>Cash Into Your Account</label>
           <select>
             <option value="">
               {cashCallType === "1"
@@ -98,7 +98,7 @@ export const CashCallRequestForm = ({
           />
         </div>
         <div>
-          <label>Total</label>
+          <label>Total Amount You Will Be Debited</label>
           <input
             name="total"
             value={
@@ -111,7 +111,9 @@ export const CashCallRequestForm = ({
             disabled
           />
         </div>
-        <button type="submit">{loading ? "Please wait..." : "Proceed"}</button>
+        <button type="submit">
+          {loading ? "Please wait..." : "Proceed to Submit Request"}
+        </button>
       </form>
     </div>
   );

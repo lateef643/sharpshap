@@ -11,20 +11,16 @@
     padding-top: 2rem;
   }
 
+  > .cashcallHeader {
+    font-size: 1.65rem;
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
   > .cardContainer {
-    flex: 0 0 30%;
     display: flex;
     flex-flow: row wrap;
     height: max-content;
-    justify-content: flex-start;
-
-    @include respond(phone-large) {
-      justify-content: space-between;
-      width: 55%;
-    }
-
-    @include respond-custom(330px) {
-      width: 50%;
-    }
+    justify-content: space-between;
   }
 }

@@ -2,26 +2,23 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import StatusBar from "../partials/StatusBar";
 // import NotificationsPanel from "../partials/NotificationsPanel";
+import { createNotification } from "../../actions/notification";
 import logo from "../../assets/images/cico-logo.svg";
 import notification from "../../assets/images/notification-svgrepo-com (1).svg";
-import chat from "../../assets/images/chat-svgrepo-com (1).svg";
+// import chat from "../../assets/images/chat-svgrepo-com (1).svg";
 import caution from "../../assets/images/warning-svgrepo-com.svg";
+import check from "../../assets/images/check.svg";
 import user from "../../assets/images/user.svg";
 import { connect } from "react-redux";
 import megaphone from "../../assets/images/announcement-svgrepo-com.svg";
 import styles from "./Header.module.scss";
 
-const Header = ({ currentPage, isDefaultPassword }) => {
-  const [notifications, setNotifications] = useState([
-    {
-      title:
-        "Great news! Dear Agent, you can now make electricity payments with CICO! From your home page click on BILL PAYMENT, next click PAY ELECTRICITY to use this exciting new feature.",
-    },
-    {
-      title:
-        "Dear Agent, please fund your wallets by making deposits to this account: CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, please note that this is only temporary as we are working towards automating the process shortly.",
-    },
-  ]);
+const Header = ({
+  currentPage,
+  isDefaultPassword,
+  notifications,
+  createNotification,
+}) => {
   const [toggleNotifications, setToggleNotifications] = useState(true);
   const [toggleProfile, setToggleProfile] = useState(false);
   useEffect(() => {
@@ -34,13 +31,15 @@ const Header = ({ currentPage, isDefaultPassword }) => {
   }, [currentPage]);
 
   useEffect(() => {
+    setToggleNotifications(true);
+  }, [notifications]);
+
+  useEffect(() => {
     if (isDefaultPassword === 1) {
-      setNotifications([
-        ...notifications,
-        {
-          title: "Dear Agent, please create a secure password to proceed.",
-        },
-      ]);
+      createNotification({
+        title: "password",
+        body: "Dear Agent, please create a secure password to proceed.",
+      });
     }
   }, []);
 
@@ -70,20 +69,24 @@ const Header = ({ currentPage, isDefaultPassword }) => {
             {toggleNotifications ? (
               <div className={styles.notificationPanel}>
                 <p className={styles.heading}>Notifications</p>
-                <div>
-                  <img src={megaphone} alt="announcement icon" />
-                  <p>{notifications[0].title}</p>
-                </div>
-                <div>
-                  <img src={chat} alt="chat icon" />
-                  <p>{notifications[1].title}</p>
-                </div>
-                {notifications[2] ? (
-                  <div>
-                    <img src={caution} alt="caution icon" />
-                    <p>{notifications[1].title}</p>
-                  </div>
-                ) : undefined}
+                {notifications.map((notification, index) => {
+                  return (
+                    <div key={index}>
+                      <img
+                        src={
+                          notification.status &&
+                          notification.title === "transaction"
+                            ? check
+                            : notification.title === "password"
+                            ? caution
+                            : megaphone
+                        }
+                        alt=""
+                      />
+                      <p>{notification.body}</p>
+                    </div>
+                  );
+                })}
               </div>
             ) : undefined}
           </span>
@@ -113,6 +116,13 @@ const Header = ({ currentPage, isDefaultPassword }) => {
 const mapStateToProps = (state) => ({
   currentPage: state.page,
   isDefaultPassword: state.auth.user.is_default,
+  notifications: state.notification.notifications,
 });
 
-export default connect(mapStateToProps)(Header);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    createNotification: (payload) => dispatch(createNotification(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
