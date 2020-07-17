@@ -46,8 +46,8 @@ const Header = ({
   useEffect(() => {
     setTimeout(() => {
       setToggleNotifications(false);
-    }, 30000);
-  }, []);
+    }, 10000);
+  }, [notifications]);
 
   const handleToggleNotifications = () => {
     setToggleNotifications(!toggleNotifications);
@@ -66,7 +66,7 @@ const Header = ({
           >
             <img src={notification} alt="notification bell" />
             <span className={styles.active}>{notifications.length}</span>
-            {toggleNotifications ? (
+            {toggleNotifications && (
               <div className={styles.notificationPanel}>
                 <p className={styles.heading}>Notifications</p>
                 {notifications.map((notification, index) => {
@@ -88,7 +88,7 @@ const Header = ({
                   );
                 })}
               </div>
-            ) : undefined}
+            )}
           </span>
           <span className={styles.profile}>
             <img

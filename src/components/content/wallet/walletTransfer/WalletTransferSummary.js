@@ -6,14 +6,12 @@ import Loader from "../../../partials/Loader";
 import style from "./WalletTransferSummary.module.scss";
 
 export const WalletTransferSummary = ({
-  agentId,
-  agentName,
-  amount,
-  transactionCost,
-  total,
+  state,
   loading,
-  handleOnSubmit,
+  handleWalletTransfer,
 }) => {
+  const { amount, wallet_id, agent_name } = state;
+
   return (
     <div className={style.paymentContainer}>
       <div className={style.heading}>
@@ -27,12 +25,12 @@ export const WalletTransferSummary = ({
         ) : undefined}
       </div>
       <div>
-        <span>Agent ID:</span>
-        <span>{agentId}</span>
+        <span>Wallet ID:</span>
+        <span>{wallet_id}</span>
       </div>
       <div>
         <span>Agent Name:</span>
-        <span>{agentName}</span>
+        <span>{agent_name}</span>
       </div>
       <div>
         <span>Amount:</span>
@@ -40,16 +38,16 @@ export const WalletTransferSummary = ({
       </div>
       <div>
         <span>Transaction Cost:</span>
-        <span>{formatToCurrency(transactionCost)}</span>
+        <span>{formatToCurrency(0)}</span>
       </div>
       <div className={style.total}>
         <span>Total:</span>
-        <span>{formatToCurrency(total)}</span>
+        <span>{formatToCurrency(amount)}</span>
       </div>
       <button
         onClick={(e) => {
           e.preventDefault();
-          handleOnSubmit();
+          handleWalletTransfer();
         }}
       >
         {loading ? (

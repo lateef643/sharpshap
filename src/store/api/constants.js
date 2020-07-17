@@ -91,6 +91,9 @@ export const SEARCH_WALLET = `${path}/wallets/search`;
 //agent wallet transfer
 export const WALLET_TRANSFER = `${path}/wallets/transfer`;
 
+//agent wallet transfer
+export const VALIDATE_AGENT = `${path}/agents/validate`;
+
 //agent fund wallet request
 export const FUND_WALLET_REQUEST = `${path}/fund-requests`;
 
