@@ -2,12 +2,12 @@
 @import "../../../../assets/styles/config/mixins";
 @import "../../../../assets/styles/config/breakpoints";
 
-.form {
-  height: 44.8rem;
-  padding: 2rem;
-  padding-bottom: 3rem;
+// .form {
+//   height: 44.8rem;
+//   padding: 2rem;
+//   padding-bottom: 3rem;
 
-  @include respond(phone-large) {
-    height: max-content;
-  }
-}
+//   @include respond(phone-large) {
+//     height: max-content;
+//   }
+// }
