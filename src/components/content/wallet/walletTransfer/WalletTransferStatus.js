@@ -6,14 +6,9 @@ import check from "../../../../assets/images/check.svg";
 
 import styles from "./WalletTransferStatus.module.scss";
 
-export const WalletTransferStatus = (props) => {
-  const {
-    successData,
-    transactionCost,
-    total,
-    agentId,
-    setComponentToRender,
-  } = props;
+export const WalletTransferStatus = ({ successData, date, setStatus }) => {
+  const { customer_info, mode, status, amount, reference } = successData;
+
   return (
     <div className={styles.section}>
       <div className={styles.imageContainer}>
@@ -23,38 +18,38 @@ export const WalletTransferStatus = (props) => {
       <div className={styles.contentContainer}>
         <div className={styles.transactionDetails}>
           <div>
+            <span>Recipient:</span>
+            <span>{customer_info}</span>
+          </div>
+          <div>
             <span>Transaction Reference:</span>
-            <span>{successData.reference}</span>
+            <span>{reference}</span>
           </div>
           <div>
             <span>Type:</span>
-            <span>{successData.mode}</span>
+            <span>{mode}</span>
           </div>
           <div>
-            <span>Recipient:</span>
-            <span>{successData.customer_info}</span>
-          </div>
-          <div>
-            <span>Recipient ID:</span>
-            <span>{agentId}</span>
+            <span>Status</span>
+            <span>{status}</span>
           </div>
           <div>
             <span>Date:</span>
-            <span>{successData.date}</span>
+            <span>{date}</span>
           </div>
         </div>
         <div className={styles.transactionAmount}>
           <div>
             <span>Amount:</span>
-            <span>{formatToCurrency(successData.amount)}</span>
+            <span>{formatToCurrency(amount)}</span>
           </div>
           <div>
             <span>Convenience Fee:</span>
-            <span>{formatToCurrency(transactionCost)}</span>
+            <span>{formatToCurrency(0)}</span>
           </div>
           <div>
             <span>Total:</span>
-            <span>{formatToCurrency(total)}</span>
+            <span>{formatToCurrency(amount)}</span>
           </div>
         </div>
         <div className={styles.link}>
@@ -62,10 +57,10 @@ export const WalletTransferStatus = (props) => {
             Home
           </Link>
           <button
-            onClick={() => setComponentToRender("form")}
             className={styles.linkServiceHome}
+            onClick={() => window.print()}
           >
-            New Payment
+            Print
           </button>
         </div>
       </div>
