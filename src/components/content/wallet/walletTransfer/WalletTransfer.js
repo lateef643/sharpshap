@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 import { WALLET_TRANSFER } from "../../../../store/api/constants";
 import WalletTransferForm from "./WalletTransferForm";
@@ -14,6 +14,18 @@ export const WalletTransfer = () => {
   const [successData, setSuccessData] = useState({});
   const [loading, setLoading] = useState(false);
   const [transactionDate, setTransactionDate] = useState(null);
+  const [agentLocation, setAgentLocation] = useState(null);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setAgentLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    }
+  }, []);
 
   const getTransactionDate = (date) => {
     const dateString = date.toString();
@@ -32,7 +44,14 @@ export const WalletTransfer = () => {
 
     (async function transferFunds() {
       try {
-        const res = await axios.post(WALLET_TRANSFER, req);
+        const options = {
+          headers: {
+            lat: agentLocation?.latitude,
+            lng: agentLocation?.longitude,
+          },
+        };
+
+        const res = await axios.post(WALLET_TRANSFER, req, options);
 
         const date = new Date();
         const transactionDate = getTransactionDate(date);
