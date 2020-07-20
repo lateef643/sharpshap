@@ -22,12 +22,24 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
   );
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState(null);
+  const [agentLocation, setAgentLocation] = useState(null);
 
   useEffect(() => {
     changeCurrentPage({
       heading: "Pay Electricity Bill",
       search: false,
     });
+  }, []);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setAgentLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    }
   }, []);
 
   const handleOnSubmit = () => {
@@ -50,7 +62,14 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
 
     (async function vendEnergy() {
       try {
-        const res = await axios.post(VEND_ENERGY, req);
+        const options = {
+          headers: {
+            lat: agentLocation?.latitude,
+            lng: agentLocation?.longitude,
+          },
+        };
+
+        const res = await axios.post(VEND_ENERGY, req, options);
         setLoading(false);
         setSuccessData(res.data.data);
         setComponentToRender("success");
