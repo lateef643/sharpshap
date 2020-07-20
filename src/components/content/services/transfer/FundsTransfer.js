@@ -23,6 +23,18 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
   );
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [agentLocation, setAgentLocation] = useState(null);
+
+  useEffect(() => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(function (position) {
+        setAgentLocation({
+          latitude: position.coords.latitude,
+          longitude: position.coords.longitude,
+        });
+      });
+    }
+  }, []);
 
   useEffect(() => {
     changeCurrentPage({
@@ -33,7 +45,6 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
 
   const getTransactionDate = (date) => {
     const dateString = date.toString();
-    const index = dateString.search("GMT");
     return dateString.slice(0, 24);
   };
 
@@ -56,7 +67,14 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
 
     (async function disburseFunds() {
       try {
-        const res = await axios.post(DISBURSE_FUNDS, req);
+        const options = {
+          headers: {
+            lat: agentLocation?.latitude,
+            lng: agentLocation?.longitude,
+          },
+        };
+
+        const res = await axios.post(DISBURSE_FUNDS, req, options);
         const reference = res.data.data.Data.TxnId;
         const status = "success";
         const date = new Date();
