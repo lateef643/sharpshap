@@ -8,7 +8,7 @@ const initialState = {
     {
       title: `announcement`,
       body: `Dear Agent, please fund your wallets by making deposits to this account: 
-        CICOSERVE PAYMENTS 0001192798 SUNTRUST BANK, 
+        CICOSERVE PAYMENTS 1001137813 VFD BANK, 
         please note that this is only temporary as we are working towards automating the process shortly.`,
     },
   ],

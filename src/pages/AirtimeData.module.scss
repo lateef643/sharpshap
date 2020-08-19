@@ -1,0 +1,30 @@
+@import "../assets/styles/config/breakpoints";
+@import "../assets/styles/config/mixins";
+
+.container {
+  padding-top: 3rem;
+  width: 80%;
+  margin: 0 auto;
+
+  @include respond(phone-large) {
+    width: 95%;
+    padding-top: 2rem;
+  }
+
+  > .cardContainer {
+    flex: 0 0 30%;
+    display: flex;
+    flex-flow: row wrap;
+    height: max-content;
+    justify-content: flex-start;
+
+    @include respond(phone-large) {
+      justify-content: space-between;
+      width: 55%;
+    }
+
+    @include respond-custom(330px) {
+      width: 50%;
+    }
+  }
+}
