@@ -56,6 +56,10 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
               </span>
             </div>
             <div>
+              <span>Retrieval Reference:</span>
+              <span>{transaction.retrieval_reference}</span>
+            </div>
+            <div>
               <span>Date:</span>
               <span>{transaction.created_at}</span>
             </div>
@@ -66,15 +70,6 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
               <span>
                 &#8358;
                 {Number(transaction.amount)
-                  .toFixed(2)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-              </span>
-            </div>
-            <div>
-              <span>Convenience Fee:</span>
-              <span>
-                &#8358;
-                {Number(0)
                   .toFixed(2)
                   .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
               </span>

@@ -5,12 +5,16 @@ export const PrivateRoute = ({
   component: Component,
   path,
   isDefaultPassword,
+  routes,
   ...rest
 }) => {
   return (
     <>
       {isDefaultPassword == 0 ? (
-        <Route {...rest} render={({ match }) => <Component match={match} />} />
+        <Route
+          {...rest}
+          render={({ match }) => <Component routes={routes} match={match} />}
+        />
       ) : (
         <Switch>
           <Redirect to="/profile" />

@@ -1,0 +1,10 @@
+@import "../../../assets/styles/config/mixins";
+@import "../../../assets/styles/config/breakpoints";
+
+.container {
+  padding-top: 2rem;
+
+  @include respond(phone-large) {
+    padding-top: 1rem;
+  }
+}
