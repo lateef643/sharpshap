@@ -1,0 +1,76 @@
+@import "../assets/styles/config/mixins";
+@import "../assets/styles/config/breakpoints";
+
+.container {
+  padding-top: 2rem;
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  color: #707087;
+  font-size: 1.4rem;
+  overflow: hidden;
+  justify-content: space-between;
+
+  @include respond(phone-large) {
+    width: 95%;
+    flex-direction: column;
+  }
+
+  > .cardContainer {
+    flex: 0 0 30%;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
+    height: max-content;
+
+    @include respond(phone-large) {
+      margin-bottom: 3rem;
+      justify-content: space-between;
+    }
+  }
+
+  > .chartContainer {
+    flex: 1;
+    background-color: #fff;
+    padding: 2rem;
+    padding-bottom: 1rem;
+    border-radius: 10px;
+
+    @include respond(phone-large) {
+      padding: 0.2rem;
+      padding-top: 1rem;
+    }
+
+    .sortBy {
+      float: right;
+      width: 10rem;
+      height: 3rem;
+      border: 0;
+      font-size: 1.4rem;
+      font-family: inherit;
+      box-shadow: 3px 2px 4px #00000029;
+      border-radius: 10px;
+      margin-right: 3rem;
+      margin-bottom: 2rem;
+      padding: 5px;
+      background-color: #fff;
+
+      @include respond(phone-large) {
+        height: 3rem;
+        width: 8rem;
+        font-size: 1.2rem;
+        box-shadow: 0 1px 2px #00000029;
+      }
+    }
+
+    .chart {
+      -moz-user-select: none;
+      -webkit-user-select: none;
+      -ms-user-select: none;
+    }
+  }
+}
+
+#canvas {
+  height: 500px;
+}

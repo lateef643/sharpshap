@@ -1,19 +1,10 @@
 import React, { useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
-import { createBrowserHistory } from "history";
+import { BrowserRouter as Router } from "react-router-dom";
+import history from "./util/history";
 
-import routes from "./routes/router";
-import Login from "./components/pages/Login";
-import ForgotPassword from "./components/pages/ForgotPassword";
-import Sidebar from "./components/partials/Sidebar";
-import Main from "./components/partials/Main";
+import AppRouter from "./router/AppRouter";
 
-import "./App.scss";
-
-export const App = ({ isAuthenticated }) => {
-  const history = createBrowserHistory();
-
+const App = () => {
   useEffect(() => {
     let isCancelled = false;
 
@@ -31,30 +22,10 @@ export const App = ({ isAuthenticated }) => {
   }, []);
 
   return (
-    <>
-      {!isAuthenticated ? (
-        <Router>
-          <Switch>
-            <Route path="/" children={() => <Login />} exact />
-            <Route path="/forgot-password" component={ForgotPassword} />
-          </Switch>
-        </Router>
-      ) : (
-        <Router>
-          <div className="app">
-            <Sidebar />
-            <Main routes={routes} history={history} />
-          </div>
-        </Router>
-      )}
-    </>
+    <Router history={history}>
+      <AppRouter />
+    </Router>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.auth.isAuthenticated,
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;

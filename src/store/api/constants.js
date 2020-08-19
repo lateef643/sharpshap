@@ -37,6 +37,16 @@ export const FORGOT_PASSWORD = `${path}/user/password`;
 //update user password - PATCH
 export const RESET_PASSWORD = `${path}/user/token`;
 
+/////PARAMETERS//////////
+//Get list of banks - GET
+export const FETCH_BANKS = `${path}/parameters/banks`;
+
+//Get list of states - GET
+export const FETCH_STATES = `${path}/parameters/states`;
+
+//Get list of local governments - GET
+export const FETCH_LGAS = `${path}/parameters/cities`;
+
 ///////AGENT DASHBOARD DATA/////////
 export const AGENT_DASHBOARD_DATA = `${path}/agent/dashboard`;
 
@@ -198,3 +208,17 @@ export const CANCEL_CASHCALL = `${path}/cashcall/cancel-funds`;
 
 //List opportunities
 export const OPPORTUNITIES_LIST = `${path}/cashcall/opportunities`;
+
+////AGGREGATOR - SUPER AGENTS
+
+//Get aggregator dashboard
+export const AGGREGATOR_DASHBOARD = `${path}/super-agents/dashboard`;
+
+//Get sub agents list
+export const GET_SUB_AGENTS = `${path}/super-agents/agents`;
+
+//Get agent commission history
+export const GET_COMMISSION_HISTORY = `${path}/super-agents/commissions`;
+
+//Create agents - POST
+export const CREATE_AGENT = `${path}/super-agents/agents/create`;
