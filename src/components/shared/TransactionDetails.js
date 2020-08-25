@@ -9,8 +9,6 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
   const [transaction, setTransaction] = useState({});
   const [transtype, setTranstype] = useState({});
 
-  console.log(transaction);
-
   useEffect(() => {
     const transactions = JSON.parse(sessionStorage.getItem("transactions"));
     const transactionItem = transactions.find((transaction) => {
@@ -55,10 +53,17 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
                 {transaction.customer_info}
               </span>
             </div>
-            <div>
-              <span>Retrieval Reference:</span>
-              <span>{transaction.retrieval_reference}</span>
-            </div>
+            {transaction.type == "7" ? (
+              <div>
+                <span>Session ID:</span>
+                <span>{transaction.retrieval_reference}</span>
+              </div>
+            ) : transaction.type == "1" ? (
+              <div>
+                <span>Token:</span>
+                <span>{transaction.energy_token}</span>
+              </div>
+            ) : undefined}
             <div>
               <span>Date:</span>
               <span>{transaction.created_at}</span>

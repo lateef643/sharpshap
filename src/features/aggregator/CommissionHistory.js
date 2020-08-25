@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
+import formatToCurrency from "../../util/formatToCurrency";
+
 import { GET_COMMISSION_HISTORY } from "../../store/api/constants";
 
 import styles from "./CommissionHistory.module.scss";
@@ -55,7 +57,7 @@ const CommissionHistory = () => {
                       className={`${styles.tableBodyRow} ${styles.tableRow}`}
                     >
                       <td>{index + 1}</td>
-                      <td>{history.amount}</td>
+                      <td>{formatToCurrency(history.amount)}</td>
                       <td>{history.description}</td>
                       <td>{history.mode}</td>
                       <td>{history.date}</td>
