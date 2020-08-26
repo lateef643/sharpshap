@@ -42,7 +42,7 @@ export const CashCall = ({
 
   useEffect(() => {
     changeCurrentPage({
-      heading: "Cash Call ",
+      heading: "Cash Call",
       search: false,
     });
   }, []);
