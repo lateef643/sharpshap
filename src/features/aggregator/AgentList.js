@@ -21,7 +21,7 @@ const AgentList = () => {
           setAgentListData(agentListData);
         }
       } catch (e) {
-        console.log(e.response);
+        // console.log(e.response);
       }
     })();
   }, []);
@@ -55,66 +55,25 @@ const AgentList = () => {
                 </tr>
               </thead>
               <tbody className={styles.tableBody}>
-                <tr className={`${styles.tableBodyRow} ${styles.tableRow}`}>
-                  <td>
-                    <span className={styles.status}></span>
-                  </td>
-                  <td>CI/AGT/LA/81840640</td>
-                  <td>Tola Enterprises</td>
-                  <td>08064829451</td>
-                  <td>CICO2345678</td>
-                  <td>35648983989099</td>
-                  <td>2020-06-27 19:23:35</td>
-                  <td>Something</td>
-                </tr>
-                <tr className={`${styles.tableBodyRow} ${styles.tableRow}`}>
-                  <td>
-                    <span className={styles.status}></span>
-                  </td>
-                  <td>CI/AGT/LA/81840640</td>
-                  <td>Tola Enterprises</td>
-                  <td>08064829451</td>
-                  <td>CICO2345678</td>
-                  <td>35648983989099</td>
-                  <td>2020-06-27 19:23:35</td>
-                  <td>Something</td>
-                </tr>
-                <tr className={`${styles.tableBodyRow} ${styles.tableRow}`}>
-                  <td>
-                    <span className={styles.status}></span>
-                  </td>
-                  <td>CI/AGT/LA/81840640</td>
-                  <td>Tola Enterprises</td>
-                  <td>08064829451</td>
-                  <td>CICO2345678</td>
-                  <td>35648983989099</td>
-                  <td>2020-06-27 19:23:35</td>
-                  <td>Something</td>
-                </tr>
-                <tr className={`${styles.tableBodyRow} ${styles.tableRow}`}>
-                  <td>
-                    <span className={styles.status}></span>
-                  </td>
-                  <td>CI/AGT/LA/81840640</td>
-                  <td>Tola Enterprises</td>
-                  <td>08064829451</td>
-                  <td>CICO2345678</td>
-                  <td>35648983989099</td>
-                  <td>2020-06-27 19:23:35</td>
-                  <td>Something</td>
-                </tr>
-                <tr className={`${styles.tableBodyRow} ${styles.tableRow}`}>
-                  <td>
-                    <span className={styles.status}></span>
-                  </td>
-                  <td>CI/AGT/LA/81840640</td>
-                  <td>Tola Enterprises</td>
-                  <td>08064829451</td>
-                  <td>CICO2345678</td>
-                  <td>35648983989099</td>
-                  <td>2020-06-27 19:23:35</td>
-                  <td>Something</td>
-                </tr>
+                {agentListData?.map((agent, index) => {
+                  return (
+                    <tr
+                      className={`${styles.tableBodyRow} ${styles.tableRow}`}
+                      key={index}
+                    >
+                      <td>
+                        <span className={styles.status}></span>
+                      </td>
+                      <td>CI/AGT/LA/81840640</td>
+                      <td>Tola Enterprises</td>
+                      <td>08064829451</td>
+                      <td>CICO2345678</td>
+                      <td>35648983989099</td>
+                      <td>2020-06-27 19:23:35</td>
+                      <td>Something</td>
+                    </tr>
+                  );
+                })}
               </tbody>
             </table>
           </div>
