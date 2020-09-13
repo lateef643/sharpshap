@@ -30,7 +30,7 @@ export const BuyAirtimeSummary = (props) => {
       </div>
       <div>
         <span>Phone Number:</span>
-        <span>{phone}</span>
+        <span>234{phone}</span>
       </div>
       <div>
         <span>Transaction:</span>

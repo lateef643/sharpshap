@@ -53,10 +53,25 @@ export const BuyAirtimeForm = (props) => {
   };
 
   const handleSetFormState = ({ target }) => {
+    let value;
+    const typeCheck = target.name == "phone" && !isNaN(parseInt(target.value));
+
+    if (typeCheck && target.value.indexOf("234") === 0) {
+      value = target.value.slice(3);
+    } else if (
+      typeCheck &&
+      target.value.length > 10 &&
+      target.value.indexOf("0") === 0
+    ) {
+      value = target.value.slice(1);
+    } else if (typeCheck) {
+      value = target.value;
+    }
+
     setValidationErrors({ ...validationErrors, [target.name]: false });
     dispatch({
       type: "UPDATE_FORM_STATE",
-      payload: { [target.name]: target.value },
+      payload: { [target.name]: target.name == "phone" ? value : target.value },
     });
   };
 
@@ -92,9 +107,9 @@ export const BuyAirtimeForm = (props) => {
             );
           })}
         </select>
-        {validationErrors.network ? (
+        {validationErrors.network && (
           <p className={styles.validationErrorText}>Please select network</p>
-        ) : undefined}
+        )}
       </label>
       <label>
         <span>Amount</span>
@@ -107,26 +122,29 @@ export const BuyAirtimeForm = (props) => {
             validationErrors.amount ? styles.outlineRed : styles.outlineGrey
           }
         />
-        {validationErrors.amount ? (
+        {validationErrors.amount && (
           <p className={styles.validationErrorText}>Please enter amount</p>
-        ) : undefined}
+        )}
       </label>
       <label>
         <span>Phone Number</span>
+        <p className={styles.prefix}>+234</p>
         <input
           type="text"
           name="phone"
           value={state.phone}
           onChange={(e) => handleSetFormState(e)}
           className={
-            validationErrors.phone ? styles.outlineRed : styles.outlineGrey
+            validationErrors.phone
+              ? `${styles.outlineRed} ${styles.phoneInput}`
+              : `${styles.outlineGrey} ${styles.phoneInput}`
           }
         />
-        {validationErrors.phone ? (
+        {validationErrors.phone && (
           <p className={styles.validationErrorText}>
             Please enter valid phone number
           </p>
-        ) : undefined}
+        )}
       </label>
       <button type="submit">Continue</button>
     </form>

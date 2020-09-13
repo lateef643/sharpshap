@@ -11,7 +11,7 @@ const validateFormData = (formData, properties) => {
     } else if (
       property === "phone" &&
       formData[property] &&
-      formData[property].length <= 10
+      formData[property].length < 10
     ) {
       errors.phone = true;
     } else if (!formData[property]) {
