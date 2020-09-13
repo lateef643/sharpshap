@@ -7,7 +7,13 @@ import check from "../../../assets/images/check.svg";
 import styles from "./BuyAirtimeStatus.module.scss";
 
 export const BuyAirtimeStatus = (props) => {
-  const { successData, transactionCost, setComponentToRender } = props;
+  const {
+    successData,
+    transactionCost,
+    setComponentToRender,
+    AirtimePurchaseFormState,
+    selectedNetworkName,
+  } = props;
 
   return (
     <div className={styles.section}>
@@ -23,7 +29,7 @@ export const BuyAirtimeStatus = (props) => {
         <div className={styles.transactionDetails}>
           <div>
             <span>Transaction Reference:</span>
-            <span>{successData.tranxReference}</span>
+            <span>{successData.reference}</span>
           </div>
           <div>
             <span>Type:</span>
@@ -31,15 +37,15 @@ export const BuyAirtimeStatus = (props) => {
           </div>
           <div>
             <span>Network:</span>
-            <span>{successData.network}</span>
+            <span>{selectedNetworkName}</span>
           </div>
           <div>
             <span>Recipient:</span>
-            <span>{successData.recipient}</span>
+            <span>{AirtimePurchaseFormState.phone}</span>
           </div>
           <div>
             <span>Date:</span>
-            <span>{successData.tranxDate}</span>
+            <span>{successData.date}</span>
           </div>
         </div>
         <div className={styles.transactionAmount}>

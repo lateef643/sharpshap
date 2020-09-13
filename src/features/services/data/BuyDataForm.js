@@ -11,7 +11,7 @@ import styles from "./BuyDataForm.module.scss";
 export const BuyDataForm = (props) => {
   const telcoList = [
     { code: "D01D", id: 5, name: "Airtel", type: "Data" },
-    { code: "D02D", id: 6, name: "9 Mobile", type: "Data" },
+    { code: "D02D", id: 6, name: "9mobile", type: "Data" },
     { code: "D03D", id: 7, name: "Globacom", type: "Data" },
     { code: "D04D", id: 8, name: "MTN", type: "Data" },
   ];
@@ -32,18 +32,23 @@ export const BuyDataForm = (props) => {
   } = props;
 
   useEffect(() => {
-    const payload = {
-      telco,
-    };
+    // const payload = {
+    //   telco,
+    // };
 
     axios
-      .post(GET_DATA_PLANS, payload)
+      .get(GET_DATA_PLANS)
       .then((res) => {
-        const dataPlans = res.data.data;
+        const data = res.data.data;
+
+        const dataPlans = data.filter((data) => {
+          return data.operator === telcoName;
+        });
+
         setDataPlans(dataPlans);
       })
       .catch((err) => {
-        console.log(err);
+        // console.log(err);
       });
   }, [telco]);
 
@@ -101,9 +106,9 @@ export const BuyDataForm = (props) => {
             );
           })}
         </select>
-        {validationError.telco ? (
+        {validationError.telco && (
           <p className={styles.validationErrorText}>Please select network</p>
-        ) : undefined}
+        )}
       </label>
       <label>
         <span>Phone Number</span>
@@ -114,11 +119,11 @@ export const BuyDataForm = (props) => {
             validationError.phone ? styles.outlineRed : styles.outlineGrey
           }
         />
-        {validationError.phone ? (
+        {validationError.phone && (
           <p className={styles.validationErrorText}>
             Please enter phone number
           </p>
-        ) : undefined}
+        )}
       </label>
       <label>
         <span>Data Plan</span>
@@ -134,14 +139,14 @@ export const BuyDataForm = (props) => {
           {dataPlans.map((plan, index) => {
             return (
               <option value={JSON.stringify(plan)} key={index}>
-                {plan.databundle}
+                {plan.product_value}
               </option>
             );
           })}
         </select>
-        {validationError.selectedDataPlanId ? (
+        {validationError.selectedDataPlanId && (
           <p className={styles.validationErrorText}>Please select data plan</p>
-        ) : undefined}
+        )}
       </label>
       <label>
         <span>Amount</span>
