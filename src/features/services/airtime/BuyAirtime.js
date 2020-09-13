@@ -52,9 +52,9 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
     setLoading(true);
 
     const payload = {
-      telco,
       amount,
-      phone,
+      bank_code: "9001",
+      recipient: `234${phone}`,
     };
 
     if (telco && amount && phone) {
@@ -62,8 +62,11 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
         .post(VEND_AIRTIME, payload)
         .then((res) => {
           const successData = res.data.data;
+
+          const date = new Date();
+
           setLoading(false);
-          setSuccessData(successData);
+          setSuccessData({ ...successData, date: date.toDateString() });
           setComponentToRender("success");
         })
         .catch((err) => {
@@ -106,7 +109,10 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
       renderedComponent = (
         <BuyAirtimeStatus
           successData={successData}
+          transactionCost={TRANSACTION_COST}
           setComponentToRender={setComponentToRender}
+          AirtimePurchaseFormState={AirtimePurchaseFormState}
+          selectedNetworkName={selectedNetworkName}
         />
       );
       break;

@@ -131,13 +131,13 @@ export const ACTIVITY_LOGS = `${path}/logs`;
 export const GET_TELCOS = `${path}/airtime/telcos`;
 
 //get data plans - POST
-export const GET_DATA_PLANS = `${path}/airtime/data/plans`;
-
-//vend airtime - POST
-export const VEND_AIRTIME = `${path}/airtime`;
+export const GET_DATA_PLANS = `${path}/fusion/topup/data/bundles`;
 
 //vend data - POST
-export const VEND_DATA = `${path}/airtime/data`;
+export const VEND_DATA = `${path}/fusion/topup/data`;
+
+//vend airtime - POST
+export const VEND_AIRTIME = `${path}/fusion/topup/airtime`;
 
 /////CABLE TV//////////
 //get startimes plans - GET

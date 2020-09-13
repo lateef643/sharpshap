@@ -36,9 +36,10 @@ const BuyData = ({ changeCurrentPage }) => {
     setLoading(true);
 
     const payload = {
-      telco,
+      productId: telco,
       amount,
-      phone,
+      bank_code: "9001",
+      recipient: phone,
     };
 
     if (telco && amount && phone) {
@@ -52,26 +53,28 @@ const BuyData = ({ changeCurrentPage }) => {
         .catch((err) => {
           if (err.response && err.response.status === 403) {
             setLoading(false);
-            setComponentToRender("status");
+            setComponentToRender("failed");
           } else {
             setTimeout(() => {
               setLoading(false);
-              setComponentToRender("status");
+              setComponentToRender("failed");
             }, 7000);
           }
         });
     }
   };
 
-  const handleAmountChange = (planId) => {
-    const selectedDataPlan = dataPlans.find((plan) => {
-      return plan.productId === planId;
-    });
+  const handleAmountChange = (amount) => {
+    // const selectedDataPlan = dataPlans.find((plan) => {
+    //   return plan.productId === planId;
+    // });
 
-    if (Object.keys(selectedDataPlan).length > 0) {
-      const amount = String(selectedDataPlan.amount);
+    // if (Object.keys(selectedDataPlan).length > 0) {
+    //   const amount = String(selectedDataPlan.amount);
+    if (!isNaN(amount)) {
       setAmount(amount);
     }
+    // }
   };
 
   const handleTelcoChange = (e) => {
@@ -79,7 +82,7 @@ const BuyData = ({ changeCurrentPage }) => {
 
     if (typeof telco !== "string") {
       const newTelcoName = telco.name;
-      const newTelcoCode = telco.code;
+      const newTelcoCode = telco.name;
 
       setValidationError({ ...validationError, telco: !newTelcoName });
       setTelco(newTelcoCode);
@@ -104,10 +107,11 @@ const BuyData = ({ changeCurrentPage }) => {
         ...validationError,
         selectedDataPlanId: !newSelectedDataPlanId,
       });
+      setTelco(plan.productId);
       setSelectedDataPlanId(newSelectedDataPlanId);
       setSelectedDataPlanValidity(plan.validity);
-      setSelectedDataPlanName(plan.databundle);
-      handleAmountChange(newSelectedDataPlanId);
+      setSelectedDataPlanName(plan.product_value);
+      handleAmountChange(plan.face_value);
     }
   };
 
