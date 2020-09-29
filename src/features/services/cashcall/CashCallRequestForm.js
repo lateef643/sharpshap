@@ -2,6 +2,8 @@ import React from "react";
 
 import postcash from "../../../assets/images/postcash.png";
 
+import formatToAmount from "../../../util/formatToAmount";
+
 import styles from "./CashCallRequestForm.module.scss";
 
 export const CashCallRequestForm = ({
