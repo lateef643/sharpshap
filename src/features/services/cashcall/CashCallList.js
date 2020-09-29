@@ -190,12 +190,14 @@ export const CashCallList = ({
                     <button
                       className={`${styles.button} ${styles.buttonDisabled}`}
                       onClick={() => handleCancelCashcall(cashcall.uuid)}
+                      disabled
                     >
                       Cancel
                     </button>
                     <button
                       className={`${styles.button} ${styles.buttonDisabled}`}
                       onClick={() => handleReleaseFunds(cashcall.uuid)}
+                      disabled
                     >
                       Release funds
                     </button>

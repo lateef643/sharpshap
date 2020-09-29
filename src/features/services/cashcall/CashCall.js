@@ -73,7 +73,7 @@ export const CashCall = ({
   useEffect(() => {
     if (cashCallType === "1") {
       if (!isNaN(parseInt(cashCallState.post.amount))) {
-        const transactionCost = 0.1 * cashCallState.post.amount;
+        const transactionCost = 500;
         const total = +cashCallState.post.amount + transactionCost;
 
         dispatch({
