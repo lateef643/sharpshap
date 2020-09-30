@@ -36,6 +36,7 @@
     flex-direction: column;
     justify-content: space-between;
     text-align: left;
+    position: relative;
 
     label {
       position: relative;
@@ -54,6 +55,7 @@
       border-radius: 5px;
       background-color: #fff;
       color: #707070;
+      color: #fff;
       font-family: inherit;
       padding: 0 6px;
       border: 1px solid #7070707e;
@@ -76,4 +78,10 @@
     background: transparent linear-gradient(90deg, #11998e 0%, #38ef7d 100%) 0%
       0% no-repeat padding-box;
   }
+}
+
+.format {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.2rem;
 }
