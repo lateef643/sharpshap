@@ -2,7 +2,7 @@ import React from "react";
 
 import postcash from "../../../assets/images/postcash.png";
 
-import formatToAmount from "../../../util/formatToAmount";
+import formatToCurrency from "../../../util/formatToCurrency";
 
 import styles from "./CashCallRequestForm.module.scss";
 
@@ -74,6 +74,11 @@ export const CashCallRequestForm = ({
             type="text"
             onChange={handleUpdateState}
           />
+          <span className={styles.format}>
+            {cashCallType === "1"
+              ? formatToCurrency(cashCallState.post.amount)
+              : formatToCurrency(cashCallState.accept.amount)}
+          </span>
         </div>
         <div>
           <label>Cash Into Your Account</label>
@@ -98,6 +103,11 @@ export const CashCallRequestForm = ({
             onChange={handleUpdateState}
             disabled
           />
+          <span className={styles.format}>
+            {cashCallType === "1"
+              ? formatToCurrency(cashCallState.post.adminFee)
+              : formatToCurrency(cashCallState.accept.adminFee)}
+          </span>
         </div>
         <div>
           <label>Total Amount You Will Be Debited</label>
@@ -112,6 +122,11 @@ export const CashCallRequestForm = ({
             onChange={handleUpdateState}
             disabled
           />
+          <span className={styles.format}>
+            {cashCallType === "1"
+              ? formatToCurrency(cashCallState.post.total)
+              : formatToCurrency(cashCallState.accept.total)}
+          </span>
         </div>
         <button type="submit">
           {loading ? "Please wait..." : "Proceed to Submit Request"}
