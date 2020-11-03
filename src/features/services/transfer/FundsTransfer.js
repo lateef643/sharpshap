@@ -24,6 +24,7 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [agentLocation, setAgentLocation] = useState(null);
+  const [failedErrorMessage, setFailedErrorMessage] = useState("");
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -75,12 +76,14 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
         };
 
         const res = await axios.post(DISBURSE_FUNDS, req, options);
-        const reference = res.data.data.Data.TxnId;
-        const status = "success";
+        const reference = res.data?.data?.Data?.TxnId;
+        const status = res.data.status;
+        const message = res.data.message;
         const date = new Date();
         const transactionDate = getTransactionDate(date);
 
         setSuccessData({
+          message,
           reference,
           status,
           transactionCost: TRANSACTION_COST,
@@ -91,10 +94,12 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
       } catch (err) {
         if (err.response && err.response.status === 403) {
           setLoading(false);
+          setFailedErrorMessage(err.response?.message || undefined);
           setComponentToRender("failed");
         } else {
           setTimeout(() => {
             setLoading(false);
+            setFailedErrorMessage(err.response?.message || undefined);
             setComponentToRender("failed");
           }, 7000);
         }
@@ -133,7 +138,7 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
       );
       break;
     case "failed":
-      renderedComponent = <FailedTransaction />;
+      renderedComponent = <FailedTransaction message={failedErrorMessage} />;
       break;
     default:
       renderedComponent = null;
