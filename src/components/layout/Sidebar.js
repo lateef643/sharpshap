@@ -6,7 +6,7 @@ import dashboard from "../../assets/images/dashboard.svg";
 import phone from "../../assets/images/phone-contact.svg";
 import user from "../../assets/images/user-2.svg";
 import business from "../../assets/images/business.svg";
-import aggregator from "../../assets/images/aggregator.svg";
+// import aggregator from "../../assets/images/aggregator.svg";
 // import terminal from "../../assets/images/payment-terminal.svg";
 import wallet from "../../assets/images/wallet-outlined.svg";
 import { startLogout } from "../../actions/auth";
@@ -108,10 +108,10 @@ export const Sidebar = ({ firstname, lastname, id, startLogout }) => {
               </NavLink>        
             </div>
           </div> */}
-          <NavLink to="/aggregator" className={styles.linkItem}>
+          {/* <NavLink to="/aggregator" className={styles.linkItem}>
             <img src={aggregator} className={styles.linkItemImage} alt="" />
             <p className={styles.linkItemText}>Aggregator</p>
-          </NavLink>
+          </NavLink> */}
           <NavLink to="/contact-us" className={styles.linkItem}>
             <img src={phone} className={styles.linkItemImage} alt="" />
             <p className={styles.linkItemText}>Contact Us</p>

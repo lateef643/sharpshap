@@ -22,11 +22,11 @@ import Terminals from "../pages/Terminals";
 import CashCallPage from "../pages/CashCall";
 import ActivityLog from "../features/logs/wallet/ActivityLog";
 import TransactionDetails from "../components/shared/TransactionDetails";
-import AggregatorDashboard from "../features/aggregator/Dashboard";
-import Aggregator from "../features/aggregator/index";
-import CreateAgent from "../features/aggregator/createAgent/index";
-import AgentList from "../features/aggregator/AgentList";
-import CommissionHistory from "../features/aggregator/CommissionHistory";
+// import AggregatorDashboard from "../features/aggregator/Dashboard";
+// import Aggregator from "../features/aggregator/index";
+// import CreateAgent from "../features/aggregator/createAgent/index";
+// import AgentList from "../features/aggregator/AgentList";
+// import CommissionHistory from "../features/aggregator/CommissionHistory";
 
 const routes = [
   {
@@ -151,35 +151,35 @@ const routes = [
     path: "/cash-call/:id",
     component: CashCall,
   },
-  {
-    path: "/aggregator",
-    component: Aggregator,
-    // exact: true,
-    routes: [
-      {
-        path: "/aggregator",
-        exact: true,
-        component: AggregatorDashboard,
-      },
-      {
-        path: "/aggregator/dashboard",
-        exact: true,
-        component: AggregatorDashboard,
-      },
-      {
-        path: "/aggregator/agent-list",
-        component: AgentList,
-      },
-      {
-        path: "/aggregator/create-agent",
-        component: CreateAgent,
-      },
-      {
-        path: "/aggregator/commission-history",
-        component: CommissionHistory,
-      },
-    ],
-  },
+  // {
+  //   path: "/aggregator",
+  //   component: Aggregator,
+  //   // exact: true,
+  //   routes: [
+  //     {
+  //       path: "/aggregator",
+  //       exact: true,
+  //       component: AggregatorDashboard,
+  //     },
+  //     {
+  //       path: "/aggregator/dashboard",
+  //       exact: true,
+  //       component: AggregatorDashboard,
+  //     },
+  //     {
+  //       path: "/aggregator/agent-list",
+  //       component: AgentList,
+  //     },
+  //     {
+  //       path: "/aggregator/create-agent",
+  //       component: CreateAgent,
+  //     },
+  //     {
+  //       path: "/aggregator/commission-history",
+  //       component: CommissionHistory,
+  //     },
+  //   ],
+  // },
 ];
 
 export default routes;
