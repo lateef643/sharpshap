@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 
 import formatToCurrency from "../../../util/formatToCurrency";
 import check from "../../../assets/images/check.svg";
+import pending from "../../../assets/images/pending.svg";
 
 import styles from "./FundsTransferCompleted.module.scss";
 
@@ -15,13 +16,24 @@ export const FundsTransferCompleted = (props) => {
     accountName,
     total,
   } = FundsTransferFormState;
-  const { date, transactionCost, status, reference } = successData;
+  const { date, transactionCost, status, reference, message } = successData;
 
   return (
     <div className={styles.section}>
       <div className={styles.imageContainer}>
-        <img className={styles.headingImage} src={check} alt="checkmark" />
-        <p className={styles.headingText}>Transaction Successful</p>
+        <img
+          className={styles.headingImage}
+          src={
+            status === "successful" ||
+            status === "success" ||
+            status === "Successful" ||
+            status === "Success"
+              ? check
+              : pending
+          }
+          alt=""
+        />
+        <p className={styles.headingText}>{message}</p>
       </div>
       <div className={styles.contentContainer}>
         <div className={styles.transactionDetails}>
