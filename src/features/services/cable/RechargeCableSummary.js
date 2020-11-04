@@ -44,10 +44,7 @@ export const RechargeCableSummary = (props) => {
       </div>
       <div>
         <span>Plan Duration:</span>
-        <span>
-          {state.selectedPlanDuration}{" "}
-          {state.selectedPlanDuration === "1" ? "month" : "months"}
-        </span>
+        <span>{state.selectedPlanDuration}</span>
       </div>
       <div>
         <span>Amount:</span>

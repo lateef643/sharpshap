@@ -42,28 +42,36 @@ export const RechargeCable = ({ changeCurrentPage }) => {
     setLoading(true);
 
     let providerApi;
+    let payload;
     const {
       provider,
       smartCardNumber,
       amount,
       selectedPlanCode,
       selectedplanDuration,
+      phone,
     } = RechargeCableFormState;
 
     if (provider === "dstv" || provider === "gotv") {
       providerApi = VEND_MULTICHOICE;
+      payload = {
+        smartcard: smartCardNumber,
+        amount,
+        customer_name: "MOBILE",
+        product_code: selectedPlanCode,
+        period: selectedplanDuration,
+        service: provider,
+      };
     } else if (provider === "startimes") {
       providerApi = VEND_STARTIMES;
+      payload = {
+        phone,
+        productCode: selectedPlanCode,
+        bouquet: selectedPlanCode,
+        amount: amount,
+        smartcard: smartCardNumber,
+      };
     }
-
-    const payload = {
-      smartcard: smartCardNumber,
-      amount,
-      customer_name: "MOBILE",
-      product_code: selectedPlanCode,
-      period: selectedplanDuration,
-      service: provider,
-    };
 
     (async function vendCable() {
       try {
