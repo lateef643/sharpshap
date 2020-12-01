@@ -2,9 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import setAuthToken from "./util/setAuthToken";
-import setAxiosDefaults from "./util/setAxiosDefaults";
-import configureStore from "./store/redux/configureStore";
+import setAuthToken from "./utils/setAuthToken";
+import setAxiosDefaults from "./utils/setAxiosDefaults";
+import configureStore from "./store/configureStore";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 

@@ -1,68 +1,108 @@
-@import "../../assets/styles/generic/form.scss";
 @import "../../assets/styles/config/breakpoints";
 @import "../../assets/styles/config/mixins";
 
 .container {
-  padding-top: 3rem;
+  padding: 2rem 0;
+  font-size: 1.4rem;
+}
+
+.sectionHeading {
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-family: "Nunito", sans-serif;
+  color: #22215b;
+}
+
+.card {
+  width: 25rem;
+  height: 13rem;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 
   @include respond(phone-large) {
-    padding-top: 1rem;
+    width: 100%;
   }
 }
 
-.optionsContainer {
-  margin: 2rem 0 2rem 1rem;
+.services {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-  span {
+.service {
+  text-align: center;
+  flex: 0 0 40%;
+  padding: 1rem;
+  background: rgba(155, 180, 255, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.serviceLogo {
+  width: 3rem;
+  margin-bottom: 1rem;
+}
+
+.serviceText {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #22215b;
+}
+
+.form {
+  padding: 3rem 4rem;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-gap: 3rem;
+  grid-column-gap: 5rem;
+}
+
+.formGroup {
+  text-align: left;
+
+  label {
+    margin-bottom: 1rem;
+    color: #707070;
+  }
+
+  input,
+  select {
+    margin-top: 0.8rem;
+    display: block;
+    border: 1px solid #c4c4c4;
+    padding: 0 1rem;
+    font-family: "Lato";
+    color: #707070;
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 5px;
+    font-family: inherit;
     font-size: 1.4rem;
-    margin-right: 1.5rem;
-  }
-
-  .detailsText {
-    color: #cdcdcd;
-  }
-
-  .startModal {
-    color: #4d73bb;
-    cursor: pointer;
   }
 }
 
-.passwordModal {
-  width: 100%;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0;
-  background-color: #828282d7;
-  z-index: 15;
-  overflow: hidden;
+.submit {
+  grid-column: 2/ -1;
+  margin-top: 1rem;
 
-  span {
-    font-size: 1.7rem;
-    position: absolute;
-    right: 0;
-    background-color: #fff;
-    border-radius: 100%;
-    width: 2rem;
-    display: inline-block;
-    margin-right: 1rem;
-    margin-top: 1rem;
-    text-align: center;
-    font-weight: 500;
+  button {
+    width: 100%;
+    height: 3.5rem;
+    border-radius: 5px;
+    border: 0;
+    background-color: #062863;
+    color: #eee;
     cursor: pointer;
-  }
-
-  .form {
-    margin-top: 10rem;
-
-    @include respond(phone-large) {
-      margin-top: 5rem;
-    }
+    outline: none;
   }
 }
 
-.error {
-  font-size: 1.4rem;
-  color: rgba(230, 56, 56, 0.856);
+.errorText {
+  font-size: 1.3rem;
+  color: rgba(255, 0, 0, 0.89);
+  margin-top: 0.5rem;
 }

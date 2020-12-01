@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { ThreeDots } from "svg-loaders-react";
+import { connect } from "react-redux";
 
+import generateServiceProviderImageUrl from "./generateServiceProviderImageUrl";
 import validateFormData from "../../../validation/validateFormData";
 import {
   GET_STARTIMES_PLANS,
@@ -9,18 +12,14 @@ import {
   GET_GOTV_PLANS,
   VALIDATE_STARTIMES_CUSTOMER,
   VALIDATE_MULTICHOICE_CUSTOMER,
-} from "../../../store/api/constants";
-import VerificationLoader from "../../../components/util/VerificationLoader";
-import dstv from "../../../assets/images/dstv.jpg";
-import startimes from "../../../assets/images/startimes.png";
-import gotv from "../../../assets/images/GOtv_Logo.png";
+} from "../../../utils/constants";
 
 import styles from "./RechargeCableForm.module.scss";
 
 export const RechargeCableForm = (props) => {
   const {
     RechargeCableFormState: state,
-    dispatch,
+    setFormState,
     setComponentToRender,
   } = props;
   const [customerValidationLoading, setCustomerValidationLoading] = useState(
@@ -28,11 +27,6 @@ export const RechargeCableForm = (props) => {
   );
   const [fetchPlansLoading, setFetchPlansLoading] = useState(false);
   const [validationErrors, setValidationErrors] = useState({});
-  const cableTvProviders = [
-    { name: "dstv" },
-    { name: "gotv" },
-    { name: "startimes" },
-  ];
   const [plans, setPlans] = useState([]);
   const [durations, setDurations] = useState({
     type: "multichoice",
@@ -41,7 +35,8 @@ export const RechargeCableForm = (props) => {
 
   //effect fetches plans based on selected provider
   useEffect(() => {
-    const { provider } = state;
+    const provider = props.service;
+
     let providerApi;
 
     if (provider) {
@@ -73,7 +68,7 @@ export const RechargeCableForm = (props) => {
         }
       })();
     }
-  }, [state.provider]);
+  }, [props.service]);
 
   //sets selected plan name && plan amount based on plans dropdown value
   useEffect(() => {
@@ -99,11 +94,11 @@ export const RechargeCableForm = (props) => {
         }
 
         setDurations({
-          type: startimes,
+          type: "startimes",
           data,
         });
       }
-      dispatch({
+      setFormState({
         type: "UPDATE_FORM_STATE",
         payload: { selectedPlanName, selectedPlanAmount },
       });
@@ -113,20 +108,20 @@ export const RechargeCableForm = (props) => {
   //Account number validation
   useEffect(() => {
     let providerApi;
-    const { provider, smartCardNumber } = state;
+    const { smartCardNumber } = state;
 
-    if (provider && smartCardNumber.length >= 10) {
+    if (smartCardNumber.length >= 10) {
       setCustomerValidationLoading(true);
 
-      if (provider === "dstv" || provider === "gotv") {
+      if (props.service === "dstv" || props.service === "gotv") {
         providerApi = VALIDATE_MULTICHOICE_CUSTOMER;
-      } else if (provider === "startimes") {
+      } else if (props.service === "startimes") {
         providerApi = VALIDATE_STARTIMES_CUSTOMER;
       }
 
       const payload = {
         smartcard: smartCardNumber,
-        service: provider,
+        service: props.service,
       };
 
       (async function validateAndSetCustomerName() {
@@ -136,10 +131,12 @@ export const RechargeCableForm = (props) => {
           let name;
 
           name =
-            provider === "startimes" ? res.data.data.name : res.data.data.name;
+            props.service === "startimes"
+              ? res.data.data.name
+              : res.data.data.name;
 
           setValidationErrors({ ...validationErrors, customerName: !name });
-          dispatch({
+          setFormState({
             type: "UPDATE_FORM_STATE",
             payload: { customerName: name },
           });
@@ -157,26 +154,24 @@ export const RechargeCableForm = (props) => {
 
   //calculates and sets payable amount based on selectedPlanAmount and plan duration
   useEffect(() => {
-    const { provider } = state;
-
-    if (provider === "dstv" || provider === "gotv") {
+    if (props.service === "dstv" || props.service === "gotv") {
       const { selectedPlanDuration, selectedPlanAmount } = state;
       let amount;
 
       if (selectedPlanDuration && selectedPlanAmount) {
         amount = selectedPlanDuration * selectedPlanAmount;
 
-        dispatch({
+        setFormState({
           type: "UPDATE_FORM_STATE",
           payload: { amount },
         });
       }
-    } else if (provider === "startimes") {
+    } else if (props.service === "startimes") {
       const { selectedPlanDuration } = state;
 
       const amount = selectedPlanDuration;
 
-      dispatch({
+      setFormState({
         type: "UPDATE_FORM_STATE",
         payload: { amount },
       });
@@ -185,7 +180,7 @@ export const RechargeCableForm = (props) => {
 
   const handleFormStateChange = ({ target }) => {
     setValidationErrors({ ...validationErrors, [target.name]: false });
-    dispatch({
+    setFormState({
       type: "UPDATE_FORM_STATE",
       payload: { [target.name]: target.value },
     });
@@ -208,18 +203,7 @@ export const RechargeCableForm = (props) => {
   };
 
   //Dynamically render bank logo
-  let providerImageUrl = "";
-
-  switch (state.provider) {
-    case "gotv":
-      providerImageUrl = gotv;
-      break;
-    case "startimes":
-      providerImageUrl = startimes;
-      break;
-    default:
-      providerImageUrl = dstv;
-  }
+  let providerImageUrl = generateServiceProviderImageUrl(props.service);
 
   return (
     <form
@@ -227,42 +211,24 @@ export const RechargeCableForm = (props) => {
       autoComplete="off"
       onSubmit={handleOnContinue}
     >
-      <div className={styles.imageContainer}>
+      {/* <div className={styles.imageContainer}>
         <img
           className={styles.image}
           src={providerImageUrl}
           alt="cable provider icon"
         />
-      </div>
-      <label>
-        <span>Provider</span>
-        <select
-          name="provider"
-          onChange={handleFormStateChange}
-          className={
-            validationErrors.provider ? styles.outlineRed : styles.outlineGrey
-          }
-        >
-          <option value="">Select Provider</option>
-          {cableTvProviders.map((cable, index) => {
-            return (
-              <option value={cable.name} key={`${index}--${cable.name}`}>
-                {cable.name}
-              </option>
-            );
-          })}
-        </select>
-        {validationErrors.provider ? (
-          <p className={styles.validationErrorText}>Please select provider</p>
-        ) : undefined}
-      </label>
-      <label>
-        <span>Packages</span>
+      </div> */}
+      <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="selectedPlanCode">
+          Packages
+        </label>
         <select
           name="selectedPlanCode"
           onChange={handleFormStateChange}
           className={
-            validationErrors.plan ? styles.outlineRed : styles.outlineGrey
+            validationErrors.beneficiaryBankCode
+              ? `${styles.outlineRed} ${styles.select}`
+              : `${styles.outlineGrey} ${styles.select}`
           }
         >
           <option value="">Select Plan</option>
@@ -277,80 +243,94 @@ export const RechargeCableForm = (props) => {
             );
           })}
         </select>
-        {fetchPlansLoading ? (
+        {fetchPlansLoading && (
           <div className={styles.loader}>
-            <VerificationLoader />
+            <ThreeDots />
           </div>
-        ) : undefined}
-        {validationErrors.plan ? (
+        )}
+        {validationErrors.plan && (
           <p className={styles.validationErrorText}>Please select plan</p>
-        ) : undefined}
-      </label>
-      <label>
-        <span>Smart Card Number</span>
+        )}
+      </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="smartCardNumber" className={styles.label}>
+          Smart Card Number
+        </label>
         <input
           name="smartCardNumber"
           value={state.smartCardNumber}
           type="text"
           onChange={handleFormStateChange}
           className={
-            validationErrors.smartCardNumber
-              ? styles.outlineRed
-              : styles.outlineGrey
+            validationErrors.amount
+              ? `${styles.outlineRed} ${styles.input}`
+              : `${styles.outlineGrey} ${styles.input}`
           }
         />
-        {validationErrors.smartCardNumber ? (
+        {validationErrors.smartCardNumber && (
           <p className={styles.validationErrorText}>
             Please enter smart card number
           </p>
-        ) : undefined}
-      </label>
-      <label>
-        <span>Customer Name</span>
+        )}
+      </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="customerName" className={styles.label}>
+          Customer Name
+        </label>
         <input
           name="customerName"
           type="text"
           value={state.customerName}
           disabled={true}
-          className={styles.outlineGrey}
+          className={
+            validationErrors.amount
+              ? `${styles.outlineRed} ${styles.input}`
+              : `${styles.outlineGrey} ${styles.input}`
+          }
         />
-        {customerValidationLoading ? (
+        {customerValidationLoading && (
           <div className={styles.loader}>
-            <VerificationLoader />
+            <ThreeDots />
           </div>
-        ) : undefined}
-        {validationErrors.customerName ? (
+        )}
+        {validationErrors.customerName && (
           <p className={styles.validationErrorText}>
             Customer validation failed
           </p>
-        ) : undefined}
-      </label>
-      <label>
-        <span>Phone Number</span>
+        )}
+      </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="phone" className={styles.label}>
+          Phone Number
+        </label>
         <input
           name="phone"
           type="text"
           value={state.phone}
           onChange={handleFormStateChange}
           className={
-            validationErrors.phone ? styles.outlineRed : styles.outlineGrey
+            validationErrors.beneficiaryBankCode
+              ? `${styles.outlineRed} ${styles.input}`
+              : `${styles.outlineGrey} ${styles.input}`
           }
         />
-        {validationErrors.phone ? (
+        {validationErrors.phone && (
           <p className={styles.validationErrorText}>
             Please enter phone number
           </p>
-        ) : undefined}
-      </label>
-      <label>
-        <span>Plan Duration</span>
+        )}
+      </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="selectedPlanDuration" className={styles.label}>
+          Plan Duration
+        </label>
         <select
           name="selectedPlanDuration"
           onChange={handleFormStateChange}
           className={
-            validationErrors.planDuration
-              ? styles.outlineRed
-              : styles.outlineGrey
+            validationErrors.beneficiaryBankCode
+              ? `${styles.outlineRed} ${styles.select}`
+              : `${styles.outlineGrey} ${styles.select}`
           }
         >
           <option value="">Select Duration</option>
@@ -362,36 +342,48 @@ export const RechargeCableForm = (props) => {
                 return <option value={duration.value}>{duration.type}</option>;
               })}
         </select>
-        {validationErrors.planDuration ? (
+        {validationErrors.planDuration && (
           <p className={styles.validationErrorText}>
             Please select plan duration
           </p>
-        ) : undefined}
-      </label>
-      <label>
-        <span>Amount</span>
+        )}
+      </div>
+      <div className={styles.formGroup}>
+        <label htmlFor="amount" className={styles.label}>
+          Amount
+        </label>
         <input
           name="amount"
           type="text"
           value={state.amount}
           onChange={handleFormStateChange}
           className={
-            validationErrors.amount ? styles.outlineRed : styles.outlineGrey
+            validationErrors.beneficiaryBankCode
+              ? `${styles.outlineRed} ${styles.input}`
+              : `${styles.outlineGrey} ${styles.input}`
           }
         />
-        {validationErrors.amount ? (
+        {validationErrors.amount && (
           <p className={styles.validationErrorText}>Please enter amount</p>
-        ) : undefined}
-      </label>
-      <button type="submit">Submit</button>
+        )}
+      </div>
+      <button type="submit" className={styles.button}>
+        Submit
+      </button>
     </form>
   );
 };
 
 RechargeCableForm.propTypes = {
   RechargeCableFormState: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  setFormState: PropTypes.func.isRequired,
   setComponentToRender: PropTypes.func.isRequired,
 };
 
-export default RechargeCableForm;
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
+export default connect(mapStateToProps)(RechargeCableForm);

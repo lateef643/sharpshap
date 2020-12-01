@@ -1,0 +1,88 @@
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/variables";
+
+.balance {
+  height: 15rem;
+  display: flex;
+  align-items: center;
+  background: url("../../assets/icons/balance-bkg.png");
+  background-position: bottom 0px right 7%;
+  background-color: #3e215b;
+  background-size: 7rem;
+  background-repeat: no-repeat;
+  padding: 0 5rem;
+  color: #ffffff;
+  font-family: "Poppins", monospace, arial, helvetica, sans-serif;
+  border-radius: 1rem;
+
+  @include respond(tab) {
+    padding: 0 3rem;
+    background-position: bottom 0px right 5%;
+  }
+
+  @include respond-custom(450px) {
+    padding: 0 2rem;
+    background-position: bottom 0px right 4%;
+    background-size: 6.5rem;
+  }
+}
+
+.balanceHeading {
+  font-weight: 500;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.balanceText {
+  font-weight: 800;
+  font-size: 3.5rem;
+
+  @include respond(phone-medium) {
+    font-size: 3.2rem;
+  }
+
+  @include respond(phone) {
+    font-size: 2.8rem;
+  }
+}
+
+.refresh {
+  width: 1.5rem;
+  margin-left: 1rem;
+  transition: 1s all;
+  cursor: pointer;
+
+  &:active {
+    -webkit-animation: rotate 3s ease-in;
+    animation: rotate 0.5s ease-in;
+  }
+}
+
+@-webkit-keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(180deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

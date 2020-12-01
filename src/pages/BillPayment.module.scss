@@ -2,24 +2,87 @@
 @import "../assets/styles/config/mixins";
 
 .container {
-  padding-top: 3rem;
-  width: 80%;
-  margin: 0 auto;
+  padding-top: 2rem;
+  height: 100%;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionHeading {
+  margin-bottom: 1.5rem;
+  font-size: 1.3rem;
+  color: #22215b;
 
   @include respond(phone-large) {
-    width: 95%;
-    padding-top: 2rem;
+    margin-bottom: 0;
   }
+}
 
-  > .cardContainer {
-    flex: 0 0 30%;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: flex-start;
-    height: max-content;
+.card {
+  width: 38rem;
+  min-height: 13rem;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
 
-    @include respond(phone-large) {
-      justify-content: space-between;
+  &Electricity {
+    width: 70rem;
+
+    @include respond(tab) {
+      width: 100%;
     }
   }
+
+  @include respond(phone-large) {
+    width: 100%;
+  }
+}
+
+.services {
+  width: 100%;
+  display: flex;
+
+  justify-content: space-around;
+  align-items: center;
+
+  @include respond(tab) {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+}
+
+.service {
+  text-align: center;
+  flex: 0 0 7rem;
+  padding: 1rem;
+  background: rgba(155, 180, 255, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+
+  @include respond(phone-large) {
+    flex: 0 0 20%;
+    margin: auto;
+    margin-top: 1.5rem;
+    height: 7rem;
+  }
+}
+
+.serviceLogo {
+  width: 3rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+
+  @include respond(phone-large) {
+    margin-bottom: 0.5rem;
+  }
+}
+
+.serviceText {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #22215b;
 }

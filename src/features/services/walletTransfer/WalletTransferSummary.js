@@ -1,7 +1,7 @@
 import React from "react";
 
-import formatToCurrency from "../../../util/formatToCurrency";
-import Loader from "../../../components/util/Loader";
+import formatToCurrency from "../../../utils/formatToCurrency";
+import { ThreeDots } from "svg-loaders-react";
 
 import style from "./WalletTransferSummary.module.scss";
 
@@ -50,11 +50,7 @@ export const WalletTransferSummary = ({
           handleWalletTransfer();
         }}
       >
-        {loading ? (
-          <Loader size="small" color="white" position="center" />
-        ) : (
-          "Continue"
-        )}
+        {loading ? <ThreeDots /> : "Continue"}
       </button>
     </div>
   );

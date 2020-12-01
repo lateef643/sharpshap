@@ -1,9 +1,10 @@
 import axios from "axios";
 
-import { LOGIN_API } from "../store/api/constants";
-import setAuthToken from "../util/setAuthToken";
+import { LOGIN_API } from "../utils/constants";
+import setAuthToken from "../utils/setAuthToken";
 import isEmpty from "../validation/isEmpty";
-import history from "../util/history";
+import history from "../utils/history";
+import { setWalletBalance } from "./wallet";
 
 const loginUser = ({
   user,
@@ -31,17 +32,41 @@ export const startLoginUser = (payload) => (dispatch) => {
       const walletBalance = res.data.data.wallet.current_bal;
       const transactionSettings = res.data.data.settings;
 
+      const { id, username, phone, email, is_default, agent } = user;
+      const {
+        first_name: firstName,
+        last_name: lastName,
+        user_id: userId,
+        business_name: businessName,
+        wallet_no: walletNo,
+        uuid,
+      } = agent;
+
       if (!isEmpty(user)) {
         const authDetails = {
           isAuthenticated: true,
-          user,
+          user: {
+            id,
+            username,
+            phone,
+            email,
+            uuid,
+            is_default,
+            firstName,
+            lastName,
+            userId,
+            businessName,
+            walletNo,
+          },
           walletBalance,
           transactionSettings,
         };
 
         dispatch(loginUser(authDetails));
+        dispatch(setWalletBalance(walletBalance));
         sessionStorage.setItem("user", JSON.stringify(authDetails));
         sessionStorage.setItem("token", token);
+        sessionStorage.setItem("balance", walletBalance);
         setAuthToken(token);
       }
     })
@@ -60,7 +85,7 @@ export const startLoginUser = (payload) => (dispatch) => {
             type: "SET_LOADING",
             payload: {
               loading: false,
-              message: undefined,
+              message: "Network error",
             },
           });
         }, 4000);
@@ -85,6 +110,7 @@ export const startLogout = () => (dispatch) => {
 
   sessionStorage.clear("user");
   sessionStorage.clear("token");
+  sessionStorage.clear("balance");
   history.push("/");
   dispatch(logoutUser());
 };

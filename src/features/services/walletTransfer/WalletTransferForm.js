@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import VerificationLoader from "../../../components/util/VerificationLoader";
+import { ThreeDots } from "svg-loaders-react";
 import wallet from "../../../assets/images/wallet-svgrepo-com.svg";
 import styles from "./WalletTransferForm.module.scss";
-import { VALIDATE_AGENT } from "../../../store/api/constants";
+import { VALIDATE_AGENT } from "../../../utils/constants";
 
 export const WalletTransferForm = (props) => {
   const { dispatch, state, setStatus } = props;
@@ -93,7 +93,7 @@ export const WalletTransferForm = (props) => {
           />
           {verificationLoading && (
             <span className={styles.loader}>
-              <VerificationLoader />
+              <ThreeDots />
             </span>
           )}
           {error && (

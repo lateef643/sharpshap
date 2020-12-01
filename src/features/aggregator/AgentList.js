@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
-import { GET_SUB_AGENTS } from "../../store/api/constants";
+import { GET_SUB_AGENTS } from "../../utils/constants";
 
 import styles from "./AgentLIst.module.scss";
 

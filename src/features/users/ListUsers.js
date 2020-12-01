@@ -1,78 +1,119 @@
-import React, { useEffect, useState } from "react";
-// import axios from "axios";
-import ListLoader from "../../components/util/ListLoader";
-import { connect } from "react-redux";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import style from "./ListUsers.module.scss";
-import { setCurrentPage } from "../../actions/page";
 
-export const ListUsers = ({ changeCurrentPage }) => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+import menu from "../../assets/images/dots.svg";
+import arrowDown from "../../assets/icons/arrowdown.svg";
+import arrowUp from "../../assets/images/arrowUp.svg";
+import houseTag from "../../assets/images/houseTag.svg";
 
-  // useEffect(() => {
-  //   axios.get()
-  //   .then((res) => {
-  //     const logs = res.data.data.data;
-  //     setLogs(logs);
-  //     setLoading(false);
-  //   })
-  //   .catch((err) => {
-  //     console.log(err);
-  //   })
-  // }, [])
+import refresh from "../../assets/images/refresh.svg";
 
-  useEffect(() => {
-    changeCurrentPage({
-      heading: "List Users",
-      search: true,
-    });
-  }, [changeCurrentPage]);
+import styles from "./ListUsers.module.scss";
+
+const User = () => {
+  const [startDate, setStartDate] = useState(new Date());
+  const [endDate, setEndDate] = useState(new Date());
+  const [isOpen, setIsOpen] = useState(false);
+  const users = [0, 1, 2, 3, 4, 5, 6, 7];
+
+  const CustomInputGroup = ({ value, onClick, label }) => {
+    return (
+      <label className={styles.CustomInputGroup}>
+        <span className={styles.customInputGroupLabel}>{label}:</span>
+        <input type="text" value={value} onClick={onClick} />
+      </label>
+    );
+  };
 
   return (
-    <div className={style.container}>
-      {loading ? (
-        <div className={style.loaderContainer}>
-          <ListLoader />
+    <div className={styles.users}>
+      <div className={styles.transactions}>
+        <h3 className={styles.transactionsHeading}>Users</h3>
+        <div className={styles.filter}>
+          <div className={styles.filterToggle}>
+            <span>Filter</span>
+            <img
+              src={isOpen ? arrowDown : arrowUp}
+              alt=""
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            />
+          </div>
+          <div
+            className={
+              isOpen ? `${styles.filters} ${styles.isOpen}` : styles.filters
+            }
+          >
+            <label className={styles.inputGroup}>
+              <input
+                className={styles.searchUsers}
+                type="text"
+                placeholder="Search Users"
+              />
+              <span>Search Users</span>
+            </label>
+            <label className={styles.inputGroup}>
+              <select className={styles.filterUsers}>
+                <option value="">Type</option>
+              </select>
+            </label>
+            <label className={styles.inputGroup}>
+              <select className={styles.filterUsers}>
+                <option value="">Date Added</option>
+              </select>
+            </label>
+          </div>
         </div>
-      ) : undefined}
-      {!loading && users.length > 0 ? (
-        <div className={style.heading}>
-          <span>S/N</span>
-          <span>Name</span>
-          <span>Phone &nbsp;</span>
-          <span>Role</span>
-          <span>Last Login</span>
-          <span>Action</span>
+        <div className={styles.table}>
+          <div className={styles.tableHeading}>
+            <span className={styles.sn}>S/N</span>
+            <span className={styles.name}>Name</span>
+            <span className={styles.amount}>Transactions</span>
+            <span className={styles.date}>Date Added</span>
+            <span className={styles.status}>Status</span>
+            {/* <span className={styles.query}>Query</span> */}
+            <span className={styles.action}>Action</span>
+          </div>
+          <div className={styles.tableBody}>
+            {users.map((user, index) => {
+              return (
+                <div className={styles.tableRow} key={index}>
+                  <span className={styles.sn}>{++index}.</span>
+                  <span className={styles.name}>Tochukwu Nwanguma</span>
+                  <span className={styles.amount}>1,239</span>
+                  <span className={styles.date}>
+                    26<sup>th</sup>, August 2020
+                  </span>
+                  <span className={styles.status}>Active</span>
+
+                  {/* <span className={styles.query}>
+                    <img src={refresh} alt="" />
+                  </span> */}
+                  <div className={styles.action}>
+                    <label htmlFor={`menu${index}`}>
+                      <img className={styles.menu} src={menu} alt="" />
+                    </label>
+                    <input
+                      name={`menu${index}`}
+                      id={`menu${index}`}
+                      type="checkbox"
+                    />
+
+                    <div className={styles.actions}>
+                      <Link to="/admin/transactions/976765875665">
+                        Deactivate User
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
         </div>
-      ) : undefined}
-      {!loading
-        ? users.map((user, index) => (
-            <div key={index} className={style.content}>
-              <span>{index + 1}</span>
-              <span>{user.name}</span>
-              <span>{user.phone}</span>
-              <span>{user.role}</span>
-              <span>{user.login}</span>
-              <span>
-                <span className={style.one}>...</span>
-                <span className={style.two}>
-                  <Link>Edit</Link>
-                  <Link>Delete</Link>
-                  <Link>View History</Link>
-                </span>
-              </span>
-            </div>
-          ))
-        : undefined}
+      </div>
     </div>
   );
 };
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
-  };
-};
-
-export default connect(undefined, mapDispatchToProps)(ListUsers);
+export default User;

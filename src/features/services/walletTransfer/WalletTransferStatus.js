@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import formatToCurrency from "../../../util/formatToCurrency";
+import formatToCurrency from "../../../utils/formatToCurrency";
 import check from "../../../assets/images/check.svg";
 
 import styles from "./WalletTransferStatus.module.scss";

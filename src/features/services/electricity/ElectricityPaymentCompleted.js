@@ -1,15 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { connect } from "react-redux";
 
-import formatToCurrency from "../../../util/formatToCurrency";
-import check from "../../../assets/images/check.svg";
-import logo from "../../../assets/images/cico-logo.svg";
-
+import formatToCurrency from "../../../utils/formatToCurrency";
+import generateServiceProviderImageUrl from "./generateServiceProviderImageUrl";
 import styles from "./ElectricityPaymentCompleted.module.scss";
+
+var Barcode = require("react-barcode");
 
 export const ElectricityPaymentCompleted = ({
   successData,
   ElectricityPaymentFormState,
+  service,
 }) => {
   const {
     payer,
@@ -19,76 +21,88 @@ export const ElectricityPaymentCompleted = ({
     transactionID,
     date,
     amount,
+    address,
   } = successData;
-  const { account } = ElectricityPaymentFormState;
+  // const { account } = ElectricityPaymentFormState;
+
+  let serviceImageUrl = generateServiceProviderImageUrl(service);
 
   return (
-    <div className={styles.section}>
-      <div className={styles.imageContainer}>
-        <img className={styles.headingImage} src={check} alt="checkmark" />
-        <img
-          className={styles.headingImagePrint}
-          src={logo}
-          alt="cico logo for print"
-        />
-        <p className={styles.headingText}>Transaction Successful</p>
+    <div className={styles.container}>
+      <div className={styles.logoContainer}>
+        <img className={styles.bankLogo} src={serviceImageUrl} alt="" />
       </div>
-      <div className={styles.contentContainer}>
-        <div className={styles.transactionDetails}>
-          <div>
-            <span>Name:</span>
-            <span>{payer.trim()}</span>
-          </div>
-          <div>
-            <span>Account No:</span>
-            <span>{account}</span>
-          </div>
-          <div>
-            <span>Units</span>
-            <span>{unit_value + unit || "NIL"}</span>
-          </div>
-          <div>
-            <span>Token</span>
-            <span>{token || "NIL"}</span>
-          </div>
-          <div>
-            <span>Transaction ID:</span>
-            <span>{transactionID}</span>
-          </div>
-          <div>
-            <span>Date:</span>
-            <span>{date}</span>
-          </div>
+      <div className={styles.content}>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Name:</span>
+          <span className={styles.contentDetails}>{payer.trim()}</span>
         </div>
-        <div className={styles.transactionAmount}>
-          <div>
-            <span>Amount:</span>
-            <span>{formatToCurrency(amount)}</span>
-          </div>
-          <div>
-            <span>Convenience Fee:</span>
-            <span>{formatToCurrency(0)}</span>
-          </div>
-          <div className={styles.total}>
-            <span>Total:</span>
-            <span>{formatToCurrency(amount)}</span>
-          </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Account No:</span>
+          <span className={styles.contentDetails}>{address}</span>
         </div>
-        <div className={styles.link}>
-          <Link to="/" className={styles.linkHome}>
-            Home
-          </Link>
-          <button
-            onClick={() => window.print()}
-            className={styles.linkServiceHome}
-          >
-            Print
-          </button>
-          {/* <a onClick={() => setComponentToRender("form")} className={styles.linkServiceHome}>New Payment</a> */}
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Units</span>
+          <span className={styles.contentDetails}>
+            {unit_value + unit || "NIL"}
+          </span>
         </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Token</span>
+          <span className={styles.contentDetails}>{token || "NIL"}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Transaction ID:</span>
+          <span className={styles.contentDetails}>{transactionID}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Date:</span>
+          <span className={styles.contentDetails}>{date}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Amount:</span>
+          <span className={styles.contentDetails}>
+            {formatToCurrency(amount)}
+          </span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Convenience Fee:</span>
+          <span className={styles.contentDetails}>{formatToCurrency(0)}</span>
+        </div>
+      </div>
+
+      <div className={styles.total}>
+        <span className={styles.totalHeading}>Total:</span>
+        <span className={styles.totalDetails}>{formatToCurrency(amount)}</span>
+      </div>
+
+      <Barcode
+        value="https://www.cico.ng"
+        width={1.25}
+        height={50}
+        marginTop={30}
+        fontSize={16}
+        displayValue={false}
+      />
+      <div className={styles.action}>
+        <Link to="/" className={`${styles.buttonAction} ${styles.buttonHome}`}>
+          Home
+        </Link>
+        <button
+          onClick={() => window.print()}
+          className={`${styles.buttonAction} ${styles.buttonRestart}`}
+        >
+          New Payment
+        </button>
       </div>
     </div>
   );
 };
 
-export default ElectricityPaymentCompleted;
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
+export default connect(mapStateToProps)(ElectricityPaymentCompleted);

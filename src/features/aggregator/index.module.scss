@@ -1,0 +1,57 @@
+@import "../assets/styles/config/breakpoints";
+@import "../assets/styles/config/mixins";
+
+.active {
+  background-color: #203f79;
+}
+
+.aggregator {
+  padding: 3rem;
+  font-size: 1.4rem;
+  background-color: #fff;
+  min-height: 100vh;
+
+  @include respond(phone-large) {
+    padding: 3rem 0.5rem;
+  }
+}
+
+.nav {
+  margin-bottom: 3rem;
+  width: 40%;
+
+  @include respond-custom(1200px) {
+    width: 70%;
+  }
+
+  @include respond(tab) {
+    width: 80%;
+  }
+
+  @include respond(phone-large) {
+    width: 100%;
+    font-size: 1.3rem;
+    flex-wrap: wrap;
+  }
+}
+
+.nav-list {
+  list-style: none;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-list__item {
+  display: inline-block;
+}
+
+.nav-list__item > a {
+  text-decoration: none;
+  color: #707070;
+  padding-bottom: 1rem;
+}
+
+.aggregator-active {
+  border-bottom: 2px solid #00c4a9;
+}

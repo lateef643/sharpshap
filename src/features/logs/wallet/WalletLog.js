@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ListLoader from "../../../components/util/ListLoader";
+import { ThreeDots } from "svg-loaders-react";
 import minus from "../../../assets/images/minus.svg";
 import plus from "../../../assets/images/plus.svg";
 import { connect } from "react-redux";
 import { setCurrentPage } from "../../../actions/page";
-import formatToCurrency from "../../../util/formatToCurrency";
-import { GET_AGENT_WALLET_HISTORY } from "../../../store/api/constants";
+import formatToCurrency from "../../../utils/formatToCurrency";
+import { GET_AGENT_WALLET_HISTORY } from "../../../utils/constants";
 import style from "./WalletLog.module.scss";
 
 export const WalletLog = ({ changeCurrentPage }) => {
@@ -94,7 +94,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
       )}
       {(loading || pageChangeLoading) && (
         <div className={style.loaderContainer}>
-          <ListLoader />
+          <ThreeDots />
         </div>
       )}
       {!loading && logs.length > 0 && deviceWidth > 600 && (

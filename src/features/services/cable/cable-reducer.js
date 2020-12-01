@@ -1,5 +1,4 @@
 export const initialFormState = {
-  provider: "",
   selectedPlanName: "",
   smartCardNumber: "",
   customerName: "",

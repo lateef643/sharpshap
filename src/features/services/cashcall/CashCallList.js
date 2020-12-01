@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 
-import ListLoader from "../../../components/util/ListLoader";
+import { ThreeDots } from "svg-loaders-react";
 import {
   GET_CASHCALL_LIST,
   OPPORTUNITIES_LIST,
-} from "../../../store/api/constants";
-import formatToCurrency from "../../../util/formatToCurrency";
+} from "../../../utils/constants";
+import formatToCurrency from "../../../utils/formatToCurrency";
 
 import styles from "./CashCallList.module.scss";
 
@@ -102,7 +102,7 @@ export const CashCallList = ({
     <div className={styles.container}>
       {loading && (
         <div className={styles.loaderContainer}>
-          <ListLoader />
+          <ThreeDots />
         </div>
       )}
       {!loading && cashCallList.length === 0 && (

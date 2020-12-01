@@ -1,6 +1,6 @@
 import React from "react";
 // import { connect } from "react-redux";
-import Loader from "../../../components/util/Loader";
+import { ThreeDots } from "svg-loaders-react";
 import style from "./FundWalletSummary.module.scss";
 
 export const FundWalletSummary = ({
@@ -55,11 +55,7 @@ export const FundWalletSummary = ({
           handleOnSubmit();
         }}
       >
-        {loading ? (
-          <Loader size="small" color="white" position="center" />
-        ) : (
-          "Continue"
-        )}
+        {loading ? <ThreeDots /> : "Continue"}
       </button>
     </div>
   );

@@ -1,19 +1,21 @@
 import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
-import axios from "axios";
-import { AGENT_DASHBOARD_DATA } from "../store/api/constants";
-import Card from "../components/shared/Card";
-import bills from "../assets/images/bills.svg";
-import transfer from "../assets/images/transfer-outlined.svg";
-import sim from "../assets/images/sim.svg";
-import football from "../assets/images/football.svg";
-import cashcall2 from "../assets/images/cashcall2.svg";
+import { Link } from "react-router-dom";
 import Chart from "chart.js";
+
+import { setDisplayModal } from "../actions/modal";
+
 import { setCurrentPage } from "../actions/page";
+import bills from "../assets/icons/dashboard-bill.svg";
+import transfer from "../assets/icons/dashboard-transaction.svg";
+import betting from "../assets/icons/dashboard-betting.svg";
+import cashcall from "../assets/icons/dashboard-call.svg";
+import airtime from "../assets/icons/dashboard-phone.svg";
+import formatToCurrency from "../utils/formatToCurrency";
 
 import styles from "./Overview.module.scss";
 
-export const Overview = ({ changeCurrentPage }) => {
+export const Overview = ({ changeCurrentPage, displayModal, overviewData }) => {
   const days = [
     "Monday",
     "Tuesday",
@@ -56,14 +58,14 @@ export const Overview = ({ changeCurrentPage }) => {
     transactionVolumeDataToDisplay,
     setTransactionVolumeDateToDisplay,
   ] = useState("month");
-  const [transactionVolumeData, setTransactionVolumeData] = useState(null);
+  // const [transactionVolumeData, setTransactionVolumeData] = useState(null);
   const transactionVolumeDataMonthly = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const transactionVolumeDataDaily = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
   const barChartData = {
     labels: transactionVolumeDataToDisplay === "month" ? monthShort : dayShort,
     datasets: [
       {
-        backgroundColor: "#2A58AE",
+        backgroundColor: "#3E215B",
         data:
           transactionVolumeDataToDisplay === "month"
             ? transactionVolumeDataMonthly
@@ -72,17 +74,12 @@ export const Overview = ({ changeCurrentPage }) => {
       },
     ],
   };
-  // const [deviceHeight, setDeviceHeight] = useState(window.innerHeight);
-  // const [deviceWidth, setDeviceWidth] = useState(window.innerWidth);
 
   const deviceWidth = window.innerWidth;
 
   const getTransactionVolumeDataDaily = () => {
-    if (
-      transactionVolumeData !== null &&
-      transactionVolumeData.weekly.data.length > 0
-    ) {
-      const dailyTransactionVolumeInfo = transactionVolumeData.weekly.data;
+    if (overviewData !== null && overviewData.chart.weekly.data.length > 0) {
+      const dailyTransactionVolumeInfo = overviewData.chart.weekly.data;
 
       days.forEach((day, index) => {
         dailyTransactionVolumeInfo.forEach((dayInfo) => {
@@ -95,11 +92,8 @@ export const Overview = ({ changeCurrentPage }) => {
   };
 
   const getTransactionVolumeDataMonthly = () => {
-    if (
-      transactionVolumeData !== null &&
-      transactionVolumeData.monthly.data.length > 0
-    ) {
-      const monthlyTransactionVolumeInfo = transactionVolumeData.monthly.data;
+    if (overviewData !== null && overviewData.chart.monthly.data.length > 0) {
+      const monthlyTransactionVolumeInfo = overviewData.chart.monthly.data;
 
       months.forEach((month, index) => {
         monthlyTransactionVolumeInfo.forEach((monthInfo) => {
@@ -112,20 +106,12 @@ export const Overview = ({ changeCurrentPage }) => {
   };
 
   useEffect(() => {
-    (async () => {
-      const res = await axios.get(AGENT_DASHBOARD_DATA);
-      const transactionVolume = res.data.data;
-      setTransactionVolumeData(transactionVolume);
-    })();
-  }, []);
-
-  useEffect(() => {
     getTransactionVolumeDataDaily();
     getTransactionVolumeDataMonthly();
-  }, [transactionVolumeData]);
+  }, [overviewData]);
 
   useEffect(() => {
-    Chart.defaults.global.defaultFontFamily = "Lato";
+    Chart.defaults.global.defaultFontFamily = "Nunito";
 
     window.onload = function () {
       var ctx = document.getElementById("canvas").getContext("2d");
@@ -225,47 +211,126 @@ export const Overview = ({ changeCurrentPage }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.cardContainer}>
-        <Card
-          link="transfer"
-          text="Transfer Funds"
-          size="small"
-          image={transfer}
-        />
-        <Card
-          link="bill-payment"
-          text="Bill Payment"
-          size="small"
-          image={bills}
-        />
-        <Card
-          link="airtime-data"
-          text="Airtime & Data"
-          size="small"
-          image={sim}
-        />
-        <Card link="betting" text="Betting" size="small" image={football} />
-        <Card
-          link="cash-call"
-          text="Cash Call"
-          size="small"
-          image={cashcall2}
-        />
-      </div>
-      <div className={styles.chartContainer}>
-        <select
-          className={styles.sortBy}
-          onChange={handleTransactionVolumeDateToDisplayChange}
+      <div className={styles.services}>
+        <Link
+          to="/transfer"
+          className={`${styles.card} ${styles.cardTransfer}`}
+          onClick={(e) => {
+            e.preventDefault();
+
+            displayModal({
+              overlay: true,
+              modal: "fundsTransfer",
+            });
+          }}
         >
-          <option value="month">Monthly</option>
-          <option value="day">Daily</option>
-        </select>
-        <canvas
-          id="canvas"
-          className={styles.canvas}
-          width="200"
-          height={deviceWidth > 600 ? "120" : "180"}
-        ></canvas>
+          <div className={styles.container}>
+            <div
+              className={`${styles.cardImageContainer} ${styles.cardImageContainerTransfer}`}
+            >
+              <img src={transfer} className={styles.image} alt="card icon" />
+            </div>
+            <p className={`${styles.text} ${styles.textTransfer}`}>Transfer</p>
+          </div>
+        </Link>
+        <Link
+          to="/bill-payment"
+          className={`${styles.card} ${styles.cardBill}`}
+        >
+          <div className={styles.container}>
+            <div
+              className={`${styles.cardImageContainer} ${styles.cardImageContainerBill}`}
+            >
+              <img src={bills} className={styles.image} alt="card icon" />
+            </div>
+            <p className={`${styles.text} ${styles.textBill}`}>Bill Payment</p>
+          </div>
+        </Link>
+        <Link
+          to="/airtime-data"
+          className={`${styles.card} ${styles.cardAirtime}`}
+        >
+          <div className={styles.container}>
+            <div
+              className={`${styles.cardImageContainer} ${styles.cardImageContainerAirtime}`}
+            >
+              <img src={airtime} className={styles.image} alt="card icon" />
+            </div>
+            <p className={`${styles.text} ${styles.textAirtime}`}>
+              Airtime & Data
+            </p>
+          </div>
+        </Link>
+        <Link to="/transfer" className={`${styles.card} ${styles.cardBetting}`}>
+          <div className={styles.container}>
+            <div
+              className={`${styles.cardImageContainer} ${styles.cardImageContainerBetting}`}
+            >
+              <img src={betting} className={styles.image} alt="card icon" />
+            </div>
+            <p className={`${styles.text} ${styles.textBetting}`}>Betting</p>
+          </div>
+        </Link>
+        <Link to="/transfer" className={`${styles.card} ${styles.cardCash}`}>
+          <div className={styles.container}>
+            <div
+              className={`${styles.cardImageContainer} ${styles.cardImageContainerCash}`}
+            >
+              <img src={cashcall} className={styles.image} alt="card icon" />
+            </div>
+            <p className={`${styles.text} ${styles.textCash}`}>Cash Call</p>
+          </div>
+        </Link>
+      </div>
+      <div className={styles.content}>
+        <div className={styles.transactions}>
+          {overviewData !== null && overviewData.transaction.length > 0 ? (
+            <>
+              <div className={styles.transactionsHeading}>
+                <h3 className={styles.transactionsHeadingText}>
+                  Recent transactions
+                </h3>
+                <Link
+                  to="/transactions"
+                  className={styles.transactionsHeadingLink}
+                >
+                  View all
+                </Link>
+              </div>
+              {overviewData.transaction.map((data) => {
+                const date = new Date(data.transaction_date).toDateString();
+                const { amount, type, status } = data;
+
+                return (
+                  <div className={styles.transactionsItem}>
+                    <p className={styles.date}>{date}</p>
+                    <p className={styles.description}>
+                      {`${type.toLowerCase()}/${status}`}
+                    </p>
+                    <p className={styles.amount}>₦{formatToCurrency(amount)}</p>
+                  </div>
+                );
+              })}
+            </>
+          ) : (
+            <div>this is the loading state</div>
+          )}
+        </div>
+        <div className={styles.chartContainer}>
+          <select
+            className={styles.sortBy}
+            onChange={handleTransactionVolumeDateToDisplayChange}
+          >
+            <option value="month">Monthly</option>
+            <option value="day">Daily</option>
+          </select>
+          <canvas
+            id="canvas"
+            className={styles.canvas}
+            width="200"
+            height={deviceWidth > 600 ? "120" : "180"}
+          ></canvas>
+        </div>
       </div>
     </div>
   );
@@ -274,6 +339,7 @@ export const Overview = ({ changeCurrentPage }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+    displayModal: (payload) => dispatch(setDisplayModal(payload)),
   };
 };
 

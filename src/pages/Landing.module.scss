@@ -1,0 +1,291 @@
+@import "../assets/styles/config/mixins";
+@import "../assets/styles/config/breakpoints";
+
+.wrapper {
+  width: 100%;
+  min-height: 100vh;
+  overflow: hidden;
+  color: #fff;
+  background-color: #062863;
+  background-position: bottom 12rem right 14rem, bottom 8rem right 8.5rem,
+    bottom 14rem right 7rem, bottom 4rem right 13rem, bottom 0rem right 0rem,
+    bottom 9rem left 11rem, bottom 2rem left 13rem, bottom 0rem left 0rem;
+  background-size: 4vw, 3vw, 1.5vw, 2.5vw, 5.5vw, 19vw, 19vw, 38vw 18vw;
+  background-repeat: no-repeat;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+    url("../assets/icons/background-phone.svg"),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzc0IiBoZWlnaHQ9IjM3NCIgdmlld0JveD0iMCAwIDM3NCAzNzQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjE4NyIgY3k9IjE4NyIgcj0iMTg3IiBmaWxsPSIjMDBCMzc4Ii8+Cjwvc3ZnPgo="),
+    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgxIiBoZWlnaHQ9IjMyNiIgdmlld0JveD0iMCAwIDQ4MSAzMjYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEzMCIgY3k9IjM1MSIgcj0iMzUxIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
+
+  @include respond-custom(1000px) {
+    background-position: bottom 11rem right 13rem, bottom 7rem right 7.5rem,
+      bottom 13rem right 6rem, bottom 3rem right 12rem, bottom 0rem right 0rem,
+      bottom 9rem left 11rem, bottom 2rem left 13rem, bottom 0rem left 0rem;
+    background-size: 5vw, 4vw, 2.5vw, 3.5vw, 8vw, 22vw, 22vw, 41vw 21vw;
+  }
+
+  @include respond-custom(810px) {
+    background-size: 5vw, 4vw, 2.5vw, 3.5vw, 8vw, 0px, 0px, 0px;
+  }
+}
+
+.header {
+  padding: 4rem 10vw;
+  display: flex;
+  justify-content: flex-start;
+
+  @include respond-custom(1000px) {
+    padding: 5rem 9vw;
+  }
+
+  @include respond-custom(900px) {
+    padding: 5rem 8vw;
+  }
+
+  @include respond-custom(810px) {
+    justify-content: center;
+  }
+
+  @include respond-custom(410px) {
+    padding: 5rem 1rem;
+  }
+}
+
+.heading {
+  flex: 0 0 25%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+
+  @include respond-custom(810px) {
+    display: none;
+  }
+}
+
+.headingPrimary {
+  font-weight: 800;
+  font-size: 5.5rem;
+  line-height: 6.5rem;
+
+  @include respond-custom(1000px) {
+    font-size: 5rem;
+  }
+}
+
+.formSection {
+  flex: 0 0 37.1rem;
+  margin-left: 20%;
+
+  @include respond-custom(1000px) {
+    margin-left: 18%;
+  }
+
+  @include respond-custom(900px) {
+    margin-left: 14%;
+  }
+
+  @include respond-custom(810px) {
+    margin: 0;
+  }
+
+  @include respond-custom(410px) {
+    flex: 1;
+  }
+}
+
+.formContainer {
+  width: 100%;
+  margin: 0 auto;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  background: #fff;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+
+  @include respond(phone-large) {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.form {
+  width: 100%;
+  padding: 6.5rem 3rem;
+
+  @include respond(tab) {
+    padding: 4rem 2rem;
+  }
+}
+
+.formGroup {
+  width: 100%;
+  position: relative;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+
+    @include respond(phone) {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+.label {
+  color: #22215b;
+  font-size: 1.4rem;
+  display: block;
+  margin-bottom: 2rem;
+  font-weight: 600;
+
+  @include respond(phone) {
+    margin-bottom: 1rem;
+    font-size: 1.3rem;
+  }
+}
+
+.inputIcon {
+  position: absolute;
+  width: 2rem;
+  left: 1rem;
+  top: 60%;
+
+  @include respond(phone) {
+    width: 1.7rem;
+    top: 55%;
+  }
+}
+
+.input {
+  width: 100%;
+  border: 0;
+  outline: 0;
+  height: 4rem;
+  font-family: inherit;
+  padding: 0 4rem;
+  font-size: 1.5rem;
+  background: rgba(204, 220, 255, 0.411);
+
+  &::-webkit-input-placeholder {
+    opacity: 1;
+    font-size: 1.4rem;
+    font-family: inherit;
+    color: #575757;
+
+    @include respond(phone) {
+      font-size: 1.3rem;
+    }
+  }
+
+  &::-moz-placeholder {
+    opacity: 1;
+    font-size: 1.4rem;
+    font-family: inherit;
+    color: #575757;
+
+    @include respond(phone) {
+      font-size: 1.3rem;
+    }
+  }
+
+  &:-ms-input-placeholder {
+    opacity: 1;
+    font-size: 1.4rem;
+    font-family: inherit;
+    color: #575757;
+
+    @include respond(phone) {
+      font-size: 1.3rem;
+    }
+  }
+
+  &::-ms-input-placeholder {
+    opacity: 1;
+    font-size: 1.4rem;
+    font-family: inherit;
+    color: #575757;
+
+    @include respond(phone) {
+      font-size: 1.3rem;
+    }
+  }
+
+  &::placeholder {
+    opacity: 1;
+    font-size: 1.4rem;
+    font-family: inherit;
+    color: #575757;
+
+    @include respond(phone) {
+      font-size: 1.3rem;
+    }
+  }
+}
+
+.forgotPassword {
+  text-align: right;
+}
+
+.forgotPasswordLink {
+  text-decoration: none;
+  color: #22215b;
+  font-size: 1.4rem;
+
+  @include respond(phone) {
+    font-size: 1.3rem;
+  }
+}
+
+.button {
+  cursor: pointer;
+  display: block;
+  height: 4rem;
+  line-height: 4rem;
+  color: #fff;
+  font-size: 1.5rem;
+  width: 21.5rem;
+  font-family: "Avenir", sans-serif;
+  background: lighten(#062863, 5%);
+  box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  margin: 0 auto;
+  outline: 0;
+  border: 0;
+  text-align: center;
+
+  @include respond(phone) {
+    font-size: 1.3rem;
+  }
+
+  & > svg {
+    position: relative;
+    top: 5px;
+    width: 4rem;
+    height: 3rem;
+  }
+
+  &:hover {
+    background: #062863;
+  }
+}
+
+.register {
+  margin-top: 3rem;
+  color: #22215b;
+  font-size: 1.5rem;
+  text-align: center;
+
+  @include respond(phone) {
+    font-size: 1.3rem;
+  }
+}
+
+.registerLink {
+  text-decoration: none;
+  margin-left: 1rem;
+  display: inline-block;
+  color: #00b378;
+}

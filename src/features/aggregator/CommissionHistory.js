@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
 
-import formatToCurrency from "../../util/formatToCurrency";
+import formatToCurrency from "../../utils/formatToCurrency";
 
-import { GET_COMMISSION_HISTORY } from "../../store/api/constants";
+import { GET_COMMISSION_HISTORY } from "../../utils/constants";
 
 import styles from "./CommissionHistory.module.scss";
 

@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
-import { WALLET_TRANSFER } from "../../../store/api/constants";
+import { WALLET_TRANSFER } from "../../../utils/constants";
 import WalletTransferForm from "./WalletTransferForm";
 import WalletTransferStatus from "./WalletTransferStatus";
 import WalletTransferSummary from "./WalletTransferSummary";
-import FailedTransaction from "../../../components/shared/FailedTransaction";
+import FailedTransaction from "../../../components/common/FailedTransaction";
 import styles from "./WalletTransfer.module.scss";
 import transferReducer, { initialState } from "./transfer-reducer";
 

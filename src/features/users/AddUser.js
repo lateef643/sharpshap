@@ -1,91 +1,117 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { setCurrentPage } from "../../actions/page";
-import style from "./AddUser.module.scss";
+import { ThreeDots } from "svg-loaders-react";
+import Axios from "axios";
+import { useToasts } from "react-toast-notifications";
+import { setDisplayModal } from "../../actions/modal";
 
-export const AddUser = ({ changeCurrentPage }) => {
+import { CREATE_SUB_USER } from "../../utils/constants";
+import { setCurrentPage } from "../../actions/page";
+import styles from "./AddUser.module.scss";
+
+export const AddUser = ({ changeCurrentPage, displayModal }) => {
+  const { addToast } = useToasts();
   changeCurrentPage({
     heading: "Add User",
     search: false,
   });
 
-  const [firstname, setFirstname] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [validationErrors, setValidationErrors] = useState({});
+  const [formState, setFormState] = useState({
+    email: "",
+    phone: "",
+  });
+  const [loading, setLoading] = useState(false);
+
+  const handleOnChange = (e) => {
+    e.preventDefault();
+
+    setFormState({ ...formState, [e.target.name]: e.target.value });
+  };
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    console.log({
-      firstname,
-      lastname,
-      phoneNumber,
-      email,
-      password,
-      confirmPassword,
-    });
-  };
+    setLoading(true);
 
-  const handleFirstnameChange = (e) => {
-    const newFirstname = e.target.value;
-    setFirstname(newFirstname);
-  };
+    (async function fetchWalletBalance() {
+      try {
+        const res = await Axios.post(CREATE_SUB_USER, formState);
 
-  const handleLastnameChange = (e) => {
-    const newLastname = e.target.value;
-    setLastname(newLastname);
-  };
+        addToast("User created successfully", {
+          appearance: "success",
+          autoDismiss: false,
+        });
 
-  const handlePhoneChange = (e) => {
-    const newPhoneNumber = e.target.value;
-    setPhoneNumber(newPhoneNumber);
-  };
+        displayModal({
+          overlay: false,
+          modal: "",
+          service: "",
+        });
 
-  const handleEmailChange = (e) => {
-    const newEmail = e.target.value;
-    setEmail(newEmail);
-  };
+        setLoading(false);
+      } catch (e) {
+        setLoading(false);
 
-  const handlePasswordChange = (e) => {
-    const newPassword = e.target.value;
-    setPassword(newPassword);
-  };
-
-  const handleConfirmPasswordChange = (e) => {
-    const password2 = e.target.value;
-    setConfirmPassword(password2);
+        addToast("An error occured", {
+          appearance: "error",
+          autoDismiss: false,
+        });
+      }
+    })();
   };
 
   return (
-    <div className={style.container}>
-      <form className={style.form} onSubmit={handleOnSubmit}>
-        <label>
-          <span>Firstname</span>
-          <input type="text" onChange={handleFirstnameChange} />
-        </label>
-        <label>
-          <span>Lastname</span>
-          <input type="text" onChange={handleLastnameChange} />
-        </label>
-        <label>
-          <span>Phone Number</span>
-          <input type="text" onChange={handlePhoneChange} />
-        </label>
-        <label>
-          <span>Email</span>
-          <input type="text" onChange={handleEmailChange} />
-        </label>
-        <label>
-          <span>Password</span>
-          <input type="text" onChange={handlePasswordChange} />
-        </label>
-        <label>
-          <span>Confirm Password</span>
-          <input type="text" onChange={handleConfirmPasswordChange} />
-        </label>
-        <button type="submit">Submit</button>
+    <div className={styles.container}>
+      <form
+        className={styles.form}
+        onSubmit={(e) => handleOnSubmit(e)}
+        autoComplete="off"
+      >
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="amount">
+            Phone number
+          </label>
+          <input
+            name="phone"
+            value={formState.phone}
+            type="text"
+            onChange={(e) => handleOnChange(e)}
+            className={
+              validationErrors.phone
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
+          />
+          {validationErrors.phone && (
+            <p className={styles.validationErrorText}>
+              Please enter valid phone number
+            </p>
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="email">
+            Email
+          </label>
+          <input
+            name="email"
+            value={formState.email}
+            type="text"
+            onChange={(e) => handleOnChange(e)}
+            className={
+              validationErrors.email
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
+          />
+          {validationErrors.email && (
+            <p className={styles.validationErrorText}>
+              Please enter valid email
+            </p>
+          )}
+        </div>
+        <button type="submit" className={styles.button}>
+          {loading ? <ThreeDots /> : "Create"}
+        </button>
       </form>
     </div>
   );
@@ -94,6 +120,7 @@ export const AddUser = ({ changeCurrentPage }) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
+    displayModal: (payload) => dispatch(setDisplayModal(payload)),
   };
 };
 

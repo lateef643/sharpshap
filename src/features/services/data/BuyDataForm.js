@@ -1,40 +1,35 @@
-import React, { useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import axios from "axios";
-import { GET_DATA_PLANS } from "../../../store/api/constants";
-import mtn from "../../../assets/images/MTN Logo.svg";
-import _9mobile from "../../../assets/images/9mobile.svg";
-import airtel from "../../../assets/images/Airtel.svg";
-import glo from "../../../assets/images/glo.svg";
-// import data from "../../../assets/images/smartphone.svg";
+import { connect } from "react-redux";
+
+import generateNetworkImageUrl from "./generateNetworkImageUrl";
+import { GET_DATA_PLANS } from "../../../utils/constants";
+import validateFormData from "../../../validation/validateFormData";
+
 import styles from "./BuyDataForm.module.scss";
 
 export const BuyDataForm = (props) => {
-  const telcoList = [
-    { code: "D01D", id: 5, name: "Airtel", type: "Data" },
-    { code: "D02D", id: 6, name: "9mobile", type: "Data" },
-    { code: "D03D", id: 7, name: "Globacom", type: "Data" },
-    { code: "D04D", id: 8, name: "MTN", type: "Data" },
-  ];
   const {
-    handleTelcoChange,
-    handlePhoneChange,
-    handleSelectedDataPlanIdChange,
-    setDataPlans,
-    amount,
-    phone,
-    telcoName,
-    setValidationError,
-    validationError,
-    selectedDataPlanId,
+    DataPurchaseFormState: state,
+    setState,
     setComponentToRender,
-    telco,
-    dataPlans,
+    service,
   } = props;
+  const [validationErrors, setValidationErrors] = useState({});
+  const [dataPlans, setDataPlans] = useState([]);
+
+  const networkImageUrl = generateNetworkImageUrl(service);
 
   useEffect(() => {
-    // const payload = {
-    //   telco,
-    // };
+    const telcoList = {
+      airtel: "Airtel",
+      "9mobile": "9mobile",
+      glo: "Globacom",
+      mtn: "MTN",
+    };
+
+    const telcoName = telcoList[`${service}`];
 
     axios
       .get(GET_DATA_PLANS)
@@ -50,116 +45,166 @@ export const BuyDataForm = (props) => {
       .catch((err) => {
         // console.log(err);
       });
-  }, [telco]);
+  }, [service]);
 
-  //Dynamically render telco logo
-  let telcoImageUrl = "";
+  useEffect(() => {
+    if (state.plan) {
+      const selectedPlan = dataPlans.filter((plan) => {
+        return plan.productId === state.plan;
+      })[0];
 
-  telcoImageUrl =
-    telcoName === "MTN"
-      ? mtn
-      : telcoName === "9 Mobile"
-      ? _9mobile
-      : telcoName === "Globacom"
-      ? glo
-      : telcoName === "Airtel"
-      ? airtel
-      : mtn;
+      const amount = selectedPlan.face_value;
+
+      setState({
+        type: "UPDATE_FORM_STATE",
+        payload: { amount },
+      });
+    }
+  }, [state.plan]);
+
+  const handleOnContinue = (e) => {
+    e.preventDefault();
+
+    const keys = Object.keys(state);
+    const errors = validateFormData(state, keys);
+
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) return;
+
+    setComponentToRender("summary");
+  };
+
+  const handleSetFormState = ({ target }) => {
+    setValidationErrors({ ...validationErrors, [target.name]: false });
+
+    setState({
+      type: "UPDATE_FORM_STATE",
+      payload: { [target.name]: target.value },
+    });
+  };
 
   return (
     <form
       className={styles.form}
-      onSubmit={(e) => {
-        e.preventDefault();
-
-        if (telco && amount && phone && selectedDataPlanId) {
-          setComponentToRender("summary");
-        } else {
-          setTimeout(() => {
-            setValidationError({
-              ...validationError,
-              telco: !telco,
-              phone: !phone,
-              selectedDataPlanId: !selectedDataPlanId,
-            });
-          }, 2000);
-        }
-      }}
+      onSubmit={(e) => handleOnContinue(e)}
+      autoComplete="off"
     >
-      <div className={styles.imageContainer}>
-        <img src={telcoImageUrl} className={styles.image} alt="network icon" />
-      </div>
-      <label>
-        <span>Network</span>
-        <select
-          onChange={handleTelcoChange}
-          className={
-            validationError.telco ? styles.outlineRed : styles.outlineGrey
-          }
-        >
-          <option value="">Select Network</option>
-          {telcoList.map((telco, index) => {
-            return (
-              <option value={JSON.stringify(telco)} key={index}>
-                {telco.name}
-              </option>
-            );
-          })}
-        </select>
-        {validationError.telco && (
-          <p className={styles.validationErrorText}>Please select network</p>
-        )}
-      </label>
-      <label>
-        <span>Phone Number</span>
-        <input
-          type="text"
-          onChange={handlePhoneChange}
-          className={
-            validationError.phone ? styles.outlineRed : styles.outlineGrey
-          }
-        />
-        {validationError.phone && (
+      <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="amount">
+          Phone number
+        </label>
+        <div className={styles.formGroupSub}>
+          <select
+            name="currency"
+            onChange={(e) => handleSetFormState(e)}
+            className={
+              validationErrors.phone
+                ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
+                : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
+            }
+          >
+            <option value="">+234</option>
+          </select>
+          <input
+            name="phone"
+            value={state.phone}
+            type="text"
+            onChange={(e) => handleSetFormState(e)}
+            className={
+              validationErrors.phone
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
+          />
+        </div>
+        {validationErrors.phone && (
           <p className={styles.validationErrorText}>
-            Please enter phone number
+            Please enter valid phone number
           </p>
         )}
-      </label>
-      <label>
-        <span>Data Plan</span>
-        <select
-          onChange={handleSelectedDataPlanIdChange}
-          className={
-            validationError.selectedDataPlanId
-              ? styles.outlineRed
-              : styles.outlineGrey
-          }
-        >
-          <option value="">Select Data Plan</option>
-          {dataPlans.map((plan, index) => {
-            return (
-              <option value={JSON.stringify(plan)} key={index}>
-                {plan.product_value}
-              </option>
-            );
-          })}
-        </select>
-        {validationError.selectedDataPlanId && (
-          <p className={styles.validationErrorText}>Please select data plan</p>
+      </div>
+      <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="plan">
+          Phone number
+        </label>
+        <div className={styles.formGroupSub}>
+          <img className={styles.selectionImage} src={networkImageUrl} alt="" />
+          <select
+            name="plan"
+            onChange={(e) => handleSetFormState(e)}
+            className={
+              validationErrors.plan
+                ? `${styles.outlineRed} ${styles.select}`
+                : `${styles.outlineGrey} ${styles.select}`
+            }
+          >
+            <option value="">Select Plan</option>
+            {dataPlans.map((plan, index) => {
+              return (
+                <option value={plan.productId} key={`${index}--${plan.name}`}>
+                  {plan.product_value}
+                </option>
+              );
+            })}
+          </select>
+        </div>
+        {validationErrors.plan && (
+          <p className={styles.validationErrorText}>Please select plan</p>
         )}
-      </label>
-      <label>
-        <span>Amount</span>
-        <input
-          type="text"
-          disabled={true}
-          value={amount}
-          className={styles.outlineGrey}
-        />
-      </label>
-      <button type="submit">Continue</button>
+      </div>
+      <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="amount">
+          Amount
+        </label>
+        <div className={styles.formGroupSub}>
+          <select
+            name="currency"
+            onChange={(e) => handleSetFormState(e)}
+            className={
+              validationErrors.amount
+                ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
+                : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
+            }
+          >
+            <option value="">NGN</option>
+          </select>
+          <input
+            name="amount"
+            value={state.amount}
+            type="number"
+            onChange={(e) => handleSetFormState(e)}
+            className={
+              validationErrors.amount
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
+          />
+        </div>
+        {validationErrors.amount && (
+          <p className={styles.validationErrorText}>
+            Please enter valid amount
+          </p>
+        )}
+      </div>
+      <button type="submit" className={styles.button}>
+        Continue
+      </button>
     </form>
   );
 };
 
-export default BuyDataForm;
+BuyDataForm.propTypes = {
+  networkList: PropTypes.array.isRequired,
+  AirtimePurchaseFormState: PropTypes.object.isRequired,
+  setState: PropTypes.func.isRequired,
+  setComponentToRender: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
+export default connect(mapStateToProps)(BuyDataForm);

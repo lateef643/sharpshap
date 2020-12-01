@@ -1,33 +1,31 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
+import { ThreeDots } from "svg-loaders-react";
+import { connect } from "react-redux";
 
-import VerificationLoader from "../../../components/util/VerificationLoader";
+import generateServiceProviderImageUrl from "./generateServiceProviderImageUrl";
 
 import {
   GET_ENERGY_VENDORS,
   VALIDATE_METER_NUMBER,
-} from "../../../store/api/constants";
+} from "../../../utils/constants";
 import validateFormData from "../../../validation/validateFormData";
-import ikedc from "../../../assets/images/ikedc.png";
-import aedc from "../../../assets/images/Abuja electricity.png";
-import kedc from "../../../assets/images/Kaduna.png";
-import kaedc from "../../../assets/images/Kano.png";
-import ibedc from "../../../assets/images/ibedc.png";
-import phedc from "../../../assets/images/Ph.png";
 
 import styles from "./ElectricityPaymentForm.module.scss";
 
 const ElectricityPaymentForm = (props) => {
   const {
     ElectricityPaymentFormState: state,
-    dispatch,
+    setState,
     setComponentToRender,
   } = props;
   const [energyVendors, setEnergyVendors] = useState([]);
   const [accountName, setAccountName] = useState("");
   const [validationErrors, setValidationErrors] = useState({});
   const [loading, setLoading] = useState(false);
+
+  let serviceImageUrl = generateServiceProviderImageUrl(props.service);
 
   useEffect(() => {
     (async function fetchVendorsList() {
@@ -37,6 +35,29 @@ const ElectricityPaymentForm = (props) => {
       setEnergyVendors(energyVendors);
     })();
   }, []);
+
+  useEffect(() => {
+    let isCancelled;
+
+    if (energyVendors) {
+      const selectedEnergyVendor = energyVendors.find((vendor) => {
+        return vendor.name === props.service.toUpperCase();
+      });
+
+      if (selectedEnergyVendor) {
+        const selectedVendorCode = selectedEnergyVendor.name.trim();
+
+        setState({
+          type: "UPDATE_FORM_STATE",
+          payload: { disco: selectedVendorCode },
+        });
+      }
+    }
+
+    return () => {
+      isCancelled = true;
+    };
+  }, [energyVendors]);
 
   useEffect(() => {
     const { meterNo, disco, paymentPlan } = state;
@@ -49,7 +70,7 @@ const ElectricityPaymentForm = (props) => {
     if (!isNaN(parseInt(meterNo)) && meterNo.length > 10) {
       setLoading(true);
 
-      dispatch({
+      setState({
         type: "UPDATE_FORM_STATE",
         payload: { accountName: "" },
       });
@@ -61,9 +82,10 @@ const ElectricityPaymentForm = (props) => {
           const res = await axios.put(VALIDATE_METER_NUMBER, req);
 
           const customerName = res.data.data.name;
+
           setLoading(false);
 
-          dispatch({
+          setState({
             type: "UPDATE_FORM_STATE",
             payload: { accountName: customerName },
           });
@@ -77,35 +99,6 @@ const ElectricityPaymentForm = (props) => {
       })();
     }
   }, [state.meterNo]);
-
-  //Change form image url on disco change
-  let imageUrl;
-
-  switch (state.disco) {
-    case "IKEDC":
-      imageUrl = ikedc;
-      break;
-    case "EKEDC":
-      imageUrl = ikedc;
-      break;
-    case "PHEDC":
-      imageUrl = phedc;
-      break;
-    case "KEDC":
-      imageUrl = kaedc;
-      break;
-    case "KAEDC":
-      imageUrl = kedc;
-      break;
-    case "IBEDC":
-      imageUrl = ibedc;
-      break;
-    case "AEDC":
-      imageUrl = aedc;
-      break;
-    default:
-      imageUrl = ikedc;
-  }
 
   const handleOnContinue = (e) => {
     e.preventDefault();
@@ -123,7 +116,7 @@ const ElectricityPaymentForm = (props) => {
   const handleStateChange = ({ target }) => {
     setValidationErrors({ ...validationErrors, [target.name]: false });
 
-    dispatch({
+    setState({
       type: "UPDATE_FORM_STATE",
       payload: { [target.name]: target.value },
     });
@@ -136,130 +129,141 @@ const ElectricityPaymentForm = (props) => {
         onSubmit={(e) => handleOnContinue(e)}
         autoComplete="off"
       >
-        <div className={styles.imageContainer}>
-          <img
-            src={imageUrl}
-            className={styles.image}
-            alt="Electricity Vendor's logo"
-          />
-        </div>
-        <label>
-          <span>Disco</span>
-          <select
-            type="text"
-            name="disco"
-            value={state.disco}
-            className={
-              validationErrors.disco ? styles.outlineRed : styles.outlineGrey
-            }
-            onChange={(e) => handleStateChange(e)}
-          >
-            <option value="">Select Disco</option>
-            {energyVendors.map((vendor, index) => {
-              return (
-                <option key={`${index}-${vendor.name}`} value={vendor.name}>
-                  {vendor.name}
-                </option>
-              );
-            })}
-          </select>
-          {validationErrors.disco ? (
-            <p className={styles.validationErrorText}>Please select disco</p>
-          ) : undefined}
-        </label>
-        <label>
-          <span>Plan</span>
-          <select
-            type="text"
-            name="paymentPlan"
-            value={state.paymentPlan}
-            className={
-              validationErrors.paymentPlan
-                ? styles.outlineRed
-                : styles.outlineGrey
-            }
-            onChange={(e) => handleStateChange(e)}
-          >
-            <option value="">Select plan</option>
-            <option value="PREPAID">PREPAID</option>
-            <option value="POSTPAID">POSTPAID</option>
-          </select>
-          {validationErrors.paymentPlan ? (
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="paymentPlan">
+            Plan
+          </label>
+          <div className={styles.formGroupSub}>
+            <img
+              className={styles.selectionImage}
+              src={serviceImageUrl}
+              alt=""
+            />
+            <select
+              name="paymentPlan"
+              onChange={(e) => handleStateChange(e)}
+              className={
+                validationErrors.paymentPlan
+                  ? `${styles.outlineRed} ${styles.select}`
+                  : `${styles.outlineGrey} ${styles.select}`
+              }
+            >
+              <option value="">Select plan</option>
+              <option value="PREPAID">PREPAID</option>
+              <option value="POSTPAID">POSTPAID</option>
+            </select>
+          </div>
+          {validationErrors.paymentPlan && (
             <p className={styles.validationErrorText}>
               Please select payment plan
             </p>
-          ) : undefined}
-        </label>
-        <label>
-          <span>Meter Number</span>
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="meterNo">
+            Meter Number
+          </label>
           <input
             type="text"
             name="meterNo"
             value={state.meterNo}
-            className={
-              validationErrors.meterNo ? styles.outlineRed : styles.outlineGrey
-            }
             onChange={(e) => handleStateChange(e)}
+            className={
+              validationErrors.meterNo
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
           />
-          {validationErrors.meterNo ? (
+          {validationErrors.meterNo && (
             <p className={styles.validationErrorText}>
               Please enter meter number
             </p>
-          ) : undefined}
-        </label>
-        <label>
-          <span>Account Name</span>
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="accountName">
+            Account Name
+          </label>
           <input
             type="text"
             name="accountName"
             value={state.accountName}
-            className={styles.outlineGrey}
+            className={
+              validationErrors.beneficiaryBankCode
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
             disabled
           />
-          {loading ? (
+          {loading && (
             <div className={styles.loader}>
-              <VerificationLoader />
+              <ThreeDots />
             </div>
-          ) : undefined}
-          {validationErrors.accountName ? (
+          )}
+          {validationErrors.accountName && (
             <p className={styles.validationErrorText}>
               {validationErrors.accountName}
             </p>
-          ) : undefined}
-        </label>
-        <label>
-          <span>Amount</span>
-          <input
-            type="text"
-            name="amount"
-            value={state.amount}
-            className={
-              validationErrors.amount ? styles.outlineRed : styles.outlineGrey
-            }
-            onChange={(e) => handleStateChange(e)}
-          />
-          {validationErrors.amount ? (
-            <p className={styles.validationErrorText}>Please enter amount</p>
-          ) : undefined}
-        </label>
-        <label>
-          <span>Phone</span>
-          <input
-            type="text"
-            name="phone"
-            value={state.phone}
-            className={
-              validationErrors.phone ? styles.outlineRed : styles.outlineGrey
-            }
-            onChange={(e) => handleStateChange(e)}
-          />
-          {validationErrors.phone ? (
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="amount">
+            Amount
+          </label>
+          <div className={styles.formGroupSub}>
+            <select
+              name="currency"
+              onChange={(e) => handleStateChange(e)}
+              className={
+                validationErrors.amount
+                  ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
+                  : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
+              }
+            >
+              <option value="">NGN</option>
+            </select>
+            <input
+              name="amount"
+              value={state.amount}
+              type="number"
+              onChange={(e) => handleStateChange(e)}
+              className={
+                validationErrors.amount
+                  ? `${styles.outlineRed} ${styles.input}`
+                  : `${styles.outlineGrey} ${styles.input}`
+              }
+            />
+          </div>
+          {validationErrors.amount && (
             <p className={styles.validationErrorText}>
-              Please enter valid phone number
+              Please enter valid amount
             </p>
-          ) : undefined}
-        </label>
-        <button type="submit">Continue</button>
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="phone">
+            Phone
+          </label>
+          <input
+            name="phone"
+            type="text"
+            value={state.phone}
+            onChange={(e) => handleStateChange(e)}
+            className={
+              validationErrors.beneficiaryBankCode
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
+          />
+          {validationErrors.phone && (
+            <p className={styles.validationErrorText}>
+              Please enter phone number
+            </p>
+          )}
+        </div>
+        <button type="submit" className={styles.button}>
+          Continue
+        </button>
       </form>
     </div>
   );
@@ -267,8 +271,14 @@ const ElectricityPaymentForm = (props) => {
 
 ElectricityPaymentForm.propTypes = {
   ElectricityPaymentFormState: PropTypes.object.isRequired,
-  dispatch: PropTypes.func.isRequired,
+  setState: PropTypes.func.isRequired,
   setComponentToRender: PropTypes.func.isRequired,
 };
 
-export default ElectricityPaymentForm;
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
+export default connect(mapStateToProps)(ElectricityPaymentForm);

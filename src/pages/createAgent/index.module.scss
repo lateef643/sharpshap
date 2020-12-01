@@ -1,0 +1,97 @@
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/mixins";
+
+.register {
+  min-height: 100vh;
+  color: #000000;
+  font-size: 1.4rem;
+  background-color: #fff;
+}
+
+.createAgent {
+  width: 100%;
+  padding: 3.5rem 0;
+}
+
+.create {
+  width: 55%;
+  margin: 0 auto;
+  text-align: center;
+
+  @include respond-custom(1000px) {
+    width: 70%;
+  }
+
+  @include respond(tab) {
+    width: 80%;
+  }
+
+  @include respond(phone-large) {
+    width: 100%;
+  }
+}
+
+.steps {
+  width: 50%;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c4c4c4;
+}
+
+.tab {
+  height: 100%;
+  font-size: 1.5rem;
+  color: #c4c4c4;
+  padding-bottom: 0.8rem;
+}
+
+.tabActive {
+  color: #123c68;
+  font-weight: 600;
+  border-bottom: 2px solid #123c68;
+}
+
+.success,
+.error {
+  position: absolute;
+  left: 38%;
+  top: 8rem;
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 1.5rem;
+  border-radius: 5px;
+  background-color: #fff;
+
+  img {
+    width: 2rem;
+    margin-right: 1rem;
+  }
+}
+
+.success {
+  background-color: rgb(104, 207, 143);
+  animation: slide 0.2s ease-in;
+}
+
+.error {
+  background-color: rgba(224, 65, 91, 0.527);
+  animation: slide 0.2s ease-in;
+}
+
+@keyframes slide {
+  0% {
+    opacity: 0;
+    transform: translateY(-2rem);
+  }
+
+  50% {
+    opacity: 1;
+    transform: translateY(-1rem);
+  }
+
+  100% {
+    transform: translateY(0);
+  }
+}
