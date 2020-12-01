@@ -18,7 +18,17 @@ const Download = (props) => {
       amount: data.amount,
       customer: data.customer_info,
       reference: data.reference,
-      type: data.transtype.name,
+      type: data.transtype
+        ? data.transtype.name
+        : data.type === "12"
+        ? "Commission"
+        : data.type === "0"
+        ? "Reversal"
+        : data.type === "10"
+        ? "Bet"
+        : data.type === "11"
+        ? "Cashcall"
+        : "Nil",
     };
   });
 

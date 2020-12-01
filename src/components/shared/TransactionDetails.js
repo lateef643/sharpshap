@@ -45,7 +45,19 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
             </div>
             <div>
               <span>Type:</span>
-              <span>{transtype.name}</span>
+              <span>
+                {transtype
+                  ? transtype.name
+                  : transaction.type === "12"
+                  ? "Commission"
+                  : transaction.type === "0"
+                  ? "Reversal"
+                  : transaction.type === "10"
+                  ? "Bet"
+                  : transaction.type === "11"
+                  ? "Cashcall"
+                  : "Nil"}
+              </span>
             </div>
             <div>
               <span>Customer:</span>

@@ -34,7 +34,10 @@ export const RechargeCableForm = (props) => {
     { name: "startimes" },
   ];
   const [plans, setPlans] = useState([]);
-  const [selectedPlan, setselectedPlan] = useState({});
+  const [durations, setDurations] = useState({
+    type: "multichoice",
+    data: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+  });
 
   //effect fetches plans based on selected provider
   useEffect(() => {
@@ -62,6 +65,7 @@ export const RechargeCableForm = (props) => {
         try {
           const res = await axios.get(providerApi);
           const plans = res.data.data;
+
           setPlans(plans);
           setFetchPlansLoading(false);
         } catch (e) {
@@ -71,23 +75,42 @@ export const RechargeCableForm = (props) => {
     }
   }, [state.provider]);
 
-  //sets selected plan name based on plans dropdown value
+  //sets selected plan name && plan amount based on plans dropdown value
   useEffect(() => {
     if (state.selectedPlanCode) {
       const selectedPlan = plans.find((plan) => {
-        return plan.code === state.selectedPlanCode;
+        return plan.product_code || plan.name === state.selectedPlanCode;
       });
 
       const selectedPlanName = selectedPlan.name;
+      const selectedPlanAmount =
+        selectedPlan.amount || selectedPlan.cycles.monthly;
 
-      setselectedPlan(selectedPlan);
+      if (selectedPlan.cycles) {
+        let data = [];
+
+        for (let key in selectedPlan.cycles) {
+          if (selectedPlan.cycles.hasOwnProperty(key)) {
+            data.push({
+              type: [key],
+              value: selectedPlan.cycles[key],
+            });
+          }
+        }
+
+        setDurations({
+          type: startimes,
+          data,
+        });
+      }
       dispatch({
         type: "UPDATE_FORM_STATE",
-        payload: { selectedPlanName },
+        payload: { selectedPlanName, selectedPlanAmount },
       });
     }
   }, [state.selectedPlanCode]);
 
+  //Account number validation
   useEffect(() => {
     let providerApi;
     const { provider, smartCardNumber } = state;
@@ -113,9 +136,7 @@ export const RechargeCableForm = (props) => {
           let name;
 
           name =
-            provider === "startimes"
-              ? res.data.data.customerName
-              : `${res.data.data.statusDescription.firstname} ${res.data.data.statusDescription.lastname}`;
+            provider === "startimes" ? res.data.data.name : res.data.data.name;
 
           setValidationErrors({ ...validationErrors, customerName: !name });
           dispatch({
@@ -134,25 +155,32 @@ export const RechargeCableForm = (props) => {
     }
   }, [state.provider, state.smartCardNumber]);
 
+  //calculates and sets payable amount based on selectedPlanAmount and plan duration
   useEffect(() => {
-    const { selectedPlanDuration } = state;
-    let selectedPlanPricingOption;
-    let amount;
+    const { provider } = state;
 
-    if (selectedPlan.availablePricingOptions) {
-      selectedPlanPricingOption = selectedPlan.availablePricingOptions.find(
-        (plan) => {
-          return plan.monthsPaidFor === selectedPlanDuration;
-        }
-      );
+    if (provider === "dstv" || provider === "gotv") {
+      const { selectedPlanDuration, selectedPlanAmount } = state;
+      let amount;
+
+      if (selectedPlanDuration && selectedPlanAmount) {
+        amount = selectedPlanDuration * selectedPlanAmount;
+
+        dispatch({
+          type: "UPDATE_FORM_STATE",
+          payload: { amount },
+        });
+      }
+    } else if (provider === "startimes") {
+      const { selectedPlanDuration } = state;
+
+      const amount = selectedPlanDuration;
+
+      dispatch({
+        type: "UPDATE_FORM_STATE",
+        payload: { amount },
+      });
     }
-
-    amount = selectedPlanPricingOption ? selectedPlanPricingOption.price : "";
-
-    dispatch({
-      type: "UPDATE_FORM_STATE",
-      payload: { amount },
-    });
   }, [state.selectedPlanDuration]);
 
   const handleFormStateChange = ({ target }) => {
@@ -240,7 +268,10 @@ export const RechargeCableForm = (props) => {
           <option value="">Select Plan</option>
           {plans.map((plan, index) => {
             return (
-              <option value={plan.code} key={`${index}--${plan.name}`}>
+              <option
+                value={plan.product_code || plan.name}
+                key={`${index}--${plan.name}`}
+              >
                 {plan.name}
               </option>
             );
@@ -323,18 +354,13 @@ export const RechargeCableForm = (props) => {
           }
         >
           <option value="">Select Duration</option>
-          {selectedPlan.availablePricingOptions
-            ? selectedPlan.availablePricingOptions.map((plan, index) => {
-                return (
-                  <option
-                    value={plan.monthsPaidFor}
-                    key={`${index}--${plan.name}`}
-                  >
-                    {plan.monthsPaidFor} months
-                  </option>
-                );
+          {durations.type === "multichoice"
+            ? durations.data.map((duration) => {
+                return <option value={duration}>{duration} months</option>;
               })
-            : undefined}
+            : durations.data.map((duration) => {
+                return <option value={duration.value}>{duration.type}</option>;
+              })}
         </select>
         {validationErrors.planDuration ? (
           <p className={styles.validationErrorText}>
