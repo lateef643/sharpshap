@@ -39,7 +39,12 @@ const BuyData = ({ changeCurrentPage }) => {
       productId: telco,
       amount,
       bank_code: "9001",
-      recipient: phone,
+      recipient:
+        phone.length > 11 && phone.indexOf("234") === 0
+          ? phone
+          : phone.length === 11 && phone.indexOf("234") !== 0
+          ? `234${phone}`
+          : phone,
     };
 
     if (telco && amount && phone) {

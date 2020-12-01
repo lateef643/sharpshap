@@ -6,6 +6,8 @@ export const initialFormState = {
   phone: "",
   selectedPlanDuration: "",
   selectedPlanCode: "",
+  selectedPlanAmount: "",
+  amount: "",
 };
 
 const RechargeCableReducer = (state, { type, payload }) => {
