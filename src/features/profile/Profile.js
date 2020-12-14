@@ -56,7 +56,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
               onClick={() => {
                 displayModal({
                   overlay: true,
-                  modal: "pin",
+                  // modal: "pin",
                   service: "pin",
                 });
               }}

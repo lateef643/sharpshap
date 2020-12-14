@@ -53,12 +53,17 @@
 }
 
 .form {
+  width: 60%;
   padding: 3rem 4rem;
   margin: 0 auto;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-gap: 3rem;
   grid-column-gap: 5rem;
+
+  @include respond(tab) {
+    width: 80%;
+  }
 }
 
 .formGroup {

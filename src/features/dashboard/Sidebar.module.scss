@@ -23,6 +23,7 @@
 }
 .sidebar {
   flex: 0 0 19rem;
+  z-index: 200;
   padding: 0;
   background: #fff;
   background: $content-background-color;
@@ -47,8 +48,8 @@
 }
 
 .sidebarSlide {
-  -webkit-animation: slide 0.5s ease-in;
-  animation: slide 0.2s ease-in;
+  // -webkit-animation: slide 0.5s ease-in;
+  // animation: slide 0.2s ease-in;
 }
 
 .overlay {
@@ -120,7 +121,7 @@
 }
 
 .active {
-  // border-right: 2px solid #3e215b;
+  border-right: 2px solid #3e215b;
 
   .navItemImage {
     fill: #3e215b;
@@ -179,8 +180,9 @@
     }
   }
 
-  &:hover > .linkSecondary {
-    visibility: visible;
+  &:hover .linkSecondary {
+    visibility: visible !important;
+    z-index: 1000;
   }
 }
 
@@ -217,6 +219,7 @@
   left: 100%;
   width: 100%;
   z-index: 203;
+  display: block;
   visibility: hidden;
 }
 
@@ -232,7 +235,7 @@
   padding-left: 1rem;
 
   &:hover {
-    // visibility: visible;
+    visibility: visible;
     color: #3e215b;
     font-weight: 700;
   }

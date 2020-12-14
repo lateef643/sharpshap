@@ -1,0 +1,14 @@
+<svg width="35" height="24" viewBox="0 0 35 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect width="34.7838" height="23.1892" rx="11.5946" fill="url(#paint0_radial)"/>
+<path fill-rule="evenodd" clip-rule="evenodd" d="M20.3904 4.93259C18.9926 2.74089 15.7916 2.73978 14.3938 4.93148V4.93148C13.8428 5.79538 13.6953 6.85398 13.8756 7.86264C14.1601 9.45487 14.4399 12.0418 13.9341 14.6031C13.7383 15.5949 13.8121 16.6416 14.3106 17.5211L14.3604 17.6089C15.6953 19.9637 19.0881 19.9637 20.423 17.6089V17.6089C20.9494 16.6804 21.0212 15.5577 20.8278 14.5081C20.5361 12.926 20.332 10.2601 21.1305 6.80914C21.2103 6.46442 21.162 6.14245 20.9717 5.84414C20.8215 5.60866 20.6207 5.29368 20.3904 4.93259Z" stroke="#C7C7B6" stroke-width="1.37027" stroke-linejoin="bevel"/>
+<path d="M2.08105 6.54053H13.7477" stroke="#C7C7B6" stroke-width="1.37027" stroke-linejoin="bevel"/>
+<path d="M21.0811 6.54053H33.0811" stroke="#C7C7B6" stroke-width="1.37027" stroke-linejoin="bevel"/>
+<path d="M2.08105 16.0405H13.7477" stroke="#C7C7B6" stroke-width="1.37027" stroke-linejoin="bevel"/>
+<path d="M21.0811 16.0405H33.0811" stroke="#C7C7B6" stroke-width="1.37027" stroke-linejoin="bevel"/>
+<defs>
+<radialGradient id="paint0_radial" cx="0" cy="0" r="1" gradientUnits="userSpaceOnUse" gradientTransform="translate(19.9747 8.44704) rotate(141.302) scale(23.5791 23.4003)">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="#DDDCDA"/>
+</radialGradient>
+</defs>
+</svg>

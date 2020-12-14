@@ -3,6 +3,7 @@
 
 .container {
   padding: 3rem 0;
+  z-index: 2;
 
   @include respond(tab) {
     padding: 1.5rem 0;

@@ -305,7 +305,9 @@ export const Overview = ({ changeCurrentPage, displayModal, overviewData }) => {
                   <div className={styles.transactionsItem}>
                     <p className={styles.date}>{date}</p>
                     <p className={styles.description}>
-                      {`${type.toLowerCase()}/${status}`}
+                      {type
+                        ? `${type?.toLowerCase()}/${status}`
+                        : `nil/${status}`}
                     </p>
                     <p className={styles.amount}>₦{formatToCurrency(amount)}</p>
                   </div>
