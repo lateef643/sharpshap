@@ -103,6 +103,10 @@
     color: #eee;
     cursor: pointer;
     outline: none;
+
+    & > svg {
+      width: 4rem;
+    }
   }
 }
 

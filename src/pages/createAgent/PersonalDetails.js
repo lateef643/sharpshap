@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import styles from "./PersonalDetails.module.scss";
+import styles from "./form.module.scss";
 
 const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
   const [errors, setErrors] = useState(false);
@@ -37,8 +37,11 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleProceed}>
         <div className={styles.formGroup}>
-          <label htmlFor="firstname">First Name</label>
+          <label className={styles.label} htmlFor="firstname">
+            First Name
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="first_name"
             onChange={handleOnChange}
@@ -49,8 +52,11 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="last_name">Last Name</label>
+          <label className={styles.label} htmlFor="last_name">
+            Last Name
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="last_name"
             onChange={handleOnChange}
@@ -61,8 +67,11 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="date_of_birth">Date of Birth</label>
+          <label className={styles.label} htmlFor="date_of_birth">
+            Date of Birth
+          </label>
           <input
+            className={styles.input}
             type="date"
             name="date_of_birth"
             onChange={handleOnChange}
@@ -73,8 +82,11 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="email">Email</label>
+          <label className={styles.label} htmlFor="email">
+            Email
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="email"
             onChange={handleOnChange}
@@ -85,8 +97,11 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="gender">Gender</label>
+          <label className={styles.label} htmlFor="gender">
+            Gender
+          </label>
           <select
+            className={styles.input}
             type="text"
             name="gender"
             onChange={handleOnChange}
@@ -101,8 +116,11 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="business_phone">Phone</label>
+          <label className={styles.label} htmlFor="business_phone">
+            Phone
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="business_phone"
             onChange={handleOnChange}
@@ -113,8 +131,11 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="mobile">Mobile</label>
+          <label className={styles.label} htmlFor="mobile">
+            Mobile
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="mobile"
             onChange={handleOnChange}
@@ -125,8 +146,11 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="bvn">BVN</label>
+          <label className={styles.label} htmlFor="bvn">
+            BVN
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="bvn"
             onChange={handleOnChange}
@@ -137,7 +161,9 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>
-          <button type="submit">Next</button>
+          <button className={styles.button} type="submit">
+            Next
+          </button>
         </div>
       </form>
     </div>

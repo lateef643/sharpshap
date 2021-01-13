@@ -30,7 +30,7 @@ export const TransactionPin = (props) => {
             onChange={handleOnChange}
             type="text"
             tabIndex="1"
-            maxLength={1}
+            maxLength="1"
           />
         </div>
         <div className={styles.formGroup}>
@@ -39,6 +39,8 @@ export const TransactionPin = (props) => {
             name="two"
             onChange={handleOnChange}
             type="text"
+            tabIndex="1"
+            maxLength="1"
           />
         </div>
         <div className={styles.formGroup}>
@@ -47,14 +49,18 @@ export const TransactionPin = (props) => {
             name="three"
             onChange={handleOnChange}
             type="text"
+            tabIndex="1"
+            maxLength="1"
           />
         </div>
         <div className={styles.formGroup}>
           <input
             className={styles.input}
             name="four"
+            tabIndex="1"
             onChange={handleOnChange}
             type="text"
+            maxLength="1"
           />
         </div>
       </div>

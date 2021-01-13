@@ -1,5 +1,6 @@
 import React, { useState, useReducer } from "react";
 import Axios from "axios";
+import { useToasts } from "react-toast-notifications";
 
 import agentDataReducer, { initialState } from "./agent-reducer";
 import { CREATE_AGENT } from "../../utils/constants";
@@ -11,33 +12,38 @@ import AccountDetails from "./AccountDetails";
 
 import NavHome from "../../components/layout/HomeNavBar";
 
-import check from "../../assets/images/check.svg";
-import cross from "../../assets/images/cross.svg";
-
 import styles from "./index.module.scss";
 
 const CreateAgent = () => {
+  const { addToast } = useToasts();
   const [agentData, dispatch] = useReducer(agentDataReducer, initialState);
-
   const [status, setStatus] = useState("personal");
-  const [error, setError] = useState("");
-  const [message, setMessage] = useState("");
   const [loading, setLoading] = useState(false);
 
   const createAgent = (agentData) => {
     setLoading(true);
 
     (async function create() {
+      const payload = agentData;
+
       try {
-        const res = await Axios.post(CREATE_AGENT);
+        const res = await Axios.post(CREATE_AGENT, payload);
 
         if (res) {
-          setMessage("Agent Created Successfully");
           setLoading(false);
+
+          addToast("Registration Successful", {
+            appearance: "success",
+            autoDismiss: true,
+          });
         }
       } catch (e) {
-        setError("An Error occurred, please try again.");
         setLoading(false);
+
+        addToast("Registration failed", {
+          appearance: "error",
+          autoDismiss: true,
+        });
       }
     })();
   };
@@ -46,18 +52,6 @@ const CreateAgent = () => {
     <div className={styles.register}>
       <NavHome theme="dark" />
       <div className={styles.createAgent}>
-        {message && (
-          <div className={styles.success}>
-            <img src={check} alt="" />
-            <span>{message}</span>
-          </div>
-        )}
-        {error && (
-          <div className={styles.error}>
-            <img src={cross} alt="" />
-            <span>{error}</span>
-          </div>
-        )}
         <div className={styles.create}>
           <div className={styles.steps}>
             <span

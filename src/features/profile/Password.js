@@ -1,37 +1,76 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
+import axios from "axios";
+import { ThreeDots } from "svg-loaders-react";
+import { useToasts } from "react-toast-notifications";
+import { connect } from "react-redux";
 
-import validateFormData from "../../../validation/validateFormData";
+import { UPDATE_USER_PASSWORD } from "../../utils/constants";
+import validateFormData from "../../validation/validateFormData";
 
 import styles from "./Password.module.scss";
+import { setDisplayModal } from "../../actions/modal";
 
-export const BuyAirtimeForm = (props) => {
-  const {
-    AirtimePurchaseFormState: state,
-    dispatch,
-    setComponentToRender,
-  } = props;
+export const Password = ({ displayModal }) => {
+  const [formState, setFormState] = useState({
+    password: "",
+    new_password: "",
+    confirm_password: "",
+  });
   const [validationErrors, setValidationErrors] = useState({});
+  const [loading, setLoading] = useState(false);
+  const { addToast } = useToasts();
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    const keys = Object.keys(state);
-    const errors = validateFormData(state, keys);
+    const keys = Object.keys(formState);
+    const errors = validateFormData(formState, keys);
 
     setValidationErrors(errors);
 
     if (Object.keys(errors).length > 0) return;
 
-    setComponentToRender("summary");
+    submit();
+  };
+
+  const submit = () => {
+    const payload = formState;
+    setLoading(true);
+
+    (async function changePassword() {
+      try {
+        const res = await axios.put(UPDATE_USER_PASSWORD, payload);
+
+        if (res) {
+          addToast("Password changed successfully", {
+            appearance: "success",
+            autoDismiss: true,
+          });
+
+          displayModal({
+            overlay: false,
+            modal: false,
+            service: null,
+          });
+        }
+      } catch (e) {
+        addToast("An error occurred", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      } finally {
+        setLoading(false);
+      }
+    })();
   };
 
   const handleSetFormState = ({ target }) => {
     setValidationErrors({ ...validationErrors, [target.name]: false });
 
-    dispatch({
-      type: "UPDATE_FORM_STATE",
-      payload: { [target.name]: target.value },
+    setFormState({
+      ...formState,
+      [target.name]: target.value,
     });
   };
 
@@ -47,68 +86,76 @@ export const BuyAirtimeForm = (props) => {
         </label>
 
         <input
-          name="phone"
-          value={state.phone}
-          type="text"
+          name="password"
+          value={formState.password}
+          type="password"
           onChange={(e) => handleSetFormState(e)}
           className={
-            validationErrors.phone
+            validationErrors.password
               ? `${styles.outlineRed} ${styles.input}`
               : `${styles.outlineGrey} ${styles.input}`
           }
         />
-        {validationErrors.phone && (
-          <p className={styles.validationErrorText}>
-            Please enter valid phone number
-          </p>
+        {validationErrors.password && (
+          <p className={styles.validationErrorText}>Please enter password</p>
         )}
       </div>
       <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="amount">
-          Amount
+        <label className={styles.label} htmlFor="new_password">
+          New password
         </label>
-        <div className={styles.formGroupSub}>
-          <select
-            name="currency"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
-                : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
-            }
-          >
-            <option value="">NGN</option>
-          </select>
-          <input
-            name="amount"
-            value={state.amount}
-            type="number"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-        </div>
-        {validationErrors.amount && (
-          <p className={styles.validationErrorText}>
-            Please enter valid amount
-          </p>
+        <input
+          name="new_password"
+          value={formState.new_password}
+          type="password"
+          onChange={(e) => handleSetFormState(e)}
+          className={
+            validationErrors.new_password
+              ? `${styles.outlineRed} ${styles.input}`
+              : `${styles.outlineGrey} ${styles.input}`
+          }
+        />
+        {validationErrors.new_password && (
+          <p className={styles.validationErrorText}>Please enter password</p>
+        )}
+      </div>
+      <div className={styles.formGroup}>
+        <label className={styles.label} htmlFor="confirm_password">
+          Confirm password
+        </label>
+        <input
+          name="confirm_password"
+          value={formState.confirm_password}
+          type="password"
+          onChange={(e) => handleSetFormState(e)}
+          className={
+            validationErrors.confirm_password
+              ? `${styles.outlineRed} ${styles.input}`
+              : `${styles.outlineGrey} ${styles.input}`
+          }
+        />
+        {validationErrors.confirm_password && (
+          <p className={styles.validationErrorText}>Please enter password</p>
         )}
       </div>
       <button type="submit" className={styles.button}>
-        Continue
+        {loading ? <ThreeDots /> : "Continue"}
       </button>
     </form>
   );
 };
 
-BuyAirtimeForm.propTypes = {
+Password.propTypes = {
   networkList: PropTypes.array.isRequired,
   AirtimePurchaseFormState: PropTypes.object.isRequired,
   dispatch: PropTypes.func.isRequired,
   setComponentToRender: PropTypes.func.isRequired,
 };
 
-export default BuyAirtimeForm;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    displayModal: (payload) => dispatch(setDisplayModal(payload)),
+  };
+};
+
+export default connect(undefined, mapDispatchToProps)(Password);

@@ -5,7 +5,7 @@ import { ThreeDots } from "svg-loaders-react";
 
 import { FETCH_BANKS, FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
 
-import styles from "./AccountDetails.module.scss";
+import styles from "./form.module.scss";
 import Axios from "axios";
 
 const AccountDetails = ({

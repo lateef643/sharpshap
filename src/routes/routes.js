@@ -1,46 +1,32 @@
-import { lazy } from "react";
-
-const AddUser = lazy(() => import("../features/users/AddUser"));
-const Users = lazy(() => import("../features/users/index"));
-const FundWallet = lazy(() =>
-  import("../features/services/fundWallet/FundWallet")
-);
-const CashCall = lazy(() => import("../features/services/cashcall/CashCall"));
-const FundsTransfer = lazy(() => import("../features/services/transfer/index"));
-const BuyAirtime = lazy(() => import("../features/services/airtime/index"));
-const ElectricityPayment = lazy(() =>
-  import("../features/services/electricity/index")
-);
-const BuyData = lazy(() => import("../features/services/data/index"));
-const RechargeCable = lazy(() => import("../features/services/cable/index"));
-const BuyInsurance = lazy(() =>
-  import("../features/services/insurance/BuyInsurance")
-);
-const WalletLog = lazy(() => import("../features/logs/wallet/WalletLog"));
-const TransactionLog = lazy(() =>
-  import("../features/logs/transactions/TransactionLog")
-);
-const Profile = lazy(() => import("../features/profile/Profile"));
-const WalletTransfer = lazy(() =>
-  import("../features/services/walletTransfer/WalletTransfer")
-);
-// const NewTransaction = lazy(() => import("../pages/NewTransaction"));
-const BillPayment = lazy(() => import("../pages/BillPayment"));
-const AirtimeData = lazy(() => import("../pages/AirtimeData"));
-const Overview = lazy(() => import("../pages/Overview"));
-const Contact = lazy(() => import("../pages/Contact"));
-// const Terminals = lazy(() => import("../pages/Terminals"));
-// const Betting = lazy(() => import("../components/content/services/betting/Betting"));
-const CashCallPage = lazy(() => import("../pages/CashCall"));
-const ActivityLog = lazy(() => import("../features/logs/wallet/ActivityLog"));
-const TransactionDetails = lazy(() =>
-  import("../components/common/TransactionDetails")
-);
-// const AggregatorDashboard = lazy(() => import("../features/aggregator/Dashboard"));
-// const Aggregator = lazy(() => import("../features/aggregator/index"));
-// const CreateAgent = lazy(() => import("../features/aggregator/createAgent/index"));
-// const AgentList = lazy(() => import("../features/aggregator/AgentList"));
-// const CommissionHistory = lazy(() => import("../features/aggregator/CommissionHistory"));
+import AddUser from "../features/users/AddUser";
+import Users from "../features/users/index";
+import FundWallet from "../features/services/fundWallet/FundWallet";
+import CashCall from "../features/services/cashcall/CashCall";
+import FundsTransfer from "../features/services/transfer/index";
+import BuyAirtime from "../features/services/airtime/index";
+import ElectricityPayment from "../features/services/electricity/index";
+import BuyData from "../features/services/data/index";
+import RechargeCable from "../features/services/cable/index";
+import BuyInsurance from "../features/services/insurance/BuyInsurance";
+import WalletLog from "../features/logs/wallet/WalletLog";
+import TransactionLog from "../features/logs/transactions/TransactionLog";
+import Profile from "../features/profile/Profile";
+import WalletTransfer from "../features/services/walletTransfer/WalletTransfer";
+// import NewTransaction from "../pages/NewTransaction";
+import BillPayment from "../pages/BillPayment";
+import AirtimeData from "../pages/AirtimeData";
+import Overview from "../pages/Overview";
+import Contact from "../pages/Contact";
+// import Terminals from "../pages/Terminals";
+// import Betting from "../components/content/services/betting/Betting";
+import CashCallPage from "../pages/CashCall";
+// import ActivityLog from "../features/logs/wallet/ActivityLog";
+import TransactionDetails from "../components/common/TransactionDetails";
+// import AggregatorDashboard from "../features/aggregator/Dashboard";
+// import Aggregator from "../features/aggregator/index";
+// import CreateAgent from "../features/aggregator/createAgent/index";
+// import AgentList from "../features/aggregator/AgentList";
+// import CommissionHistory from "../features/aggregator/CommissionHistory";
 
 const routes = [
   {
@@ -111,10 +97,10 @@ const routes = [
     exact: true,
     component: WalletLog,
   },
-  {
-    path: "/activity-log",
-    component: ActivityLog,
-  },
+  // {
+  //   path: "/activity-log",
+  //   component: ActivityLog,
+  // },
   //passing props to transaction details because we need match to extract id
   {
     path: "/transaction-details/:id",

@@ -2,20 +2,22 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 import { ThreeDots } from "svg-loaders-react";
-import { UPDATE_USER_PASSWORD, UPDATE_USER } from "../../utils/constants";
+import { useToasts } from "react-toast-notifications";
+import { UPDATE_USER } from "../../utils/constants";
 import { setCurrentPage } from "../../actions/page";
-import styles from "./Profile.module.scss";
 import { startLogout } from "../../actions/auth";
 
 import { setDisplayModal } from "../../actions/modal";
 import pin from "../../assets/icons/pin.svg";
 import lock from "../../assets/icons/lock.svg";
 
-export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
-  const [formState, setFormState] = useState({});
-  const [errors, setErrors] = useState(false);
+import styles from "./Profile.module.scss";
 
-  // useEffect(() => {}, []);
+export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
+  const [formState, setFormState] = useState(agentData);
+  const [errors, setErrors] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const { addToast } = useToasts();
 
   useEffect(() => {
     changeCurrentPage({
@@ -24,8 +26,31 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
     });
   }, []);
 
-  const handleOnSubmit = () => {
-    console.log(formState);
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    setLoading(true);
+
+    (async function fetchProfile() {
+      const payload = formState;
+
+      try {
+        const res = await axios.put(UPDATE_USER, payload);
+
+        if (res) {
+          addToast("Profile updated successfully", {
+            appearance: "success",
+            autoDismiss: true,
+          });
+        }
+      } catch (e) {
+        addToast("An error occurred", {
+          appearance: "error",
+          autoDismiss: true,
+        });
+      } finally {
+        setLoading(false);
+      }
+    })();
   };
 
   const handleOnChange = ({ target }) => {
@@ -56,7 +81,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
               onClick={() => {
                 displayModal({
                   overlay: true,
-                  // modal: "pin",
+                  modal: "pin",
                   service: "pin",
                 });
               }}
@@ -169,7 +194,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
           )}
         </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>
-          <button type="submit">Next</button>
+          <button type="submit">{loading ? <ThreeDots /> : "Submit"}</button>
         </div>
       </form>
     </div>
@@ -179,12 +204,11 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
 const mapStateToProps = (state) => {
   return {
     agentData: {
-      first_name: state.auth.user.first_name,
-      last_name: state.auth.userlast_name,
-      business_name: state.auth.user.business_name,
+      first_name: state.auth.user.firstName,
+      last_name: state.auth.user.lastName,
+      business_name: state.auth.user.businessName,
       email: state.auth.user.email,
-      phone: state.auth.user.business_phone,
-      address: state.auth.user.business_address,
+      phone: state.auth.user.phone,
     },
   };
 };

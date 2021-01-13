@@ -1,0 +1,13 @@
+Login
+Agent Onboarding
+Funds transfer
+Airtime purchase
+Data purchase
+Cable recharge
+Energy payment
+Transaction pin
+Profile
+User management
+Change password
+Wallet logs
+Transaction logs

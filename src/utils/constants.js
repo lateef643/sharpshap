@@ -28,6 +28,9 @@ export const GET_CURRENT_USER = `${path}/user`;
 //Create user/sub agent - POST;
 export const CREATE_SUB_USER = `${path}/agents/create-sub`;
 
+//get user - GET
+export const GET_USER = `${path}/user`;
+
 //update user - PUT
 export const UPDATE_USER = `${path}/user`;
 

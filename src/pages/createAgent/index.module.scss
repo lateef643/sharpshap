@@ -8,8 +8,10 @@
   background-color: #fff;
 }
 
+//height 100vh - navbar height
 .createAgent {
   width: 100%;
+  min-height: calc(100vh - 8rem);
   padding: 3.5rem 0;
 }
 
@@ -38,11 +40,19 @@
   display: flex;
   justify-content: space-between;
   border-bottom: 1px solid #c4c4c4;
+
+  @include respond(tab) {
+    width: 80%;
+  }
+
+  @include respond(phone-large) {
+    min-width: 30rem;
+  }
 }
 
 .tab {
   height: 100%;
-  font-size: 1.5rem;
+  font-size: 1.7rem;
   color: #c4c4c4;
   padding-bottom: 0.8rem;
 }
@@ -51,47 +61,4 @@
   color: #123c68;
   font-weight: 600;
   border-bottom: 2px solid #123c68;
-}
-
-.success,
-.error {
-  position: absolute;
-  left: 38%;
-  top: 8rem;
-  display: flex;
-  align-items: center;
-  padding: 0.5rem 1.5rem;
-  border-radius: 5px;
-  background-color: #fff;
-
-  img {
-    width: 2rem;
-    margin-right: 1rem;
-  }
-}
-
-.success {
-  background-color: rgb(104, 207, 143);
-  animation: slide 0.2s ease-in;
-}
-
-.error {
-  background-color: rgba(224, 65, 91, 0.527);
-  animation: slide 0.2s ease-in;
-}
-
-@keyframes slide {
-  0% {
-    opacity: 0;
-    transform: translateY(-2rem);
-  }
-
-  50% {
-    opacity: 1;
-    transform: translateY(-1rem);
-  }
-
-  100% {
-    transform: translateY(0);
-  }
 }

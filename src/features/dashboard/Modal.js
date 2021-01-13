@@ -7,8 +7,8 @@ import DataRecharge from "../../features/services/data/index";
 import Energy from "../../features/services/electricity/index";
 import CableRecharge from "../../features/services/cable/index";
 import AddUser from "../../features/users/AddUser";
-import TransactionPin from "../../features/users/TransactionPin";
-// import Password from "../../features/profile/Password";
+import TransactionPin from "../profile/TransactionPin";
+import Password from "../../features/profile/Password";
 
 import styles from "./Modal.module.scss";
 
@@ -28,7 +28,7 @@ const Modal = ({ overlay, modal }) => {
           cableRecharge: <CableRecharge />,
           pin: <TransactionPin />,
           addUsers: <AddUser />,
-          // password: <Password />,
+          password: <Password />,
         }[modal]
       }
     </div>

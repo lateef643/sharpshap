@@ -1,6 +1,6 @@
 import React from "react";
 
-import styles from "./FileUploads.module.scss";
+import styles from "./form.module.scss";
 
 const FileUploads = () => {
   return (

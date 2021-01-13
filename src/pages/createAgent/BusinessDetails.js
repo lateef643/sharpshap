@@ -5,7 +5,7 @@ import { ThreeDots } from "svg-loaders-react";
 
 import { FETCH_BANKS, FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
 
-import styles from "./BusinessDetails.module.scss";
+import styles from "./form.module.scss";
 import Axios from "axios";
 
 const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
@@ -98,8 +98,11 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleProceed}>
         <div className={styles.formGroup}>
-          <label htmlFor="business_name">Business Name</label>
+          <label className={styles.label} htmlFor="business_name">
+            Business Name
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="business_name"
             onChange={handleOnChange}
@@ -110,8 +113,11 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="business_address">Business Address</label>
+          <label className={styles.label} htmlFor="business_address">
+            Business Address
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="business_address"
             onChange={handleOnChange}
@@ -122,9 +128,11 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="state_id">State</label>
+          <label className={styles.label} htmlFor="state_id">
+            State
+          </label>
           <select
-            type="text"
+            className={styles.select}
             name="state_id"
             onChange={handleOnChange}
             value={agentData.state_id}
@@ -143,8 +151,11 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="business_type">Business Type</label>
+          <label className={styles.label} htmlFor="business_type">
+            Business Type
+          </label>
           <select
+            className={styles.select}
             name="business_type"
             onChange={handleOnChange}
             value={agentData.business_type}
@@ -157,9 +168,11 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="agent_type">Agent Type</label>
+          <label className={styles.label} htmlFor="agent_type">
+            Agent Type
+          </label>
           <select
-            type="text"
+            className={styles.select}
             name="agent_type"
             onChange={handleOnChange}
             value={agentData.agent_type}
@@ -171,9 +184,11 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="local_government_id">LGA</label>
+          <label className={styles.label} htmlFor="local_government_id">
+            LGA
+          </label>
           <select
-            type="text"
+            className={styles.select}
             name="local_government_id"
             onChange={handleOnChange}
             value={agentData.local_government_id}
@@ -191,23 +206,19 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
             <p className={styles.errorText}>Please Select LGA</p>
           )}
         </div>
-        <div className={styles.formGroup}>
-          <label htmlFor="user_name">User Name</label>
-          <input
-            type="text"
-            name="user_name"
-            onChange={handleOnChange}
-            value={agentData.user_name}
-          />
-          {errors && !agentData.user_name && (
-            <p className={styles.errorText}>Please Enter User Name</p>
-          )}
-        </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>
-          <button onClick={() => setStatus("personal")} className={styles.back}>
+          <button
+            onClick={() => setStatus("personal")}
+            className={`${styles.button} ${styles.buttonSmall} ${styles.back}`}
+          >
             Back
           </button>
-          <button type="submit">Next</button>
+          <button
+            className={`${styles.button} ${styles.buttonSmall}`}
+            type="submit"
+          >
+            Next
+          </button>
         </div>
       </form>
     </div>

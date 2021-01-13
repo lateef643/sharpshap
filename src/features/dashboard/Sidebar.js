@@ -87,24 +87,24 @@ export const Sidebar = () => {
 
                 <span className={styles.navItemText}>My Wallet</span>
                 <span className={styles.linkSecondary}>
-                  <NavLink
+                  {/* <NavLink
                     to="/wallet/transfer"
                     className={styles.linkSecondaryItem}
                   >
                     <p>Wallet Transfer</p>
-                  </NavLink>
+                  </NavLink> */}
                   <NavLink
                     to="/wallet/log"
                     className={styles.linkSecondaryItem}
                   >
                     <p>Wallet Log</p>
                   </NavLink>
-                  <NavLink
+                  {/* <NavLink
                     to="/wallet/fund"
                     className={styles.linkSecondaryItem}
                   >
                     <p>Fund Wallet</p>
-                  </NavLink>
+                  </NavLink> */}
                 </span>
               </div>
               <div
