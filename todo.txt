@@ -1,0 +1,46 @@
+setup agent registration -- get the right unauth agent creation endpoint
+add hero patterns to balance container -- cannot get pattern need to ask for file from Taiwo
+filter users -- no filter users
+add filters and sorting wallet logs -- depends on Riliwan
+convert wallet logs to use new filters -- depends of Riliwan
+
+
+fix dashboard not fetching data upon login 
+fix sidebar hoverstate
+convert transaction logs to use the new filters
+add loading indicator to transaction and wallet logs page change
+display activate transaction pin icon in profile if pin flag is false
+display change transaction pin if pin flag is true
+display transaction pin icon if user type is master else nothing
+add transaction pin input to forms
+decide what goes in profile modal
+integrate betting to the new platform
+fix payments modal
+fix transaction pin form input
+get progile to update and work
+
+remove modal on page change
+fix overview page card and chart height on navigation
+only thing a sub user should see is add user/user management, they should not see deactivate
+
+
+permission for subagents
+integrate trengo
+live chat
+
+
+
+
+
+
+
+
+
+
+
+
+
+remove useless/duplicate code
+remove unneccessary modules/packages
+
+request new dashboard design

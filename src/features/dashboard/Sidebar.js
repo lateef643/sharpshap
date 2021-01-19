@@ -68,12 +68,10 @@ export const Sidebar = () => {
                 </svg>
                 <p className={styles.navItemText}>Overview</p>
               </NavLink>
-              <div
-                className={
-                  window.location.href.indexOf("wallet") === -1
-                    ? styles.navItem
-                    : `${styles.navItem} ${styles.active}`
-                }
+              <NavLink
+                to="/wallet"
+                className={styles.navItem}
+                activeClassName={styles.active}
               >
                 <svg
                   width="17"
@@ -84,35 +82,12 @@ export const Sidebar = () => {
                 >
                   <path d="M15.5 13V13.8333C15.5 14.75 14.75 15.5 13.8333 15.5H2.16667C1.24167 15.5 0.5 14.75 0.5 13.8333V2.16667C0.5 1.25 1.24167 0.5 2.16667 0.5H13.8333C14.75 0.5 15.5 1.25 15.5 2.16667V3H8C7.075 3 6.33333 3.75 6.33333 4.66667V11.3333C6.33333 12.25 7.075 13 8 13H15.5ZM8 11.3333H16.3333V4.66667H8V11.3333ZM11.3333 9.25C10.6417 9.25 10.0833 8.69167 10.0833 8C10.0833 7.30833 10.6417 6.75 11.3333 6.75C12.025 6.75 12.5833 7.30833 12.5833 8C12.5833 8.69167 12.025 9.25 11.3333 9.25Z" />
                 </svg>
-
                 <span className={styles.navItemText}>My Wallet</span>
-                <span className={styles.linkSecondary}>
-                  {/* <NavLink
-                    to="/wallet/transfer"
-                    className={styles.linkSecondaryItem}
-                  >
-                    <p>Wallet Transfer</p>
-                  </NavLink> */}
-                  <NavLink
-                    to="/wallet/log"
-                    className={styles.linkSecondaryItem}
-                  >
-                    <p>Wallet Log</p>
-                  </NavLink>
-                  {/* <NavLink
-                    to="/wallet/fund"
-                    className={styles.linkSecondaryItem}
-                  >
-                    <p>Fund Wallet</p>
-                  </NavLink> */}
-                </span>
-              </div>
-              <div
-                className={
-                  window.location.href.indexOf("transactions") === -1
-                    ? styles.navItem
-                    : `${styles.navItem} ${styles.active}`
-                }
+              </NavLink>
+              <NavLink
+                to="/transactions"
+                className={styles.navItem}
+                activeClassName={styles.active}
               >
                 <svg
                   width="20"
@@ -125,21 +100,7 @@ export const Sidebar = () => {
                   <path d="M17.6562 0.78125H2.34375C1.05133 0.78125 0 1.83258 0 3.125V16.875C0 18.1674 1.05133 19.2188 2.34375 19.2188H17.6562C18.9487 19.2188 20 18.1674 20 16.875V3.125C20 1.83258 18.9487 0.78125 17.6562 0.78125ZM2.34375 2.34375H17.6562C18.087 2.34375 18.4375 2.69424 18.4375 3.125V5.46875H1.5625V3.125C1.5625 2.69424 1.91299 2.34375 2.34375 2.34375ZM17.6562 17.6562H2.34375C1.91299 17.6562 1.5625 17.3058 1.5625 16.875V7.03125H18.4375V16.875C18.4375 17.3058 18.087 17.6562 17.6562 17.6562ZM2.73438 3.90625C2.73438 3.47473 3.08411 3.125 3.51562 3.125C3.94714 3.125 4.29688 3.47473 4.29688 3.90625C4.29688 4.33777 3.94714 4.6875 3.51562 4.6875C3.08411 4.6875 2.73438 4.33777 2.73438 3.90625ZM5.46875 3.90625C5.46875 3.47473 5.81848 3.125 6.25 3.125C6.68152 3.125 7.03125 3.47473 7.03125 3.90625C7.03125 4.33777 6.68152 4.6875 6.25 4.6875C5.81848 4.6875 5.46875 4.33777 5.46875 3.90625ZM13.5406 8.04138L16.2807 10.7812L13.5406 13.5211L12.4359 12.4164L13.2896 11.5625H9.17969V10H13.2896L12.4359 9.14612L13.5406 8.04138ZM6.71036 13.125H10.7422V14.6875H6.71036L7.56409 15.5414L6.45935 16.6461L3.71933 13.9062L6.45935 11.1664L7.56409 12.2711L6.71036 13.125Z" />
                 </svg>
                 <span className={styles.navItemText}>Transactions</span>
-                <div className={styles.linkSecondary}>
-                  <NavLink
-                    to="/transactions/new"
-                    className={styles.linkSecondaryItem}
-                  >
-                    New Transaction
-                  </NavLink>
-                  <NavLink
-                    to="/transactions/log"
-                    className={styles.linkSecondaryItem}
-                  >
-                    Transactions Log
-                  </NavLink>
-                </div>
-              </div>
+              </NavLink>
               <NavLink
                 to="/users"
                 className={styles.navItem}
@@ -260,7 +221,7 @@ export const Sidebar = () => {
                   <path d="M13.0687 6.94375C13.4234 7.2963 13.704 7.71624 13.894 8.17886C14.084 8.64147 14.1795 9.13741 14.175 9.6375C14.175 9.80326 14.2408 9.96223 14.358 10.0794C14.4753 10.1967 14.6342 10.2625 14.8 10.2625C14.9657 10.2625 15.1247 10.1967 15.2419 10.0794C15.3591 9.96223 15.425 9.80326 15.425 9.6375C15.4333 8.97565 15.31 8.31874 15.0625 7.70488C14.8149 7.09102 14.4479 6.53242 13.9828 6.06149C13.5177 5.59056 12.9637 5.21666 12.3529 4.96149C11.7422 4.70632 11.0869 4.57495 10.425 4.575C10.2592 4.575 10.1003 4.64084 9.98305 4.75806C9.86584 4.87527 9.79999 5.03424 9.79999 5.2C9.79999 5.36576 9.86584 5.52473 9.98305 5.64194C10.1003 5.75915 10.2592 5.825 10.425 5.825C10.9175 5.82871 11.4045 5.92942 11.8582 6.12138C12.3118 6.31333 12.7231 6.59278 13.0687 6.94375Z" />
                 </svg>
 
-                <p className={styles.navItemText}>Contact Us</p>
+                <p className={styles.navItemText}>Support</p>
               </NavLink>
             </nav>
             {/* <div className={styles.copyright}>

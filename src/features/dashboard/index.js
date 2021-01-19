@@ -2,10 +2,11 @@ import React from "react";
 import Sidebar from "./Sidebar";
 import Main from "./Main";
 
+import styles from "./index.module.scss";
+
 const Dashboard = () => {
-  console.log("this dashboard is the shit");
   return (
-    <div className="container">
+    <div className={styles.container}>
       <Sidebar />
       <Main />
     </div>

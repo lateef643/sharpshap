@@ -5,7 +5,7 @@ import cico from "../../assets/images/cico-logo-login.svg";
 import styles from "./TransactionDetails.module.scss";
 import { setCurrentPage } from "../../actions/page";
 
-export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
+export const TransactionDetails = ({ changeCurrentPage, match }) => {
   const [transaction, setTransaction] = useState({});
   const [transtype, setTranstype] = useState({});
 
@@ -106,11 +106,11 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    uuid: state.auth.user.agent.uuid,
-  };
-};
+// const mapStateToProps = (state) => {
+//   return {
+//     uuid: state.auth.user.agent.uuid,
+//   };
+// };
 
 const mapDispatchToProps = (dispatch) => {
   return {
@@ -118,4 +118,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(TransactionDetails);
+export default connect(undefined, mapDispatchToProps)(TransactionDetails);

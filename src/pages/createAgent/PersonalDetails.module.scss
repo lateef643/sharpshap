@@ -1,41 +1,17 @@
-.form {
-  padding: 3rem 4rem;
-  margin: 0 auto;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-gap: 3rem;
-  grid-column-gap: 5rem;
-}
-
-.formGroup {
-  text-align: left;
-
-  label {
-    margin-bottom: 1rem;
-    color: #707070;
-  }
-
-  input,
-  select {
-    margin-top: 0.8rem;
-    display: block;
-    border: 1px solid #c4c4c4;
-    padding: 0 1rem;
-    font-family: "Lato";
-    color: #707070;
-    width: 100%;
-    height: 3.5rem;
-    border-radius: 5px;
-  }
-}
+@import "./form.module.scss";
 
 .submit {
   grid-column: 2/ -1;
-  margin-top: 1rem;
+  margin-top: 2rem;
+
+  @include respond(phone) {
+    margin-top: 3rem;
+  }
 
   button {
     width: 100%;
-    height: 3.5rem;
+    height: 4rem;
+    font-size: 1.6rem;
     border-radius: 5px;
     border: 0;
     background-color: #062863;
@@ -43,10 +19,4 @@
     cursor: pointer;
     outline: none;
   }
-}
-
-.errorText {
-  font-size: 1.3rem;
-  color: rgba(255, 0, 0, 0.89);
-  margin-top: 0.5rem;
 }

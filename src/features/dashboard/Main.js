@@ -25,6 +25,7 @@ export const Main = ({
   overlay,
 }) => {
   const [overviewData, setOverviewData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   async function fetchOverviewData() {
     try {
@@ -36,6 +37,8 @@ export const Main = ({
       setWalletBalance(overviewData.wallet.current_bal);
     } catch (e) {
       // console.log("an error occurred");
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -57,31 +60,36 @@ export const Main = ({
         <Header />
         <section
           className={
-            overlay ? `${styles.content} ${styles.maxHeight}` : styles.content
+            overlay
+              ? `${styles.content} ${styles.maxHeight}`
+              : styles.contentContainer
           }
         >
-          <Balance refreshOverviewData={refreshOverviewData} />
-          <Switch>
-            <Route path="/profile" component={Profile} />
-            {routes.map((route, index) => {
-              return (
-                //This route shows the correct component if password is not default
-                //else redirect to Profile route
-                <PrivateRoute
-                  history={history}
-                  key={index}
-                  routes={route.routes}
-                  overviewData={overviewData}
-                  path={route.path}
-                  exact={route.exact}
-                  component={route.component}
-                  isDefaultPassword={isDefaultPassword}
-                />
-              );
-            })}
-          </Switch>
-          <Overlay />
-          <Modal />
+          <div className={styles.content}>
+            <Balance refreshOverviewData={refreshOverviewData} />
+            <Switch>
+              <Route path="/profile" component={Profile} />
+              {routes.map((route, index) => {
+                return (
+                  //This route shows the correct component if password is not default
+                  //else redirect to Profile route
+                  <PrivateRoute
+                    history={history}
+                    key={index}
+                    routes={route.routes}
+                    overviewData={overviewData}
+                    path={route.path}
+                    exact={route.exact}
+                    component={route.component}
+                    isDefaultPassword={isDefaultPassword}
+                    loading={loading}
+                  />
+                );
+              })}
+            </Switch>
+            <Overlay />
+            <Modal />
+          </div>
         </section>
       </main>
     </Suspense>

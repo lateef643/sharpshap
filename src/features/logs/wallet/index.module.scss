@@ -1,6 +1,6 @@
-@import "../../assets/styles/config/breakpoints";
-@import "../../assets/styles/config/mixins";
-@import "../../assets/styles/config/variables";
+@import "../../../assets/styles/config/breakpoints";
+@import "../../../assets/styles/config/mixins";
+@import "../../../assets/styles/config/variables";
 
 // .container {
 //   padding-top: 2rem;
@@ -131,7 +131,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  margin-bottom: 3rem;
+  margin-bottom: 1rem;
 
   @include respond(tab) {
     justify-content: flex-start;
@@ -167,7 +167,7 @@
 
 .service {
   text-align: center;
-  width: 10rem;
+  width: 12rem;
   padding: 1rem;
   background: rgba(155, 180, 255, 0.1);
   border-radius: 5px;

@@ -5,7 +5,7 @@ import { ThreeDots } from "svg-loaders-react";
 
 import { FETCH_BANKS, FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
 
-import styles from "./form.module.scss";
+import styles from "./AccountDetails.module.scss";
 import Axios from "axios";
 
 const AccountDetails = ({
@@ -101,8 +101,11 @@ const AccountDetails = ({
     <div className={styles.container}>
       <form className={styles.form} onSubmit={handleProceed}>
         <div className={styles.formGroup}>
-          <label htmlFor="account_name">Account Name</label>
+          <label className={styles.label} htmlFor="account_name">
+            Account Name
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="account_name"
             onChange={handleOnChange}
@@ -113,8 +116,11 @@ const AccountDetails = ({
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="account_number">Account Number</label>
+          <label className={styles.label} htmlFor="account_number">
+            Account Number
+          </label>
           <input
+            className={styles.input}
             type="text"
             name="account_number"
             onChange={handleOnChange}
@@ -125,9 +131,11 @@ const AccountDetails = ({
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="identity_type">ID Type</label>
+          <label className={styles.label} htmlFor="identity_type">
+            ID Type
+          </label>
           <select
-            type="text"
+            className={styles.select}
             name="identity_type"
             onChange={handleOnChange}
             value={agentData.identity_type}
@@ -145,9 +153,11 @@ const AccountDetails = ({
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="bank_id">Bank Name</label>
+          <label className={styles.label} htmlFor="bank_id">
+            Bank Name
+          </label>
           <select
-            type="text"
+            className={styles.select}
             name="bank_id"
             onChange={handleOnChange}
             value={agentData.bank_id}
@@ -166,10 +176,15 @@ const AccountDetails = ({
           )}
         </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>
-          <button onClick={() => setStatus("personal")} className={styles.back}>
+          <button
+            onClick={() => setStatus("business")}
+            className={`${styles.button} ${styles.back}`}
+          >
             Back
           </button>
-          <button type="submit">{loading ? <ThreeDots /> : "Register"}</button>
+          <button className={`${styles.button}`} type="submit">
+            Submit
+          </button>
         </div>
       </form>
     </div>

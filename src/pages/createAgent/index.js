@@ -3,11 +3,11 @@ import Axios from "axios";
 import { useToasts } from "react-toast-notifications";
 
 import agentDataReducer, { initialState } from "./agent-reducer";
-import { CREATE_AGENT } from "../../utils/constants";
+import { REGISTER_AGENT } from "../../utils/constants";
 
 import PersonalDetails from "./PersonalDetails";
 import BusinessDetails from "./BusinessDetails";
-import FileUploads from "./FileUploads";
+// import FileUploads from "./FileUploads";
 import AccountDetails from "./AccountDetails";
 
 import NavHome from "../../components/layout/HomeNavBar";
@@ -27,7 +27,7 @@ const CreateAgent = () => {
       const payload = agentData;
 
       try {
-        const res = await Axios.post(CREATE_AGENT, payload);
+        const res = await Axios.post(REGISTER_AGENT, payload);
 
         if (res) {
           setLoading(false);
@@ -81,7 +81,7 @@ const CreateAgent = () => {
             >
               Account
             </span>
-            <span
+            {/* <span
               className={
                 status === "file"
                   ? `${styles.tab} ${styles.tabActive}`
@@ -89,7 +89,7 @@ const CreateAgent = () => {
               }
             >
               Files
-            </span>
+            </span> */}
           </div>
           <div className={styles.content}>
             {
@@ -117,7 +117,7 @@ const CreateAgent = () => {
                     loading={loading}
                   />
                 ),
-                file: <FileUploads />,
+                // file: <FileUploads />,
               }[status]
             }
           </div>

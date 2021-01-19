@@ -5,7 +5,7 @@ import { ThreeDots } from "svg-loaders-react";
 
 import { FETCH_BANKS, FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
 
-import styles from "./form.module.scss";
+import styles from "./BusinessDetails.module.scss";
 import Axios from "axios";
 
 const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
@@ -78,16 +78,20 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
   const handleProceed = (e) => {
     e.preventDefault();
 
+    console.log("clicky");
+
     const hasNoErrors =
       agentData.business_name &&
       agentData.business_type &&
-      agentData.user_name &&
       agentData.agent_type &&
       agentData.state_id &&
       agentData.local_government_id &&
       agentData.business_address;
 
+    console.log(agentData);
+
     if (hasNoErrors) {
+      console.log("yes this has no errors");
       setStatus("account");
     } else {
       setErrors(true);
@@ -178,6 +182,7 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
             value={agentData.agent_type}
           >
             <option value="">Select type</option>
+            <option value="aggregator">Aggregator</option>
           </select>
           {errors && !agentData.agent_type && (
             <p className={styles.errorText}>Please Select Agent type</p>
@@ -209,16 +214,11 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
         <div className={`${styles.submit} ${styles.formGroup}`}>
           <button
             onClick={() => setStatus("personal")}
-            className={`${styles.button} ${styles.buttonSmall} ${styles.back}`}
+            className={`${styles.button} ${styles.back}`}
           >
             Back
           </button>
-          <button
-            className={`${styles.button} ${styles.buttonSmall}`}
-            type="submit"
-          >
-            Next
-          </button>
+          <button className={`${styles.button}`}>Next</button>
         </div>
       </form>
     </div>

@@ -7,10 +7,9 @@ export const PrivateRoute = ({
   isDefaultPassword,
   routes,
   overviewData,
+  loading,
   ...rest
 }) => {
-  console.log(path);
-  console.log(overviewData);
   return (
     <>
       {isDefaultPassword == 0 ? (
@@ -23,6 +22,7 @@ export const PrivateRoute = ({
               overviewData={
                 path === "/overview" || path === "/" ? overviewData : {}
               }
+              loading={path === "/overview" || path === "/" ? loading : null}
             />
           )}
         />

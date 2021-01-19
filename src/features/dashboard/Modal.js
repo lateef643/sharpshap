@@ -9,6 +9,7 @@ import CableRecharge from "../../features/services/cable/index";
 import AddUser from "../../features/users/AddUser";
 import TransactionPin from "../profile/TransactionPin";
 import Password from "../../features/profile/Password";
+import WalletTransfer from "../../features/services/walletTransfer/WalletTransfer";
 
 import styles from "./Modal.module.scss";
 
@@ -29,6 +30,7 @@ const Modal = ({ overlay, modal }) => {
           pin: <TransactionPin />,
           addUsers: <AddUser />,
           password: <Password />,
+          walletTransfer: <WalletTransfer />,
         }[modal]
       }
     </div>

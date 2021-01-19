@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import Chart from "chart.js";
+import { ThreeDots } from "svg-loaders-react";
 
 import { setDisplayModal } from "../actions/modal";
 
@@ -9,13 +10,18 @@ import { setCurrentPage } from "../actions/page";
 import bills from "../assets/icons/dashboard-bill.svg";
 import transfer from "../assets/icons/dashboard-transaction.svg";
 import betting from "../assets/icons/dashboard-betting.svg";
-import cashcall from "../assets/icons/dashboard-call.svg";
+import loan from "../assets/icons/dashboard-call.svg";
 import airtime from "../assets/icons/dashboard-phone.svg";
 import formatToCurrency from "../utils/formatToCurrency";
 
 import styles from "./Overview.module.scss";
 
-export const Overview = ({ changeCurrentPage, displayModal, overviewData }) => {
+export const Overview = ({
+  changeCurrentPage,
+  loading,
+  displayModal,
+  overviewData,
+}) => {
   const days = [
     "Monday",
     "Tuesday",
@@ -120,6 +126,8 @@ export const Overview = ({ changeCurrentPage, displayModal, overviewData }) => {
         type: "bar",
         data: barChartData,
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           tooltips: {
             callbacks: {
               label: function (tooltipItem, data) {
@@ -261,7 +269,7 @@ export const Overview = ({ changeCurrentPage, displayModal, overviewData }) => {
             </p>
           </div>
         </Link>
-        <Link to="/transfer" className={`${styles.card} ${styles.cardBetting}`}>
+        <Link to="/betting" className={`${styles.card} ${styles.cardBetting}`}>
           <div className={styles.container}>
             <div
               className={`${styles.cardImageContainer} ${styles.cardImageContainerBetting}`}
@@ -271,20 +279,22 @@ export const Overview = ({ changeCurrentPage, displayModal, overviewData }) => {
             <p className={`${styles.text} ${styles.textBetting}`}>Betting</p>
           </div>
         </Link>
-        <Link to="/transfer" className={`${styles.card} ${styles.cardCash}`}>
+        <Link to="/loan" className={`${styles.card} ${styles.cardCash}`}>
           <div className={styles.container}>
             <div
               className={`${styles.cardImageContainer} ${styles.cardImageContainerCash}`}
             >
-              <img src={cashcall} className={styles.image} alt="card icon" />
+              <img src={loan} className={styles.image} alt="card icon" />
             </div>
-            <p className={`${styles.text} ${styles.textCash}`}>Cash Call</p>
+            <p className={`${styles.text} ${styles.textCash}`}>Loan</p>
           </div>
         </Link>
       </div>
       <div className={styles.content}>
         <div className={styles.transactions}>
-          {overviewData !== null && overviewData.transaction.length > 0 ? (
+          {overviewData !== null &&
+          overviewData.transaction.length > 0 &&
+          !loading ? (
             <>
               <div className={styles.transactionsHeading}>
                 <h3 className={styles.transactionsHeadingText}>
@@ -297,13 +307,24 @@ export const Overview = ({ changeCurrentPage, displayModal, overviewData }) => {
                   View all
                 </Link>
               </div>
-              {overviewData.transaction.map((data) => {
+
+              <div className={styles.transactionsItem}>
+                <p className={styles.sn}>S/N</p>
+                <p className={styles.date}>Date</p>
+                <p className={styles.description}>Description</p>
+                <p className={`${styles.amount} ${styles.amountHeader}`}>
+                  Amount
+                </p>
+              </div>
+              {overviewData.transaction.map((data, index) => {
                 const date = new Date(data.transaction_date).toDateString();
+                const formattedDate = date.slice(4, 11);
                 const { amount, type, status } = data;
 
                 return (
                   <div className={styles.transactionsItem}>
-                    <p className={styles.date}>{date}</p>
+                    <p className={styles.sn}>{++index}.</p>
+                    <p className={styles.date}>{formattedDate}</p>
                     <p className={styles.description}>
                       {type
                         ? `${type?.toLowerCase()}/${status}`
@@ -314,8 +335,12 @@ export const Overview = ({ changeCurrentPage, displayModal, overviewData }) => {
                 );
               })}
             </>
+          ) : loading ? (
+            <ThreeDots fill="#3e215b" />
           ) : (
-            <div>this is the loading state</div>
+            <div className={styles.noTransactions}>
+              No transactions to display
+            </div>
           )}
         </div>
         <div className={styles.chartContainer}>

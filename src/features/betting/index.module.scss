@@ -139,11 +139,10 @@
 }
 
 .card {
-  width: 15rem;
+  width: 35rem;
   height: 13rem;
   padding: 1rem;
   background: #ffffff;
-
   box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
 
@@ -154,7 +153,7 @@
 
 .sectionHeading {
   margin-bottom: 1.5rem;
-  font-size: 1.4rem;
+  font-size: 1.5rem;
   font-family: "Nunito", sans-serif;
   color: #22215b;
 }
@@ -167,7 +166,7 @@
 
 .service {
   text-align: center;
-  width: 10rem;
+  flex: 0 0 25%;
   padding: 1rem;
   background: rgba(155, 180, 255, 0.1);
   border-radius: 5px;

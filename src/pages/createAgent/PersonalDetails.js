@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-import styles from "./form.module.scss";
+import styles from "./PersonalDetails.module.scss";
 
 const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
   const [errors, setErrors] = useState(false);

@@ -228,3 +228,12 @@ export const GET_COMMISSION_HISTORY = `${path}/super-agents/commissions`;
 
 //Create agents - POST
 export const CREATE_AGENT = `${path}/super-agents/agents/create`;
+
+//Agent registration - POST
+export const REGISTER_AGENT = `${path}/users/register`;
+
+//List sub users - GET
+export const LIST_USERS = `${path}/agents/subs`;
+
+//Delete sub user - DEL
+export const DELETE_USER = `${path}/agents/subs`;

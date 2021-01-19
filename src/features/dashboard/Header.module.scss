@@ -4,13 +4,11 @@
 
 .header {
   width: calc(100vw - 19rem);
-  position: fixed;
-  top: 0;
   text-align: left;
-  background-color: #fff;
   background-color: $content-background-color;
+  background-color: #f4f7fa;
   z-index: 5;
-  height: 5rem;
+  height: 7rem;
 
   @media print {
     display: none;
@@ -20,21 +18,27 @@
     width: 100%;
   }
 
+  @include respond(tab) {
+    // background-color: #fff;
+  }
+
   @include respond(phone-large) {
     width: 100vw;
-    background-color: #fff;
+    // background-color: #fff;
   }
 }
 
 .container {
+  // position: fixed;
+  top: 0;
+  width: 100%;
   flex: 1;
   display: flex;
   justify-content: flex-start;
   padding: 0 3rem;
-  margin-bottom: 0.2rem;
-  height: 100%;
   align-items: center;
   padding: 0 5rem;
+  height: 100%;
 
   @include respond(phone-large) {
     height: 5rem;

@@ -1,25 +1,27 @@
 import AddUser from "../features/users/AddUser";
 import Users from "../features/users/index";
 import FundWallet from "../features/services/fundWallet/FundWallet";
-import CashCall from "../features/services/cashcall/CashCall";
+// import CashCall from "../features/services/cashcall/CashCall";
+// import Loan from "../features/services/loan/index";
 import FundsTransfer from "../features/services/transfer/index";
 import BuyAirtime from "../features/services/airtime/index";
 import ElectricityPayment from "../features/services/electricity/index";
 import BuyData from "../features/services/data/index";
 import RechargeCable from "../features/services/cable/index";
 import BuyInsurance from "../features/services/insurance/BuyInsurance";
-import WalletLog from "../features/logs/wallet/WalletLog";
+import WalletLog from "../features/logs/wallet/index";
 import TransactionLog from "../features/logs/transactions/TransactionLog";
 import Profile from "../features/profile/Profile";
 import WalletTransfer from "../features/services/walletTransfer/WalletTransfer";
 // import NewTransaction from "../pages/NewTransaction";
 import BillPayment from "../pages/BillPayment";
 import AirtimeData from "../pages/AirtimeData";
+import LoanPage from "../pages/Loan";
 import Overview from "../pages/Overview";
 import Contact from "../pages/Contact";
 // import Terminals from "../pages/Terminals";
-// import Betting from "../components/content/services/betting/Betting";
-import CashCallPage from "../pages/CashCall";
+import Betting from "../features/betting/index";
+// import CashCallPage from "../pages/CashCall";
 // import ActivityLog from "../features/logs/wallet/ActivityLog";
 import TransactionDetails from "../components/common/TransactionDetails";
 // import AggregatorDashboard from "../features/aggregator/Dashboard";
@@ -138,19 +140,23 @@ const routes = [
     path: "/airtime-data",
     component: AirtimeData,
   },
+  {
+    path: "/loan",
+    component: LoanPage,
+  },
+  {
+    path: "/betting",
+    component: Betting,
+  },
   // {
-  //   path: "/betting",
-  //   component: Betting
-  // }
-  {
-    path: "/cash-call",
-    exact: true,
-    component: CashCallPage,
-  },
-  {
-    path: "/cash-call/:id",
-    component: CashCall,
-  },
+  //   path: "/cash-call",
+  //   exact: true,
+  //   component: CashCallPage,
+  // },
+  // {
+  //   path: "/cash-call/:id",
+  //   component: CashCall,
+  // },
   // {
   //   path: "/aggregator",
   //   component: Aggregator,

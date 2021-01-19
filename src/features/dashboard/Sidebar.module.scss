@@ -35,6 +35,7 @@
   }
 
   @include respond-custom(1000px) {
+    width: 23rem;
     position: fixed;
     z-index: 8;
     min-height: 100vh;
@@ -43,7 +44,7 @@
 
   @include respond(phone-large) {
     z-index: 23;
-    width: 15rem;
+    // width: 15rem;
   }
 }
 
@@ -87,11 +88,11 @@
 .content {
   background: #fff;
   background: $content-background-color;
-  position: fixed;
+  // position: fixed;
   height: 100%;
-  min-height: 100vh;
+  // min-height: 100vh;
   width: 19rem;
-  padding: 2rem 0 4rem 5rem;
+  padding: 2rem 1rem 4rem 3rem;
 
   @include respond-custom(1000px) {
     position: relative;
@@ -121,7 +122,8 @@
 }
 
 .active {
-  border-right: 2px solid #3e215b;
+  // border-right: 2px solid #3e215b;
+  background: #f0fbff;
 
   .navItemImage {
     fill: #3e215b;
@@ -145,6 +147,7 @@
 }
 
 .navItem {
+  padding: 1rem;
   text-decoration: none;
   width: 100%;
   display: flex;
@@ -155,7 +158,7 @@
   z-index: 2000;
 
   &:not(:last-child) {
-    margin-bottom: 3.5rem;
+    margin-bottom: 2rem;
   }
 
   @include respond(phone-large) {
