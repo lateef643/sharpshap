@@ -46,6 +46,7 @@ export const AddUser = ({ changeCurrentPage, displayModal }) => {
           overlay: false,
           modal: "",
           service: "",
+          modalIsUpdated: res.data.data.email,
         });
 
         setLoading(false);

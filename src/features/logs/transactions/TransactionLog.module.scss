@@ -137,7 +137,8 @@
     }
 
     .date {
-      flex: 0 0 12.5%;
+      flex: 0 0 18.5%;
+      background: orange;
     }
 
     .amount {
@@ -391,6 +392,7 @@
   margin-top: 3rem;
   width: 100%;
   color: #22215b;
+  padding: 2rem 0.5rem;
 }
 
 .transactionsHeading {
@@ -617,11 +619,11 @@
   }
 
   .date {
-    flex: 0 0 10%;
+    flex: 0 0 15%;
   }
 
   .amount {
-    flex: 0 0 10%;
+    flex: 0 0 8%;
   }
 
   .type {
@@ -629,11 +631,11 @@
   }
 
   .prev {
-    flex: 0 0 10%;
+    flex: 0 0 9%;
   }
 
   .current {
-    flex: 0 0 10%;
+    flex: 0 0 9%;
   }
 
   .customer {

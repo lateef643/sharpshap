@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import axios from "axios";
 import { ThreeDots } from "svg-loaders-react";
 import { useToasts } from "react-toast-notifications";
-import { UPDATE_USER } from "../../utils/constants";
+import { UPDATE_AGENT_PROFILE } from "../../utils/constants";
 import { setCurrentPage } from "../../actions/page";
 import { startLogout } from "../../actions/auth";
 
@@ -34,7 +34,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
       const payload = formState;
 
       try {
-        const res = await axios.put(UPDATE_USER, payload);
+        const res = await axios.put(UPDATE_AGENT_PROFILE, payload);
 
         if (res) {
           addToast("Profile updated successfully", {

@@ -20,7 +20,8 @@ import LoanPage from "../pages/Loan";
 import Overview from "../pages/Overview";
 import Contact from "../pages/Contact";
 // import Terminals from "../pages/Terminals";
-import Betting from "../features/betting/index";
+import Betting from "../features/services/betting/index";
+import PlaceBet from "../features/services/betting/play/Play";
 // import CashCallPage from "../pages/CashCall";
 // import ActivityLog from "../features/logs/wallet/ActivityLog";
 import TransactionDetails from "../components/common/TransactionDetails";
@@ -147,6 +148,12 @@ const routes = [
   {
     path: "/betting",
     component: Betting,
+    exact: true,
+  },
+  {
+    path: "/betting/bet",
+    component: PlaceBet,
+    exact: true,
   },
   // {
   //   path: "/cash-call",

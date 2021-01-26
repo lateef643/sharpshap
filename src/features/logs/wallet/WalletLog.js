@@ -174,8 +174,8 @@ export const WalletLog = ({ changeCurrentPage }) => {
             </div>
             <div className={styles.tableBody}>
               {transactions.map((transaction, index) => {
-                const date = new Date(transaction.created_at).toDateString();
-                const formattedDate = date.slice(4);
+                const date = new Date(transaction.created_at).toString();
+                const formattedDate = date.slice(4, 24);
 
                 return (
                   <div className={styles.tableRow} key={index}>

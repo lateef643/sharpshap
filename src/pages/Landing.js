@@ -8,9 +8,6 @@ import { useToasts } from "react-toast-notifications";
 import NavHome from "../components/layout/HomeNavBar";
 import { startLoginUser } from "../actions/auth";
 
-import lock from "../assets/icons/lock.svg";
-import phoneIcon from "../assets/icons/home-phone.svg";
-
 import styles from "./Landing.module.scss";
 
 export const Landing = ({ dispatch, message, loading, startLoginUser }) => {

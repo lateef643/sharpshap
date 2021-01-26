@@ -31,8 +31,12 @@ export const startLoginUser = (payload) => (dispatch) => {
       const token = res.data.data.token;
       const walletBalance = res.data.data.wallet.current_bal;
       const transactionSettings = res.data.data.settings;
+      const agent = res.data.data.data?.user?.agent
+        ? res.data.data?.user?.agent
+        : res.data.data.agent;
+      const proprietor = res.data.data.user.proprietor;
 
-      const { id, username, phone, email, is_default, agent } = user;
+      const { id, username, phone, email, is_default } = user;
       const {
         first_name: firstName,
         last_name: lastName,
@@ -50,6 +54,7 @@ export const startLoginUser = (payload) => (dispatch) => {
             username,
             phone,
             email,
+            type: proprietor ? "sub" : "main",
             uuid,
             is_default,
             firstName,
@@ -85,7 +90,7 @@ export const startLoginUser = (payload) => (dispatch) => {
             type: "SET_LOADING",
             payload: {
               loading: false,
-              message: "Network error",
+              message: "An error occurred",
             },
           });
         }, 4000);

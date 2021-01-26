@@ -1,0 +1,304 @@
+.container {
+  // width: 90%;
+  margin: 0 auto;
+  margin-top: 2rem;
+  font-size: 1.4rem;
+}
+
+.heading {
+  height: 4rem;
+  background-color: #ebe9e9;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 1rem;
+  color: #3d3d3d;
+  margin-bottom: 1rem;
+  border-radius: 0.5rem;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sectionBetting {
+  flex: 0 0 70%;
+}
+
+.betsContainer {
+  height: 4.2rem;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+  border: 1px solid #70707050;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 0.5rem 1rem;
+  align-items: center;
+  border-radius: 0.5rem;
+}
+
+.betDataSection {
+  flex: 0 0 30%;
+  display: flex;
+  flex-direction: column;
+
+  div:nth-child(even) {
+    margin: 0.5rem 0;
+  }
+}
+
+.oddsDataSection {
+  flex: 0 0 40%;
+}
+
+.oddsData {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  div {
+    flex: 0 0 28%;
+    text-align: center;
+    padding: 0.5rem;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0.5rem;
+  }
+
+  div:first-child {
+    flex: 0 0 10%;
+    color: orangered;
+  }
+
+  div:not(:first-child) {
+    border: 1px solid #70707033;
+  }
+
+  .odd:active,
+  .odd:focus {
+    background-color: #37f0a6;
+    color: #eee;
+  }
+
+  .active {
+    background-color: #37f0a6;
+    color: #eee;
+  }
+}
+
+.sectionBetslip {
+  flex: 0 0 29%;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+}
+
+.sectionBetslipHeading {
+  height: 3.5rem;
+  background-color: #ebe9e9;
+  color: #eee;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+  color: #3d3d3d;
+  line-height: 3.5rem;
+  border-radius: 0.5rem;
+}
+
+.betslip {
+  background-color: #fff;
+  border: 1px solid #70707050;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding-bottom: 1rem;
+  border-radius: 0.5rem;
+
+  &Content {
+    padding: 1.5rem 1.2rem;
+
+    form {
+      .stakeDetails {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1rem;
+        padding: 1rem 1.5rem;
+        border: 1px solid #70707050;
+
+        &EventData {
+          flex: 0 0 50%;
+
+          p:nth-child(2) {
+            margin: 1.5rem 0 0.5rem 0;
+          }
+        }
+
+        .removeBet {
+          cursor: pointer;
+
+          img {
+            width: 1rem;
+          }
+        }
+      }
+
+      .accountDetails {
+        div {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 1.5rem;
+
+          input {
+            width: 12rem;
+            height: 2.8rem;
+            border: 0;
+            border: 1px solid #70707050;
+            font-family: inherit;
+            text-align: right;
+            padding: 0 1rem;
+          }
+        }
+      }
+
+      .amountDetails {
+        div {
+          display: flex;
+          justify-content: space-between;
+          margin-bottom: 1.5rem;
+        }
+      }
+
+      button {
+        height: 3rem;
+        width: 9rem;
+        border: 0;
+        background-color: #37f0a6;
+        color: #eee;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+
+    .bettingReceipt {
+      text-align: center;
+      padding: 0 1rem;
+
+      img {
+        width: 3rem;
+        margin-bottom: 1rem;
+      }
+
+      div {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 1.7rem;
+
+        p {
+          flex: 0 0 48%;
+          text-align: left;
+        }
+
+        p:nth-child(2) {
+          text-align: right;
+        }
+      }
+
+      .selection {
+        display: initial;
+
+        .selectionHeading {
+          margin-bottom: 2rem;
+          font-weight: bold;
+          font-size: 1.5rem;
+        }
+
+        .selectionOdds {
+          display: flex;
+
+          > p:nth-child(1) {
+            flex: 1;
+          }
+
+          > p {
+            flex: 0 0 15%;
+          }
+
+          > p:not(:nth-child(1)) {
+            text-align: right;
+          }
+        }
+      }
+
+      .possibleWin {
+        font-weight: bold;
+        font-size: 1.5rem;
+      }
+
+      .betOptions {
+        margin-top: 2.5rem;
+
+        button {
+          border: 0;
+          width: 9rem;
+          height: 3rem;
+          border-radius: 5px;
+          color: #eee;
+          cursor: pointer;
+        }
+
+        .rebet {
+          background-color: #2a58ae;
+        }
+
+        .newBet {
+          background-color: #25ae88;
+        }
+      }
+    }
+  }
+}
+
+.betcode {
+  background-color: #fff;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  padding: 1.5rem 1.2rem;
+  margin-top: 1rem;
+  border: 1px solid #70707050;
+  border-radius: 0.5rem;
+
+  form {
+    div {
+      label {
+        display: block;
+        margin-bottom: 1.5rem;
+      }
+
+      input {
+        height: 2.8rem;
+        border: 1px solid #70707050;
+        padding-left: 5px;
+        font-family: inherit;
+      }
+    }
+
+    button {
+      margin-top: 1.5rem;
+      height: 3rem;
+      width: 9rem;
+      border: 0;
+      color: #eee;
+      background-color: #37f0a6;
+      font-size: 1.5rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  }
+}

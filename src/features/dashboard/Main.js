@@ -61,11 +61,15 @@ export const Main = ({
         <section
           className={
             overlay
-              ? `${styles.content} ${styles.maxHeight}`
+              ? `${styles.contentContainer} ${styles.maxHeight}`
               : styles.contentContainer
           }
         >
-          <div className={styles.content}>
+          <div
+            className={
+              overlay ? `${styles.content} ${styles.maxHeight}` : styles.content
+            }
+          >
             <Balance refreshOverviewData={refreshOverviewData} />
             <Switch>
               <Route path="/profile" component={Profile} />

@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ThreeDots } from "svg-loaders-react";
 import { connect } from "react-redux";
-import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
 import axios from "axios";
 
@@ -9,20 +7,14 @@ import { setCurrentPage } from "../../actions/page";
 import { setDisplayModal } from "../../actions/modal";
 import { useToasts } from "react-toast-notifications";
 
-import pin from "../../assets/icons/pin.svg";
-import lock from "../../assets/icons/lock.svg";
-
 import userGroup from "../../assets/icons/users.svg";
-import user from "../../assets/icons/bio-user.svg";
 
 import ListUsers from "./ListUsers";
 import { LIST_USERS, DELETE_USER } from "../../utils/constants";
 
-import transfer from "../../assets/images/transfer.svg";
-
-export const Users = ({ changeCurrentPage, displayModal }) => {
+export const Users = ({ changeCurrentPage, displayModal, modalIsUpdated }) => {
+  const [isUpdated, setIsUpdated] = useState(false);
   const [users, setUsers] = useState([]);
-  const [isUpdated, setIsUpdated] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const { addToast } = useToasts();
@@ -41,7 +33,7 @@ export const Users = ({ changeCurrentPage, displayModal }) => {
           setUsers(users);
         }
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       } finally {
         setLoading(false);
       }
@@ -50,7 +42,7 @@ export const Users = ({ changeCurrentPage, displayModal }) => {
     return () => {
       isCancelled = true;
     };
-  }, [isUpdated]);
+  }, [modalIsUpdated]);
 
   const handleDeleteUser = (id) => {
     (async function deleteUser() {
@@ -125,6 +117,14 @@ export const Users = ({ changeCurrentPage, displayModal }) => {
   );
 };
 
+const mapStateToProps = (state) => {
+  console.log(state);
+  console.log(state.modal.modalIsUpdated);
+  return {
+    modalIsUpdated: state.modal.isUpdated,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
@@ -132,4 +132,4 @@ const mapDispatchToProps = (dispatch) => {
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(Users);
+export default connect(mapStateToProps, mapDispatchToProps)(Users);

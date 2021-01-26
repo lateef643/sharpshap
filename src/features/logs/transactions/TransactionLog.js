@@ -42,7 +42,7 @@ export const TransactionLog = ({
   }, []);
 
   useEffect(() => {
-    setPageChangeLoading(true);
+    // setPageChangeLoading(true);
 
     const params = {};
 
@@ -52,25 +52,30 @@ export const TransactionLog = ({
     if (currentPage) params.page = currentPage;
 
     (async function getTransactionsLog() {
-      const res = await axios.get(`${AGENT_TRANSACTION_HISTORY}`, { params });
+      try {
+        const res = await axios.get(`${AGENT_TRANSACTION_HISTORY}`, { params });
 
-      const transactions = res.data.data.data;
-      const total = res.data.data.total;
-      const perPage = res.data.data.per_page;
-      const lastPage = res.data.data.last_page;
-      let pageNumbers = [];
+        const transactions = res.data.data.data;
+        const total = res.data.data.total;
+        const perPage = res.data.data.per_page;
+        const lastPage = res.data.data.last_page;
+        let pageNumbers = [];
 
-      if (total !== null && total > 0) {
-        for (let i = 1; i <= Math.ceil(total / perPage); i++) {
-          pageNumbers.push(i);
+        if (total !== null && total > 0) {
+          for (let i = 1; i <= Math.ceil(total / perPage); i++) {
+            pageNumbers.push(i);
+          }
+          setPageNumbers(pageNumbers);
+          setLastPage(lastPage);
+          // setBusinessName(businessName);
+          sessionStorage.setItem("transactions", JSON.stringify(transactions));
+          setTransactions(transactions);
+          // setPageChangeLoading(false);
         }
-        setPageNumbers(pageNumbers);
+      } catch (e) {
+        // console.log(e)
+      } finally {
         setLoading(false);
-        setLastPage(lastPage);
-        // setBusinessName(businessName);
-        sessionStorage.setItem("transactions", JSON.stringify(transactions));
-        setTransactions(transactions);
-        setPageChangeLoading(false);
       }
     })();
   }, [transactionTypeFilter, currentPage, date]);
@@ -201,8 +206,8 @@ export const TransactionLog = ({
             </div>
             <div className={styles.tableBody}>
               {transactions.map((transaction, index) => {
-                const date = new Date(transaction.created_at).toDateString();
-                const formattedDate = date.slice(4);
+                const date = new Date(transaction.created_at).toString();
+                const formattedDate = date.slice(4, 24);
 
                 return (
                   <div className={styles.tableRow} key={index}>

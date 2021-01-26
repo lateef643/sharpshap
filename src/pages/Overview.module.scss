@@ -224,13 +224,14 @@
   border-radius: 1rem;
   min-width: 40rem;
   max-height: 40rem;
+  min-height: 40rem;
 
   > svg {
     position: absolute;
-    top: 50%;
+    top: 20%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 7rem;
+    width: 4rem;
   }
 
   @include respond(tab) {
@@ -241,6 +242,7 @@
     min-width: 30rem !important;
     overflow: hidden;
     max-height: 37rem;
+    min-height: 37rem;
     padding: 3rem 1rem;
   }
 }

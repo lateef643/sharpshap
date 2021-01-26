@@ -6,8 +6,6 @@ import { setDisplayModal } from "../../actions/modal";
 import styles from "./Overlay.module.scss";
 
 const Overlay = ({ overlay, displayModal }) => {
-  console.log(overlay);
-
   return (
     <div
       className={

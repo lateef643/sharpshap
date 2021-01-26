@@ -117,7 +117,7 @@ const Header = ({
                   <img className={styles.arrow} src={right} alt="" />
                 </Link>
                 <div
-                  className={styles.userSubmenuMainItem}
+                  className={`${styles.userSubmenuMainItem} ${styles.logout}`}
                   aria-label="button"
                   onClick={() => {
                     logout();

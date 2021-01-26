@@ -3,16 +3,16 @@ import { ThreeDots } from "svg-loaders-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
-import { setCurrentPage } from "../../actions/page";
-import { setDisplayModal } from "../../actions/modal";
+import { setCurrentPage } from "../../../actions/page";
+import { setDisplayModal } from "../../../actions/modal";
 
-import pin from "../../assets/icons/pin.svg";
-import lock from "../../assets/icons/lock.svg";
+// import pin from "../../assets/icons/pin.svg";
+// import lock from "../../assets/icons/lock.svg";
 
-import userGroup from "../../assets/icons/users.svg";
-import user from "../../assets/icons/bio-user.svg";
+import userGroup from "../../../assets/icons/users.svg";
+import user from "../../../assets/icons/bio-user.svg";
 
-import transfer from "../../assets/images/transfer.svg";
+import transfer from "../../../assets/images/transfer.svg";
 
 export const Users = ({ changeCurrentPage, displayModal }) => {
   const [users, setUsers] = useState([]);
@@ -43,19 +43,10 @@ export const Users = ({ changeCurrentPage, displayModal }) => {
         <div className={styles.card}>
           <h3 className={styles.sectionHeading}>Betting</h3>
           <div className={styles.services}>
-            <div
-              className={styles.service}
-              onClick={() => {
-                displayModal({
-                  overlay: true,
-                  modal: "addUsers",
-                  service: "",
-                });
-              }}
-            >
+            <Link to="/betting/bet" className={styles.service}>
               <img className={styles.serviceLogo} src={userGroup} alt="" />
               <p className={styles.serviceText}>Bet</p>
-            </div>
+            </Link>
             <div
               className={styles.service}
               onClick={() => {

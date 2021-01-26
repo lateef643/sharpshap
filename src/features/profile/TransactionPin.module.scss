@@ -45,8 +45,12 @@
   height: 3rem;
 }
 
+.inputGroup {
+  margin-bottom: 4rem;
+}
+
 .input {
-  width: 100%;
+  width: 9rem;
   height: 100%;
   display: block;
   border: 0;
@@ -73,6 +77,13 @@
   color: #fff;
   font-family: inherit;
   cursor: pointer;
+
+  & > svg {
+    position: relative;
+    top: 1px;
+    width: 4rem;
+    height: 3rem;
+  }
 
   &:disabled {
     background: #001b6c9f;

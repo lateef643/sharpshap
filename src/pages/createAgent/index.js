@@ -1,6 +1,7 @@
 import React, { useState, useReducer } from "react";
 import Axios from "axios";
 import { useToasts } from "react-toast-notifications";
+import { withRouter } from "react-router-dom";
 
 import agentDataReducer, { initialState } from "./agent-reducer";
 import { REGISTER_AGENT } from "../../utils/constants";
@@ -14,7 +15,7 @@ import NavHome from "../../components/layout/HomeNavBar";
 
 import styles from "./index.module.scss";
 
-const CreateAgent = () => {
+const CreateAgent = ({ history }) => {
   const { addToast } = useToasts();
   const [agentData, dispatch] = useReducer(agentDataReducer, initialState);
   const [status, setStatus] = useState("personal");
@@ -32,10 +33,12 @@ const CreateAgent = () => {
         if (res) {
           setLoading(false);
 
-          addToast("Registration Successful", {
+          addToast("Registration successful, please login to continue", {
             appearance: "success",
             autoDismiss: true,
           });
+
+          history.push("/login");
         }
       } catch (e) {
         setLoading(false);
@@ -127,4 +130,6 @@ const CreateAgent = () => {
   );
 };
 
-export default CreateAgent;
+const CreateAgentWithRouter = withRouter(CreateAgent);
+
+export default CreateAgentWithRouter;

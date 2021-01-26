@@ -129,7 +129,7 @@ const User = ({ handleDeleteUser, loading, users }) => {
         ) : loading ? (
           <ThreeDots fill="#3E215B" />
         ) : (
-          <div>No users to display</div>
+          <div style={{ fontSize: "16px" }}>No users to display</div>
         )}
       </div>
     </>

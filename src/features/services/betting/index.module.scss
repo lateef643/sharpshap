@@ -1,6 +1,6 @@
-@import "../../assets/styles/config/breakpoints";
-@import "../../assets/styles/config/mixins";
-@import "../../assets/styles/config/variables";
+@import "../../../assets/styles/config/breakpoints";
+@import "../../../assets/styles/config/mixins";
+@import "../../../assets/styles/config/variables";
 
 // .container {
 //   padding-top: 2rem;
@@ -171,6 +171,7 @@
   background: rgba(155, 180, 255, 0.1);
   border-radius: 5px;
   cursor: pointer;
+  text-decoration: none;
 }
 
 .serviceLogo {

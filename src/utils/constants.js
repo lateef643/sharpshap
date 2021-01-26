@@ -34,6 +34,9 @@ export const GET_USER = `${path}/user`;
 //update user - PUT
 export const UPDATE_USER = `${path}/user`;
 
+//update agent - PUT
+export const UPDATE_AGENT_PROFILE = `${path}/agents`;
+
 //update user password - PUT
 export const UPDATE_USER_PASSWORD = `${path}/users`;
 
@@ -237,3 +240,31 @@ export const LIST_USERS = `${path}/agents/subs`;
 
 //Delete sub user - DEL
 export const DELETE_USER = `${path}/agents/subs`;
+
+///////BETTING/////////////////////
+//place bet - POST
+export const PLACE_BET = `${path}/fusion/events/placebet`;
+
+//list supported banks - GET
+export const LIST_SUPPORTED_BANKS = `${path}/fusion/banks`;
+
+//bank details - POST
+export const BANK_DETAILS = `${path}/fusion/banks/details`;
+
+//fetch betslip - POST
+export const FETCH_BETSLIP = `${path}/fusion/events/slip`;
+
+//bank verification details - POST
+export const BANK_VERIFICATION = `${path}/fusion/banks/account/verify`;
+
+//list events - POST
+export const LIST_EVENTS = `${path}/fusion/events`;
+
+//fund wallet - POST
+export const FUND_BETTING_WALLET = `${path}/fusion/transactions/deposit`;
+
+//requery - GET
+export const REQUERY = `${path}/fusion/transactions/requery/CiCO_RKGWBF8NE4ST326`;
+
+//change transaction pin - POST
+export const SET_PIN = `${path}/agents/settings/pin`;

@@ -15,6 +15,24 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
   const [LGA, setLGA] = useState(null);
 
   useEffect(() => {
+    if (states && states.length > 0 && agentData.state_id) {
+      const selectedState = states.find((state) => {
+        console.log(state);
+        return state.id == agentData.state_id;
+      });
+
+      const generatedCode = Math.floor(10000000 + Math.random() * 90000000);
+
+      dispatch({
+        type: "SET_AGENT_DATA",
+        payload: {
+          agent_code: `CI/AGT/${selectedState.statecode}/${generatedCode}`,
+        },
+      });
+    }
+  }, [agentData.state_id]);
+
+  useEffect(() => {
     let isCancelled = false;
 
     const fetchBanks = Axios.get(FETCH_BANKS);
@@ -25,9 +43,6 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
         Axios.spread((...responses) => {
           const banksResponse = responses[0];
           const statesResponse = responses[1];
-
-          console.log(banksResponse);
-          console.log(statesResponse);
 
           if (!isCancelled) {
             setBanks(banksResponse.data.data);
@@ -78,8 +93,6 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
   const handleProceed = (e) => {
     e.preventDefault();
 
-    console.log("clicky");
-
     const hasNoErrors =
       agentData.business_name &&
       agentData.business_type &&
@@ -88,10 +101,7 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
       agentData.local_government_id &&
       agentData.business_address;
 
-    console.log(agentData);
-
     if (hasNoErrors) {
-      console.log("yes this has no errors");
       setStatus("account");
     } else {
       setErrors(true);
