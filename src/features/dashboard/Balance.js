@@ -1,12 +1,34 @@
 import React from "react";
 import { connect } from "react-redux";
 
+import flexShield from "../../assets/icons/bronze-badge.svg";
+import premiumShield from "../../assets/icons/silver-badge.svg";
+import vipShield from "../../assets/icons/gold-badge.svg";
+
 import formatToCurrency from "../../utils/formatToCurrency";
 import refresh from "../../assets/icons/refresh.svg";
 
 import styles from "./Balance.module.scss";
 
-const Balance = ({ walletBalance, refreshOverviewData }) => {
+const Balance = ({
+  walletBalance,
+  refreshOverviewData,
+  agentClassification,
+}) => {
+  const agentClassificationLowercase = agentClassification.toLowerCase();
+  const agentClassificationIcon =
+    agentClassificationLowercase === "premium"
+      ? premiumShield
+      : agentClassificationLowercase === "vip"
+      ? vipShield
+      : flexShield;
+  const agentClassificationText =
+    agentClassificationLowercase === "Premium Agent"
+      ? premiumShield
+      : agentClassificationLowercase === "VIP Agent"
+      ? vipShield
+      : "Flex Agent";
+
   const handleOnClick = () => {
     refreshOverviewData();
   };
@@ -25,6 +47,14 @@ const Balance = ({ walletBalance, refreshOverviewData }) => {
           />
         </h3>
       </div>
+      <div className={styles.agentCategory}>
+        <img
+          className={styles.agentCategoryImage}
+          src={agentClassificationIcon}
+          alt=""
+        />
+        <p className={styles.agentCategoryText}>{agentClassificationText}</p>
+      </div>
     </div>
   );
 };
@@ -32,6 +62,7 @@ const Balance = ({ walletBalance, refreshOverviewData }) => {
 const mapStateToProps = (state) => {
   return {
     walletBalance: state.wallet.balance,
+    agentClassification: state.auth.user.agentClassification,
   };
 };
 

@@ -10,6 +10,7 @@ import { startLogout } from "../../actions/auth";
 import { setDisplayModal } from "../../actions/modal";
 import pin from "../../assets/icons/pin.svg";
 import lock from "../../assets/icons/lock.svg";
+import shield from "../../assets/icons/profile-shield.svg";
 
 import styles from "./Profile.module.scss";
 
@@ -88,6 +89,19 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             >
               <img className={styles.serviceLogo} src={lock} alt="" />
               <p className={styles.serviceText}>Change Pin</p>
+            </div>
+            <div
+              className={styles.service}
+              onClick={() => {
+                displayModal({
+                  overlay: true,
+                  modal: "customerStatus",
+                  service: "customerStatus",
+                });
+              }}
+            >
+              <img className={styles.serviceLogo} src={shield} alt="" />
+              <p className={styles.serviceText}>Category</p>
             </div>
           </div>
         </div>

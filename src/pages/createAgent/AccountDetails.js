@@ -1,12 +1,11 @@
-import React, { useReducer, useState, useEffect } from "react";
-
-import agentDataReducer, { initialState } from "./agent-reducer";
+import React, { useState, useEffect } from "react";
 import { ThreeDots } from "svg-loaders-react";
+import axios from "axios";
 
-import { FETCH_BANKS, FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
+import validateFormData from "../../validation/validateFormData";
+import { FETCH_BANKS } from "../../utils/constants";
 
 import styles from "./AccountDetails.module.scss";
-import Axios from "axios";
 
 const AccountDetails = ({
   setStatus,
@@ -15,62 +14,28 @@ const AccountDetails = ({
   loading,
   createAgent,
 }) => {
-  const [errors, setErrors] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({ errors: true });
   const [banks, setBanks] = useState(null);
-  const [states, setStates] = useState(null);
-  const [LGA, setLGA] = useState(null);
 
   useEffect(() => {
     let isCancelled = false;
 
-    const fetchBanks = Axios.get(FETCH_BANKS);
-    const fetchStates = Axios.get(FETCH_STATES);
+    axios
+      .get(FETCH_BANKS)
+      .then((res) => {
+        const banks = res.data.data;
 
-    Axios.all([fetchBanks, fetchStates])
-      .then(
-        Axios.spread((...responses) => {
-          const banksResponse = responses[0];
-          const statesResponse = responses[1];
-
-          if (!isCancelled) {
-            setBanks(banksResponse.data.data);
-            setStates(statesResponse.data.data);
-          }
-        })
-      )
-      .catch((e) => {
-        // console.log(e)
-      });
+        if (!isCancelled) setBanks(banks);
+      })
+      .catch((e) => console.log(e));
 
     return () => {
       isCancelled = true;
     };
   }, []);
 
-  useEffect(() => {
-    let isCancelled = false;
-
-    if (agentData.state_id) {
-      (async function fetchLGA() {
-        try {
-          const res = await Axios.get(`${FETCH_LGAS}/${agentData.state_id}`);
-
-          if (!isCancelled) {
-            setLGA(res.data.data);
-          }
-        } catch (e) {
-          // console.log(e)
-        }
-      })();
-    }
-
-    return () => {
-      isCancelled = true;
-    };
-  }, [agentData.state_id]);
-
   const handleOnChange = ({ target }) => {
-    setErrors(false);
+    setValidationErrors({ ...validationErrors, [target.name]: "" });
 
     dispatch({
       type: "SET_AGENT_DATA",
@@ -81,20 +46,23 @@ const AccountDetails = ({
   const handleProceed = (e) => {
     e.preventDefault();
 
-    const hasNoErrors =
-      agentData.bank_id &&
-      agentData.account_name &&
-      agentData.account_number &&
-      agentData.identity_type;
+    const { account_name, account_number, identity_type, bank_id } = agentData;
 
-    if (hasNoErrors) {
-      // console.log(agentData);
-      // setStatus("file");
+    const state = {
+      account_name,
+      account_number,
+      identity_type,
+      bank_id,
+    };
 
-      createAgent(agentData);
-    } else {
-      setErrors(true);
-    }
+    const keys = Object.keys(state);
+    const errors = validateFormData(agentData, keys);
+
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) return;
+
+    createAgent(agentData);
   };
 
   return (
@@ -111,8 +79,10 @@ const AccountDetails = ({
             onChange={handleOnChange}
             value={agentData.account_name}
           />
-          {errors && !agentData.account_name && (
-            <p className={styles.errorText}>Please Enter Account Name</p>
+          {validationErrors.account_name && (
+            <p className={styles.errorText}>
+              {validationErrors.account_name.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -126,8 +96,10 @@ const AccountDetails = ({
             onChange={handleOnChange}
             value={agentData.account_number}
           />
-          {errors && !agentData.account_number && (
-            <p className={styles.errorText}>Please Enter Account No.</p>
+          {validationErrors.account_number && (
+            <p className={styles.errorText}>
+              {validationErrors.account_number.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -148,8 +120,10 @@ const AccountDetails = ({
             </option>
             <option value="passport">Passport</option>
           </select>
-          {errors && !agentData.mobile && (
-            <p className={styles.errorText}>Please Select ID type</p>
+          {validationErrors.identity_type && (
+            <p className={styles.errorText}>
+              {validationErrors.identity_type.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -171,8 +145,8 @@ const AccountDetails = ({
               );
             })}
           </select>
-          {errors && !agentData.bank_id && (
-            <p className={styles.errorText}>Please Select Bank</p>
+          {validationErrors.bank_id && (
+            <p className={styles.errorText}>{validationErrors.bank_id.text}</p>
           )}
         </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>
@@ -183,7 +157,7 @@ const AccountDetails = ({
             Back
           </button>
           <button className={`${styles.button}`} type="submit">
-            Submit
+            {loading ? <ThreeDots /> : "Submit"}
           </button>
         </div>
       </form>

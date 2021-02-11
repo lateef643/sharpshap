@@ -52,7 +52,7 @@ export const Users = ({ changeCurrentPage, displayModal }) => {
               onClick={() => {
                 displayModal({
                   overlay: true,
-                  modal: "addUsers",
+                  modal: "fundBettingWallet",
                   service: "",
                 });
               }}

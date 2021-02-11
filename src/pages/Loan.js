@@ -4,9 +4,10 @@ import { connect } from "react-redux";
 import { setDisplayModal } from "../actions/modal";
 
 import { setCurrentPage } from "../actions/page";
-import mtn from "../assets/images/MTN Logo.svg";
-import airtel from "../assets/images/Airtel.svg";
-import requestloan from "../assets/icons/requestloan.svg";
+import consumerLoan from "../assets/icons/consumerIcon.svg";
+import repaymentIcon from "../assets/icons/repaymentIcon.svg";
+import loanIcon from "../assets/icons/loanHistoryIcon.svg";
+import agentLoan from "../assets/icons/agentLoanIcon.svg";
 
 import styles from "./Loan.module.scss";
 
@@ -22,7 +23,7 @@ export const Loan = ({ changeCurrentPage, displayModal }) => {
     <div className={styles.container}>
       <div className={styles.section}>
         <div className={styles.card}>
-          <h3 className={styles.sectionHeading}>Loan</h3>
+          <h3 className={styles.sectionHeading}>Quick Actions</h3>
           <div className={styles.services}>
             <div
               className={styles.service}
@@ -34,8 +35,12 @@ export const Loan = ({ changeCurrentPage, displayModal }) => {
                 });
               }}
             >
-              <img className={styles.serviceLogo} src={requestloan} alt="" />
-              <p className={styles.serviceText}>Request</p>
+              <span
+                className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerAgent}`}
+              >
+                <img className={styles.serviceLogo} src={agentLoan} alt="" />
+              </span>
+              <p className={styles.serviceText}>Agent Loan</p>
             </div>
             <div
               className={styles.service}
@@ -47,8 +52,50 @@ export const Loan = ({ changeCurrentPage, displayModal }) => {
                 });
               }}
             >
-              <img className={styles.serviceLogo} src={requestloan} alt="" />
-              <p className={styles.serviceText}>Pay</p>
+              <span
+                className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerConsumer}`}
+              >
+                <img className={styles.serviceLogo} src={consumerLoan} alt="" />
+              </span>
+              <p className={styles.serviceText}>Consumer Loan</p>
+            </div>
+            <div
+              className={styles.service}
+              onClick={() => {
+                displayModal({
+                  overlay: true,
+                  modal: "dataRecharge",
+                  service: "airtel",
+                });
+              }}
+            >
+              <span
+                className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerHistory}`}
+              >
+                <img className={styles.serviceLogo} src={loanIcon} alt="" />
+              </span>
+              <p className={styles.serviceText}>Loan History</p>
+            </div>
+            <div
+              className={styles.service}
+              onClick={() => {
+                displayModal({
+                  overlay: true,
+                  modal: "dataRecharge",
+                  service: "airtel",
+                });
+              }}
+            >
+              <span
+                className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerRepayment}`}
+              >
+                <img
+                  className={styles.serviceLogo}
+                  src={repaymentIcon}
+                  alt=""
+                />
+              </span>
+              <p className={styles.serviceText}>Repayment History</p>
             </div>
           </div>
         </div>

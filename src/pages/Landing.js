@@ -82,7 +82,7 @@ export const Landing = ({ dispatch, message, loading, startLoginUser }) => {
                 <input
                   name="phone"
                   type="text"
-                  value={formState.phone}
+                  value={formState.phone.trim()}
                   onChange={handleOnChange}
                   className={styles.input}
                 />

@@ -14,6 +14,9 @@ import users from "../../assets/icons/users.svg";
 import bioUser from "../../assets/icons/bio-user.svg";
 import exit from "../../assets/icons/exit.svg";
 import pinLock from "../../assets/icons/pin.svg";
+import flexShield from "../../assets/icons/bronze-badge.svg";
+import premiumShield from "../../assets/icons/silver-badge.svg";
+import vipShield from "../../assets/icons/gold-badge.svg";
 
 import styles from "./Header.module.scss";
 
@@ -25,9 +28,18 @@ const Header = ({
   name,
   walletId,
   logout,
+  agentClassification,
+  vfdAccountNumber,
 }) => {
   const [toggleUser, setToggleUser] = useState(false);
   const { addToast } = useToasts();
+  const agentClassificationLowercase = agentClassification.toLowerCase();
+  const agentClassificationIcon =
+    agentClassificationLowercase === "premium"
+      ? premiumShield
+      : agentClassificationLowercase === "vip"
+      ? vipShield
+      : flexShield;
 
   useEffect(() => {
     let isCancelled;
@@ -82,6 +94,11 @@ const Header = ({
             }}
             alt=""
           />
+          <img
+            src={agentClassificationIcon}
+            alt=""
+            className={styles.agentCategory}
+          />
           {toggleUser && (
             <div className={styles.userSubmenu}>
               <div className={styles.userSubmenuBio}>
@@ -90,9 +107,19 @@ const Header = ({
                   alt="user avatar"
                   className={styles.userSubmenuBioAvatar}
                 />
-                <span className={styles.userSubmenuBioService}>{name}</span>
+                <span className={styles.userSubmenuBioService}>
+                  {name}
+                  <img
+                    className={styles.userSubmenuBioBadge}
+                    src={agentClassificationIcon}
+                    alt=""
+                  />
+                </span>
                 <span className={styles.userSubmenuBioWallet}>
                   Wallet ID: {walletId}
+                </span>
+                <span className={styles.userSubmenuBioWallet}>
+                  VFD Account No: {vfdAccountNumber}
                 </span>
               </div>
               <div className={styles.userSubmenuMain}>
@@ -145,6 +172,8 @@ const mapStateToProps = (state) => ({
   notifications: state.notification.notifications,
   walletId: state.auth.user.walletNo,
   name: `${state.auth.user.firstName} ${state.auth.user.lastName}`,
+  agentClassification: state.auth.user.agentClassification,
+  vfdAccountNumber: state.auth.user.vfd_account_number,
 });
 
 const mapDispatchToProps = (dispatch) => {

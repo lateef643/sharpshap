@@ -18,7 +18,7 @@ const Pin = ({ formState, setStatus, handleChange }) => {
       onSubmit={(e) => {
         e.preventDefault();
 
-        if (formState.otp.length === 6) {
+        if (formState.otp.length === 4) {
           setStatus("confirm");
         }
       }}
@@ -32,7 +32,7 @@ const Pin = ({ formState, setStatus, handleChange }) => {
           <OtpInput
             value={formState.otp}
             onChange={handleChange}
-            numInputs={6}
+            numInputs={4}
             inputStyle={styles.input}
             separator={
               <span style={{ display: "inline-block", width: "2rem" }}></span>
@@ -54,7 +54,7 @@ const PinConfirmation = ({ formState, handleChange, loading, setPin }) => {
       onSubmit={(e) => {
         e.preventDefault();
 
-        if (formState.otp_confirmation.length === 6) {
+        if (formState.otp_confirmation.length === 4) {
           setPin();
         }
       }}
@@ -68,7 +68,7 @@ const PinConfirmation = ({ formState, handleChange, loading, setPin }) => {
           <OtpInput
             value={formState.otp_confirmation}
             onChange={handleChange}
-            numInputs={6}
+            numInputs={4}
             inputStyle={styles.input}
             separator={
               <span style={{ display: "inline-block", width: "2rem" }}></span>

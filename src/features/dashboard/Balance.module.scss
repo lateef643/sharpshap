@@ -6,15 +6,13 @@
   height: 15rem;
   display: flex;
   align-items: center;
-  background: url("../../assets/icons/balance-bkg.png");
-  background-position: bottom 0px right 7%;
   background-color: #3e215b;
   background-size: 7rem;
-  background-repeat: no-repeat;
   padding: 0 5rem;
   color: #ffffff;
   font-family: "Poppins", monospace, arial, helvetica, sans-serif;
   border-radius: 1rem;
+  justify-content: space-between;
 
   @include respond(tab) {
     padding: 0 3rem;
@@ -57,6 +55,22 @@
     -webkit-animation: rotate 3s ease-in;
     animation: rotate 0.5s ease-in;
   }
+}
+
+.agentCategory {
+}
+
+.agentCategoryImage {
+  width: 8rem;
+  height: 8rem;
+  display: block;
+  margin: 0 auto;
+}
+
+.agentCategoryText {
+  font-size: 18px;
+  text-align: center;
+  color: #ffffff;
 }
 
 @-webkit-keyframes rotate {

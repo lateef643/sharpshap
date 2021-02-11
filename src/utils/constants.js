@@ -241,7 +241,7 @@ export const LIST_USERS = `${path}/agents/subs`;
 //Delete sub user - DEL
 export const DELETE_USER = `${path}/agents/subs`;
 
-///////BETTING/////////////////////
+///////////BETTING////////////
 //place bet - POST
 export const PLACE_BET = `${path}/fusion/events/placebet`;
 
@@ -268,3 +268,17 @@ export const REQUERY = `${path}/fusion/transactions/requery/CiCO_RKGWBF8NE4ST326
 
 //change transaction pin - POST
 export const SET_PIN = `${path}/agents/settings/pin`;
+
+//////////LOAN////////////
+
+//loan history
+export const LOAN_HISTORY = `${path}/loans/history`;
+
+//agents info
+export const AGENTS_INFO = `${path}/agents/info`;
+
+//check loan eligibility
+export const CHECK_ELIGIBILITY = `${path}/loans/eligibility`;
+
+//application
+export const LOAN_APPLICATION = `${path}/cashouts/settle`;

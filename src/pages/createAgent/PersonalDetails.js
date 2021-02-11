@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 
+import validateFormData from "../../validation/validateFormData";
+
 import styles from "./PersonalDetails.module.scss";
 
 const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
-  const [errors, setErrors] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({ errors: true });
 
   const handleOnChange = ({ target }) => {
-    setErrors(false);
+    setValidationErrors({ ...validationErrors, [target.name]: "" });
 
     dispatch({
       type: "SET_AGENT_DATA",
@@ -17,20 +19,36 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
   const handleProceed = (e) => {
     e.preventDefault();
 
-    const hasNoErrors =
-      agentData.first_name &&
-      agentData.last_name &&
-      agentData.date_of_birth &&
-      agentData.email &&
-      agentData.gender &&
-      agentData.business_phone &&
-      agentData.bvn;
+    const {
+      first_name,
+      last_name,
+      date_of_birth,
+      email,
+      mobile,
+      gender,
+      business_phone,
+      bvn,
+    } = agentData;
 
-    if (hasNoErrors) {
-      setStatus("business");
-    } else {
-      setErrors(true);
-    }
+    const state = {
+      first_name,
+      last_name,
+      date_of_birth,
+      email,
+      mobile,
+      gender,
+      business_phone,
+      bvn,
+    };
+
+    const keys = Object.keys(state);
+    const errors = validateFormData(agentData, keys);
+
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) return;
+
+    setStatus("business");
   };
 
   return (
@@ -47,8 +65,10 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.first_name}
           />
-          {errors && !agentData.first_name && (
-            <p className={styles.errorText}>Please Enter First Name</p>
+          {validationErrors.first_name && (
+            <p className={styles.errorText}>
+              {validationErrors.first_name.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -62,8 +82,10 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.last_name}
           />
-          {errors && !agentData.last_name && (
-            <p className={styles.errorText}>Please Enter Last Name</p>
+          {validationErrors.last_name && (
+            <p className={styles.errorText}>
+              {validationErrors.last_name.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -77,8 +99,10 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.date_of_birth}
           />
-          {errors && !agentData.date_of_birth && (
-            <p className={styles.errorText}>Please Select Date of Birth</p>
+          {validationErrors.date_of_birth && (
+            <p className={styles.errorText}>
+              {validationErrors.date_of_birth.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -92,8 +116,8 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.email}
           />
-          {errors && !agentData.email && (
-            <p className={styles.errorText}>Please Enter Email</p>
+          {validationErrors.email && (
+            <p className={styles.errorText}>{validationErrors.email.text}</p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -111,8 +135,8 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             <option value="Male">Male</option>
             <option value="Female">Female</option>
           </select>
-          {errors && !agentData.gender && (
-            <p className={styles.errorText}>Please Select Gender</p>
+          {validationErrors.gender && (
+            <p className={styles.errorText}>{validationErrors.gender.text}</p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -126,8 +150,10 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.business_phone}
           />
-          {errors && !agentData.business_phone && (
-            <p className={styles.errorText}>Please Enter Phone Number</p>
+          {validationErrors.business_phone && (
+            <p className={styles.errorText}>
+              {validationErrors.business_phone.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -141,8 +167,8 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.mobile}
           />
-          {errors && !agentData.mobile && (
-            <p className={styles.errorText}>Please Enter Mobile Number</p>
+          {validationErrors.mobile && (
+            <p className={styles.errorText}>{validationErrors.mobile.text}</p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -156,8 +182,8 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.bvn}
           />
-          {errors && !agentData.bvn && (
-            <p className={styles.errorText}>Please Enter BVN</p>
+          {validationErrors.bvn && (
+            <p className={styles.errorText}>{validationErrors.bvn.text}</p>
           )}
         </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>

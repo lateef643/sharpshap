@@ -27,10 +27,13 @@ export const startLoginUser = (payload) => (dispatch) => {
   return axios
     .post(LOGIN_API, payload)
     .then((res) => {
+      console.log(res);
+
       const user = res.data.data.user;
       const token = res.data.data.token;
       const walletBalance = res.data.data.wallet.current_bal;
       const transactionSettings = res.data.data.settings;
+      const agentClassification = res.data.data.class;
       const agent = res.data.data.data?.user?.agent
         ? res.data.data?.user?.agent
         : res.data.data.agent;
@@ -44,6 +47,7 @@ export const startLoginUser = (payload) => (dispatch) => {
         business_name: businessName,
         wallet_no: walletNo,
         uuid,
+        vfd_account_number,
       } = agent;
 
       if (!isEmpty(user)) {
@@ -59,6 +63,8 @@ export const startLoginUser = (payload) => (dispatch) => {
             is_default,
             firstName,
             lastName,
+            vfd_account_number,
+            agentClassification,
             userId,
             businessName,
             walletNo,

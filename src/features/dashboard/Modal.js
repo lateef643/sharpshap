@@ -10,6 +10,8 @@ import AddUser from "../../features/users/AddUser";
 import TransactionPin from "../profile/TransactionPin";
 import Password from "../../features/profile/Password";
 import WalletTransfer from "../../features/services/walletTransfer/WalletTransfer";
+import FundBettingWallet from "../../features/services/betting/fundWallet/FundWallet";
+import CustomerStatus from "../../features/profile/CustomerStatus";
 
 import styles from "./Modal.module.scss";
 
@@ -31,6 +33,8 @@ const Modal = ({ overlay, modal }) => {
           addUsers: <AddUser />,
           password: <Password />,
           walletTransfer: <WalletTransfer />,
+          fundBettingWallet: <FundBettingWallet />,
+          customerStatus: <CustomerStatus />,
         }[modal]
       }
     </div>

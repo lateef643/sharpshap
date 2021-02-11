@@ -1,23 +1,20 @@
-import React, { useReducer, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
-import agentDataReducer, { initialState } from "./agent-reducer";
-import { ThreeDots } from "svg-loaders-react";
+import validateFormData from "../../validation/validateFormData";
 
-import { FETCH_BANKS, FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
+import { FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
 
 import styles from "./BusinessDetails.module.scss";
 import Axios from "axios";
 
 const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
-  const [errors, setErrors] = useState(false);
-  const [banks, setBanks] = useState(null);
-  const [states, setStates] = useState(null);
-  const [LGA, setLGA] = useState(null);
+  const [validationErrors, setValidationErrors] = useState({ errors: true });
+  const [states, setStates] = useState([]);
+  const [LGA, setLGA] = useState([]);
 
   useEffect(() => {
     if (states && states.length > 0 && agentData.state_id) {
       const selectedState = states.find((state) => {
-        console.log(state);
         return state.id == agentData.state_id;
       });
 
@@ -35,24 +32,13 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
   useEffect(() => {
     let isCancelled = false;
 
-    const fetchBanks = Axios.get(FETCH_BANKS);
-    const fetchStates = Axios.get(FETCH_STATES);
+    Axios.get(FETCH_STATES)
+      .then((res) => {
+        const states = res.data.data;
 
-    Axios.all([fetchBanks, fetchStates])
-      .then(
-        Axios.spread((...responses) => {
-          const banksResponse = responses[0];
-          const statesResponse = responses[1];
-
-          if (!isCancelled) {
-            setBanks(banksResponse.data.data);
-            setStates(statesResponse.data.data);
-          }
-        })
-      )
-      .catch((e) => {
-        // console.log(e)
-      });
+        if (!isCancelled) setStates(states);
+      })
+      .catch((e) => console.log(e));
 
     return () => {
       isCancelled = true;
@@ -82,7 +68,7 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
   }, [agentData.state_id]);
 
   const handleOnChange = ({ target }) => {
-    setErrors(false);
+    setValidationErrors({ ...validationErrors, [target.name]: "" });
 
     dispatch({
       type: "SET_AGENT_DATA",
@@ -93,19 +79,32 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
   const handleProceed = (e) => {
     e.preventDefault();
 
-    const hasNoErrors =
-      agentData.business_name &&
-      agentData.business_type &&
-      agentData.agent_type &&
-      agentData.state_id &&
-      agentData.local_government_id &&
-      agentData.business_address;
+    const {
+      business_name,
+      business_address,
+      state_id,
+      business_type,
+      agent_type,
+      local_government_id,
+    } = agentData;
 
-    if (hasNoErrors) {
-      setStatus("account");
-    } else {
-      setErrors(true);
-    }
+    const state = {
+      business_name,
+      business_address,
+      state_id,
+      business_type,
+      agent_type,
+      local_government_id,
+    };
+
+    const keys = Object.keys(state);
+    const errors = validateFormData(agentData, keys);
+
+    setValidationErrors(errors);
+
+    if (Object.keys(errors).length > 0) return;
+
+    setStatus("account");
   };
 
   return (
@@ -122,8 +121,10 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.business_name}
           />
-          {errors && !agentData.business_name && (
-            <p className={styles.errorText}>Please Enter Business Name</p>
+          {validationErrors.business_name && (
+            <p className={styles.errorText}>
+              {validationErrors.business_name.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -137,8 +138,10 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
             onChange={handleOnChange}
             value={agentData.business_address}
           />
-          {errors && !agentData.business_address && (
-            <p className={styles.errorText}>Please Enter Business Address</p>
+          {validationErrors.business_address && (
+            <p className={styles.errorText}>
+              {validationErrors.business_address.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -160,8 +163,8 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
               );
             })}
           </select>
-          {errors && !agentData.state_id && (
-            <p className={styles.errorText}>Please Select State</p>
+          {validationErrors.state_id && (
+            <p className={styles.errorText}>{validationErrors.state_id.text}</p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -177,8 +180,10 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
             <option value="">Select Business Type</option>
             <option value="payments">Payments</option>
           </select>
-          {errors && !agentData.business_type && (
-            <p className={styles.errorText}>Please Select LGA</p>
+          {validationErrors.business_type && (
+            <p className={styles.errorText}>
+              {validationErrors.business_type.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -194,8 +199,10 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
             <option value="">Select type</option>
             <option value="aggregator">Aggregator</option>
           </select>
-          {errors && !agentData.agent_type && (
-            <p className={styles.errorText}>Please Select Agent type</p>
+          {validationErrors.agent_type && (
+            <p className={styles.errorText}>
+              {validationErrors.agent_type.text}
+            </p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -217,8 +224,10 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
               );
             })}
           </select>
-          {errors && !agentData.local_government_id && (
-            <p className={styles.errorText}>Please Select LGA</p>
+          {validationErrors.local_government_id && (
+            <p className={styles.errorText}>
+              {validationErrors.local_government_id.text}
+            </p>
           )}
         </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>

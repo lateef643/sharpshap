@@ -19,6 +19,8 @@ fix payments modal
 fix transaction pin form input
 get progile to update and work
 
+close open modals on route change
+
 remove modal on page change
 fix overview page card and chart height on navigation
 only thing a sub user should see is add user/user management, they should not see deactivate
