@@ -79,23 +79,25 @@ export const RechargeCableForm = ({ agentId }) => {
               <span className={styles.date}>Date</span>
               <span className={styles.amount}>Amount</span>
               <span className={styles.duration}>Duration</span>
+              <span className={styles.rate}>Rate</span>
               <span className={styles.status}>Status</span>
               <span className={styles.disbursed}>Disbursed</span>
               {/* <span className={styles.query}>Query</span> */}
             </div>
             <div className={styles.tableBody}>
               {history.map((history, index) => {
-                const date = new Date(history.created_at).toDateString();
-                const formattedDate = date.slice(4);
+                const date = history.created_at;
+                const formattedDate = date.substring(10);
 
                 return (
                   <div className={styles.tableRow} key={index}>
                     <span className={styles.sn}>{++index}.</span>
                     <span className={styles.date}>{formattedDate}</span>
-                    <span className={styles.amount}>
-                      {history.amount || "Nil"}
-                    </span>
-                    <span className={styles.duration}>{history.duration}</span>
+                    <span className={styles.amount}>{history.amount}</span>
+                    <span
+                      className={styles.duration}
+                    >{`${history.duration} months`}</span>
+                    <span className={styles.rate}>{`${history.rate}%`}</span>
                     <span className={styles.status}>{history.status}</span>
                     <span className={styles.disbursed}>
                       {history.disbursed}

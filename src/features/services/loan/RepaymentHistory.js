@@ -8,7 +8,7 @@ import { REPAYMENT_HISTORY } from "../../../utils/constants";
 
 import styles from "./RepaymentHistory.module.scss";
 
-export const RechargeCableForm = ({ agentId }) => {
+export const RechargeCableForm = ({ agentUuid }) => {
   const [history, setHistory] = useState([]);
   const [loading, setLoading] = useState(false);
 
@@ -17,8 +17,12 @@ export const RechargeCableForm = ({ agentId }) => {
 
     (async function getLoanHistory() {
       setLoading(true);
+
+      const payload = {
+        identifier: agentUuid,
+      };
       try {
-        const res = await axios.post(REPAYMENT_HISTORY, agentId);
+        const res = await axios.post(REPAYMENT_HISTORY, payload);
         const history = res.data.data;
 
         console.log(history);
@@ -76,13 +80,11 @@ export const RechargeCableForm = ({ agentId }) => {
           <div className={styles.table}>
             <div className={styles.tableHeading}>
               <span className={styles.sn}>S/N</span>
-              <span className={styles.date}>Date</span>
-              <span className={styles.amount}>Amount</span>
-              <span className={styles.duration}>Duration</span>
-              <span className={styles.status}>Status</span>
-              <span className={styles.disbursed}>Disbursed</span>
+              <span className={styles.principal}>Principal</span>
+              <span className={styles.interest}>Interest</span>
+              <span className={styles.payment}>Payment</span>
+              <span className={styles.balance}>Balance</span>
               <span className={styles.due}>Due date</span>
-              {/* <span className={styles.query}>Query</span> */}
             </div>
             <div className={styles.tableBody}>
               {history.map((history, index) => {
@@ -92,20 +94,13 @@ export const RechargeCableForm = ({ agentId }) => {
                 return (
                   <div className={styles.tableRow} key={index}>
                     <span className={styles.sn}>{++index}.</span>
-                    <span className={styles.date}>{formattedDate}</span>
-                    <span className={styles.amount}>
-                      {history.amount || "Nil"}
+                    <span className={styles.principal}>
+                      {history.principal}
                     </span>
-                    <span className={styles.duration}>{history.duration}</span>
-                    <span className={styles.status}>{history.status}</span>
-                    <span className={styles.disbursed}>
-                      {history.disbursed}
-                    </span>
+                    <span className={styles.interest}>{history.interest}</span>
+                    <span className={styles.payment}>{history.payment}</span>
+                    <span className={styles.balance}>{history.balance}</span>
                     <span className={styles.due}>{history.due_date}</span>
-
-                    {/* <span className={styles.query}>
-                    <img src={refresh} alt="" />
-                  </span> */}
                     {/* <div className={styles.action}>
                       <label htmlFor={`menu${index}`}>
                         <img className={styles.menu} src={menu} alt="" />
@@ -155,7 +150,7 @@ RechargeCableForm.propTypes = {
 
 const mapStateToProps = (state) => {
   return {
-    agentId: state.auth.user.id,
+    agentUuid: state.auth.user.uuid,
   };
 };
 

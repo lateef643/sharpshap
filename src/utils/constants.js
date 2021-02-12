@@ -277,7 +277,7 @@ export const LOAN_HISTORY =
 
 //loan repayment history
 export const REPAYMENT_HISTORY =
-  "https://loanserve.cicoserve.xyz/api/v1/loans/repayment";
+  "https://loanserve.cicoserve.xyz/api/v1/loans/repayments";
 
 //agents info
 export const AGENTS_INFO = "https://loanserve.cicoserve.xyz/api/v1/info";

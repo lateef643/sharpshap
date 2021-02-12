@@ -32,7 +32,9 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
     setLoading(true);
 
     (async function fetchProfile() {
-      const payload = formState;
+      const payload = {
+        agent: formState,
+      };
 
       try {
         const res = await axios.put(UPDATE_AGENT_PROFILE, payload);
@@ -146,6 +148,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             name="date_of_birth"
             onChange={handleOnChange}
             value={formState.date_of_birth}
+            disabled
             className={styles.input}
           />
           {errors && !formState.date_of_birth && (
@@ -161,6 +164,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             name="email"
             onChange={handleOnChange}
             value={formState.email}
+            disabled
             className={styles.input}
           />
           {errors && !formState.email && (
@@ -179,8 +183,8 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             className={styles.input}
           >
             <option value="">Select Gender</option>
-            <option value="Male">Male</option>
-            <option value="Female">Female</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
           </select>
           {errors && !formState.gender && (
             <p className={styles.errorText}>Please Select Gender</p>
@@ -196,24 +200,25 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             onChange={handleOnChange}
             value={formState.business_phone}
             className={styles.input}
+            disabled
           />
           {errors && !formState.business_phone && (
             <p className={styles.errorText}>Please Enter Phone Number</p>
           )}
         </div>
         <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="mobile">
-            Mobile
+          <label className={styles.label} htmlFor="business_address">
+            Business Address
           </label>
           <input
             type="text"
-            name="mobile"
+            name="business_address"
             onChange={handleOnChange}
-            value={formState.mobile}
+            value={formState.business_address}
             className={styles.input}
           />
-          {errors && !formState.mobile && (
-            <p className={styles.errorText}>Please Enter Mobile Number</p>
+          {errors && !formState.business_address && (
+            <p className={styles.errorText}>Please enter business address</p>
           )}
         </div>
         <div className={styles.formGroup}>
@@ -226,6 +231,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             onChange={handleOnChange}
             value={formState.bvn}
             className={styles.input}
+            disabled
           />
           {errors && !formState.bvn && (
             <p className={styles.errorText}>Please Enter BVN</p>
@@ -248,7 +254,18 @@ const mapStateToProps = (state) => {
       last_name: state.auth.user.lastName,
       business_name: state.auth.user.businessName,
       email: state.auth.user.email,
-      phone: state.auth.user.phone,
+      business_phone: state.auth.user.business_phone,
+      bvn: state.auth.user.bvn,
+      business_address: state.auth.user.business_address,
+      date_of_birth: state.auth.user.date_of_birth,
+      gender: state.auth.user.gender,
+      account_name: state.auth.user.account_name,
+      account_number: state.auth.user.account_number,
+      bank_id: state.auth.user.bank_id,
+      state_id: state.auth.user.state_id,
+      local_government_id: state.auth.user.local_government_id,
+      business_type: state.auth.user.business_type,
+      agent_code: state.auth.user.agent_code,
     },
   };
 };

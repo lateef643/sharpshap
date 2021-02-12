@@ -6,6 +6,7 @@
   min-width: 80rem;
   overflow: hidden;
   padding: 4rem 2rem;
+  min-height: 80vh;
 
   & > svg {
     position: fixed;
@@ -231,70 +232,27 @@
     flex: 0 0 5%;
   }
 
-  .username {
-    flex: 0 0 19%;
-  }
-
-  .phone {
+  .date {
     flex: 0 0 13%;
   }
 
-  .email {
-    flex: 0 0 19%;
+  .amount {
+    flex: 0 0 13%;
   }
 
-  .date {
-    flex: 0 0 18%;
+  .duration {
+    flex: 0 0 13%;
   }
 
-  .action {
-    position: relative;
-    flex: 0 0 10%;
-    text-align: center;
+  .rate {
+    flex: 0 0 13%;
+  }
 
-    input {
-      // position: relative;
-      display: none;
-    }
+  .status {
+    flex: 0 0 13%;
+  }
 
-    .menu {
-      width: 1.5rem;
-      cursor: pointer;
-    }
-
-    .actions {
-      position: absolute;
-      left: 0;
-      z-index: 3;
-      background-color: #fff;
-      width: -webkit-max-content;
-      width: -moz-max-content;
-      width: max-content;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-      visibility: hidden;
-      border-radius: 5px;
-
-      span {
-        cursor: pointer;
-        text-decoration: none;
-        display: block;
-        padding: 0.8rem 1.5rem;
-        font-size: 1.2rem;
-        color: #303030;
-        color: red;
-
-        &:hover {
-          background-color: #f0efefe7;
-        }
-      }
-    }
-
-    .actionsItemEdit {
-      color: #22215b !important;
-    }
-
-    input:checked ~ .actions {
-      visibility: visible;
-    }
+  .disbursed {
+    flex: 0 0 13%;
   }
 }
