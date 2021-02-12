@@ -112,8 +112,8 @@ export const WalletLog = ({ changeCurrentPage }) => {
     <div className={styles.container}>
       {transactions.length > 0 && !loading ? (
         <div className={styles.transactions}>
-          <h3 className={styles.transactionsHeading}>Transactions</h3>
-          <div className={styles.filter}>
+          <h3 className={styles.transactionsHeading}>Logs</h3>
+          {/* <div className={styles.filter}>
             <div className={styles.filterToggle}>
               <span>Filter</span>
               <img
@@ -160,7 +160,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
                 </select>
               </label>
             </div>
-          </div>
+          </div> */}
           <div className={styles.table}>
             <div className={styles.tableHeading}>
               <span className={styles.sn}>S/N</span>
@@ -222,7 +222,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
             </div>
           </div>
         </div>
-      ) : loading ? (
+      ) : loading || pageChangeLoading ? (
         <ThreeDots fill="#3E215B" />
       ) : (
         <div>No transactions to display</div>

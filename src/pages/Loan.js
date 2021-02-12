@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { setDisplayModal } from "../actions/modal";
 
@@ -30,8 +31,8 @@ export const Loan = ({ changeCurrentPage, displayModal }) => {
               onClick={() => {
                 displayModal({
                   overlay: true,
-                  modal: "dataRecharge",
-                  service: "mtn",
+                  modal: "loanApplication",
+                  service: "agentLoan",
                 });
               }}
             >
@@ -42,7 +43,7 @@ export const Loan = ({ changeCurrentPage, displayModal }) => {
               </span>
               <p className={styles.serviceText}>Agent Loan</p>
             </div>
-            <div
+            {/* <div
               className={styles.service}
               onClick={() => {
                 displayModal({
@@ -58,34 +59,16 @@ export const Loan = ({ changeCurrentPage, displayModal }) => {
                 <img className={styles.serviceLogo} src={consumerLoan} alt="" />
               </span>
               <p className={styles.serviceText}>Consumer Loan</p>
-            </div>
-            <div
-              className={styles.service}
-              onClick={() => {
-                displayModal({
-                  overlay: true,
-                  modal: "dataRecharge",
-                  service: "airtel",
-                });
-              }}
-            >
+            </div> */}
+            <Link to="loan/history" className={styles.service}>
               <span
-                className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerHistory}`}
+                className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerRepayment}`}
               >
                 <img className={styles.serviceLogo} src={loanIcon} alt="" />
               </span>
               <p className={styles.serviceText}>Loan History</p>
-            </div>
-            <div
-              className={styles.service}
-              onClick={() => {
-                displayModal({
-                  overlay: true,
-                  modal: "dataRecharge",
-                  service: "airtel",
-                });
-              }}
-            >
+            </Link>
+            <Link to="loan/repayment-history" className={styles.service}>
               <span
                 className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerRepayment}`}
               >
@@ -96,7 +79,7 @@ export const Loan = ({ changeCurrentPage, displayModal }) => {
                 />
               </span>
               <p className={styles.serviceText}>Repayment History</p>
-            </div>
+            </Link>
           </div>
         </div>
       </div>

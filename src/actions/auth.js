@@ -2,6 +2,7 @@ import axios from "axios";
 
 import { LOGIN_API } from "../utils/constants";
 import setAuthToken from "../utils/setAuthToken";
+import setAxiosDefaults from "../utils/setAxiosDefaults";
 import isEmpty from "../validation/isEmpty";
 import history from "../utils/history";
 import { setWalletBalance } from "./wallet";
@@ -27,8 +28,6 @@ export const startLoginUser = (payload) => (dispatch) => {
   return axios
     .post(LOGIN_API, payload)
     .then((res) => {
-      console.log(res);
-
       const user = res.data.data.user;
       const token = res.data.data.token;
       const walletBalance = res.data.data.wallet.current_bal;
@@ -73,12 +72,12 @@ export const startLoginUser = (payload) => (dispatch) => {
           transactionSettings,
         };
 
+        setAuthToken(token);
         dispatch(loginUser(authDetails));
         dispatch(setWalletBalance(walletBalance));
         sessionStorage.setItem("user", JSON.stringify(authDetails));
         sessionStorage.setItem("token", token);
         sessionStorage.setItem("balance", walletBalance);
-        setAuthToken(token);
       }
     })
     .catch((err) => {

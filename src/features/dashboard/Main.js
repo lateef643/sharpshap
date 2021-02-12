@@ -71,26 +71,29 @@ export const Main = ({
             }
           >
             <Balance refreshOverviewData={refreshOverviewData} />
-            <Switch>
-              <Route path="/profile" component={Profile} />
-              {routes.map((route, index) => {
-                return (
-                  //This route shows the correct component if password is not default
-                  //else redirect to Profile route
-                  <PrivateRoute
-                    history={history}
-                    key={index}
-                    routes={route.routes}
-                    overviewData={overviewData}
-                    path={route.path}
-                    exact={route.exact}
-                    component={route.component}
-                    isDefaultPassword={isDefaultPassword}
-                    loading={loading}
-                  />
-                );
-              })}
-            </Switch>
+            <div className={styles.contentMain}>
+              <Switch>
+                <Route path="/profile" component={Profile} />
+                {routes.map((route, index) => {
+                  return (
+                    //This route shows the correct component if password is not default
+                    //else redirect to Profile route
+                    <PrivateRoute
+                      history={history}
+                      key={index}
+                      routes={route.routes}
+                      overviewData={overviewData}
+                      path={route.path}
+                      exact={route.exact}
+                      component={route.component}
+                      isDefaultPassword={isDefaultPassword}
+                      loading={loading}
+                    />
+                  );
+                })}
+              </Switch>
+            </div>
+
             <Overlay />
             <Modal />
           </div>

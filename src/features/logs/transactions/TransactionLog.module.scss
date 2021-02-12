@@ -3,7 +3,6 @@
 
 .container {
   padding-top: 2rem;
-  width: 98%;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
@@ -11,24 +10,31 @@
   font-size: 1.4rem;
   text-align: left;
   position: relative;
+  min-width: 1400px;
 
   & > svg {
-    position: absolute;
-    display: block;
-    width: 4rem;
-    top: 10rem;
-    left: 50%;
-    transform: translateX(-50%);
+    position: fixed;
+    display: inline-block;
+    width: 5rem;
+    top: 70%;
+    left: 55%;
+    // transform: translateX(-80%);
+
+    @include respond-custom(1000px) {
+      transform: translateX(-50%);
+    }
   }
 
   @include respond-custom(1000px) {
-    min-width: 100rem;
+    // min-width: 100rem;
     margin: 0 2rem;
   }
 
   @include respond(phone-large) {
     margin: 0 auto;
-    min-width: 96%;
+    // min-width: 96%;
+    min-width: 1400px;
+
     padding-top: 1rem;
   }
 
@@ -60,12 +66,6 @@
 
       @include respond(phone-large) {
         flex-direction: column;
-      }
-
-      .export {
-        @include respond(phone-large) {
-          display: none;
-        }
       }
 
       .dateFilterContainer {
@@ -343,10 +343,10 @@
 
   > .pagination {
     margin: 2rem auto;
+    min-width: 40rem;
 
     @include respond(phone-large) {
       margin-top: 0.5rem;
-      width: 100%;
     }
 
     span {
@@ -393,6 +393,7 @@
   width: 100%;
   color: #22215b;
   padding: 2rem 0.5rem;
+  position: relative;
 }
 
 .transactionsHeading {
@@ -619,7 +620,7 @@
   }
 
   .date {
-    flex: 0 0 15%;
+    flex: 0 0 13%;
   }
 
   .amount {
@@ -627,28 +628,28 @@
   }
 
   .type {
-    flex: 0 0 8%;
+    flex: 0 0 7%;
   }
 
   .prev {
-    flex: 0 0 9%;
+    flex: 0 0 8%;
   }
 
   .current {
-    flex: 0 0 9%;
+    flex: 0 0 8%;
   }
 
   .customer {
-    flex: 0 0 17%;
+    flex: 0 0 25%;
   }
 
   .ref {
-    flex: 0 0 20%;
+    flex: 0 0 15%;
   }
 
   .action {
     position: relative;
-    flex: 0 0 7%;
+    flex: 0 0 4%;
     text-align: center;
 
     input {
@@ -697,85 +698,12 @@
   }
 }
 
-.statsItem {
-  border-top-right-radius: 10px;
-  border-top-left-radius: 10px;
-  border-bottom-right-radius: 10px;
-  background-color: #fff;
-  max-width: 20rem;
-  min-width: 18rem;
-  padding: 2rem 1.5rem;
-  display: flex;
-  align-items: center;
-  transition: 0.3s ease-in-out all;
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
-  float: right;
-}
-
-.statsItem:hover {
-  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.15);
-  transform: translateY(-0.5rem);
-}
-.statsItem:not(:last-child) {
-  margin-right: 1.5rem;
-}
-.statsItemDark {
-  background: #0846ba;
-  color: #fff;
-}
-.statsItemDark .statTitle {
-  color: #f0f0f0 !important;
-}
-.statsItemDark .statValue {
-  color: #fff;
-}
-.statsItemDark .statSub {
-  color: #999999;
-}
-.statsItemData {
-  flex: 1;
-}
-.statsItemData .statTitle {
-  font-size: 1.2rem;
-  font-weight: 300;
-  text-transform: capitalize;
-  margin-bottom: 0.5rem;
-  color: #999999;
-}
-.statsItemData .statValue {
-  font-size: 2rem;
-  margin-bottom: 0.5rem;
-}
-.statsItemData .statSub {
-  font-size: 1.1rem;
-}
-.statsItemIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-  background-color: #f0f0f0;
-  height: 5rem;
-  width: 5rem;
-}
-
-.statsItemIcon > img {
-  height: 100%;
-  width: 100%;
-}
-
-.statsItemIconPrimary {
-  background: #a8ffd1;
-  color: #00853e;
-}
-.statsItemIconRed {
-  color: #d63447;
-  background-color: #f8dee1;
-}
-.statsItemIconDark {
-  color: #f0f0f0;
-  background-color: #3f3f44;
-}
-.statsItemIcon .material-icons {
-  font-size: 1.7rem;
+.exportToExcel {
+  position: relative;
+  bottom: 5.5rem;
+  left: 12rem;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  cursor: pointer;
 }

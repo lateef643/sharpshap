@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { ThreeDots } from "svg-loaders-react";
-import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { DatePicker } from "@material-ui/pickers";
+import { startOfMonth } from "date-fns";
 
 import formatToCurrency from "../../../utils/formatToCurrency";
 import ExportToExcel from "../../../components/common/ExportToExcel";
@@ -15,6 +16,7 @@ import "../../../assets/styles/generic/daterangepicker.scss";
 import arrowDown from "../../../assets/icons/arrowdown.svg";
 import arrowUp from "../../../assets/images/arrowUp.svg";
 import menu from "../../../assets/images/dots.svg";
+import "./custom-date.css";
 
 export const TransactionLog = ({
   changeCurrentPage,
@@ -27,22 +29,25 @@ export const TransactionLog = ({
   const [pageNumbers, setPageNumbers] = useState([]);
   const [lastPage, setLastPage] = useState("");
   const [pageChangeLoading, setPageChangeLoading] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [from, setFrom] = useState(null);
-  const [to, setTo] = useState(null);
   const [transactionTypeFilter, setTransactionTypeFilter] = useState("");
-  const [accordionToggle, setAccordionToggle] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
+  const [selectedDateFrom, handleSelectedDateFrom] = useState(() => {
+    const newDate = new Date();
+    const monthDate = startOfMonth(newDate);
+
+    return monthDate;
+  });
+  const [selectedDateTo, handleSelectedDateTo] = useState(new Date());
 
   const firstPage = 1;
 
   useEffect(() => {
-    const now = new Date();
-    const nowString = now.toString();
-  }, []);
-
-  useEffect(() => {
     // setPageChangeLoading(true);
+
+    const formattedDates = convertDatesToString().split(" ");
+
+    const from = formattedDates[0];
+    const to = formattedDates[1];
 
     const params = {};
 
@@ -78,7 +83,7 @@ export const TransactionLog = ({
         setLoading(false);
       }
     })();
-  }, [transactionTypeFilter, currentPage, date]);
+  }, [selectedDateTo, selectedDateFrom, currentPage]);
 
   //dispatching to redux state because we need transactions log to get transactionDetails
   useEffect(() => {
@@ -103,15 +108,10 @@ export const TransactionLog = ({
     setTransactionTypeFilter(filter);
   };
 
-  const setDateFilters = (date) => {
-    if (date) {
-      let from;
-      let to;
-
-      if (date) {
-        from = date[0];
-        to = date[1];
-      }
+  const convertDatesToString = () => {
+    if (selectedDateFrom && selectedDateTo) {
+      let from = selectedDateFrom;
+      let to = selectedDateTo;
 
       const fromMonth = from.getMonth();
       const toMonth = to.getMonth();
@@ -123,8 +123,7 @@ export const TransactionLog = ({
       const formattedFrom = `${fromYear}-${fromMonth + 1}-${fromDate}`;
       const formattedTo = `${toYear}-${toMonth + 1}-${toDate}`;
 
-      setFrom(formattedFrom);
-      setTo(formattedTo);
+      return `${formattedFrom} ${formattedTo}`;
     }
   };
 
@@ -155,19 +154,26 @@ export const TransactionLog = ({
                 }}
               />
             </div>
+            <div className={styles.exportToExcel}>
+              <ExportToExcel
+                dataset={transactions}
+                labels={labels}
+                filename="Transactions Log"
+              />
+            </div>
             <div
               className={
                 isOpen ? `${styles.filters} ${styles.isOpen}` : styles.filters
               }
             >
-              <label className={styles.inputGroup}>
+              {/* <label className={styles.inputGroup}>
                 <input
                   className={styles.searchTransactions}
                   type="text"
                   placeholder="Search Transactions"
                 />
                 <span>Search Transactions</span>
-              </label>
+              </label> */}
               <label className={styles.inputGroup}>
                 <select
                   className={styles.filterTransactions}
@@ -186,9 +192,26 @@ export const TransactionLog = ({
                 </select>
               </label>
               <label className={styles.inputGroup}>
-                <select className={styles.filterTransactions}>
-                  <option value="">Date Added</option>
-                </select>
+                From:{" "}
+                <DatePicker
+                  views={["date", "year", "month"]}
+                  variant="inline"
+                  value={selectedDateFrom}
+                  onChange={handleSelectedDateFrom}
+                  format="dd/MM/yyyy"
+                  disableFuture={true}
+                />
+              </label>
+              <label className={styles.inputGroup}>
+                To:{" "}
+                <DatePicker
+                  views={["date", "year", "month"]}
+                  variant="inline"
+                  value={selectedDateTo}
+                  onChange={handleSelectedDateTo}
+                  format="dd/MM/yyyy"
+                  disableFuture={true}
+                />
               </label>
             </div>
           </div>

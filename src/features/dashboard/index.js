@@ -6,6 +6,7 @@ import Main from "./Main";
 import styles from "./index.module.scss";
 
 const Dashboard = ({ overlay }) => {
+  console.log("the dashboard is rendering");
   useEffect(() => {
     const body = document.getElementsByTagName("body")[0];
 

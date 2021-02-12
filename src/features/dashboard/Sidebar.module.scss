@@ -21,6 +21,7 @@
     transform: translateX(0%);
   }
 }
+
 .sidebar {
   flex: 0 0 19rem;
   z-index: 200;
@@ -29,6 +30,8 @@
   background: $content-background-color;
   position: relative;
   font-family: "Nunito", sans-serif;
+  -webkit-animation: slide 0.1s ease-in-out;
+  animation: slide 0.1s ease-in-out;
 
   @media print {
     display: none;

@@ -17,6 +17,9 @@ import WalletTransfer from "../features/services/walletTransfer/WalletTransfer";
 import BillPayment from "../pages/BillPayment";
 import AirtimeData from "../pages/AirtimeData";
 import LoanPage from "../pages/Loan";
+import LoanHistory from "../features/services/loan/LoanHistory";
+import RepaymentHistory from "../features/services/loan/RepaymentHistory";
+
 import Overview from "../pages/Overview";
 import Contact from "../pages/Contact";
 // import Terminals from "../pages/Terminals";
@@ -144,6 +147,15 @@ const routes = [
   {
     path: "/loan",
     component: LoanPage,
+    exact: true,
+  },
+  {
+    path: "/loan/history",
+    component: LoanHistory,
+  },
+  {
+    path: "/loan/repayment-history",
+    component: RepaymentHistory,
   },
   {
     path: "/betting",

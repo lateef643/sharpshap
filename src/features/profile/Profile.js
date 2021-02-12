@@ -10,7 +10,7 @@ import { startLogout } from "../../actions/auth";
 import { setDisplayModal } from "../../actions/modal";
 import pin from "../../assets/icons/pin.svg";
 import lock from "../../assets/icons/lock.svg";
-import shield from "../../assets/icons/profile-shield.svg";
+import category from "../../assets/icons/category.svg";
 
 import styles from "./Profile.module.scss";
 
@@ -100,7 +100,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
                 });
               }}
             >
-              <img className={styles.serviceLogo} src={shield} alt="" />
+              <img className={styles.serviceLogo} src={category} alt="" />
               <p className={styles.serviceText}>Category</p>
             </div>
           </div>
@@ -108,11 +108,14 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
       </div>
       <form className={styles.form} onSubmit={handleOnSubmit}>
         <div className={styles.formGroup}>
-          <label htmlFor="firstname">First Name</label>
+          <label className={styles.label} htmlFor="firstname">
+            First Name
+          </label>
           <input
             type="text"
             name="first_name"
             onChange={handleOnChange}
+            className={styles.input}
             value={formState.first_name}
           />
           {errors && !formState.first_name && (
@@ -120,48 +123,60 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="last_name">Last Name</label>
+          <label className={styles.label} htmlFor="last_name">
+            Last Name
+          </label>
           <input
             type="text"
             name="last_name"
             onChange={handleOnChange}
             value={formState.last_name}
+            className={styles.input}
           />
           {errors && !formState.last_name && (
             <p className={styles.errorText}>Please Enter Last Name</p>
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="date_of_birth">Date of Birth</label>
+          <label className={styles.label} htmlFor="date_of_birth">
+            Date of Birth
+          </label>
           <input
             type="date"
             name="date_of_birth"
             onChange={handleOnChange}
             value={formState.date_of_birth}
+            className={styles.input}
           />
           {errors && !formState.date_of_birth && (
             <p className={styles.errorText}>Please Select Date of Birth</p>
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="email">Email</label>
+          <label className={styles.label} htmlFor="email">
+            Email
+          </label>
           <input
             type="text"
             name="email"
             onChange={handleOnChange}
             value={formState.email}
+            className={styles.input}
           />
           {errors && !formState.email && (
             <p className={styles.errorText}>Please Enter Email</p>
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="gender">Gender</label>
+          <label className={styles.label} htmlFor="gender">
+            Gender
+          </label>
           <select
             type="text"
             name="gender"
             onChange={handleOnChange}
             value={formState.gender}
+            className={styles.input}
           >
             <option value="">Select Gender</option>
             <option value="Male">Male</option>
@@ -172,43 +187,54 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="business_phone">Phone</label>
+          <label className={styles.label} htmlFor="business_phone">
+            Phone
+          </label>
           <input
             type="text"
             name="business_phone"
             onChange={handleOnChange}
             value={formState.business_phone}
+            className={styles.input}
           />
           {errors && !formState.business_phone && (
             <p className={styles.errorText}>Please Enter Phone Number</p>
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="mobile">Mobile</label>
+          <label className={styles.label} htmlFor="mobile">
+            Mobile
+          </label>
           <input
             type="text"
             name="mobile"
             onChange={handleOnChange}
             value={formState.mobile}
+            className={styles.input}
           />
           {errors && !formState.mobile && (
             <p className={styles.errorText}>Please Enter Mobile Number</p>
           )}
         </div>
         <div className={styles.formGroup}>
-          <label htmlFor="bvn">BVN</label>
+          <label className={styles.label} htmlFor="bvn">
+            BVN
+          </label>
           <input
             type="text"
             name="bvn"
             onChange={handleOnChange}
             value={formState.bvn}
+            className={styles.input}
           />
           {errors && !formState.bvn && (
             <p className={styles.errorText}>Please Enter BVN</p>
           )}
         </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>
-          <button type="submit">{loading ? <ThreeDots /> : "Submit"}</button>
+          <button className={styles.submit} type="submit">
+            {loading ? <ThreeDots /> : "Submit"}
+          </button>
         </div>
       </form>
     </div>

@@ -5,7 +5,7 @@
 .header {
   width: calc(100vw - 19rem);
   text-align: left;
-  background-color: $content-background-color;
+  // background-color: $content-background-color;
   background-color: #f4f7fa;
   z-index: 5;
   height: 7rem;
@@ -188,6 +188,13 @@
     position: absolute;
     top: 4.2rem;
     right: 5.3rem;
+
+    @include respond(phone-large) {
+      top: 3rem;
+      right: 3.7rem;
+      width: 2.2rem;
+      height: 2.2rem;
+    }
   }
 
   .userSubmenu {
@@ -204,8 +211,8 @@
 
     @include respond(phone-large) {
       right: 1.5rem;
-      width: 22rem;
-      height: 40rem;
+      width: 25rem;
+      height: 43rem;
       font-size: 1.3rem;
       box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
     }
@@ -261,7 +268,7 @@
     color: #3e215b;
 
     @include respond(phone-large) {
-      width: 70%;
+      width: 80%;
     }
   }
 

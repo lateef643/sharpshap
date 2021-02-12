@@ -1,5 +1,6 @@
 import React from "react";
 import ReactExport from "react-export-excel";
+import excel from "../../assets/icons/excel.svg";
 import styles from "./ExportToExcel.module.scss";
 
 const ExcelFile = ReactExport.ExcelFile;
@@ -24,7 +25,12 @@ const Download = (props) => {
 
   return (
     <ExcelFile
-      element={<button className={styles.button}>Export to Excel</button>}
+      element={
+        <button className={styles.button}>
+          <img src={excel} alt="" />
+          Export
+        </button>
+      }
     >
       <ExcelSheet data={transactionDataForExcel} name={filename}>
         {labels.map((label, index) => {

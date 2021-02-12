@@ -12,12 +12,16 @@
   position: relative;
 
   & > svg {
-    position: absolute;
-    display: block;
-    width: 4rem;
-    top: 10rem;
-    left: 50%;
-    transform: translateX(-50%);
+    position: fixed;
+    display: inline-block;
+    width: 5rem;
+    top: 70%;
+    left: 55%;
+    // transform: translateX(-80%);
+
+    @include respond-custom(1000px) {
+      transform: translateX(-50%);
+    }
   }
 
   @include respond-custom(1000px) {

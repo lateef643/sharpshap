@@ -20,6 +20,8 @@ export const AddUser = ({ changeCurrentPage, displayModal }) => {
   const [formState, setFormState] = useState({
     email: "",
     phone: "",
+    username: "",
+    limit: "",
   });
   const [loading, setLoading] = useState(false);
 
@@ -108,6 +110,44 @@ export const AddUser = ({ changeCurrentPage, displayModal }) => {
             <p className={styles.validationErrorText}>
               Please enter valid email
             </p>
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="username">
+            Username
+          </label>
+          <input
+            name="username"
+            value={formState.username}
+            type="text"
+            onChange={(e) => handleOnChange(e)}
+            className={
+              validationErrors.username
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
+          />
+          {validationErrors.username && (
+            <p className={styles.validationErrorText}>Username is required</p>
+          )}
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="limit">
+            Transaction limit
+          </label>
+          <input
+            name="limit"
+            value={formState.limit}
+            type="text"
+            onChange={(e) => handleOnChange(e)}
+            className={
+              validationErrors.limit
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
+          />
+          {validationErrors.limit && (
+            <p className={styles.validationErrorText}>Limit is required</p>
           )}
         </div>
         <button type="submit" className={styles.button}>

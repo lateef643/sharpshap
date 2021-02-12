@@ -272,13 +272,20 @@ export const SET_PIN = `${path}/agents/settings/pin`;
 //////////LOAN////////////
 
 //loan history
-export const LOAN_HISTORY = `${path}/loans/history`;
+export const LOAN_HISTORY =
+  "https://loanserve.cicoserve.xyz/api/v1/loans/history";
+
+//loan repayment history
+export const REPAYMENT_HISTORY =
+  "https://loanserve.cicoserve.xyz/api/v1/loans/repayment";
 
 //agents info
-export const AGENTS_INFO = `${path}/agents/info`;
+export const AGENTS_INFO = "https://loanserve.cicoserve.xyz/api/v1/info";
 
 //check loan eligibility
-export const CHECK_ELIGIBILITY = `${path}/loans/eligibility`;
+export const CHECK_ELIGIBILITY =
+  "https://loanserve.cicoserve.xyz/api/v1/loans/eligibility";
 
 //application
-export const LOAN_APPLICATION = `${path}/cashouts/settle`;
+export const LOAN_APPLICATION =
+  "https://loanserve.cicoserve.xyz/api/v1/loans/apply";

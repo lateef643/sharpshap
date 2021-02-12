@@ -32,7 +32,7 @@ const User = ({ handleDeleteUser, loading, users }) => {
         {users.length > 0 && !loading ? (
           <div className={styles.transactions}>
             <h3 className={styles.transactionsHeading}>Users</h3>
-            <div className={styles.filter}>
+            {/* <div className={styles.filter}>
               <div className={styles.filterToggle}>
                 <span>Filter</span>
                 <img
@@ -67,14 +67,14 @@ const User = ({ handleDeleteUser, loading, users }) => {
                   </select>
                 </label>
               </div>
-            </div>
+            </div> */}
             <div className={styles.table}>
               <div className={styles.tableHeading}>
                 <span className={styles.sn}>S/N</span>
+                <span className={styles.username}>Username</span>
                 <span className={styles.phone}>Phone</span>
                 <span className={styles.email}>Email</span>
                 <span className={styles.date}>Date Added</span>
-                <span className={styles.status}>Status</span>
                 {/* <span className={styles.query}>Query</span> */}
                 <span className={styles.action}>Action</span>
               </div>
@@ -86,10 +86,12 @@ const User = ({ handleDeleteUser, loading, users }) => {
                   return (
                     <div className={styles.tableRow} key={index}>
                       <span className={styles.sn}>{++index}.</span>
+                      <span className={styles.username}>
+                        {user.username || "Nil"}
+                      </span>
                       <span className={styles.phone}>{user.phone}</span>
                       <span className={styles.email}>{user.email}</span>
                       <span className={styles.date}>{formattedDate}</span>
-                      <span className={styles.status}>Active</span>
 
                       {/* <span className={styles.query}>
                     <img src={refresh} alt="" />

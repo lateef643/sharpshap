@@ -1,13 +1,22 @@
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/mixins";
+
 .users {
   position: relative;
+  min-width: 80rem;
+  overflow: hidden;
 
   & > svg {
-    position: absolute;
-    display: block;
-    width: 4rem;
-    top: 10rem;
-    left: 50%;
-    transform: translateX(-50%);
+    position: fixed;
+    display: inline-block;
+    width: 5rem;
+    top: 70%;
+    left: 55%;
+    // transform: translateX(-80%);
+
+    @include respond-custom(1000px) {
+      transform: translateX(-50%);
+    }
   }
 }
 
@@ -221,8 +230,12 @@
     flex: 0 0 5%;
   }
 
+  .username {
+    flex: 0 0 19%;
+  }
+
   .phone {
-    flex: 0 0 17%;
+    flex: 0 0 13%;
   }
 
   .email {
@@ -231,10 +244,6 @@
 
   .date {
     flex: 0 0 18%;
-  }
-
-  .status {
-    flex: 0 0 13%;
   }
 
   .action {

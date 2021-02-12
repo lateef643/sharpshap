@@ -19,7 +19,7 @@ const CustomerStatus = (props) => {
               alt=""
             />
           </div>
-          <p className={styles.sectionTag}>Flex Agent</p>
+          <p className={styles.sectionTag}>Flex</p>
           <div className={styles.sectionStatusCheckContainer}>
             <img className={styles.sectionStatusCheck} src={checkmark} alt="" />
           </div>
@@ -41,7 +41,7 @@ const CustomerStatus = (props) => {
               alt=""
             />
           </div>
-          <p className={styles.sectionTag}>Flex Agent</p>
+          <p className={styles.sectionTag}>Premium</p>
           <div className={styles.sectionStatusCheckContainer}>
             <img className={styles.sectionStatusCheck} src={checkmark} alt="" />
           </div>
@@ -59,7 +59,7 @@ const CustomerStatus = (props) => {
           <div className={styles.sectionImageContainer}>
             <img className={styles.sectionImage} src={flexShieldGold} alt="" />
           </div>
-          <p className={styles.sectionTag}>Flex Agent</p>
+          <p className={styles.sectionTag}>VIP</p>
           <div className={styles.sectionStatusCheckContainer}>
             <img className={styles.sectionStatusCheck} src={checkmark} alt="" />
           </div>

@@ -12,6 +12,7 @@ import Password from "../../features/profile/Password";
 import WalletTransfer from "../../features/services/walletTransfer/WalletTransfer";
 import FundBettingWallet from "../../features/services/betting/fundWallet/FundWallet";
 import CustomerStatus from "../../features/profile/CustomerStatus";
+import LoanApplication from "../../features/services/loan/AgentLoan";
 
 import styles from "./Modal.module.scss";
 
@@ -35,6 +36,7 @@ const Modal = ({ overlay, modal }) => {
           walletTransfer: <WalletTransfer />,
           fundBettingWallet: <FundBettingWallet />,
           customerStatus: <CustomerStatus />,
+          loanApplication: <LoanApplication />,
         }[modal]
       }
     </div>

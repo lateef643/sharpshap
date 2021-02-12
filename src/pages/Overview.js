@@ -326,9 +326,7 @@ export const Overview = ({
                     <p className={styles.sn}>{++index}.</p>
                     <p className={styles.date}>{formattedDate}</p>
                     <p className={styles.description}>
-                      {type
-                        ? `${type?.toLowerCase()}/${status}`
-                        : `nil/${status}`}
+                      {type ? `${type?.toLowerCase()}` : `nil/${status}`}
                     </p>
                     <p className={styles.amount}>₦{formatToCurrency(amount)}</p>
                   </div>
