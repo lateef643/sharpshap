@@ -45,25 +45,29 @@ export const Users = ({ changeCurrentPage, displayModal, modalIsUpdated }) => {
   }, [modalIsUpdated]);
 
   const handleDeleteUser = (id) => {
-    (async function deleteUser() {
-      try {
-        const res = await axios.delete(`${DELETE_USER}/${id}`);
+    const getConfirmation = window.confirm("Do you want to deactivate user?");
 
-        if (res) {
-          addToast("User deleted successfully", {
-            appearance: "success",
+    if (getConfirmation) {
+      (async function deleteUser() {
+        try {
+          const res = await axios.delete(`${DELETE_USER}/${id}`);
+
+          if (res) {
+            addToast("User deleted successfully", {
+              appearance: "success",
+              autoDismiss: true,
+            });
+          }
+        } catch (e) {
+          addToast("User not deleted", {
+            appearance: "error",
             autoDismiss: true,
           });
+        } finally {
+          setIsUpdated(id);
         }
-      } catch (e) {
-        addToast("User not deleted", {
-          appearance: "error",
-          autoDismiss: true,
-        });
-      } finally {
-        setIsUpdated(id);
-      }
-    })();
+      })();
+    }
   };
 
   // useEffect(() => {
@@ -118,8 +122,6 @@ export const Users = ({ changeCurrentPage, displayModal, modalIsUpdated }) => {
 };
 
 const mapStateToProps = (state) => {
-  console.log(state);
-  console.log(state.modal.modalIsUpdated);
   return {
     modalIsUpdated: state.modal.isUpdated,
   };

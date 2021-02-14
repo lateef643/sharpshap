@@ -168,6 +168,7 @@ const ElectricityPaymentForm = (props) => {
             name="meterNo"
             value={state.meterNo}
             onChange={(e) => handleStateChange(e)}
+            placeholder="Meter number"
             className={
               validationErrors.meterNo
                 ? `${styles.outlineRed} ${styles.input}`
@@ -249,6 +250,7 @@ const ElectricityPaymentForm = (props) => {
             type="text"
             value={state.phone}
             onChange={(e) => handleStateChange(e)}
+            placeholder="Customer's phone number"
             className={
               validationErrors.beneficiaryBankCode
                 ? `${styles.outlineRed} ${styles.input}`

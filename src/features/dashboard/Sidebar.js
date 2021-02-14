@@ -8,8 +8,6 @@ import styles from "./Sidebar.module.scss";
 export const Sidebar = () => {
   const [isOpen, setIsOpen] = useState(true);
 
-  console.log("sidebar rerendered");
-
   useEffect(() => {
     window.addEventListener("resize", (e) => {
       if (window.innerWidth > 1000) {

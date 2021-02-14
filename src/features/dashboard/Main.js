@@ -1,5 +1,5 @@
 import React, { Suspense, useState, useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
+import { Route, Switch, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 import axios from "axios";
 
@@ -12,6 +12,8 @@ import PrivateRoute from "../../utils/privateRoute";
 import Header from "./Header";
 import Profile from "../profile/Profile";
 import routes from "../../routes/routes";
+
+// import back from "../../assets/icons/back.svg";
 
 import Overlay from "./Overlay";
 import Modal from "./Modal";
@@ -72,6 +74,14 @@ export const Main = ({
           >
             <Balance refreshOverviewData={refreshOverviewData} />
             <div className={styles.contentMain}>
+              <span
+                className={styles.back}
+                onClick={() => {
+                  history.goBack();
+                }}
+              >
+                &#8592; back
+              </span>
               <Switch>
                 <Route path="/profile" component={Profile} />
                 {routes.map((route, index) => {
@@ -93,7 +103,6 @@ export const Main = ({
                 })}
               </Switch>
             </div>
-
             <Overlay />
             <Modal />
           </div>
@@ -114,4 +123,4 @@ const mapStateToProps = (state) => ({
   overlay: state.modal.overlay,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Main);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Main));

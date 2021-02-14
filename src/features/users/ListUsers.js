@@ -107,11 +107,11 @@ const User = ({ handleDeleteUser, loading, users }) => {
                         />
 
                         <div className={styles.actions}>
-                          <span
+                          {/* <span
                             className={`${styles.actionsItem} ${styles.actionsItemEdit}`}
                           >
                             Edit User
-                          </span>
+                          </span> */}
                           <span
                             className={styles.actionsItem}
                             onClick={() => {

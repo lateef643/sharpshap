@@ -21,11 +21,9 @@ export const RechargeCableForm = ({ agentId }) => {
         const res = await axios.post(LOAN_HISTORY, agentId);
         const history = res.data.data;
 
-        console.log(history);
-
         if (res && !isCancelled) setHistory(history);
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       } finally {
         setLoading(false);
       }

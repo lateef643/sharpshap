@@ -13,16 +13,29 @@ import WalletTransfer from "../../features/services/walletTransfer/WalletTransfe
 import FundBettingWallet from "../../features/services/betting/fundWallet/FundWallet";
 import CustomerStatus from "../../features/profile/CustomerStatus";
 import LoanApplication from "../../features/services/loan/AgentLoan";
+import closeIcon from "../../assets/icons/closeModal.svg";
+import { setDisplayModal } from "../../actions/modal";
 
 import styles from "./Modal.module.scss";
 
-const Modal = ({ overlay, modal }) => {
+const Modal = ({ overlay, modal, displayModal }) => {
   return (
     <div
       className={
         overlay ? `${styles.modal} ${styles.displayModal}` : `${styles.modal}`
       }
     >
+      <img
+        className={styles.close}
+        onClick={() => {
+          displayModal({
+            modal: false,
+            overlay: false,
+          });
+        }}
+        src={closeIcon}
+        alt=""
+      />
       {
         {
           fundsTransfer: <FundsTransfer />,
@@ -50,4 +63,10 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps)(Modal);
+const mapDispatchToProps = (dispatch) => {
+  return {
+    displayModal: (payload) => dispatch(setDisplayModal(payload)),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

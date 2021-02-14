@@ -202,7 +202,7 @@ export const Overview = ({
     };
 
     window.onload();
-  });
+  }, [overviewData]);
 
   useEffect(() => {
     changeCurrentPage({

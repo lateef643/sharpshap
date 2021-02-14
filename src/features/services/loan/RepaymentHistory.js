@@ -25,12 +25,11 @@ export const RechargeCableForm = ({ agentUuid }) => {
         const res = await axios.post(REPAYMENT_HISTORY, payload);
         const history = res.data.data;
 
-        console.log(history);
-
         if (res && !isCancelled) setHistory(history);
       } catch (e) {
-        console.log(e);
+        // console.log(e);
       } finally {
+        setHistory([]);
         setLoading(false);
       }
     })();

@@ -1,12 +1,21 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { Route, Redirect } from "react-router-dom";
+import { setDisplayModal } from "../actions/modal";
 
 export const PrivateRoute = ({
   isAuthenticated,
+  displayModal,
   component: Component,
   ...rest
 }) => {
+  useEffect(() => {
+    displayModal({
+      modal: false,
+      overlay: false,
+    });
+  });
+
   return (
     <Route
       {...rest}
@@ -21,4 +30,8 @@ const mapStateToProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
 });
 
-export default connect(mapStateToProps)(PrivateRoute);
+const mapDispatchToProps = (dispatch) => ({
+  displayModal: (payload) => dispatch(setDisplayModal(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PrivateRoute);

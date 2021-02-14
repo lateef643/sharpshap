@@ -42,7 +42,7 @@ export const TransactionLog = ({
   const firstPage = 1;
 
   useEffect(() => {
-    // setPageChangeLoading(true);
+    setPageChangeLoading(true);
 
     const formattedDates = convertDatesToString().split(" ");
 
@@ -75,15 +75,15 @@ export const TransactionLog = ({
           // setBusinessName(businessName);
           sessionStorage.setItem("transactions", JSON.stringify(transactions));
           setTransactions(transactions);
-          // setPageChangeLoading(false);
         }
       } catch (e) {
         // console.log(e)
       } finally {
         setLoading(false);
+        setPageChangeLoading(false);
       }
     })();
-  }, [selectedDateTo, selectedDateFrom, currentPage]);
+  }, [transactionTypeFilter, selectedDateTo, selectedDateFrom, currentPage]);
 
   //dispatching to redux state because we need transactions log to get transactionDetails
   useEffect(() => {
@@ -295,6 +295,7 @@ export const TransactionLog = ({
       ) : (
         <div>No transactions to display</div>
       )}
+      {pageChangeLoading && <ThreeDots fill="#3E215B" />}
       {!loading && transactions.length ? (
         <div className={styles.pagination}>
           <span

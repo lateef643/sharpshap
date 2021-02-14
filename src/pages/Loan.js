@@ -62,7 +62,7 @@ export const Loan = ({ changeCurrentPage, displayModal }) => {
             </div> */}
             <Link to="loan/history" className={styles.service}>
               <span
-                className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerRepayment}`}
+                className={`${styles.serviceLogoContainer} ${styles.serviceLogoContainerHistory}`}
               >
                 <img className={styles.serviceLogo} src={loanIcon} alt="" />
               </span>

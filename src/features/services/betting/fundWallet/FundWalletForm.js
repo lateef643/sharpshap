@@ -38,13 +38,14 @@ export const FundWalletForm = (props) => {
     >
       <div className={styles.formGroup}>
         <label className={styles.label} htmlFor="accountId">
-          Account ID
+          Cloudbet Account ID
         </label>
         <input
           name="accountId"
           value={state.accountId}
           type="text"
           onChange={handleStateChange}
+          placeholder="Account ID"
           className={
             errors.accountId
               ? `${styles.outlineRed} ${styles.input}`

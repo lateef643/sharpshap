@@ -85,3 +85,16 @@
     background-position: 0% 50%;
   }
 }
+
+.back {
+  display: inline-block;
+  margin: 2rem 0;
+  font-size: 1.6rem;
+  cursor: pointer;
+
+  & > img {
+    width: 2rem;
+    vertical-align: middle;
+    margin-right: 0.5rem;
+  }
+}

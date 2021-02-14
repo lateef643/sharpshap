@@ -13,12 +13,12 @@ const Overlay = ({ overlay, displayModal }) => {
           ? `${styles.overlay} ${styles.displayOverlay}`
           : `${styles.modal}`
       }
-      onClick={(e) => {
-        displayModal({
-          modal: false,
-          overlay: false,
-        });
-      }}
+      // onClick={(e) => {
+      //   displayModal({
+      //     modal: false,
+      //     overlay: false,
+      //   });
+      // }}
     ></div>
   );
 };

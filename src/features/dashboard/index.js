@@ -10,8 +10,6 @@ const Dashboard = ({ overlay, displayModal }) => {
   useEffect(() => {
     const body = document.getElementsByTagName("body")[0];
 
-    console.log("how often does this run");
-
     if (overlay) {
       body.style.maxHeight = "100vh";
       body.style.overflow = "hidden";

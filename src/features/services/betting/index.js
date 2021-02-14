@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { ThreeDots } from "svg-loaders-react";
+import React, { useEffect } from "react";
+// import { ThreeDots } from "svg-loaders-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import styles from "./index.module.scss";
@@ -12,11 +12,11 @@ import { setDisplayModal } from "../../../actions/modal";
 import userGroup from "../../../assets/icons/users.svg";
 import user from "../../../assets/icons/bio-user.svg";
 
-import transfer from "../../../assets/images/transfer.svg";
+// import transfer from "../../../assets/images/transfer.svg";
 
 export const Users = ({ changeCurrentPage, displayModal }) => {
-  const [users, setUsers] = useState([]);
-  const [loading, setLoading] = useState(true);
+  // const [users, setUsers] = useState([]);
+  // const [loading, setLoading] = useState(true);
 
   // useEffect(() => {
   //   axios.get()
@@ -60,7 +60,7 @@ export const Users = ({ changeCurrentPage, displayModal }) => {
               <img className={styles.serviceLogo} src={user} alt="" />
               <p className={styles.serviceText}>Fund wallet</p>
             </div>
-            <div
+            {/* <div
               className={styles.service}
               onClick={() => {
                 displayModal({
@@ -72,7 +72,7 @@ export const Users = ({ changeCurrentPage, displayModal }) => {
             >
               <img className={styles.serviceLogo} src={user} alt="" />
               <p className={styles.serviceText}>Cashout</p>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

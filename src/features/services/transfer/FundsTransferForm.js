@@ -195,6 +195,7 @@ export const FundsTransferForm = (props) => {
         </label>
         <input
           name="accountNumber"
+          placeholder="Beneficiary's account number"
           value={state.accountNumber}
           type="text"
           onChange={handleFormStateChange}
@@ -239,13 +240,14 @@ export const FundsTransferForm = (props) => {
       </div>
       <div className={styles.formGroup}>
         <label className={styles.label} htmlFor="phone">
-          Customer Number
+          Phone Number
         </label>
         <input
           name="phone"
           type="text"
           value={state.phone}
           onChange={handleFormStateChange}
+          placeholder="Customer's phone number"
           className={
             validationErrors.beneficiaryBankCode
               ? `${styles.outlineRed} ${styles.input}`
@@ -266,6 +268,7 @@ export const FundsTransferForm = (props) => {
           name="narration"
           type="text"
           value={state.narration}
+          placeholder="Remark (e.g Transfer funds to ABC)"
           onChange={handleFormStateChange}
           className={
             validationErrors.beneficiaryBankCode

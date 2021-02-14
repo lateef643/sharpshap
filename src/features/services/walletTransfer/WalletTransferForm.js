@@ -77,6 +77,7 @@ export const WalletTransferForm = (props) => {
             Wallet ID
           </label>
           <input
+            placeholder="Beneficiary's wallet ID"
             className={
               validationErrors.amount
                 ? `${styles.outlineRed} ${styles.input}`

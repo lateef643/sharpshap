@@ -9,7 +9,6 @@ if (balance) {
 }
 
 const walletReducer = (state = initialState, { type, payload }) => {
-  console.log("something");
   switch (type) {
     case "SET_WALLET_BALANCE":
       sessionStorage.setItem("balance", payload.balance);

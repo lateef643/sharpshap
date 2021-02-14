@@ -59,6 +59,7 @@ export const BuyAirtimeForm = (props) => {
           </select>
           <input
             name="phone"
+            placeholder="08012345678"
             value={state.phone}
             type="text"
             onChange={(e) => handleSetFormState(e)}
@@ -83,6 +84,7 @@ export const BuyAirtimeForm = (props) => {
           <select
             name="currency"
             onChange={(e) => handleSetFormState(e)}
+            placeholder="100"
             className={
               validationErrors.amount
                 ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`

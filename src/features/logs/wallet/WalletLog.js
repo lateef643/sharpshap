@@ -44,6 +44,8 @@ export const WalletLog = ({ changeCurrentPage }) => {
   useEffect(() => {
     let isCancelled = false;
 
+    setPageChangeLoading(true);
+
     const params = {};
 
     if (transactionTypeFilter) params.type = transactionTypeFilter;
@@ -227,6 +229,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
       ) : (
         <div>No transactions to display</div>
       )}
+      {!loading && pageChangeLoading && <ThreeDots fill="#3E215B" />}
       {!loading && transactions.length > 0 && (
         <div className={styles.pagination}>
           <span

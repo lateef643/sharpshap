@@ -23,7 +23,7 @@ const CommissionHistory = () => {
           setHistory(history);
         }
       } catch (e) {
-        console.log(e.response);
+        // console.log(e.response);
       }
     })();
   }, []);

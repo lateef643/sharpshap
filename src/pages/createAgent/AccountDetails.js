@@ -27,7 +27,9 @@ const AccountDetails = ({
 
         if (!isCancelled) setBanks(banks);
       })
-      .catch((e) => console.log(e));
+      .catch((e) => {
+        // console.log(e);
+      });
 
     return () => {
       isCancelled = true;

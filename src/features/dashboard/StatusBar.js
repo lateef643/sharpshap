@@ -19,7 +19,7 @@ export const StatusBar = ({ page, walletBalance, uuid }) => {
           setBalance(balance);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }, 300000);
   }, []);
