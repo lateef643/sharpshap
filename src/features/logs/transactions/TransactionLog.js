@@ -172,7 +172,6 @@ export const TransactionLog = ({
                   type="text"
                   placeholder="Search Transactions"
                 />
-<<<<<<< HEAD
                 <span>Search Transactions</span>
               </label> */}
               <label className={styles.inputGroup}>
@@ -245,154 +244,6 @@ export const TransactionLog = ({
                             : styles.success
                         }`}
                       ></span>
-=======
-              </div>
-            </div>
-            {/* <div className={styles.searchFilterContainer}>
-              <input
-                className={styles.filterDropDown}
-                type="text"
-                placeholder="search"
-              />
-            </div> */}
-            <div>
-              <select
-                className={styles.filterDropDown}
-                onChange={handleFilterChange}
-              >
-                <option value="">Filter by Transaction Type</option>
-                <option value="">All transactions</option>
-                <option value="0">Reversal</option>
-                <option value="1">Energy</option>
-                <option value="2">Cashout</option>
-                <option value="3">Deposit</option>
-                <option value="4">Airtime</option>
-                <option value="5">DSTV</option>
-                <option value="6">GOTV</option>
-                <option value="7">Transfer</option>
-                <option value="8">Startimes</option>
-                <option value="9">Data</option>
-                <option value="10">Bet</option>
-                <option value="11">Cashcall</option>
-                <option value="12">Commission</option>
-              </select>
-            </div>
-          </div>
-        </div>
-      ) : undefined}
-      {loading || pageChangeLoading ? (
-        <div className={styles.loaderContainer}>
-          <ListLoader />
-        </div>
-      ) : undefined}
-      {!loading && transactions.length > 0 ? (
-        <div className={styles.heading}>
-          <span className={styles.status}>Status</span>
-          <span className={styles.date}>Date Created</span>
-          <span className={styles.amount}>Amount</span>
-          <span className={styles.type}>Type</span>
-          <span className={styles.prev}>Prev Balance</span>
-          <span className={styles.current}>Current Balance</span>
-          <span className={styles.customer}>Customer</span>
-          <span className={styles.ref}>Reference</span>
-          {/* <span className={styles.itemSix}>Agent</span> */}
-          <span className={styles.details}>Details</span>
-        </div>
-      ) : undefined}
-      {!loading || !pageChangeLoading
-        ? transactions.map((transaction, index) => (
-            <div key={transaction.id} className={styles.log}>
-              <div className={`${styles.logItem} ${styles.status}`}>
-                {/* <span className={`${styles.headingMobile} ${styles.statusHeadingMobile}`}>Status:</span> */}
-                <span className={styles.statusColor}>
-                  <span
-                    className={`${
-                      transaction.status === "failed"
-                        ? styles.failed
-                        : transaction.status === "pending"
-                        ? styles.pending
-                        : styles.success
-                    }`}
-                  ></span>
-                </span>
-                <span className={styles.statusDate}>
-                  {transaction.created_at}
-                </span>
-                <span className={styles.statusAmount}>
-                  {formatToCurrency(transaction.amount)}
-                </span>
-                <span className={styles.statusType}>
-                  {transaction.transtype
-                    ? transaction.transtype.name
-                    : transaction.type === "12"
-                    ? "Commission"
-                    : transaction.type === "0"
-                    ? "Reversal"
-                    : transaction.type === "10"
-                    ? "Bet"
-                    : transaction.type === "11"
-                    ? "Cashcall"
-                    : "Nil"}
-                </span>
-                <span className={styles.statusPrev}>
-                  {formatToCurrency(transaction.wallet_history.previous_bal)}
-                </span>
-                <span className={styles.statusCurrent}>
-                  {formatToCurrency(transaction.wallet_history.current_bal)}
-                </span>
-                <span className={styles.statusCustomer}>
-                  {transaction.customer_info}
-                </span>
-                <span className={styles.statusRef}>
-                  {transaction.reference}
-                </span>
-                <Link to={`/transaction-details/${transaction.reference}`}>
-                  View Details
-                </Link>
-                <span
-                  className={styles.statusAccordionToggle}
-                  onClick={(e) => {
-                    setAccordionToggle(
-                      accordionToggle === index + 1 ? false : index + 1
-                    );
-                  }}
-                >
-                  {accordionToggle === index + 1 ? (
-                    <span>-</span>
-                  ) : (
-                    <span>+</span>
-                  )}
-                </span>
-              </div>
-              {accordionToggle === index + 1 ? (
-                <>
-                  <div className={`${styles.logItem} ${styles.date}`}>
-                    <span
-                      className={`${styles.headingMobile} ${styles.dateHeadingMobile}`}
-                    >
-                      Date:
-                    </span>
-                    <span>{transaction.created_at}</span>
-                  </div>
-                  <div className={`${styles.logItem} ${styles.prev}`}>
-                    <span
-                      className={`${styles.headingMobile} ${styles.prevHeadingMobile}`}
-                    >
-                      Previous Balance:
-                    </span>
-                    <span className={styles.prevContent}>
-                      {transaction.wallet_history.previous_bal}
-                    </span>
-                  </div>
-                  <div className={`${styles.logItem} ${styles.current}`}>
-                    <span
-                      className={`${styles.headingMobile} ${styles.currentHeadingMobile}`}
-                    >
-                      Current Balance:
-                    </span>
-                    <span className={styles.currentContent}>
-                      {transaction.wallet_history.current_bal}
->>>>>>> remotes/origin/develop
                     </span>
                     <span className={styles.date}>{formattedDate}</span>
                     <span className={styles.amount}>{transaction.amount}</span>
@@ -434,54 +285,8 @@ export const TransactionLog = ({
                       </div>
                     </div>
                   </div>
-<<<<<<< HEAD
                 );
               })}
-=======
-                  <div className={`${styles.logItem} ${styles.ref}`}>
-                    <span
-                      className={`${styles.headingMobile} ${styles.refHeadingMobile}`}
-                    >
-                      Ref:
-                    </span>
-                    <span className={styles.dateContent}>
-                      {transaction.reference}
-                    </span>
-                  </div>
-                  <div className={`${styles.logItem} ${styles.type}`}>
-                    <span
-                      className={`${styles.headingMobile} ${styles.typeHeadingMobile}`}
-                    >
-                      Type:
-                    </span>
-                    <span className={styles.typeContent}>
-                      {transaction.transtype
-                        ? transaction.transtype.name
-                        : transaction.type === "12"
-                        ? "COMMISSION"
-                        : transaction.type === "0"
-                        ? "REVERSAL"
-                        : transaction.type === "10"
-                        ? "BET"
-                        : transaction.type === "11"
-                        ? "CASHCALL"
-                        : "NIL"}
-                    </span>
-                  </div>
-                  {/* <span className={styles.itemSix}>{transaction.agent.business_name}</span> */}
-                  <div className={`${styles.logItem} ${styles.details}`}>
-                    <span
-                      className={`${styles.headingMobile} ${styles.detailsHeadingMobile}`}
-                    >
-                      Details:
-                    </span>
-                    <Link to={`/transaction-details/${transaction.reference}`}>
-                      View Details
-                    </Link>
-                  </div>
-                </>
-              ) : undefined}
->>>>>>> remotes/origin/develop
             </div>
           </div>
         </div>
