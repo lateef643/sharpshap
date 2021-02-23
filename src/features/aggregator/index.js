@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 
 import { setCurrentPage } from "../../actions/page";
 
-import "./index.scss";
+import "./index.module.scss";
 
 const Aggregator = ({ routes, changeCurrentPage }) => {
   useEffect(() => {

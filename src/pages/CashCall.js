@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
 import { setCurrentPage } from "../actions/page";
-import Card from "../components/shared/Card";
+import Card from "../components/common/Card";
 import postcash from "../assets/images/postcash.png";
 import viewcash from "../assets/images/viewcash.png";
 import acceptcash from "../assets/images/acceptcash.png";

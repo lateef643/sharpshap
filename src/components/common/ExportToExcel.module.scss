@@ -1,0 +1,19 @@
+.button {
+  border: 0;
+  height: 3.5rem;
+  width: 11rem;
+  box-shadow: 0 0.2rem 0.3rem #00000029;
+  color: #707087;
+  font-size: inherit;
+  font-family: inherit;
+  padding: 0 0.5rem;
+  border-radius: 5px;
+  background-color: #fff;
+  cursor: pointer;
+
+  & > img {
+    width: 2rem;
+    vertical-align: middle;
+    margin-right: 1rem;
+  }
+}

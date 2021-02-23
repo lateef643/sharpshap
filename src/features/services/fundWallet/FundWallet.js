@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { setCurrentPage } from "../../../actions/page";
-import { FUND_WALLET_REQUEST } from "../../../store/api/constants";
+import { FUND_WALLET_REQUEST } from "../../../utils/constants";
 import FundWalletStatus from "./FundWalletStatus";
 import FundWalletSummary from "./FundWalletSummary";
 import FundWalletRequestForm from "./FundWalletRequestForm";

@@ -12,6 +12,7 @@ import keystone from "../../../assets/images/keystone.svg";
 import fcmb from "../../../assets/images/fcmb.svg";
 import sterling from "../../../assets/images/Sterling Bank Plc Logo.svg";
 import suntrust from "../../../assets/images/suntrust.svg";
+import cico from "../../../assets/images/cico-logo.svg";
 
 const generateBankImageUrl = (bankCode) => {
   switch (bankCode) {
@@ -44,7 +45,7 @@ const generateBankImageUrl = (bankCode) => {
     case "000022":
       return suntrust;
     default:
-      return access;
+      return cico;
   }
 };
 

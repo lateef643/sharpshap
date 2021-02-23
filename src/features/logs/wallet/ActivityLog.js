@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 // import axios from "axios";
-import ListLoader from "../../../components/util/ListLoader";
+import { ThreeDots } from "svg-loaders-react";
 import { connect } from "react-redux";
 import style from "./ActivityLog.module.scss";
 import { setCurrentPage } from "../../../actions/page";
@@ -32,7 +32,7 @@ export const ActivityLog = ({ changeCurrentPage }) => {
     <div className={style.container}>
       {loading ? (
         <div className={style.loaderContainer}>
-          <ListLoader />
+          <ThreeDots />
         </div>
       ) : undefined}
       {!loading && transactions.length > 0 ? (

@@ -1,14 +1,15 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import VerificationLoader from "../../../components/util/VerificationLoader";
+import { ThreeDots } from "svg-loaders-react";
 import wallet from "../../../assets/images/wallet-svgrepo-com.svg";
 import styles from "./WalletTransferForm.module.scss";
-import { VALIDATE_AGENT } from "../../../store/api/constants";
+import { VALIDATE_AGENT } from "../../../utils/constants";
 
 export const WalletTransferForm = (props) => {
   const { dispatch, state, setStatus } = props;
   const [verificationLoading, setVerificationLoading] = useState(false);
   const [error, setError] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
 
   useEffect(() => {
     let isCancelled = false;
@@ -68,32 +69,45 @@ export const WalletTransferForm = (props) => {
   return (
     <div>
       <form className={styles.form} onSubmit={handleOnProceed}>
-        <div className={styles.imageContainer}>
+        {/* <div className={styles.imageContainer}>
           <img src={wallet} className={styles.image} alt="" />
-        </div>
-        <label>
-          <span>Wallet ID</span>
+        </div> */}
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="wallet_id">
+            Wallet ID
+          </label>
           <input
+            placeholder="Beneficiary's wallet ID"
+            className={
+              validationErrors.amount
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
             name="wallet_id"
             type="text"
             value={state.wallet_id}
-            className={styles.outlineGrey}
             onChange={handleOnChange}
           />
-        </label>
-        <label>
-          <span>Agent Name</span>
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="agent_name">
+            Agent Name
+          </label>
           <input
+            className={
+              validationErrors.agent_name
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
             name="agent_name"
             type="text"
-            value={state.agent_name}
-            className={styles.outlineGrey}
             readOnly={true}
+            value={state.agent_name}
             onChange={handleOnChange}
           />
           {verificationLoading && (
             <span className={styles.loader}>
-              <VerificationLoader />
+              <ThreeDots />
             </span>
           )}
           {error && (
@@ -101,20 +115,30 @@ export const WalletTransferForm = (props) => {
               Account validation failed, please try again.
             </p>
           )}
-        </label>
-        <label>
-          <span>Amount</span>
+        </div>
+        <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="amount">
+            Amount
+          </label>
           <input
+            className={
+              validationErrors.amount
+                ? `${styles.outlineRed} ${styles.input}`
+                : `${styles.outlineGrey} ${styles.input}`
+            }
             name="amount"
             type="text"
             value={state.amount}
-            className={styles.outlineGrey}
             onChange={handleOnChange}
           />
-        </label>
-        {state.amount && state.wallet_id && state.agent_name && (
-          <button>Submit</button>
-        )}
+        </div>
+        <button
+          className={styles.button}
+          type="submit"
+          disabled={!state.amount || !state.wallet_id || !state.agent_name}
+        >
+          Submit
+        </button>
       </form>
     </div>
   );

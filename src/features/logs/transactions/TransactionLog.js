@@ -1,17 +1,22 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ListLoader from "../../../components/util/ListLoader";
-import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import { ThreeDots } from "svg-loaders-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
+import { DatePicker } from "@material-ui/pickers";
+import { startOfMonth } from "date-fns";
 
-import formatToCurrency from "../../../util/formatToCurrency";
-import ExportToExcel from "../../../components/shared/ExportToExcel";
+import formatToCurrency from "../../../utils/formatToCurrency";
+import ExportToExcel from "../../../components/common/ExportToExcel";
 import styles from "./TransactionLog.module.scss";
 import { setCurrentPage } from "../../../actions/page";
 import { setTransactionLog } from "../../../actions/transaction";
-import { AGENT_TRANSACTION_HISTORY } from "../../../store/api/constants";
+import { AGENT_TRANSACTION_HISTORY } from "../../../utils/constants";
 import "../../../assets/styles/generic/daterangepicker.scss";
+import arrowDown from "../../../assets/icons/arrowdown.svg";
+import arrowUp from "../../../assets/images/arrowUp.svg";
+import menu from "../../../assets/images/dots.svg";
+import "./custom-date.css";
 
 export const TransactionLog = ({
   changeCurrentPage,
@@ -24,20 +29,25 @@ export const TransactionLog = ({
   const [pageNumbers, setPageNumbers] = useState([]);
   const [lastPage, setLastPage] = useState("");
   const [pageChangeLoading, setPageChangeLoading] = useState(false);
-  const [date, setDate] = useState(new Date());
-  const [from, setFrom] = useState(null);
-  const [to, setTo] = useState(null);
   const [transactionTypeFilter, setTransactionTypeFilter] = useState("");
-  const [accordionToggle, setAccordionToggle] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const [selectedDateFrom, handleSelectedDateFrom] = useState(() => {
+    const newDate = new Date();
+    const monthDate = startOfMonth(newDate);
+
+    return monthDate;
+  });
+  const [selectedDateTo, handleSelectedDateTo] = useState(new Date());
+
   const firstPage = 1;
 
   useEffect(() => {
-    const now = new Date();
-    const nowString = now.toString();
-  }, []);
-
-  useEffect(() => {
     setPageChangeLoading(true);
+
+    const formattedDates = convertDatesToString().split(" ");
+
+    const from = formattedDates[0];
+    const to = formattedDates[1];
 
     const params = {};
 
@@ -47,27 +57,33 @@ export const TransactionLog = ({
     if (currentPage) params.page = currentPage;
 
     (async function getTransactionsLog() {
-      const res = await axios.get(`${AGENT_TRANSACTION_HISTORY}`, { params });
+      try {
+        const res = await axios.get(`${AGENT_TRANSACTION_HISTORY}`, { params });
 
-      const transactions = res.data.data.data;
-      const total = res.data.data.total;
-      const perPage = res.data.data.per_page;
-      const lastPage = res.data.data.last_page;
-      let pageNumbers = [];
+        const transactions = res.data.data.data;
+        const total = res.data.data.total;
+        const perPage = res.data.data.per_page;
+        const lastPage = res.data.data.last_page;
+        let pageNumbers = [];
 
-      if (total !== null && total > 0) {
-        for (let i = 1; i <= Math.ceil(total / perPage); i++) {
-          pageNumbers.push(i);
+        if (total !== null && total > 0) {
+          for (let i = 1; i <= Math.ceil(total / perPage); i++) {
+            pageNumbers.push(i);
+          }
+          setPageNumbers(pageNumbers);
+          setLastPage(lastPage);
+          // setBusinessName(businessName);
+          sessionStorage.setItem("transactions", JSON.stringify(transactions));
+          setTransactions(transactions);
         }
-        setPageNumbers(pageNumbers);
+      } catch (e) {
+        // console.log(e)
+      } finally {
         setLoading(false);
-        setLastPage(lastPage);
-        // setBusinessName(businessName);
-        setTransactions(transactions);
         setPageChangeLoading(false);
       }
     })();
-  }, [transactionTypeFilter, currentPage, date]);
+  }, [transactionTypeFilter, selectedDateTo, selectedDateFrom, currentPage]);
 
   //dispatching to redux state because we need transactions log to get transactionDetails
   useEffect(() => {
@@ -92,15 +108,10 @@ export const TransactionLog = ({
     setTransactionTypeFilter(filter);
   };
 
-  const setDateFilters = (date) => {
-    if (date) {
-      let from;
-      let to;
-
-      if (date) {
-        from = date[0];
-        to = date[1];
-      }
+  const convertDatesToString = () => {
+    if (selectedDateFrom && selectedDateTo) {
+      let from = selectedDateFrom;
+      let to = selectedDateTo;
 
       const fromMonth = from.getMonth();
       const toMonth = to.getMonth();
@@ -112,8 +123,7 @@ export const TransactionLog = ({
       const formattedFrom = `${fromYear}-${fromMonth + 1}-${fromDate}`;
       const formattedTo = `${toYear}-${toMonth + 1}-${toDate}`;
 
-      setFrom(formattedFrom);
-      setTo(formattedTo);
+      return `${formattedFrom} ${formattedTo}`;
     }
   };
 
@@ -130,26 +140,112 @@ export const TransactionLog = ({
 
   return (
     <div className={styles.container}>
-      {!loading && transactions.length > 0 ? (
-        <div className={styles.filters}>
-          <div className={styles.filtersContainer}>
-            <div className={styles.export}>
+      {transactions.length > 0 && !loading ? (
+        <div className={styles.transactions}>
+          <h3 className={styles.transactionsHeading}>Transactions</h3>
+          <div className={styles.filter}>
+            <div className={styles.filterToggle}>
+              <span>Filter</span>
+              <img
+                src={isOpen ? arrowDown : arrowUp}
+                alt=""
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              />
+            </div>
+            <div className={styles.exportToExcel}>
               <ExportToExcel
                 dataset={transactions}
                 labels={labels}
                 filename="Transactions Log"
               />
             </div>
-            <div className={styles.dateFilterContainer}>
-              <div className={styles.dateFilter}>
-                <DateRangePicker
-                  className={styles.dateRangePicker}
-                  onChange={(date) => {
-                    setDate(date);
-                    setDateFilters(date);
-                  }}
-                  value={date}
+            <div
+              className={
+                isOpen ? `${styles.filters} ${styles.isOpen}` : styles.filters
+              }
+            >
+              {/* <label className={styles.inputGroup}>
+                <input
+                  className={styles.searchTransactions}
+                  type="text"
+                  placeholder="Search Transactions"
                 />
+<<<<<<< HEAD
+                <span>Search Transactions</span>
+              </label> */}
+              <label className={styles.inputGroup}>
+                <select
+                  className={styles.filterTransactions}
+                  onChange={handleFilterChange}
+                >
+                  <option value="">Filter by Transaction Type</option>
+                  <option value="">All transactions</option>
+                  <option value="1">Energy</option>
+                  <option value="2">Cashout</option>
+                  <option value="3">Deposit</option>
+                  <option value="4">Airtime</option>
+                  <option value="5">DSTV</option>
+                  <option value="6">GOTV</option>
+                  <option value="7">Transfer</option>
+                  <option value="8">Data</option>
+                </select>
+              </label>
+              <label className={styles.inputGroup}>
+                From:{" "}
+                <DatePicker
+                  views={["date", "year", "month"]}
+                  variant="inline"
+                  value={selectedDateFrom}
+                  onChange={handleSelectedDateFrom}
+                  format="dd/MM/yyyy"
+                  disableFuture={true}
+                />
+              </label>
+              <label className={styles.inputGroup}>
+                To:{" "}
+                <DatePicker
+                  views={["date", "year", "month"]}
+                  variant="inline"
+                  value={selectedDateTo}
+                  onChange={handleSelectedDateTo}
+                  format="dd/MM/yyyy"
+                  disableFuture={true}
+                />
+              </label>
+            </div>
+          </div>
+          <div className={styles.table}>
+            <div className={styles.tableHeading}>
+              <span className={styles.status}>Status</span>
+              <span className={styles.date}>Date</span>
+              <span className={styles.amount}>Amount</span>
+              <span className={styles.type}>Type</span>
+              <span className={styles.prev}>Previous</span>
+              <span className={styles.current}>Balance</span>
+              <span className={styles.customer}>Customer</span>
+              <span className={styles.ref}>Reference</span>
+              <span className={styles.action}>Actions</span>
+            </div>
+            <div className={styles.tableBody}>
+              {transactions.map((transaction, index) => {
+                const date = new Date(transaction.created_at).toString();
+                const formattedDate = date.slice(4, 24);
+
+                return (
+                  <div className={styles.tableRow} key={index}>
+                    <span className={styles.status}>
+                      <span
+                        className={`${styles.color} ${
+                          transaction.status === "failed"
+                            ? styles.failed
+                            : transaction.status === "pending"
+                            ? styles.pending
+                            : styles.success
+                        }`}
+                      ></span>
+=======
               </div>
             </div>
             {/* <div className={styles.searchFilterContainer}>
@@ -296,28 +392,52 @@ export const TransactionLog = ({
                     </span>
                     <span className={styles.currentContent}>
                       {transaction.wallet_history.current_bal}
+>>>>>>> remotes/origin/develop
                     </span>
-                  </div>
-                  <div className={`${styles.logItem} ${styles.amount}`}>
-                    <span
-                      className={`${styles.headingMobile} ${styles.amountHeadingMobile}`}
-                    >
-                      Amount:
+                    <span className={styles.date}>{formattedDate}</span>
+                    <span className={styles.amount}>{transaction.amount}</span>
+                    <span className={styles.type}>
+                      {transaction.transtype?.name}
                     </span>
-                    <span className={styles.amountContent}>
-                      {formatToCurrency(transaction.amount)}
+                    <span className={styles.prev}>
+                      {formatToCurrency(
+                        transaction.wallet_history.previous_bal
+                      )}
                     </span>
-                  </div>
-                  <div className={`${styles.logItem} ${styles.customer}`}>
-                    <span
-                      className={`${styles.headingMobile} ${styles.customerHeadingMobile}`}
-                    >
-                      Customer:
+                    <span className={styles.current}>
+                      {formatToCurrency(transaction.wallet_history.current_bal)}
                     </span>
-                    <span className={styles.customerContent}>
+                    <span className={styles.customer}>
                       {transaction.customer_info}
                     </span>
+                    <span className={styles.ref}>{transaction.reference}</span>
+
+                    {/* <span className={styles.query}>
+                    <img src={refresh} alt="" />
+                  </span> */}
+                    <div className={styles.action}>
+                      <label htmlFor={`menu${index}`}>
+                        <img className={styles.menu} src={menu} alt="" />
+                      </label>
+                      <input
+                        name={`menu${index}`}
+                        id={`menu${index}`}
+                        type="checkbox"
+                      />
+
+                      <div className={styles.actions}>
+                        <Link
+                          to={`/transaction-details/${transaction.reference}`}
+                        >
+                          View Details
+                        </Link>
+                      </div>
+                    </div>
                   </div>
+<<<<<<< HEAD
+                );
+              })}
+=======
                   <div className={`${styles.logItem} ${styles.ref}`}>
                     <span
                       className={`${styles.headingMobile} ${styles.refHeadingMobile}`}
@@ -361,9 +481,16 @@ export const TransactionLog = ({
                   </div>
                 </>
               ) : undefined}
+>>>>>>> remotes/origin/develop
             </div>
-          ))
-        : undefined}
+          </div>
+        </div>
+      ) : loading ? (
+        <ThreeDots fill="#3E215B" />
+      ) : (
+        <div>No transactions to display</div>
+      )}
+      {pageChangeLoading && <ThreeDots fill="#3E215B" />}
       {!loading && transactions.length ? (
         <div className={styles.pagination}>
           <span
@@ -436,7 +563,7 @@ const mapDispatchToProps = (dispatch) => {
 
 const mapStateToProps = (state) => {
   return {
-    uuid: state.auth.user.agent.uuid,
+    uuid: state.auth.user.uuid,
   };
 };
 

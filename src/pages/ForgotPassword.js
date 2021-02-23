@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
-import { RESET_PASSWORD, FORGOT_PASSWORD } from "../store/api/constants";
+import { RESET_PASSWORD, FORGOT_PASSWORD } from "../utils/constants";
 
 import styles from "./ForgotPassword.module.scss";
 
@@ -94,7 +94,7 @@ export const ForgotPassword = ({ history }) => {
               className={phone ? styles.notEmpty : styles.empty}
               htmlFor="phone"
             >
-              Please enter phone number
+              Phone number
             </label>
             <input
               name="phone"
