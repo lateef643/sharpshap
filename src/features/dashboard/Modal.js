@@ -26,17 +26,19 @@ const Modal = ({ overlay, modal, displayModal }) => {
         overlay ? `${styles.modal} ${styles.displayModal}` : `${styles.modal}`
       }
     >
-      <img
-        className={styles.close}
-        onClick={() => {
-          displayModal({
-            modal: false,
-            overlay: false,
-          });
-        }}
-        src={closeIcon}
-        alt=""
-      />
+      <div className={styles.toggleClose}>
+        <img
+          className={styles.close}
+          onClick={() => {
+            displayModal({
+              modal: false,
+              overlay: false,
+            });
+          }}
+          src={closeIcon}
+          alt=""
+        />
+      </div>
       {
         {
           fundsTransfer: <FundsTransfer />,

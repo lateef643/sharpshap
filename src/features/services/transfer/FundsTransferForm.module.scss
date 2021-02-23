@@ -1,6 +1,24 @@
 @import "../../../assets/styles/generic/form.scss";
+@import "../../../assets/styles/config/mixins";
+@import "../../../assets/styles/config/breakpoints";
 
 .form {
-  height: 50rem;
-  overflow: auto;
+  height: 45rem;
+  width: 38rem;
+  padding-bottom: 3rem;
+
+  @include respond(phone-large) {
+    width: 33rem;
+    height: 50rem;
+  }
+
+  @include respond(phone) {
+    width: 32rem;
+    height: 50rem;
+  }
+
+  @include respond-custom(340px) {
+    width: 29rem;
+    height: 45rem;
+  }
 }

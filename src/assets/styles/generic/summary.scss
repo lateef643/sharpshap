@@ -3,18 +3,23 @@
 
 .container {
   width: 35rem;
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
+  height: 45rem;
   background: #fff;
   padding: 3rem 1.5rem;
+  overflow: auto;
 
   @include respond-custom(1000px) {
     width: 30rem;
   }
 
   @include respond(phone) {
-    width: 25rem;
+    width: 30rem;
+    height: 46rem;
+  }
+
+  @include respond-custom(340px) {
+    width: 29rem;
+    height: 40rem;
   }
 }
 

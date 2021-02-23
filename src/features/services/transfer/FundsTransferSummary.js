@@ -64,7 +64,7 @@ export const FundsTransferSummary = (props) => {
       </div>
       <Barcode
         value="https://www.cico.ng"
-        width={1.25}
+        width={1.1}
         height={50}
         marginTop={30}
         fontSize={16}

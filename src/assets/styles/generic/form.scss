@@ -2,20 +2,8 @@
 @import "../config/breakpoints";
 
 .form {
-  width: 35rem;
-  height: -webkit-max-content;
-  height: -moz-max-content;
-  height: max-content;
-  background: #fff;
-  padding: 3rem 1.5rem;
-
-  @include respond-custom(1000px) {
-    width: 30rem;
-  }
-
-  @include respond(phone) {
-    width: 25rem;
-  }
+  padding: 2rem;
+  overflow: auto;
 }
 
 .formGroup {
@@ -64,7 +52,7 @@
 
 .select {
   @include respond(phone) {
-    min-width: 5rem;
+    min-width: 6rem;
   }
 }
 

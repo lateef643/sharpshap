@@ -31,12 +31,10 @@
 
   @include respond(phone-large) {
     margin: 0 auto;
-    min-width: 96%;
     padding-top: 1rem;
   }
 
   @include respond-custom(330px) {
-    width: 99%;
     font-size: 1.3rem;
   }
 

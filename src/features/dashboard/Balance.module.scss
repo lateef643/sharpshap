@@ -41,7 +41,7 @@
   }
 
   @include respond(phone) {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
 }
 
@@ -71,6 +71,10 @@
   font-size: 18px;
   text-align: center;
   color: #ffffff;
+
+  @include respond(phone) {
+    font-size: 1.5rem;
+  }
 }
 
 @-webkit-keyframes rotate {

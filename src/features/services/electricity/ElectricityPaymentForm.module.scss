@@ -1,1 +1,21 @@
 @import "../../../assets/styles/generic/form.scss";
+
+.form {
+  height: 45rem;
+  width: 38rem;
+  padding-bottom: 3rem;
+
+  @include respond-custom(1000px) {
+    width: 30rem;
+  }
+
+  @include respond(phone) {
+    width: 32rem;
+    height: 50rem;
+  }
+
+  @include respond-custom(340px) {
+    width: 29rem;
+    height: 45rem;
+  }
+}
