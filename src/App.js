@@ -1,38 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { connect } from "react-redux";
-import { createBrowserHistory } from "history";
+import history from "./util/history";
 
-import routes from "./routes/router";
-import Login from "./components/pages/Login";
-import Sidebar from "./components/partials/Sidebar";
-import Main from "./components/partials/Main";
+import AppRouter from "./router/AppRouter";
 
-import "./App.scss";
+const App = () => {
+  useEffect(() => {
+    let isCancelled = false;
 
-export const App = ({ isAuthenticated }) => {
-  const history = createBrowserHistory();
+    if (!isCancelled) {
+      (function requestNotification() {
+        if (Notification.permission !== "denied") {
+          Notification.requestPermission();
+        }
+      })();
+    }
+
+    return () => {
+      isCancelled = true;
+    };
+  }, []);
 
   return (
-    <>
-      {!isAuthenticated ? (
-        <Login />
-      ) : (
-        <Router>
-          <div className="app">
-            <Sidebar />
-            <Main routes={routes} history={history} />
-          </div>
-        </Router>
-      )}
-    </>
+    <Router history={history}>
+      <AppRouter />
+    </Router>
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    isAuthenticated: state.auth.isAuthenticated,
-  };
-};
-
-export default connect(mapStateToProps)(App);
+export default App;

@@ -31,6 +31,22 @@ export const UPDATE_USER = `${path}/user`;
 //update user password - PUT
 export const UPDATE_USER_PASSWORD = `${path}/users`;
 
+//forgot password - PATCH
+export const FORGOT_PASSWORD = `${path}/user/password`;
+
+//update user password - PATCH
+export const RESET_PASSWORD = `${path}/user/token`;
+
+/////PARAMETERS//////////
+//Get list of banks - GET
+export const FETCH_BANKS = `${path}/parameters/banks`;
+
+//Get list of states - GET
+export const FETCH_STATES = `${path}/parameters/states`;
+
+//Get list of local governments - GET
+export const FETCH_LGAS = `${path}/parameters/cities`;
+
 ///////AGENT DASHBOARD DATA/////////
 export const AGENT_DASHBOARD_DATA = `${path}/agent/dashboard`;
 
@@ -85,6 +101,9 @@ export const SEARCH_WALLET = `${path}/wallets/search`;
 //agent wallet transfer
 export const WALLET_TRANSFER = `${path}/wallets/transfer`;
 
+//agent wallet transfer
+export const VALIDATE_AGENT = `${path}/agents/validate`;
+
 //agent fund wallet request
 export const FUND_WALLET_REQUEST = `${path}/fund-requests`;
 
@@ -112,13 +131,13 @@ export const ACTIVITY_LOGS = `${path}/logs`;
 export const GET_TELCOS = `${path}/airtime/telcos`;
 
 //get data plans - POST
-export const GET_DATA_PLANS = `${path}/airtime/data/plans`;
-
-//vend airtime - POST
-export const VEND_AIRTIME = `${path}/airtime`;
+export const GET_DATA_PLANS = `${path}/fusion/topup/data/bundles`;
 
 //vend data - POST
-export const VEND_DATA = `${path}/airtime/data`;
+export const VEND_DATA = `${path}/fusion/topup/data`;
+
+//vend airtime - POST
+export const VEND_AIRTIME = `${path}/fusion/topup/airtime`;
 
 /////CABLE TV//////////
 //get startimes plans - GET
@@ -189,3 +208,17 @@ export const CANCEL_CASHCALL = `${path}/cashcall/cancel-funds`;
 
 //List opportunities
 export const OPPORTUNITIES_LIST = `${path}/cashcall/opportunities`;
+
+////AGGREGATOR - SUPER AGENTS
+
+//Get aggregator dashboard
+export const AGGREGATOR_DASHBOARD = `${path}/super-agents/dashboard`;
+
+//Get sub agents list
+export const GET_SUB_AGENTS = `${path}/super-agents/agents`;
+
+//Get agent commission history
+export const GET_COMMISSION_HISTORY = `${path}/super-agents/commissions`;
+
+//Create agents - POST
+export const CREATE_AGENT = `${path}/super-agents/agents/create`;

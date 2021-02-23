@@ -9,8 +9,6 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
   const [transaction, setTransaction] = useState({});
   const [transtype, setTranstype] = useState({});
 
-  console.log(transaction);
-
   useEffect(() => {
     const transactions = JSON.parse(sessionStorage.getItem("transactions"));
     const transactionItem = transactions.find((transaction) => {
@@ -47,7 +45,19 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
             </div>
             <div>
               <span>Type:</span>
-              <span>{transtype.name}</span>
+              <span>
+                {transtype
+                  ? transtype.name
+                  : transaction.type === "12"
+                  ? "Commission"
+                  : transaction.type === "0"
+                  ? "Reversal"
+                  : transaction.type === "10"
+                  ? "Bet"
+                  : transaction.type === "11"
+                  ? "Cashcall"
+                  : "Nil"}
+              </span>
             </div>
             <div>
               <span>Customer:</span>
@@ -55,6 +65,17 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
                 {transaction.customer_info}
               </span>
             </div>
+            {transaction.type == "7" ? (
+              <div>
+                <span>Session ID:</span>
+                <span>{transaction.retrieval_reference}</span>
+              </div>
+            ) : transaction.type == "1" ? (
+              <div>
+                <span>Token:</span>
+                <span>{transaction.energy_token}</span>
+              </div>
+            ) : undefined}
             <div>
               <span>Date:</span>
               <span>{transaction.created_at}</span>
@@ -66,15 +87,6 @@ export const TransactionDetails = ({ uuid, changeCurrentPage, match }) => {
               <span>
                 &#8358;
                 {Number(transaction.amount)
-                  .toFixed(2)
-                  .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
-              </span>
-            </div>
-            <div>
-              <span>Convenience Fee:</span>
-              <span>
-                &#8358;
-                {Number(0)
                   .toFixed(2)
                   .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1,")}
               </span>

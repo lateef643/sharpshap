@@ -78,9 +78,10 @@
       color: #9e9d9d;
       line-height: 2.4rem;
       position: relative;
-      left: 1.5rem;
+      left: 1.9rem;
       top: 1rem;
       width: max-content;
+      // z-index: 1;
 
       @include respond(phone-large) {
         font-size: 1.3rem;
@@ -151,6 +152,7 @@
       top: 50%;
       left: 1.5rem;
       z-index: 5;
+      background-color: transparent;
 
       @include respond(phone) {
         top: 54%;

@@ -8,6 +8,7 @@ import transactionReducer from "../../reducers/transaction";
 import terminalsReducer from "../../reducers/terminals";
 import servicesReducer from "../../reducers/services";
 import errorReducer from "../../reducers/error";
+import notificationReducer from "../../reducers/notification";
 
 const composeEnhancer = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -22,6 +23,7 @@ export default () => {
       terminals: terminalsReducer,
       services: servicesReducer,
       error: errorReducer,
+      notification: notificationReducer,
     }),
     composeEnhancer(applyMiddleware(thunk))
   );

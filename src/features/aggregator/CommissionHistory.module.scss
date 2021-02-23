@@ -1,0 +1,73 @@
+.commissionHistory {
+  margin-top: 6rem;
+}
+
+.filter {
+  margin-bottom: 3rem;
+  width: 30%;
+  display: flex;
+  justify-content: space-between;
+
+  select {
+    height: 3.5rem;
+    padding: 0 1rem;
+    border-radius: 2px;
+    font-family: "Lato";
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;utf8,<svg fill='grey' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'><path d='M7 10l5 5 5-5z'/><path d='M0 0h24v24H0z' fill='none'/></svg>");
+    background-repeat: no-repeat;
+    background-position-x: 100%;
+    background-position-y: 5px;
+    // border: 1px solid #dfdfdf;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    // color: #707070;
+    border: 0;
+  }
+}
+
+.search {
+  flex: 0 0 40%;
+}
+
+.sortby {
+  flex: 0 0 40%;
+}
+
+.list {
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.tableHead {
+  background-color: #e1e1e1;
+}
+
+.tableRow > th,
+.tableRow > td {
+  padding: 1.5rem 1rem;
+  text-align: center;
+  border-top: 1px solid #cecece;
+  border-bottom: 1px solid #cecece;
+}
+
+.tableBodyRow:nth-child(even) {
+  background-color: #f0f0f0;
+}
+
+.tableBodyRow:nth-child(odd) {
+  background-color: #fff;
+}
+
+.status {
+  display: inline-block;
+  width: 1rem;
+  height: 1rem;
+  background-color: green;
+  border-radius: 50%;
+}
