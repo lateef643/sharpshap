@@ -26,12 +26,12 @@
   flex: 0 0 19rem;
   z-index: 200;
   padding: 0;
-  background: #fff;
-  background: $content-background-color;
+  // background: $content-background-color;
   position: relative;
   font-family: "Nunito", sans-serif;
   -webkit-animation: slide 0.1s ease-in-out;
   animation: slide 0.1s ease-in-out;
+  background: #fff;
 
   // @media print {
   //   display: none;
@@ -92,8 +92,8 @@
   background: #fff;
   background: $content-background-color;
   // position: fixed;
-  height: 100%;
-  // min-height: 100vh;
+  // height: 100%;
+  min-height: 100vh;
   width: 19rem;
   padding: 2rem 1rem 4rem 3rem;
 
