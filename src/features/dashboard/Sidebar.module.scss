@@ -33,9 +33,9 @@
   -webkit-animation: slide 0.1s ease-in-out;
   animation: slide 0.1s ease-in-out;
 
-  @media print {
-    display: none;
-  }
+  // @media print {
+  //   display: none;
+  // }
 
   @include respond-custom(1000px) {
     width: 23rem;

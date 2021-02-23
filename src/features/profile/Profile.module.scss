@@ -120,6 +120,10 @@
   outline: none;
   font-size: 1.6rem;
 
+  &:disabled {
+    background-color: lighten(#062863, 10%);
+  }
+
   & > svg {
     width: 4rem;
   }

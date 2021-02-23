@@ -209,6 +209,12 @@
         }
       }
 
+      .betType {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 2rem;
+      }
+
       .selection {
         display: initial;
 
@@ -216,6 +222,7 @@
           margin-bottom: 2rem;
           font-weight: bold;
           font-size: 1.5rem;
+          text-align: center;
         }
 
         .selectionOdds {
@@ -233,6 +240,20 @@
             text-align: right;
           }
         }
+      }
+
+      .orderDate {
+        // background: orange;
+      }
+
+      .orderDateHeading {
+        flex: 0 0 30% !important;
+        // background: green;
+      }
+
+      .orderDateContent {
+        flex: 0 0 70% !important;
+        // background: blueviolet;
       }
 
       .possibleWin {
@@ -258,6 +279,19 @@
 
         .newBet {
           background-color: #25ae88;
+        }
+      }
+
+      .printSlip {
+        margin-top: 3rem;
+        display: flex;
+        justify-content: flex-start !important;
+        align-items: center;
+        cursor: pointer;
+
+        & > img {
+          width: 2rem;
+          margin-right: 1rem;
         }
       }
     }

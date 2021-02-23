@@ -24,7 +24,14 @@ export const Password = ({ displayModal }) => {
   const handleOnSubmit = (e) => {
     e.preventDefault();
 
-    const keys = Object.keys(formState);
+    const { new_password, confirm_password } = formState;
+
+    const payload = {
+      new_password,
+      confirm_password,
+    };
+
+    const keys = Object.keys(payload);
     const errors = validateFormData(formState, keys);
 
     setValidationErrors(errors);
@@ -73,7 +80,7 @@ export const Password = ({ displayModal }) => {
       [target.name]: target.value,
     });
   };
-
+  console.log(formState);
   return (
     <form
       className={styles.form}
@@ -97,7 +104,9 @@ export const Password = ({ displayModal }) => {
           }
         />
         {validationErrors.password && (
-          <p className={styles.validationErrorText}>Please enter password</p>
+          <p className={styles.validationErrorText}>
+            {validationErrors.password.text}
+          </p>
         )}
       </div>
       <div className={styles.formGroup}>

@@ -119,6 +119,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             onChange={handleOnChange}
             className={styles.input}
             value={formState.first_name}
+            disabled
           />
           {errors && !formState.first_name && (
             <p className={styles.errorText}>Please Enter First Name</p>
@@ -133,6 +134,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             name="last_name"
             onChange={handleOnChange}
             value={formState.last_name}
+            disabled
             className={styles.input}
           />
           {errors && !formState.last_name && (
@@ -181,6 +183,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             onChange={handleOnChange}
             value={formState.gender}
             className={styles.input}
+            disabled
           >
             <option value="">Select Gender</option>
             <option value="male">Male</option>
@@ -216,6 +219,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
             onChange={handleOnChange}
             value={formState.business_address}
             className={styles.input}
+            disabled
           />
           {errors && !formState.business_address && (
             <p className={styles.errorText}>Please enter business address</p>
@@ -238,7 +242,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
           )}
         </div>
         <div className={`${styles.submit} ${styles.formGroup}`}>
-          <button className={styles.submit} type="submit">
+          <button className={styles.submit} disabled type="submit">
             {loading ? <ThreeDots /> : "Submit"}
           </button>
         </div>

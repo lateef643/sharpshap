@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 import cico from "../../assets/images/cico-logo-login.svg";
 import styles from "./TransactionDetails.module.scss";
 import { setCurrentPage } from "../../actions/page";
+import email from "../../assets/images/email.svg";
+import whatsapp from "../../assets/images/whatsapp.svg";
 
 export const TransactionDetails = ({ changeCurrentPage, match }) => {
   const [transaction, setTransaction] = useState({});
@@ -99,6 +101,22 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
             >
               Print
             </div>
+          </div>
+          <div className={styles.message}>
+            <a
+              className={styles.messageText}
+              href={`mailto:hello@cico.ng?subject=Transaction%20Details&body=ref:${transaction.reference}%20amount=${transaction.amount}%20date=${transaction.created_at}`}
+            >
+              <img className={styles.messageIcon} src={email} alt="" />
+              <span>Email support </span>
+            </a>
+            <a
+              className={styles.messageText}
+              href={`https://wa.me/+2349080070040/?text=ref:${transaction.reference} amount=${transaction.amount} date=${transaction.created_at}`}
+            >
+              <img className={styles.messageIcon} src={whatsapp} alt="" />
+              <span>Text support</span>
+            </a>
           </div>
         </div>
       </div>

@@ -1,5 +1,8 @@
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
+import { connect } from "react-redux";
+
+import { setDisplayModal } from "../../../../actions/modal";
 
 import {
   PLACE_BET,
@@ -7,13 +10,15 @@ import {
   FETCH_BETSLIP,
 } from "../../../../utils/constants";
 import formatToCurrency from "../../../../utils/formatToCurrency";
+
 import playReducer, { initialState } from "./play-reducer";
 
+import print from "../../../../assets/icons/printer-print.svg";
 import success from "../../../../assets/images/success-svgrepo-com.svg";
 import symbol from "../../../../assets/images/x-symbol-svgrepo-com.svg";
 import styles from "./Play.module.scss";
 
-export const Play = (props) => {
+export const Play = ({ displayModal }) => {
   const [playState, dispatch] = useReducer(playReducer, initialState);
   const [events, setEvents] = useState([]);
   const [displayBettingReceipt, setDisplayBettingReceipt] = useState(false);
@@ -384,17 +389,21 @@ export const Play = (props) => {
               ) : displayBettingReceipt ? (
                 <div className={styles.bettingReceipt}>
                   <img src={success} alt="success icon" />
+                  <p className={styles.betType}>
+                    <p>Type:</p>
+                    <p>{receipt.bet_type}</p>
+                  </p>
                   <div className={styles.selection}>
                     <p className={styles.selectionHeading}>Your selection</p>
-                    {playState.bets.map((bet, index) => {
+                    {receipt.stakes.map((bet, index) => {
                       return (
                         <div
                           key={bet.selectedOutcomeOdds}
                           className={styles.selectionOdds}
                         >
-                          <p>{bet.selectedOutcome}</p>
+                          <p>{bet.match}</p>
                           <p>@</p>
-                          <p>{bet.selectedOutcomeOdds}</p>
+                          <p>{bet.total_odds}</p>
                         </div>
                       );
                     })}
@@ -403,13 +412,15 @@ export const Play = (props) => {
                     <p>Bet code</p>
                     <p>{receipt.orderNumber}</p>
                   </div>
-                  <div>
-                    <p>Date</p>
-                    <p>{receipt.orderDate}</p>
+                  <div className={styles.orderDate}>
+                    <p className={styles.orderDateHeading}>Date</p>
+                    <p className={styles.orderDateContent}>
+                      {receipt.orderDate}
+                    </p>
                   </div>
                   <div className={styles.possibleWin}>
                     <p>Possible win</p>
-                    <p>{formatToCurrency(playState.winnings)}</p>
+                    <p>&#8358;{receipt.possibleWin}</p>
                   </div>
                   <div className={styles.betOptions}>
                     <button
@@ -429,8 +440,21 @@ export const Play = (props) => {
                       }}
                       className={styles.rebet}
                     >
-                      Re-Bet
+                      Rebet
                     </button>
+                  </div>
+                  <div
+                    className={styles.printSlip}
+                    onClick={() => {
+                      displayModal({
+                        overlay: true,
+                        modal: "printBetsip",
+                        state: receipt,
+                      });
+                    }}
+                  >
+                    <img src={print} alt="" />
+                    <span>Print Slip</span>
                   </div>
                 </div>
               ) : (
@@ -464,4 +488,10 @@ export const Play = (props) => {
   );
 };
 
-export default Play;
+const mapDispatchToProps = (dispatch) => {
+  return {
+    displayModal: (payload) => dispatch(setDisplayModal(payload)),
+  };
+};
+
+export default connect(undefined, mapDispatchToProps)(Play);

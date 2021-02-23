@@ -6,15 +6,10 @@
   margin-top: 2rem;
   padding: 2rem 0;
   width: 50rem;
-  height: 48rem;
+  height: 53rem;
 
   @include respond(phone-large) {
     width: 95%;
-  }
-
-  @media print {
-    position: absolute;
-    left: 16%;
   }
 
   .imageContainer {
@@ -31,4 +26,17 @@
   text-align: right;
 }
 
-// @page { size: auto;  margin: 0mm; }
+.message {
+  margin-top: 3rem;
+}
+
+.messageText {
+  text-decoration: none;
+  margin-right: 3rem;
+}
+
+.messageIcon {
+  margin-right: 1rem;
+  width: 2rem;
+  vertical-align: middle;
+}

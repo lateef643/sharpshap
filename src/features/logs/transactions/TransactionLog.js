@@ -30,7 +30,7 @@ export const TransactionLog = ({
   const [lastPage, setLastPage] = useState("");
   const [pageChangeLoading, setPageChangeLoading] = useState(false);
   const [transactionTypeFilter, setTransactionTypeFilter] = useState("");
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
   const [selectedDateFrom, handleSelectedDateFrom] = useState(() => {
     const newDate = new Date();
     const monthDate = startOfMonth(newDate);

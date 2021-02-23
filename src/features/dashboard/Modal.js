@@ -9,6 +9,7 @@ import CableRecharge from "../../features/services/cable/index";
 import AddUser from "../../features/users/AddUser";
 import TransactionPin from "../profile/TransactionPin";
 import Password from "../../features/profile/Password";
+import BetslipModal from "../../features/services/betting/play/BetslipModal";
 import WalletTransfer from "../../features/services/walletTransfer/WalletTransfer";
 import FundBettingWallet from "../../features/services/betting/fundWallet/FundWallet";
 import CustomerStatus from "../../features/profile/CustomerStatus";
@@ -50,6 +51,7 @@ const Modal = ({ overlay, modal, displayModal }) => {
           fundBettingWallet: <FundBettingWallet />,
           customerStatus: <CustomerStatus />,
           loanApplication: <LoanApplication />,
+          printBetsip: <BetslipModal />,
         }[modal]
       }
     </div>
