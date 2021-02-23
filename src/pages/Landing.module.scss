@@ -7,30 +7,30 @@
   overflow: hidden;
   color: #fff;
   background-color: #062863;
-  background-position: bottom 12rem right 14rem, bottom 8rem right 8.5rem,
-    bottom 14rem right 7rem, bottom 4rem right 13rem, bottom 0rem right 0rem,
-    bottom 9rem left 11rem, bottom 2rem left 13rem, bottom 0rem left 0rem;
-  background-size: 4vw, 3vw, 1.5vw, 2.5vw, 5.5vw, 19vw, 19vw, 38vw 18vw;
-  background-repeat: no-repeat;
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
-    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
-    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
-    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
-    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
-    url("../assets/icons/background-phone.svg"),
-    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzc0IiBoZWlnaHQ9IjM3NCIgdmlld0JveD0iMCAwIDM3NCAzNzQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjE4NyIgY3k9IjE4NyIgcj0iMTg3IiBmaWxsPSIjMDBCMzc4Ii8+Cjwvc3ZnPgo="),
-    url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgxIiBoZWlnaHQ9IjMyNiIgdmlld0JveD0iMCAwIDQ4MSAzMjYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEzMCIgY3k9IjM1MSIgcj0iMzUxIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
+  // background-position: bottom 12rem right 14rem, bottom 8rem right 8.5rem,
+  //   bottom 14rem right 7rem, bottom 4rem right 13rem, bottom 0rem right 0rem,
+  //   bottom 9rem left 11rem, bottom 2rem left 13rem, bottom 0rem left 0rem;
+  // background-size: 4vw, 3vw, 1.5vw, 2.5vw, 5.5vw, 19vw, 19vw, 38vw 18vw;
+  // background-repeat: no-repeat;
+  // background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+  //   url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+  //   url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+  //   url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+  //   url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
+  //   url("../assets/icons/background-phone.svg"),
+  //   url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzc0IiBoZWlnaHQ9IjM3NCIgdmlld0JveD0iMCAwIDM3NCAzNzQiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjE4NyIgY3k9IjE4NyIgcj0iMTg3IiBmaWxsPSIjMDBCMzc4Ii8+Cjwvc3ZnPgo="),
+  //   url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDgxIiBoZWlnaHQ9IjMyNiIgdmlld0JveD0iMCAwIDQ4MSAzMjYiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxjaXJjbGUgY3g9IjEzMCIgY3k9IjM1MSIgcj0iMzUxIiBmaWxsPSJ3aGl0ZSIvPgo8L3N2Zz4K");
 
-  @include respond-custom(1000px) {
-    background-position: bottom 11rem right 13rem, bottom 7rem right 7.5rem,
-      bottom 13rem right 6rem, bottom 3rem right 12rem, bottom 0rem right 0rem,
-      bottom 9rem left 11rem, bottom 2rem left 13rem, bottom 0rem left 0rem;
-    background-size: 5vw, 4vw, 2.5vw, 3.5vw, 8vw, 22vw, 22vw, 41vw 21vw;
-  }
+  // @include respond-custom(1000px) {
+  //   background-position: bottom 11rem right 13rem, bottom 7rem right 7.5rem,
+  //     bottom 13rem right 6rem, bottom 3rem right 12rem, bottom 0rem right 0rem,
+  //     bottom 9rem left 11rem, bottom 2rem left 13rem, bottom 0rem left 0rem;
+  //   background-size: 5vw, 4vw, 2.5vw, 3.5vw, 8vw, 22vw, 22vw, 41vw 21vw;
+  // }
 
-  @include respond-custom(810px) {
-    background-size: 5vw, 4vw, 2.5vw, 3.5vw, 8vw, 0px, 0px, 0px;
-  }
+  // @include respond-custom(810px) {
+  //   background-size: 5vw, 4vw, 2.5vw, 3.5vw, 8vw, 0px, 0px, 0px;
+  // }
 }
 
 .header {
