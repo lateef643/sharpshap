@@ -121,7 +121,7 @@ export const Play = ({ displayModal }) => {
     setLoading(true);
 
     (async function placeBet() {
-      const req = {
+      const payload = {
         provider,
         amount,
         phone,
@@ -129,7 +129,7 @@ export const Play = ({ displayModal }) => {
       };
 
       try {
-        const res = await axios.post(PLACE_BET, req);
+        const res = await axios.post(PLACE_BET, payload);
 
         const receipt = res.data.data;
         // dispatch({

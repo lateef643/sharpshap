@@ -3,14 +3,18 @@ import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 import logo from "../../assets/images/cico-logo.svg";
+import close from "../../assets/icons/closeModal.svg";
 
 import styles from "./Sidebar.module.scss";
 
 export const Sidebar = ({ agentType }) => {
-  const [isOpen, setIsOpen] = useState(true);
+  const [isOpen, setIsOpen] = useState(false);
+  const [width, setWidth] = useState(window.innerWidth);
 
   useEffect(() => {
     window.addEventListener("resize", (e) => {
+      setWidth(window.innerWidth);
+
       if (window.innerWidth > 1000) {
         setIsOpen(true);
       } else {
@@ -46,11 +50,19 @@ export const Sidebar = ({ agentType }) => {
           }}
         ></div>
       )}
-      {isOpen && (
+      {(isOpen || width >= 1000) && (
         <div className={styles.sidebar}>
           <div className={styles.content}>
             <div className={styles.logoBox}>
               <img src={logo} className={styles.logo} alt="company logo" />
+            </div>
+            <div
+              className={styles.toggleSidebarClose}
+              onClick={() => {
+                setIsOpen(!isOpen);
+              }}
+            >
+              <img src={close} className={styles.iconClose} alt="" />
             </div>
             <nav className={styles.navigation}>
               <NavLink

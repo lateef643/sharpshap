@@ -1,7 +1,16 @@
+@import "../../../../assets/styles/config/mixins";
+@import "../../../../assets/styles/config/breakpoints";
+@import "../../../../assets/styles/config/variables";
+
 .bettingReceipt {
   text-align: center;
   font-size: 1.4rem;
   padding: 3rem 2rem;
+  width: 35rem;
+
+  @include respond(phone) {
+    width: 30rem;
+  }
 
   img {
     width: 7rem;

@@ -88,6 +88,10 @@ export default [
     name: "Zenith Bank",
   },
   {
+    code: "090370",
+    name: "Ilisan Microfinance Bank",
+  },
+  {
     code: 110005,
     name: "3line Card management Limited",
   },
