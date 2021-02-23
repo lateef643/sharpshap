@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
-import history from "./util/history";
+import { ToastProvider } from "react-toast-notifications";
+import history from "./utils/history";
 
 import AppRouter from "./router/AppRouter";
 
@@ -22,9 +23,11 @@ const App = () => {
   }, []);
 
   return (
-    <Router history={history}>
-      <AppRouter />
-    </Router>
+    <ToastProvider>
+      <Router history={history}>
+        <AppRouter />
+      </Router>
+    </ToastProvider>
   );
 };
 

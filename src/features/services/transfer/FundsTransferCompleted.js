@@ -1,11 +1,11 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import formatToCurrency from "../../../util/formatToCurrency";
-import check from "../../../assets/images/check.svg";
-import pending from "../../../assets/images/pending.svg";
+import formatToCurrency from "../../../utils/formatToCurrency";
+import generateBankImageUrl from "./generateBankImageUrl";
 
 import styles from "./FundsTransferCompleted.module.scss";
+var Barcode = require("react-barcode");
 
 export const FundsTransferCompleted = (props) => {
   const { successData, setComponentToRender, FundsTransferFormState } = props;
@@ -15,78 +15,77 @@ export const FundsTransferCompleted = (props) => {
     accountNumber,
     accountName,
     total,
+    beneficiaryBankCode,
   } = FundsTransferFormState;
-  const { date, transactionCost, status, reference, message } = successData;
+  const { date, transactionCost, status, reference } = successData;
+
+  const bankImageUrl = generateBankImageUrl(beneficiaryBankCode);
 
   return (
-    <div className={styles.section}>
-      <div className={styles.imageContainer}>
-        <img
-          className={styles.headingImage}
-          src={
-            status === "successful" ||
-            status === "success" ||
-            status === "Successful" ||
-            status === "Success"
-              ? check
-              : pending
-          }
-          alt=""
-        />
-        <p className={styles.headingText}>{message}</p>
+    <div className={styles.container}>
+      <div className={styles.logoContainer}>
+        <img className={styles.bankLogo} src={bankImageUrl} alt="" />
       </div>
-      <div className={styles.contentContainer}>
-        <div className={styles.transactionDetails}>
-          <div>
-            <span>Payment Reference:</span>
-            <span>{reference}</span>
-          </div>
-          <div>
-            <span>Beneficiary Bank:</span>
-            <span>{beneficiaryBankName}</span>
-          </div>
-          <div>
-            <span>Beneficiary Name:</span>
-            <span>{accountName}</span>
-          </div>
-          <div>
-            <span>Beneficiary Account:</span>
-            <span>{accountNumber}</span>
-          </div>
-          <div>
-            <span>Status:</span>
-            <span>{status}</span>
-          </div>
-          <div>
-            <span>Date:</span>
-            <span>{date}</span>
-          </div>
+      <div className={styles.content}>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Payment Reference:</span>
+          <span className={styles.contentDetails}>{reference}</span>
         </div>
-        <div className={styles.transactionAmount}>
-          <div>
-            <span>Amount:</span>
-            <span>{formatToCurrency(amount)}</span>
-          </div>
-          <div>
-            <span>Convenience Fee:</span>
-            <span>{formatToCurrency(transactionCost)}</span>
-          </div>
-          <div className={styles.total}>
-            <span>Total:</span>
-            <span>{formatToCurrency(total)}</span>
-          </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Beneficiary Bank:</span>
+          <span className={styles.contentDetails}>{beneficiaryBankName}</span>
         </div>
-        <div className={styles.link}>
-          <Link to="/" className={styles.linkHome}>
-            Home
-          </Link>
-          <a
-            onClick={() => setComponentToRender("form")}
-            className={styles.linkServiceHome}
-          >
-            New Payment
-          </a>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Beneficiary Name:</span>
+          <span className={styles.contentDetails}>{accountName}</span>
         </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Beneficiary Account:</span>
+          <span className={styles.contentDetails}>{accountNumber}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Status:</span>
+          <span className={styles.contentDetails}>{status}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Date:</span>
+          <span className={styles.contentDetails}>{date}</span>
+        </div>
+      </div>
+      <div className={styles.contentItem}>
+        <span className={styles.contentHeading}>Amount:</span>
+        <span className={styles.contentDetails}>
+          {formatToCurrency(amount)}
+        </span>
+      </div>
+      <div className={styles.contentItem}>
+        <span className={styles.contentHeading}>Convenience Fee:</span>
+        <span className={styles.contentDetails}>
+          {formatToCurrency(transactionCost)}
+        </span>
+      </div>
+      <div className={styles.total}>
+        <span className={styles.totalHeading}>Total:</span>
+        <span className={styles.totalDetails}>{formatToCurrency(total)}</span>
+      </div>
+      <Barcode
+        value="https://www.cico.ng"
+        width={1.25}
+        height={50}
+        marginTop={30}
+        fontSize={16}
+        displayValue={false}
+      />
+      <div className={styles.action}>
+        <Link to="/" className={`${styles.buttonAction} ${styles.buttonHome}`}>
+          Home
+        </Link>
+        <button
+          onClick={() => setComponentToRender("form")}
+          className={`${styles.buttonAction} ${styles.buttonRestart}`}
+        >
+          New Payment
+        </button>
       </div>
     </div>
   );

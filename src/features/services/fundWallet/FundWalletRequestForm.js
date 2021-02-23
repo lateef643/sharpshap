@@ -1,5 +1,5 @@
 import React from "react";
-import Loader from "../../../components/util/Loader";
+import { ThreeDots } from "svg-loaders-react";
 import wallet from "../../../assets/images/wallet.svg";
 import styles from "./FundWalletRequestForm.module.scss";
 
@@ -26,29 +26,27 @@ export const FundWalletRequestForm = ({
   return (
     <form
       className={styles.form}
+      autoComplete="off"
       onSubmit={() => {
         if (amount && bankCode && tellerNumber) {
           setComponentToRender("summary");
         }
       }}
     >
-      <div className={styles.imageContainer}>
-        <img src={wallet} className={styles.image} alt="wallet icon" />
-      </div>
-      <label>
-        <span>Amount</span>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Amount</label>
         <input
           type="number"
           onChange={handleAmountChange}
-          className={styles.outlineGrey}
+          className={styles.input}
         />
-      </label>
-      <label>
-        <span>Bank</span>
-        <select className={styles.outlineGrey}>
+      </div>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Bank</label>
+        <select className={styles.select}>
           <option>{bank}</option>
         </select>
-        <div>
+        {/* <div>
           {banks.map((bank) => {
             return (
               <p
@@ -65,28 +63,24 @@ export const FundWalletRequestForm = ({
               </p>
             );
           })}
-        </div>
+        </div> */}
         {/* <select onChange={handleBankCodeChange}>   
             <option value="">Select Bank</option>
             {banks.map(bank => {
               return <option value={bank.code} key={bank.code}>{bank.name}  0012345678 CicoServe Payment</option>
             })}
           </select> */}
-      </label>
-      <label>
-        <span>Teller Number</span>
+      </div>
+      <div className={styles.formGroup}>
+        <label className={styles.label}>Teller Number</label>
         <input
           type="text"
           onChange={handleTellerNumberChange}
-          className={styles.outlineGrey}
+          className={styles.select}
         />
-      </label>
-      <button type="submit">
-        {loading ? (
-          <Loader size="small" color="white" position="center" />
-        ) : (
-          "Submit"
-        )}
+      </div>
+      <button type="submit" className={styles.button}>
+        {loading ? <ThreeDots /> : "Submit"}
       </button>
     </form>
   );

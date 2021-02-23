@@ -2,7 +2,7 @@ import React from "react";
 
 import postcash from "../../../assets/images/postcash.png";
 
-import formatToCurrency from "../../../util/formatToCurrency";
+import formatToCurrency from "../../../utils/formatToCurrency";
 
 import styles from "./CashCallRequestForm.module.scss";
 

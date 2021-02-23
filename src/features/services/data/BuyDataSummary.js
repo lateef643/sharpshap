@@ -1,74 +1,85 @@
 import React from "react";
-// import { connect } from "react-redux";
-import Loader from "../../../components/util/Loader";
-import style from "./BuyDataSummary.module.scss";
-import formatToCurrency from "../../../util/formatToCurrency";
+import PropTypes from "prop-types";
+import { connect } from "react-redux";
+
+import formatToCurrency from "../../../utils/formatToCurrency";
+import { ThreeDots } from "svg-loaders-react";
+import generateNetworkImageUrl from "./generateNetworkImageUrl";
+
+import styles from "./BuyDataSummary.module.scss";
 
 export const BuyDataSummary = (props) => {
   const {
-    telcoName,
-    amount,
-    phone,
+    DataPurchaseFormState,
     loading,
     handleOnSubmit,
-    selectedDataPlanName,
-    selectedDataPlanValidity,
+    transactionCost,
+    service,
   } = props;
+  const { phone, amount } = DataPurchaseFormState;
+
+  const bankImageUrl = generateNetworkImageUrl(service);
 
   return (
-    <div className={style.paymentContainer}>
-      <div className={style.heading}>
-        <h2 className={style.headingText}>Transaction Summary</h2>
+    <div className={styles.container}>
+      <div className={styles.logoContainer}>
+        <img className={styles.bankLogo} src={bankImageUrl} alt="" />
       </div>
-      <div>
-        {loading ? (
-          <p className={style.pending}>
-            Please wait while your transaction is processing...
-          </p>
-        ) : undefined}
+      <div className={styles.content}>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Phone Number:</span>
+          <span className={styles.contentDetails}>{phone}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Transaction:</span>
+          <span className={styles.contentDetails}>Airtime Purchase</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Network:</span>
+          <span className={styles.contentDetails}>{service}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Amount:</span>
+          <span className={styles.contentDetails}>
+            {formatToCurrency(amount)}
+          </span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Transaction cost:</span>
+          <span className={styles.contentDetails}>
+            {formatToCurrency(transactionCost)}
+          </span>
+        </div>
       </div>
-      <div>
-        <span>Phone Number:</span>
-        <span>{phone}</span>
-      </div>
-      <div>
-        <span>Network:</span>
-        <span>{telcoName}</span>
-      </div>
-      <div>
-        <span>Data Bundle:</span>
-        <span>{selectedDataPlanName}</span>
-      </div>
-      <div>
-        <span>Validity:</span>
-        <span>{selectedDataPlanValidity}</span>
-      </div>
-      <div>
-        <span>Amount:</span>
-        <span>{formatToCurrency(amount)}</span>
-      </div>
-      <div>
-        <span>Transaction cost:</span>
-        <span>{formatToCurrency(0)}</span>
-      </div>
-      <div className={style.total}>
-        <span>Total:</span>
-        <span>{formatToCurrency(amount)}</span>
+      <div className={styles.total}>
+        <span className={styles.totalHeading}>Total:</span>
+        <span className={styles.totalDetails}>{formatToCurrency(amount)}</span>
       </div>
       <button
         onClick={(e) => {
           e.preventDefault();
           handleOnSubmit();
         }}
+        className={styles.button}
       >
-        {loading ? (
-          <Loader size="small" color="white" position="center" />
-        ) : (
-          "Continue"
-        )}
+        {loading ? <ThreeDots /> : "Continue"}
       </button>
     </div>
   );
 };
 
-export default BuyDataSummary;
+BuyDataSummary.propTypes = {
+  DataPurchaseFormState: PropTypes.object.isRequired,
+  selectedNetworkName: PropTypes.string.isRequired,
+  handleOnSubmit: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  transactionCost: PropTypes.number.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
+export default connect(mapStateToProps)(BuyDataSummary);

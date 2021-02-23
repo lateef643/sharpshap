@@ -1,109 +1,140 @@
 @import "../config/breakpoints";
 @import "../config/mixins";
 
-.paymentContainer {
-  height: 39.2rem;
-  width: 41.6rem;
+.container {
+  width: 35rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  background: #fff;
+  padding: 3rem 1.5rem;
+
+  @include respond-custom(1000px) {
+    width: 30rem;
+  }
+
+  @include respond(phone) {
+    width: 25rem;
+  }
+}
+
+.logoContainer {
+  width: 9rem;
+  height: 4rem;
   margin: 0 auto;
-  box-shadow: 0px 3px 0.6rem #00000029;
-  padding: 2rem 2rem;
+}
+
+.bankLogo {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  margin-top: 3rem;
+  border-top: 1px dashed #dbdbdb;
+  border-bottom: 1px dashed #dbdbdb;
+  padding: 2rem 0 0 0;
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
-  background-color: #fff;
-  color: #707070;
+  flex-wrap: wrap;
+}
 
-  @include respond(phone-large) {
-    width: 95%;
+.contentItem {
+  margin-bottom: 3.5rem;
+
+  &:nth-child(odd) {
+    flex: 0 0 45%;
   }
 
-  @include respond-custom(330px) {
-    font-size: 1.3rem;
+  &:nth-child(even) {
+    flex: 0 0 45%;
+    text-align: right;
   }
+}
 
-  .heading {
-    margin-bottom: 2rem;
+.contentHeading {
+  font-family: "Avenir", sans-serif;
+  font-style: normal;
+  font-size: 1.1rem;
+  color: #cfcfcf;
+  display: block;
+  margin-bottom: 0.8rem;
+}
 
-    > .headingText {
-      text-align: center;
-      margin: 0 auto;
-      font-size: 1.6rem;
+.contentDetails {
+  font-style: normal;
+  font-size: 1.3rem;
+  color: #22215b;
+  display: block;
+  text-transform: capitalize;
+}
 
-      @include respond-custom(330px) {
-        font-size: 1.5rem;
-      }
-    }
+.total {
+  padding: 2rem 0;
+  display: flex;
+  justify-content: space-between;
+}
+
+.totalHeading {
+  font-size: 1.2rem;
+  color: #c4c4c4;
+}
+
+.totalDetails {
+  font-size: 1.3rem;
+  color: #22215b;
+}
+
+.button {
+  width: 100%;
+  display: block;
+  height: 3.5rem;
+  width: 19.5rem;
+  background: #001b6c;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  margin: 3rem auto 0 auto;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+
+  & > svg {
+    fill: #fff;
+    width: 4rem;
   }
+}
 
-  div {
-    display: flex;
-    justify-content: space-between;
+.action {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 3rem;
+}
 
-    > .pending {
-      font-size: 1.4rem;
-      margin-bottom: 2rem;
-      font-weight: 400;
-      color: #707070;
-      text-align: center;
-    }
+.buttonAction {
+  flex: 0 0 35%;
+  display: block;
+  height: 3.5rem;
+  width: 19.5rem;
+  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+  border: 0;
+  outline: 0;
+  color: #fff;
+  font-family: inherit;
+  font-size: 1.5rem;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  line-height: 3.5rem;
+}
 
-    span {
-      text-align: right;
-      font-size: 1.4rem;
-      flex: 0 0 65%;
-      color: #707070;
-      line-height: 2.4rem;
+.buttonHome {
+  background: #001b6c;
+}
 
-      @include respond-custom(330px) {
-        font-size: 1.3rem;
-      }
-    }
-
-    span:first-child {
-      text-align: left;
-      font-size: 1.4rem;
-      flex: 0 0 35%;
-      color: #707070;
-      line-height: 2.4rem;
-
-      @include respond-custom(330px) {
-        font-size: 1.3rem;
-        flex: 0 0 38%;
-      }
-    }
-  }
-
-  .total {
-    font-size: 1.75rem;
-    font-weight: bold;
-    padding: 5px 0;
-    border: 1px solid #7070709f;
-    border-left: 0;
-    border-right: 0;
-
-    @include respond-custom(330px) {
-      font-size: 1.3rem;
-    }
-  }
-
-  button {
-    font-family: "Lato", sans-serif;
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 2rem;
-    height: 3.6rem;
-    font-size: 1.4rem;
-    outline: 0;
-    border: 0;
-    border-radius: 1rem;
-    box-shadow: 3px 3px 0.6rem #00000029;
-    background: transparent linear-gradient(90deg, #11998e 0%, #38ef7d 100%) 0%
-      0% no-repeat padding-box;
-    color: #fff;
-
-    &:active {
-      transform: translateY(3%);
-      box-shadow: 1px 1px 4px #00000029;
-    }
-  }
+.buttonRestart {
+  background: rgb(32, 165, 110);
 }

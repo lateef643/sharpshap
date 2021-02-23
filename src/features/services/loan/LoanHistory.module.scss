@@ -1,0 +1,258 @@
+@import "../../../assets/styles/config/breakpoints";
+@import "../../../assets/styles/config/mixins";
+
+.container {
+  position: relative;
+  min-width: 80rem;
+  overflow: hidden;
+  padding: 4rem 2rem;
+  min-height: 80vh;
+
+  & > svg {
+    position: fixed;
+    display: inline-block;
+    width: 5rem;
+    top: 70%;
+    left: 55%;
+    // transform: translateX(-80%);
+
+    @include respond-custom(1000px) {
+      transform: translateX(-50%);
+    }
+  }
+}
+
+.transactions {
+  margin-top: 3rem;
+  width: 100%;
+  color: #22215b;
+}
+
+.transactionsHeading {
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.filter {
+  margin-bottom: 2rem;
+  overflow: hidden;
+
+  .filterToggle {
+    width: 10rem;
+    height: 3rem;
+    line-height: 3rem;
+    text-align: center;
+    border-radius: 0.5rem;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2);
+    padding: 0 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    transition: 0.5s all;
+    font-size: 1.4rem;
+
+    img {
+      width: 1.1rem;
+      line-height: 3rem;
+      cursor: pointer;
+    }
+  }
+
+  .filters {
+    transition: 0.3s all;
+    opacity: 0;
+    max-height: 0;
+    transform: translateX(-100%);
+
+    .inputGroup {
+      input {
+        transition: 0.3s all;
+      }
+
+      span {
+        position: absolute;
+        transition: 0.2s all;
+
+        top: 0.5rem;
+        left: 0.5rem;
+        opacity: 0;
+      }
+
+      input:focus + span,
+      input:active + span {
+        transform: translateY(-1.3rem);
+        font-size: 1.2rem;
+        color: #0546be;
+        opacity: 1;
+      }
+
+      input::-webkit-input-placeholder {
+        font-family: "Nunito", sans-serif;
+        opacity: 1;
+        color: #707070;
+      }
+
+      input::-moz-placeholder {
+        font-family: "Nunito", sans-serif;
+        opacity: 1;
+        color: #707070;
+      }
+
+      input:-ms-input-placeholder {
+        font-family: "Nunito", sans-serif;
+        opacity: 1;
+        color: #707070;
+      }
+
+      input::-ms-input-placeholder {
+        font-family: "Nunito", sans-serif;
+        opacity: 1;
+        color: #707070;
+      }
+
+      input::placeholder {
+        font-family: "Nunito", sans-serif;
+        opacity: 1;
+        color: #707070;
+      }
+
+      input:placeholder-shown + span {
+        opacity: 0;
+      }
+
+      .searchUsers,
+      .filterUsers {
+        width: 18rem;
+      }
+    }
+
+    input,
+    select {
+      width: 9rem;
+      padding: 0 0.5rem;
+      border: 0;
+      height: 3rem;
+      border-bottom: 2px solid rgb(214, 214, 214);
+      margin-bottom: 2rem;
+      font-family: "Nunito", sans-serif;
+      font-size: 1.4rem;
+      outline: 0;
+      transition: 0.3s all;
+      margin-right: 2rem;
+    }
+
+    input:hover,
+    input:focus,
+    select:hover,
+    select:focus {
+      border-bottom: 2px solid #0846ba;
+    }
+
+    ::-webkit-input-placeholder {
+      color: black;
+      font-family: "Nunito", sans-serif;
+      // font-weight: 500;
+    }
+
+    ::-moz-placeholder {
+      color: black;
+      font-family: "Nunito", sans-serif;
+      // font-weight: 500;
+    }
+
+    :-ms-input-placeholder {
+      color: black;
+      font-family: "Nunito", sans-serif;
+      // font-weight: 500;
+    }
+
+    ::-ms-input-placeholder {
+      color: black;
+      font-family: "Nunito", sans-serif;
+      // font-weight: 500;
+    }
+
+    ::placeholder {
+      color: black;
+      font-family: "Nunito", sans-serif;
+      // font-weight: 500;
+    }
+  }
+
+  .isOpen {
+    opacity: 1;
+    max-height: 700px;
+    transform: translateX(0);
+  }
+}
+
+.customInputGroup {
+  span {
+    position: relative;
+    left: 2rem;
+  }
+
+  input {
+    width: 15rem !important;
+    background-color: red !important;
+  }
+}
+
+.table {
+  font-size: 1.4rem;
+
+  .tableHeading {
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    border-radius: 0.5rem;
+    font-family: "Avenir";
+    background-color: rgb(235, 233, 233);
+    margin-bottom: 1rem;
+  }
+
+  .tableBody {
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+
+    .tableRow {
+      padding: 1.5rem 3rem;
+
+      display: flex;
+      justify-content: space-between;
+      border-radius: 1rem;
+      border: 1px solid #e2e1e1;
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .sn {
+    flex: 0 0 5%;
+  }
+
+  .date {
+    flex: 0 0 13%;
+  }
+
+  .amount {
+    flex: 0 0 13%;
+  }
+
+  .duration {
+    flex: 0 0 13%;
+  }
+
+  .rate {
+    flex: 0 0 13%;
+  }
+
+  .status {
+    flex: 0 0 13%;
+  }
+
+  .disbursed {
+    flex: 0 0 13%;
+  }
+}

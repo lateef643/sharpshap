@@ -2,9 +2,11 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Provider } from "react-redux";
 
-import setAuthToken from "./util/setAuthToken";
-import setAxiosDefaults from "./util/setAxiosDefaults";
-import configureStore from "./store/redux/configureStore";
+import { MuiPickersUtilsProvider } from "@material-ui/pickers";
+import DateFnsUtils from "@date-io/date-fns";
+import setAuthToken from "./utils/setAuthToken";
+import setAxiosDefaults from "./utils/setAxiosDefaults";
+import configureStore from "./store/configureStore";
 import App from "./App";
 import * as serviceWorker from "./serviceWorker";
 
@@ -18,7 +20,9 @@ const store = configureStore();
 
 ReactDOM.render(
   <Provider store={store}>
-    <App />
+    <MuiPickersUtilsProvider utils={DateFnsUtils}>
+      <App />
+    </MuiPickersUtilsProvider>
   </Provider>,
   document.getElementById("root")
 );

@@ -1,10 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
 
-import formatToCurrency from "../../../util/formatToCurrency";
-import Loader from "../../../components/util/Loader";
+import generateServiceProviderImageUrl from "./generateServiceProviderImageUrl";
+import formatToCurrency from "../../../utils/formatToCurrency";
+import { ThreeDots } from "svg-loaders-react";
 
-import style from "./ElectricityPaymentSummary.module.scss";
+import styles from "./ElectricityPaymentSummary.module.scss";
+
+var Barcode = require("react-barcode");
 
 export const ElectricityPaymentSummary = (props) => {
   const {
@@ -15,61 +19,67 @@ export const ElectricityPaymentSummary = (props) => {
   } = props;
   const { disco, meterNo, accountName, paymentPlan, amount, phone } = state;
 
+  let serviceImageUrl = generateServiceProviderImageUrl(props.service);
+
   return (
-    <div className={style.paymentContainer}>
-      <div className={style.heading}>
-        <h2 className={style.headingText}>Transaction Summary</h2>
+    <div className={styles.container}>
+      <div className={styles.logoContainer}>
+        <img className={styles.bankLogo} src={serviceImageUrl} alt="" />
       </div>
-      <div>
-        {loading ? (
-          <p className={style.pending}>
-            Please wait while your transaction is processing...
-          </p>
-        ) : undefined}
+      <div className={styles.content}>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Disco:</span>
+          <span className={styles.contentDetails}>{disco}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Meter Number:</span>
+          <span className={styles.contentDetails}>{meterNo}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Account Name:</span>
+          <span className={styles.contentDetails}>{accountName}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Plan:</span>
+          <span className={styles.contentDetails}>{paymentPlan}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Phone No:</span>
+          <span className={styles.contentDetails}>{phone}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Amount:</span>
+          <span className={styles.contentDetails}>
+            {formatToCurrency(amount)}
+          </span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Transaction cost:</span>
+          <span className={styles.contentDetails}>
+            {formatToCurrency(transactionCost)}
+          </span>
+        </div>
       </div>
-      <div>
-        <span>Disco:</span>
-        <span>{disco}</span>
+      <div className={styles.total}>
+        <span className={styles.totalHeading}>Total</span>
+        <span className={styles.totalDetails}>{formatToCurrency(amount)}</span>
       </div>
-      <div>
-        <span>Meter Number:</span>
-        <span>{meterNo}</span>
-      </div>
-      <div>
-        <span>Account Name:</span>
-        <span>{accountName}</span>
-      </div>
-      <div>
-        <span>Plan:</span>
-        <span>{paymentPlan}</span>
-      </div>
-      <div>
-        <span>Phone No:</span>
-        <span>{phone}</span>
-      </div>
-      <div>
-        <span>Amount:</span>
-        <span>{formatToCurrency(amount)}</span>
-      </div>
-      <div>
-        <span>Transaction cost:</span>
-        <span>{formatToCurrency(transactionCost)}</span>
-      </div>
-      <div className={style.total}>
-        <span>Total</span>
-        <span>{formatToCurrency(amount)}</span>
-      </div>
+      <Barcode
+        value="https://www.cico.ng"
+        width={1.25}
+        height={50}
+        marginTop={30}
+        fontSize={16}
+        displayValue={false}
+      />
       <button
         onClick={(e) => {
           e.preventDefault();
           handleOnSubmit();
         }}
+        className={styles.button}
       >
-        {loading ? (
-          <Loader size="small" color="white" position="center" />
-        ) : (
-          "Continue"
-        )}
+        {loading ? <ThreeDots /> : "Continue"}
       </button>
     </div>
   );
@@ -82,4 +92,10 @@ ElectricityPaymentSummary.propTypes = {
   transactionCost: PropTypes.number.isRequired,
 };
 
-export default ElectricityPaymentSummary;
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
+export default connect(mapStateToProps)(ElectricityPaymentSummary);

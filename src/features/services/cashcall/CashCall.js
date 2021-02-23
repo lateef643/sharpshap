@@ -11,7 +11,7 @@ import {
   INITIATE_LIQUID_CASHCALL,
   CANCEL_CASHCALL,
   POST_OPPORTUNITY,
-} from "../../../store/api/constants";
+} from "../../../utils/constants";
 import { setCurrentPage } from "../../../actions/page";
 import CashCallRequestForm from "./CashCallRequestForm";
 import CashCallList from "./CashCallList";

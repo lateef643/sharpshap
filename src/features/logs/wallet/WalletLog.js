@@ -1,16 +1,20 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ListLoader from "../../../components/util/ListLoader";
+import { ThreeDots } from "svg-loaders-react";
+import { Link } from "react-router-dom";
 import minus from "../../../assets/images/minus.svg";
 import plus from "../../../assets/images/plus.svg";
 import { connect } from "react-redux";
 import { setCurrentPage } from "../../../actions/page";
-import formatToCurrency from "../../../util/formatToCurrency";
-import { GET_AGENT_WALLET_HISTORY } from "../../../store/api/constants";
-import style from "./WalletLog.module.scss";
+import formatToCurrency from "../../../utils/formatToCurrency";
+import { GET_AGENT_WALLET_HISTORY } from "../../../utils/constants";
+import styles from "./WalletLog.module.scss";
+import arrowDown from "../../../assets/icons/arrowdown.svg";
+import arrowUp from "../../../assets/images/arrowUp.svg";
+import menu from "../../../assets/images/dots.svg";
 
 export const WalletLog = ({ changeCurrentPage }) => {
-  const [logs, setLogs] = useState([]);
+  const [transactions, setTransactions] = useState([]);
   const [loading, setLoading] = useState(true);
   // const [total, setTotal] = useState(null);
   // const [perPage, setPerPage] = useState(null);
@@ -22,6 +26,8 @@ export const WalletLog = ({ changeCurrentPage }) => {
   const [accordionToggle, setAccordionToggle] = useState(false);
   const [activeListItem, setActiveListItem] = useState(null);
   const firstPage = 1;
+  const [isOpen, setIsOpen] = useState(false);
+  const [transactionTypeFilter, setTransactionTypeFilter] = useState("");
 
   useEffect(() => {
     const handleResize = () => {
@@ -38,10 +44,16 @@ export const WalletLog = ({ changeCurrentPage }) => {
   useEffect(() => {
     let isCancelled = false;
 
+    setPageChangeLoading(true);
+
+    const params = {};
+
+    if (transactionTypeFilter) params.type = transactionTypeFilter;
+
     axios
-      .get(`${GET_AGENT_WALLET_HISTORY}?page=${currentPage}`)
+      .get(`${GET_AGENT_WALLET_HISTORY}?page=${currentPage}`, { params })
       .then((res) => {
-        const logs = res.data.data.data;
+        const transactions = res.data.data.data;
         const total = res.data.data.total;
         const perPage = res.data.data.per_page;
 
@@ -62,14 +74,14 @@ export const WalletLog = ({ changeCurrentPage }) => {
           setLastPage(lastPage);
           // setTotal(total);
           // setPerPage(perPage);
-          setLogs(logs);
+          setTransactions(transactions);
           setLoading(false);
           setPageChangeLoading(false);
         }
       })
       .catch((err) => {
         if (!isCancelled) {
-          setLogs([]);
+          setTransactions([]);
           setLoading(false);
           setPageChangeLoading(false);
         }
@@ -87,194 +99,145 @@ export const WalletLog = ({ changeCurrentPage }) => {
     });
   }, [changeCurrentPage]);
 
-  return (
-    <div className={style.container}>
-      {!loading && !pageChangeLoading && logs.length === 0 && (
-        <div>Nothing to display</div>
-      )}
-      {(loading || pageChangeLoading) && (
-        <div className={style.loaderContainer}>
-          <ListLoader />
-        </div>
-      )}
-      {!loading && logs.length > 0 && deviceWidth > 600 && (
-        <div className={style.heading}>
-          <span className={style.itemOne}>Previous Balance</span>
-          <span className={style.itemTwo}>Amount</span>
-          <span className={style.itemThree}>Current Balance</span>
-          <span className={style.itemFour}>Description</span>
-          <span className={style.itemFive}>Type</span>
-          <span className={style.itemSix}>Mode</span>
-          <span className={style.itemSeven}>Date Created</span>
-        </div>
-      )}
-      {(!loading || !pageChangeLoading) &&
-        logs.map((log, index) => (
-          <div key={`${log.id}--${index}`} className={style.log}>
-            {deviceWidth <= 600 && (
-              <div className={style.mobileHeading}>
-                <span
-                  className={`${style.mobileHeadingItem} ${style.mobileHeadingItemIndex}`}
-                >
-                  {index + 1}.
-                </span>
-                <span
-                  className={`${style.mobileHeadingItem} ${style.mobileHeadingItemDate}`}
-                >
-                  {deviceWidth <= 600 && log.created_at.slice(0, 10)}
-                </span>
-                <span
-                  className={`${style.mobileHeadingItem} ${style.mobileHeadingItemAmount}`}
-                >
-                  {formatToCurrency(log.amount)}
-                </span>
-                {/* <span
-                  className={`${style.mobileHeadingItem} ${style.mobileHeadingItemDate}`}
-                >
-                  {log.current_bal}
-                </span> */}
-                <span
-                  className={`${style.mobileHeadingItem} ${style.mobileHeadingItemType}`}
-                >
-                  {log.type}
-                </span>
-                <img
-                  className={style.accordionToggle}
-                  src={
-                    accordionToggle && activeListItem === index ? minus : plus
-                  }
-                  alt="toggle direction icon"
-                  onClick={() => {
-                    setAccordionToggle(!accordionToggle);
-                    setActiveListItem(index);
-                  }}
-                />
-              </div>
-            )}
-            <span
-              className={
-                deviceWidth < 600 && accordionToggle && activeListItem === index
-                  ? `${style.mobileListItem}`
-                  : deviceWidth < 600 &&
-                    (!accordionToggle || activeListItem !== index)
-                  ? `${style.mobileListItem} ${style.hideMobileListItem}`
-                  : `${style.itemOne}`
-              }
-            >
-              {deviceWidth <= 600 && (
-                <span className={style.mobileListItemHeading}>
-                  Previous Balance:
-                </span>
-              )}
-              <span>{formatToCurrency(log.previous_bal)}</span>
-            </span>
-            <span
-              className={
-                deviceWidth < 600 && accordionToggle && activeListItem === index
-                  ? `${style.mobileListItem}`
-                  : deviceWidth < 600 &&
-                    (!accordionToggle || activeListItem !== index)
-                  ? `${style.mobileListItem} ${style.hideMobileListItem}`
-                  : `${style.itemTwo}`
-              }
-            >
-              {deviceWidth <= 600 && (
-                <span className={style.mobileListItemHeading}>Amount:</span>
-              )}
-              <span>{formatToCurrency(log.amount)}</span>
-            </span>
-            <span
-              className={
-                deviceWidth < 600 && accordionToggle && activeListItem === index
-                  ? `${style.mobileListItem}`
-                  : deviceWidth < 600 &&
-                    (!accordionToggle || activeListItem !== index)
-                  ? `${style.mobileListItem} ${style.hideMobileListItem}`
-                  : `${style.itemThree}`
-              }
-            >
-              {deviceWidth <= 600 && (
-                <span className={style.mobileListItemHeading}>
-                  Current balance:
-                </span>
-              )}
-              <span>{formatToCurrency(log.current_bal)}</span>
-            </span>
-            <span
-              className={
-                deviceWidth < 600 && accordionToggle && activeListItem === index
-                  ? `${style.mobileListItem}`
-                  : deviceWidth < 600 &&
-                    (!accordionToggle || activeListItem !== index)
-                  ? `${style.mobileListItem} ${style.hideMobileListItem}`
-                  : `${style.itemFour}`
-              }
-            >
-              {deviceWidth <= 600 && (
-                <span className={style.mobileListItemHeading}>
-                  Description:
-                </span>
-              )}
-              <span>{log.description || "Nil"}</span>
-            </span>
-            <span
-              className={
-                deviceWidth < 600 && accordionToggle && activeListItem === index
-                  ? `${style.mobileListItem}`
-                  : deviceWidth < 600 &&
-                    (!accordionToggle || activeListItem !== index)
-                  ? `${style.mobileListItem} ${style.hideMobileListItem}`
-                  : `${style.itemFive}`
-              }
-            >
-              {deviceWidth <= 600 && (
-                <span className={style.mobileListItemHeading}>Type:</span>
-              )}
-              <span>{log.type}</span>
-            </span>
-            <span
-              className={
-                deviceWidth < 600 && accordionToggle && activeListItem === index
-                  ? `${style.mobileListItem}`
-                  : deviceWidth < 600 &&
-                    (!accordionToggle || activeListItem !== index)
-                  ? `${style.mobileListItem} ${style.hideMobileListItem}`
-                  : `${style.itemSix}`
-              }
-            >
-              {deviceWidth <= 600 && (
-                <span className={style.mobileListItemHeading}>Mode:</span>
-              )}
-              <span>{log.mode}</span>
-            </span>
-            <span
-              className={
-                deviceWidth <= 600 &&
-                accordionToggle &&
-                activeListItem === index
-                  ? `${style.mobileListItem}`
-                  : deviceWidth < 600 &&
-                    (!accordionToggle || activeListItem !== index)
-                  ? `${style.mobileListItem} ${style.hideMobileListItem}`
-                  : `${style.itemSeven}`
-              }
-            >
-              {deviceWidth <= 600 && (
-                <span className={style.mobileListItemHeading}>Date:</span>
-              )}
-              <span>{log.created_at}</span>
-            </span>
-          </div>
-        ))}
+  const handleFilterChange = (e) => {
+    const value = e.target.value;
+    let filter;
 
-      {!loading && logs.length > 0 && (
-        <div className={style.pagination}>
+    if (value) {
+      filter = parseInt(e.target.value);
+    }
+
+    setTransactionTypeFilter(filter);
+  };
+
+  return (
+    <div className={styles.container}>
+      {transactions.length > 0 && !loading ? (
+        <div className={styles.transactions}>
+          <h3 className={styles.transactionsHeading}>Logs</h3>
+          {/* <div className={styles.filter}>
+            <div className={styles.filterToggle}>
+              <span>Filter</span>
+              <img
+                src={isOpen ? arrowDown : arrowUp}
+                alt=""
+                onClick={() => {
+                  setIsOpen(!isOpen);
+                }}
+              />
+            </div>
+            <div
+              className={
+                isOpen ? `${styles.filters} ${styles.isOpen}` : styles.filters
+              }
+            >
+              <label className={styles.inputGroup}>
+                <input
+                  className={styles.searchTransactions}
+                  type="text"
+                  placeholder="Search Transactions"
+                />
+                <span>Search Transactions</span>
+              </label>
+              <label className={styles.inputGroup}>
+                <select
+                  className={styles.filterTransactions}
+                  onChange={handleFilterChange}
+                >
+                  <option value="">Filter by Transaction Type</option>
+                  <option value="">All transactions</option>
+                  <option value="1">Energy</option>
+                  <option value="2">Cashout</option>
+                  <option value="3">Deposit</option>
+                  <option value="4">Airtime</option>
+                  <option value="5">DSTV</option>
+                  <option value="6">GOTV</option>
+                  <option value="7">Transfer</option>
+                  <option value="8">Data</option>
+                </select>
+              </label>
+              <label className={styles.inputGroup}>
+                <select className={styles.filterTransactions}>
+                  <option value="">Date Added</option>
+                </select>
+              </label>
+            </div>
+          </div> */}
+          <div className={styles.table}>
+            <div className={styles.tableHeading}>
+              <span className={styles.sn}>S/N</span>
+              <span className={styles.date}>Date</span>
+              <span className={styles.amount}>Amount</span>
+              <span className={styles.prev}>Previous</span>
+              <span className={styles.current}>Balance</span>
+              <span className={styles.description}>Description</span>
+              <span className={styles.type}>Type</span>
+              <span className={styles.mode}>Mode</span>
+            </div>
+            <div className={styles.tableBody}>
+              {transactions.map((transaction, index) => {
+                const date = new Date(transaction.created_at).toString();
+                const formattedDate = date.slice(4, 24);
+
+                return (
+                  <div className={styles.tableRow} key={index}>
+                    <span className={styles.sn}>{++index}.</span>
+                    <span className={styles.date}>{formattedDate}</span>
+                    <span className={styles.amount}>{transaction.amount}</span>
+
+                    <span className={styles.prev}>
+                      {formatToCurrency(transaction.previous_bal)}
+                    </span>
+                    <span className={styles.current}>
+                      {formatToCurrency(transaction.current_bal)}
+                    </span>
+                    <span className={styles.description}>
+                      {transaction.description}
+                    </span>
+                    <span className={styles.type}>{transaction.type}</span>
+                    <span className={styles.mode}>{transaction.mode}</span>
+
+                    {/* <span className={styles.query}>
+                    <img src={refresh} alt="" />
+                  </span> */}
+                    {/* <div className={styles.action}>
+                      <label htmlFor={`menu${index}`}>
+                        <img className={styles.menu} src={menu} alt="" />
+                      </label>
+                      <input
+                        name={`menu${index}`}
+                        id={`menu${index}`}
+                        type="checkbox"
+                      />
+
+                      <div className={styles.actions}>
+                        <Link
+                          to={`/transaction-details/${transaction.reference}`}
+                        >
+                          View Details
+                        </Link>
+                      </div>
+                    </div> */}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      ) : loading || pageChangeLoading ? (
+        <ThreeDots fill="#3E215B" />
+      ) : (
+        <div>No transactions to display</div>
+      )}
+      {!loading && pageChangeLoading && <ThreeDots fill="#3E215B" />}
+      {!loading && transactions.length > 0 && (
+        <div className={styles.pagination}>
           <span
             onClick={() => {
               setPageChangeLoading(true);
               setCurrentPage(1);
             }}
-            className={currentPage === 1 ? style.active : style.normal}
+            className={currentPage === 1 ? styles.active : styles.normal}
           >
             First Page
           </span>
@@ -288,7 +251,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
           >
             Next Page
           </span>
-          <span className={style.active} disabled>
+          <span className={styles.active} disabled>
             {currentPage}
           </span>
           {/* {
@@ -297,7 +260,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
               setCurrentPage(page);
               setPageChangeLoading(true);
             }} 
-            className={currentPage === page ? style.active : style.normal}>{page}</span>
+            className={currentPage === page ? styles.active : styles.normal}>{page}</span>
           })
         }  */}
           <span
@@ -317,7 +280,7 @@ export const WalletLog = ({ changeCurrentPage }) => {
                 setPageChangeLoading(true);
               }
             }}
-            className={currentPage === lastPage ? style.active : style.normal}
+            className={currentPage === lastPage ? styles.active : styles.normal}
             disabled={currentPage === lastPage}
           >
             Last Page

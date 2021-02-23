@@ -2,12 +2,9 @@ import React, { useState, useEffect } from "react";
 import Chart from "chart.js";
 import Axios from "axios";
 
-import {
-  AGGREGATOR_DASHBOARD,
-  GET_SUB_AGENTS,
-} from "../../store/api/constants";
-import formatToCurrency from "../../util/formatToCurrency";
-import bal from "../../assets/images/bills.svg";
+import { AGGREGATOR_DASHBOARD, GET_SUB_AGENTS } from "../utils/constants";
+import formatToCurrency from "../utils/formatToCurrency";
+import bal from "../assets/images/bills.svg";
 import styles from "./Dashboard.module.scss";
 
 const Dashboard = () => {

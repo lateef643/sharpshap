@@ -1,27 +1,33 @@
 import AddUser from "../features/users/AddUser";
-import ListUsers from "../features/users/ListUsers";
+import Users from "../features/users/index";
 import FundWallet from "../features/services/fundWallet/FundWallet";
-import CashCall from "../features/services/cashcall/CashCall";
-import FundsTransfer from "../features/services/transfer/FundsTransfer";
-import BuyAirtime from "../features/services/airtime/BuyAirtime";
-import ElectricityPayment from "../features/services/electricity/ElectricityPayment";
-import BuyData from "../features/services/data/BuyData";
-import RechargeCable from "../features/services/cable/RechargeCable";
+// import CashCall from "../features/services/cashcall/CashCall";
+// import Loan from "../features/services/loan/index";
+import FundsTransfer from "../features/services/transfer/index";
+import BuyAirtime from "../features/services/airtime/index";
+import ElectricityPayment from "../features/services/electricity/index";
+import BuyData from "../features/services/data/index";
+import RechargeCable from "../features/services/cable/index";
 import BuyInsurance from "../features/services/insurance/BuyInsurance";
-import WalletLog from "../features/logs/wallet/WalletLog";
+import WalletLog from "../features/logs/wallet/index";
 import TransactionLog from "../features/logs/transactions/TransactionLog";
 import Profile from "../features/profile/Profile";
 import WalletTransfer from "../features/services/walletTransfer/WalletTransfer";
-import NewTransaction from "../pages/NewTransaction";
+// import NewTransaction from "../pages/NewTransaction";
 import BillPayment from "../pages/BillPayment";
 import AirtimeData from "../pages/AirtimeData";
+import LoanPage from "../pages/Loan";
+import LoanHistory from "../features/services/loan/LoanHistory";
+import RepaymentHistory from "../features/services/loan/RepaymentHistory";
+
 import Overview from "../pages/Overview";
 import Contact from "../pages/Contact";
-import Terminals from "../pages/Terminals";
-// import Betting from "../components/content/services/betting/Betting";
-import CashCallPage from "../pages/CashCall";
-import ActivityLog from "../features/logs/wallet/ActivityLog";
-import TransactionDetails from "../components/shared/TransactionDetails";
+// import Terminals from "../pages/Terminals";
+import Betting from "../features/services/betting/index";
+import PlaceBet from "../features/services/betting/play/Play";
+// import CashCallPage from "../pages/CashCall";
+// import ActivityLog from "../features/logs/wallet/ActivityLog";
+import TransactionDetails from "../components/common/TransactionDetails";
 // import AggregatorDashboard from "../features/aggregator/Dashboard";
 // import Aggregator from "../features/aggregator/index";
 // import CreateAgent from "../features/aggregator/createAgent/index";
@@ -47,17 +53,17 @@ const routes = [
     component: Contact,
   },
   {
-    path: "/add-user",
-    component: AddUser,
+    path: "/users",
+    component: Users,
   },
   {
     path: "/list-users",
-    component: ListUsers,
+    component: AddUser,
   },
-  {
-    path: "/my-terminals",
-    component: Terminals,
-  },
+  // {
+  //   path: "/my-terminals",
+  //   component: Terminals,
+  // },
   {
     path: "/transactions",
     exact: true,
@@ -68,11 +74,11 @@ const routes = [
     exact: true,
     component: TransactionLog,
   },
-  {
-    path: "/transactions/new",
-    exact: true,
-    component: NewTransaction,
-  },
+  // {
+  //   path: "/transactions/new",
+  //   exact: true,
+  //   component: NewTransaction,
+  // },
   {
     path: "/profile",
     component: Profile,
@@ -97,10 +103,10 @@ const routes = [
     exact: true,
     component: WalletLog,
   },
-  {
-    path: "/activity-log",
-    component: ActivityLog,
-  },
+  // {
+  //   path: "/activity-log",
+  //   component: ActivityLog,
+  // },
   //passing props to transaction details because we need match to extract id
   {
     path: "/transaction-details/:id",
@@ -138,19 +144,38 @@ const routes = [
     path: "/airtime-data",
     component: AirtimeData,
   },
-  // {
-  //   path: "/betting",
-  //   component: Betting
-  // }
   {
-    path: "/cash-call",
+    path: "/loan",
+    component: LoanPage,
     exact: true,
-    component: CashCallPage,
   },
   {
-    path: "/cash-call/:id",
-    component: CashCall,
+    path: "/loan/history",
+    component: LoanHistory,
   },
+  {
+    path: "/loan/repayment-history",
+    component: RepaymentHistory,
+  },
+  {
+    path: "/betting",
+    component: Betting,
+    exact: true,
+  },
+  {
+    path: "/betting/bet",
+    component: PlaceBet,
+    exact: true,
+  },
+  // {
+  //   path: "/cash-call",
+  //   exact: true,
+  //   component: CashCallPage,
+  // },
+  // {
+  //   path: "/cash-call/:id",
+  //   component: CashCall,
+  // },
   // {
   //   path: "/aggregator",
   //   component: Aggregator,
