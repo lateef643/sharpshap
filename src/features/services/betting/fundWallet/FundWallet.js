@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
+import { useToasts } from "react-toast-notifications";
 
 import { FUND_BETTING_WALLET } from "../../../../utils/constants";
 import FundWalletReducer, { initialFormState } from "./wallet-reducer.js";
@@ -20,15 +21,23 @@ export const FundWallet = () => {
   );
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
+  const { addToast } = useToasts();
 
   const handleOnSubmit = () => {
     setLoading(true);
     const { accountId, amount, phone } = FundWalletFormState;
+    let recipient;
+
+    if (accountId.indexOf("234") === 0) recipient = accountId;
+    if (accountId.indexOf("0") === 0)
+      recipient = `234${accountId.substring(1)}`;
+    if (accountId.indexOf("0") !== 0 && accountId.indexOf("234") !== 0)
+      recipient = `234${accountId}`;
 
     const req = {
-      bank_code: "9001",
       amount,
-      recipient: phone,
+      bank_code: "9001",
+      recipient,
     };
 
     (async function fundWallet() {
@@ -38,6 +47,10 @@ export const FundWallet = () => {
         setSuccessData(res.data.data);
         setComponentToRender("success");
       } catch (e) {
+        addToast(e.response.data.message, {
+          appearance: "error",
+          autoDismiss: true,
+        });
         setLoading(false);
         setComponentToRender("failed");
       }

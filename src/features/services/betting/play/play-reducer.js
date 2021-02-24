@@ -2,7 +2,7 @@ export const initialState = {
   bets: [],
   provider: "54000",
   amount: "",
-  phone: "2348068601341",
+  phone: "",
   winnings: "",
   oddsTotal: "",
 };

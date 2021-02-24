@@ -70,6 +70,7 @@ const Header = ({
   return (
     <header className={styles.header}>
       <div className={styles.container}>
+        <div className={styles.agentName}>{name}</div>
         <div
           className={styles.notification}
           onClick={handleToggleNotifications}

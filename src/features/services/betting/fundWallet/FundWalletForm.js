@@ -20,7 +20,14 @@ export const FundWalletForm = (props) => {
   const handleOnContinue = (e) => {
     e.preventDefault();
 
-    const properties = Object.keys(state);
+    const { accountId, amount } = state;
+
+    const validationState = {
+      accountId,
+      amount,
+    };
+
+    const properties = Object.keys(validationState);
     const errors = validateFormData(state, properties);
 
     setErrors(errors);
@@ -45,7 +52,7 @@ export const FundWalletForm = (props) => {
           value={state.accountId}
           type="text"
           onChange={handleStateChange}
-          placeholder="Account ID"
+          placeholder="e.g 08012345678"
           className={
             errors.accountId
               ? `${styles.outlineRed} ${styles.input}`
@@ -84,6 +91,7 @@ export const FundWalletForm = (props) => {
           type="text"
           value={state.phone}
           onChange={handleStateChange}
+          placeholder="e.g 08012345678"
           className={
             errors.beneficiaryBankCode
               ? `${styles.outlineRed} ${styles.input}`

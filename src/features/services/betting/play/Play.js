@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useReducer } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
+import { useToasts } from "react-toast-notifications";
 
 import { setDisplayModal } from "../../../../actions/modal";
 
@@ -26,6 +27,8 @@ export const Play = ({ displayModal }) => {
   const [loading, setLoading] = useState(false);
   const [bookingCode, setBookingCode] = useState("");
   const [eventsLoading, setEventsLoading] = useState(false);
+  const [bookingLoading, setBookingLoading] = useState(false);
+  const { addToast } = useToasts();
 
   useEffect(() => {
     let isCancelled = false;
@@ -124,7 +127,7 @@ export const Play = ({ displayModal }) => {
       const payload = {
         provider,
         amount,
-        phone,
+        phone: `234${phone.substr(1)}`,
         bets,
       };
 
@@ -139,6 +142,10 @@ export const Play = ({ displayModal }) => {
         setDisplayBettingReceipt(true);
         setLoading(false);
       } catch (e) {
+        addToast(e.response.data.message, {
+          appearance: "error",
+          autoDismiss: true,
+        });
         setLoading(false);
       }
     })();
@@ -149,7 +156,7 @@ export const Play = ({ displayModal }) => {
   };
 
   const fetchBetslipFromCode = () => {
-    setLoading(true);
+    setBookingLoading(true);
 
     (async function fetchSlip() {
       const req = {
@@ -182,7 +189,7 @@ export const Play = ({ displayModal }) => {
         // console.log(e.response);
         // setLoading(false);
       } finally {
-        setLoading(false);
+        setBookingLoading(false);
       }
     })();
   };
@@ -363,6 +370,16 @@ export const Play = ({ displayModal }) => {
                         placeholder="0.00"
                       />
                     </div>
+                    <div>
+                      <label>Phone:</label>
+                      <input
+                        name="phone"
+                        onChange={handleUpdateState}
+                        value={playState.phone}
+                        type="text"
+                        placeholder="e.g 08012345678"
+                      />
+                    </div>
                   </div>
                   {playState.amount ? (
                     <div className={styles.amountDetails}>
@@ -479,7 +496,9 @@ export const Play = ({ displayModal }) => {
                   onChange={(e) => handleBookingCodeChange(e)}
                 />
               </div>
-              <button type="submit">{loading ? "Loading..." : "Submit"}</button>
+              <button type="submit">
+                {bookingLoading ? "Loading..." : "Submit"}
+              </button>
             </form>
           </div>
         </div>
