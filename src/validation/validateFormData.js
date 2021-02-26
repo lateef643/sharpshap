@@ -145,6 +145,20 @@ const validateFormData = (formData, properties) => {
         error: true,
         text: `${property} must be 11 digits`,
       };
+    } else if (property === "loanAmount" && !parseInt(formData[property])) {
+      errors[property] = {
+        error: true,
+        text: `Please enter a valid amount`,
+      };
+    } else if (
+      property === "loanAmount" &&
+      parseInt(formData[property]) &&
+      parseInt(formData[property]) > 150000
+    ) {
+      errors[property] = {
+        error: true,
+        text: `Maximum loan amount is NGN150,000`,
+      };
     } else if (!formData[property]) {
       errors[property] = {
         error: true,

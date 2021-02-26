@@ -142,7 +142,7 @@ export const Play = ({ displayModal }) => {
         setDisplayBettingReceipt(true);
         setLoading(false);
       } catch (e) {
-        addToast(e.response.data.message, {
+        addToast(e.response.data.message || "An error occurred", {
           appearance: "error",
           autoDismiss: true,
         });

@@ -12,7 +12,7 @@ import styles from "./AgentLoan.module.scss";
 
 export const AgentLoan = ({ agentUuid }) => {
   const [validationErrors, setValidationErrors] = useState({ errors: true });
-  const [formState, setFormState] = useState({});
+  const [formState, setFormState] = useState({ loanAmount: "", duration: "" });
   const [loading, setLoading] = useState(false);
   const { addToast } = useToasts();
 
@@ -37,7 +37,9 @@ export const AgentLoan = ({ agentUuid }) => {
     setLoading(true);
 
     (async function request() {
-      const payload = { ...formState, identifier: agentUuid };
+      const { loanAmount: amount, duration } = formState;
+
+      const payload = { amount, duration, identifier: agentUuid };
 
       try {
         const res = await axios.post(LOAN_APPLICATION, payload);
@@ -69,14 +71,14 @@ export const AgentLoan = ({ agentUuid }) => {
           Amount
         </label>
         <input
-          name="amount"
+          name="loanAmount"
           className={styles.input}
           type="text"
-          value={formState.amount}
+          value={formState.loanAmount}
           onChange={handleOnChange}
         />
-        {validationErrors.amount && (
-          <p className={styles.errorText}>{validationErrors.amount.text}</p>
+        {validationErrors.loanAmount && (
+          <p className={styles.errorText}>{validationErrors.loanAmount.text}</p>
         )}
       </div>
       <div className={styles.formGroup}>
@@ -92,11 +94,6 @@ export const AgentLoan = ({ agentUuid }) => {
         >
           <option value="">Select duration</option>
           <option value="1">1 month</option>
-          <option value="2">2 months</option>
-          <option value="3">3 months</option>
-          <option value="4">4 months</option>
-          <option value="5">5 months</option>
-          <option value="6">6 months</option>
         </select>
         {validationErrors.duration && (
           <p className={styles.errorText}>{validationErrors.duration.text}</p>

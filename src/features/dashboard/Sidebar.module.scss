@@ -2,25 +2,25 @@
 @import "../../assets/styles/config/breakpoints";
 @import "../../assets/styles/config/variables";
 
-@-webkit-keyframes slide {
-  0% {
-    transform: translateX(-100%);
-  }
+// @-webkit-keyframes slide {
+//   0% {
+//     transform: translateX(-100%);
+//   }
 
-  100% {
-    transform: translateX(0%);
-  }
-}
+//   100% {
+//     transform: translateX(0%);
+//   }
+// }
 
-@keyframes slide {
-  0% {
-    transform: translateX(-100%);
-  }
+// @keyframes slide {
+//   0% {
+//     transform: translateX(-100%);
+//   }
 
-  100% {
-    transform: translateX(0%);
-  }
-}
+//   100% {
+//     transform: translateX(0%);
+//   }
+// }
 
 .sidebar {
   flex: 0 0 19rem;
@@ -29,13 +29,13 @@
   // background: $content-background-color;
   position: relative;
   font-family: "Nunito", sans-serif;
-  -webkit-animation: slide 0.1s ease-in-out;
-  animation: slide 0.1s ease-in-out;
+  // -webkit-animation: slide 0.1s ease-in-out;
+  // animation: slide 0.1s ease-in-out;
   background: #fff;
 
-  // @media print {
-  //   display: none;
-  // }
+  @media print {
+    display: none;
+  }
 
   @include respond-custom(1000px) {
     width: 23rem;

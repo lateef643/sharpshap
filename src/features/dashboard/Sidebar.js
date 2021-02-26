@@ -15,12 +15,16 @@ export const Sidebar = ({ agentType }) => {
     window.addEventListener("resize", (e) => {
       setWidth(window.innerWidth);
 
-      if (window.innerWidth > 1000) {
+      if (window.innerWidth === 1000) {
         setIsOpen(true);
-      } else {
+      } else if (window.innerWidth < 1000) {
         setIsOpen(false);
       }
     });
+
+    return () => {
+      window.removeEventListener("resize");
+    };
   }, []);
 
   return (

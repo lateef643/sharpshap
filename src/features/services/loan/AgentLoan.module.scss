@@ -1,1 +1,11 @@
 @import "../../../assets/styles/generic/form.scss";
+
+.errorText {
+  margin-top: 0.5rem;
+  color: red;
+  font-size: 1.3rem;
+
+  &::first-letter {
+    text-transform: capitalize;
+  }
+}
