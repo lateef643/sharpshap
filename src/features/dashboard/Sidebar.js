@@ -23,7 +23,9 @@ export const Sidebar = ({ agentType }) => {
     });
 
     return () => {
-      window.removeEventListener("resize");
+      window.removeEventListener("resize", () => {
+        console.log("event");
+      });
     };
   }, []);
 
