@@ -31,23 +31,24 @@ export const TransactionLog = ({
   const [pageChangeLoading, setPageChangeLoading] = useState(false);
   const [transactionTypeFilter, setTransactionTypeFilter] = useState("");
   const [isOpen, setIsOpen] = useState(true);
-  const [selectedDateFrom, handleSelectedDateFrom] = useState(() => {
-    const newDate = new Date();
-    const yearDate = startOfYear(newDate);
-
-    return yearDate;
-  });
-  const [selectedDateTo, handleSelectedDateTo] = useState(new Date());
+  const [selectedDateFrom, handleSelectedDateFrom] = useState("");
+  const [selectedDateTo, handleSelectedDateTo] = useState("");
 
   const firstPage = 1;
 
   useEffect(() => {
     setPageChangeLoading(true);
 
-    const formattedDates = convertDatesToString().split(" ");
+    let formattedDates;
+    let from;
+    let to;
 
-    const from = formattedDates[0];
-    const to = formattedDates[1];
+    if (selectedDateFrom && selectedDateTo) {
+      formattedDates = convertDatesToString().split(" ");
+
+      from = formattedDates[0];
+      to = formattedDates[1];
+    }
 
     const params = {};
 
@@ -194,23 +195,25 @@ export const TransactionLog = ({
               <label className={styles.inputGroup}>
                 From:{" "}
                 <DatePicker
-                  views={["date", "year", "month"]}
-                  variant="inline"
+                  disableFuture
+                  clearLabel
+                  openTo="date"
+                  format="dd/MM/yyyy"
+                  views={["year", "month", "date"]}
                   value={selectedDateFrom}
                   onChange={handleSelectedDateFrom}
-                  format="dd/MM/yyyy"
-                  disableFuture={true}
                 />
               </label>
               <label className={styles.inputGroup}>
                 To:{" "}
                 <DatePicker
-                  views={["date", "year", "month"]}
-                  variant="inline"
+                  disableFuture
+                  clearLabel
+                  openTo="date"
+                  format="dd/MM/yyyy"
+                  views={["year", "month", "date"]}
                   value={selectedDateTo}
                   onChange={handleSelectedDateTo}
-                  format="dd/MM/yyyy"
-                  disableFuture={true}
                 />
               </label>
             </div>

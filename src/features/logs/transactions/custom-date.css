@@ -5,3 +5,7 @@
 .MuiInput-underline::before {
   border-bottom: 0 !important;
 }
+
+.MuiFormHelperText-root.Mui-error {
+  display: none;
+}
