@@ -4,7 +4,7 @@ import { ThreeDots } from "svg-loaders-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { DatePicker } from "@material-ui/pickers";
-import { startOfMonth } from "date-fns";
+import { startOfYear } from "date-fns";
 
 import formatToCurrency from "../../../utils/formatToCurrency";
 import ExportToExcel from "../../../components/common/ExportToExcel";
@@ -33,9 +33,9 @@ export const TransactionLog = ({
   const [isOpen, setIsOpen] = useState(true);
   const [selectedDateFrom, handleSelectedDateFrom] = useState(() => {
     const newDate = new Date();
-    const monthDate = startOfMonth(newDate);
+    const yearDate = startOfYear(newDate);
 
-    return monthDate;
+    return yearDate;
   });
   const [selectedDateTo, handleSelectedDateTo] = useState(new Date());
 

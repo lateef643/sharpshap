@@ -23,10 +23,10 @@ const Balance = ({
       ? vipShield
       : flexShield;
   const agentClassificationText =
-    agentClassificationLowercase === "Premium Agent"
-      ? premiumShield
-      : agentClassificationLowercase === "VIP Agent"
-      ? vipShield
+    agentClassificationLowercase === "premium"
+      ? "Premium Agent"
+      : agentClassificationLowercase === "vip"
+      ? "VIP Agent"
       : "Flex Agent";
 
   const handleOnClick = () => {
