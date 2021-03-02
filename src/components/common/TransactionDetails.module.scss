@@ -6,7 +6,7 @@
   margin-top: 2rem;
   padding: 2rem 0;
   width: 50rem;
-  height: 53rem;
+  height: 56rem;
 
   @include respond(phone-large) {
     width: 95%;
@@ -39,4 +39,24 @@
   margin-right: 1rem;
   width: 2rem;
   vertical-align: middle;
+}
+
+.requery {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.9rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid green;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  & > svg {
+    width: 1.5rem;
+    margin-left: 1rem;
+  }
 }

@@ -675,7 +675,8 @@
       visibility: hidden;
       border-radius: 5px;
 
-      a {
+      a,
+      div {
         cursor: pointer;
         text-decoration: none;
         display: block;
@@ -685,6 +686,17 @@
 
         &:hover {
           background-color: #f0efefe7;
+        }
+      }
+
+      div {
+        display: flex;
+        align-items: center;
+
+        & > svg {
+          width: 2rem;
+          display: inline-block;
+          margin-left: 1rem;
         }
       }
     }

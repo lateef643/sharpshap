@@ -289,3 +289,8 @@ export const CHECK_ELIGIBILITY =
 //application
 export const LOAN_APPLICATION =
   "https://loanserve.cicoserve.xyz/api/v1/loans/apply";
+
+  //requery transactions
+  export const REQUERY_TRANSACTION_STATUS = `${path}/transactions/verify`
+
+  
