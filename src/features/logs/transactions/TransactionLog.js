@@ -4,14 +4,17 @@ import { ThreeDots } from "svg-loaders-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { DatePicker } from "@material-ui/pickers";
-import { startOfYear } from "date-fns";
+// import { startOfYear } from "date-fns";
 
 import formatToCurrency from "../../../utils/formatToCurrency";
 import ExportToExcel from "../../../components/common/ExportToExcel";
 import styles from "./TransactionLog.module.scss";
 import { setCurrentPage } from "../../../actions/page";
 import { setTransactionLog } from "../../../actions/transaction";
-import { AGENT_TRANSACTION_HISTORY } from "../../../utils/constants";
+import {
+  AGENT_TRANSACTION_HISTORY,
+  REQUERY_TRANSACTION_STATUS,
+} from "../../../utils/constants";
 import "../../../assets/styles/generic/daterangepicker.scss";
 import arrowDown from "../../../assets/icons/arrowdown.svg";
 import arrowUp from "../../../assets/images/arrowUp.svg";
@@ -33,6 +36,8 @@ export const TransactionLog = ({
   const [isOpen, setIsOpen] = useState(true);
   const [selectedDateFrom, handleSelectedDateFrom] = useState("");
   const [selectedDateTo, handleSelectedDateTo] = useState("");
+  const [requeryLoading, setRequeryLoading] = useState(false);
+  const [refresh, setRefresh] = useState(false);
 
   const firstPage = 1;
 
@@ -84,7 +89,13 @@ export const TransactionLog = ({
         setPageChangeLoading(false);
       }
     })();
-  }, [transactionTypeFilter, selectedDateTo, selectedDateFrom, currentPage]);
+  }, [
+    transactionTypeFilter,
+    selectedDateTo,
+    selectedDateFrom,
+    currentPage,
+    refresh,
+  ]);
 
   //dispatching to redux state because we need transactions log to get transactionDetails
   useEffect(() => {
@@ -138,6 +149,23 @@ export const TransactionLog = ({
     { name: "Reference", value: "reference" },
     { name: "Type", value: "type" },
   ];
+
+  const handleRequeryTransactionStatus = async (id) => {
+    setRequeryLoading(true);
+
+    const payload = {
+      transaction_id: id,
+    };
+    try {
+      const res = await axios.post(REQUERY_TRANSACTION_STATUS, payload);
+
+      if (res) setRefresh(!refresh);
+    } catch (e) {
+      // console.log(e)
+    } finally {
+      setRequeryLoading(false);
+    }
+  };
 
   return (
     <div className={styles.container}>
@@ -285,6 +313,18 @@ export const TransactionLog = ({
                         >
                           View Details
                         </Link>
+                        {transaction.status === "pending" && (
+                          <div
+                            onClick={() => {
+                              handleRequeryTransactionStatus(
+                                transaction.reference
+                              );
+                            }}
+                          >
+                            {requeryLoading && <ThreeDots fill="#3E215B" />}
+                            <span>Re-query transaction</span>
+                          </div>
+                        )}
                       </div>
                     </div>
                   </div>

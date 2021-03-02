@@ -77,9 +77,12 @@ export const FundsTransferCompleted = (props) => {
         displayValue={false}
       />
       <div className={styles.action}>
-        <Link to="/" className={`${styles.buttonAction} ${styles.buttonHome}`}>
-          Home
-        </Link>
+        <div
+          className={`${styles.buttonAction} ${styles.buttonHome}`}
+          onClick={() => window.print()}
+        >
+          Print
+        </div>
         <button
           onClick={() => setComponentToRender("form")}
           className={`${styles.buttonAction} ${styles.buttonRestart}`}
