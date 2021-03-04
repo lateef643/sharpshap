@@ -15,8 +15,7 @@ import routes from "../../routes/routes";
 
 // import back from "../../assets/icons/back.svg";
 
-import Overlay from "./Overlay";
-import Modal from "./Modal";
+import Overlay from "./modal/index";
 
 import styles from "./Main.module.scss";
 
@@ -103,8 +102,7 @@ export const Main = ({
                 })}
               </Switch>
             </div>
-            <Overlay />
-            <Modal />
+            {overlay && <Overlay />}
           </div>
         </section>
       </main>

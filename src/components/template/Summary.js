@@ -1,40 +1,24 @@
-import React from "react";
-import PropTypes from "prop-types";
-
 import Submit from "../../../components/common/Button";
 
-import back from "../../../assets/images/left-arrow.svg";
-import generateBankImageUrl from "./generateBankImageUrl";
 import formatToCurrency from "../../../utils/formatToCurrency";
+
 import info from "../../../assets/images/tooltip-icon.svg";
 
-import styles from "./FundsTransferSummary.module.scss";
+import styles from "./Summary.module.scss";
 
-export const FundsTransferSummary = (props) => {
-  const {
-    FundsTransferFormState: state,
-    loading,
-    setComponentToRender,
-    handleOnSubmit,
-    transactionCost,
-  } = props;
-
-  const bankImageUrl = generateBankImageUrl(state.beneficiaryBankCode);
+const Status = ({ state, loading, handleOnSubmit }) => {
+  const formState = {
+    accountName: "Lagbaja Nothing for you",
+    bankName: "Eco for show",
+    accountNumber: "Nathething",
+    phone: "08028998989",
+    amount: "100000",
+    transactionCost: "344",
+    total: "2000000",
+  };
 
   return (
     <div className={styles.container}>
-      <div
-        className={styles.back}
-        onClick={() => {
-          setComponentToRender("form");
-        }}
-      >
-        <img className={styles.backIcon} src={back} alt="" />
-        <span className={styles.backText}>Back</span>
-      </div>
-      <div className={styles.logoContainer}>
-        <img className={styles.logo} src={bankImageUrl} alt="" />
-      </div>
       <div className={styles.heading}>
         <div className={styles.headingIconContainer}>
           <img className={styles.headingIcon} src={info} alt="" />
@@ -46,32 +30,32 @@ export const FundsTransferSummary = (props) => {
       <div className={styles.content}>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Account Name:</span>
-          <span className={styles.contentDetails}>{state.accountName}</span>
+          <span className={styles.contentDetails}>{formState.accountName}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Bank:</span>
-          <span className={styles.contentDetails}>
-            {state.beneficiaryBankName}
-          </span>
+          <span className={styles.contentDetails}>{formState.bankName}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Account Number:</span>
-          <span className={styles.contentDetails}>{state.accountNumber}</span>
+          <span className={styles.contentDetails}>
+            {formState.accountNumber}
+          </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Phone Number:</span>
-          <span className={styles.contentDetails}>{state.phone}</span>
+          <span className={styles.contentDetails}>{formState.phone}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Amount:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(state.amount)}
+            {formatToCurrency(formState.amount)}
           </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Transaction cost:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(transactionCost)}
+            {formatToCurrency(formState.transactionCost)}
           </span>
         </div>
         <div className={`${styles.contentItem} ${styles.total}`}>
@@ -79,22 +63,21 @@ export const FundsTransferSummary = (props) => {
             Total:
           </span>
           <span className={`${styles.contentDetails} ${styles.totalDetails}`}>
-            {formatToCurrency(state.total)}
+            {formatToCurrency(formState.total)}
           </span>
         </div>
       </div>
-      <Submit disabled={false} onClick={handleOnSubmit}>
+
+      <Submit
+        onClick={(e) => {
+          e.preventDefault();
+          handleOnSubmit();
+        }}
+      >
         {loading ? "Loading" : "Proceed"}
       </Submit>
     </div>
   );
 };
 
-FundsTransferSummary.propTypes = {
-  FundsTransferFormState: PropTypes.object,
-  loading: PropTypes.bool,
-  handleOnSubmit: PropTypes.func,
-  transactionCost: PropTypes.number,
-};
-
-export default FundsTransferSummary;
+export default Status;
