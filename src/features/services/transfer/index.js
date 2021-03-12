@@ -16,7 +16,7 @@ import styles from "./index.module.scss";
 export const FundsTransfer = ({ changeCurrentPage }) => {
   const TRANSACTION_COST = 35;
   let renderedComponent;
-  const [componentToRender, setComponentToRender] = useState("completed");
+  const [componentToRender, setComponentToRender] = useState("form");
   const [FundsTransferFormState, dispatch] = useReducer(
     FundsTransferReducer,
     initialFormState

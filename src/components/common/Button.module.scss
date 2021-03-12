@@ -7,14 +7,10 @@
   cursor: pointer;
   color: #fff;
   font-size: 1.5rem;
-  border-radius: 0.5rem;
+  border-radius: 0.9rem;
   font-family: inherit;
 
-  // &:disabled {
-  //   background-color: lighten(#0047b3, 1%);
-  // }
-
   &:disabled {
-    background: orange;
+    background-color: lighten(#0047b3, 1%);
   }
 }

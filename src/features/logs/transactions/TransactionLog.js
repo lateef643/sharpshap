@@ -13,7 +13,7 @@ import { setCurrentPage } from "../../../actions/page";
 import { setTransactionLog } from "../../../actions/transaction";
 import {
   AGENT_TRANSACTION_HISTORY,
-  REQUERY_TRANSACTION_STATUS,
+  // REQUERY_TRANSACTION_STATUS,
 } from "../../../utils/constants";
 import "../../../assets/styles/generic/daterangepicker.scss";
 import arrowDown from "../../../assets/icons/arrowdown.svg";
@@ -36,8 +36,8 @@ export const TransactionLog = ({
   const [isOpen, setIsOpen] = useState(true);
   const [selectedDateFrom, handleSelectedDateFrom] = useState("");
   const [selectedDateTo, handleSelectedDateTo] = useState("");
-  const [requeryLoading, setRequeryLoading] = useState(false);
-  const [refresh, setRefresh] = useState(false);
+  // const [requeryLoading, setRequeryLoading] = useState(false);
+  // const [refresh, setRefresh] = useState(false);
 
   const firstPage = 1;
 
@@ -94,7 +94,7 @@ export const TransactionLog = ({
     selectedDateTo,
     selectedDateFrom,
     currentPage,
-    refresh,
+    // refresh,
   ]);
 
   //dispatching to redux state because we need transactions log to get transactionDetails
@@ -150,22 +150,22 @@ export const TransactionLog = ({
     { name: "Type", value: "type" },
   ];
 
-  const handleRequeryTransactionStatus = async (id) => {
-    setRequeryLoading(true);
+  // const handleRequeryTransactionStatus = async (id) => {
+  //   setRequeryLoading(true);
 
-    const payload = {
-      transaction_id: id,
-    };
-    try {
-      const res = await axios.post(REQUERY_TRANSACTION_STATUS, payload);
+  //   const payload = {
+  //     transaction_id: id,
+  //   };
+  //   try {
+  //     const res = await axios.post(REQUERY_TRANSACTION_STATUS, payload);
 
-      if (res) setRefresh(!refresh);
-    } catch (e) {
-      // console.log(e)
-    } finally {
-      setRequeryLoading(false);
-    }
-  };
+  //     if (res) setRefresh(!refresh);
+  //   } catch (e) {
+  //     // console.log(e)
+  //   } finally {
+  //     setRequeryLoading(false);
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
@@ -313,7 +313,7 @@ export const TransactionLog = ({
                         >
                           View Details
                         </Link>
-                        {transaction.status === "pending" && (
+                        {/* {transaction.status === "pending" && (
                           <div
                             onClick={() => {
                               handleRequeryTransactionStatus(
@@ -324,7 +324,7 @@ export const TransactionLog = ({
                             {requeryLoading && <ThreeDots fill="#3E215B" />}
                             <span>Re-query transaction</span>
                           </div>
-                        )}
+                        )} */}
                       </div>
                     </div>
                   </div>

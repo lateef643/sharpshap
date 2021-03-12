@@ -5,12 +5,12 @@ import { Link } from "react-router-dom";
 import cico from "../../assets/images/cico-logo-login.svg";
 import styles from "./TransactionDetails.module.scss";
 import { setCurrentPage } from "../../actions/page";
-import { ThreeDots } from "svg-loaders-react";
+// import { ThreeDots } from "svg-loaders-react";
 
-import {
-  AGENT_TRANSACTION_HISTORY,
-  REQUERY_TRANSACTION_STATUS,
-} from "../../utils/constants";
+// import {
+//   AGENT_TRANSACTION_HISTORY,
+//   REQUERY_TRANSACTION_STATUS,
+// } from "../../utils/constants";
 
 import email from "../../assets/images/email.svg";
 import whatsapp from "../../assets/images/whatsapp.svg";
@@ -18,8 +18,8 @@ import whatsapp from "../../assets/images/whatsapp.svg";
 export const TransactionDetails = ({ changeCurrentPage, match }) => {
   const [transaction, setTransaction] = useState({});
   const [transtype, setTranstype] = useState({});
-  const [requeryLoading, setRequeryLoading] = useState(false);
-  const [transactions, setTransactions] = useState([]);
+  // const [requeryLoading, setRequeryLoading] = useState(false);
+  // const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
     const transactions = JSON.parse(sessionStorage.getItem("transactions"));
@@ -29,7 +29,7 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
 
     setTransaction(transactionItem);
     setTranstype(transactionItem.transtype);
-  }, [transactions]);
+  }, []);
 
   useEffect(() => {
     changeCurrentPage({
@@ -38,36 +38,36 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
     });
   });
 
-  const getTransactionsLog = async () => {
-    try {
-      const res = await axios.get(AGENT_TRANSACTION_HISTORY);
+  // const getTransactionsLog = async () => {
+  //   try {
+  //     const res = await axios.get(AGENT_TRANSACTION_HISTORY);
 
-      const transactions = res.data.data.data;
+  //     const transactions = res.data.data.data;
 
-      sessionStorage.setItem("transactions", JSON.stringify(transactions));
-      setTransactions(transactions);
-    } catch (e) {
-      // console.log(e)
-    }
-  };
+  //     sessionStorage.setItem("transactions", JSON.stringify(transactions));
+  //     setTransactions(transactions);
+  //   } catch (e) {
+  //     // console.log(e)
+  //   }
+  // };
 
-  const handleRequeryTransactionStatus = async (id) => {
-    setRequeryLoading(true);
+  // const handleRequeryTransactionStatus = async (id) => {
+  //   setRequeryLoading(true);
 
-    const payload = {
-      transaction_id: id,
-    };
+  //   const payload = {
+  //     transaction_id: id,
+  //   };
 
-    try {
-      const res = await axios.post(REQUERY_TRANSACTION_STATUS, payload);
+  //   try {
+  //     const res = await axios.post(REQUERY_TRANSACTION_STATUS, payload);
 
-      if (res) getTransactionsLog();
-    } catch (e) {
-      // console.log(e)
-    } finally {
-      setRequeryLoading(false);
-    }
-  };
+  //     if (res) getTransactionsLog();
+  //   } catch (e) {
+  //     // console.log(e)
+  //   } finally {
+  //     setRequeryLoading(false);
+  //   }
+  // };
 
   return (
     <div className={styles.section}>
@@ -144,7 +144,7 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
               </span>
             </div>
           </div>
-          {transaction.status === "pending" && (
+          {/* {transaction.status === "pending" && (
             <div
               className={styles.requery}
               onClick={() => {
@@ -156,7 +156,7 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
               </span>
               {requeryLoading && <ThreeDots fill="#3E215B" />}
             </div>
-          )}
+          )} */}
           <div className={styles.link}>
             <Link to="/" className={styles.linkHome}>
               Go Home

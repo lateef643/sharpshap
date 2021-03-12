@@ -14,6 +14,10 @@
   border-radius: 1rem;
   justify-content: space-between;
 
+  @media print {
+    display: none;
+  }
+
   @include respond(tab) {
     padding: 0 3rem;
     background-position: bottom 0px right 5%;

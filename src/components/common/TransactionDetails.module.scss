@@ -28,6 +28,10 @@
 
 .message {
   margin-top: 3rem;
+
+  @media print {
+    display: none;
+  }
 }
 
 .messageText {
