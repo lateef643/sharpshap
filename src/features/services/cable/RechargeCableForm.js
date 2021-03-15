@@ -47,7 +47,7 @@ export const RechargeCableForm = (props) => {
 
     if (!isCancelled && state.cycle) {
       const selectedCycle = state.cycles.find((cycle) => {
-        return (cycle.name = state.cycle);
+        return cycle.name === state.cycle;
       });
 
       const amount = selectedCycle.amount;
@@ -161,7 +161,7 @@ export const RechargeCableForm = (props) => {
 
       for (var key in selectedPlan.cycles) {
         if (selectedPlan.cycles.hasOwnProperty(key)) {
-          cycles.push({ name: [key], amount: selectedPlan.cycles[key] });
+          cycles.push({ name: key, amount: selectedPlan.cycles[key] });
         }
       }
 
@@ -276,6 +276,7 @@ export const RechargeCableForm = (props) => {
         <FormGroup>
           <Select
             name="cycle"
+            value={state.cycle}
             label="Plan duration"
             handleOnChange={handleFormStateChange}
             error={validationErrors.cycle}
