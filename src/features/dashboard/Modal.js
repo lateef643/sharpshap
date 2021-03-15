@@ -21,11 +21,7 @@ import styles from "./Modal.module.scss";
 
 const Modal = ({ overlay, modal, displayModal }) => {
   return (
-    <div
-      className={
-        overlay ? `${styles.modal} ${styles.displayModal}` : `${styles.modal}`
-      }
-    >
+    <div className={styles.container}>
       <div className={styles.toggleClose}>
         <img
           className={styles.close}

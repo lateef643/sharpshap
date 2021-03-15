@@ -12,6 +12,10 @@
   padding: 0 30px;
   background-color: #fff;
 
+  @media print {
+    display: none;
+  }
+
   @include respond(tab) {
     padding: 0 1rem;
   }

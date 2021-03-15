@@ -1,14 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
-
-// import generateBankImageUrl from "./generateBankImageUrl";
-import cloudbet from "../../../../assets/icons/cloudbet.png";
-import formatToCurrency from "../../../../utils/formatToCurrency";
 import { ThreeDots } from "svg-loaders-react";
 
-import styles from "./FundWalletSummary.module.scss";
+import Submit from "../../../../components/common/Button";
 
-var Barcode = require("react-barcode");
+import back from "../../../../assets/images/left-arrow.svg";
+import info from "../../../../assets/images/tooltip-icon.svg";
+import cloudbet from "../../../../assets/icons/cloudbet.jpg";
+import formatToCurrency from "../../../../utils/formatToCurrency";
+
+import styles from "./FundWalletSummary.module.scss";
 
 export const FundWalletSummary = (props) => {
   const {
@@ -16,13 +17,31 @@ export const FundWalletSummary = (props) => {
     loading,
     handleOnSubmit,
     transactionCost,
+    setComponentToRender,
   } = props;
   const { phone, accountId, amount } = FundWalletFormState;
 
   return (
     <div className={styles.container}>
+      <div
+        className={styles.back}
+        onClick={() => {
+          setComponentToRender("form");
+        }}
+      >
+        <img className={styles.backIcon} src={back} alt="" />
+        <span className={styles.backText}>Back</span>
+      </div>
       <div className={styles.logoContainer}>
-        <img className={styles.bankLogo} src={cloudbet} alt="" />
+        <img className={styles.logo} src={cloudbet} alt="" />
+      </div>
+      <div className={styles.heading}>
+        <div className={styles.headingIconContainer}>
+          <img className={styles.headingIcon} src={info} alt="" />
+        </div>
+        <div className={styles.headingText}>
+          Verify the information before proceeding.
+        </div>
       </div>
       <div className={styles.content}>
         <div className={styles.contentItem}>
@@ -40,37 +59,32 @@ export const FundWalletSummary = (props) => {
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Amount:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(amount)}
+            &#8358;{formatToCurrency(amount)}
           </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Transaction cost:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(transactionCost)}
+            &#8358;{formatToCurrency(transactionCost)}
           </span>
         </div>
       </div>
-      <div className={styles.total}>
-        <span className={styles.totalHeading}>Total:</span>
-        <span className={styles.totalDetails}>{formatToCurrency(amount)}</span>
+      <div className={`${styles.contentItem} ${styles.total}`}>
+        <span className={`${styles.contentHeading} ${styles.totalHeading}`}>
+          Total:
+        </span>
+        <span className={`${styles.contentDetails} ${styles.totalDetails}`}>
+          &#8358;{formatToCurrency(amount)}
+        </span>
       </div>
-      <Barcode
-        value="https://www.cico.ng"
-        width={1.25}
-        height={50}
-        marginTop={30}
-        fontSize={16}
-        displayValue={false}
-      />
-      <button
+      <Submit
         onClick={(e) => {
           e.preventDefault();
           handleOnSubmit();
         }}
-        className={styles.button}
       >
-        {loading ? <ThreeDots /> : "Proceed"}
-      </button>
+        {loading ? <ThreeDots fill="white" /> : "Proceed"}
+      </Submit>
     </div>
   );
 };

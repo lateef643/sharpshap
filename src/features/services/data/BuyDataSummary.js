@@ -1,9 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-
-import formatToCurrency from "../../../utils/formatToCurrency";
 import { ThreeDots } from "svg-loaders-react";
+
+import Submit from "../../../components/common/Button";
+
+import back from "../../../assets/images/left-arrow.svg";
+import info from "../../../assets/images/tooltip-icon.svg";
+import formatToCurrency from "../../../utils/formatToCurrency";
 import generateNetworkImageUrl from "./generateNetworkImageUrl";
 
 import styles from "./BuyDataSummary.module.scss";
@@ -14,16 +18,34 @@ export const BuyDataSummary = (props) => {
     loading,
     handleOnSubmit,
     transactionCost,
+    setComponentToRender,
     service,
   } = props;
   const { phone, amount } = DataPurchaseFormState;
 
-  const bankImageUrl = generateNetworkImageUrl(service);
+  const networkImageUrl = generateNetworkImageUrl(service);
 
   return (
     <div className={styles.container}>
+      <div
+        className={styles.back}
+        onClick={() => {
+          setComponentToRender("form");
+        }}
+      >
+        <img className={styles.backIcon} src={back} alt="" />
+        <span className={styles.backText}>Back</span>
+      </div>
       <div className={styles.logoContainer}>
-        <img className={styles.bankLogo} src={bankImageUrl} alt="" />
+        <img className={styles.logo} src={networkImageUrl} alt="" />
+      </div>
+      <div className={styles.heading}>
+        <div className={styles.headingIconContainer}>
+          <img className={styles.headingIcon} src={info} alt="" />
+        </div>
+        <div className={styles.headingText}>
+          Verify the information before proceeding.
+        </div>
       </div>
       <div className={styles.content}>
         <div className={styles.contentItem}>
@@ -41,29 +63,26 @@ export const BuyDataSummary = (props) => {
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Amount:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(amount)}
-          </span>
-        </div>
-        <div className={styles.contentItem}>
-          <span className={styles.contentHeading}>Transaction cost:</span>
-          <span className={styles.contentDetails}>
-            {formatToCurrency(transactionCost)}
+            &#8358;{formatToCurrency(amount)}
           </span>
         </div>
       </div>
-      <div className={styles.total}>
-        <span className={styles.totalHeading}>Total:</span>
-        <span className={styles.totalDetails}>{formatToCurrency(amount)}</span>
+      <div className={`${styles.contentItem} ${styles.total}`}>
+        <span className={`${styles.contentHeading} ${styles.totalHeading}`}>
+          Total:
+        </span>
+        <span className={`${styles.contentDetails} ${styles.totalDetails}`}>
+          &#8358;{formatToCurrency(amount)}
+        </span>
       </div>
-      <button
+      <Submit
         onClick={(e) => {
           e.preventDefault();
           handleOnSubmit();
         }}
-        className={styles.button}
       >
-        {loading ? <ThreeDots /> : "Continue"}
-      </button>
+        {loading ? <ThreeDots fill="white" /> : "Proceed"}
+      </Submit>
     </div>
   );
 };

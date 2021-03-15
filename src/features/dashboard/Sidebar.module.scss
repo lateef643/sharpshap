@@ -97,6 +97,10 @@
   display: none;
   cursor: pointer;
 
+  @media print {
+    display: none;
+  }
+
   & > img {
     width: 100%;
     height: 100%;

@@ -4,6 +4,15 @@
   display: flex;
   align-items: center;
   justify-content: space-around;
+  background: #fff;
+
+  @media screen and (max-width: 900px) {
+    width: 80rem;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 65rem;
+  }
 }
 
 .section {

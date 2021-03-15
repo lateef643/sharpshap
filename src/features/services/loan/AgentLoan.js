@@ -1,14 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
 import { ThreeDots } from "svg-loaders-react";
 import { connect } from "react-redux";
 import { useToasts } from "react-toast-notifications";
 
+import Form from "../../../components/common/Form";
+import FormGroup from "../../../components/common/FormGroup";
+import Input from "../../../components/common/Input";
+import Select from "../../../components/common/Select";
+import Submit from "../../../components/common/Button";
+
 import validateFormData from "../../../validation/validateFormData";
 import { LOAN_APPLICATION } from "../../../utils/constants";
 
-import styles from "./AgentLoan.module.scss";
+import logo from "../../../assets/images/cico-logo.svg";
 
 export const AgentLoan = ({ agentUuid }) => {
   const [validationErrors, setValidationErrors] = useState({ errors: true });
@@ -65,44 +71,39 @@ export const AgentLoan = ({ agentUuid }) => {
   };
 
   return (
-    <form className={styles.form} autoComplete="off" onSubmit={handleOnSubmit}>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="amount">
-          Amount
-        </label>
-        <input
+    <Form
+      autoComplete="off"
+      title="Funds Transfer"
+      caption="Complete your payment information"
+      handleOnSubmit={handleOnSubmit}
+      logo={logo}
+    >
+      <FormGroup>
+        <Input
           name="loanAmount"
-          className={styles.input}
+          label="Amount"
+          placeholder="Enter amount"
           type="text"
           value={formState.loanAmount}
-          onChange={handleOnChange}
+          handleOnChange={handleOnChange}
+          error={validationErrors.loanAmount}
         />
-        {validationErrors.loanAmount && (
-          <p className={styles.errorText}>{validationErrors.loanAmount.text}</p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="duration">
-          Duration
-        </label>
-        <select
+      </FormGroup>
+      <FormGroup>
+        <Select
           name="duration"
-          className={styles.input}
+          label="Duration"
           type=""
           value={formState.duration}
-          onChange={handleOnChange}
+          handleOnChange={handleOnChange}
+          error={validationErrors.duration}
         >
           <option value="">Select duration</option>
           <option value="1">1 month</option>
-        </select>
-        {validationErrors.duration && (
-          <p className={styles.errorText}>{validationErrors.duration.text}</p>
-        )}
-      </div>
-      <button type="submit" className={styles.button}>
-        {loading ? <ThreeDots /> : "Submit"}
-      </button>
-    </form>
+        </Select>
+      </FormGroup>
+      <Submit type="submit">{loading ? <ThreeDots /> : "Submit"}</Submit>
+    </Form>
   );
 };
 

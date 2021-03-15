@@ -1,7 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import axios from "axios";
-import { ThreeDots } from "svg-loaders-react";
+
+import Form from "../../../components/common/Form";
+import FormGroup from "../../../components/common/FormGroup";
+import Input from "../../../components/common/Input";
+import Select from "../../../components/common/Select";
+import Submit from "../../../components/common/Button";
 
 import { VERIFY_ACCOUNT } from "../../../utils/constants";
 import generateBankImageUrl from "./generateBankImageUrl";
@@ -121,166 +126,84 @@ export const FundsTransferForm = (props) => {
   let bankImageUrl = generateBankImageUrl(state.beneficiaryBankCode);
 
   return (
-    <form
-      className={styles.form}
+    <Form
       autoComplete="off"
-      onSubmit={handleOnContinue}
+      title="Funds Transfer"
+      caption="Complete your payment information"
+      handleOnSubmit={handleOnContinue}
+      logo={bankImageUrl}
     >
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="amount">
-          Amount
-        </label>
-        <div className={styles.formGroupSub}>
-          <select
-            name="currency"
-            onChange={handleFormStateChange}
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
-                : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
-            }
-          >
-            <option value="">NGN</option>
-          </select>
-          <input
-            name="amount"
-            value={state.amount}
-            type="number"
-            onChange={handleFormStateChange}
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-        </div>
-        {validationErrors.amount && (
-          <p className={styles.validationErrorText}>
-            Please enter valid amount
-          </p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="beneficiaryBankCode">
-          Beneficiary bank
-        </label>
-        <div className={styles.formGroupSub}>
-          <img className={styles.selectionImage} src={bankImageUrl} alt="" />
-          <select
-            name="beneficiaryBankCode"
-            onChange={handleFormStateChange}
-            className={
-              validationErrors.beneficiaryBankCode
-                ? `${styles.outlineRed} ${styles.select}`
-                : `${styles.outlineGrey} ${styles.select}`
-            }
-          >
-            <option value="">Select Bank</option>
-            {banksList.map((bank, index) => {
-              return (
-                <option value={bank.code} key={`${index}--${bank.name}`}>
-                  {bank.name}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        {validationErrors.beneficiaryBankCode && (
-          <p className={styles.validationErrorText}>Please select bank</p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="accountNumber">
-          Account Number
-        </label>
-        <input
+      <FormGroup>
+        <Input
+          name="amount"
+          value={state.amount}
+          type="number"
+          label="Amount"
+          placeholder="Enter amount"
+          handleOnChange={handleFormStateChange}
+          error={validationErrors.amount}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Select
+          name="beneficiaryBankCode"
+          label="Beneficiary's bank"
+          handleOnChange={handleFormStateChange}
+        >
+          <option value="">Select Bank</option>
+          {banksList.map((bank, index) => {
+            return (
+              <option value={bank.code} key={`${index}--${bank.name}`}>
+                {bank.name}
+              </option>
+            );
+          })}
+        </Select>
+      </FormGroup>
+      <FormGroup>
+        <Input
           name="accountNumber"
           placeholder="Beneficiary's account number"
           value={state.accountNumber}
           type="text"
-          onChange={handleFormStateChange}
-          className={
-            validationErrors.beneficiaryBankCode
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          label="Account number"
+          error={validationErrors.accountNumber}
+          handleOnChange={handleFormStateChange}
         />
-        {validationErrors.accountNumber && (
-          <p className={styles.validationErrorText}>
-            Please enter account number
-          </p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="accountName">
-          Account Name
-        </label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Input
           name="accountName"
           type="text"
+          label="Account name"
           value={state.accountName}
           disabled={true}
-          className={
-            validationErrors.beneficiaryBankCode
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          loading={accountValidationLoading}
+          error={validationErrors.accountName}
         />
-        {accountValidationLoading && (
-          <div className={styles.loader}>
-            <ThreeDots />
-          </div>
-        )}
-        {validationErrors.accountName && (
-          <p className={styles.validationErrorText}>
-            Account verification failed please check account number and try
-            again
-          </p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="phone">
-          Phone Number
-        </label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Input
           name="phone"
           type="text"
+          label="Phone"
           value={state.phone}
-          onChange={handleFormStateChange}
-          placeholder="Customer's phone number"
-          className={
-            validationErrors.beneficiaryBankCode
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          handleOnChange={handleFormStateChange}
+          placeholder="e.g 08012345678"
+          error={validationErrors.phone}
         />
-        {validationErrors.phone && (
-          <p className={styles.validationErrorText}>
-            Please enter phone number
-          </p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="narration">
-          Narration
-        </label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Input
           name="narration"
+          label="Narration"
           type="text"
           value={state.narration}
-          placeholder="Remark (e.g Transfer funds to ABC)"
-          onChange={handleFormStateChange}
-          className={
-            validationErrors.beneficiaryBankCode
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          placeholder="Remark (e.g Transfer funds to John Doe)"
+          handleOnChange={handleFormStateChange}
         />
-        {validationErrors.narration && (
-          <p className={styles.validationErrorText}>Narration is required</p>
-        )}
-      </div>
-      <button
+      </FormGroup>
+      <Submit
         type="submit"
         className={styles.button}
         disabled={
@@ -295,8 +218,8 @@ export const FundsTransferForm = (props) => {
         }
       >
         Continue
-      </button>
-    </form>
+      </Submit>
+    </Form>
   );
 };
 

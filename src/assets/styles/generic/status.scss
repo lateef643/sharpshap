@@ -1,149 +1,148 @@
 @import "../config/breakpoints";
 @import "../config/mixins";
 
-//real favicon generator
-//whydidyouupdate
-//create pwa
-
-.section {
+.container {
+  background: #fff;
+  width: 36rem;
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  width: 35.2rem;
-  margin: 0 auto;
-  box-shadow: 0px 3px 6px #00000029;
-  padding-bottom: 3rem;
-  background-color: #fff;
-  color: #707070;
+  border-radius: 1.5rem;
+  padding: 2rem 1.8rem;
   font-size: 1.4rem;
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
+  position: relative;
+  overflow: hidden;
 
   @include respond(phone-large) {
     width: 95%;
   }
 
-  @media print {
-    width: 43.6rem;
-
-    .headingImage {
-      display: none !important;
-    }
-    .headingImagePrint {
-      display: initial !important;
-    }
+  @include respond(phone) {
+    width: 99%;
   }
+}
 
-  .imageContainer {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-    flex: 0 0 5%;
-    margin-bottom: 1.5rem;
+.logoContainer {
+  width: 11rem;
+  height: 5rem;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
 
-    .headingImage {
-      position: relative;
-      bottom: 2rem;
-      width: 4rem;
-    }
+.logo {
+  width: 100%;
+  height: 100%;
+}
 
-    .headingImagePrint {
-      margin: 1rem 0;
-      display: none;
-    }
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 7rem);
+  grid-auto-rows: 7rem;
+}
 
-    .headingText {
-      font-size: 1.6rem;
-      font-weight: bold;
-    }
+.indentEffect {
+  height: 3rem;
+  position: absolute;
+  width: 100%;
+  left: 0rem;
+  top: 18%;
+  display: flex;
+  justify-content: space-between;
+  // align-items: center;
+}
+
+.indentEffectLeft,
+.indentEffectRight {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  // -webkit-mask: radial-gradient(circle 50px, transparent 98%, #fff 100%);
+  // mask: radial-gradient(circle 50px, transparent 98%, #fff 100%);
+}
+
+.indentEffectLeft {
+  position: relative;
+  left: -2.2rem;
+}
+
+.indentEffectRight {
+  position: relative;
+  right: -2.2rem;
+}
+
+.contentItem {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  border-top: 1px dashed #e9e9e9;
+  border-bottom: 1px dashed #e9e9e9;
+  justify-content: center;
+
+  &:nth-child(even) {
+    text-align: right;
   }
+}
 
-  .contentContainer {
-    flex: 1;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.contentHeading,
+.totalHeading {
+  margin-bottom: 0.7rem;
+  font-size: 1.3rem;
+  color: #a3a3a3;
+}
 
-    .transactionDetails {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 1rem 0;
-      border-top: 1px solid #7070706c;
+.contentDetails,
+.totalDetails {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgb(20, 20, 143);
+}
 
-      div {
-        flex: 0 0 10%;
-        margin: 0.8rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        text-align: left;
+.total {
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e9e9e9;
+}
 
-        span {
-          display: block;
-        }
-      }
-    }
+.totalDetails {
+  font-weight: 600;
+  font-size: 1.6rem;
+}
 
-    .transactionAmount {
-      flex: 0 0 35%;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 1rem 0;
-      border-top: 1px solid #7070706c;
+.action {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
 
-      div {
-        flex: 0 0 20%;
-        margin: 0.8rem;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        text-align: left;
+.barcodeContainer {
+  width: 100%;
+  overflow: hidden;
+}
 
-        span {
-          display: block;
-        }
-      }
-    }
+.buttonAction {
+  height: 3.5rem;
+  width: 12rem;
+  border-radius: 0.5rem;
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  line-height: 3.5rem;
+  text-align: center;
+  font-family: inherit;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  letter-spacing: 0px;
+}
 
-    .link {
-      margin-top: 2rem;
-      flex: 0 0 15%;
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      padding: 0;
+.buttonHome {
+  background: #312aaa;
+}
 
-      a,
-      div,
-      button {
-        flex: 0 0 45%;
-        display: inline-block;
-        height: 3.1rem;
-        border: 0;
-        border-radius: 5px;
-        font-size: 1.35rem;
-        text-align: center;
-        line-height: 2.8rem;
-        text-decoration: none;
-        color: #fff;
-        cursor: pointer;
-      }
-
-      .linkHome {
-        background-color: #2a58ae;
-      }
-
-      .linkServiceHome {
-        background-color: #00b378;
-      }
-    }
-  }
+.buttonRestart {
+  border: 1px solid #312aaa;
+  background: #fff;
+  color: rgb(41, 41, 184);
 }

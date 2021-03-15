@@ -1,5 +1,5 @@
 export const initialFormState = {
-  disco: "",
+  // disco: "",
   meterNo: "",
   accountName: "",
   paymentPlan: "",

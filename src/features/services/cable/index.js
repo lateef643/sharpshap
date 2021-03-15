@@ -1,18 +1,17 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import axios from "axios";
 
 import RechargeCableReducer, { initialFormState } from "./cable-reducer";
 import { setCurrentPage } from "../../../actions/page";
-import { VEND_STARTIMES } from "../../../utils/constants";
-import { VEND_MULTICHOICE } from "../../../utils/constants";
+import { VEND_STARTIMES, VEND_MULTICHOICE } from "../../../utils/constants";
 import RechargeCableForm from "./RechargeCableForm";
 import RechargeCableStatus from "./RechargeCableStatus";
 import RechargeCableSummary from "./RechargeCableSummary";
 import FailedTransaction from "../../../components/common/FailedTransaction";
 
-export const RechargeCable = ({ changeCurrentPage, service }) => {
+export const RechargeCable = ({ service }) => {
   const TRANSACTION_COST = 0;
   let renderedComponent;
   const [componentToRender, setComponentToRender] = useState("form");
@@ -23,16 +22,8 @@ export const RechargeCable = ({ changeCurrentPage, service }) => {
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    changeCurrentPage({
-      heading: "Recharge Cable",
-      search: false,
-    });
-  }, []);
-
   const getTransactionDate = (date) => {
-    const dateString = date.toString();
-    // const index = dateString.search("GMT");
+    const dateString = date.toLocaleDateString();
     return dateString.slice(0, 24);
   };
 
@@ -45,7 +36,7 @@ export const RechargeCable = ({ changeCurrentPage, service }) => {
       smartCardNumber,
       amount,
       selectedPlanCode,
-      selectedplanDuration,
+      cycle,
       phone,
     } = RechargeCableFormState;
 
@@ -54,17 +45,16 @@ export const RechargeCable = ({ changeCurrentPage, service }) => {
       payload = {
         smartcard: smartCardNumber,
         amount,
-        customer_name: "MOBILE",
-        product_code: selectedPlanCode,
-        period: selectedplanDuration,
-        service: service,
+        phone,
+        code: selectedPlanCode,
+        type: service,
       };
     } else if (service === "startimes") {
       providerApi = VEND_STARTIMES;
       payload = {
         phone,
-        productCode: selectedPlanCode,
-        bouquet: selectedPlanCode,
+        code: selectedPlanCode,
+        cycle,
         amount: amount,
         smartcard: smartCardNumber,
       };
@@ -91,6 +81,7 @@ export const RechargeCable = ({ changeCurrentPage, service }) => {
     case "form":
       renderedComponent = (
         <RechargeCableForm
+          service={service}
           RechargeCableFormState={RechargeCableFormState}
           setFormState={dispatch}
           setComponentToRender={setComponentToRender}
@@ -104,6 +95,8 @@ export const RechargeCable = ({ changeCurrentPage, service }) => {
           loading={loading}
           handleOnSubmit={handleOnSubmit}
           transactionCost={TRANSACTION_COST}
+          service={service}
+          setComponentToRender={setComponentToRender}
         />
       );
       break;
@@ -111,8 +104,10 @@ export const RechargeCable = ({ changeCurrentPage, service }) => {
       renderedComponent = (
         <RechargeCableStatus
           successData={successData}
+          formState={RechargeCableFormState}
           setComponentToRender={setComponentToRender}
           transactionCost={TRANSACTION_COST}
+          service={service}
         />
       );
       break;
@@ -123,7 +118,7 @@ export const RechargeCable = ({ changeCurrentPage, service }) => {
       renderedComponent = null;
   }
 
-  return <div>{renderedComponent}</div>;
+  return <>{renderedComponent}</>;
 };
 
 const mapStateToProps = (state) => {

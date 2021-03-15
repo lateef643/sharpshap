@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
 import formatToCurrency from "../../../utils/formatToCurrency";
 import generateServiceProviderImageUrl from "./generateServiceProviderImageUrl";
@@ -10,86 +8,93 @@ var Barcode = require("react-barcode");
 
 export const ElectricityPaymentCompleted = ({
   successData,
+  setComponentToRender,
   ElectricityPaymentFormState,
   service,
 }) => {
   const {
-    payer,
-    unit_value,
-    unit,
-    token,
-    transactionID,
-    date,
+    reference,
+    status,
     amount,
-    address,
+    energy_token,
+    customer_info,
   } = successData;
-  // const { account } = ElectricityPaymentFormState;
+
+  const { accountName } = ElectricityPaymentFormState;
 
   let serviceImageUrl = generateServiceProviderImageUrl(service);
 
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
-        <img className={styles.bankLogo} src={serviceImageUrl} alt="" />
+        <img className={styles.logo} src={serviceImageUrl} alt="" />
+      </div>
+      <div className={styles.indentEffect}>
+        <span className={styles.indentEffectLeft}></span>
+        <span className={styles.indentEffectRight}></span>
       </div>
       <div className={styles.content}>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Name:</span>
-          <span className={styles.contentDetails}>{payer.trim()}</span>
+          <span className={styles.contentDetails}>{accountName}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Account No:</span>
-          <span className={styles.contentDetails}>{address}</span>
+          <span className={styles.contentDetails}>{customer_info}</span>
         </div>
         <div className={styles.contentItem}>
-          <span className={styles.contentHeading}>Units</span>
-          <span className={styles.contentDetails}>
-            {unit_value + unit || "NIL"}
-          </span>
+          <span className={styles.contentHeading}>Status</span>
+          <span className={styles.contentDetails}>{status}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Token</span>
-          <span className={styles.contentDetails}>{token || "NIL"}</span>
+          <span className={styles.contentDetails}>{energy_token || "NIL"}</span>
         </div>
         <div className={styles.contentItem}>
-          <span className={styles.contentHeading}>Transaction ID:</span>
-          <span className={styles.contentDetails}>{transactionID}</span>
+          <span className={styles.contentHeading}>Reference:</span>
+          <span className={styles.contentDetails}>{reference}</span>
         </div>
-        <div className={styles.contentItem}>
+        {/* <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Date:</span>
           <span className={styles.contentDetails}>{date}</span>
-        </div>
+        </div> */}
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Amount:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(amount)}
+            &#8358;{formatToCurrency(amount)}
           </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Convenience Fee:</span>
-          <span className={styles.contentDetails}>{formatToCurrency(0)}</span>
+          <span className={styles.contentDetails}>
+            &#8358;{formatToCurrency(0)}
+          </span>
         </div>
       </div>
-
       <div className={styles.total}>
         <span className={styles.totalHeading}>Total:</span>
-        <span className={styles.totalDetails}>{formatToCurrency(amount)}</span>
+        <span className={styles.totalDetails}>
+          &#8358;{formatToCurrency(amount)}
+        </span>
       </div>
-
-      <Barcode
-        value="https://www.cico.ng"
-        width={1.25}
-        height={50}
-        marginTop={30}
-        fontSize={16}
-        displayValue={false}
-      />
+      <div className={styles.barCodeContainer}>
+        <Barcode
+          value="https://www.cico.ng"
+          width={1.21}
+          height={50}
+          marginTop={20}
+          displayValue={false}
+        />
+      </div>
       <div className={styles.action}>
-        <Link to="/" className={`${styles.buttonAction} ${styles.buttonHome}`}>
-          Home
-        </Link>
-        <button
+        <div
+          className={`${styles.buttonAction} ${styles.buttonHome}`}
           onClick={() => window.print()}
+        >
+          Print
+        </div>
+        <button
+          onClick={() => setComponentToRender("form")}
           className={`${styles.buttonAction} ${styles.buttonRestart}`}
         >
           New Payment
@@ -99,10 +104,4 @@ export const ElectricityPaymentCompleted = ({
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    service: state.modal.service,
-  };
-};
-
-export default connect(mapStateToProps)(ElectricityPaymentCompleted);
+export default ElectricityPaymentCompleted;

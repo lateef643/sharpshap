@@ -9,6 +9,8 @@ import symbol from "../../../../assets/images/x-symbol-svgrepo-com.svg";
 
 import styles from "./BetslipModal.module.scss";
 
+var Barcode = require("react-barcode");
+
 const BetslipModal = ({ receiptState }) => {
   const [receipt, setReceipt] = useState(receiptState);
   return (
@@ -41,6 +43,15 @@ const BetslipModal = ({ receiptState }) => {
       <div className={styles.possibleWin}>
         <p>Possible win</p>
         <p>&#8358;{receipt.possibleWin}</p>
+      </div>
+      <div className={styles.barCodeContainer}>
+        <Barcode
+          value="https://www.cico.ng"
+          width={1.21}
+          height={50}
+          marginTop={20}
+          displayValue={false}
+        />
       </div>
       <div className={styles.betOptions}>
         <Link to="/betting/bet" className={styles.newBet}>

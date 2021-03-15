@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { ThreeDots } from "svg-loaders-react";
-import wallet from "../../../assets/images/wallet-svgrepo-com.svg";
-import styles from "./WalletTransferForm.module.scss";
+
 import { VALIDATE_AGENT } from "../../../utils/constants";
+
+import logo from "../../../assets/images/cico-logo.svg";
+
+import Form from "../../../components/common/Form";
+import FormGroup from "../../../components/common/FormGroup";
+import Input from "../../../components/common/Input";
+import Submit from "../../../components/common/Button";
 
 export const WalletTransferForm = (props) => {
   const { dispatch, state, setStatus } = props;
@@ -43,7 +48,10 @@ export const WalletTransferForm = (props) => {
               payload: { agent_name: "" },
             });
           }
-          setError(true);
+          setError({
+            error: true,
+            text: "Agent validation failed",
+          });
           setVerificationLoading(false);
         }
       })();
@@ -68,78 +76,55 @@ export const WalletTransferForm = (props) => {
 
   return (
     <div>
-      <form className={styles.form} onSubmit={handleOnProceed}>
+      <Form
+        autoComplete="off"
+        title="Wallet Transfer"
+        caption="Complete your payment information"
+        handleOnSubmit={handleOnProceed}
+        logo={logo}
+      >
         {/* <div className={styles.imageContainer}>
           <img src={wallet} className={styles.image} alt="" />
         </div> */}
-        <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="wallet_id">
-            Wallet ID
-          </label>
-          <input
+        <FormGroup>
+          <Input
+            label="Wallet ID"
             placeholder="Beneficiary's wallet ID"
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
             name="wallet_id"
             type="text"
             value={state.wallet_id}
-            onChange={handleOnChange}
+            handleOnChange={handleOnChange}
           />
-        </div>
-        <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="agent_name">
-            Agent Name
-          </label>
-          <input
-            className={
-              validationErrors.agent_name
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
+        </FormGroup>
+        <FormGroup>
+          <Input
             name="agent_name"
+            label="Recipient's name"
             type="text"
             readOnly={true}
             value={state.agent_name}
-            onChange={handleOnChange}
+            handleOnChange={handleOnChange}
+            loading={verificationLoading}
+            error={error}
           />
-          {verificationLoading && (
-            <span className={styles.loader}>
-              <ThreeDots />
-            </span>
-          )}
-          {error && (
-            <p className={styles.validationErrorText}>
-              Account validation failed, please try again.
-            </p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="amount">
-            Amount
-          </label>
-          <input
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
+        </FormGroup>
+        <FormGroup>
+          <Input
+            label="Amount"
+            placeholder="Amount"
             name="amount"
             type="text"
             value={state.amount}
             onChange={handleOnChange}
           />
-        </div>
-        <button
-          className={styles.button}
+        </FormGroup>
+        <Submit
           type="submit"
           disabled={!state.amount || !state.wallet_id || !state.agent_name}
         >
           Submit
-        </button>
-      </form>
+        </Submit>
+      </Form>
     </div>
   );
 };

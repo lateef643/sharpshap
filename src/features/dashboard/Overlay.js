@@ -2,24 +2,17 @@ import React from "react";
 import { connect } from "react-redux";
 
 import { setDisplayModal } from "../../actions/modal";
+import Modal from "./Modal";
 
 import styles from "./Overlay.module.scss";
 
 const Overlay = ({ overlay, displayModal }) => {
   return (
-    <div
-      className={
-        overlay
-          ? `${styles.overlay} ${styles.displayOverlay}`
-          : `${styles.modal}`
-      }
-      // onClick={(e) => {
-      //   displayModal({
-      //     modal: false,
-      //     overlay: false,
-      //   });
-      // }}
-    ></div>
+    <div className={styles.container}>
+      <div className={styles.wrapper}>
+        <Modal />
+      </div>
+    </div>
   );
 };
 

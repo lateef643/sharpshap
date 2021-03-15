@@ -1,0 +1,87 @@
+.container {
+  width: 38rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 4rem 3rem;
+}
+
+.logoContainer {
+  width: 11rem;
+  height: 5rem;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
+
+.heading {
+  min-height: 4rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(180, 235, 218, 0.534);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: #42997c;
+  margin-bottom: 3rem;
+}
+
+.headingIconContainer {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 1.5rem;
+  padding: 0.5rem;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.headingIcon {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  margin-bottom: 3rem;
+}
+
+.contentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}
+
+.total {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+.actionContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.action {
+  background: #ffffff;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  padding: 0.7rem;
+}
+
+.actionIcon {
+  width: 100%;
+  height: 100%;
+}

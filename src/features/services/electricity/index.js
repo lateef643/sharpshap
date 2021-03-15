@@ -10,7 +10,7 @@ import ElectricityPaymentCompleted from "./ElectricityPaymentCompleted";
 import FailedTransaction from "../../../components/common/FailedTransaction";
 import ElecticityPaymentReducer, { initialFormState } from "./payment-reducer";
 
-export const ElectricityPayment = ({ changeCurrentPage }) => {
+export const ElectricityPayment = ({ service }) => {
   const TRANSACTION_COST = 0;
   let renderedComponent;
   const [componentToRender, setComponentToRender] = useState("form");
@@ -21,13 +21,6 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
   const [loading, setLoading] = useState(false);
   const [successData, setSuccessData] = useState(null);
   const [agentLocation, setAgentLocation] = useState(null);
-
-  useEffect(() => {
-    changeCurrentPage({
-      heading: "Pay Electricity Bill",
-      search: false,
-    });
-  }, []);
 
   useEffect(() => {
     if ("geolocation" in navigator) {
@@ -52,7 +45,7 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
 
     const req = {
       meter_number: meterNo,
-      disco: disco,
+      disco: service,
       type: paymentPlan,
       amount: parseInt(amount),
       phone: phone,
@@ -84,6 +77,7 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
         <ElectricityPaymentForm
           setComponentToRender={setComponentToRender}
           setState={dispatch}
+          service={service}
           ElectricityPaymentFormState={ElectricityPaymentFormState}
         />
       );
@@ -93,7 +87,9 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
         <ElectricityPaymentSummary
           ElectricityPaymentFormState={ElectricityPaymentFormState}
           handleOnSubmit={handleOnSubmit}
+          setComponentToRender={setComponentToRender}
           loading={loading}
+          service={service}
           transactionCost={TRANSACTION_COST}
         />
       );
@@ -102,6 +98,7 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
       renderedComponent = (
         <ElectricityPaymentCompleted
           successData={successData}
+          service={service}
           ElectricityPaymentFormState={ElectricityPaymentFormState}
         />
       );
@@ -116,10 +113,16 @@ export const ElectricityPayment = ({ changeCurrentPage }) => {
   return <div>{renderedComponent}</div>;
 };
 
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(ElectricityPayment);
+export default connect(mapStateToProps, mapDispatchToProps)(ElectricityPayment);

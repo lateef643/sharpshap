@@ -11,6 +11,8 @@ import FundsTransferCompleted from "./FundsTransferCompleted";
 import FundsTransferSummary from "./FundsTransferSummary";
 import FailedTransaction from "../../../components/common/FailedTransaction";
 
+import styles from "./index.module.scss";
+
 export const FundsTransfer = ({ changeCurrentPage }) => {
   const TRANSACTION_COST = 35;
   let renderedComponent;
@@ -123,6 +125,7 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
           loading={loading}
           handleOnSubmit={handleOnSubmit}
           transactionCost={TRANSACTION_COST}
+          setComponentToRender={setComponentToRender}
         />
       );
       break;
@@ -142,7 +145,7 @@ export const FundsTransfer = ({ changeCurrentPage }) => {
       renderedComponent = null;
   }
 
-  return <div>{renderedComponent}</div>;
+  return <div className={styles.container}>{renderedComponent}</div>;
 };
 
 const mapDispatchToProps = (dispatch) => {

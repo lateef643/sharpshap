@@ -135,9 +135,13 @@ export const Play = ({ displayModal }) => {
         const res = await axios.post(PLACE_BET, payload);
 
         const receipt = res.data.data;
+
+        if (typeof receipt[0] === "string") throw new Error();
+
         // dispatch({
         //   type: "REMOVE_FROM_BETSLIP"
         // })
+
         setReceipt(receipt);
         setDisplayBettingReceipt(true);
         setLoading(false);

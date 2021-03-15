@@ -1,15 +1,9 @@
-.overlay {
-  width: 100%;
-  background: #383838c4;
+.container {
+  background-color: rgba(115, 129, 150, 0.637);
   position: fixed;
-  height: 100%;
   width: 100%;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  display: none;
-}
-
-.displayOverlay {
-  display: initial;
+  height: 100vh;
+  top: 0rem;
+  left: 0rem;
+  z-index: 1000;
 }

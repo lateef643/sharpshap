@@ -1,0 +1,121 @@
+.label {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  font-style: normal;
+  display: inline-block;
+  font-size: 1.5rem;
+  line-height: 16px;
+  letter-spacing: -0.3px;
+  font-weight: 600;
+  color: #707070;
+  margin-bottom: 1.5rem;
+  padding: 0 0.1rem;
+  background-color: inherit;
+  left: 1.6rem;
+  transition: 0.2s all;
+}
+
+.block {
+  display: block !important;
+}
+
+.default {
+  display: inline-block;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  height: 3.8rem;
+  background: #eff0f1;
+  border-radius: 4px;
+  font-size: 1.6rem;
+  font-family: inherit;
+  border-radius: 4px;
+  padding: 0 1.6rem;
+  border: 0;
+  outline: 0;
+
+  &::-webkit-input-placeholder {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.6rem;
+    line-height: 22px;
+    letter-spacing: -0.3px;
+    color: #3d4c64;
+
+    @media screen and (max-width: 87.85em) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &::-moz-placeholder {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.6rem;
+    line-height: 22px;
+    letter-spacing: -0.3px;
+    color: #77869e;
+
+    @media screen and (max-width: 87.85em) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &:-ms-input-placeholder {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.6rem;
+    line-height: 22px;
+    letter-spacing: -0.3px;
+    color: #77869e;
+
+    @media screen and (max-width: 87.85em) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &::-ms-input-placeholder {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.6rem;
+    line-height: 22px;
+    letter-spacing: -0.3px;
+    color: #77869e;
+
+    @media screen and (max-width: 87.85em) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &::placeholder {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.6rem;
+    line-height: 22px;
+    letter-spacing: -0.3px;
+    color: #77869e;
+    color: #3d4c64;
+
+    @media screen and (max-width: 87.85em) {
+      font-size: 1.4rem;
+    }
+  }
+}
+
+.error {
+  margin-top: 0.8rem;
+  display: flex;
+  align-items: center;
+}
+
+.errorIcon {
+  width: 2rem;
+}
+
+.errorText {
+  font-size: 1.4rem;
+  color: #ff0000;
+  text-transform: lowercase;
+}

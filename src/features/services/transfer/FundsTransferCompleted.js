@@ -5,6 +5,7 @@ import formatToCurrency from "../../../utils/formatToCurrency";
 import generateBankImageUrl from "./generateBankImageUrl";
 
 import styles from "./FundsTransferCompleted.module.scss";
+
 var Barcode = require("react-barcode");
 
 export const FundsTransferCompleted = (props) => {
@@ -17,6 +18,7 @@ export const FundsTransferCompleted = (props) => {
     total,
     beneficiaryBankCode,
   } = FundsTransferFormState;
+
   const { date, transactionCost, status, reference } = successData;
 
   const bankImageUrl = generateBankImageUrl(beneficiaryBankCode);
@@ -24,7 +26,11 @@ export const FundsTransferCompleted = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
-        <img className={styles.bankLogo} src={bankImageUrl} alt="" />
+        <img className={styles.logo} src={bankImageUrl} alt="" />
+      </div>
+      <div className={styles.indentEffect}>
+        <span className={styles.indentEffectLeft}></span>
+        <span className={styles.indentEffectRight}></span>
       </div>
       <div className={styles.content}>
         <div className={styles.contentItem}>
@@ -51,31 +57,34 @@ export const FundsTransferCompleted = (props) => {
           <span className={styles.contentHeading}>Date:</span>
           <span className={styles.contentDetails}>{date}</span>
         </div>
-      </div>
-      <div className={styles.contentItem}>
-        <span className={styles.contentHeading}>Amount:</span>
-        <span className={styles.contentDetails}>
-          {formatToCurrency(amount)}
-        </span>
-      </div>
-      <div className={styles.contentItem}>
-        <span className={styles.contentHeading}>Convenience Fee:</span>
-        <span className={styles.contentDetails}>
-          {formatToCurrency(transactionCost)}
-        </span>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Amount:</span>
+          <span className={styles.contentDetails}>
+            &#8358;{formatToCurrency(amount)}
+          </span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Convenience Fee:</span>
+          <span className={styles.contentDetails}>
+            &#8358;{formatToCurrency(transactionCost)}
+          </span>
+        </div>
       </div>
       <div className={styles.total}>
         <span className={styles.totalHeading}>Total:</span>
-        <span className={styles.totalDetails}>{formatToCurrency(total)}</span>
+        <span className={styles.totalDetails}>
+          &#8358;{formatToCurrency(total)}
+        </span>
       </div>
-      <Barcode
-        value="https://www.cico.ng"
-        width={1.25}
-        height={50}
-        marginTop={30}
-        fontSize={16}
-        displayValue={false}
-      />
+      <div className={styles.barCodeContainer}>
+        <Barcode
+          value="https://www.cico.ng"
+          width={1.21}
+          height={50}
+          marginTop={20}
+          displayValue={false}
+        />
+      </div>
       <div className={styles.action}>
         <div
           className={`${styles.buttonAction} ${styles.buttonHome}`}

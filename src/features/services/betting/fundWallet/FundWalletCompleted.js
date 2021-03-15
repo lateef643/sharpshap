@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
 
 import formatToCurrency from "../../../../utils/formatToCurrency";
 import cloudbet from "../../../../assets/icons/cloudbet.png";
 
 import styles from "./FundWalletCompleted.module.scss";
+
 var Barcode = require("react-barcode");
 
 export const FundsTransferCompleted = (props) => {
@@ -14,7 +14,11 @@ export const FundsTransferCompleted = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
-        <img className={styles.bankLogo} src={cloudbet} alt="" />
+        <img className={styles.logo} src={cloudbet} alt="" />
+      </div>
+      <div className={styles.indentEffect}>
+        <span className={styles.indentEffectLeft}></span>
+        <span className={styles.indentEffectRight}></span>
       </div>
       <div className={styles.content}>
         <div className={styles.contentItem}>
@@ -32,20 +36,20 @@ export const FundsTransferCompleted = (props) => {
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Amount:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(successData.amount)}
+            &#8358;{formatToCurrency(successData.amount)}
           </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Convenience Fee:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(transactionCost)}
+            &#8358;{formatToCurrency(transactionCost)}
           </span>
         </div>
       </div>
       <div className={styles.total}>
         <span className={styles.totalHeading}>Total:</span>
         <span className={styles.totalDetails}>
-          {formatToCurrency(successData.amount)}
+          &#8358;{formatToCurrency(successData.amount)}
         </span>
       </div>
       <Barcode
@@ -57,9 +61,12 @@ export const FundsTransferCompleted = (props) => {
         displayValue={false}
       />
       <div className={styles.action}>
-        <Link to="/" className={`${styles.buttonAction} ${styles.buttonHome}`}>
-          Home
-        </Link>
+        <div
+          className={`${styles.buttonAction} ${styles.buttonHome}`}
+          onClick={() => window.print()}
+        >
+          Print
+        </div>
         <button
           onClick={() => setComponentToRender("form")}
           className={`${styles.buttonAction} ${styles.buttonRestart}`}

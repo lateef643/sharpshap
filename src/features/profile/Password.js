@@ -5,10 +5,16 @@ import { ThreeDots } from "svg-loaders-react";
 import { useToasts } from "react-toast-notifications";
 import { connect } from "react-redux";
 
+import logo from "../../assets/images/cico-logo.svg";
+
+import Form from "../../components/common/Form";
+import FormGroup from "../../components/common/FormGroup";
+import Input from "../../components/common/Input";
+import Submit from "../../components/common/Button";
+
 import { UPDATE_USER_PASSWORD } from "../../utils/constants";
 import validateFormData from "../../validation/validateFormData";
 
-import styles from "./Password.module.scss";
 import { setDisplayModal } from "../../actions/modal";
 
 export const Password = ({ displayModal }) => {
@@ -80,77 +86,49 @@ export const Password = ({ displayModal }) => {
       [target.name]: target.value,
     });
   };
-  console.log(formState);
   return (
-    <form
-      className={styles.form}
-      onSubmit={(e) => handleOnSubmit(e)}
+    <Form
       autoComplete="off"
+      title="Change password"
+      caption="Complete your information"
+      handleOnSubmit={handleOnSubmit}
+      logo={logo}
     >
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="old_password">
-          Password
-        </label>
-
-        <input
+      <FormGroup>
+        <Input
           name="password"
+          label="Password"
+          placeholder="Enter password"
           value={formState.password}
           type="password"
-          onChange={(e) => handleSetFormState(e)}
-          className={
-            validationErrors.password
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          handleOnChange={(e) => handleSetFormState(e)}
+          error={validationErrors.password}
         />
-        {validationErrors.password && (
-          <p className={styles.validationErrorText}>
-            {validationErrors.password.text}
-          </p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="new_password">
-          New password
-        </label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Input
           name="new_password"
+          label="New Password"
           value={formState.new_password}
+          placeholder="Enter new password"
           type="password"
-          onChange={(e) => handleSetFormState(e)}
-          className={
-            validationErrors.new_password
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          handleOnChange={(e) => handleSetFormState(e)}
+          error={validationErrors.new_password}
         />
-        {validationErrors.new_password && (
-          <p className={styles.validationErrorText}>Please enter password</p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="confirm_password">
-          Confirm password
-        </label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Input
           name="confirm_password"
+          label="Confirm Password"
+          placeholder="Confirm password"
           value={formState.confirm_password}
           type="password"
-          onChange={(e) => handleSetFormState(e)}
-          className={
-            validationErrors.confirm_password
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          handleONnChange={(e) => handleSetFormState(e)}
+          error={validationErrors.confirm_password}
         />
-        {validationErrors.confirm_password && (
-          <p className={styles.validationErrorText}>Please enter password</p>
-        )}
-      </div>
-      <button type="submit" className={styles.button}>
-        {loading ? <ThreeDots /> : "Continue"}
-      </button>
-    </form>
+      </FormGroup>
+      <Submit type="submit">{loading ? <ThreeDots /> : "Continue"}</Submit>
+    </Form>
   );
 };
 

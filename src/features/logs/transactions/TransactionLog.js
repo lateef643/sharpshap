@@ -4,6 +4,7 @@ import { ThreeDots } from "svg-loaders-react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { DatePicker } from "@material-ui/pickers";
+
 // import { startOfYear } from "date-fns";
 
 import formatToCurrency from "../../../utils/formatToCurrency";
@@ -13,10 +14,11 @@ import { setCurrentPage } from "../../../actions/page";
 import { setTransactionLog } from "../../../actions/transaction";
 import {
   AGENT_TRANSACTION_HISTORY,
-  REQUERY_TRANSACTION_STATUS,
+  // REQUERY_TRANSACTION_STATUS,
 } from "../../../utils/constants";
 import "../../../assets/styles/generic/daterangepicker.scss";
 import arrowDown from "../../../assets/icons/arrowdown.svg";
+import toggle from "../../../assets/icons/cross.svg";
 import arrowUp from "../../../assets/images/arrowUp.svg";
 import menu from "../../../assets/images/dots.svg";
 import "./custom-date.css";
@@ -36,8 +38,9 @@ export const TransactionLog = ({
   const [isOpen, setIsOpen] = useState(true);
   const [selectedDateFrom, handleSelectedDateFrom] = useState("");
   const [selectedDateTo, handleSelectedDateTo] = useState("");
-  const [requeryLoading, setRequeryLoading] = useState(false);
-  const [refresh, setRefresh] = useState(false);
+  const [mobileOpenRow, setMobileOpenRow] = useState("");
+  // const [requeryLoading, setRequeryLoading] = useState(false);
+  // const [refresh, setRefresh] = useState(false);
 
   const firstPage = 1;
 
@@ -94,7 +97,7 @@ export const TransactionLog = ({
     selectedDateTo,
     selectedDateFrom,
     currentPage,
-    refresh,
+    // refresh,
   ]);
 
   //dispatching to redux state because we need transactions log to get transactionDetails
@@ -150,22 +153,22 @@ export const TransactionLog = ({
     { name: "Type", value: "type" },
   ];
 
-  const handleRequeryTransactionStatus = async (id) => {
-    setRequeryLoading(true);
+  // const handleRequeryTransactionStatus = async (id) => {
+  //   setRequeryLoading(true);
 
-    const payload = {
-      transaction_id: id,
-    };
-    try {
-      const res = await axios.post(REQUERY_TRANSACTION_STATUS, payload);
+  //   const payload = {
+  //     transaction_id: id,
+  //   };
+  //   try {
+  //     const res = await axios.post(REQUERY_TRANSACTION_STATUS, payload);
 
-      if (res) setRefresh(!refresh);
-    } catch (e) {
-      // console.log(e)
-    } finally {
-      setRequeryLoading(false);
-    }
-  };
+  //     if (res) setRefresh(!refresh);
+  //   } catch (e) {
+  //     // console.log(e)
+  //   } finally {
+  //     setRequeryLoading(false);
+  //   }
+  // };
 
   return (
     <div className={styles.container}>
@@ -264,56 +267,63 @@ export const TransactionLog = ({
                 const formattedDate = date.slice(4, 24);
 
                 return (
-                  <div className={styles.tableRow} key={index}>
-                    <span className={styles.status}>
-                      <span
-                        className={`${styles.color} ${
-                          transaction.status === "failed"
-                            ? styles.failed
-                            : transaction.status === "pending"
-                            ? styles.pending
-                            : styles.success
-                        }`}
-                      ></span>
-                    </span>
-                    <span className={styles.date}>{formattedDate}</span>
-                    <span className={styles.amount}>{transaction.amount}</span>
-                    <span className={styles.type}>
-                      {transaction.transtype?.name}
-                    </span>
-                    <span className={styles.prev}>
-                      {formatToCurrency(
-                        transaction.wallet_history.previous_bal
-                      )}
-                    </span>
-                    <span className={styles.current}>
-                      {formatToCurrency(transaction.wallet_history.current_bal)}
-                    </span>
-                    <span className={styles.customer}>
-                      {transaction.customer_info}
-                    </span>
-                    <span className={styles.ref}>{transaction.reference}</span>
+                  <>
+                    <div className={styles.tableRow} key={index}>
+                      <span className={styles.status}>
+                        <span
+                          className={`${styles.color} ${
+                            transaction.status === "failed"
+                              ? styles.failed
+                              : transaction.status === "pending"
+                              ? styles.pending
+                              : styles.success
+                          }`}
+                        ></span>
+                      </span>
+                      <span className={styles.date}>{formattedDate}</span>
+                      <span className={styles.amount}>
+                        {transaction.amount}
+                      </span>
+                      <span className={styles.type}>
+                        {transaction.transtype?.name}
+                      </span>
+                      <span className={styles.prev}>
+                        {formatToCurrency(
+                          transaction.wallet_history.previous_bal
+                        )}
+                      </span>
+                      <span className={styles.current}>
+                        {formatToCurrency(
+                          transaction.wallet_history.current_bal
+                        )}
+                      </span>
+                      <span className={styles.customer}>
+                        {transaction.customer_info}
+                      </span>
+                      <span className={styles.ref}>
+                        {transaction.reference}
+                      </span>
 
-                    {/* <span className={styles.query}>
+                      {/* <span className={styles.query}>
                     <img src={refresh} alt="" />
                   </span> */}
-                    <div className={styles.action}>
-                      <label htmlFor={`menu${index}`}>
-                        <img className={styles.menu} src={menu} alt="" />
-                      </label>
-                      <input
-                        name={`menu${index}`}
-                        id={`menu${index}`}
-                        type="checkbox"
-                      />
+                      <div className={styles.action}>
+                        <label htmlFor={`menu${index}`}>
+                          <img className={styles.menu} src={menu} alt="" />
+                        </label>
+                        <input
+                          name={`menu${index}`}
+                          id={`menu${index}`}
+                          type="checkbox"
+                        />
 
-                      <div className={styles.actions}>
-                        <Link
-                          to={`/transaction-details/${transaction.reference}`}
-                        >
-                          View Details
-                        </Link>
-                        {transaction.status === "pending" && (
+                        <div className={styles.actions}>
+                          <Link
+                            to={`/transaction-details/${transaction.reference}`}
+                          >
+                            View Details
+                          </Link>
+                          {/* {transaction.status === "pending" && (
                           <div
                             onClick={() => {
                               handleRequeryTransactionStatus(
@@ -324,10 +334,157 @@ export const TransactionLog = ({
                             {requeryLoading && <ThreeDots fill="#3E215B" />}
                             <span>Re-query transaction</span>
                           </div>
-                        )}
+                        )} */}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                    <div className={styles.tableRowMobile} key={index}>
+                      <div
+                        className={styles.tableRowMobileHeading}
+                        onClick={() => {
+                          mobileOpenRow === transaction.reference
+                            ? setMobileOpenRow("")
+                            : setMobileOpenRow(transaction.reference);
+                        }}
+                      >
+                        <span className={styles.status}>
+                          <span
+                            className={`${styles.color} ${
+                              transaction.status === "failed"
+                                ? styles.failed
+                                : transaction.status === "pending"
+                                ? styles.pending
+                                : styles.success
+                            }`}
+                          ></span>
+                        </span>
+                        <span className={styles.date}>
+                          {new Date(
+                            transaction.created_at
+                          ).toLocaleDateString()}
+                        </span>
+                        <span className={styles.type}>
+                          {transaction.transtype?.name}
+                        </span>
+                        <span className={styles.amount}>
+                          {transaction.amount}
+                        </span>
+                        <img
+                          src={toggle}
+                          className={`${styles.mobileItemBodyToggle} ${
+                            mobileOpenRow === transaction.reference
+                              ? styles.mobileItemBodyToggleOpen
+                              : styles.mobileItemBodyToggleClose
+                          }`}
+                          alt=""
+                        />
+                      </div>
+                      {mobileOpenRow === transaction.reference && (
+                        <div
+                          className={styles.tableRowMobileBody}
+                          id={transaction.reference}
+                        >
+                          <span className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Status
+                            </span>
+                            <span className={styles.mobileItemContent}>
+                              {transaction.status}
+                            </span>
+                          </span>
+                          <span className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Date
+                            </span>
+                            <span className={styles.mobileItemContent}>
+                              {formattedDate}
+                            </span>
+                          </span>
+                          <span className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Amount
+                            </span>
+                            <span className={styles.mobileItemContent}>
+                              {transaction.amount}
+                            </span>
+                          </span>
+                          <span className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Type
+                            </span>
+                            <span className={styles.mobileItemContent}>
+                              {transaction.transtype?.name}
+                            </span>
+                          </span>
+                          <span className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Previous Balance
+                            </span>
+                            <span className={styles.mobileItemContent}>
+                              {formatToCurrency(
+                                transaction.wallet_history.previous_bal
+                              )}
+                            </span>
+                          </span>
+                          <span className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Current Balance
+                            </span>
+                            <span className={styles.mobileItemContent}>
+                              {formatToCurrency(
+                                transaction.wallet_history.current_bal
+                              )}
+                            </span>
+                          </span>
+                          <span className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Customer
+                            </span>
+                            <span className={styles.mobileItemContent}>
+                              {transaction.customer_info}
+                            </span>
+                          </span>
+                          <span className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Reference
+                            </span>
+                            <span className={styles.mobileItemContent}>
+                              {transaction.reference}
+                            </span>
+                          </span>
+                          {/* <span className={styles.query}>
+                    <img src={refresh} alt="" />
+                  </span> */}
+                          <div className={styles.mobileItem}>
+                            <span className={styles.mobileItemHeading}>
+                              Actions
+                            </span>
+                            <div className={styles.mobileItemContent}>
+                              <div className={styles.actions}>
+                                <Link
+                                  to={`/transaction-details/${transaction.reference}`}
+                                >
+                                  View Details
+                                </Link>
+                                {/* {transaction.status === "pending" && (
+                          <div
+                            onClick={() => {
+                              handleRequeryTransactionStatus(
+                                transaction.reference
+                              );
+                            }}
+                          >
+                            {requeryLoading && <ThreeDots fill="#3E215B" />}
+                            <span>Re-query transaction</span>
+                          </div>
+                        )} */}
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </>
                 );
               })}
             </div>
@@ -348,7 +505,7 @@ export const TransactionLog = ({
             }}
             className={currentPage === 1 ? styles.active : styles.normal}
           >
-            First Page
+            First
           </span>
           <span
             onClick={() => {
@@ -358,7 +515,7 @@ export const TransactionLog = ({
             }}
             disabled={currentPage === lastPage}
           >
-            Next Page
+            Next
           </span>
           <span className={`${styles.currentPage} ${styles.active}`} disabled>
             {currentPage}
@@ -382,7 +539,7 @@ export const TransactionLog = ({
               }
             }}
           >
-            Prev Page
+            Prev
           </span>
           <span
             onClick={() => {
@@ -394,7 +551,7 @@ export const TransactionLog = ({
             className={currentPage === lastPage ? styles.active : styles.normal}
             disabled={currentPage === lastPage}
           >
-            Last Page
+            Last
           </span>
         </div>
       ) : undefined}

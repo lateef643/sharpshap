@@ -3,10 +3,10 @@ export const initialFormState = {
   smartCardNumber: "",
   customerName: "",
   phone: "",
-  selectedPlanDuration: "",
   selectedPlanCode: "",
-  selectedPlanAmount: "",
   amount: "",
+  cycles: [],
+  cycle: "",
 };
 
 const RechargeCableReducer = (state, { type, payload }) => {

@@ -7,15 +7,15 @@ export const initialFormState = {
   phone: "",
   narration: "",
   total: "",
-}
+};
 
 const FundsTransferReducer = (state, { type, payload }) => {
-  switch(type) {
+  switch (type) {
     case "UPDATE_FORM_STATE":
-      return { ...state, ...payload }
+      return { ...state, ...payload };
     default:
-      return state
+      return state;
   }
-}
+};
 
 export default FundsTransferReducer;

@@ -2,144 +2,91 @@
 @import "../config/mixins";
 
 .container {
-  width: 35rem;
-  height: 45rem;
-  background: #fff;
-  padding: 3rem 1.5rem;
-  overflow: auto;
+  width: 40rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  background-color: #fff;
+  border-radius: 1rem;
+  padding: 4rem 3rem;
+  font-size: 1.4rem;
+}
 
-  @include respond-custom(1000px) {
-    width: 30rem;
-  }
+.back {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 1rem;
+  position: absolute;
+  top: 2rem;
+  left: 1rem;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
 
-  @include respond(phone) {
-    width: 30rem;
-    height: 46rem;
-  }
+.backIcon {
+  width: 2rem;
+  margin-right: 0.7rem;
+}
 
-  @include respond-custom(340px) {
-    width: 29rem;
-    height: 40rem;
-  }
+.backText {
+  font-size: 1.4rem;
 }
 
 .logoContainer {
-  width: 9rem;
-  height: 4rem;
-  margin: 0 auto;
+  width: 11rem;
+  height: 5rem;
+  margin: 2rem auto;
 }
 
-.bankLogo {
+.logo {
+  width: 100%;
+  height: 100%;
+}
+
+.heading {
+  min-height: 4rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(193, 207, 226, 0.534);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  color: #2666ff;
+  margin-bottom: 3rem;
+}
+
+.headingIconContainer {
+  width: 2.5rem;
+  height: 2.5rem;
+  margin-right: 1.5rem;
+  padding: 0.5rem;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  border-radius: 50%;
+}
+
+.headingIcon {
   width: 100%;
   height: 100%;
 }
 
 .content {
-  margin-top: 3rem;
-  border-top: 1px dashed #dbdbdb;
-  border-bottom: 1px dashed #dbdbdb;
-  padding: 2rem 0 0 0;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  margin-bottom: 3rem;
 }
 
 .contentItem {
-  margin-bottom: 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 
-  &:nth-child(odd) {
-    flex: 0 0 45%;
+  &:not(:last-child) {
+    margin-bottom: 3rem;
   }
-
-  &:nth-child(even) {
-    flex: 0 0 45%;
-    text-align: right;
-  }
-}
-
-.contentHeading {
-  font-family: "Avenir", sans-serif;
-  font-style: normal;
-  font-size: 1.1rem;
-  color: #cfcfcf;
-  display: block;
-  margin-bottom: 0.8rem;
-}
-
-.contentDetails {
-  font-style: normal;
-  font-size: 1.3rem;
-  color: #22215b;
-  display: block;
-  text-transform: capitalize;
 }
 
 .total {
-  padding: 2rem 0;
-  display: flex;
-  justify-content: space-between;
-}
-
-.totalHeading {
-  font-size: 1.2rem;
-  color: #c4c4c4;
-}
-
-.totalDetails {
-  font-size: 1.3rem;
-  color: #22215b;
-}
-
-.button {
-  width: 100%;
-  display: block;
-  height: 3.5rem;
-  width: 19.5rem;
-  background: #001b6c;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  border: 0;
-  outline: 0;
-  margin: 3rem auto 0 auto;
-  color: #fff;
-  font-family: inherit;
-  font-size: 1.5rem;
-  cursor: pointer;
-
-  & > svg {
-    fill: #fff;
-    width: 4rem;
-  }
-}
-
-.action {
-  display: flex;
-  justify-content: space-around;
-  margin-top: 3rem;
-}
-
-.buttonAction {
-  flex: 0 0 35%;
-  display: block;
-  height: 3.5rem;
-  width: 19.5rem;
-  box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
-  border-radius: 5px;
-  border: 0;
-  outline: 0;
-  color: #fff;
-  font-family: inherit;
-  font-size: 1.5rem;
-  cursor: pointer;
-  text-align: center;
-  text-decoration: none;
-  line-height: 3.5rem;
-}
-
-.buttonHome {
-  background: #001b6c;
-}
-
-.buttonRestart {
-  background: rgb(32, 165, 110);
+  font-size: 1.6rem;
+  font-weight: 700;
 }
