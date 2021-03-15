@@ -149,26 +149,29 @@ export const VEND_DATA = `${path}/fusion/topup/data`;
 export const VEND_AIRTIME = `${path}/fusion/topup/airtime`;
 
 /////CABLE TV//////////
+//Validate multichoice smart card number
+export const VALIDATE_MULTICHOICE_CUSTOMER = `${path}/cabletv/validate/multichoice`;
+
+//get cable plans
+export const GET_CABLE_PLANS = `${path}/cabletv/bouquets`;
+
 //get startimes plans - GET
 export const GET_STARTIMES_PLANS = `${path}/cable/multichoice/startimes`;
 
 //validate startimes customer - POST
-export const VALIDATE_STARTIMES_CUSTOMER = `${path}/cable/startimes/validate`;
+export const VALIDATE_STARTIMES_CUSTOMER = `${path}/cabletv/validate/startimes`;
 
 //vend startimes - POST
-export const VEND_STARTIMES = `${path}/cable/startimes/vend`;
+export const VEND_STARTIMES = `${path}/cabletv/subscribe/startimes`;
 
 //get dstv plans - POST
 export const GET_DSTV_PLANS = `${path}/cable/multichoice/dstv`;
-
-//validate dstv & gotv customer - POST
-export const VALIDATE_MULTICHOICE_CUSTOMER = `${path}/cable/multichoice/validate`;
 
 //get gotv plans - POST
 export const GET_GOTV_PLANS = `${path}/cable/multichoice/gotv`;
 
 //vend gotv - POST
-export const VEND_MULTICHOICE = `${path}/cable/multichoice/vend`;
+export const VEND_MULTICHOICE = `${path}/cabletv/subscribe/multichoice`;
 
 //////BANK OPERATIONS///////
 
@@ -187,10 +190,10 @@ export const DISBURSE_FUNDS = `${path}/funds/transfer`;
 export const GET_ENERGY_VENDORS = `${path}/energy/discos`;
 
 //validate meter number - PUT
-export const VALIDATE_METER_NUMBER = `${path}/energy`;
+export const VALIDATE_METER_NUMBER = `${path}/electricity/validate`;
 
 //vend energy - POST
-export const VEND_ENERGY = `${path}/energy`;
+export const VEND_ENERGY = `${path}/electricity/vend`;
 
 //////////CASHCALL///////////
 
@@ -290,7 +293,5 @@ export const CHECK_ELIGIBILITY =
 export const LOAN_APPLICATION =
   "https://loanserve.cicoserve.xyz/api/v1/loans/apply";
 
-  //requery transactions
-  export const REQUERY_TRANSACTION_STATUS = `${path}/transactions/verify`
-
-  
+//requery transactions
+export const REQUERY_TRANSACTION_STATUS = `${path}/transactions/verify`;

@@ -1,6 +1,6 @@
 import React from "react";
 
-import logo from "../../assets/images/cico-logo.svg";
+// import logo from "../../assets/images/cico-logo.svg";
 
 import styles from "./Form.module.scss";
 
@@ -11,6 +11,7 @@ const Form = ({
   caption,
   titleSize,
   disabled,
+  logo,
 }) => {
   return (
     <div className={styles.formContainer}>

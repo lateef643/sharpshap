@@ -41,6 +41,9 @@
 
   .selection {
     display: initial;
+    border: 1px solid black;
+    padding: 1rem;
+    border-radius: 5px;
 
     .selectionHeading {
       margin-bottom: 2rem;
@@ -127,4 +130,10 @@
       margin-right: 1rem;
     }
   }
+}
+
+.barcodeContainer {
+  width: 100%;
+  overflow: hidden;
+  margin: 1rem 0;
 }

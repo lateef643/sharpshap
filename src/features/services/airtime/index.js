@@ -7,12 +7,12 @@ import { VEND_AIRTIME } from "../../../utils/constants";
 import AirtimePurchaseReducer, { initialState } from "./airtime-reducer";
 import BuyAirtimeForm from "./BuyAirtimeForm";
 import BuyAirtimeSummary from "./BuyAirtimeSummary";
-import BuyAirtimeStatus from "./BuyAirtimeStatus";
+import BuyAirtimeCompleted from "./BuyAirtimeCompleted";
 import FailedTransaction from "../../../components/common/FailedTransaction";
 
 // import styles from "./BuyAirtime.module.scss";
 
-export const BuyAirtime = ({ changeCurrentPage }) => {
+export const BuyAirtime = ({ service }) => {
   let renderedComponent;
   const TRANSACTION_COST = 0;
   const [componentToRender, setComponentToRender] = useState("form");
@@ -29,13 +29,6 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
     { code: "A04E", id: 4, name: "MTN", type: "Airtime" },
   ];
   const [selectedNetworkName, setSelectedNetworkName] = useState("");
-
-  useEffect(() => {
-    changeCurrentPage({
-      heading: "Buy Airtime",
-      search: false,
-    });
-  }, []);
 
   useEffect(() => {
     if (AirtimePurchaseFormState.network) {
@@ -59,6 +52,10 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
 
     if (phone.indexOf("234") === 0) {
       newPhone = phone.replace("234", "");
+    }
+
+    if (phone.indexOf("0") === 0) {
+      newPhone = phone.replace("0", "");
     }
 
     const payload = {
@@ -98,6 +95,7 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
           networkList={networkList}
           AirtimePurchaseFormState={AirtimePurchaseFormState}
           dispatch={dispatch}
+          service={service}
           setComponentToRender={setComponentToRender}
         />
       );
@@ -110,17 +108,20 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
           handleOnSubmit={handleOnSubmit}
           loading={loading}
           transactionCost={TRANSACTION_COST}
+          service={service}
+          setComponentToRender={setComponentToRender}
         />
       );
       break;
     case "success":
       renderedComponent = (
-        <BuyAirtimeStatus
+        <BuyAirtimeCompleted
           successData={successData}
           transactionCost={TRANSACTION_COST}
           setComponentToRender={setComponentToRender}
           AirtimePurchaseFormState={AirtimePurchaseFormState}
           selectedNetworkName={selectedNetworkName}
+          service={service}
         />
       );
       break;
@@ -135,10 +136,16 @@ export const BuyAirtime = ({ changeCurrentPage }) => {
   return <div>{renderedComponent}</div>;
 };
 
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(BuyAirtime);
+export default connect(mapStateToProps, mapDispatchToProps)(BuyAirtime);

@@ -1,21 +1,21 @@
-@import "../../../assets/styles/generic/form.scss";
-@import "../../../assets/styles/config/mixins";
-@import "../../../assets/styles/config/breakpoints";
+// @import "../../../assets/styles/generic/form.scss";
+// @import "../../../assets/styles/config/mixins";
+// @import "../../../assets/styles/config/breakpoints";
 
-.form {
-  height: 35rem;
-  width: 38rem;
-  padding-bottom: 3rem;
+// .form {
+//   height: 35rem;
+//   width: 38rem;
+//   padding-bottom: 3rem;
 
-  @include respond-custom(1000px) {
-    width: 30rem;
-  }
+//   @include respond-custom(1000px) {
+//     width: 30rem;
+//   }
 
-  @include respond(phone) {
-    width: 32rem;
-  }
+//   @include respond(phone) {
+//     width: 32rem;
+//   }
 
-  @include respond-custom(340px) {
-    width: 29rem;
-  }
-}
+//   @include respond-custom(340px) {
+//     width: 29rem;
+//   }
+// }

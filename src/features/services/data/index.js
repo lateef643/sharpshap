@@ -7,12 +7,12 @@ import { VEND_DATA } from "../../../utils/constants";
 import DataPurchaseReducer, { initialState } from "./data-reducer";
 import BuyDataForm from "./BuyDataForm";
 import BuyDataSummary from "./BuyDataSummary";
-import BuyDataStatus from "./BuyDataStatus";
+import BuyDataStatus from "./BuyDataCompleted";
 import FailedTransaction from "../../../components/common/FailedTransaction";
 
 // import styles from "./BuyData.module.scss";
 
-export const BuyData = ({ changeCurrentPage }) => {
+export const BuyData = ({ service }) => {
   let renderedComponent;
   const TRANSACTION_COST = 0;
   const [componentToRender, setComponentToRender] = useState("form");
@@ -22,13 +22,6 @@ export const BuyData = ({ changeCurrentPage }) => {
   );
   const [successData, setSuccessData] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    changeCurrentPage({
-      heading: "Buy Data",
-      search: false,
-    });
-  }, []);
 
   const handleOnSubmit = () => {
     const { amount, phone, plan } = DataPurchaseFormState;
@@ -42,6 +35,10 @@ export const BuyData = ({ changeCurrentPage }) => {
 
     if (phone.indexOf("234") === 0) {
       newPhone = phone.replace("234", "");
+    }
+
+    if (phone.indexOf("0") === 0) {
+      newPhone = phone.replace("0", "");
     }
 
     const payload = {
@@ -82,6 +79,7 @@ export const BuyData = ({ changeCurrentPage }) => {
           DataPurchaseFormState={DataPurchaseFormState}
           setState={dispatch}
           setComponentToRender={setComponentToRender}
+          service={service}
         />
       );
       break;
@@ -92,6 +90,7 @@ export const BuyData = ({ changeCurrentPage }) => {
           handleOnSubmit={handleOnSubmit}
           loading={loading}
           transactionCost={TRANSACTION_COST}
+          service={service}
         />
       );
       break;
@@ -102,6 +101,7 @@ export const BuyData = ({ changeCurrentPage }) => {
           transactionCost={TRANSACTION_COST}
           setComponentToRender={setComponentToRender}
           DataPurchaseFormState={DataPurchaseFormState}
+          service={service}
         />
       );
       break;
@@ -116,10 +116,16 @@ export const BuyData = ({ changeCurrentPage }) => {
   return <div>{renderedComponent}</div>;
 };
 
+const mapStateToProps = (state) => {
+  return {
+    service: state.modal.service,
+  };
+};
+
 const mapDispatchToProps = (dispatch) => {
   return {
     changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
   };
 };
 
-export default connect(undefined, mapDispatchToProps)(BuyData);
+export default connect(mapStateToProps, mapDispatchToProps)(BuyData);

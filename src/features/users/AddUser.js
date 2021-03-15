@@ -5,9 +5,15 @@ import Axios from "axios";
 import { useToasts } from "react-toast-notifications";
 import { setDisplayModal } from "../../actions/modal";
 
+import logo from "../../assets/images/cico-logo.svg";
+
 import { CREATE_SUB_USER } from "../../utils/constants";
 import { setCurrentPage } from "../../actions/page";
-import styles from "./AddUser.module.scss";
+
+import Form from "../../components/common/Form";
+import FormGroup from "../../components/common/FormGroup";
+import Input from "../../components/common/Input";
+import Submit from "../../components/common/Button";
 
 export const AddUser = ({ changeCurrentPage, displayModal }) => {
   const { addToast } = useToasts();
@@ -64,97 +70,59 @@ export const AddUser = ({ changeCurrentPage, displayModal }) => {
   };
 
   return (
-    <div className={styles.container}>
-      <form
-        className={styles.form}
-        onSubmit={(e) => handleOnSubmit(e)}
-        autoComplete="off"
-      >
-        <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="amount">
-            Phone number
-          </label>
-          <input
-            name="phone"
-            value={formState.phone}
-            type="text"
-            onChange={(e) => handleOnChange(e)}
-            className={
-              validationErrors.phone
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-          {validationErrors.phone && (
-            <p className={styles.validationErrorText}>
-              Please enter valid phone number
-            </p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="email">
-            Email
-          </label>
-          <input
-            name="email"
-            value={formState.email}
-            type="text"
-            onChange={(e) => handleOnChange(e)}
-            className={
-              validationErrors.email
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-          {validationErrors.email && (
-            <p className={styles.validationErrorText}>
-              Please enter valid email
-            </p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="username">
-            Username
-          </label>
-          <input
-            name="username"
-            value={formState.username}
-            type="text"
-            onChange={(e) => handleOnChange(e)}
-            className={
-              validationErrors.username
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-          {validationErrors.username && (
-            <p className={styles.validationErrorText}>Username is required</p>
-          )}
-        </div>
-        <div className={styles.formGroup}>
-          <label className={styles.label} htmlFor="limit">
-            Transaction limit
-          </label>
-          <input
-            name="limit"
-            value={formState.limit}
-            type="text"
-            onChange={(e) => handleOnChange(e)}
-            className={
-              validationErrors.limit
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-          {validationErrors.limit && (
-            <p className={styles.validationErrorText}>Limit is required</p>
-          )}
-        </div>
-        <button type="submit" className={styles.button}>
-          {loading ? <ThreeDots /> : "Create"}
-        </button>
-      </form>
-    </div>
+    <Form
+      autoComplete="off"
+      title="Create Sub Agent"
+      caption="Complete sub agent information"
+      handleOnSubmit={handleOnSubmit}
+      logo={logo}
+    >
+      <FormGroup>
+        <Input
+          name="phone"
+          label="Phone"
+          placeholder="Phone number"
+          value={formState.phone}
+          type="text"
+          handleOnChange={(e) => handleOnChange(e)}
+          error={validationErrors.phone}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Input
+          name="email"
+          label="Email"
+          placeholder="Enter email"
+          value={formState.email}
+          type="text"
+          error={validationErrors.email}
+          handleOnChange={(e) => handleOnChange(e)}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Input
+          name="username"
+          label="Username"
+          placeholder="Enter username"
+          value={formState.username}
+          type="text"
+          handleOnChange={(e) => handleOnChange(e)}
+          error={validationErrors.username}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Input
+          name="limit"
+          label="Transaction Limit"
+          placeholder="Transaction limit"
+          error={validationErrors.limit}
+          value={formState.limit}
+          type="text"
+          handleOnChange={(e) => handleOnChange(e)}
+        />
+      </FormGroup>
+      <Submit type="submit">{loading ? <ThreeDots /> : "Create"}</Submit>
+    </Form>
   );
 };
 

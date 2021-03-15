@@ -5,6 +5,7 @@ import formatToCurrency from "../../../utils/formatToCurrency";
 import generateBankImageUrl from "./generateBankImageUrl";
 
 import styles from "./FundsTransferCompleted.module.scss";
+
 var Barcode = require("react-barcode");
 
 export const FundsTransferCompleted = (props) => {
@@ -18,14 +19,7 @@ export const FundsTransferCompleted = (props) => {
     beneficiaryBankCode,
   } = FundsTransferFormState;
 
-  const successDatas = {
-    date: "23-09-2021",
-    transactionCost: 35,
-    status: "Pending",
-    reference: "CICO_OUYUYGKHGFFYI",
-  };
-
-  const { date, transactionCost, status, reference } = successDatas;
+  const { date, transactionCost, status, reference } = successData;
 
   const bankImageUrl = generateBankImageUrl(beneficiaryBankCode);
 
@@ -75,7 +69,7 @@ export const FundsTransferCompleted = (props) => {
             &#8358;{formatToCurrency(transactionCost)}
           </span>
         </div>
-      </div>{" "}
+      </div>
       <div className={styles.total}>
         <span className={styles.totalHeading}>Total:</span>
         <span className={styles.totalDetails}>

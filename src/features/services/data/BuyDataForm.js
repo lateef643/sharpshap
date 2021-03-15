@@ -3,11 +3,15 @@ import PropTypes from "prop-types";
 import axios from "axios";
 import { connect } from "react-redux";
 
+import Form from "../../../components/common/Form";
+import FormGroup from "../../../components/common/FormGroup";
+import Select from "../../../components/common/Select";
+import Input from "../../../components/common/Input";
+import Submit from "../../../components/common/Button";
+
 import generateNetworkImageUrl from "./generateNetworkImageUrl";
 import { GET_DATA_PLANS } from "../../../utils/constants";
 import validateFormData from "../../../validation/validateFormData";
-
-import styles from "./BuyDataForm.module.scss";
 
 export const BuyDataForm = (props) => {
   const {
@@ -85,112 +89,55 @@ export const BuyDataForm = (props) => {
   };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={(e) => handleOnContinue(e)}
+    <Form
       autoComplete="off"
+      title="Buy Data"
+      caption="Complete your payment information"
+      handleOnSubmit={handleOnContinue}
+      logo={networkImageUrl}
     >
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="amount">
-          Phone number
-        </label>
-        <div className={styles.formGroupSub}>
-          <select
-            name="currency"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.phone
-                ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
-                : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
-            }
-          >
-            <option value="">+234</option>
-          </select>
-          <input
-            name="phone"
-            value={state.phone}
-            type="text"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.phone
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-        </div>
-        {validationErrors.phone && (
-          <p className={styles.validationErrorText}>
-            Please enter valid phone number
-          </p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="plan">
-          Phone number
-        </label>
-        <div className={styles.formGroupSub}>
-          <img className={styles.selectionImage} src={networkImageUrl} alt="" />
-          <select
-            name="plan"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.plan
-                ? `${styles.outlineRed} ${styles.select}`
-                : `${styles.outlineGrey} ${styles.select}`
-            }
-          >
-            <option value="">Select Plan</option>
-            {dataPlans.map((plan, index) => {
-              return (
-                <option value={plan.productId} key={`${index}--${plan.name}`}>
-                  {plan.product_value}
-                </option>
-              );
-            })}
-          </select>
-        </div>
-        {validationErrors.plan && (
-          <p className={styles.validationErrorText}>Please select plan</p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="amount">
-          Amount
-        </label>
-        <div className={styles.formGroupSub}>
-          <select
-            name="currency"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
-                : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
-            }
-          >
-            <option value="">NGN</option>
-          </select>
-          <input
-            name="amount"
-            value={state.amount}
-            type="number"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-        </div>
-        {validationErrors.amount && (
-          <p className={styles.validationErrorText}>
-            Please enter valid amount
-          </p>
-        )}
-      </div>
-      <button type="submit" className={styles.button}>
-        Continue
-      </button>
-    </form>
+      <FormGroup>
+        <Input
+          name="phone"
+          placeholder="e.g 08012345678"
+          label="Phone Number"
+          value={state.phone}
+          type="text"
+          handleOnChange={(e) => handleSetFormState(e)}
+          error={validationErrors.phone}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Select
+          name="plan"
+          label="Plan"
+          value={state.plan}
+          handleOnChange={(e) => handleSetFormState(e)}
+          error={validationErrors.plan}
+        >
+          <option value="">Select Plan</option>
+          {dataPlans.map((plan, index) => {
+            return (
+              <option value={plan.productId} key={`${index}--${plan.name}`}>
+                {plan.product_value} for {plan.validity}
+              </option>
+            );
+          })}
+        </Select>
+      </FormGroup>
+      <FormGroup>
+        <Input
+          name="amount"
+          label="Amount"
+          placeholder="Amount"
+          value={state.amount}
+          type="text"
+          handleOnChange={(e) => handleSetFormState(e)}
+          disabled
+        />
+      </FormGroup>
+      <Submit type="submit">Continue</Submit>
+    </Form>
   );
 };
 

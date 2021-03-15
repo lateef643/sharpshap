@@ -1,12 +1,13 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { ThreeDots } from "svg-loaders-react";
 
 import Submit from "../../../components/common/Button";
 
 import back from "../../../assets/images/left-arrow.svg";
+import info from "../../../assets/images/tooltip-icon.svg";
 import generateBankImageUrl from "./generateBankImageUrl";
 import formatToCurrency from "../../../utils/formatToCurrency";
-import info from "../../../assets/images/tooltip-icon.svg";
 
 import styles from "./FundsTransferSummary.module.scss";
 
@@ -71,7 +72,7 @@ export const FundsTransferSummary = (props) => {
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Transaction cost:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(transactionCost)}
+            &#8358;{formatToCurrency(transactionCost)}
           </span>
         </div>
         <div className={`${styles.contentItem} ${styles.total}`}>
@@ -79,12 +80,12 @@ export const FundsTransferSummary = (props) => {
             Total:
           </span>
           <span className={`${styles.contentDetails} ${styles.totalDetails}`}>
-            {formatToCurrency(state.total)}
+            &#8358;{formatToCurrency(state.total)}
           </span>
         </div>
       </div>
       <Submit disabled={false} onClick={handleOnSubmit}>
-        {loading ? "Loading" : "Proceed"}
+        {loading ? <ThreeDots fill="white" /> : "Proceed"}
       </Submit>
     </div>
   );

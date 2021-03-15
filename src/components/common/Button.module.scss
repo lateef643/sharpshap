@@ -13,4 +13,8 @@
   &:disabled {
     background-color: lighten(#0047b3, 1%);
   }
+
+  & > svg {
+    width: 4rem;
+  }
 }

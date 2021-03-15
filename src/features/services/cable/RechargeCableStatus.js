@@ -1,6 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
 
 import generateServiceProviderImageUrl from "./generateServiceProviderImageUrl";
 import formatToCurrency from "../../../utils/formatToCurrency";
@@ -11,9 +9,7 @@ var Barcode = require("react-barcode");
 export const RechargeCableStatus = (props) => {
   const {
     successData,
-    smartCardNumber,
-    provider,
-    plan,
+    formState,
     transactionCost,
     setComponentToRender,
     service,
@@ -24,7 +20,11 @@ export const RechargeCableStatus = (props) => {
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
-        <img className={styles.bankLogo} src={serviceProviderImageUrl} alt="" />
+        <img className={styles.logo} src={serviceProviderImageUrl} alt="" />
+      </div>
+      <div className={styles.indentEffect}>
+        <span className={styles.indentEffectLeft}></span>
+        <span className={styles.indentEffectRight}></span>
       </div>
       <div className={styles.content}>
         <div className={styles.contentItem}>
@@ -35,15 +35,19 @@ export const RechargeCableStatus = (props) => {
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Provider:</span>
-          <span className={styles.contentDetails}>{provider}</span>
+          <span className={styles.contentDetails}>{service}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Plan:</span>
-          <span className={styles.contentDetails}>{plan}</span>
+          <span className={styles.contentDetails}>
+            {formState.selectedPlanCode}
+          </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Smartcard:</span>
-          <span className={styles.contentDetails}>{smartCardNumber}</span>
+          <span className={styles.contentDetails}>
+            {formState.smartCardNumber}
+          </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Date:</span>
@@ -52,34 +56,38 @@ export const RechargeCableStatus = (props) => {
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Amount:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(successData.amount)}
+            &#8358;{formatToCurrency(successData.amount)}
           </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Convenience Fee:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(transactionCost)}
+            &#8358;{formatToCurrency(transactionCost)}
           </span>
         </div>
       </div>
       <div className={styles.total}>
         <span className={styles.totalHeading}>Total:</span>
         <span className={styles.totalDetails}>
-          {formatToCurrency(successData.amount)}
+          &#8358;{formatToCurrency(successData.amount)}
         </span>
       </div>
-      <Barcode
-        value="https://www.cico.ng"
-        width={1.25}
-        height={50}
-        marginTop={30}
-        fontSize={16}
-        displayValue={false}
-      />
+      <div className={styles.barCodeContainer}>
+        <Barcode
+          value="https://www.cico.ng"
+          width={1.21}
+          height={50}
+          marginTop={20}
+          displayValue={false}
+        />
+      </div>
       <div className={styles.action}>
-        <Link to="/" className={`${styles.buttonAction} ${styles.buttonHome}`}>
-          Home
-        </Link>
+        <div
+          className={`${styles.buttonAction} ${styles.buttonHome}`}
+          onClick={() => window.print()}
+        >
+          Print
+        </div>
         <button
           onClick={() => setComponentToRender("form")}
           className={`${styles.buttonAction} ${styles.buttonRestart}`}
@@ -91,10 +99,4 @@ export const RechargeCableStatus = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  return {
-    service: state.modal.service,
-  };
-};
-
-export default connect(mapStateToProps)(RechargeCableStatus);
+export default RechargeCableStatus;

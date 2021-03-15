@@ -6,6 +6,10 @@
   padding: 3rem 3rem;
   background: #fff;
   border-radius: 0.5rem;
+
+  @media screen and (max-width: 400px) {
+    width: 35rem;
+  }
 }
 
 .logo {

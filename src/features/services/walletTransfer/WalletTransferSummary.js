@@ -1,26 +1,46 @@
 import React from "react";
-
-import formatToCurrency from "../../../utils/formatToCurrency";
 import { ThreeDots } from "svg-loaders-react";
 
-import logo from "../../../assets/icons/cico-logo-regular.svg";
+import formatToCurrency from "../../../utils/formatToCurrency";
+import Submit from "../../../components/common/Button";
+
+import logo from "../../../assets/images/cico-logo.svg";
+
+import back from "../../../assets/images/left-arrow.svg";
+import info from "../../../assets/images/tooltip-icon.svg";
 
 import styles from "./WalletTransferSummary.module.scss";
-
-var Barcode = require("react-barcode");
 
 export const WalletTransferSummary = ({
   state,
   loading,
   handleWalletTransfer,
+  setStatus,
 }) => {
   const { amount, wallet_id, agent_name } = state;
 
   return (
     <div className={styles.container}>
-      {/* <div className={styles.logoContainer}>
-        <img className={styles.bankLogo} src={logo} alt="" />
-      </div> */}
+      <div
+        className={styles.back}
+        onClick={() => {
+          setStatus("form");
+        }}
+      >
+        <img className={styles.backIcon} src={back} alt="" />
+        <span className={styles.backText}>Back</span>
+      </div>
+      <div className={styles.logoContainer}>
+        <img className={styles.logo} src={logo} alt="" />
+      </div>
+      <div className={styles.heading}>
+        <div className={styles.headingIconContainer}>
+          <img className={styles.headingIcon} src={info} alt="" />
+        </div>
+        <div className={styles.headingText}>
+          Verify the information before proceeding.
+        </div>
+      </div>
       <div className={styles.content}>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>AccountWallet ID:</span>
@@ -40,32 +60,28 @@ export const WalletTransferSummary = ({
           <span className={styles.contentHeading}>
             AccountTransaction Cost:
           </span>
-          <span className={styles.contentDetails}>{formatToCurrency(0)}</span>
+          <span className={styles.contentDetails}>
+            &#8358;{formatToCurrency(0)}
+          </span>
+        </div>
+        <div className={`${styles.contentItem} ${styles.total}`}>
+          <span className={`${styles.contentHeading} ${styles.totalHeading}`}>
+            Total:
+          </span>
+          <span className={`${styles.contentDetails} ${styles.totalDetails}`}>
+            &#8358;{formatToCurrency(state.amount)}
+          </span>
         </div>
       </div>
-      <div className={styles.total}>
-        <span className={styles.totalHeading}>Total:</span>
-        <span className={styles.totalDetails}>
-          {formatToCurrency(state.amount)}
-        </span>
-      </div>
-      <Barcode
-        value="https://www.cico.ng"
-        width={1.25}
-        height={50}
-        marginTop={30}
-        fontSize={16}
-        displayValue={false}
-      />
-      <button
+      <Submit
+        disabled={false}
         onClick={(e) => {
           e.preventDefault();
           handleWalletTransfer();
         }}
-        className={styles.button}
       >
-        {loading ? <ThreeDots /> : "Proceed"}
-      </button>
+        {loading ? <ThreeDots fill="white" /> : "Proceed"}
+      </Submit>
     </div>
   );
 };

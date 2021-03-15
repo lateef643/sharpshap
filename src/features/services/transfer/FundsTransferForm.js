@@ -128,9 +128,10 @@ export const FundsTransferForm = (props) => {
   return (
     <Form
       autoComplete="off"
-      title="Payment information"
+      title="Funds Transfer"
       caption="Complete your payment information"
       handleOnSubmit={handleOnContinue}
+      logo={bankImageUrl}
     >
       <FormGroup>
         <Input
@@ -146,7 +147,6 @@ export const FundsTransferForm = (props) => {
       <FormGroup>
         <Select
           name="beneficiaryBankCode"
-          type="text"
           label="Beneficiary's bank"
           handleOnChange={handleFormStateChange}
         >

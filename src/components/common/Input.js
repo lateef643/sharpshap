@@ -61,7 +61,7 @@ const Input = ({
       {error && (
         <p className={styles.error}>
           {/* <img className={styles.errorIcon} src={errorIcon} alt="" /> */}
-          <span className={styles.errorText}>This is the error</span>
+          <span className={styles.errorText}>{error.text}</span>
         </p>
       )}
     </>

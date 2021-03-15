@@ -57,8 +57,8 @@
   display: inline-block;
   width: 3rem;
   height: 3rem;
-  border-radius: 50%;
-  background-color: rgba(90, 101, 117, 0.5);
+  // -webkit-mask: radial-gradient(circle 50px, transparent 98%, #fff 100%);
+  // mask: radial-gradient(circle 50px, transparent 98%, #fff 100%);
 }
 
 .indentEffectLeft {

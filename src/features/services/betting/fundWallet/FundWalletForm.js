@@ -1,8 +1,12 @@
 import React, { useState } from "react";
 
-import validateFormData from "../../../../validation/validateFormData";
+import Form from "../../../../components/common/Form";
+import FormGroup from "../../../../components/common/FormGroup";
+import Input from "../../../../components/common/Input";
+import Submit from "../../../../components/common/Button";
 
-import styles from "./FundWalletForm.module.scss";
+import validateFormData from "../../../../validation/validateFormData";
+import logo from "../../../../assets/icons/cloudbet.jpg";
 
 export const FundWalletForm = (props) => {
   const { setComponentToRender, dispatch, FundWalletFormState: state } = props;
@@ -38,80 +42,53 @@ export const FundWalletForm = (props) => {
   };
 
   return (
-    <form
-      className={styles.form}
-      onSubmit={handleOnContinue}
+    <Form
       autoComplete="off"
+      title="Fund Cloudbet Wallet"
+      caption="Complete your payment information"
+      handleOnSubmit={handleOnContinue}
+      logo={logo}
     >
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="accountId">
-          Cloudbet Account ID
-        </label>
-        <input
+      <FormGroup>
+        <Input
           name="accountId"
+          label="Cloudbet ID"
           value={state.accountId}
           type="text"
-          onChange={handleStateChange}
+          handleOnChange={handleStateChange}
           placeholder="e.g 08012345678"
-          className={
-            errors.accountId
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          error={errors.accountId}
         />
-        {errors.accountId && (
-          <p className={styles.validationErrorText}>Account ID is required</p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="amount">
-          Amount
-        </label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Input
           name="amount"
+          label="Amount"
           value={state.amount}
           type="number"
-          onChange={handleStateChange}
-          className={
-            errors.amount
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          placeholder="Enter amount"
+          handleOnChange={handleStateChange}
+          error={errors.amount}
         />
-        {errors.amount && (
-          <p className={styles.validationErrorText}>Amount is required</p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="phone">
-          Customer Number
-        </label>
-        <input
+      </FormGroup>
+      <FormGroup>
+        <Input
           name="phone"
+          label="Phone"
           type="text"
           value={state.phone}
-          onChange={handleStateChange}
+          handleOnChange={handleStateChange}
           placeholder="e.g 08012345678"
-          className={
-            errors.beneficiaryBankCode
-              ? `${styles.outlineRed} ${styles.input}`
-              : `${styles.outlineGrey} ${styles.input}`
-          }
+          error={errors.phone}
         />
-        {errors.phone && (
-          <p className={styles.validationErrorText}>
-            Please enter phone number
-          </p>
-        )}
-      </div>
-      <button
+      </FormGroup>
+      <Submit
         type="submit"
-        className={styles.button}
         disabled={!state.accountId || !state.amount || !state.phone}
       >
         Continue
-      </button>
-    </form>
+      </Submit>
+    </Form>
   );
 };
 

@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 
-import validateFormData from "../../../validation/validateFormData";
+import generateServiceImageUrl from "./generateNetworkImageUrl";
 
-import styles from "./BuyAirtimeForm.module.scss";
+import Form from "../../../components/common/Form";
+import FormGroup from "../../../components/common/FormGroup";
+import Input from "../../../components/common/Input";
+import Submit from "../../../components/common/Button";
+
+import validateFormData from "../../../validation/validateFormData";
 
 export const BuyAirtimeForm = (props) => {
   const {
     AirtimePurchaseFormState: state,
     dispatch,
+    service,
     setComponentToRender,
   } = props;
   const [validationErrors, setValidationErrors] = useState({});
@@ -35,86 +41,40 @@ export const BuyAirtimeForm = (props) => {
     });
   };
 
+  //Dynamically render bank logo
+  let networkImageUrl = generateServiceImageUrl(service);
+
   return (
-    <form
-      className={styles.form}
-      onSubmit={(e) => handleOnContinue(e)}
+    <Form
       autoComplete="off"
+      title="Buy Airtime"
+      caption="Complete your payment information"
+      handleOnSubmit={handleOnContinue}
+      logo={networkImageUrl}
     >
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="amount">
-          Phone number
-        </label>
-        <div className={styles.formGroupSub}>
-          <select
-            name="currency"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.phone
-                ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
-                : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
-            }
-          >
-            <option value="">+234</option>
-          </select>
-          <input
-            name="phone"
-            placeholder="08012345678"
-            value={state.phone}
-            type="text"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.phone
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-        </div>
-        {validationErrors.phone && (
-          <p className={styles.validationErrorText}>
-            Please enter valid phone number
-          </p>
-        )}
-      </div>
-      <div className={styles.formGroup}>
-        <label className={styles.label} htmlFor="amount">
-          Amount
-        </label>
-        <div className={styles.formGroupSub}>
-          <select
-            name="currency"
-            onChange={(e) => handleSetFormState(e)}
-            placeholder="100"
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.select} ${styles.selectCurrency}`
-                : `${styles.outlineGrey} ${styles.select} ${styles.selectCurrency}`
-            }
-          >
-            <option value="">NGN</option>
-          </select>
-          <input
-            name="amount"
-            value={state.amount}
-            type="number"
-            onChange={(e) => handleSetFormState(e)}
-            className={
-              validationErrors.amount
-                ? `${styles.outlineRed} ${styles.input}`
-                : `${styles.outlineGrey} ${styles.input}`
-            }
-          />
-        </div>
-        {validationErrors.amount && (
-          <p className={styles.validationErrorText}>
-            Please enter valid amount
-          </p>
-        )}
-      </div>
-      <button type="submit" className={styles.button}>
-        Continue
-      </button>
-    </form>
+      <FormGroup>
+        <Input
+          name="phone"
+          placeholder="e.g 08012345678"
+          label="Phone Number"
+          value={state.phone}
+          type="text"
+          handleOnChange={(e) => handleSetFormState(e)}
+          error={validationErrors.phone}
+        />
+      </FormGroup>
+      <FormGroup>
+        <Input
+          name="amount"
+          value={state.amount}
+          label="Amount"
+          type="number"
+          error={validationErrors.amount}
+          handleOnChange={(e) => handleSetFormState(e)}
+        />
+      </FormGroup>
+      <Submit type="submit">Continue</Submit>
+    </Form>
   );
 };
 

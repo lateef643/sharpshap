@@ -3,8 +3,11 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { ThreeDots } from "svg-loaders-react";
 
-import generateServiceProviderImageUrl from "./generateServiceProviderImageUrl";
+import Submit from "../../../components/common/Button";
 
+import back from "../../../assets/images/left-arrow.svg";
+import info from "../../../assets/images/tooltip-icon.svg";
+import generateServiceProviderImageUrl from "./generateServiceProviderImageUrl";
 import formatToCurrency from "../../../utils/formatToCurrency";
 
 import styles from "./RechargeCableSummary.module.scss";
@@ -18,25 +21,37 @@ export const RechargeCableSummary = (props) => {
     handleOnSubmit,
     transactionCost,
     service,
+    setComponentToRender,
   } = props;
 
   const serviceProviderImageUrl = generateServiceProviderImageUrl(service);
 
   return (
     <div className={styles.container}>
+      <div
+        className={styles.back}
+        onClick={() => {
+          setComponentToRender("form");
+        }}
+      >
+        <img className={styles.backIcon} src={back} alt="" />
+        <span className={styles.backText}>Back</span>
+      </div>
       <div className={styles.logoContainer}>
-        <img className={styles.bankLogo} src={serviceProviderImageUrl} alt="" />
+        <img className={styles.logo} src={serviceProviderImageUrl} alt="" />
+      </div>
+      <div className={styles.heading}>
+        <div className={styles.headingIconContainer}>
+          <img className={styles.headingIcon} src={info} alt="" />
+        </div>
+        <div className={styles.headingText}>
+          Verify the information before proceeding.
+        </div>
       </div>
       <div className={styles.content}>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Service:</span>
-          <span className={styles.contentDetails}>{state.provider}</span>
-        </div>
-        <div className={styles.contentItem}>
-          <span className={styles.contentHeading}>Plan:</span>
-          <span className={styles.contentDetails}>
-            {state.selectedPlanName}
-          </span>
+          <span className={styles.contentDetails}>{service.toUpperCase()}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Account Name:</span>
@@ -47,48 +62,29 @@ export const RechargeCableSummary = (props) => {
           <span className={styles.contentDetails}>{state.smartCardNumber}</span>
         </div>
         <div className={styles.contentItem}>
-          <span className={styles.contentHeading}>Plan Duration:</span>
-          <span className={styles.contentDetails}>
-            {state.selectedPlanDuration}
-          </span>
-        </div>
-        <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Amount:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(state.amount)}
+            &#8358;{formatToCurrency(state.amount)}
           </span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Transaction cost:</span>
           <span className={styles.contentDetails}>
-            {formatToCurrency(transactionCost)}
+            &#8358;{formatToCurrency(transactionCost)}
           </span>
         </div>
       </div>
-
-      <div className={styles.total}>
-        <span className={styles.totalHeading}>Total:</span>
-        <span className={styles.totalDetails}>
-          {formatToCurrency(state.amount)}
+      <div className={`${styles.contentItem} ${styles.total}`}>
+        <span className={`${styles.contentHeading} ${styles.totalHeading}`}>
+          Total:
+        </span>
+        <span className={`${styles.contentDetails} ${styles.totalDetails}`}>
+          &#8358;{formatToCurrency(state.amount)}
         </span>
       </div>
-      <Barcode
-        value="https://www.cico.ng"
-        width={1.25}
-        height={50}
-        marginTop={30}
-        fontSize={16}
-        displayValue={false}
-      />
-      <button
-        onClick={(e) => {
-          e.preventDefault();
-          handleOnSubmit();
-        }}
-        className={styles.button}
-      >
-        {loading ? <ThreeDots /> : "Continue"}
-      </button>
+      <Submit disabled={false} onClick={handleOnSubmit}>
+        {loading ? <ThreeDots fill="white" /> : "Proceed"}
+      </Submit>
     </div>
   );
 };
