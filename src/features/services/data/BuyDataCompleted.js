@@ -13,10 +13,11 @@ export const BuyDataCompleted = (props) => {
     successData,
     service,
     setComponentToRender,
-    AirtimePurchaseFormState,
+    DataPurchaseFormState,
   } = props;
 
-  const { phone, amount } = AirtimePurchaseFormState;
+  const { phone, amount } = DataPurchaseFormState;
+  const { reference } = successData;
 
   //Dynamically render bank logo
   let networkImageUrl = generateServiceImageUrl(service);
@@ -37,7 +38,11 @@ export const BuyDataCompleted = (props) => {
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Transaction:</span>
-          <span className={styles.contentDetails}>Airtime Purchase</span>
+          <span className={styles.contentDetails}>Data Purchase</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Reference:</span>
+          <span className={styles.contentDetails}>{reference}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Network:</span>

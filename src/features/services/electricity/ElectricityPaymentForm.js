@@ -73,7 +73,7 @@ const ElectricityPaymentForm = (props) => {
       amount,
     };
 
-    if (!isNaN(parseInt(meterNo)) && meterNo.length > 10) {
+    if (!isNaN(parseInt(meterNo)) && meterNo.length >= 10) {
       setLoading(true);
 
       setState({
