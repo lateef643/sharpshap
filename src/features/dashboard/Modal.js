@@ -49,7 +49,7 @@ const Modal = ({ overlay, modal, displayModal }) => {
           fundBettingWallet: <FundBettingWallet />,
           customerStatus: <CustomerStatus />,
           loanApplication: <LoanApplication />,
-          printBetsip: <BetslipModal />,
+          printBetslip: <BetslipModal />,
         }[modal]
       }
     </div>
