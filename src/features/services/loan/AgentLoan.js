@@ -73,8 +73,8 @@ export const AgentLoan = ({ agentUuid }) => {
   return (
     <Form
       autoComplete="off"
-      title="Funds Transfer"
-      caption="Complete your payment information"
+      title="Agent loan"
+      caption="Complete your loan application"
       handleOnSubmit={handleOnSubmit}
       logo={logo}
     >

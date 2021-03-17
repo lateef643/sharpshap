@@ -10,7 +10,7 @@ import {
   LIST_EVENTS,
   FETCH_BETSLIP,
 } from "../../../../utils/constants";
-import formatToCurrency from "../../../../utils/formatToCurrency";
+// import formatToCurrency from "../../../../utils/formatToCurrency";
 
 import playReducer, { initialState } from "./play-reducer";
 
@@ -146,7 +146,7 @@ export const Play = ({ displayModal }) => {
         setDisplayBettingReceipt(true);
         setLoading(false);
       } catch (e) {
-        addToast(e.response.data.message || "An error occurred", {
+        addToast(e.response?.data?.message || "An error occurred", {
           appearance: "error",
           autoDismiss: true,
         });
@@ -469,7 +469,7 @@ export const Play = ({ displayModal }) => {
                     onClick={() => {
                       displayModal({
                         overlay: true,
-                        modal: "printBetsip",
+                        modal: "printBetslip",
                         state: receipt,
                       });
                     }}
