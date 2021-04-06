@@ -12,6 +12,7 @@ import eedc from "../assets/icons/eedc.svg";
 import phedc from "../assets/icons/phdc.svg";
 import aedc from "../assets/icons/aedc.svg";
 import ekedc from "../assets/icons/ekedc.svg";
+import ibedc from "../assets/images/IBEDC.png";
 
 import gotv from "../assets/icons/gotv.svg";
 import dstv from "../assets/icons/dstv.svg";
@@ -58,6 +59,19 @@ export const BillPayment = ({ changeCurrentPage, displayModal }) => {
             >
               <img className={styles.serviceLogo} src={ekedc} alt="" />
               <p className={styles.serviceText}>Eko</p>
+            </div>
+            <div
+              className={styles.service}
+              onClick={() => {
+                displayModal({
+                  overlay: true,
+                  modal: "energy",
+                  service: "ibedc",
+                });
+              }}
+            >
+              <img className={styles.serviceLogo} src={ibedc} alt="" />
+              <p className={styles.serviceText}>IBEDC</p>
             </div>
             <div
               className={styles.service}

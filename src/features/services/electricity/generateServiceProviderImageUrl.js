@@ -5,6 +5,7 @@ import eedc from "../../../assets/icons/eedc.svg";
 import phdc from "../../../assets/icons/phdc.svg";
 import aedc from "../../../assets/icons/aedc.svg";
 import ekedc from "../../../assets/icons/ekedc.svg";
+import ibedc from "../../../assets/images/IBEDC.png";
 
 const generateBankImageUrl = (provider) => {
   switch (provider) {
@@ -22,6 +23,8 @@ const generateBankImageUrl = (provider) => {
       return eedc;
     case "aedc":
       return aedc;
+    case "ibedc":
+      return ibedc;
     default:
       return ikedc;
   }
