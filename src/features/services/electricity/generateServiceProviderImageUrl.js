@@ -5,7 +5,7 @@ import eedc from "../../../assets/icons/eedc.svg";
 import phdc from "../../../assets/icons/phdc.svg";
 import aedc from "../../../assets/icons/aedc.svg";
 import ekedc from "../../../assets/icons/ekedc.svg";
-import ibedc from "../../../assets/images/IBEDC.png";
+import ibedc from "../../../assets/images/ibedc.png";
 
 const generateBankImageUrl = (provider) => {
   switch (provider) {
