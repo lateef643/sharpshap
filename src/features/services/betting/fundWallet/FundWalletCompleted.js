@@ -1,20 +1,23 @@
 import React from "react";
 
 import formatToCurrency from "../../../../utils/formatToCurrency";
-import cloudbet from "../../../../assets/icons/cloudbet.png";
+import generateProviderImageUrl from "../generateProviderImageUrl";
 
 import styles from "./FundWalletCompleted.module.scss";
 
 var Barcode = require("react-barcode");
 
 export const FundsTransferCompleted = (props) => {
-  const { accountId } = props.FundWalletFormState;
-  const { successData, transactionCost, setComponentToRender } = props;
+  // const { accountId } = props.FundWalletFormState;
+  const { successData, transactionCost, setComponentToRender, service } = props;
+  const { amount, status, customer_info, reference, date, id } = successData;
+
+  const logo = generateProviderImageUrl(service);
 
   return (
     <div className={styles.container}>
       <div className={styles.logoContainer}>
-        <img className={styles.logo} src={cloudbet} alt="" />
+        <img className={styles.logo} src={logo} alt="" />
       </div>
       <div className={styles.indentEffect}>
         <span className={styles.indentEffectLeft}></span>
@@ -23,11 +26,23 @@ export const FundsTransferCompleted = (props) => {
       <div className={styles.content}>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Recipient:</span>
-          <span className={styles.contentDetails}>{accountId}</span>
+          <span className={styles.contentDetails}>{customer_info}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Status:</span>
+          <span className={styles.contentDetails}>{status}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Date:</span>
+          <span className={styles.contentDetails}>{date}</span>
+        </div>
+        <div className={styles.contentItem}>
+          <span className={styles.contentHeading}>Transaction ID:</span>
+          <span className={styles.contentDetails}>{id}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Reference:</span>
-          <span className={styles.contentDetails}>{successData.reference}</span>
+          <span className={styles.contentDetails}>{reference}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Type:</span>
@@ -36,7 +51,7 @@ export const FundsTransferCompleted = (props) => {
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Amount:</span>
           <span className={styles.contentDetails}>
-            &#8358;{formatToCurrency(successData.amount)}
+            &#8358;{formatToCurrency(amount)}
           </span>
         </div>
         <div className={styles.contentItem}>
@@ -49,7 +64,7 @@ export const FundsTransferCompleted = (props) => {
       <div className={styles.total}>
         <span className={styles.totalHeading}>Total:</span>
         <span className={styles.totalDetails}>
-          &#8358;{formatToCurrency(successData.amount)}
+          &#8358;{formatToCurrency(amount)}
         </span>
       </div>
       <Barcode
