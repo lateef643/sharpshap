@@ -104,6 +104,7 @@ export const FundWallet = () => {
           transactionCost={TRANSACTION_COST}
           setComponentToRender={setComponentToRender}
           successData={successData}
+          service={service}
         />
       );
       break;

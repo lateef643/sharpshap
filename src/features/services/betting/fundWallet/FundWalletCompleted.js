@@ -10,7 +10,14 @@ var Barcode = require("react-barcode");
 export const FundsTransferCompleted = (props) => {
   // const { accountId } = props.FundWalletFormState;
   const { successData, transactionCost, setComponentToRender, service } = props;
-  const { amount, status, customer_info, reference, date, id } = successData;
+  const {
+    amount,
+    status,
+    customer_info,
+    reference,
+    created_at,
+    id,
+  } = successData;
 
   const logo = generateProviderImageUrl(service);
 
@@ -34,7 +41,7 @@ export const FundsTransferCompleted = (props) => {
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Date:</span>
-          <span className={styles.contentDetails}>{date}</span>
+          <span className={styles.contentDetails}>{created_at}</span>
         </div>
         <div className={styles.contentItem}>
           <span className={styles.contentHeading}>Transaction ID:</span>
@@ -67,14 +74,15 @@ export const FundsTransferCompleted = (props) => {
           &#8358;{formatToCurrency(amount)}
         </span>
       </div>
-      <Barcode
-        value="https://www.cico.ng"
-        width={1.25}
-        height={50}
-        marginTop={30}
-        fontSize={16}
-        displayValue={false}
-      />
+      <div className={styles.barCodeContainer}>
+        <Barcode
+          value="https://www.cico.ng"
+          width={1.21}
+          height={50}
+          marginTop={20}
+          displayValue={false}
+        />
+      </div>
       <div className={styles.action}>
         <div
           className={`${styles.buttonAction} ${styles.buttonHome}`}

@@ -27,21 +27,21 @@ export const FundWalletForm = ({
       const { accountId } = state;
 
       const payload = {
-        provider: service,
-        customer_info: accountId,
+        provider: service.toUpperCase(),
+        customer_id: accountId,
       };
 
       (async function lookupAccountId() {
         try {
           const res = await axios.post(LOOKUP_ACCOUNT, payload);
 
-          const name = res.data.data;
+          const { user_name } = res.data.data;
 
           delete errors.accountName;
 
           dispatch({
             type: "UPDATE_FORM_STATE",
-            payload: { accountName: name },
+            payload: { accountName: user_name },
           });
         } catch (e) {
           setErrors({

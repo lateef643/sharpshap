@@ -3,6 +3,7 @@ import bet9ja from "../../../assets/icons/Bet9ja Logo.svg";
 import sportybet from "../../../assets/icons/SportyBet Logo.svg";
 import nairabet from "../../../assets/icons/Nairabet Logo.svg";
 import cloudbet from "../../../assets/icons/cloudbet.jpg";
+import betting from "../../../assets/images/football.svg";
 
 const generateProviderImageUrl = (service) => {
   switch (service) {
@@ -17,7 +18,7 @@ const generateProviderImageUrl = (service) => {
     case "nairabet":
       return nairabet;
     default:
-      return bet9ja;
+      return betting;
   }
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 // import { ThreeDots } from "svg-loaders-react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
