@@ -1,8 +1,11 @@
-import React, { useEffect, useState, useReducer } from "react";
+import React, { useState, useReducer } from "react";
 import axios from "axios";
 import { useToasts } from "react-toast-notifications";
 
-import { FUND_BETTING_WALLET } from "../../../../utils/constants";
+import {
+  FUND_BETTING_WALLET,
+  FUND_BETTING_WALLET_CLOUDBET,
+} from "../../../../utils/constants";
 import FundWalletReducer, { initialFormState } from "./wallet-reducer.js";
 import FundWalletForm from "./FundWalletForm";
 import FundWalletSummary from "./FundWalletSummary";
@@ -23,10 +26,15 @@ export const FundWallet = () => {
   const [loading, setLoading] = useState(false);
   const { addToast } = useToasts();
 
+  const strings = window.location.href.split("/");
+  const service = strings[4];
+
   const handleOnSubmit = () => {
     setLoading(true);
-    const { accountId, amount, phone } = FundWalletFormState;
+    const { accountId, amount } = FundWalletFormState;
     let recipient;
+    let payload;
+    let requestUrl;
 
     if (accountId.indexOf("234") === 0) recipient = accountId;
     if (accountId.indexOf("0") === 0)
@@ -34,15 +42,25 @@ export const FundWallet = () => {
     if (accountId.indexOf("0") !== 0 && accountId.indexOf("234") !== 0)
       recipient = `234${accountId}`;
 
-    const req = {
-      amount,
-      bank_code: "9001",
-      recipient,
-    };
+    if (service === "cloudbet") {
+      payload = {
+        amount,
+        bank_code: "9001",
+        recipient,
+      };
+      requestUrl = FUND_BETTING_WALLET_CLOUDBET;
+    } else {
+      payload = {
+        amount,
+        provider: service,
+        customer_id: accountId,
+      };
+      requestUrl = FUND_BETTING_WALLET;
+    }
 
     (async function fundWallet() {
       try {
-        const res = await axios.post(FUND_BETTING_WALLET, req);
+        const res = await axios.post(requestUrl, payload);
         setLoading(false);
         setSuccessData(res.data.data);
         setComponentToRender("success");
@@ -64,6 +82,7 @@ export const FundWallet = () => {
           FundWalletFormState={FundWalletFormState}
           dispatch={dispatch}
           setComponentToRender={setComponentToRender}
+          service={service}
         />
       );
       break;
@@ -74,6 +93,7 @@ export const FundWallet = () => {
           loading={loading}
           handleOnSubmit={handleOnSubmit}
           transactionCost={TRANSACTION_COST}
+          service={service}
         />
       );
       break;
@@ -84,6 +104,7 @@ export const FundWallet = () => {
           transactionCost={TRANSACTION_COST}
           setComponentToRender={setComponentToRender}
           successData={successData}
+          service={service}
         />
       );
       break;

@@ -1,12 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { ThreeDots } from "svg-loaders-react";
+import generateProviderImageUrl from "../generateProviderImageUrl";
 
 import Submit from "../../../../components/common/Button";
 
 import back from "../../../../assets/images/left-arrow.svg";
 import info from "../../../../assets/images/tooltip-icon.svg";
-import cloudbet from "../../../../assets/icons/cloudbet.jpg";
 import formatToCurrency from "../../../../utils/formatToCurrency";
 
 import styles from "./FundWalletSummary.module.scss";
@@ -18,8 +18,11 @@ export const FundWalletSummary = (props) => {
     handleOnSubmit,
     transactionCost,
     setComponentToRender,
+    service,
   } = props;
   const { phone, accountId, amount } = FundWalletFormState;
+
+  const logo = generateProviderImageUrl(service);
 
   return (
     <div className={styles.container}>
@@ -33,7 +36,7 @@ export const FundWalletSummary = (props) => {
         <span className={styles.backText}>Back</span>
       </div>
       <div className={styles.logoContainer}>
-        <img className={styles.logo} src={cloudbet} alt="" />
+        <img className={styles.logo} src={logo} alt="" />
       </div>
       <div className={styles.heading}>
         <div className={styles.headingIconContainer}>

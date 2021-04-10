@@ -263,8 +263,20 @@ export const BANK_VERIFICATION = `${path}/fusion/banks/account/verify`;
 //list events - POST
 export const LIST_EVENTS = `${path}/fusion/events`;
 
-//fund wallet - POST
-export const FUND_BETTING_WALLET = `${path}/fusion/transactions/deposit`;
+//fund wallet fusion/cloudbet - POST
+export const FUND_BETTING_WALLET_CLOUDBET = `${path}/fusion/transactions/deposit`;
+
+//fund wallet opay - POST
+export const FUND_BETTING_WALLET = `${path}/betting/transact`;
+
+//lookup account ID opay
+export const LOOKUP_ACCOUNT = `${path}/betting/lookup`;
+
+//requery status opay
+export const REQUERY_BET_STATUS = `${path}/betting/status`;
+
+//get betting providers
+export const GET_BETTING_PROVIDERS = `${path}/betting/providers`;
 
 //requery - GET
 export const REQUERY = `${path}/fusion/transactions/requery/CiCO_RKGWBF8NE4ST326`;

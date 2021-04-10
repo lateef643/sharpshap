@@ -1,0 +1,66 @@
+@import "../assets/styles/config/breakpoints";
+@import "../assets/styles/config/mixins";
+
+.container {
+  padding-top: 2rem;
+}
+
+.section {
+  margin-bottom: 2rem;
+}
+
+.sectionHeading {
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-family: "Nunito", sans-serif;
+  color: #22215b;
+}
+
+.card {
+  width: 51rem;
+  height: 13rem;
+  padding: 1rem;
+  background: #ffffff;
+  box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.25);
+  border-radius: 5px;
+
+  @include respond(phone-large) {
+    width: 100%;
+  }
+
+  & > svg {
+    width: 4rem;
+    display: block;
+    margin: 0 auto;
+    margin-top: 3rem;
+  }
+}
+
+.services {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.service {
+  text-align: center;
+  flex: 0 0 calc(100% / 6);
+  padding: 1rem;
+  background: rgba(155, 180, 255, 0.1);
+  border-radius: 5px;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.serviceLogo {
+  width: 7rem;
+  height: 3rem;
+  margin-bottom: 1rem;
+}
+
+.serviceText {
+  font-size: 1.2rem;
+  text-align: center;
+  color: #22215b;
+}
