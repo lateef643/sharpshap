@@ -367,15 +367,15 @@
       }
 
       &.active {
-        background-color: #2a58ae;
+        background-color: green;
         color: white;
-        border: 1px solid #2a58ae;
+        border: 1px solid green;
       }
 
       &:disabled {
-        background-color: #2a58ae;
+        background-color: green;
         color: white;
-        border: 1px solid #2a58ae;
+        border: 1px solid green;
       }
     }
 
@@ -391,7 +391,7 @@
 .transactions {
   margin-top: 3rem;
   width: 100%;
-  color: #22215b;
+  color: #000;
 }
 
 .transactionsHeading {

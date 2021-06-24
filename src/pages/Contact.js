@@ -30,15 +30,15 @@ export const Contact = ({ changeCurrentPage }) => {
         <div className={styles.content}>
           <div className={styles.section}>
             <img src={phone} alt="phone icon" />
-            <p>+2349080070040</p>
+            <p>+23480123456789</p>
           </div>
           <div className={styles.section}>
             <img src={email} alt="email icon" />
-            <p>hello@cico.ng</p>
+            <p>hello@paydia.ng</p>
           </div>
           <div className={styles.section}>
             <img src={whatsapp} alt="whatsapp icon" />
-            <p>+2349080070040</p>
+            <p>+23480123456789</p>
           </div>
           <div className={styles.section}>
             <img src={address} alt="address icon" />

@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import logoWhite from "../../assets/icons/cico-logo-white.svg";
+import logoWhite from "../../assets/images/pay.png";
 import logoMain from "../../assets/images/cico-logo-login.svg";
 
 import styles from "./HomeNavBar.module.scss";

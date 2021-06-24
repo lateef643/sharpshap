@@ -152,8 +152,8 @@
   background: #f0fbff;
 
   .navItemImage {
-    fill: #3e215b;
-    stroke: #3e215b;
+    fill: green;
+    stroke: green;
 
     @include respond-custom(330px) {
       // height: 1.2rem;
@@ -162,7 +162,7 @@
   }
 
   .navItemText {
-    color: #3e215b;
+    color: green;
     font-weight: 600;
 
     @include respond-custom(330px) {
@@ -196,15 +196,15 @@
   // }
 
   &:hover {
-    color: #3e215b;
+    color: green;
 
     .navItemImage {
-      fill: #3e215b;
-      stroke: #3e215b;
+      fill: green;
+      stroke: green;
     }
 
     .navItemText {
-      color: #3e215b;
+      color: green;
       font-weight: 600;
     }
   }

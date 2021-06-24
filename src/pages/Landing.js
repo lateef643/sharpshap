@@ -15,13 +15,13 @@ export const Landing = ({ dispatch, message, loading, startLoginUser }) => {
     phone: "",
     password: "",
   });
-  const { addToast } = useToasts();
+  const { addToast } = useToasts(); 
 
   useEffect(() => {
-    if (loading === false && message) {
+    if (loading === false && message) { 
       addToast(message, {
         appearance: "error",
-        autoDismiss: true,
+        autoDismiss: true, 
       });
 
       dispatch({
@@ -68,7 +68,7 @@ export const Landing = ({ dispatch, message, loading, startLoginUser }) => {
       <header className={styles.header}>
         <div className={styles.heading}>
           <p className={styles.headingPrimary}>
-            Simplifying Payments in Africa.
+          Payments simplified for your conveninence
           </p>
         </div>
         <div className={styles.formSection}>

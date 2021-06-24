@@ -5,10 +5,10 @@ if (
   window.location.href.indexOf("dev") >= 0
 ) {
   //development server
-  path = "https://api.cico.ng/api";
+  path = "https://pinscher.bytestacks.io/api/";
 } else {
   //production server
-  path = "https://api.cico.ng/api";
+  path = "https://pinscher.bytestacks.io/api/";
 }
 
 //////AUTH///////

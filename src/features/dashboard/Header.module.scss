@@ -59,7 +59,7 @@
   font-size: 2.1rem;
   font-family: "Nunito", "Poppins", sans-serif;
   font-weight: 700;
-  color: #3e215b;
+  color: #000;
 }
 
 .notification {
@@ -177,7 +177,7 @@
   }
 
   .profileName {
-    color: #3e215b;
+    color: #000;
     font-size: 1.3rem;
 
     @include respond(phone-large) {
@@ -229,7 +229,7 @@
 
   .userSubmenuBio {
     height: 50%;
-    background: #3e215b;
+    background: green;
     padding: 2rem 0 2.5rem 0;
     color: #fff;
     border-top-left-radius: 10px;
@@ -274,7 +274,7 @@
     padding: 0.5rem 1rem;
     margin: 0.5rem auto;
     font-size: 1.2rem;
-    color: #3e215b;
+    color: #000;
 
     @include respond(phone-large) {
       width: 80%;
@@ -295,7 +295,7 @@
     position: relative;
     padding: 0 2rem;
     text-decoration: none;
-    color: #3e215b;
+    color: #000;
     font-size: 1.4rem;
 
     @include respond(phone-large) {

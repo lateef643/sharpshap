@@ -10,7 +10,7 @@
   margin-bottom: 1.5rem;
   font-size: 1.4rem;
   font-family: "Nunito", sans-serif;
-  color: #22215b;
+  color: #000;
 }
 
 .card {
@@ -49,7 +49,7 @@
 .serviceText {
   font-size: 1.2rem;
   text-align: center;
-  color: #22215b;
+  color: #000;
 }
 
 .form {
@@ -114,14 +114,14 @@
   height: 4rem;
   border-radius: 5px;
   border: 0;
-  background-color: #062863;
+  background-color: green;
   color: #eee;
   cursor: pointer;
   outline: none;
   font-size: 1.6rem;
 
   &:disabled {
-    background-color: lighten(#062863, 10%);
+    background-color: lighten(green, 10%);
   }
 
   & > svg {
