@@ -14,7 +14,7 @@ import Submit from "../../../components/common/Button";
 import validateFormData from "../../../validation/validateFormData";
 import { LOAN_APPLICATION } from "../../../utils/constants";
 
-import logo from "../../../assets/images/cico-logo.svg";
+import logo from "../../../assets/images/paydia.png";
 
 export const AgentLoan = ({ agentUuid }) => {
   const [validationErrors, setValidationErrors] = useState({ errors: true });

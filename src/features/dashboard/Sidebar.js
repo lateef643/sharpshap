@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { connect } from "react-redux";
 import { NavLink } from "react-router-dom";
 
-import logo from "../../assets/images/pay.png";
+import logo from "../../assets/images/paydia.png";
 import close from "../../assets/icons/closeModal.svg";
 
 import styles from "./Sidebar.module.scss";

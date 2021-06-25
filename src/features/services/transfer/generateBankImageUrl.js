@@ -12,7 +12,7 @@ import keystone from "../../../assets/images/keystone.svg";
 import fcmb from "../../../assets/images/fcmb.svg";
 import sterling from "../../../assets/images/Sterling Bank Plc Logo.svg";
 import suntrust from "../../../assets/images/suntrust.svg";
-import cico from "../../../assets/images/cico-logo.svg";
+import cico from "../../../assets/images/paydia.png";
 
 const generateBankImageUrl = (bankCode) => {
   switch (bankCode) {

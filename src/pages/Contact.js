@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { connect } from "react-redux";
-
 import { setCurrentPage } from "../actions/page";
-
 import address from "../assets/images/address.svg";
 import phone from "../assets/images/phone-3.svg";
 import email from "../assets/images/email.svg";
