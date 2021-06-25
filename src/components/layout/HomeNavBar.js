@@ -2,7 +2,7 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import logoWhite from "../../assets/images/paydia.png";
-import logoMain from "../../assets/images/cico-logo-login.svg";
+import logoMain from "../../assets/images/paydia.png";
 
 import styles from "./HomeNavBar.module.scss";
 
