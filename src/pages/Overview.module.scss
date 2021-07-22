@@ -1,390 +1,388 @@
-@import "../assets/styles/config/mixins";
-@import "../assets/styles/config/breakpoints";
+@import '../assets/styles/config/mixins';
+@import '../assets/styles/config/breakpoints';
 
 .container {
-  padding: 3rem 0;
-  z-index: 2;
+    padding: 3rem 0;
+    z-index: 2;
 
-  @include respond(tab) {
-    padding: 1.5rem 0;
-  }
+    @include respond(tab) {
+        padding: 1.5rem 0;
+    }
 }
 
 .services {
-  width: 100%;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  overflow: auto;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    overflow: auto;
 
-  @include respond(tab) {
-    flex-wrap: nowrap;
-    padding-bottom: 2rem;
-  }
+    @include respond(tab) {
+        flex-wrap: nowrap;
+        padding-bottom: 2rem;
+    }
 
-  @include respond-custom(500px) {
-    justify-content: flex-start;
-    gap: 1rem !important;
-    -moz-column-gap: 1rem;
-    column-gap: 1rem;
-    row-gap: 1rem;
-    -webkit-column-gap: 1rem;
-  }
+    @include respond-custom(500px) {
+        justify-content: flex-start;
+        gap: 1rem !important;
+        -moz-column-gap: 1rem;
+        column-gap: 1rem;
+        row-gap: 1rem;
+        -webkit-column-gap: 1rem;
+    }
 }
 
 .card {
-  flex: 0 0 18%;
-  height: 13.9rem;
-  padding: 2rem 1rem;
-  border-radius: 5px;
-  position: relative;
-  box-shadow: 0 1px 2px #00000029;
-  margin: 0;
+    flex: 0 0 18%;
+    height: 13.9rem;
+    padding: 2rem 1rem;
+    border-radius: 11px;
+    position: relative;
+    box-shadow: 0 1px 2px #00000029;
+    margin: 0;
 
-  @include respond(tab) {
-    height: 11rem;
-    min-width: 11.5rem;
-    padding: 2rem;
+    @include respond(tab) {
+        height: 11rem;
+        min-width: 11.5rem;
+        padding: 2rem;
 
-    &:not(:last-child) {
-      margin-right: 1.2rem;
+        &:not(:last-child) {
+            margin-right: 1.2rem;
+        }
     }
-  }
 
-  @include respond(phone-large) {
-    height: 10.5rem;
-  }
+    @include respond(phone-large) {
+        height: 10.5rem;
+    }
 
-  // @include respond-custom(500px) {
-  // }
+    // @include respond-custom(500px) {
+    // }
 
-  // @include respond-custom(340px) {
-  //   flex: 0 0 9rem;
-  //   height: 9.2rem;
-  //   margin-top: 1rem;
-  //   margin-left: auto;
-  //   margin-right: auto;
+    // @include respond-custom(340px) {
+    //   flex: 0 0 9rem;
+    //   height: 9.2rem;
+    //   margin-top: 1rem;
+    //   margin-left: auto;
+    //   margin-right: auto;
 
-  //   &:nth-child(4) {
-  //     margin-top: 1rem;
-  //     margin-left: 0.8rem;
-  //     margin-right: 0;
-  //   }
+    //   &:nth-child(4) {
+    //     margin-top: 1rem;
+    //     margin-left: 0.8rem;
+    //     margin-right: 0;
+    //   }
 
-  //   &:last-child {
-  //     margin-top: 1rem;
-  //     margin-left: 1rem;
-  //     margin-right: auto;
-  //   }
-  // }
+    //   &:last-child {
+    //     margin-top: 1rem;
+    //     margin-left: 1rem;
+    //     margin-right: auto;
+    //   }
+    // }
 
-  &Transfer {
-    background: #f6edff;
-  }
+    &Transfer {
+        background: #fff;
+    }
 
-  &Bill {
-    background: #f0fffa;
-  }
+    &Bill {
+        background: #fff;
+    }
 
-  &Airtime {
-    background: #ffeaef;
-  }
+    &Airtime {
+        background: #fff;
+    }
 
-  &Betting {
-    background: #f0fbff;
-  }
+    &Betting {
+        background: #fff;
+    }
 
-  &Cash {
-    background: #fff3eb;
-  }
+    &Cash {
+        background: #fff;
+    }
 }
 
 .cardImageContainer {
-  border-radius: 50%;
-  width: 7rem;
-  height: 7rem;
-  position: absolute;
-  top: 1.5rem;
-  right: 1.5rem;
-  padding: 1.5rem;
-  border: 10px solid #3e215b;
+    width: 10rem;
+    height: 9rem;
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    padding: 1.5rem;
 
-  @include respond(tab) {
-    border-width: 6px;
-    width: 4.5rem;
-    height: 4.5rem;
-    top: 1rem;
-    right: 1rem;
-    padding: 1rem;
-  }
+    @include respond(tab) {
+        border-width: 6px;
+        width: 4.5rem;
+        height: 4.5rem;
+        top: 1rem;
+        right: 1rem;
+        padding: 1rem;
+    }
 
-  // @include respond(phone) {
-  //   border-width: 5px;
-  //   width: 4rem;
-  //   height: 4rem;
-  //   top: 0.9rem;
-  //   right: 0.9rem;
-  //   padding: 0.9rem;
-  // }
+    // @include respond(phone) {
+    //   border-width: 5px;
+    //   width: 4rem;
+    //   height: 4rem;
+    //   top: 0.9rem;
+    //   right: 0.9rem;
+    //   padding: 0.9rem;
+    // }
 
-  &Transfer {
-    border-color: #3e215b;
-  }
+    // &Transfer {
+    //   border-color: #3e215b;
+    // }
 
-  &Bill {
-    border-color: #00b378;
-  }
+    // &Bill {
+    //   border-color: #00b378;
+    // }
 
-  &Airtime {
-    border-color: #ff547d;
-  }
+    // &Airtime {
+    //   border-color: #ff547d;
+    // }
 
-  &Betting {
-    border-color: #0bc2ff;
-  }
+    // &Betting {
+    //   border-color: #0bc2ff;
+    // }
 
-  &Cash {
-    border-color: #ff9c52;
-  }
+    // &Cash {
+    //   border-color: #ff9c52;
+    // }
 }
 
 .image {
-  width: 100%;
-  height: 100%;
+    width: 100%;
+    height: 100%;
 }
 
 .text {
-  position: absolute;
-  bottom: 1.5rem;
-  left: 1.5rem;
-  font-size: 1.4rem;
-
-  @include respond(tab) {
+    position: absolute;
+    bottom: 1.5rem;
+    left: 1.5rem;
     font-size: 1.4rem;
-    left: 0.7rem;
-  }
 
-  // @include respond-custom(800px) {
-  //   left: 0.7rem;
-  // }
+    @include respond(tab) {
+        font-size: 1.4rem;
+        left: 0.7rem;
+    }
 
-  // @include respond-custom(650px) {
-  //   font-size: 1.3rem;
-  //   left: 0.5rem;
-  //   bottom: 1rem;
-  // }
+    // @include respond-custom(800px) {
+    //   left: 0.7rem;
+    // }
 
-  // @include respond(phone-medium) {
-  //   font-size: 1.2rem;
-  //   left: 0.5rem;
-  // }
+    // @include respond-custom(650px) {
+    //   font-size: 1.3rem;
+    //   left: 0.5rem;
+    //   bottom: 1rem;
+    // }
 
-  &Transfer {
-    color: #3e215b;
-  }
+    // @include respond(phone-medium) {
+    //   font-size: 1.2rem;
+    //   left: 0.5rem;
+    // }
 
-  &Bill {
-    color: #00b378;
-  }
+    &Transfer {
+        color: #000;
+    }
 
-  &Airtime {
-    color: #ff547d;
-  }
+    &Bill {
+        color: #000;
+    }
 
-  &Betting {
-    color: #0bc2ff;
-  }
+    &Airtime {
+        color: #000;
+    }
 
-  &Cash {
-    color: #ff9c52;
-  }
+    &Betting {
+        color: #000;
+    }
+
+    &Cash {
+        color: #000;
+    }
 }
 
 .transfer {
-  background: #f6edff;
+    background: #f6edff;
 }
 
 .content {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 3rem;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 3rem;
 
-  @include respond(tab) {
-    flex-direction: column-reverse;
-  }
+    @include respond(tab) {
+        flex-direction: column-reverse;
+    }
 }
 
 .transactions {
-  flex: 0 0 44%;
-  margin-right: 2rem;
-  position: relative;
-  margin-top: 2rem;
-  box-shadow: -1px 1px 6px 1px rgba(black, 0.1);
-  padding: 3rem 2rem;
-  border-radius: 1rem;
-  min-width: 40rem;
-  max-height: 40rem;
-  min-height: 40rem;
+    flex: 0 0 44%;
+    margin-right: 2rem;
+    position: relative;
+    margin-top: 2rem;
+    box-shadow: -1px 1px 6px 1px rgba(black, 0.1);
+    padding: 3rem 2rem;
+    border-radius: 1rem;
+    min-width: 40rem;
+    max-height: 40rem;
+    min-height: 40rem;
 
-  > svg {
-    position: absolute;
-    top: 20%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 4rem;
-  }
+    > svg {
+        position: absolute;
+        top: 20%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 4rem;
+    }
 
-  @include respond(tab) {
-    margin-top: 7rem;
-  }
+    @include respond(tab) {
+        margin-top: 7rem;
+    }
 
-  @include respond(phone-large) {
-    min-width: 30rem !important;
-    overflow: hidden;
-    max-height: 37rem;
-    min-height: 37rem;
-    padding: 3rem 1rem;
-  }
+    @include respond(phone-large) {
+        min-width: 30rem !important;
+        overflow: hidden;
+        max-height: 37rem;
+        min-height: 37rem;
+        padding: 3rem 1rem;
+    }
 }
 
 .transactionsHeading {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 2.5rem;
-  padding: 0 1rem;
-  font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2.5rem;
+    padding: 0 1rem;
+    font-size: 1.5rem;
 }
 
 .transactionsHeadingText {
-  font-weight: 500;
-  font-size: 1.5rem;
-  color: #000;
+    font-weight: 500;
+    font-size: 1.5rem;
+    color: #000;
 }
 
 .transactionsHeadingLink {
-  font-size: 1.5rem;
-  color: #1fd302;
-  text-decoration: none;
-  font-family: inherit;
+    font-size: 1.5rem;
+    color: #1fd302;
+    text-decoration: none;
+    font-family: inherit;
 }
 
 .transactionsItem {
-  padding: 1.2rem 0.5rem;
-  font-size: 1.4rem;
-  display: flex;
-  justify-content: space-between;
-  background: #ffffff;
-  // box-shadow: 0 1px 2px #00000029;
-  text-align: center;
+    padding: 1.2rem 0.5rem;
+    font-size: 1.4rem;
+    display: flex;
+    justify-content: space-between;
+    background: #ffffff;
+    // box-shadow: 0 1px 2px #00000029;
+    text-align: center;
 
-  &:not(:last-child) {
-    margin-bottom: 1.2rem;
-    border-bottom: 1px solid rgb(238, 238, 238);
+    &:not(:last-child) {
+        margin-bottom: 1.2rem;
+        border-bottom: 1px solid rgb(238, 238, 238);
+
+        @include respond(phone-large) {
+            margin-bottom: 1rem;
+        }
+    }
 
     @include respond(phone-large) {
-      margin-bottom: 1rem;
+        padding: 1rem 0;
+        // font-size: 1.3rem;
     }
-  }
-
-  @include respond(phone-large) {
-    padding: 1rem 0;
-    // font-size: 1.3rem;
-  }
 }
 
 .sn {
-  color: #3d3d3d;
-  flex: 0 0 10%;
+    color: #3d3d3d;
+    flex: 0 0 10%;
 
-  @include respond(phone-large) {
-    display: none;
-  }
+    @include respond(phone-large) {
+        display: none;
+    }
 }
 
 .date {
-  color: #3d3d3d;
-  flex: 0 0 25%;
+    color: #3d3d3d;
+    flex: 0 0 25%;
 
-  @include respond(phone-large) {
-    // flex: 0 0 35%;
-    // flex: 0 0 20%;
-  }
+    @include respond(phone-large) {
+        // flex: 0 0 35%;
+        // flex: 0 0 20%;
+    }
 }
 
 .description {
-  color: #3d3d3d;
-  flex: 0 0 40%;
+    color: #3d3d3d;
+    flex: 0 0 40%;
 }
 
 .amountHeader {
-  font-weight: 500 !important;
+    font-weight: 500 !important;
 }
 
 .amount {
-  // font-family: "Poppins", sans-serif;
-  letter-spacing: 0.3px;
-  color: #1fd302;
-  color: #3d3d3d;
-  flex: 0 0 20%;
-  font-weight: 600;
+    // font-family: "Poppins", sans-serif;
+    letter-spacing: 0.3px;
+    color: #1fd302;
+    color: #3d3d3d;
+    flex: 0 0 20%;
+    font-weight: 600;
 
-  @include respond(phone-large) {
-    flex: 0 0 30%;
-  }
+    @include respond(phone-large) {
+        flex: 0 0 30%;
+    }
 }
 
 .chartContainer {
-  position: relative;
-  flex: 0 0 55%;
-  background-color: #fff;
-  padding: 2rem;
-  padding-bottom: 1rem;
-  border-radius: 10px;
-  max-height: 40rem;
-
-  @include respond(phone-large) {
-    padding: 0.2rem;
-    padding-top: 1rem;
-    max-height: 30rem;
-  }
-
-  .sortBy {
-    float: right;
-    width: 10rem;
-    height: 3rem;
-    border: 0;
-    font-size: 1.4rem;
-    font-family: inherit;
-    box-shadow: 2px 1px 4px #00000029;
-    // border-radius: 10px;
-    margin-right: 3rem;
-    margin-bottom: 2rem;
-    padding: 5px;
+    position: relative;
+    flex: 0 0 55%;
     background-color: #fff;
+    padding: 2rem;
+    padding-bottom: 1rem;
+    border-radius: 10px;
+    max-height: 40rem;
 
     @include respond(phone-large) {
-      height: 3rem;
-      width: 8rem;
-      font-size: 1.2rem;
-      box-shadow: 0 1px 2px #00000029;
+        padding: 0.2rem;
+        padding-top: 1rem;
+        max-height: 30rem;
     }
-  }
 
-  .chart {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-  }
+    .sortBy {
+        float: right;
+        width: 10rem;
+        height: 3rem;
+        border: 0;
+        font-size: 1.4rem;
+        font-family: inherit;
+        box-shadow: 2px 1px 4px #00000029;
+        // border-radius: 10px;
+        margin-right: 3rem;
+        margin-bottom: 2rem;
+        padding: 5px;
+        background-color: #fff;
+
+        @include respond(phone-large) {
+            height: 3rem;
+            width: 8rem;
+            font-size: 1.2rem;
+            box-shadow: 0 1px 2px #00000029;
+        }
+    }
+
+    .chart {
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+    }
 }
 
 #canvas {
-  height: 500px;
+    height: 500px;
 }
 
 .services {
-  flex: 0 0 100%;
+    flex: 0 0 100%;
 }
 
 .noTransactions {
-  font-size: 1.6rem;
+    font-size: 1.6rem;
 }

@@ -1,0 +1,166 @@
+@import '../../assets/styles/config/breakpoints';
+@import '../../assets/styles/config/mixins';
+@import '../../assets/styles/config/variables';
+
+.balanceContainer {
+    display: flex;
+    justify-content: space-between;
+
+    @include respond(phone-large) {
+        flex-direction: column;
+    }
+}
+
+.balance {
+    height: 15rem;
+    display: flex;
+    align-items: center;
+    background-color: #77b856;
+    background-size: 7rem;
+    padding: 3rem 5rem;
+    color: #ffffff;
+    font-family: 'Poppins', monospace, arial, helvetica, sans-serif;
+    border-radius: 1rem;
+    justify-content: space-between;
+    flex: 0 0 48%;
+
+    &:not(:last-child) {
+        margin-bottom: 3rem;
+        @include respond(phone-large) {
+            margin-bottom: 2rem;
+        }
+    }
+
+    @media print {
+        display: none;
+    }
+
+    @include respond(tab) {
+        padding: 1rem 3rem;
+        background-position: bottom 0px right 5%;
+    }
+
+    @include respond-custom(450px) {
+        padding: 1rem 2rem;
+        background-position: bottom 0px right 4%;
+        background-size: 6.5rem;
+    }
+}
+
+.balanceHeading {
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.balanceText {
+    font-weight: 500;
+    font-size: 3rem;
+    padding: 1rem;
+    background-color: #fff;
+    color: #77b856;
+    border-radius: 8px;
+
+    @include respond(tab) {
+        font-size: 2rem;
+    }
+
+    @include respond(phone-medium) {
+        font-size: 1.8rem;
+    }
+}
+
+.refresh {
+    width: 1.5rem;
+    margin-left: 1rem;
+    transition: 1s all;
+    cursor: pointer;
+
+    &:active {
+        -webkit-animation: rotate 3s ease-in;
+        animation: rotate 0.5s ease-in;
+    }
+}
+
+.walletHistory {
+    font-weight: 400;
+    font-size: 1.2rem;
+    padding: 1rem 2rem;
+    color: #fff;
+    background-color: #77b856;
+    border-radius: 8px;
+    margin-top: 1rem;
+    cursor: pointer;
+}
+
+.wallet {
+    background-color: #fff;
+    color: #77b856;
+}
+
+.walletHeading {
+    color: #000000;
+    font-size: 0.9rem;
+}
+
+.wallet_Text {
+    font-weight: 800;
+    font-size: 3rem;
+    color: #000;
+
+    @include respond(tab) {
+        font-size: 2rem;
+    }
+
+    @include respond(phone-medium) {
+        font-size: 1.8rem;
+    }
+}
+
+.agentCategory {
+}
+
+.agentCategoryImage {
+    width: 8rem;
+    height: 8rem;
+    display: block;
+    margin: 0 auto;
+}
+
+.agentCategoryText {
+    font-size: 18px;
+    text-align: center;
+    color: #ffffff;
+
+    @include respond(phone-medium) {
+        font-size: 1.5rem;
+    }
+}
+
+@-webkit-keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    50% {
+        transform: rotate(180deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

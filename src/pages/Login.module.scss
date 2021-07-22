@@ -1,0 +1,506 @@
+@import '../assets/styles/config/mixins';
+@import '../assets/styles/config/breakpoints';
+
+.wrapper {
+    width: 100%;
+    min-height: 100vh;
+    overflow: hidden;
+    background-color: #77b856;
+}
+
+.navContainer {
+    height: 15rem;
+    padding: 0 8%;
+    @include respond(phone-large) {
+        height: 5rem;
+    }
+}
+
+.logoContainer {
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 0 0 50px 50px;
+    width: 15%;
+}
+
+.logoContainer .logo {
+    width: 75%;
+    margin-top: 50px;
+    margin-left: 20px;
+    @include respond-custom(1000px) {
+        margin-top: 50px;
+        margin-left: 12px;
+    }
+
+    @include respond(phone-large) {
+        width: 100%;
+        margin-top: 15px;
+        margin-left: 1px;
+    }
+}
+
+.header {
+    padding: 4rem 10vw;
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+    position: relative;
+
+    @include respond-custom(1000px) {
+        padding: 5rem 9vw;
+        margin-top: 0;
+    }
+
+    @include respond-custom(900px) {
+        padding: 5rem 8vw;
+    }
+
+    @include respond-custom(810px) {
+        justify-content: center;
+    }
+
+    @include respond-custom(410px) {
+        padding: 5rem 1rem;
+    }
+}
+
+.headingContainer {
+    display: flex;
+    flex-direction: column;
+}
+
+.headingContainerImage {
+    position: absolute;
+    left: 0;
+    top: 162px;
+
+    @include respond-custom(1000px) {
+        top: 195px;
+    }
+
+    @include respond(phone-large) {
+        display: none;
+    }
+}
+
+.headingContainerImage img {
+    @include respond-custom(1000px) {
+        width: 63%;
+    }
+
+    @include respond(semi-tab) {
+        width: 55%;
+    }
+}
+
+.heading {
+    flex: 0 0 31%;
+    height: -webkit-max-content;
+    height: -moz-max-content;
+    height: max-content;
+
+    @include respond-custom(1000px) {
+        flex: 0 0 35%;
+    }
+
+    @include respond(phone-large) {
+        display: none;
+    }
+}
+
+.headingPrimary {
+    font-weight: 800;
+    font-size: 5rem;
+    line-height: 6.5rem;
+    color: #fff;
+
+    @include respond-custom(1000px) {
+        font-size: 3.8rem;
+    }
+}
+
+.headingSecondary {
+    font-weight: 400;
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    color: #fff;
+    margin-top: 10px;
+    text-align: center;
+
+    @include respond-custom(1000px) {
+        font-size: 2rem;
+    }
+}
+
+.formSection {
+    flex: 0 0 37.1rem;
+    margin-left: 20%;
+
+    @include respond-custom(1000px) {
+        margin-left: 10%;
+    }
+
+    @include respond-custom(900px) {
+        margin-left: 5%;
+    }
+
+    @include respond-custom(810px) {
+        margin: 0;
+    }
+
+    @include respond-custom(410px) {
+        flex: 1;
+    }
+}
+
+.loginContainer {
+    position: relative;
+    @include respond(phone-large) {
+        width: 100%;
+    }
+}
+
+.loginContainer__img {
+    @include respond-custom(1000px) {
+        width: 446px;
+    }
+
+    @include respond(tab) {
+        width: 374px;
+    }
+
+    @include respond(phone-large) {
+        height: 469px;
+        width: 406px;
+    }
+}
+
+.form__wrapper {
+    position: absolute;
+    width: 434px;
+    height: 477px;
+    left: 905px;
+    top: 35px;
+    background: rgba(97, 147, 71, 0.5);
+    border-radius: 15px 15px 60px 60px;
+    padding: 20px;
+    @include respond-custom(1000px) {
+        left: 506px;
+        top: 50px;
+        width: 371px;
+        height: 398px;
+    }
+
+    @include respond(tab) {
+        left: 487px;
+        width: 311px;
+        height: 340px;
+    }
+
+    @include respond(semi-tab) {
+        left: 405px;
+    }
+
+    @include respond(phone-large) {
+        height: 394px;
+        width: 332px;
+        top: 61px;
+        left: 41px;
+    }
+}
+
+.form {
+    width: 100%;
+    padding: 6.5rem 3rem;
+
+    @include respond-custom(1000px) {
+        padding: 3rem 3rem 4rem;
+    }
+
+    @include respond(tab) {
+        padding: 0rem 3rem 4rem;
+    }
+    @include respond(phone-large) {
+        padding: 2rem 2rem 0;
+    }
+}
+
+.formGroup {
+    width: 100%;
+    position: relative;
+
+    &:not(:last-child) {
+        margin-bottom: 3rem;
+
+        @include respond-custom(1000px) {
+            margin-bottom: 1.5rem;
+        }
+
+        @include respond(phone) {
+            margin-bottom: 1.5rem;
+        }
+
+        @include respond(phone-large) {
+            margin-bottom: 1.5rem;
+        }
+    }
+}
+
+.label {
+    color: #fff;
+    font-size: 1.5rem;
+    display: block;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+
+    @include respond(phone) {
+        margin-bottom: 1rem;
+    }
+}
+
+.inputIcon {
+    position: absolute;
+    width: 1.5rem;
+    left: 1rem;
+    top: 60%;
+
+    @include respond(phone) {
+        width: 1.7rem;
+        top: 55%;
+    }
+}
+
+.input {
+    width: 100%;
+    border: 0;
+    outline: 0;
+    height: 4rem;
+    font-family: inherit;
+    padding: 0 1rem;
+    padding-left: 4rem;
+    font-size: 1.6rem;
+    background: transparent;
+    border: 2px solid #fff;
+    border-radius: 15px;
+    color: #fff;
+}
+
+.checkBox:not(:checked),
+.checkBox:checked {
+    position: absolute;
+    left: -9999px;
+}
+.checkBox:not(:checked) + label,
+.checkBox:checked + label {
+    position: relative;
+    padding-left: 1.95em;
+    cursor: pointer;
+}
+
+/* checkbox aspect */
+.checkBox:not(:checked) + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1em;
+    height: 1em;
+    border: 1.7px solid #fff;
+    background: transparent;
+    border-radius: 6px;
+    padding: 2px;
+    //     box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.checkBox:not(:checked) + label:after {
+    content: '\2713\0020';
+    position: absolute;
+    top: 0.12em;
+    left: 0.2em;
+    font-size: 1em;
+    line-height: 0.8;
+    color: #8dc441;
+    transition: all 0.2s;
+    border-radius: inherit;
+    font-family: 'Lucida Sans Unicode', 'Arial Unicode MS', Arial;
+}
+
+.checkBox:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 1rem;
+    height: 1rem;
+    border: 1.7px solid #fff;
+    background: transparent;
+    border-radius: 6px;
+    padding: 2px;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+/* checked mark aspect */
+
+.checkBox:checked + label:after {
+    content: '\2713\0020';
+    position: absolute;
+    top: 0.6em;
+    left: 0.4em;
+    font-size: 1em;
+    font-weight: 600;
+    line-height: 0.75;
+    color: #fff;
+    transition: all 0.2s;
+    border-radius: inherit;
+}
+/* checked mark aspect changes */
+.checkBox:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+.checkBox:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+/* disabled checkbox */
+.checkBox:disabled:not(:checked) + label:before,
+.checkBox:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+.checkBox:disabled:checked + label:after {
+    color: #999;
+}
+.checkBox:disabled + label {
+    color: #aaa;
+}
+
+.checkContainer {
+    display: flex;
+    align-items: end;
+}
+
+.checkedLabel {
+    color: #fff;
+    font-size: 1.5rem;
+    margin-left: 10px;
+
+    // @include respond(phone) {
+    //     margin-bottom: 1rem;
+    // }
+}
+
+.forgotPassword {
+    text-align: right;
+}
+
+.forgotPasswordLink {
+    text-decoration: none;
+    color: #fff;
+    font-size: 1.5rem;
+}
+
+.button {
+    background-color: #fff;
+    border: none;
+    color: #77b856;
+    height: 3.7rem;
+    width: 100%;
+    text-align: center;
+    transition-duration: 0.4s;
+    text-decoration: none;
+    font-size: 1.6rem;
+    line-height: 4rem;
+    cursor: pointer;
+    border-radius: 10px;
+}
+
+.button span {
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.7s;
+}
+
+.button span:after {
+    content: '\279E';
+    position: absolute;
+    opacity: 0;
+    top: 0;
+    right: -1.3rem;
+    transition: 0.4s;
+}
+
+.button:hover span {
+    padding-right: 3rem;
+}
+
+.button:hover span:after {
+    opacity: 1;
+    right: 0;
+}
+
+.register {
+    margin-top: 3rem;
+    color: #fff;
+    font-size: 1.5rem;
+    text-align: center;
+
+    @include respond(tab) {
+        margin-top: 1.4rem;
+        color: #fff;
+        font-size: 1.3rem;
+        text-align: center;
+    }
+}
+
+.registerLink {
+    text-decoration: none;
+    margin-left: 1rem;
+    display: inline-block;
+    color: #212129;
+}
+
+.hanger {
+    position: absolute;
+    left: 997px;
+    top: -116px;
+    z-index: 1;
+
+    @include respond-custom(1000px) {
+        left: 571px;
+        top: -99px;
+    }
+
+    @include respond(tab) {
+        left: 522px;
+        top: -105px;
+    }
+    @include respond(semi-tab) {
+        left: 438px;
+    }
+
+    @include respond(phone-large) {
+        display: none;
+    }
+}
+
+.hangerImage {
+    position: relative;
+}
+
+.hangerInfo {
+    display: flex;
+    align-items: center;
+    position: absolute;
+    top: 104px;
+    z-index: 2;
+    left: 30px;
+}
+
+.hangerInfoText {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-right: 10px;
+    color: #77b856;
+}

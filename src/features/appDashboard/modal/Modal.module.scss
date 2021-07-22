@@ -1,0 +1,28 @@
+@-webkit-keyframes fadeOut {
+  0% {
+    transform: translateX(-50%) scale(0.8);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    transform: translateX(-50%) scale(0.8);
+  }
+
+  100% {
+    transform: translateX(-50%) scale(1);
+  }
+}
+
+.container {
+  -webkit-animation: fadeOut 0.1s ease;
+  animation: fadeOut 0.1s ease;
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%) scale(1);
+}
