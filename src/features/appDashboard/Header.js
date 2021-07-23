@@ -72,7 +72,13 @@ const Header = ({
         <header className={styles.header}>
             <div className={styles.container}>
                 <div className={styles.logoContainer}>
-                    <img src={logoMain} alt='App Logo' />
+                    <a
+                        href='/https://agents.paydia.ng'
+                        target='_blank'
+                        rel='noopener noreferrer'
+                    >
+                        <img src={logoMain} alt='App Logo' />
+                    </a>
                 </div>
                 <nav className={styles.navContainer}>
                     <NavLink

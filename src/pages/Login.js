@@ -185,7 +185,14 @@ const LoginPage = ({ dispatch, message, loading, startLoginUser }) => {
                             </div>
                             <button className={styles.button}>
                                 <span>
-                                    {loading ? <ThreeDots /> : 'Sign In'}
+                                    {loading ? (
+                                        <ThreeDots
+                                            fill='#77b856'
+                                            height='10px'
+                                        />
+                                    ) : (
+                                        'Sign In'
+                                    )}
                                 </span>
                             </button>
                             <p className={styles.register}>

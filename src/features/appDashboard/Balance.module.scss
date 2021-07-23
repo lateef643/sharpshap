@@ -50,7 +50,7 @@
 .balanceHeading {
     font-weight: 500;
     font-size: 1.5rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.2rem;
 }
 
 .balanceText {
@@ -91,6 +91,7 @@
     border-radius: 8px;
     margin-top: 1rem;
     cursor: pointer;
+    margin-bottom: 5px;
 }
 
 .wallet {
@@ -117,7 +118,18 @@
     }
 }
 
-.agentCategory {
+.wallet_id {
+    font-weight: 800;
+    font-size: 2.5rem;
+    color: #000;
+
+    @include respond(tab) {
+        font-size: 2rem;
+    }
+
+    @include respond(phone-medium) {
+        font-size: 1.5rem;
+    }
 }
 
 .agentCategoryImage {

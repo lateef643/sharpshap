@@ -17,8 +17,8 @@ export const AppRouter = () => {
     return (
         <Switch>
             <PublicRoute path='/forgot-password' component={ForgotPassword} />
-            <PublicRoute path='/login' component={Landing} exact />
-            <PublicRoute path='/loginPage' component={LoginPage} exact />
+            <PublicRoute path='/login' component={LoginPage} exact />
+            {/* <PublicRoute path='/loginPage' component={LoginPage} exact /> */}
             <PublicRoute path='/register' component={Register} exact />
             {/* <PrivateRoute path='/' component={Dashboard} /> */}
             <PrivateRoute path='/' component={AppDashBoard} />

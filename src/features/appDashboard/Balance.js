@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import flexShield from '../../assets/icons/bronze-badge.svg';
 import premiumShield from '../../assets//images/premiumSvg.svg';
@@ -16,6 +17,7 @@ const Balance = ({
     walletNo,
     account_number,
     walletBalance,
+    vfdAccountNumber,
     refreshOverviewData,
     agentClassification,
 }) => {
@@ -64,10 +66,10 @@ const Balance = ({
             </div>
             <div className={`${styles.balance} ${styles.wallet}`}>
                 <div className={styles.walletInfo}>
-                    <p className={styles.balanceHeading}>Wallet No</p>
-                    <h3 className={styles.wallet_Text}>{walletNo}</h3>
                     <p className={styles.balanceHeading}>Nuban Acc No</p>
-                    <h3 className={styles.wallet_Text}>{account_number}</h3>
+                    <h3 className={styles.wallet_Text}>
+                        {vfdAccountNumber ? vfdAccountNumber : '----'}
+                    </h3>
                 </div>
                 <div className={styles.balanceWrapper}>
                     <p
@@ -84,9 +86,21 @@ const Balance = ({
                             onClick={handleOnClick}
                         />
                     </h3>
-                    <h3 className={styles.walletHistory} arial-label='button'>
-                        Wallet history
-                    </h3>
+                    <Link to='/wallet/log' style={{ textDecoration: 'none' }}>
+                        <h3
+                            className={styles.walletHistory}
+                            arial-label='button'
+                        >
+                            Wallet history
+                        </h3>
+                    </Link>
+
+                    <p
+                        className={`${styles.balanceHeading} ${styles.walletHeading}`}
+                    >
+                        Wallet No
+                    </p>
+                    <h6 className={styles.wallet_id}>{walletNo}</h6>
                 </div>
             </div>
         </div>
@@ -100,6 +114,7 @@ const mapStateToProps = (state) => {
         name: `${state.auth.user.firstName} ${state.auth.user.lastName}`,
         walletNo: state.auth.user.walletNo,
         account_number: state.auth.user.account_number,
+        vfdAccountNumber: state.auth.user.vfd_account_number,
     };
 };
 

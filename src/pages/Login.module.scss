@@ -422,23 +422,22 @@
     transition: 0.7s;
 }
 
-.button span:after {
-    content: '\279E';
-    position: absolute;
-    opacity: 0;
-    top: 0;
-    right: -1.3rem;
-    transition: 0.4s;
-}
+// .button span:after {
+//     content: '\279E';
+//     position: absolute;
+//     top: 0;
+//     right: -2rem;
+//     transition: 0.4s;
+// }
 
-.button:hover span {
-    padding-right: 3rem;
-}
+// .button:hover span {
+//     padding-right: 3rem;
+// }
 
-.button:hover span:after {
-    opacity: 1;
-    right: 0;
-}
+// .button:hover span:after {
+//     opacity: 1;
+//     right: 0;
+// }
 
 .register {
     margin-top: 3rem;
