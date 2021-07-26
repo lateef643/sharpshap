@@ -97,6 +97,12 @@
     &Cash {
         background: #fff;
     }
+
+    &Disabled {
+        user-select: none;
+        opacity: 0.5;
+        cursor: not-allowed !important;
+    }
 }
 
 .cardImageContainer {

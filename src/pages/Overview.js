@@ -318,7 +318,7 @@ export const Overview = ({
                 </Link>
                 <Link
                     to='/loan'
-                    className={`${styles.card} ${styles.cardCash}`}
+                    className={`${styles.card} ${styles.cardCash} ${styles.cardDisabled}`}
                 >
                     <div className={styles.container}>
                         <div
