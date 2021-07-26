@@ -316,8 +316,8 @@ export const Overview = ({
                         </p>
                     </div>
                 </Link>
-                <Link
-                    to='/loan'
+                <div
+                    // to='/loan'
                     className={`${styles.card} ${styles.cardCash} ${styles.cardDisabled}`}
                 >
                     <div className={styles.container}>
@@ -334,7 +334,7 @@ export const Overview = ({
                             Loan
                         </p>
                     </div>
-                </Link>
+                </div>
             </div>
             <div className={styles.content}>
                 <div className={styles.transactions}>

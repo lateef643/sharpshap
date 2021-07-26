@@ -184,6 +184,11 @@
     background: rgba(97, 147, 71, 0.5);
     border-radius: 15px 15px 60px 60px;
     padding: 20px;
+
+    @include respond-custom(1380px) {
+        left: 758px;
+    }
+
     @include respond-custom(1000px) {
         left: 506px;
         top: 50px;
@@ -422,23 +427,6 @@
     transition: 0.7s;
 }
 
-// .button span:after {
-//     content: '\279E';
-//     position: absolute;
-//     top: 0;
-//     right: -2rem;
-//     transition: 0.4s;
-// }
-
-// .button:hover span {
-//     padding-right: 3rem;
-// }
-
-// .button:hover span:after {
-//     opacity: 1;
-//     right: 0;
-// }
-
 .register {
     margin-top: 3rem;
     color: #fff;
@@ -465,6 +453,11 @@
     left: 997px;
     top: -116px;
     z-index: 1;
+
+    @include respond-custom(1380px) {
+        left: 845px;
+        top: -114px;
+    }
 
     @include respond-custom(1000px) {
         left: 571px;
