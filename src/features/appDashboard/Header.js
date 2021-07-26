@@ -72,13 +72,9 @@ const Header = ({
         <header className={styles.header}>
             <div className={styles.container}>
                 <div className={styles.logoContainer}>
-                    <a
-                        href='/https://agents.paydia.ng'
-                        target='_blank'
-                        rel='noopener noreferrer'
-                    >
+                    <NavLink to='/'>
                         <img src={logoMain} alt='App Logo' />
-                    </a>
+                    </NavLink>
                 </div>
                 <nav className={styles.navContainer}>
                     <NavLink
@@ -124,10 +120,10 @@ const Header = ({
                     className={styles.notification}
                     onClick={handleToggleNotifications}
                 >
-                    <img src={notification} alt='notification bell' />
+                    {/* <img src={notification} alt='notification bell' />
                     <span className={styles.active}>
                         {notifications.length}
-                    </span>
+                    </span> */}
                 </div>
                 <div className={styles.profile}>
                     <img
