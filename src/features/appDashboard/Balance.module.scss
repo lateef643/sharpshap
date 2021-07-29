@@ -15,7 +15,7 @@
     height: 15rem;
     display: flex;
     align-items: center;
-    background-color: #77b856;
+    background-color: #E37405;
     background-size: 7rem;
     padding: 3rem 5rem;
     color: #ffffff;
@@ -58,7 +58,7 @@
     font-size: 3rem;
     padding: 1rem;
     background-color: #fff;
-    color: #77b856;
+    color: #E37405;
     border-radius: 8px;
 
     @include respond(tab) {
@@ -87,7 +87,7 @@
     font-size: 1.2rem;
     padding: 1rem 2rem;
     color: #fff;
-    background-color: #77b856;
+    background-color: #E37405;
     border-radius: 8px;
     margin-top: 1rem;
     cursor: pointer;
@@ -96,7 +96,7 @@
 
 .wallet {
     background-color: #fff;
-    color: #77b856;
+    color: #E37405;
 }
 
 .walletHeading {

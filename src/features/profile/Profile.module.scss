@@ -114,14 +114,14 @@
   height: 4rem;
   border-radius: 5px;
   border: 0;
-  background-color: green;
+  background-color: #E37405;
   color: #eee;
   cursor: pointer;
   outline: none;
   font-size: 1.6rem;
 
   &:disabled {
-    background-color: lighten(green, 10%);
+    background-color: lighten(#E37405, 10%);
   }
 
   & > svg {

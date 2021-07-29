@@ -18,7 +18,7 @@ import pinLock from '../../assets/icons/pin.svg';
 import flexShield from '../../assets/icons/bronze-badge.svg';
 import premiumShield from '../../assets/icons/silver-badge.svg';
 import vipShield from '../../assets/icons/gold-badge.svg';
-import logoMain from '../../assets/images/paydia.png';
+import logoMain from '../../assets/images/newE.png';
 
 import styles from './Header.module.scss';
 

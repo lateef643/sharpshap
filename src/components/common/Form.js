@@ -1,6 +1,6 @@
 import React from "react";
 
-// import logo from "../../assets/images/cico-logo.svg";
+// import logo from "../../assets/images/newE.png";
 
 import styles from "./Form.module.scss";
 
