@@ -5,7 +5,7 @@ import Axios from "axios";
 import { useToasts } from "react-toast-notifications";
 import { setDisplayModal } from "../../actions/modal";
 
-import logo from "../../assets/images/paydia.png";
+import logo from "../../assets/images/newE.png";
 
 import { CREATE_SUB_USER } from "../../utils/constants";
 import { setCurrentPage } from "../../actions/page";

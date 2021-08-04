@@ -1,6 +1,7 @@
 import React from "react";
 
 // import logo from "../../assets/images/newE.png";
+// import logo1 from "../../assets/images/newE.png"
 
 import styles from "./Form.module.scss";
 
