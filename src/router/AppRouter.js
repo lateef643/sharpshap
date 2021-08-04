@@ -3,11 +3,10 @@ import { Switch } from 'react-router-dom';
 
 import PublicRoute from '../router/PublicRoute';
 import PrivateRoute from '../router/PrivateRoute';
-
 import './AppRouter.scss';
 
 import LoginPage from '../pages/Login';
-import Landing from '../pages/Landing';
+import LandingPage from '../pages/Landing';
 import ForgotPassword from '../pages/ForgotPassword';
 import Dashboard from '../features/dashboard/index';
 import Register from '../pages/createAgent/index';
@@ -17,7 +16,8 @@ export const AppRouter = () => {
     return (
         <Switch>
             <PublicRoute path='/forgot-password' component={ForgotPassword} />
-            <PublicRoute path='/login' component={LoginPage} exact />
+            {/* <PublicRoute path='/login' component={LoginPage} exact /> */}
+            <PublicRoute path='/login' component={LandingPage} exact />
             {/* <PublicRoute path='/loginPage' component={LoginPage} exact /> */}
             <PublicRoute path='/register' component={Register} exact />
             {/* <PrivateRoute path='/' component={Dashboard} /> */}

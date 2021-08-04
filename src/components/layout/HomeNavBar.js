@@ -1,8 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-import logoWhite from "../../assets/images/paydia.png";
-import logoMain from "../../assets/images/paydia.png";
+import logoWhite from "../../assets/images/newE.png";
+import logoMain from "../../assets/images/newE.png";
 
 import styles from "./HomeNavBar.module.scss";
 

@@ -3,15 +3,18 @@
 
 .wrapper { 
   width: 100%;
-  min-height: 100vh;
+  // min-height: 100vh;
   overflow: hidden;
-  color: rgb(57, 201, 64);
-  background-color: #f8f9fc;
-  background-position: bottom 12rem right 14rem, bottom 8rem right 8.5rem,
-    bottom 14rem right 7rem, bottom 4rem right 13rem, bottom 0rem right 0rem,
-    bottom 9rem left 11rem, bottom 2rem left 13rem, bottom 0rem left 0rem;
-  background-size: 4vw, 3vw, 1.5vw, 2.5vw, 5.5vw, 19vw, 19vw, 38vw 18vw;
+  background-image: url(../assets/images/nbg.png);
+  background-size: cover;
+  // color: rgb(57, 201, 64);
+  // background-color: #f8f9fc;
+  // background-position: bottom 12rem right 14rem, bottom 8rem right 8.5rem,
+  //   bottom 14rem right 7rem, bottom 4rem right 13rem, bottom 0rem right 0rem,
+  //   bottom 9rem left 11rem, bottom 2rem left 13rem, bottom 0rem left 0rem;
+  // background-size: 4vw, 3vw, 1.5vw, 2.5vw, 5.5vw, 19vw, 19vw, 38vw 18vw;
   background-repeat: no-repeat;
+  
   // background-image: url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
   //   url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
   //   url("data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNjciIGhlaWdodD0iNjciIHZpZXdCb3g9IjAgMCA2NyA2NyIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHJlY3Qgd2lkdGg9IjY3IiBoZWlnaHQ9IjY3IiByeD0iNSIgZmlsbD0id2hpdGUiLz4KPC9zdmc+Cg=="),
@@ -103,7 +106,8 @@
   height: -webkit-max-content;
   height: -moz-max-content;
   height: max-content;
-  background: #fff;
+  background: linear-gradient(180deg, rgba(249, 227, 205, 0.8) 0%, rgba(227, 116, 5, 0.8) 100%);
+  // background: #fff;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   border-radius: 10px;
 
@@ -160,13 +164,15 @@
 
 .input {
   width: 100%;
-  border: 0;
+  border: 1px solid #E37405;
+  // border: 0;
   outline: 0;
   height: 4rem;
   font-family: inherit;
   padding: 0 1rem;
   font-size: 1.6rem;
-  background: rgba(204, 220, 255, 0.411);
+  background: rgba(249, 227, 205, 1);
+  // background: rgba(204, 220, 255, 0.411);
 
   &::-webkit-input-placeholder {
     opacity: 1;
@@ -230,7 +236,7 @@
 
 .forgotPasswordLink {
   text-decoration: none;
-  color: green;
+  color: #fff;
   font-size: 1.5rem;
 }
 
@@ -243,7 +249,8 @@
   font-size: 1.6rem;
   width: 21.5rem;
   font-family: "Avenir", sans-serif;
-  background: green;
+  background: rgba(227, 116, 5, 1);
+  // background: green;
   box-shadow: 0px 2px 2px -2px rgba(0, 0, 0, 0.25);
   border-radius: 5px;
   margin: 0 auto;
@@ -259,7 +266,7 @@
   }
 
   &:hover {
-    background: #062863;
+    background: rgba(227, 116, 5, 1);
   }
 }
 
@@ -274,5 +281,5 @@
   text-decoration: none;
   margin-left: 1rem;
   display: inline-block;
-  color: green;
+  color: #fff;
 }
