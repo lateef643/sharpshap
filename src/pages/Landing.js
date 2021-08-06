@@ -68,7 +68,7 @@ export const Landing = ({ dispatch, message, loading, startLoginUser }) => {
       <header className={styles.header}>
         <div className={styles.heading}>
           <p className={styles.headingPrimary}>
-            Resposnsive, Relevant & Reliable Payments
+            Responsive, Relevant & Reliable Payments
           </p>
         </div>
         <div className={styles.formSection}>
