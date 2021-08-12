@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import cico from "../../assets/images/cico-logo-login.svg";
+import cico from "../../assets/images/newE.png";
 import styles from "./TransactionDetails.module.scss";
 import { setCurrentPage } from "../../actions/page";
 // import { ThreeDots } from "svg-loaders-react";
