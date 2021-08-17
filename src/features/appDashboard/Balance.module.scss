@@ -17,7 +17,7 @@
     align-items: center;
     background-color: #E37405;
     background-size: 7rem;
-    padding: 3rem 5rem;
+    padding: 9rem 5rem;
     color: #ffffff;
     font-family: 'Poppins', monospace, arial, helvetica, sans-serif;
     border-radius: 1rem;
@@ -50,7 +50,7 @@
 .balanceHeading {
     font-weight: 500;
     font-size: 1.5rem;
-    margin-bottom: 0.2rem;
+    margin-bottom: 0.1rem;
 }
 
 .balanceText {
@@ -93,11 +93,23 @@
     cursor: pointer;
     margin-bottom: 5px;
 }
+.walletButton {
+    font-weight: 400;
+    font-size: 1.2rem;
+    padding: 0.3rem ;
+    color: #fff;
+    background-color: #E37405;
+    border-radius: 8px;
+    cursor: pointer;
+
+    
+}
 
 .wallet {
     background-color: #fff;
     color: #E37405;
 }
+
 
 .walletHeading {
     color: #000000;

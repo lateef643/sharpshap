@@ -72,23 +72,23 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
   return (
     <div className={styles.section}>
       <div className={styles.imageContainer}>
-        <img className={styles.headingImage} src={cico} alt="cico logo" />
+        <img className={styles.headingImage} src={cico} alt="Egole Logo" />
         <p className={styles.headingText}>Transaction Details</p>
       </div>
       <div className={styles.contentContainer}>
         <div className={styles.successContent}>
           <div className={styles.transactionDetails}>
-            <div>
-              <span>Status:</span>
-              <span>{transaction.status}</span>
+            <div  className={styles.total}>
+              <span className={styles.text}>Status:</span>
+              <span className={styles.text}>{transaction.status}</span>
             </div>
-            <div>
-              <span>Reference:</span>
-              <span>{transaction.reference}</span>
+            <div  className={styles.total1}>
+              <span className={styles.text}>Reference:</span>
+              <span className={styles.text}>{transaction.reference}</span>
             </div>
-            <div>
-              <span>Type:</span>
-              <span>
+            <div  className={styles.total}>
+              <span className={styles.text}>Type:</span>
+              <span className={styles.text}>
                 {transtype
                   ? transtype.name
                   : transaction.type === "12"
@@ -102,8 +102,8 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
                   : "Nil"}
               </span>
             </div>
-            <div>
-              <span>Customer:</span>
+            <div  className={styles.total1}>
+              <span className={styles.text}>Customer:</span>
               <span className={styles.customerInfo}>
                 {transaction.customer_info}
               </span>
@@ -114,20 +114,20 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
                 <span>{transaction.retrieval_reference}</span>
               </div>
             ) : transaction.type == "1" ? (
-              <div>
-                <span>Token:</span>
-                <span>{transaction.energy_token}</span>
+              <div  className={styles.total1}>
+                <span className={styles.text}>Token:</span>
+                <span className={styles.text}>{transaction.energy_token}</span>
               </div>
             ) : undefined}
-            <div>
-              <span>Date:</span>
-              <span>{transaction.created_at}</span>
+            <div  className={styles.total}>
+              <span className={styles.text}>Date:</span>
+              <span className={styles.text}>{transaction.created_at}</span>
             </div>
           </div>
           <div className={styles.transactionAmount}>
-            <div>
-              <span>Amount:</span>
-              <span>
+            <div className={styles.total1}>
+              <span className={styles.text}>Amount:</span>
+              <span className={styles.text}>
                 &#8358;
                 {Number(transaction.amount)
                   .toFixed(2)
@@ -135,8 +135,8 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
               </span>
             </div>
             <div className={styles.total}>
-              <span>Total:</span>
-              <span>
+              <span className={styles.text}>Total:</span>
+              <span className={styles.text}>
                 &#8358;
                 {Number(transaction.amount)
                   .toFixed(2)
@@ -157,13 +157,13 @@ export const TransactionDetails = ({ changeCurrentPage, match }) => {
               {requeryLoading && <ThreeDots fill="#3E215B" />}
             </div>
           )} */}
-          <div className={styles.link}>
-            <Link to="/" className={styles.linkHome}>
+          <div className={styles.totalnew}>
+            <Link to="/" className={styles.text}>
               Go Home
             </Link>
             <div
               onClick={() => window.print()}
-              className={styles.linkServiceHome}
+              className={styles.text}
             >
               Print
             </div>

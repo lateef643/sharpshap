@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { ThreeDots } from 'svg-loaders-react';
 import { useToasts } from 'react-toast-notifications';
-import logoMain from '../assets/images/paydia.png';
+import logoMain from '../assets/images/newE.png';
 import loginContainer from '../assets/images/loginContainer.svg';
 import phoneIcon from '../assets/images/userIcon.svg';
 import passwordIcon from '../assets/images/passwordIcon.svg';

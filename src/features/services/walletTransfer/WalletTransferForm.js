@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { VALIDATE_AGENT } from '../../../utils/constants';
 
-import logo from '../../../assets/images/paydia.png';
+import logo from '../../../assets/images/newE.png';
 
 import Form from '../../../components/common/Form';
 import FormGroup from '../../../components/common/FormGroup';

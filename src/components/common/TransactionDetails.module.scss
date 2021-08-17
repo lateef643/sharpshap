@@ -20,10 +20,21 @@
     }
   }
 }
+.headingText{
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
 
+.text{
+  font-size: 14px;
+  font-weight: 500;
+}
 .customerInfo {
   flex: 0 0 55%;
   text-align: right;
+  font-size: 14px;
+  font-weight: 500;
 }
 
 .message {
