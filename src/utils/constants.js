@@ -1,14 +1,14 @@
 let path;
 
 if (
-  window.location.href.indexOf("localhost") >= 0 ||
-  window.location.href.indexOf("dev") >= 0
+    window.location.href.indexOf('localhost') >= 0 ||
+    window.location.href.indexOf('dev') >= 0
 ) {
-  //development server
-  path = "https://pinscher.bytestacks.io/api";
+    //development server
+    path = 'https://connect.Egolepay.com/api';
 } else {
-  //production server
-  path = "https://pinscher.bytestacks.io/api";
+    //production server
+    path = 'https://connect.Egolepay.com/api';
 }
 
 //////AUTH///////
@@ -288,22 +288,25 @@ export const SET_PIN = `${path}/agents/settings/pin`;
 
 //loan history
 export const LOAN_HISTORY =
-  "https://loanserve.cicoserve.xyz/api/v1/loans/history";
+    'https://loanserve.cicoserve.xyz/api/v1/loans/history';
 
 //loan repayment history
 export const REPAYMENT_HISTORY =
-  "https://loanserve.cicoserve.xyz/api/v1/loans/repayments";
+    'https://loanserve.cicoserve.xyz/api/v1/loans/repayments';
 
 //agents info
-export const AGENTS_INFO = "https://loanserve.cicoserve.xyz/api/v1/info";
+export const AGENTS_INFO = 'https://loanserve.cicoserve.xyz/api/v1/info';
 
 //check loan eligibility
 export const CHECK_ELIGIBILITY =
-  "https://loanserve.cicoserve.xyz/api/v1/loans/eligibility";
+    'https://loanserve.cicoserve.xyz/api/v1/loans/eligibility';
 
 //application
 export const LOAN_APPLICATION =
-  "https://loanserve.cicoserve.xyz/api/v1/loans/apply";
+    'https://loanserve.cicoserve.xyz/api/v1/loans/apply';
 
 //requery transactions
 export const REQUERY_TRANSACTION_STATUS = `${path}/transactions/verify`;
+
+//Verify otp on login
+export const VERIFY_OTP = `${path}/users/otp`;
