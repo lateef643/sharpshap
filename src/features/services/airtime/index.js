@@ -61,7 +61,7 @@ export const BuyAirtime = ({ service }) => {
         const payload = {
             amount,
             bank_code: '9001',
-            recipient: newPhone,
+            recipient: `0${newPhone}`,
             network: service,
         };
 
