@@ -45,7 +45,7 @@ export const BuyData = ({ service }) => {
             productId: plan,
             amount,
             bank_code: '9001',
-            recipient: `234${newPhone}`,
+            recipient: newPhone,
             network: service,
         };
 
