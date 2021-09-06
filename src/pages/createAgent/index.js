@@ -87,7 +87,7 @@ const CreateAgent = ({ history }) => {
                         >
                             Account
                         </span>
-                        <span
+                        {/* <span
                             className={
                                 status === 'documents'
                                     ? `${styles.tab} ${styles.tabActive}`
@@ -95,7 +95,7 @@ const CreateAgent = ({ history }) => {
                             }
                         >
                             Documents
-                        </span>
+                        </span> */}
                     </div>
                     <div className={styles.content}>
                         {
@@ -123,15 +123,15 @@ const CreateAgent = ({ history }) => {
                                         loading={loading}
                                     />
                                 ),
-                                documents: (
-                                    <FileUploads
-                                        agentData={agentData}
-                                        dispatch={dispatch}
-                                        setStatus={setStatus}
-                                        createAgent={createAgent}
-                                        loading={loading}
-                                    />
-                                ),
+                                // documents: (
+                                //     <FileUploads
+                                //         agentData={agentData}
+                                //         dispatch={dispatch}
+                                //         setStatus={setStatus}
+                                //         createAgent={createAgent}
+                                //         loading={loading}
+                                //     />
+                                // ),
                             }[status]
                         }
                     </div>

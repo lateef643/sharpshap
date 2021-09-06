@@ -1,0 +1,45 @@
+@import '../../pages/createAgent/form.module.scss';
+
+.fileInput {
+    padding: 0.6rem 1rem;
+}
+
+.formWidth {
+    width: 65%;
+}
+
+.submit {
+    grid-column: 1/ -1;
+    margin-top: 2rem;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 3rem;
+
+    @include respond(phone) {
+        margin-top: 3rem;
+    }
+
+    .button {
+        flex: 0 0 44%;
+        height: 4rem;
+        border-radius: 5px;
+        border: 0;
+        background-color: #e37405;
+        color: #eee;
+        cursor: pointer;
+        outline: none;
+        font-size: 1.6rem;
+
+        svg {
+            width: 3rem;
+            position: relative;
+            top: 2px;
+        }
+    }
+
+    .back {
+        background-color: #fff;
+        color: #e37405;
+        border: 1px solid #e37405 !important;
+    }
+}

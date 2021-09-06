@@ -193,25 +193,6 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
                     )}
                 </div>
                 <div className={styles.formGroup}>
-                    <label className={styles.label} htmlFor='agent_type'>
-                        Agent Type
-                    </label>
-                    <select
-                        className={styles.select}
-                        name='agent_type'
-                        onChange={handleOnChange}
-                        value={agentData.agent_type}
-                    >
-                        <option value=''>Select type</option>
-                        <option value='aggregator'>Aggregator</option>
-                    </select>
-                    {validationErrors.agent_type && (
-                        <p className={styles.errorText}>
-                            {validationErrors.agent_type.text}
-                        </p>
-                    )}
-                </div>
-                <div className={styles.formGroup}>
                     <label
                         className={styles.label}
                         htmlFor='local_government_id'

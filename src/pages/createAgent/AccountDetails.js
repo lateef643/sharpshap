@@ -3,6 +3,7 @@ import axios from 'axios';
 
 import validateFormData from '../../validation/validateFormData';
 import { FETCH_BANKS } from '../../utils/constants';
+import { ThreeDots } from 'svg-loaders-react';
 
 import styles from './AccountDetails.module.scss';
 
@@ -64,7 +65,7 @@ const AccountDetails = ({
 
         if (Object.keys(errors).length > 0) return;
 
-        setStatus('documents');
+        createAgent(agentData);
     };
 
     return (
@@ -166,7 +167,7 @@ const AccountDetails = ({
                         Back
                     </button>
                     <button className={`${styles.button}`} type='submit'>
-                        {'Next'}
+                        {loading ? <ThreeDots /> : 'Register'}
                     </button>
                 </div>
             </form>

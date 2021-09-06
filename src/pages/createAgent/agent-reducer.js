@@ -9,7 +9,7 @@ export const initialState = {
     business_address: '',
     business_phone: '',
     state_id: '',
-    agent_type: '',
+    agent_type: 'aggregator',
     local_government_id: '',
     account_number: '',
     account_name: '',
@@ -20,10 +20,6 @@ export const initialState = {
     business_type: '',
     type: 'sub',
     mobile: '',
-    utility_bill: '',
-    guarantor_form: '',
-    id_card: '',
-    passport_photogtaph: '',
 };
 
 const agentDataReducer = (state, { type, payload }) => {
