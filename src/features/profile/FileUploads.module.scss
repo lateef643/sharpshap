@@ -8,6 +8,18 @@
     width: 65%;
 }
 
+.guarantorLink {
+    text-decoration: none;
+    color: #000;
+    &:hover {
+        text-decoration: underline;
+    }
+}
+
+.marginBottom {
+    margin-bottom: 5px;
+}
+
 .submit {
     grid-column: 1/ -1;
     margin-top: 2rem;

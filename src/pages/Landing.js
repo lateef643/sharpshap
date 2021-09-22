@@ -132,6 +132,7 @@ export const Landing = ({ dispatch, message, loading }) => {
                     ? res.data.data?.user?.agent
                     : res.data.data.agent;
                 const proprietor = res.data.data.user.proprietor;
+                setStatus('otp');
 
                 const { id, username, phone, email, is_default } = user;
                 const {
@@ -197,7 +198,6 @@ export const Landing = ({ dispatch, message, loading }) => {
                             autoDismiss: true,
                         }
                     );
-                    setStatus('otp');
                     setAuthToken(token);
                     dispatch(loginUser(authDetails));
                     dispatch(setWalletBalance(walletBalance));
