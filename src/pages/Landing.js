@@ -249,9 +249,7 @@ export const Landing = ({ dispatch, message, loading }) => {
             <NavHome theme='white' />
             <header className={styles.header}>
                 <div className={styles.heading}>
-                    <p className={styles.headingPrimary}>
-                        Responsive, Relevant & Reliable Payments
-                    </p>
+                    <p className={styles.headingPrimary}>Payment made easy</p>
                 </div>
                 <div className={styles.formSection}>
                     <div className={styles.formContainer}>
