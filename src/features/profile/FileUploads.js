@@ -78,13 +78,13 @@ const FileUploads = ({
                         onChange={handleOnChange}
                         className={`${styles.input} ${styles.fileInput} ${styles.marginBottom}`}
                     />
-                    <Link
-                        to='/https://drive.google.com/file/d/1y8qcRADs7K26_7U2GyODXRxHOkBMr4eW/view?usp=sharing'
+                    <a
+                        href='https://drive.google.com/file/d/1y8qcRADs7K26_7U2GyODXRxHOkBMr4eW/view?usp=sharing'
                         target='_blank'
                         className={styles.guarantorLink}
                     >
                         Click here to get your guarantor form template
-                    </Link>
+                    </a>
                     {validationErrors.guarantor_form && (
                         <p className={styles.errorText}>
                             {validationErrors.guarantor_form.text}
