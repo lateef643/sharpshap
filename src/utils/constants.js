@@ -5,10 +5,10 @@ if (
     window.location.href.indexOf('dev') >= 0
 ) {
     //development server
-    path = 'https://connect.Egolepay.com/api';
+    path = 'https://connect.egolepay.com/api';
 } else {
     //production server
-    path = 'https://connect.Egolepay.com/api';
+    path = 'https://connect.egolepay.com/api';
 }
 
 //////AUTH///////
