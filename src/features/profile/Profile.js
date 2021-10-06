@@ -44,6 +44,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
                         appearance: 'success',
                         autoDismiss: true,
                     });
+                    window.location.reload();
                 }
             } catch (e) {
                 addToast('An error occurred', {

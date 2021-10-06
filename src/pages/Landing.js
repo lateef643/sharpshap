@@ -134,7 +134,7 @@ export const Landing = ({ dispatch, message, loading }) => {
                 const proprietor = res.data.data.user.proprietor;
                 setStatus('otp');
 
-                const { id, username, phone, email, is_default } = user;
+                const { username, phone, email, is_default } = user;
                 const {
                     first_name: firstName,
                     last_name: lastName,
@@ -167,7 +167,7 @@ export const Landing = ({ dispatch, message, loading }) => {
                             local_government_id,
                             business_type,
                             agent_code,
-                            id,
+                            id: res.data.data.user.agent.id,
                             username,
                             phone,
                             email,
