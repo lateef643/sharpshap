@@ -260,6 +260,7 @@ const BusinessDetails = ({
             <p className={styles.errorText}>Please Select LGA</p>
           )}
         </div>
+        
 
         <div className={`${styles.submit} ${styles.formGroup}`}>
           <button onClick={() => setStatus("personal")} className={styles.back}>
