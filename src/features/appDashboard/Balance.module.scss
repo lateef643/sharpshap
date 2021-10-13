@@ -60,6 +60,7 @@
     background-color: #fff;
     color: #E37405;
     border-radius: 8px;
+    text-transform: capitalize;
 
     @include respond(tab) {
         font-size: 2rem;

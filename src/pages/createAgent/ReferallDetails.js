@@ -220,23 +220,6 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
                         </p>
                     )}
                 </div>
-                <div className={styles.formGroup}>
-                    <label className={styles.label} htmlFor='business_name'>
-                        ReferralCode
-                    </label>
-                    <input
-                        className={styles.input}
-                        type='text'
-                        name='business_name'
-                        onChange={handleOnChange}
-                        value={agentData.business_name}
-                    />
-                    {validationErrors.business_name && (
-                        <p className={styles.errorText}>
-                            {validationErrors.business_name.text}
-                        </p>
-                    )}
-                </div>
                 <div className={`${styles.submit} ${styles.formGroup}`}>
                     <button
                         onClick={() => setStatus('personal')}

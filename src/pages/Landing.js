@@ -17,6 +17,29 @@ import NavHome from '../components/layout/HomeNavBar';
 import styles from './Landing.module.scss';
 
 export const Landing = ({ dispatch, message, loading }) => {
+    const handleOnSubmit = (e) => {
+        e.preventDefault();
+        const { phone, password } = formState;
+        const payload = {
+            user: {
+                phone,
+                password,
+            },
+            type: 'agent',
+        };
+
+        //Dispatching loading state to the error reducer to indicate loading while the
+        //auth action in actions folder dispatches { loading: false, message: error }
+        dispatch({
+            type: 'SET_LOADING',
+            payload: {
+                loading: true,
+                message: undefined,
+            },
+        });
+
+        dispatch(startLoginUser(payload));
+    };
     const [formState, setFormState] = useState({
         phone: '',
         password: '',
@@ -45,29 +68,6 @@ export const Landing = ({ dispatch, message, loading }) => {
         }
     }, [message]);
 
-    const handleOnSubmit = (e) => {
-        e.preventDefault();
-        const { phone, password } = formState;
-        const payload = {
-            user: {
-                phone,
-                password,
-            },
-            type: 'agent',
-        };
-
-        //Dispatching loading state to the error reducer to indicate loading while the
-        //auth action in actions folder dispatches { loading: false, message: error }
-        dispatch({
-            type: 'SET_LOADING',
-            payload: {
-                loading: true,
-                message: undefined,
-            },
-        });
-
-        dispatch(startLoginUser(payload));
-    };
 
     const handleOtpOnSubmit = (e) => {
         e.preventDefault();

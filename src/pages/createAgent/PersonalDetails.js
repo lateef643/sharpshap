@@ -27,7 +27,8 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
       mobile,
       gender,
       business_phone,
-      bvn,
+     
+      bvn
     } = agentData;
 
     const state = {
@@ -38,7 +39,8 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
       mobile,
       gender,
       business_phone,
-      bvn,
+     
+      bvn
     };
 
     const keys = Object.keys(state);
@@ -186,6 +188,19 @@ const PersonalDetails = ({ setStatus, agentData, dispatch }) => {
             <p className={styles.errorText}>{validationErrors.bvn.text}</p>
           )}
         </div>
+        {/* <div className={styles.formGroup}>
+          <label className={styles.label} htmlFor="ReferralCode">
+            ReferallCode
+          </label>
+          <input
+            className={styles.input}
+            type="text"
+            name="ReferralCode"
+            onChange={handleOnChange}
+            value={agentData.Referal_code}
+          />
+         
+        </div> */}
         <div className={`${styles.submit} ${styles.formGroup}`}>
           <button className={styles.button} type="submit">
             Next

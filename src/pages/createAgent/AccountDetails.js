@@ -161,7 +161,7 @@ const AccountDetails = ({
                 </div>
                 <div className={`${styles.submit} ${styles.formGroup}`}>
                     <button
-                        onClick={() => setStatus('business')}
+                        onClick={() => setStatus('personal')}
                         className={`${styles.button} ${styles.back}`}
                     >
                         Back

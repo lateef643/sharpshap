@@ -58,6 +58,7 @@ const FileUploads = ({
                     </label>
                     <input
                         type='file'
+                        accept="image/png, image/jpeg" 
                         name='utility_bill'
                         onChange={handleOnChange}
                         className={`${styles.input} ${styles.fileInput}`}
@@ -74,6 +75,7 @@ const FileUploads = ({
                     </label>
                     <input
                         type='file'
+                        accept="image/png, image/jpeg" 
                         name='guarantor_form'
                         onChange={handleOnChange}
                         className={`${styles.input} ${styles.fileInput} ${styles.marginBottom}`}
@@ -83,7 +85,7 @@ const FileUploads = ({
                         target='_blank'
                         className={styles.guarantorLink}
                     >
-                        Click here to get your guarantor form template
+                        Click here to get your guarantor's form template
                     </a>
                     {validationErrors.guarantor_form && (
                         <p className={styles.errorText}>
@@ -97,6 +99,7 @@ const FileUploads = ({
                     </label>
                     <input
                         type='file'
+                        accept="image/png, image/jpeg" 
                         name='id_card'
                         onChange={handleOnChange}
                         className={`${styles.input} ${styles.fileInput}`}
@@ -113,6 +116,7 @@ const FileUploads = ({
                     </label>
                     <input
                         type='file'
+                        accept="image/png, image/jpeg" 
                         name='passport_photogtaph'
                         onChange={handleOnChange}
                         className={`${styles.input} ${styles.fileInput}`}

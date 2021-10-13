@@ -26,6 +26,8 @@ const Balance = ({
     agentClassification,
 }) => {
     const agentClassificationLowercase = agentClassification.toLowerCase();
+   
+        console.log(name)
     const agentClassificationIcon =
         agentClassificationLowercase === 'premium'
             ? premiumShield
@@ -42,6 +44,14 @@ const Balance = ({
     const handleOnClick = () => {
         refreshOverviewData();
     };
+
+
+    
+
+    
+    // const nameUppper =  name.charAt(0).toUpperCase() + name.substring(1);
+    //         console.log(name)
+   
     const [showBalance, setShowBalance] = useState(false)
 
 

@@ -10,10 +10,13 @@ import PersonalDetails from './PersonalDetails';
 import BusinessDetails from './BusinessDetails';
 import FileUploads from './FileUploads';
 import AccountDetails from './AccountDetails';
+import Referral from './ReferallDetails';
+
 
 import NavHome from '../../components/layout/HomeNavBar';
 
 import styles from './index.module.scss';
+import ReferralDetails from './ReferallDetails';
 
 const CreateAgent = ({ history }) => {
     const { addToast } = useToasts();
@@ -87,6 +90,7 @@ const CreateAgent = ({ history }) => {
                         >
                             Account
                         </span>
+                        
                         {/* <span
                             className={
                                 status === 'documents'
@@ -123,6 +127,8 @@ const CreateAgent = ({ history }) => {
                                         loading={loading}
                                     />
                                 ),
+                               
+                               
                                 // documents: (
                                 //     <FileUploads
                                 //         agentData={agentData}
