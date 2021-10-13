@@ -3,8 +3,7 @@ import React, { useState, useEffect } from "react";
 import validateFormData from "../../validation/validateFormData";
 
 import { FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
-import ToggleButton from "react-bootstrap/ToggleButton";
-import ToggleButtonGroup from "react-bootstrap/ToggleButtonGroup";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import styles from "./BusinessDetails.module.scss";
