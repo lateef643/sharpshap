@@ -8,7 +8,7 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
     const [validationErrors, setValidationErrors] = useState({ errors: true });
 
     const handleOnChange = ({ target }) => {
-        setValidationErrors({ ...validationErrors, [target.name]: '' });
+        setValidationErrors({ ...validationErrors,  [target.name]: '' });
 
         setFormState({ ...formState, [target.name]: target.value });
     };
@@ -49,9 +49,10 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
     };
 
     return (
-        <form className={styles.form} onSubmit={handleProceed}>
+        <form className={styles.form} onSubmit={handleProceed}  >
+            
             <div className={styles.formGroup}>
-                <label className={styles.label} htmlFor='firstname'>
+                <label className={styles.label} htmlFor='first_name'>
                     First Name
                 </label>
                 <input
@@ -60,9 +61,10 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     className={styles.input}
                     value={formState.first_name}
+                   
                 />
                 {validationErrors.first_name && (
-                    <p className={styles.errorText}>
+                    <p className={styles.errorText}>  
                         {validationErrors.first_name.text}
                     </p>
                 )}

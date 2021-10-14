@@ -17,6 +17,7 @@ import NavHome from "../components/layout/HomeNavBar";
 import styles from "./Landing.module.scss";
 
 export const Landing = ({ dispatch, message, loading }) => {
+
   const handleOnSubmit = (e) => {
     e.preventDefault();
     const { phone, password } = formState;
@@ -40,7 +41,8 @@ export const Landing = ({ dispatch, message, loading }) => {
 
     dispatch(startLoginUser(payload));
   };
-  
+ 
+
   const startLoginUser = (payload) => (dispatch) => {
     return axios
       .post(LOGIN_API, payload)
@@ -157,6 +159,8 @@ export const Landing = ({ dispatch, message, loading }) => {
         }
       });
   };
+
+ 
 
   const [formState, setFormState] = useState({
     phone: "",
