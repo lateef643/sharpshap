@@ -25,6 +25,7 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
             gender,
             business_phone,
             bvn,
+            business_name,
         } = formState;
 
         const state = {
@@ -36,6 +37,7 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
             business_phone,
             business_address,
             bvn,
+            business_name,
         };
 
         const keys = Object.keys(state);
@@ -189,6 +191,23 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                 {validationErrors.bvn && (
                     <p className={styles.errorText}>
                         {validationErrors.bvn.text}
+                    </p>
+                )}
+            </div>
+            <div className={styles.formGroup}>
+                <label className={styles.label} htmlFor='business_name'>
+                    Business Name
+                </label>
+                <input
+                    type='text'
+                    name='business_name'
+                    onChange={handleOnChange}
+                    value={formState.business_name}
+                    className={styles.input}
+                />
+                {validationErrors.bvn && (
+                    <p className={styles.errorText}>
+                        {validationErrors.business_name.text}
                     </p>
                 )}
             </div>
