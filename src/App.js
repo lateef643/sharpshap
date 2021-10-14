@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { BrowserRouter as Router } from "react-router-dom";
 import { ToastProvider } from "react-toast-notifications";
 import history from "./utils/history";
+import "./newcss/bootstrap.min.css"
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 
 import AppRouter from "./router/AppRouter";

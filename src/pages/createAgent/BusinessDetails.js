@@ -4,7 +4,7 @@ import validateFormData from "../../validation/validateFormData";
 
 import { FETCH_STATES, FETCH_LGAS } from "../../utils/constants";
 
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 import styles from "./BusinessDetails.module.scss";
 import Axios from "axios";
@@ -233,13 +233,13 @@ const BusinessDetails = ({ setStatus, agentData, dispatch }) => {
                     )} */}
         </div>
 
-        <div class="custom-control custom-checkbox">
+        <div className="custom-control custom-checkbox">
           <input
             type="checkbox"
-            class="custom-control-input"
+            className="custom-control-input"
             id="defaultUnchecked"
           />
-          <label class="custom-control-label" for="defaultUnchecked"> &nbsp;
+          <label className="custom-control-label" for="defaultUnchecked"> &nbsp;
             I accept the terms and conditions
           </label>
         </div>
