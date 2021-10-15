@@ -26,6 +26,22 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
             business_phone,
             bvn,
             business_name,
+            // state_id,
+            // local_government_id,
+            // account_number,
+            // account_name,
+            // bank_id,
+            // agent_code,
+            // identity_type,
+            // business_type,
+            // super_agent_code,
+            // id_type_no,
+            // utility_bill,
+            // guarantor_form,
+            // passport_photogtaph,
+            // id_card,
+
+
         } = formState;
 
         const state = {
@@ -38,6 +54,20 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
             business_address,
             bvn,
             business_name,
+            // state_id,
+            // local_government_id,
+            // account_number,
+            // account_name,
+            // bank_id,
+            // agent_code,
+            // identity_type,
+            // business_type,
+            // super_agent_code,
+            // id_type_no,
+            // utility_bill,
+            // guarantor_form,
+            // passport_photogtaph,
+            // id_card,
         };
 
         const keys = Object.keys(state);

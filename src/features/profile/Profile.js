@@ -34,6 +34,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
         (async function fetchProfile() {
             const agent ={
                 formState
+               
             }
             try {
                 const res = await axios.put(UPDATE_AGENT_PROFILE, agent);
@@ -166,6 +167,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
 };
 
 const mapStateToProps = (state) => {
+      // console.log(State.auth)
     return {
         agentData: {
             first_name: state.auth.user.firstName,
@@ -185,10 +187,17 @@ const mapStateToProps = (state) => {
             business_type: state.auth.user.business_type,
             agent_code: state.auth.user.agent_code,
             id: state.auth.user.id,
+            utility_bill: state.auth.user.utility_bill,
+            guarantor_form: state.auth.user.guarantor_form,
+            passport_photogtaph: state.auth.user.passport_photogtaph,
+            id_card: state.auth.user.id_card,
 
-        },
-    };
-};
+          },
+          
+        };
+      };
+      
+
 
 const mapDispatchToProps = (dispatch) => {
     return {

@@ -34,6 +34,7 @@ const FileUploads = ({
             guarantor_form,
             id_card,
             passport_photogtaph,
+            
         };
 
         const keys = Object.keys(state);
@@ -53,7 +54,7 @@ const FileUploads = ({
                 onSubmit={handleProceed}
             >
                 <div className={styles.formGroup}>
-                    <label htmlFor='firstname' className={styles.label}>
+                    <label htmlFor='utility_bill' className={styles.label}>
                         Utility Bill
                     </label>
                     <input
@@ -70,7 +71,7 @@ const FileUploads = ({
                     )}
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor='firstname' className={styles.label}>
+                    <label htmlFor='guarantor_form' className={styles.label}>
                         Guarantor's Form
                     </label>
                     <input
@@ -94,7 +95,7 @@ const FileUploads = ({
                     )}
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor='firstname' className={styles.label}>
+                    <label htmlFor='id_card' className={styles.label}>
                         ID Card
                     </label>
                     <input
@@ -111,7 +112,7 @@ const FileUploads = ({
                     )}
                 </div>
                 <div className={styles.formGroup}>
-                    <label htmlFor='firstname' className={styles.label}>
+                    <label htmlFor='passport_photogtaph' className={styles.label}>
                         Passport Photograph
                     </label>
                     <input
