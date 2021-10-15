@@ -63,6 +63,7 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     className={styles.input}
                     value={formState.first_name}
+                    disabled
                    
                 />
                 {validationErrors.first_name && (
@@ -81,6 +82,8 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     value={formState.last_name}
                     className={styles.input}
+                    disabled
+
                 />
                 {validationErrors.last_name && (
                     <p className={styles.errorText}>
@@ -98,6 +101,8 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     value={formState.date_of_birth}
                     className={styles.input}
+                    disabled
+
                 />
                 {validationErrors.date_of_birth && (
                     <p className={styles.errorText}>
@@ -115,6 +120,8 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     value={formState.email}
                     className={styles.input}
+                    disabled
+
                 />
                 {validationErrors.email && (
                     <p className={styles.errorText}>
@@ -132,6 +139,8 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     value={formState.gender}
                     className={styles.input}
+                    disabled
+
                 >
                     <option value=''>Select Gender</option>
                     <option value='male'>Male</option>
@@ -153,6 +162,8 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     value={formState.business_phone}
                     className={styles.input}
+                    disabled
+
                 />
                 {validationErrors.business_phone && (
                     <p className={styles.errorText}>
@@ -170,6 +181,8 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     value={formState.business_address}
                     className={styles.input}
+                    disabled
+
                 />
                 {validationErrors.business_address && (
                     <p className={styles.errorText}>
@@ -187,6 +200,8 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     value={formState.bvn}
                     className={styles.input}
+                    disabled
+
                 />
                 {validationErrors.bvn && (
                     <p className={styles.errorText}>
@@ -204,6 +219,8 @@ const ProfileForm = ({ setFormState, setStatus, formState }) => {
                     onChange={handleOnChange}
                     value={formState.business_name}
                     className={styles.input}
+                    disabled
+
                 />
                 {validationErrors.bvn && (
                     <p className={styles.errorText}>
