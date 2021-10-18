@@ -187,6 +187,7 @@ const mapStateToProps = (state) => {
             business_type: state.auth.user.business_type,
             agent_code: state.auth.user.agent_code,
             id: state.auth.user.id,
+            id_type_no: null,
         },
     };
 };
