@@ -32,12 +32,15 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
         setLoading(true);
 
         (async function fetchProfile() {
-            const agent ={
-                formState
+            // delete formState.bank_id
+            // formState.bank_id=1
+            const data ={
+                agent:{...formState   } 
                
             }
+            console.log(data)
             try {
-                const res = await axios.put(UPDATE_AGENT_PROFILE, agent);
+                const res = await axios.put(UPDATE_AGENT_PROFILE, data);
 
                 if (res) {
                     addToast('Profile updated successfully', {
@@ -56,6 +59,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
         })();
     };
 
+    // console.log('FORMSTATE',formState)
     return (
         <div className={styles.container}>
             <div className={styles.menu}>
@@ -167,7 +171,8 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
 };
 
 const mapStateToProps = (state) => {
-      // console.log(State.auth)
+    //   console.log(state)
+    //   return state
     return {
         agentData: {
             first_name: state.auth.user.firstName,
@@ -204,6 +209,8 @@ const mapDispatchToProps = (dispatch) => {
         changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
         startLogout: () => dispatch(startLogout()),
         displayModal: (payload) => dispatch(setDisplayModal(payload)),
+        // id_type_no: ""
+       
     };
 };
 

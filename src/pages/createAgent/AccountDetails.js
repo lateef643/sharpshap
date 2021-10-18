@@ -28,7 +28,7 @@ const AccountDetails = ({
                 if (!isCancelled) setBanks(banks);
             })
             .catch((e) => {
-                // console.log(e);
+                console.log(e);
             });
 
         return () => {
@@ -48,7 +48,7 @@ const AccountDetails = ({
     const handleProceed = (e) => {
         e.preventDefault();
 
-        const { account_name, account_number, identity_type, bank_id } =
+        const { account_name, account_number, identity_type, bank_id  } =
             agentData;
 
         const state = {
@@ -57,6 +57,8 @@ const AccountDetails = ({
             identity_type,
             bank_id,
         };
+
+        console.log(bank_id)
 
         const keys = Object.keys(state);
         const errors = validateFormData(agentData, keys);
@@ -140,12 +142,16 @@ const AccountDetails = ({
                         name='bank_id'
                         onChange={handleOnChange}
                         value={agentData.bank_id}
-                    >
+                        >
                         <option value=''>Select Bank</option>
                         {banks?.map((bank, index) => {
+                        console.log(bank,index)
                             return (
+                               
                                 <option
                                     value={bank.code}
+                                    // value={1}
+                                    
                                     key={`${index}--${bank.name}`}
                                 >
                                     {bank.name}
@@ -159,6 +165,7 @@ const AccountDetails = ({
                         </p>
                     )}
                 </div>
+                  
                 <div className={`${styles.submit} ${styles.formGroup}`}>
                     <button
                         onClick={() => setStatus('personal')}

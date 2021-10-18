@@ -22,6 +22,7 @@ const FileUploads = ({
 
         setFormState({ ...formState, [target.name]: imageUrl });
     };
+    // console.log(formState)
 
     const handleProceed = (e) => {
         e.preventDefault();
