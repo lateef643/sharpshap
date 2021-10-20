@@ -32,21 +32,19 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
         setLoading(true);
 
         (async function fetchProfile() {
-            // delete formState.bank_id
-            // formState.bank_id=1
-            const data ={
-                agent:{...formState   } 
-               
-            }
-            console.log(data)
+            const agent = {
+                agent: formState,
+                type: 'master',
+            };
             try {
-                const res = await axios.put(UPDATE_AGENT_PROFILE, data);
+                const res = await axios.put(UPDATE_AGENT_PROFILE, agent);
 
                 if (res) {
                     addToast('Profile updated successfully', {
                         appearance: 'success',
                         autoDismiss: true,
                     });
+                    window.location.reload();
                 }
             } catch (e) {
                 addToast('An error occurred', {
@@ -171,8 +169,7 @@ export const Profile = ({ agentData, changeCurrentPage, displayModal }) => {
 };
 
 const mapStateToProps = (state) => {
-    //   console.log(state)
-    //   return state
+  
     return {
         agentData: {
             first_name: state.auth.user.firstName,
@@ -186,30 +183,23 @@ const mapStateToProps = (state) => {
             gender: state.auth.user.gender,
             account_name: state.auth.user.account_name,
             account_number: state.auth.user.account_number,
-            bank_id: state.auth.user.bank_id,
+            bank_id: 0,
             state_id: state.auth.user.state_id,
             local_government_id: state.auth.user.local_government_id,
             business_type: state.auth.user.business_type,
             agent_code: state.auth.user.agent_code,
             id: state.auth.user.id,
-            utility_bill: state.auth.user.utility_bill,
-            guarantor_form: state.auth.user.guarantor_form,
-            passport_photogtaph: state.auth.user.passport_photogtaph,
-            id_card: state.auth.user.id_card,
-
-          },
-          
-        };
-      };
-      
-
+            id_type_no: null,
+        },
+    };
+};
 
 const mapDispatchToProps = (dispatch) => {
     return {
         changeCurrentPage: (payload) => dispatch(setCurrentPage(payload)),
         startLogout: () => dispatch(startLogout()),
         displayModal: (payload) => dispatch(setDisplayModal(payload)),
-        // id_type_no: ""
+       
        
     };
 };

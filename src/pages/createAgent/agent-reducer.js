@@ -20,6 +20,7 @@ export const initialState = {
     business_type: '',
     type: 'sub',
     mobile: '',
+    id_type_no: null,
 };
 
 const agentDataReducer = (state, { type, payload }) => {

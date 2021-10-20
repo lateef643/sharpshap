@@ -17,58 +17,6 @@ import NavHome from "../components/layout/HomeNavBar";
 import styles from "./Landing.module.scss";
 
 export const Landing = ({ dispatch, message, loading }) => {
-
-  const handleOtpOnSubmit = (e) => {
-    e.preventDefault();
-    const { otp } = otpState;
-    const payload = {
-      otp,
-    };
-
-    setOtpLoading(true);
-
-    (async function submitOtp() {
-      try {
-        const res = await axios.post(VERIFY_OTP, payload);
-
-        addToast(res.data.message, {
-          appearance: "success",
-          autoDismiss: true,
-        });
-
-        const user = JSON.parse(sessionStorage.getItem("user"));
-        const authDetails = {
-          ...user,
-          isAuthenticated: true,
-        };
-        dispatch(loginUser(authDetails));
-
-        sessionStorage.setItem("user", JSON.stringify(authDetails));
-        setOtpLoading(false);
-      } catch (err) {
-        if (err.response && err.response.status === 401) {
-          setOtpLoading(false);
-          addToast(err.response.data.message, {
-            appearance: "error",
-            autoDismiss: true,
-          });
-        } else if (err.response && err.response.status === 422) {
-          addToast(err.response.data.message, {
-            appearance: "error",
-            autoDismiss: true,
-          });
-          window.location = "/login";
-        } else {
-          addToast(err.response.data.message, {
-            appearance: "error",
-            autoDismiss: true,
-          });
-        }
-      }
-    })();
-  };
-
-
   const [formState, setFormState] = useState({
     phone: "",
     password: "",
@@ -121,7 +69,55 @@ export const Landing = ({ dispatch, message, loading }) => {
     dispatch(startLoginUser(payload));
   };
 
- 
+  const handleOtpOnSubmit = (e) => {
+    e.preventDefault();
+    const { otp } = otpState;
+    const payload = {
+      otp,
+    };
+
+    setOtpLoading(true);
+
+    (async function submitOtp() {
+      try {
+        const res = await axios.post(VERIFY_OTP, payload);
+
+        addToast(res.data.message, {
+          appearance: "success",
+          autoDismiss: true,
+        });
+
+        const user = JSON.parse(sessionStorage.getItem("user"));
+        const authDetails = {
+          ...user,
+          isAuthenticated: true,
+        };
+        dispatch(loginUser(authDetails));
+
+        sessionStorage.setItem("user", JSON.stringify(authDetails));
+        setOtpLoading(false);
+      } catch (err) {
+        if (err.response && err.response.status === 401) {
+          setOtpLoading(false);
+          addToast(err.response.data.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
+        } else if (err.response && err.response.status === 422) {
+          addToast(err.response.data.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
+          window.location = "/login";
+        } else {
+          addToast(err.response.data.message, {
+            appearance: "error",
+            autoDismiss: true,
+          });
+        }
+      }
+    })();
+  };
 
   const startLoginUser = (payload) => (dispatch) => {
     return axios
