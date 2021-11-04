@@ -1,0 +1,109 @@
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/variables";
+
+.statusbar {
+  height: $status-bar-height;
+  box-shadow: 0px 2px 3px #00000029;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px;
+  background-color: #fff;
+
+  @media print {
+    display: none;
+  }
+
+  @include respond(tab) {
+    padding: 0 1rem;
+  }
+
+  @include respond(phone-large) {
+    height: $status-bar-height-smaller-devices;
+  }
+
+  &__links {
+    flex: 0 0 25%;
+    font-size: 1.4rem;
+    color: #013660;
+    opacity: 1;
+
+    @include respond(phone-large) {
+      display: none;
+    }
+
+    > a,
+    span {
+      text-decoration: none;
+      color: inherit;
+      cursor: pointer;
+    }
+  }
+
+  &__text {
+    font-size: 1.4rem;
+    color: #013660;
+    opacity: 1;
+    flex: 0 0 20%;
+
+    @include respond(phone-large) {
+      flex: 0 0 50%;
+      font-size: 1.35rem;
+    }
+
+    @include respond-custom(330px) {
+      flex: 0 0 55%;
+      font-size: 1.25rem;
+      text-align: center;
+    }
+
+    &__transaction-balance {
+      @include respond(phone-large) {
+        display: none;
+      }
+    }
+  }
+}
+
+.search {
+  flex: 0 0 20%;
+  height: 2.3rem;
+  position: relative;
+
+  .searchInput {
+    height: 2.3rem;
+    width: 100%;
+    background: #fcfbfb 0% 0% no-repeat padding-box;
+    border-radius: 2px;
+    opacity: 1;
+    border: 0;
+    outline: 0;
+    padding: 0 1rem;
+    padding-right: 3rem;
+    font-family: inherit;
+    color: #707070;
+    border-radius: 10px;
+    flex: 0 0 25%;
+
+    @include respond(phone-large) {
+      flex: 0 0 30%;
+      width: 12rem;
+      height: 2.3rem;
+      order: 1;
+      padding-right: 2rem;
+    }
+  }
+
+  img {
+    position: absolute;
+    right: 1.3rem;
+    top: 0.6rem;
+    width: 1.2rem;
+
+    @include respond(phone-large) {
+      right: 0.7rem;
+    }
+  }
+}

@@ -1,0 +1,77 @@
+.container {
+  padding-top: 2rem;
+  width: 97%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  color: #707087;
+  font-size: 1.4rem;
+  text-align: left;
+
+  > .loaderContainer {
+    position: absolute;
+    top: 50%;
+    left: 53.5%;
+    transform: translate(50%, 50%);
+  }
+
+  > .heading {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    padding: 1.5rem 2rem;
+    background-color: #fff;
+    text-align: left;
+
+    span {
+      flex: 1 0 11%;
+    }
+  }
+
+  > .card {
+    box-shadow: 0.5rem 0.5rem 0.5rem #00000029;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    height: 5rem;
+    padding: 1rem 2rem;
+    background-color: #fff;
+    margin-bottom: 0.3rem;
+
+    span {
+      flex: 0 1 13%;
+    }
+
+    &:hover {
+      transform: scale(1.02);
+    }
+  }
+}
+
+.status {
+  span {
+    border-radius: 100%;
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+  }
+}
+
+.pending {
+  background-color: #fe8b0c;
+}
+
+.failed {
+  background-color: #ff0000;
+}
+
+.success {
+  background-color: #3ac962;
+}
+
+.marginLeft {
+  margin-left: 2rem;
+}

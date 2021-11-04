@@ -1,0 +1,23 @@
+.searchContainer {
+  display: block;
+  position: relative;
+}
+
+.searchImage {
+  width: 1.8rem;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.searchInput {
+  height: 3.8rem;
+  width: 100%;
+  padding: 0rem 1.5rem;
+  padding-left: 3.5rem;
+  border: 0;
+  outline: 0;
+  font-size: 1.6rem;
+  background: rgb(237, 248, 245);
+  border-radius: 0.5rem;
+}

@@ -1,0 +1,49 @@
+@mixin respond($breakpoint) {
+  // Really small phones
+  @if $breakpoint == phone {
+    @media (max-width: $screen-sm-min) {
+      @content;
+    }
+  }
+
+  // Phones
+  @if $breakpoint == phone-medium {
+    @media (max-width: $screen-sm-mid) {
+      @content;
+    }
+  }
+
+  // Large phones and phones in portrait mode
+  @if $breakpoint == phone-large {
+    @media (max-width: $screen-sm-lg) {
+      @content;
+    }
+  }
+
+  // Tabs
+  @if $breakpoint == tab {
+    @media (max-width: $screen-mid) {
+      @content;
+    }
+  }
+
+  // Normal sized laptops/monitor
+  @if $breakpoint == monitor {
+    @media (max-width: $screen-lg) {
+      @content;
+    }
+  }
+
+  // Normal sized laptops/monitor
+  @if $breakpoint == monitor {
+    @media (max-width: $screen-xl) {
+      @content;
+    }
+  }
+}
+
+@mixin respond-custom($breakpoint) {
+  @media (max-width: $breakpoint) {
+    @content;
+  }
+}

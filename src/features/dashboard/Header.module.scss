@@ -1,0 +1,344 @@
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets//styles//config/variables";
+
+.header {
+  width: calc(100vw - 19rem);
+  text-align: left;
+  // background-color: $content-background-color;
+  background-color: #f4f7fa;
+  z-index: 5;
+  height: 7rem;
+
+  @media print {
+    display: none;
+  }
+
+  @include respond-custom(1000px) {
+    width: 100%;
+  }
+
+  @include respond(tab) {
+    // background-color: #fff;
+  }
+
+  @include respond(phone-large) {
+    width: 100vw;
+    // background-color: #fff;
+  }
+}
+
+.container {
+  // position: fixed;
+  top: 0;
+  width: 100%;
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  padding: 0 3rem;
+  align-items: center;
+  padding: 0 5rem;
+  height: 100%;
+
+  @include respond(phone-large) {
+    height: 5rem;
+    padding: 0 3rem 0 5rem;
+  }
+}
+
+.agentName {
+  font-size: 1.6rem;
+  font-weight: 500;
+
+  @include respond(phone-large) {
+    font-size: 1.5rem;
+  }
+}
+
+.breadCrumbs {
+  font-size: 2.1rem;
+  font-family: "Nunito", "Poppins", sans-serif;
+  font-weight: 700;
+  color: #3e215b;
+}
+
+.notification {
+  margin-left: auto;
+  width: 2rem;
+  position: relative;
+  cursor: pointer;
+
+  img {
+    width: 2rem;
+  }
+
+  .active {
+    border-radius: 100%;
+    width: 1rem;
+    height: 1rem;
+    display: inline-block;
+    background-color: red;
+    position: absolute;
+    top: -0.5rem;
+    right: 0rem;
+    text-align: center;
+    color: #fff;
+    font-size: 8px;
+    padding-top: 1px;
+  }
+
+  .notificationPanel {
+    position: absolute;
+    top: 120px;
+    right: 10px;
+    background-color: #fff;
+    width: 40rem;
+    padding: 2rem 2.2rem;
+    height: -webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+    box-shadow: 0px 3px 0.6rem #00000029;
+    border-radius: 10px;
+    opacity: 1;
+    z-index: 10;
+
+    @include respond(phone-large) {
+      width: 85%;
+      top: 95px;
+      margin: 0 auto;
+      padding: 1rem;
+    }
+
+    .heading {
+      font-size: 1.65rem;
+      color: #707070;
+      font-weight: bold;
+      margin-bottom: 2rem;
+
+      @include respond(phone-large) {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+      }
+    }
+
+    div {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+
+      img {
+        flex: 0 0 2rem;
+        margin-top: 5px;
+
+        @include respond(phone-large) {
+          flex: 0 0 1.5rem;
+        }
+      }
+
+      p {
+        flex: 0 0 89%;
+        font-size: 1.4rem;
+        display: inline-block;
+        color: #707070;
+        line-height: 2.3rem;
+        margin-bottom: 1rem;
+
+        @include respond(phone-large) {
+          flex: 0 0 85%;
+          font-size: 1.2rem;
+          line-height: 2rem;
+        }
+      }
+    }
+  }
+}
+
+.profile {
+  flex: 0 0 5%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: 3%;
+
+  .profileImage {
+    margin-right: 0.5rem;
+    width: 4.5rem;
+    position: relative;
+    bottom: 1px;
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+
+    @include respond(phone-large) {
+      width: 3rem;
+    }
+  }
+
+  .profileName {
+    color: #3e215b;
+    font-size: 1.3rem;
+
+    @include respond(phone-large) {
+      display: none;
+    }
+  }
+
+  .profileToggle {
+    width: 1rem;
+    cursor: pointer;
+  }
+
+  .agentCategory {
+    display: inline-block;
+    width: 3.3rem;
+    height: 3.3rem;
+    position: absolute;
+    top: 4.2rem;
+    right: 5.3rem;
+
+    @include respond(phone-large) {
+      top: 3rem;
+      right: 3.7rem;
+      width: 2.2rem;
+      height: 2.2rem;
+    }
+  }
+
+  .userSubmenu {
+    position: absolute;
+    top: 7rem;
+    right: 4rem;
+    width: 27rem;
+    height: 48rem;
+    background: #ffffff;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    text-align: center;
+    font-size: 1.4rem;
+
+    @include respond(phone-large) {
+      right: 1.5rem;
+      width: 25rem;
+      height: 43rem;
+      font-size: 1.3rem;
+      box-shadow: 0px 2px 3px rgba(0, 0, 0, 0.25);
+    }
+  }
+
+  .userSubmenuBio {
+    height: 50%;
+    background: #3e215b;
+    padding: 2rem 0 2.5rem 0;
+    color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+
+    @include respond(phone-large) {
+      padding: 1rem 0 1.5rem 0;
+    }
+  }
+
+  .userSubmenuBioBadge {
+    display: inline-block;
+    width: 4rem;
+    height: 4rem;
+    margin-left: 1rem;
+  }
+
+  .userSubmenuBioAvatar {
+    display: block;
+    margin: 0 auto;
+    max-width: 10rem;
+    border-radius: 50%;
+
+    @include respond(phone-large) {
+      max-width: 8rem;
+    }
+  }
+
+  .userSubmenuBioService {
+    display: block;
+    margin: 1rem 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .userSubmenuBioWallet {
+    display: block;
+    width: 70%;
+    background: #fff;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    margin: 0.5rem auto;
+    font-size: 1.2rem;
+    color: #3e215b;
+
+    @include respond(phone-large) {
+      width: 80%;
+    }
+  }
+
+  .userSubmenuMain {
+    padding: 2.5rem 0;
+
+    @include respond(phone-large) {
+      padding: 1.8rem 0.5rem;
+    }
+  }
+
+  .userSubmenuMainItem {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 2rem;
+    text-decoration: none;
+    color: #3e215b;
+    font-size: 1.4rem;
+
+    @include respond(phone-large) {
+      padding: 0 1rem;
+      font-size: 1.3rem;
+    }
+
+    &:not(:last-child) {
+      margin-bottom: 3rem;
+
+      @include respond(phone-large) {
+        margin-bottom: 2.5rem;
+      }
+    }
+
+    & > .icon {
+      width: 1.5rem;
+      margin-right: 1rem;
+      border-radius: 50%;
+    }
+
+    & > .arrow {
+      width: 1rem;
+      position: absolute;
+      top: 50%;
+      right: 2.5rem;
+      transform: translateY(-50%);
+
+      @include respond(phone-large) {
+        right: 1rem;
+      }
+    }
+  }
+}
+
+.details {
+  & > p {
+    color: #3e215b;
+    font-size: 1.3rem;
+    margin-left: 1rem;
+  }
+}
+
+.logout {
+  cursor: pointer;
+}

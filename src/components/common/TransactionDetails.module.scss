@@ -1,0 +1,66 @@
+@import "../../assets/styles/generic/status.scss";
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/mixins";
+
+.section {
+  margin-top: 2rem;
+  padding: 2rem 0;
+  width: 50rem;
+  height: 56rem;
+
+  @include respond(phone-large) {
+    width: 95%;
+  }
+
+  .imageContainer {
+    .headingImage {
+      width: 90px;
+      margin-bottom: 1rem;
+      position: initial;
+    }
+  }
+}
+
+.customerInfo {
+  flex: 0 0 55%;
+  text-align: right;
+}
+
+.message {
+  margin-top: 3rem;
+
+  @media print {
+    display: none;
+  }
+}
+
+.messageText {
+  text-decoration: none;
+  margin-right: 3rem;
+}
+
+.messageIcon {
+  margin-right: 1rem;
+  width: 2rem;
+  vertical-align: middle;
+}
+
+.requery {
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
+  padding: 0.9rem;
+  margin: 0 auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid green;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+
+  & > svg {
+    width: 1.5rem;
+    margin-left: 1rem;
+  }
+}

@@ -1,0 +1,57 @@
+.container {
+  padding-top: 6rem;
+
+  > .form {
+    height: 30.8rem;
+    width: 48.2rem;
+    margin: 0 auto;
+    box-shadow: 0px 3px 6px #00000029;
+    padding: 3rem;
+    padding-top: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background-color: #fff;
+
+    label {
+      input,
+      select {
+        width: 29.5rem;
+        height: 4rem;
+        border-radius: 5px;
+        border: 1px solid #afafaf;
+        color: #707070;
+        font-family: inherit;
+        padding: 0 3px;
+
+        option {
+          font-size: 1.4rem;
+        }
+      }
+    }
+
+    button {
+      font-family: "Lato", sans-serif;
+      width: 29.5rem;
+      margin: 0 auto;
+      margin-top: 5rem;
+      height: 3.6rem;
+      font-size: 1.6rem;
+      outline: 0;
+      border: 0;
+      height: 4.4rem;
+      border-radius: 1rem;
+      color: #fff;
+      box-shadow: 3px 3px 6px #00000029;
+      background: transparent linear-gradient(90deg, #11998e 0%, #38ef7d 100%)
+        0% 0% no-repeat padding-box;
+
+      &:active {
+        transform: translateY(3%);
+        box-shadow: 1px 1px 4px #00000029;
+      }
+    }
+  }
+}

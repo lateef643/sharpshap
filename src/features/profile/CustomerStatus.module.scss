@@ -1,0 +1,77 @@
+.container {
+  width: 90rem;
+  height: 50rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background: #fff;
+
+  @media screen and (max-width: 900px) {
+    width: 80rem;
+  }
+
+  @media screen and (max-width: 700px) {
+    width: 65rem;
+  }
+}
+
+.section {
+  flex: 0 0 27%;
+  height: 70%;
+  padding: 1.5rem;
+}
+
+.sectionStatus {
+  text-align: center;
+  padding: 2rem 0.5rem;
+}
+
+.sectionImageContainer {
+  width: 6rem;
+  height: 6rem;
+  margin: 0 auto;
+}
+
+.sectionImage {
+  width: 100%;
+  height: 100%;
+}
+
+.sectionTag {
+  font-size: 1.8rem;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #22215b;
+  margin-bottom: 2rem;
+  margin-top: 1rem;
+}
+
+.sectionStatusCheckContainer {
+  width: 3rem;
+  height: 3rem;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.sectionStatusCheck {
+  width: 100%;
+  height: 100%;
+}
+
+.sectionStatusIndicator {
+  width: 100%;
+  height: 0.8rem;
+  display: inline-block;
+  border-radius: 3px;
+  margin: 0 auto;
+  background: #00ea25;
+}
+
+.sectionDetails {
+  font-size: 15px;
+  text-align: center;
+  letter-spacing: 0.02em;
+  color: #22215b;
+  line-height: 2.4rem;
+  padding: 0.5rem;
+}

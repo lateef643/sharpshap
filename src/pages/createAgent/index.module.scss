@@ -1,0 +1,65 @@
+@import "../../assets/styles/config/breakpoints";
+@import "../../assets/styles/config/mixins";
+
+.register {
+  min-height: 100vh;
+  color: #000000;
+  font-size: 1.4rem;
+  background-color: #fff;
+}
+
+//height 100vh - navbar height
+.createAgent {
+  width: 100%;
+  min-height: calc(100vh - 8rem);
+  padding: 3.5rem 0;
+}
+
+.create {
+  width: 65rem;
+  margin: 0 auto;
+  text-align: center;
+
+  @include respond-custom(1000px) {
+    // width: 70%;
+  }
+
+  @include respond(tab) {
+    // width: 80%;
+  }
+
+  @include respond-custom(673px) {
+    width: 95%;
+  }
+}
+
+.steps {
+  width: 50%;
+  width: 35rem;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #f5f5f5;
+
+  @include respond-custom(550px) {
+    width: 70%;
+  }
+
+  @include respond-custom(370px) {
+    width: 80%;
+  }
+}
+
+.tab {
+  height: 100%;
+  font-size: 1.7rem;
+  color: #c4c4c4;
+  padding-bottom: 0.8rem;
+}
+
+.tabActive {
+  color: #123c68;
+  font-weight: 600;
+  border-bottom: 2px solid #123c68;
+}

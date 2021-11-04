@@ -1,0 +1,64 @@
+.card {
+  display: block;
+  height: 10rem;
+  text-decoration: none;
+  padding: 1.5rem;
+  border-radius: 2rem;
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  padding: 2rem 1.5rem;
+  padding-top: 4rem;
+  color: #492d65;
+}
+
+.transfer {
+  background: #f6edff;
+}
+
+.airtime {
+  background: #f0fffa;
+}
+
+.bills {
+  background: #f0fffa;
+}
+
+.betting {
+  background: #f0fbff;
+}
+
+.loan {
+  background: #fff3eb;
+}
+
+.iconContainer {
+  width: 4rem;
+  height: 4rem;
+  position: absolute;
+  margin-bottom: 1rem;
+  top: -1.5rem;
+  border-radius: 0.5rem;
+  padding: 0.6rem;
+
+  &Transfer {
+    background: #492d65;
+  }
+}
+
+.icon {
+  width: 100%;
+  height: 100%;
+}
+
+.cardText {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: "u8bold";
+  text-align: left;
+  margin-bottom: 0.9rem;
+}
+
+.cardDescription {
+  font-size: 1.2rem;
+  font-weight: 400;
+}

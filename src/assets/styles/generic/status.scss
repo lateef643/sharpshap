@@ -1,0 +1,148 @@
+@import "../config/breakpoints";
+@import "../config/mixins";
+
+.container {
+  background: #fff;
+  width: 36rem;
+  height: -webkit-max-content;
+  height: -moz-max-content;
+  height: max-content;
+  border-radius: 1.5rem;
+  padding: 2rem 1.8rem;
+  font-size: 1.4rem;
+  position: relative;
+  overflow: hidden;
+
+  @include respond(phone-large) {
+    width: 95%;
+  }
+
+  @include respond(phone) {
+    width: 99%;
+  }
+}
+
+.logoContainer {
+  width: 11rem;
+  height: 5rem;
+  margin: 0 auto;
+  margin-bottom: 1.5rem;
+}
+
+.logo {
+  width: 100%;
+  height: 100%;
+}
+
+.content {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 7rem);
+  grid-auto-rows: 7rem;
+}
+
+.indentEffect {
+  height: 3rem;
+  position: absolute;
+  width: 100%;
+  left: 0rem;
+  top: 18%;
+  display: flex;
+  justify-content: space-between;
+  // align-items: center;
+}
+
+.indentEffectLeft,
+.indentEffectRight {
+  display: inline-block;
+  width: 3rem;
+  height: 3rem;
+  // -webkit-mask: radial-gradient(circle 50px, transparent 98%, #fff 100%);
+  // mask: radial-gradient(circle 50px, transparent 98%, #fff 100%);
+}
+
+.indentEffectLeft {
+  position: relative;
+  left: -2.2rem;
+}
+
+.indentEffectRight {
+  position: relative;
+  right: -2.2rem;
+}
+
+.contentItem {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  border-top: 1px dashed #e9e9e9;
+  border-bottom: 1px dashed #e9e9e9;
+  justify-content: center;
+
+  &:nth-child(even) {
+    text-align: right;
+  }
+}
+
+.contentHeading,
+.totalHeading {
+  margin-bottom: 0.7rem;
+  font-size: 1.3rem;
+  color: #a3a3a3;
+}
+
+.contentDetails,
+.totalDetails {
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: rgb(20, 20, 143);
+}
+
+.total {
+  height: 7rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px dashed #e9e9e9;
+}
+
+.totalDetails {
+  font-weight: 600;
+  font-size: 1.6rem;
+}
+
+.action {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.barcodeContainer {
+  width: 100%;
+  overflow: hidden;
+}
+
+.buttonAction {
+  height: 3.5rem;
+  width: 12rem;
+  border-radius: 0.5rem;
+  border: 0;
+  cursor: pointer;
+  color: #fff;
+  line-height: 3.5rem;
+  text-align: center;
+  font-family: inherit;
+  font-size: 1.5rem;
+  margin-top: 2rem;
+  letter-spacing: 0px;
+}
+
+.buttonHome {
+  background: #312aaa;
+}
+
+.buttonRestart {
+  border: 1px solid #312aaa;
+  background: #fff;
+  color: rgb(41, 41, 184);
+}

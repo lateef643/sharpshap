@@ -1,0 +1,108 @@
+@import "../../assets/styles/config/mixins";
+@import "../../assets/styles/config/breakpoints";
+
+.card {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  box-shadow: 0 2px 4px #00000029;
+  border-radius: 1px;
+  opacity: 1;
+  margin: 5px;
+  flex-wrap: nowrap;
+  text-align: center;
+  position: relative;
+  text-decoration: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: 0.5s all;
+
+  @include respond(phone-large) {
+    width: 28%;
+    border-radius: 15px;
+    margin: 8px;
+  }
+
+  @include respond-custom(340px) {
+    width: 27%;
+  }
+
+  .container {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+
+    @include respond(phone-large) {
+      padding: 10px;
+      // background-color:red;
+    }
+  }
+
+  .image {
+    width: 3.3rem;
+
+    @include respond(phone-large) {
+      width: 2.5rem;
+    }
+
+    @include respond-custom(330px) {
+      width: 2rem;
+    }
+  }
+
+  .text {
+    font-size: 1.3rem;
+    margin-top: 0.8rem;
+    color: #707070;
+
+    @include respond(phone-large) {
+      line-break: strict;
+      font-size: 1.23rem;
+      // margin-top: .5rem;
+      line-height: 15px;
+      margin-top: 0.1rem;
+    }
+
+    @include respond-custom(330px) {
+      font-size: 1.15rem;
+      line-height: 14px;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-5%);
+  }
+}
+
+.large {
+  height: 21vh;
+  width: 19%;
+
+  @include respond(phone-large) {
+    height: 7.5rem;
+    width: 8.5rem;
+    margin: 0;
+    // margin-right: 5px;
+  }
+
+  @include respond-custom(330px) {
+    height: 7.5rem;
+    width: 7.1rem;
+    margin: 0;
+    // margin-right: 5px;
+  }
+}
+
+.small {
+  height: 17vh;
+  width: 43%;
+
+  @include respond(phone-large) {
+    width: 23%;
+    height: 9rem;
+    margin: 0;
+    margin-bottom: 0.5rem;
+  }
+
+  @include respond-custom(330px) {
+    height: 7.5rem;
+  }
+}

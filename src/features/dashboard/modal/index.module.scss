@@ -1,0 +1,27 @@
+.container {
+  position: fixed;
+  z-index: 1000;
+  width: 100%;
+  height: 100vh;
+  top: 0rem;
+  left: 0rem;
+}
+
+.overlayToggleContainer {
+  margin-bottom: 1.5rem;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  position: absolute;
+  right: 2rem;
+  top: 1rem;
+  padding: 0.5rem;
+  background-color: #fff;
+  cursor: pointer;
+  z-index: 1000;
+}
+
+.overlayToggle {
+  width: 100%;
+  height: 100%;
+}
